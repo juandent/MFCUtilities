@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <array>
 #include <locale>
+#include <iomanip>
 #include "GridCellBase.h"
 
 

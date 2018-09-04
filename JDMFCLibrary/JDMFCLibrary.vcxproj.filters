@@ -13,6 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Money">
+      <UniqueIdentifier>{1c8f8045-620d-4791-9f72-f0b966031583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Date">
+      <UniqueIdentifier>{a9210a25-127e-45a1-b233-28bbaf64a76b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{c7761f85-0b8a-4dbd-b0ca-d253dd6ad678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{7320c137-7193-4867-8c76-12389c87b621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DLL Support">
+      <UniqueIdentifier>{f9fa9333-08d5-4cf3-a5bb-c8b33956eef7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JDMFCLibrary.cpp">
@@ -23,6 +38,24 @@
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FixedPoint\arithmetic_types.cpp">
+      <Filter>Money</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FixedPoint\Money.cpp">
+      <Filter>Money</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DateCapsule.cpp">
+      <Filter>Date</Filter>
+    </ClCompile>
+    <ClCompile Include="..\StringDateConverter.cpp">
+      <Filter>Date</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MessageDialog.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utilities.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +75,33 @@
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FixedPoint\arithmetic_types.h">
+      <Filter>Money</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FixedPoint\Money.h">
+      <Filter>Money</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DateCapsule.h">
+      <Filter>Date</Filter>
+    </ClInclude>
+    <ClInclude Include="..\StringDateConverter.h">
+      <Filter>Date</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MessageDialog.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Buffer.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Data.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DLLs.h">
+      <Filter>DLL Support</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

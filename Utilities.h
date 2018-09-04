@@ -10,7 +10,8 @@
 //#include <date.h>
 #include <type_traits>
 #include "StringDateConverter.h"
-//#include "Money.h"
+#include "FixedPoint/Money.h"
+#include <experimental/filesystem>
 
 #ifndef DLLS_H
 #define MFC_UTILITIES_EXPORTS

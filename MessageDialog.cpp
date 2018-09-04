@@ -2,9 +2,10 @@
 //
 
 #include "stdafx.h"
-#include "Resource.h"
 #include "MessageDialog.h"
-#include "afxdialogex.h"
+//#include "afxdialogex.h"
+#include "JDMFCLibrary/Resource.h"
+#include <Utilities.h>
 
 
 // CMessageDialog dialog

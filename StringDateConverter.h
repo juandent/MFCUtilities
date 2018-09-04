@@ -2,9 +2,10 @@
 
 #include <string>
 #include <regex>
-//#include <date.h>
+#include <date.h>
 #include <array>
 #include <utility>
+#include <map>
 
 #ifndef DLLS_H
 #define MFC_UTILITIES_EXPORTS

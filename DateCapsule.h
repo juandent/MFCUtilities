@@ -1,6 +1,8 @@
 #pragma once
 
-//#include "date.h"
+#include <string>
+#include <date/date.h>
+#include "Utilities.h"
 
 #ifndef DLLS_H
 #define MFC_UTILITIES_EXPORTS
