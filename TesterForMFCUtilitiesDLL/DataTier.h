@@ -43,9 +43,8 @@ namespace DataTier
 		Colones						m_amountInLocal;
 		Dolares						m_amountInDollars;
 
-
-		std::shared_ptr<Category>	m_category;
 #if 0
+		std::shared_ptr<Category>	m_category;
 		bool						m_enabled;
 		bool						m_isDirty = false;
 		std::string					m_owner;

@@ -43,8 +43,8 @@ namespace ORM
 					&StatementLine::m_amountInDollars),
 				make_column("wide",
 					&StatementLine::m_wide),
-				make_column("category",
-					&StatementLine::m_category),
+				//make_column("category",
+					//&StatementLine::m_category),
 				foreign_key(&StatementLine::m_account).references(&Account::m_number)));
 
 		if (flag == 0)

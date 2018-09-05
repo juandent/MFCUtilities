@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Money.h"
+#include <FixedPoint/Money.h>
 #include "Utilities.h"
 #include <regex>
 #include <array>
