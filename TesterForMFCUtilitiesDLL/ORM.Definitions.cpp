@@ -8,15 +8,25 @@ namespace ORM
 
 	void fillDB()
 	{
+		using namespace DataTier;
+		using namespace date;
+		using namespace std;
+
 		auto& storage = getStorage();
 
-		storage.remove_all<StatementLine>();
+		storage.remove_all<StatementLine_Rec>();
+		storage.remove_all<Category_Rec>();
+		storage.remove_all<Account_Rec>();
 
-		Category health{ "Health", false };
-		Category gas{ "Gas", false };
+		Person_Rec leslie{ 1, "Leslie"s, "Hulse"s };
+		Person_Rec juan{ 2, "Juan"s, "Dent"s };
 
-		Account cred{ "3777-XXXXXX-X6745", Coin::Both };
-		Account bank{ "88322", Coin::Dolar };
+		Category_Rec health{ "Salud", false };
+		Category_Rec gas{ "Gasolina", false };
+		Category_Rec supermarket{ "Supermercado"s, false };
+
+		Account_Rec cred{ "3777-XXXXXX-X6745", 1, Coin::Both };
+		Account_Rec bank{ "88322", 2, Coin::Dolar };
 
 
 		auto n = std::chrono::system_clock::now().time_since_epoch().count();
@@ -30,23 +40,28 @@ namespace ORM
 		auto today = tod.time_since_epoch().count();
 
 
-		StatementLine line1{ -1,"3777-XXXXXX-X6745", tod, "Automercado", L"¢445" , 389045000.50, 2378.99 };
+		StatementLine_Rec line1{ -1,"3777-XXXXXX-X6745"s, tod, "Automercado"s,389045000.50, 2378.99, make_shared<std::string>("Supermercado"s), true,"Paseo a Bungalows" };
 
 		storage.replace(health);
 		storage.replace(gas);
+		storage.replace(supermarket);
 		storage.replace(cred);
 		storage.replace(bank);
 		line1.m_id = storage.insert(line1);
 
-		auto rows = storage.select(columns(&StatementLine::m_id,
-			&StatementLine::m_account,
-			&StatementLine::m_lineDate,
-			&StatementLine::m_concept,
-			&StatementLine::m_amountInLocal,
-			&StatementLine::m_amountInDollars,
-			&StatementLine::m_wide));
 
-		auto line = storage.get<StatementLine>(line1.m_id);
+#if 0
+  auto rows = storage.select(columns(&StatementLine_Rec::m_id,
+			&StatementLine_Rec::m_account_fid,
+			&StatementLine_Rec::m_lineDate,
+			&StatementLine_Rec::m_concept_fid,
+			&StatementLine_Rec::m_amountInLocal,
+			&StatementLine_Rec::m_amountInDollars,
+			&StatementLine_Rec::m_details));
+#endif
+
+
+		auto line = storage.get<StatementLine_Rec>(line1.m_id);
 
 		
 		auto str = SysDaysToString(line.m_lineDate);
@@ -54,7 +69,8 @@ namespace ORM
 		
 			// ,
 		//	multi_order_by(order_by(&Employee::name).asc(), order_by(&Employee::salary).desc()));
-		for (auto& r : rows)
+#if 0
+  for (auto& r : rows)
 		{
 			auto a = std::get<0>(r);
 			auto b = std::get<1>(r);
@@ -65,6 +81,8 @@ namespace ORM
 			auto g = std::get<6>(r);
 			int i = 0;
 		}
+#endif
+
 
 
 	}
