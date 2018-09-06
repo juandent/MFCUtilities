@@ -7,31 +7,50 @@ enum class Coin
 {
 	Colon = '¢',
 	Dolar = '$',
-	Both 
+	Both ,
+	Unknown
 };
 
-inline std::string CoinToString(Coin coin) {
+inline std::wstring CoinToString(Coin coin) {
 	switch (coin) {
-	case Coin::Colon:return "¢";
-	case Coin::Dolar:return "$";
-	case Coin::Both: return "¢$";
+	case Coin::Colon:return L"¢";
+	case Coin::Dolar:return L"$";
+	case Coin::Both: return L"¢$";
 	}
 }
 
-inline std::shared_ptr<Coin> CoinFromString(const std::string &s) {
-	if (s == "¢") {
+#if 0
+inline std::shared_ptr<Coin> CoinFromString(const std::wstring &s) {
+	if (s == L"¢") {
 		return std::make_shared<Coin>(Coin::Colon);
 	}
-	else if (s == "$") {
+	else if (s == L"$") {
 		return std::make_shared<Coin>(Coin::Dolar);
 	}
-	else if (s == "¢$")
+	else if (s == L"¢$")
 	{
 		return std::make_shared<Coin>(Coin::Both);
 	}
 	else
 		return nullptr;
 }
+#else
+inline Coin CoinFromString(const std::wstring &s) {
+	if (s == L"¢") {
+		return Coin::Colon;
+	}
+	else if (s == L"$") {
+		return Coin::Dolar;
+	}
+	else if (s == L"¢$")
+	{
+		return Coin::Both;
+	}
+	else
+		return Coin::Unknown;
+}
+
+#endif
 
 namespace sqlite_orm {
 
@@ -44,7 +63,7 @@ namespace sqlite_orm {
 	 *  or `INTEGER` (int/long/short etc) respectively.
 	 */
 	template<>
-	struct type_printer<Coin> : public text_printer {};
+	struct type_printer<Coin> : public type_printer<std::wstring> {}; // public text_printer{};
 
 	/**
 	 *  This is a binder class. It is used to bind c++ values to sqlite queries.
@@ -57,7 +76,7 @@ namespace sqlite_orm {
 	struct statement_binder<Coin> {
 
 		int bind(sqlite3_stmt *stmt, int index, const Coin &value) {
-			return statement_binder<std::string>().bind(stmt, index, CoinToString(value));
+			return statement_binder<std::wstring>().bind(stmt, index, CoinToString(value));
 			//  or return sqlite3_bind_text(stmt, index++, GenderToString(value).c_str(), -1, SQLITE_TRANSIENT);
 		}
 	};
@@ -68,7 +87,7 @@ namespace sqlite_orm {
 	 */
 	template<>
 	struct field_printer<Coin> {
-		std::string operator()(const Coin &t) const {
+		std::wstring operator()(const Coin &t) const {
 			return CoinToString(t);
 		}
 	};
@@ -81,6 +100,7 @@ namespace sqlite_orm {
 	 */
 	template<>
 	struct row_extractor<Coin> {
+#if 0
 		Coin extract(const char *row_value) {
 			if (auto coin = CoinFromString(row_value)) {
 				return *coin;
@@ -89,10 +109,12 @@ namespace sqlite_orm {
 				throw std::runtime_error("incorrect coin string (" + std::string(row_value) + ")");
 			}
 		}
-
-		Coin extract(sqlite3_stmt *stmt, int columnIndex) {
+#endif
+		Coin	extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
-			return this->extract((const char*)str);
+			auto ws = row_extractor<std::wstring>().extract((const char*)str);
+			return CoinFromString(ws);
+			//return this->extract((const char*)str);
 		}
 	};
 }

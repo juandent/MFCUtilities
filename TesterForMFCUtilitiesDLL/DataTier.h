@@ -29,6 +29,7 @@ namespace DataTier
 		PrimaryKey int m_id;
 		std::string m_first_name;
 		std::string m_last_name;
+		std::string m_company_name;
 	};
 
 	//struct Owner_Rec
@@ -37,6 +38,9 @@ namespace DataTier
 	//	int m_person_fid;
 	//};
 
+	/**
+	 * \brief Can be one of my credit card or bank accounts, or can be Bank accounts of other people or companies
+	 */
 	struct Account_Rec
 	{
 		PrimaryKey std::string m_number_id;
@@ -84,6 +88,7 @@ namespace DataTier
 		ForeignKey(Category_Rec) std::shared_ptr<std::string>	m_category_fid;
 		bool						m_enabled;
 		std::string					m_details;
+		ForeignKey(Account_Rec) std::string  m_payment_to_fid;
 	};
 
 

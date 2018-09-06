@@ -14,10 +14,18 @@ namespace ORM
 
 		auto& storage = getStorage();
 
-		storage.remove_all<StatementLine_Rec>();
-		storage.remove_all<Category_Rec>();
-		storage.remove_all<Account_Rec>();
-
+		try
+		{
+			storage.remove_all<Person_Rec>();
+			storage.remove_all<Category_Rec>();
+			storage.remove_all<Account_Rec>();
+			storage.remove_all<StatementLine_Rec>();
+		}
+		catch(std::system_error& exc)
+		{
+			auto what = exc.what();
+			int i = 9;
+		}
 		Person_Rec leslie{ 1, "Leslie"s, "Hulse"s };
 		Person_Rec juan{ 2, "Juan"s, "Dent"s };
 
@@ -62,7 +70,11 @@ namespace ORM
 
 
 		auto line = storage.get<StatementLine_Rec>(line1.m_id);
-
+		auto act = storage.get<Account_Rec>("3777-XXXXXX-X6745");
+		if( auto act2 = storage.get_no_throw<Account_Rec>("3777-XXXXXX"))
+		{
+			
+		}
 		
 		auto str = SysDaysToString(line.m_lineDate);
 		auto num = std::to_string(3);
