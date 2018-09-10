@@ -3,7 +3,17 @@
 #include "DataTier.h"
 
 namespace ORM
-{
+{ 
+
+	class ORM_DataTier
+	{
+	public:
+		auto& get_storage();
+		void fill_db();
+		void remove_all_from_database();
+
+	};
+#if 0
 	inline auto& getStorage()
 	{
 		using namespace sqlite_orm;
@@ -45,15 +55,6 @@ namespace ORM
 					&Concept_Rec::m_category_name_fid),
 				make_column("always",
 					&Concept_Rec::m_always)
-			),
-			make_table("REGEXCONCEPTS"s,
-				make_column("id",
-					&RegexConcept_Rec::m_regex_concept_id,
-					primary_key()),
-				make_column("category",
-					&RegexConcept_Rec::m_category_name_fid),
-				make_column("always",
-					&RegexConcept_Rec::m_always)
 			),
 			make_table("RESPONSIBLES"s,
 				make_column("id",
@@ -113,4 +114,5 @@ namespace ORM
 		return storage;
 	}
 	void fillDB();
+#endif
 }

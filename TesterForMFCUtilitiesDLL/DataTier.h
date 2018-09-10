@@ -15,80 +15,109 @@
 
 namespace DataTier
 {
-#define PrimaryKey
-#define ForeignKey(Table)
+	namespace Relationships
+	{
+		struct Category; struct Person; struct Account; struct Concept; struct Responsible; struct LineResponsibility; struct StatementLine;
+
+		struct LineResponsibility
+		{
+			StatementLine* m_statement_fid;
+			Responsible*   m_responsible_fid;
+		};
+
+		struct StatementLine
+		{
+			Account* m_account_fid;
+			Concept* m_concept_fid;
+			Category* m_category_fid;
+			Account* m_payment_to_fid;
+		};
+
+		struct Concept
+		{
+			Category* m_category_name_fid;
+			Account*  m_payment_fid;
+		};
+
+		struct Category
+		{};
+		struct Account
+		{
+			Person* m_owner_fid;
+		};
+		struct Responsible
+		{
+			Person* m_person_fid;
+		};
+
+		struct Person
+		{};
+
+	}
+#define PK
+#define FK(Table)
 
 	struct Category_Rec
 	{
-		PrimaryKey std::string					m_name_id;
+		PK std::string					m_name_id;
 		bool						m_real_expense_or_income;
 	};
 
 	struct Person_Rec					// Leslie, Juan Jr, Juan Sr, Other
 	{
-		PrimaryKey int m_id;
+		PK int m_id;
 		std::string m_first_name;
 		std::string m_last_name;
 		std::string m_company_name;
 	};
 
-	//struct Owner_Rec
-	//{
-	//	PrimaryKey int m_id;
-	//	int m_person_fid;
-	//};
 
 	/**
 	 * \brief Can be one of my credit card or bank accounts, or can be Bank accounts of other people or companies
 	 */
 	struct Account_Rec
 	{
-		PrimaryKey std::string m_number_id;
-		ForeignKey(Person_Rec) int m_owner_fid;
+		PK std::string m_number_id;
+		FK(Person_Rec) int m_owner_fid;
 		Coin		m_currency;
 	};
 
 	struct Concept_Rec
 	{
-		PrimaryKey std::string m_concept_id;
-		ForeignKey(Category_Rec)  std::string m_category_name_fid;
-		bool m_always;	// always apply this mapping rather than just suggesting
-	};
-
-	struct RegexConcept_Rec
-	{
-		PrimaryKey std::string m_regex_concept_id;
-		ForeignKey(Category_Rec)  std::string m_category_name_fid;
-		bool m_always;	// always apply this mapping rather than just suggesting
+		PK std::string m_concept_id;
+		FK(Category_Rec)  std::string m_category_name_fid;
+		FK(Account_Rec)	std::shared_ptr<std::string> m_account_payment_fid;		// TODO
+		bool m_always;		// always apply this mapping rather than just suggesting
+		bool m_is_regex;	// 
 	};
 
 	struct Responsible_Rec
 	{
-		PrimaryKey int m_id;
-		ForeignKey(Person_Rec) int m_person_fid;
+		PK int m_id;
+		FK(Person_Rec) int m_person_fid;
 		double m_percentage;	// degree of responsibility
 	};
 
 	// N:M
 	struct LineResponsibility_Rec
 	{
-		ForeignKey(StatementLine_Rec) unsigned long m_statement_fid;
-		ForeignKey(Responsible_Rec)   int m_responsible_fid;
+		FK(StatementLine_Rec) unsigned long m_statement_fid;
+		FK(Responsible_Rec)   int m_responsible_fid;
 	};
 
 	struct StatementLine_Rec
 	{
-		PrimaryKey unsigned long	m_id;
-		ForeignKey(Account_Rec) std::string		m_account_fid;
+		PK unsigned long	m_id;
+		FK(Account_Rec) std::string		m_account_fid;
 		date::sys_days				m_lineDate;
-		ForeignKey(Concept_Rec) std::string		m_concept_fid;
+		FK(Concept_Rec) std::string		m_concept_fid;
 		Colones						m_amountInLocal;
 		Dolares						m_amountInDollars;
 
-		ForeignKey(Category_Rec) std::shared_ptr<std::string>	m_category_fid;
+		FK(Category_Rec) std::shared_ptr<std::string>	m_category_fid;
 		bool						m_enabled;
 		std::string					m_details;
-		ForeignKey(Account_Rec) std::string  m_payment_to_fid;
+		FK(Account_Rec) std::shared_ptr<std::string>  m_payment_to_fid;
 	};
 
 
