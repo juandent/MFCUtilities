@@ -28,6 +28,9 @@
     <Filter Include="DLL Support">
       <UniqueIdentifier>{f9fa9333-08d5-4cf3-a5bb-c8b33956eef7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CSVFiles">
+      <UniqueIdentifier>{bfb7b2a1-9360-4ef5-a6f1-44cb79a582ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JDMFCLibrary.cpp">
@@ -56,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="..\Utilities.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CSVFile.cpp">
+      <Filter>CSVFiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +108,9 @@
     </ClInclude>
     <ClInclude Include="..\DLLs.h">
       <Filter>DLL Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CSVFile.h">
+      <Filter>CSVFiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
