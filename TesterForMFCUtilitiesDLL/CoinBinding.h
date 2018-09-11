@@ -11,15 +11,16 @@ enum class Coin
 	Unknown
 };
 
-inline std::wstring CoinToString(Coin coin) {
+inline std::shared_ptr<std::wstring> CoinToString(Coin coin) {
 	switch (coin) {
-	case Coin::Colon:return L"¢";
-	case Coin::Dolar:return L"$";
-	case Coin::Both: return L"¢$";
+	case Coin::Colon:return std::make_shared<std::wstring>( L"¢");
+	case Coin::Dolar:return std::make_shared<std::wstring>(L"$");
+	case Coin::Both: return std::make_shared<std::wstring>(L"¢$");
+	case Coin::Unknown:return {};
 	}
 }
 
-#if 0
+#if 1
 inline std::shared_ptr<Coin> CoinFromString(const std::wstring &s) {
 	if (s == L"¢") {
 		return std::make_shared<Coin>(Coin::Colon);
@@ -76,7 +77,14 @@ namespace sqlite_orm {
 	struct statement_binder<Coin> {
 
 		int bind(sqlite3_stmt *stmt, int index, const Coin &value) {
-			return statement_binder<std::wstring>().bind(stmt, index, CoinToString(value));
+			if (auto str = CoinToString(value)) {
+				return statement_binder<std::wstring>().bind(stmt, index, *str);
+			}
+			else {
+				return statement_binder<std::nullptr_t>().bind(stmt, index, nullptr);
+			}
+
+			//return statement_binder<std::wstring>().bind(stmt, index, CoinToString(value));
 			//  or return sqlite3_bind_text(stmt, index++, GenderToString(value).c_str(), -1, SQLITE_TRANSIENT);
 		}
 	};
@@ -88,7 +96,12 @@ namespace sqlite_orm {
 	template<>
 	struct field_printer<Coin> {
 		std::wstring operator()(const Coin &t) const {
-			return CoinToString(t);
+			if (auto res = CoinToString(t)) {
+				return *res;
+			}
+			else {
+				return L"Unknown";
+			}
 		}
 	};
 
@@ -110,11 +123,26 @@ namespace sqlite_orm {
 			}
 		}
 #endif
+		Coin extract(const wchar_t *row_value) {
+			if (row_value) {
+				if (auto gender = CoinFromString(row_value)) {
+					return *gender;
+				}
+				else {
+					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+					auto w = converter.to_bytes (row_value);
+					throw std::runtime_error("incorrect coin string (" + w + ")");
+				}
+			}
+			else {
+				return Coin::Unknown;
+			}
+		}
 		Coin	extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			auto ws = row_extractor<std::wstring>().extract((const char*)str);
-			return CoinFromString(ws);
-			//return this->extract((const char*)str);
+			//return CoinFromString(ws);
+			return this->extract(ws.c_str());
 		}
 	};
 }
