@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "CSVFile.h"
+#include <fstream>
+#include <regex>
+#include <Utilities.h>
 
 using namespace std;
 

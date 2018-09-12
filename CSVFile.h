@@ -2,9 +2,18 @@
 
 #include <vector>
 #include <string>
+#include <cassert>
+
+#include <FixedPoint/Money.h>
+#include <date/date.h>
+#ifndef DLLS_H
+#define MFC_UTILITIES_EXPORTS
+#include <Dlls.h>
+#endif
 
 
-struct CellPosition
+
+struct MFC_UTILITIES_API CellPosition
 {
 private:
 	std::size_t m_row;
@@ -21,7 +30,7 @@ public:
 };
 
 // associated to one file but may be saved to different file names
-class CSVFile
+class MFC_UTILITIES_API CSVFile
 {
 public:
 	using Row = std::vector<std::string>;
