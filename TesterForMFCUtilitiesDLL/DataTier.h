@@ -15,45 +15,6 @@
 
 namespace DataTier
 {
-	namespace Relationships
-	{
-		struct Category; struct Person; struct Account; struct Concept; struct Responsible; struct LineResponsibility; struct StatementLine;
-
-		struct LineResponsibility
-		{
-			StatementLine* m_statement_fid;
-			Responsible*   m_responsible_fid;
-		};
-
-		struct StatementLine
-		{
-			Account* m_account_fid;
-			Concept* m_concept_fid;
-			Category* m_category_fid;
-			Account* m_payment_to_fid;
-		};
-
-		struct Concept
-		{
-			Category* m_category_name_fid;
-			Account*  m_payment_fid;
-		};
-
-		struct Category
-		{};
-		struct Account
-		{
-			Person* m_owner_fid;
-		};
-		struct Responsible
-		{
-			Person* m_person_fid;
-		};
-
-		struct Person
-		{};
-
-	}
 #define PK
 #define FK(Table)
 
@@ -105,6 +66,7 @@ namespace DataTier
 		FK(Responsible_Rec)   int m_responsible_fid;
 	};
 
+
 	struct StatementLine_Rec
 	{
 		PK unsigned long	m_id;
@@ -118,6 +80,7 @@ namespace DataTier
 		bool						m_enabled;
 		std::string					m_details;
 		FK(Account_Rec) std::shared_ptr<std::string>  m_payment_to_fid;
+		date::sys_days				m_statement_date;
 	};
 
 

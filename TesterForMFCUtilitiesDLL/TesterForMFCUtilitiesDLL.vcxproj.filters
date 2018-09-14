@@ -19,6 +19,9 @@
     <Filter Include="ORM">
       <UniqueIdentifier>{faf42958-cbbf-4f2b-b279-7b3bff838591}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PersistenceCollections">
+      <UniqueIdentifier>{e31e5708-6233-4a85-9eb7-3d71523130cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TesterForMFCUtilitiesDLL.h">
@@ -78,6 +81,12 @@
     <ClInclude Include="Dolares.Binding.h">
       <Filter>DataTier</Filter>
     </ClInclude>
+    <ClInclude Include="ModelTier.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PersistentCollections.hpp">
+      <Filter>PersistenceCollections</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TesterForMFCUtilitiesDLL.cpp">
@@ -115,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="ORM.Definitions.cpp">
       <Filter>ORM</Filter>
+    </ClCompile>
+    <ClCompile Include="PersistentCollections.cpp">
+      <Filter>PersistenceCollections</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,5 +215,6 @@
     <None Include="res\TesterForMFCUtilitiesDLL.rc2">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="DataTierClassDiagram.cd" />
   </ItemGroup>
 </Project>
