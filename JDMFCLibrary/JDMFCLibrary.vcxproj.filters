@@ -31,6 +31,9 @@
     <Filter Include="CSVFiles">
       <UniqueIdentifier>{bfb7b2a1-9360-4ef5-a6f1-44cb79a582ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Statements">
+      <UniqueIdentifier>{7daed940-2475-4fe3-a22a-15c10b4d0eb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JDMFCLibrary.cpp">
@@ -62,6 +65,18 @@
     </ClCompile>
     <ClCompile Include="..\CSVFile.cpp">
       <Filter>CSVFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\StatementFactory.cpp">
+      <Filter>Statements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\StatementBuilder.cpp">
+      <Filter>Statements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BankAccountStatement.cpp">
+      <Filter>Statements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CreditCardStatement.cpp">
+      <Filter>Statements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +126,18 @@
     </ClInclude>
     <ClInclude Include="..\CSVFile.h">
       <Filter>CSVFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\StatementFactory.h">
+      <Filter>Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\StatementBuilder.h">
+      <Filter>Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BankAccountStatement.h">
+      <Filter>Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CreditCardStatement.h">
+      <Filter>Statements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

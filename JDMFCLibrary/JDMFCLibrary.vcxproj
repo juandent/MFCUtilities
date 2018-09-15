@@ -191,6 +191,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\BankAccountStatement.cpp" />
+    <ClCompile Include="..\CreditCardStatement.cpp" />
     <ClCompile Include="..\CSVFile.cpp" />
     <ClCompile Include="..\DateCapsule.cpp" />
     <ClCompile Include="..\FixedPoint\arithmetic_types.cpp">
@@ -201,6 +203,8 @@
     </ClCompile>
     <ClCompile Include="..\FixedPoint\Money.cpp" />
     <ClCompile Include="..\MessageDialog.cpp" />
+    <ClCompile Include="..\StatementBuilder.cpp" />
+    <ClCompile Include="..\StatementFactory.cpp" />
     <ClCompile Include="..\StringDateConverter.cpp" />
     <ClCompile Include="..\Utilities.cpp" />
     <ClCompile Include="dllmain.cpp">
@@ -230,7 +234,9 @@
     <None Include="res\JDMFCLibrary.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\BankAccountStatement.h" />
     <ClInclude Include="..\Buffer.h" />
+    <ClInclude Include="..\CreditCardStatement.h" />
     <ClInclude Include="..\CSVFile.h" />
     <ClInclude Include="..\Data.h" />
     <ClInclude Include="..\DateCapsule.h" />
@@ -238,6 +244,8 @@
     <ClInclude Include="..\FixedPoint\arithmetic_types.h" />
     <ClInclude Include="..\FixedPoint\Money.h" />
     <ClInclude Include="..\MessageDialog.h" />
+    <ClInclude Include="..\StatementBuilder.h" />
+    <ClInclude Include="..\StatementFactory.h" />
     <ClInclude Include="..\StringDateConverter.h" />
     <ClInclude Include="..\Utilities.h" />
     <ClInclude Include="Resource.h" />

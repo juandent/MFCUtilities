@@ -3,7 +3,7 @@
 #include "TesterForMFCUtilitiesDLL/DataTier.h"
 
 
-class Category : protected DataTier::Category_Rec
+class Category : protected DataTier::Category
 {
 };
 

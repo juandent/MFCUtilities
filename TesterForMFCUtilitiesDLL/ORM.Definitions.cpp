@@ -15,28 +15,29 @@ namespace ORM
 
 		auto& storage = get_storage();
 
-		Person_Rec leslie{ 1, "Leslie"s, "Hulse"s };
-		Person_Rec juan{ 2, "Juan"s, "Dent"s };
+		Person leslie{ 1, "Leslie"s, "Hulse"s };
+		Person juan{ 2, "Juan"s, "Dent"s };
 
-		Category_Rec health{ "Salud", false };
-		Category_Rec gas{ "Gasolina", false };
-		Category_Rec supermarket{ "Supermercado"s, false };
+		Category health{ "Salud", false };
+		Category gas{ "Gasolina", false };
+		Category supermarket{ "Supermercado"s, false };
 
-		Account_Rec cred{ "3777-XXXXXX-X6745", 1, Coin::Both };
-		Account_Rec bank{ "88322", 2, Coin::Dolar };
-		Account_Rec payment_to{ "4590"s, 1, Coin::Dolar };
+		Account cred{ "3777-XXXXXX-X6745", 1, Coin::Both };
+		Account bank{ "88322", 2, Coin::Dolar };
+		Account payment_to{ "4590"s, 1, Coin::Dolar };
 
-		Concept_Rec conc{ "Automercado"s, "Supermercado"s, nullptr, true, false };
+		Concept conc{ "Automercado"s, "Supermercado"s, nullptr, true, false };
 
 		auto n = std::chrono::system_clock::now().time_since_epoch().count();
 		auto start = date::sys_days{ days{n} };
 
 		year_month_day ymd{ year{2018}, month{8}, day{21} };
 		sys_days tod = ymd;
+		sys_days ttod = tod + days{ 1 };
 
 		auto today = tod.time_since_epoch().count();
 
-		StatementLine_Rec line1{ -1,
+		StatementLine line1{ -1,
 			"3777-XXXXXX-X6745"s,
 			tod,
 			"Automercado"s,
@@ -45,7 +46,16 @@ namespace ORM
 			make_shared<std::string>("Supermercado"s),
 			true,
 			"Paseo a Bungalows"s,
-			nullptr //"4590"s
+			nullptr, //"4590"s,
+			ttod
+		};
+
+		Statement_derived  st {
+			""s,
+			""s,
+			tod,
+			"3777-XXXXXX-X6745"s,
+			120
 		};
 
 		// Persons
@@ -70,12 +80,13 @@ namespace ORM
 
 		try
 		{
-			auto line = storage.get<StatementLine_Rec>(line1.m_id);
-			auto act = storage.get<Account_Rec>("3777-XXXXXX-X6745");
-			if (auto act2 = storage.get_no_throw<Account_Rec>("3777-XXXXXX"))
+			auto line = storage.get<StatementLine>(line1.m_id);
+			auto act = storage.get<Account>("3777-XXXXXX-X6745");
+			if (auto act2 = storage.get_no_throw<Account>("3777-XXXXXX"))
 			{
 
 			}
+			auto res = storage.get_all<StatementLine>(where(c(&StatementLine::m_account_fid) == "3777-XXXXXX-X6745"s));
 			auto str = SysDaysToString(line.m_lineDate);
 			auto num = std::to_string(3);
 		}
@@ -97,13 +108,13 @@ namespace ORM
 		auto& storage = get_storage();
 		try
 		{
-			storage.remove_all<LineResponsibility_Rec>();
-			storage.remove_all<StatementLine_Rec>();
-			storage.remove_all<Concept_Rec>();
-			storage.remove_all<Category_Rec>();
-			storage.remove_all<Account_Rec>();
-			storage.remove_all<Responsible_Rec>();
-			storage.remove_all<Person_Rec>();
+			storage.remove_all<LineResponsibility>();
+			storage.remove_all<StatementLine>();
+			storage.remove_all<Concept>();
+			storage.remove_all<Category>();
+			storage.remove_all<Account>();
+			storage.remove_all<Responsible>();
+			storage.remove_all<Person>();
 
 		}
 		catch (std::system_error& exc)
