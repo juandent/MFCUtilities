@@ -87,6 +87,9 @@
     <ClInclude Include="PersistentCollections.hpp">
       <Filter>PersistenceCollections</Filter>
     </ClInclude>
+    <ClInclude Include="AccountType.Binding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TesterForMFCUtilitiesDLL.cpp">

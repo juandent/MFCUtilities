@@ -46,16 +46,6 @@ namespace ORM
 				foreign_key(&Responsible::m_person_fid).references(&Person::m_id)
 			),
 
-			make_table("ACCOUNTS"s,
-				make_column("number",
-					&Account::m_number_id,
-					primary_key()),
-				make_column("owner",
-					&Account::m_owner_fid),
-				make_column("currency",
-					&Account::m_currency),
-				foreign_key(&Account::m_owner_fid).references(&Person::m_id)),
-
 			make_table("CATEGORIES"s,
 				make_column("name",
 					&Category::m_name_id,
@@ -144,7 +134,24 @@ namespace ORM
 							&Statement_derived::m_number),
 						primary_key(&Statement_derived::m_account_fid, &Statement_derived::m_statementDate),
 						foreign_key(&Statement_derived::m_account_fid).references(&Account::m_number_id)
-					));
+					),
+
+				make_table("ACCOUNTS"s,
+					make_column("number",
+						&Account::m_number_id,
+						primary_key()),
+					make_column("owner",
+						&Account::m_owner_fid),
+					make_column("currency",
+						&Account::m_currency),
+					make_column("description",
+						&Account::m_description),
+					make_column("type",
+						&Account::m_type),
+					make_column("cuenta_cliente",
+						&Account::m_cuenta_cliente),
+					foreign_key(&Account::m_owner_fid).references(&Person::m_id))
+				);
 
 		if (flag == 0)
 		{

@@ -12,6 +12,7 @@
 #include "DateBinding.h"
 #include "Colones.Binding.h"
 #include "Dolares.Binding.h"
+#include "AccountType.Binding.h"
 
 namespace DataTier
 {
@@ -40,7 +41,10 @@ namespace DataTier
 	{
 		PK std::string m_number_id;
 		FK(Person_Rec) int m_owner_fid;
+		std::string	m_cuenta_cliente;
 		Coin		m_currency;
+		std::string m_description;
+		AccountType	m_type;
 	};
 
 	struct Concept
@@ -72,25 +76,15 @@ namespace DataTier
 		std::string				m_filePath;
 		date::sys_days			m_statementDate;
 		FK(Account_Rec) std::string		m_account_fid;
-
-#if 0
-  		Statement(std::string filename, std::string filepath, date::sys_days statement_date, std::string account)
-			: m_fileName{filename}, m_filePath{filepath}, m_statementDate{statement_date}, m_account_fid{account}
-		{}
-#endif
-
 	};
 
+
+	/**
+	 * \brief Experiment to confirm derived classes can be stored in SQLITE
+	 */
 	struct Statement_derived : Statement
 	{
 		int m_number;
-
-#if 0
-  Statement_derived(std::string filename, std::string filepath, date::sys_days statement_date, std::string account, int number )
-			: Statement{filename , filepath, statement_date, account }, m_number{number}
-		{}
-#endif
-
 	};
 
 	struct StatementLine

@@ -22,9 +22,11 @@ namespace ORM
 		Category gas{ "Gasolina", false };
 		Category supermarket{ "Supermercado"s, false };
 
-		Account cred{ "3777-XXXXXX-X6745", 1, Coin::Both };
-		Account bank{ "88322", 2, Coin::Dolar };
-		Account payment_to{ "4590"s, 1, Coin::Dolar };
+		Account cred{ "3777-11**-****-7645", 2, "", Coin::Both, "AM Cashback"s, AccountType::CreditCard };
+		Account bank{ "903343622", 2, "", Coin::Dolar, "Dollars main"s, AccountType::BankAccount };
+		Account cred_leslie{ "5491-94**-****-2718", 1,"", Coin::Both, "MC Gane Premios"s, AccountType::CreditCard };
+
+		Account payment_to{ "4590"s, 1, "", Coin::Dolar, "????", AccountType::BankAccount };
 
 		Concept conc{ "Automercado"s, "Supermercado"s, nullptr, true, false };
 
@@ -38,7 +40,7 @@ namespace ORM
 		auto today = tod.time_since_epoch().count();
 
 		StatementLine line1{ -1,
-			"3777-XXXXXX-X6745"s,
+			"3777-11**-****-7645"s,
 			tod,
 			"Automercado"s,
 			389045000.50,
@@ -50,12 +52,11 @@ namespace ORM
 			ttod
 		};
 
-		Statement_derived  st {
-			""s,
-			""s,
+		Statement  st {
+			"SomeFile.csv"s,
+			"C:\\Users\\Juan Dent\\Downloads\\"s,
 			tod,
-			"3777-XXXXXX-X6745"s,
-			120
+			"3777-11**-****-7645"s
 		};
 
 		// Persons
@@ -81,12 +82,13 @@ namespace ORM
 		try
 		{
 			auto line = storage.get<StatementLine>(line1.m_id);
-			auto act = storage.get<Account>("3777-XXXXXX-X6745");
-			if (auto act2 = storage.get_no_throw<Account>("3777-XXXXXX"))
+			auto act = storage.get<Account>("3777-11**-****-7645");
+			if (auto act2 = storage.get_no_throw<Account>("3777-11**-****"))
 			{
 
 			}
 			auto res = storage.get_all<StatementLine>(where(c(&StatementLine::m_account_fid) == "3777-XXXXXX-X6745"s));
+			assert(res.size() == 0);
 			auto str = SysDaysToString(line.m_lineDate);
 			auto num = std::to_string(3);
 		}
