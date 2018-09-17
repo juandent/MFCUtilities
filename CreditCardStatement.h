@@ -2,15 +2,17 @@
 
 #include <chrono>
 #include <date/date.h>
-#include <FixedPoint/money.h>
+#include <FixedPoint/Money.h>
 #include "CSVFile.h"
+
 #include "Statement.h"
+#include "StatementBuilder.h"
 
 class ParentCreditCardStatement;
 class ChildCreditCardStatement;
 extern bool isBACAccountNumber(std::string text);
 
-class CreditCardStatement : public Statement
+class CreditCardStatement : public DataTier::Statement
 {
 private:
 	using Range = std::pair<CSVFile::Iterator, CSVFile::Iterator>;

@@ -197,20 +197,22 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AccountType.Binding.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
-    <ClInclude Include="CoinBinding.h" />
-    <ClInclude Include="Colones.Binding.h" />
-    <ClInclude Include="DataTier.h" />
-    <ClInclude Include="DateBinding.h" />
-    <ClInclude Include="Dolares.Binding.h" />
+    <ClInclude Include="DataTier\AccountType.Binding.h" />
+    <ClInclude Include="DataTier\CoinBinding.h" />
+    <ClInclude Include="DataTier\Colones.Binding.h" />
+    <ClInclude Include="DataTier\DataTier.h" />
+    <ClInclude Include="DataTier\DateBinding.h" />
+    <ClInclude Include="DataTier\Dolares.Binding.h" />
+    <ClInclude Include="DataTier\ORM.Definitions.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="ModelTier.hpp" />
-    <ClInclude Include="ORM.Definitions.h" />
+    <ClInclude Include="Model\PersistentCollections.hpp" />
+    <ClInclude Include="Model\StatementBuilder.h" />
+    <ClInclude Include="Model\StatementFactory.h" />
     <ClInclude Include="OutputWnd.h" />
-    <ClInclude Include="PersistentCollections.hpp" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -221,13 +223,17 @@
     <ClInclude Include="ViewTree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\StatementBuilder.cpp" />
+    <ClCompile Include="..\StatementFactory.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="DataTier\ORM.Definitions.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="ORM.Definitions.cpp" />
+    <ClCompile Include="Model\PersistentCollections.cpp" />
+    <ClCompile Include="Model\StatementBuilder.cpp" />
+    <ClCompile Include="Model\StatementFactory.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
-    <ClCompile Include="PersistentCollections.cpp" />
     <ClCompile Include="PropertiesWnd.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

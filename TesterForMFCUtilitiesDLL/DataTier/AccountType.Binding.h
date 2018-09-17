@@ -6,13 +6,15 @@
 enum class AccountType
 {
 	CreditCard,
-	BankAccount
+	BankAccount,
+	Unknown
 };
 
 inline std::shared_ptr<std::string> AccountTypeToString(AccountType type) {
 	switch (type) {
 	case AccountType::CreditCard : return std::make_shared<std::string>("CC");
 	case AccountType::BankAccount :return std::make_shared<std::string>("BA");
+	case AccountType::Unknown :return std::make_shared<std::string>("??");
 	}
 }
 
@@ -74,7 +76,7 @@ namespace sqlite_orm {
 				return *res;
 			}
 			else {
-				return "?";
+				return "??";
 			}
 		}
 	};

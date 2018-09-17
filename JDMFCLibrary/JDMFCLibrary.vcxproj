@@ -203,8 +203,6 @@
     </ClCompile>
     <ClCompile Include="..\FixedPoint\Money.cpp" />
     <ClCompile Include="..\MessageDialog.cpp" />
-    <ClCompile Include="..\StatementBuilder.cpp" />
-    <ClCompile Include="..\StatementFactory.cpp" />
     <ClCompile Include="..\StringDateConverter.cpp" />
     <ClCompile Include="..\Utilities.cpp" />
     <ClCompile Include="dllmain.cpp">
@@ -244,8 +242,6 @@
     <ClInclude Include="..\FixedPoint\arithmetic_types.h" />
     <ClInclude Include="..\FixedPoint\Money.h" />
     <ClInclude Include="..\MessageDialog.h" />
-    <ClInclude Include="..\StatementBuilder.h" />
-    <ClInclude Include="..\StatementFactory.h" />
     <ClInclude Include="..\StringDateConverter.h" />
     <ClInclude Include="..\Utilities.h" />
     <ClInclude Include="Resource.h" />

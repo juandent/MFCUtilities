@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <date/date.h>
-#include "TesterForMFCUtilitiesDLL/DataTier.h"
+#include "../DataTier/DataTier.h"
+
 
 class StatementBuilder
 {

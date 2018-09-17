@@ -66,16 +66,10 @@
     <ClCompile Include="..\CSVFile.cpp">
       <Filter>CSVFiles</Filter>
     </ClCompile>
-    <ClCompile Include="..\StatementFactory.cpp">
-      <Filter>Statements</Filter>
-    </ClCompile>
-    <ClCompile Include="..\StatementBuilder.cpp">
+    <ClCompile Include="..\CreditCardStatement.cpp">
       <Filter>Statements</Filter>
     </ClCompile>
     <ClCompile Include="..\BankAccountStatement.cpp">
-      <Filter>Statements</Filter>
-    </ClCompile>
-    <ClCompile Include="..\CreditCardStatement.cpp">
       <Filter>Statements</Filter>
     </ClCompile>
   </ItemGroup>
@@ -126,12 +120,6 @@
     </ClInclude>
     <ClInclude Include="..\CSVFile.h">
       <Filter>CSVFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\StatementFactory.h">
-      <Filter>Statements</Filter>
-    </ClInclude>
-    <ClInclude Include="..\StatementBuilder.h">
-      <Filter>Statements</Filter>
     </ClInclude>
     <ClInclude Include="..\BankAccountStatement.h">
       <Filter>Statements</Filter>

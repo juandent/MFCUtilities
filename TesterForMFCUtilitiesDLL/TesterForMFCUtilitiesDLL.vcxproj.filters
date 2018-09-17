@@ -16,11 +16,8 @@
     <Filter Include="DataTier">
       <UniqueIdentifier>{37012c68-a243-4a74-a1f1-b2de5c6c7da7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ORM">
-      <UniqueIdentifier>{faf42958-cbbf-4f2b-b279-7b3bff838591}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PersistenceCollections">
-      <UniqueIdentifier>{e31e5708-6233-4a85-9eb7-3d71523130cf}</UniqueIdentifier>
+    <Filter Include="Model">
+      <UniqueIdentifier>{e61f03e2-838a-4f44-923d-a4883ba64fbf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,32 +60,38 @@
     <ClInclude Include="PropertiesWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DataTier.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
-    <ClInclude Include="CoinBinding.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
-    <ClInclude Include="ORM.Definitions.h">
-      <Filter>ORM</Filter>
-    </ClInclude>
-    <ClInclude Include="DateBinding.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
-    <ClInclude Include="Colones.Binding.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
-    <ClInclude Include="Dolares.Binding.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
     <ClInclude Include="ModelTier.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PersistentCollections.hpp">
-      <Filter>PersistenceCollections</Filter>
+    <ClInclude Include="DataTier\AccountType.Binding.h">
+      <Filter>DataTier</Filter>
     </ClInclude>
-    <ClInclude Include="AccountType.Binding.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DataTier\CoinBinding.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTier\Colones.Binding.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTier\DataTier.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTier\DateBinding.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTier\Dolares.Binding.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\StatementBuilder.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\StatementFactory.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTier\ORM.Definitions.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\PersistentCollections.hpp">
+      <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,11 +128,23 @@
     <ClCompile Include="PropertiesWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ORM.Definitions.cpp">
-      <Filter>ORM</Filter>
+    <ClCompile Include="..\StatementBuilder.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PersistentCollections.cpp">
-      <Filter>PersistenceCollections</Filter>
+    <ClCompile Include="..\StatementFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\StatementBuilder.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\StatementFactory.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTier\ORM.Definitions.cpp">
+      <Filter>DataTier</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\PersistentCollections.cpp">
+      <Filter>Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
