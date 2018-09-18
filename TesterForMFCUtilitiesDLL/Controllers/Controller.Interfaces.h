@@ -4,7 +4,6 @@
 
 namespace Controller
 {
-
 	struct ICategoryLoader
 	{
 		virtual void load(const std::string& file) = 0;

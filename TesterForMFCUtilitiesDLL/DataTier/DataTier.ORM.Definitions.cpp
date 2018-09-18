@@ -2,6 +2,7 @@
 
 
 #include "DataTier.ORM.Definitions.h"
+#include "DataTier.DateBinding.h"
 
 namespace ORM
 {

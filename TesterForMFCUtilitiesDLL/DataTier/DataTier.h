@@ -2,15 +2,15 @@
 
 
 #include <sqlite_orm/sqlite_orm.h>
-#include <iostream>
 #include <memory>
 #include <string>
 #include <date/date.h>
 #include <FixedPoint/Money.h>
 
-#include "DataTier.CoinBinding.h"
 #include "DataTier.DateBinding.h"
 #include "DataTier.Colones.Binding.h"
+#include "DataTier.DateBinding.h"
+#include "DataTier.CoinBinding.h"
 #include "DataTier.Dolares.Binding.h"
 #include "DataTier.AccountType.Binding.h"
 
