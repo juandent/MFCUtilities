@@ -8,11 +8,11 @@
 #include <date/date.h>
 #include <FixedPoint/Money.h>
 
-#include "CoinBinding.h"
-#include "DateBinding.h"
-#include "Colones.Binding.h"
-#include "Dolares.Binding.h"
-#include "AccountType.Binding.h"
+#include "DataTier.CoinBinding.h"
+#include "DataTier.DateBinding.h"
+#include "DataTier.Colones.Binding.h"
+#include "DataTier.Dolares.Binding.h"
+#include "DataTier.AccountType.Binding.h"
 
 namespace DataTier
 {
@@ -79,13 +79,6 @@ namespace DataTier
 	};
 
 
-	/**
-	 * \brief Experiment to confirm derived classes can be stored in SQLITE
-	 */
-	struct Statement_derived : Statement
-	{
-		int m_number;
-	};
 
 	struct StatementLine
 	{

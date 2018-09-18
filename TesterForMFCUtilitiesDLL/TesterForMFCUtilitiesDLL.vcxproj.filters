@@ -19,6 +19,9 @@
     <Filter Include="Model">
       <UniqueIdentifier>{e61f03e2-838a-4f44-923d-a4883ba64fbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Controllers">
+      <UniqueIdentifier>{38bb335e-81ed-4948-afdf-dceb56f8ca58}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TesterForMFCUtilitiesDLL.h">
@@ -60,38 +63,38 @@
     <ClInclude Include="PropertiesWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelTier.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTier\AccountType.Binding.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTier\CoinBinding.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTier\Colones.Binding.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
     <ClInclude Include="DataTier\DataTier.h">
       <Filter>DataTier</Filter>
     </ClInclude>
-    <ClInclude Include="DataTier\DateBinding.h">
+    <ClInclude Include="Controllers\Controller.Main.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\Controller.FileLoader.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTier\DataTier.AccountType.Binding.h">
       <Filter>DataTier</Filter>
     </ClInclude>
-    <ClInclude Include="DataTier\Dolares.Binding.h">
+    <ClInclude Include="DataTier\DataTier.CoinBinding.h">
       <Filter>DataTier</Filter>
     </ClInclude>
-    <ClInclude Include="Model\StatementBuilder.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\StatementFactory.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTier\ORM.Definitions.h">
+    <ClInclude Include="DataTier\DataTier.Colones.Binding.h">
       <Filter>DataTier</Filter>
     </ClInclude>
-    <ClInclude Include="Model\PersistentCollections.hpp">
+    <ClInclude Include="DataTier\DataTier.DateBinding.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTier\DataTier.Dolares.Binding.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTier\DataTier.ORM.Definitions.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Model.PersistentCollections.hpp">
       <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\Controller.Interfaces.h">
+      <Filter>Controllers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,22 +131,22 @@
     <ClCompile Include="PropertiesWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\StatementBuilder.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Controllers\Controller.Main.cpp">
+      <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="..\StatementFactory.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Controllers\Controller.FileLoader.cpp">
+      <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Model\StatementBuilder.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\StatementFactory.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTier\ORM.Definitions.cpp">
+    <ClCompile Include="DataTier\DataTier.ORM.Definitions.cpp">
       <Filter>DataTier</Filter>
     </ClCompile>
-    <ClCompile Include="Model\PersistentCollections.cpp">
+    <ClCompile Include="Model\Model.PersistentCollections.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Model.StatementBuilder.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Model.StatementFactory.cpp">
       <Filter>Model</Filter>
     </ClCompile>
   </ItemGroup>

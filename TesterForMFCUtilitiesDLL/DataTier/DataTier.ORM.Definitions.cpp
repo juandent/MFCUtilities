@@ -1,19 +1,19 @@
 #include "stdafx.h"
 
-#include "DataTier.h"
-#include "ORM.Definitions.h"
+
+#include "DataTier.ORM.Definitions.h"
 
 namespace ORM
 {
 
-	void ORM_DataTier::fill_db()
+	void ORM_Central::fill_db()
 	{
 		using namespace sqlite_orm;
 		using namespace date;
 		using namespace std;
 		using namespace DataTier;
 
-		auto& storage = get_storage();
+		auto& storage = refresh_and_get_schema();
 
 		Person leslie{ 1, "Leslie"s, "Hulse"s };
 		Person juan{ 2, "Juan"s, "Dent"s };
@@ -100,14 +100,14 @@ namespace ORM
 
 	}
 
-	void ORM_DataTier::remove_all_from_database()
+	void ORM_Central::remove_all_from_database()
 	{
 		using namespace sqlite_orm;
 		using namespace date;
 		using namespace std;
 		using namespace DataTier;
 
-		auto& storage = get_storage();
+		auto& storage = refresh_and_get_schema();
 		try
 		{
 			storage.remove_all<LineResponsibility>();

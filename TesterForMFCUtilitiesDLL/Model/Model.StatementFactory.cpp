@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "StatementFactory.h"
+#include "CSVFile.h"
+
 // subclasses of Statement;
-#include "creditcardstatement.h"
-#include "BankAccountStatement.h"
+//#include "creditcardstatement.h"
+//#include "BankAccountStatement.h"
 
 using namespace std;
 using namespace DataTier;
@@ -27,9 +29,9 @@ std::shared_ptr<Statement> StatementFactory::Create(const std::string & rawFileN
 	switch (selectType(file))
 	{
 	case AccountType::BankAccount:
-		return make_shared<BankAccountStatement>(rawFileName, chosenDate);
+		return nullptr; // make_shared<BankAccountStatement>(rawFileName, chosenDate);
 	case AccountType::CreditCard:
-		return make_shared<CreditCardStatement>(rawFileName, chosenDate);
+		return nullptr; // make_shared<CreditCardStatement>(rawFileName, chosenDate);
 	default:
 		throw runtime_error{ "Unknown statement type in factory!" };
 	}

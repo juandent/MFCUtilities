@@ -5,16 +5,16 @@
 namespace ORM
 { 
 
-	class ORM_DataTier
+	class ORM_Central
 	{
 	public:
-		static auto& get_storage();
+		static auto& refresh_and_get_schema();
 		void fill_db();
 		void remove_all_from_database();
 
 	};
 
-	inline 	auto& ORM_DataTier::get_storage()
+	inline 	auto& ORM_Central::refresh_and_get_schema()
 	{
 		using namespace sqlite_orm;
 		using namespace date;
@@ -121,20 +121,6 @@ namespace ORM
 				foreign_key(&LineResponsibility::m_statement_fid).references(&StatementLine::m_id),
 				foreign_key(&LineResponsibility::m_responsible_fid).references(&Responsible::m_id))
   ,
-					make_table("STATEMENT_DERIVED"s,
-						make_column("file_name",
-							&Statement_derived::m_fileName),
-						make_column("file_path",
-							&Statement_derived::m_filePath),
-						make_column("statement_date",
-							&Statement_derived::m_statementDate),
-						make_column("account",
-							&Statement_derived::m_account_fid),
-						make_column("number",
-							&Statement_derived::m_number),
-						primary_key(&Statement_derived::m_account_fid, &Statement_derived::m_statementDate),
-						foreign_key(&Statement_derived::m_account_fid).references(&Account::m_number_id)
-					),
 
 				make_table("ACCOUNTS"s,
 					make_column("number",

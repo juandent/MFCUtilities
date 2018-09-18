@@ -66,12 +66,6 @@
     <ClCompile Include="..\CSVFile.cpp">
       <Filter>CSVFiles</Filter>
     </ClCompile>
-    <ClCompile Include="..\CreditCardStatement.cpp">
-      <Filter>Statements</Filter>
-    </ClCompile>
-    <ClCompile Include="..\BankAccountStatement.cpp">
-      <Filter>Statements</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="JDMFCLibrary.def">
@@ -120,12 +114,6 @@
     </ClInclude>
     <ClInclude Include="..\CSVFile.h">
       <Filter>CSVFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\BankAccountStatement.h">
-      <Filter>Statements</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CreditCardStatement.h">
-      <Filter>Statements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
