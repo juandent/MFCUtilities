@@ -16,7 +16,7 @@ void Controller::CategoryLoader::load(const std::string & file_name)
 
 void Controller::CategoryLoader::store()
 {
-	for (int rcount = 9; rcount < m_file.getRowCount() /*&& rcount < 111*/; ++rcount)
+	for (int rcount = 9; rcount < m_file.getRowCount(); ++rcount)
 	{
 		auto& row = m_file.getRow(rcount);
 		auto& col1 = row[0];
@@ -24,6 +24,9 @@ void Controller::CategoryLoader::store()
 		regex remove{ "\t|\"" };
 		auto& res = regex_replace(col1, remove, "");
 
+		if(res == "};")
+			break;
+		
 		DataTier::Category cat{ res, false };
 
 		ORM::ORM_Central::refresh_and_get_schema().replace(cat);
