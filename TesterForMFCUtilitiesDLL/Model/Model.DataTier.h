@@ -7,14 +7,14 @@
 #include <date/date.h>
 #include <FixedPoint/Money.h>
 
-#include "DataTier.DateBinding.h"
-#include "DataTier.Colones.Binding.h"
-#include "DataTier.DateBinding.h"
-#include "DataTier.CoinBinding.h"
-#include "DataTier.Dolares.Binding.h"
-#include "DataTier.AccountType.Binding.h"
+#include "Model.DateBinding.h"
+#include "Model.Colones.Binding.h"
+#include "Model.DateBinding.h"
+#include "Model.CoinBinding.h"
+#include "Model.Dolares.Binding.h"
+#include "Model.AccountType.Binding.h"
 
-namespace DataTier
+namespace Model
 {
 #define PK
 #define FK(Table)

@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 
-#include "../DataTier/DataTier.ORM.Definitions.h"
+#include "../Model/Model.ORM.Definitions.h"
 #include "Controller.Interfaces.h"
 
 
@@ -10,7 +10,7 @@ namespace Controller
 
 	class MainController
 	{
-		ORM::ORM_Central orm_central;
+		Model::ORM_Central orm_central;
 
 		MainController()
 		{

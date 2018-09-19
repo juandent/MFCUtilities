@@ -1,10 +1,10 @@
 #include "stdafx.h"
 
 
-#include "DataTier.ORM.Definitions.h"
-#include "DataTier.DateBinding.h"
+#include "Model.ORM.Definitions.h"
+#include "Model.DateBinding.h"
 
-namespace ORM
+namespace Model
 {
 
 	void ORM_Central::fill_db()
@@ -12,7 +12,6 @@ namespace ORM
 		using namespace sqlite_orm;
 		using namespace date;
 		using namespace std;
-		using namespace DataTier;
 
 		auto& storage = refresh_and_get_schema();
 
@@ -106,7 +105,6 @@ namespace ORM
 		using namespace sqlite_orm;
 		using namespace date;
 		using namespace std;
-		using namespace DataTier;
 
 		auto& storage = refresh_and_get_schema();
 		try

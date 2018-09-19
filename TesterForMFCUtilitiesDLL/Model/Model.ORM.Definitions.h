@@ -1,8 +1,8 @@
 #pragma once
 
-#include "DataTier.h"
+#include "Model.DataTier.h"
 
-namespace ORM
+namespace Model
 { 
 
 	class ORM_Central
@@ -19,7 +19,6 @@ namespace ORM
 		using namespace sqlite_orm;
 		using namespace date;
 		using namespace std;
-		using namespace DataTier;
 
 		static int flag = 0;
 		static auto storage = make_storage("statements.sqlite",

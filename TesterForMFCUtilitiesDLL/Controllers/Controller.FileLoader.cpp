@@ -27,9 +27,9 @@ void Controller::CategoryLoader::store()
 		if(res == "};")
 			break;
 		
-		DataTier::Category cat{ res, false };
+		Model::Category cat{ res, false };
 
-		ORM::ORM_Central::refresh_and_get_schema().replace(cat);
+		Model::ORM_Central::refresh_and_get_schema().replace(cat);
 
 		int i = 0;
 	}
