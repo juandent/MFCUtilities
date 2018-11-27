@@ -9,6 +9,9 @@
 
 using namespace std;
 
+// TODO: create CategoryRepository
+
+
 void Controller::CategoryLoader::load(const std::string & file_name)
 {
 	m_file.load(file_name);
@@ -16,6 +19,8 @@ void Controller::CategoryLoader::load(const std::string & file_name)
 
 void Controller::CategoryLoader::store()
 {
+	ORM::Repository<Model::Category> repository{};
+
 	for (int rcount = 9; rcount < m_file.getRowCount(); ++rcount)
 	{
 		auto& row = m_file.getRow(rcount);
@@ -29,7 +34,7 @@ void Controller::CategoryLoader::store()
 		
 		Model::Category cat{ res, false };
 
-		Model::ORM_Central::refresh_and_get_schema().replace(cat);
+		repository.Replace(cat);
 
 		int i = 0;
 	}

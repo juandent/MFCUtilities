@@ -13,21 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Model">
-      <UniqueIdentifier>{e61f03e2-838a-4f44-923d-a4883ba64fbf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Controllers">
-      <UniqueIdentifier>{38bb335e-81ed-4948-afdf-dceb56f8ca58}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ORM Infrastructure">
-      <UniqueIdentifier>{61014a99-5d6e-46d5-912d-a9230759597a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Repositories">
-      <UniqueIdentifier>{ec3a5782-f568-44ad-9885-27348560d834}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TesterForMFCUtilitiesDLL.h">
+    <ClInclude Include="TestLeaksMFC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
@@ -42,10 +30,10 @@
     <ClInclude Include="ChildFrm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TesterForMFCUtilitiesDLLDoc.h">
+    <ClInclude Include="TestLeaksMFCDoc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TesterForMFCUtilitiesDLLView.h">
+    <ClInclude Include="TestLeaksMFCView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -66,60 +54,9 @@
     <ClInclude Include="PropertiesWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Controller.Main.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="Controllers\Controller.FileLoader.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="Controllers\Controller.Interfaces.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\Model.AccountType.Binding.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\Model.CoinBinding.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\Model.Colones.Binding.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\Model.DataTier.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\Model.DateBinding.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\Model.Dolares.Binding.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\Model.ORM.Definitions.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\Model.StatementBuilder.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\Model.StatementFactory.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="ORM\ORM.IRepository.h">
-      <Filter>ORM Infrastructure</Filter>
-    </ClInclude>
-    <ClInclude Include="ORM\ORM.Repository.h">
-      <Filter>ORM Infrastructure</Filter>
-    </ClInclude>
-    <ClInclude Include="ORM\ORM.IUnitOfWork.h">
-      <Filter>ORM Infrastructure</Filter>
-    </ClInclude>
-    <ClInclude Include="Repositories\StatementLineRepository.h">
-      <Filter>Repositories</Filter>
-    </ClInclude>
-    <ClInclude Include="Repositories\CategoryRepository.h">
-      <Filter>Repositories</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TesterForMFCUtilitiesDLL.cpp">
+    <ClCompile Include="TestLeaksMFC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
@@ -131,10 +68,10 @@
     <ClCompile Include="ChildFrm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TesterForMFCUtilitiesDLLDoc.cpp">
+    <ClCompile Include="TestLeaksMFCDoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TesterForMFCUtilitiesDLLView.cpp">
+    <ClCompile Include="TestLeaksMFCView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileView.cpp">
@@ -152,33 +89,15 @@
     <ClCompile Include="PropertiesWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\Controller.Main.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="Controllers\Controller.FileLoader.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\Model.StatementBuilder.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\Model.StatementFactory.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\Model.ORM.Definitions.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="ORM\ORM.IRepository.cpp">
-      <Filter>ORM Infrastructure</Filter>
-    </ClCompile>
-    <ClCompile Include="ORM\ORM.Repository.cpp">
-      <Filter>ORM Infrastructure</Filter>
-    </ClCompile>
-    <ClCompile Include="ORM\ORM.IUnitOfWork.cpp">
-      <Filter>ORM Infrastructure</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="TesterForMFCUtilitiesDLL.rc">
+    <None Include="TestLeaksMFC.reg" />
+    <None Include="res\TestLeaksMFC.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TestLeaksMFC.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -246,10 +165,10 @@
     <Image Include="res\userimages.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\TesterForMFCUtilitiesDLLDoc.ico">
+    <Image Include="res\TestLeaksMFCDoc.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\TesterForMFCUtilitiesDLL.ico">
+    <Image Include="res\TestLeaksMFC.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\Toolbar.bmp">
@@ -258,12 +177,5 @@
     <Image Include="res\Toolbar256.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\TesterForMFCUtilitiesDLL.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="DataTierClassDiagram.cd" />
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>

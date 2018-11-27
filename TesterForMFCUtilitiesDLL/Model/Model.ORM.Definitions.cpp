@@ -4,16 +4,17 @@
 #include "Model.ORM.Definitions.h"
 #include "Model.DateBinding.h"
 
-namespace Model
+namespace ORM
 {
+	using namespace Model;
 
-	void ORM_Central::fill_db()
+	void Storage::fill_db_with_test_data()
 	{
 		using namespace sqlite_orm;
 		using namespace date;
 		using namespace std;
 
-		auto& storage = refresh_and_get_schema();
+		auto& storage = Storage::getStorage();
 
 		Person leslie{ 1, "Leslie"s, "Hulse"s };
 		Person juan{ 2, "Juan"s, "Dent"s };
@@ -100,13 +101,13 @@ namespace Model
 
 	}
 
-	void ORM_Central::remove_all_from_database()
+	void Storage::empty_database()
 	{
 		using namespace sqlite_orm;
 		using namespace date;
 		using namespace std;
 
-		auto& storage = refresh_and_get_schema();
+		auto& storage = Storage::getStorage();
 		try
 		{
 			storage.remove_all<LineResponsibility>();

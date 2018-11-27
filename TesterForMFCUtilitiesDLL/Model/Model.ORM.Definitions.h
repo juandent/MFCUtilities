@@ -2,19 +2,20 @@
 
 #include "Model.DataTier.h"
 
-namespace Model
+namespace ORM
 { 
+	using namespace Model;
 
-	class ORM_Central
+	class Storage_Impl
 	{
-	public:
-		static auto& refresh_and_get_schema();
-		void fill_db();
-		void remove_all_from_database();
+		Storage_Impl() = delete;	// prohibit instantiation
+		static auto& get_storage();
+
+		friend class Storage;
 
 	};
 
-	inline 	auto& ORM_Central::refresh_and_get_schema()
+	inline 	auto& Storage_Impl::get_storage()
 	{
 		using namespace sqlite_orm;
 		using namespace date;
@@ -146,4 +147,15 @@ namespace Model
 		return storage;
 	}
 
+	class Storage
+	{
+	public:
+		using Storage_t = decltype(Storage_Impl::get_storage());
+
+		Storage() = delete;
+		static Storage_t& getStorage() { return Storage_Impl::get_storage(); }
+		static void fill_db_with_test_data();
+		static void empty_database();
+	};
 }
+

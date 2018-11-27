@@ -16,7 +16,9 @@ inline std::shared_ptr<std::wstring> CoinToString(Coin coin) {
 	case Coin::Colon:return std::make_shared<std::wstring>( L"¢");
 	case Coin::Dolar:return std::make_shared<std::wstring>(L"$");
 	case Coin::Both: return std::make_shared<std::wstring>(L"¢$");
-	case Coin::Unknown:return {};
+	case Coin::Unknown:
+	default:
+		return {};
 	}
 }
 
