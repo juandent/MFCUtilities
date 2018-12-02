@@ -102,13 +102,7 @@
     <ClInclude Include="Model\Model.StatementFactory.h">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="ORM\ORM.IRepository.h">
-      <Filter>ORM Infrastructure</Filter>
-    </ClInclude>
     <ClInclude Include="ORM\ORM.Repository.h">
-      <Filter>ORM Infrastructure</Filter>
-    </ClInclude>
-    <ClInclude Include="ORM\ORM.IUnitOfWork.h">
       <Filter>ORM Infrastructure</Filter>
     </ClInclude>
     <ClInclude Include="Repositories\StatementLineRepository.h">
@@ -116,6 +110,12 @@
     </ClInclude>
     <ClInclude Include="Repositories\CategoryRepository.h">
       <Filter>Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="ORM\ORM.UnitOfWork.h">
+      <Filter>ORM Infrastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="FormattedCategory.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,14 +167,14 @@
     <ClCompile Include="Model\Model.ORM.Definitions.cpp">
       <Filter>Model</Filter>
     </ClCompile>
-    <ClCompile Include="ORM\ORM.IRepository.cpp">
-      <Filter>ORM Infrastructure</Filter>
-    </ClCompile>
     <ClCompile Include="ORM\ORM.Repository.cpp">
       <Filter>ORM Infrastructure</Filter>
     </ClCompile>
-    <ClCompile Include="ORM\ORM.IUnitOfWork.cpp">
+    <ClCompile Include="ORM\ORM.UnitOfWork.cpp">
       <Filter>ORM Infrastructure</Filter>
+    </ClCompile>
+    <ClCompile Include="FormattedCategory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

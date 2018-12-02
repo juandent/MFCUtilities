@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TesterForMFCUtilitiesDLL", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestLeaksMFC", "TestLeaksMFC\TestLeaksMFC.vcxproj", "{302763DB-CEF6-4A4D-BBA1-B1632BB06FFC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TypeErasure", "TypeErasure\TypeErasure.vcxproj", "{83D24ED9-BF77-4503-BAB0-9216215C672D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -69,6 +71,18 @@ Global
 		{302763DB-CEF6-4A4D-BBA1-B1632BB06FFC}.Release|x64.Build.0 = Release|x64
 		{302763DB-CEF6-4A4D-BBA1-B1632BB06FFC}.Release|x86.ActiveCfg = Release|Win32
 		{302763DB-CEF6-4A4D-BBA1-B1632BB06FFC}.Release|x86.Build.0 = Release|Win32
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Debug|x64.ActiveCfg = Debug|x64
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Debug|x64.Build.0 = Debug|x64
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Debug|x86.ActiveCfg = Debug|Win32
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Debug|x86.Build.0 = Debug|Win32
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Release Unicode|x64.ActiveCfg = Release|x64
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Release Unicode|x64.Build.0 = Release|x64
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Release Unicode|x86.ActiveCfg = Release|Win32
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Release Unicode|x86.Build.0 = Release|Win32
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Release|x64.ActiveCfg = Release|x64
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Release|x64.Build.0 = Release|x64
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Release|x86.ActiveCfg = Release|Win32
+		{83D24ED9-BF77-4503-BAB0-9216215C672D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

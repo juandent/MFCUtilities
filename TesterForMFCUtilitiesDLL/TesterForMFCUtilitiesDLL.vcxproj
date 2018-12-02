@@ -206,6 +206,7 @@
     <ClInclude Include="Controllers\Controller.Interfaces.h" />
     <ClInclude Include="Controllers\Controller.Main.h" />
     <ClInclude Include="FileView.h" />
+    <ClInclude Include="FormattedCategory.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Model\Model.AccountType.Binding.h" />
     <ClInclude Include="Model\Model.CoinBinding.h" />
@@ -216,8 +217,7 @@
     <ClInclude Include="Model\Model.ORM.Definitions.h" />
     <ClInclude Include="Model\Model.StatementBuilder.h" />
     <ClInclude Include="Model\Model.StatementFactory.h" />
-    <ClInclude Include="ORM\ORM.IRepository.h" />
-    <ClInclude Include="ORM\ORM.IUnitOfWork.h" />
+    <ClInclude Include="ORM\ORM.UnitOfWork.h" />
     <ClInclude Include="ORM\ORM.Repository.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PropertiesWnd.h" />
@@ -234,6 +234,7 @@
   <ItemGroup>
     <ClCompile Include="Controllers\Controller.FileLoader.cpp" />
     <ClCompile Include="Controllers\Controller.Main.cpp" />
+    <ClCompile Include="FormattedCategory.cpp" />
     <ClCompile Include="Model\Model.ORM.Definitions.cpp" />
     <ClCompile Include="Model\Model.StatementBuilder.cpp" />
     <ClCompile Include="Model\Model.StatementFactory.cpp" />
@@ -241,8 +242,7 @@
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="ORM\ORM.IRepository.cpp" />
-    <ClCompile Include="ORM\ORM.IUnitOfWork.cpp" />
+    <ClCompile Include="ORM\ORM.UnitOfWork.cpp" />
     <ClCompile Include="ORM\ORM.Repository.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="PropertiesWnd.cpp" />
