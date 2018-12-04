@@ -6,22 +6,17 @@
 
 using namespace sqlite_orm;
 
-void BasicCategoryGridController::OnInitialUpdate(int num_rows)
-{
-	IGridController::OnInitialUpdate( num_rows);
-
-	grid.m_sortingFunctions = { JD::Comparison::Text, JD::Comparison::Text };
-}
 
 void BasicCategoryGridController::OnInitialUpdate()
 {
 	lines = ORM::Storage::getStorage().get_all<Model::Category>(order_by(&Model::Category::m_name_id));
-	OnInitialUpdate(lines.size() + 1);
+	DoInitialUpdate(lines.size());
+	grid.m_sortingFunctions = { JD::Comparison::Text, JD::Comparison::Text };
 }
 
-void BasicCategoryGridController::OnUpdate()
+void BasicCategoryGridController::RefreshGrid()
 {
-	FillGrid();
+	FillGrid( lines.size());
 }
 
 void BasicCategoryGridController::OnGridClick(NMHDR * pNotifyStruct)
@@ -40,14 +35,6 @@ void BasicCategoryGridController::FillHeaders()
 {
 	grid.SetItemText(0, Columns::NAME, L"CATEGORY NAME");
 	grid.SetItemText(0, Columns::REAL, L"REAL?");
-}
-
-void BasicCategoryGridController::FillGrid()
-{
-	for (int i = 0; i < lines.size(); ++i)
-	{
-		FillLine(i);
-	}
 }
 
 void BasicCategoryGridController::FillLine(int row)

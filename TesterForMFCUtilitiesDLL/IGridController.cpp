@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "IGridController.h"
 
-void IGridController::OnInitialUpdate(int num_rows)
+void IGridController::DoInitialUpdate(int num_rows)
 {
-	grid.SetRowCount(num_rows);
+	grid.SetRowCount(num_rows + 1);
 	grid.SetColumnCount(count_columns);
 	grid.SetFixedRowCount();
 	grid.SetFixedColumnCount();
@@ -12,7 +12,7 @@ void IGridController::OnInitialUpdate(int num_rows)
 
 	FillHeaders();
 
-	OnUpdate();
+	RefreshGrid();
 
 	AutoSizeColumns();
 }
