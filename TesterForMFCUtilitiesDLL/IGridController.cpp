@@ -33,3 +33,15 @@ void IGridController::FillGrid(int num_rows)
 	}
 }
 
+void IGridController::OnGridClick(NMHDR * pNotifyStruct)
+{
+	NM_GRIDVIEW* pItem = reinterpret_cast<NM_GRIDVIEW*>(pNotifyStruct);
+	TRACE(_T("Clicked on row %d, col %d\n"), pItem->iRow, pItem->iColumn);
+
+	if (pItem->hdr.idFrom == grid.GetDlgCtrlID())
+	{
+		//pItem->hdr.hwndFrom;
+		HandleGridClick(pItem);
+	}
+}
+

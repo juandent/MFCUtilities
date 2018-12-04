@@ -15,7 +15,7 @@ protected:
 	void AutoSizeColumns();
 	void FillGrid(int num_rows);
 
-	virtual void OnGridClick(NMHDR *pNotifyStruct) = 0;
+	virtual void HandleGridClick(NM_GRIDVIEW* pItem) = 0;
 	virtual void FillHeaders() = 0;
 	virtual void FillLine(int row) = 0;
 public:
@@ -24,5 +24,6 @@ public:
 	virtual void OnInitialUpdate() = 0;
 	virtual void RefreshGrid() = 0;
 
+	void OnGridClick(NMHDR *pNotifyStruct);
 };
 

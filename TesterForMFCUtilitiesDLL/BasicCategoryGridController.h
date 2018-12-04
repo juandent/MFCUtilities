@@ -8,7 +8,7 @@ class BasicCategoryGridController : public IGridController
 	std::vector<Model::Category> lines;
 	enum Columns { NAME = 1, REAL = 2, NUM_COLUMNS};
 
-	virtual void OnGridClick(NMHDR * pNotifyStruct) override;
+	virtual void HandleGridClick(NM_GRIDVIEW* pItem) override;
 	virtual void FillHeaders() override;
 	virtual void FillLine(int row) override;
 

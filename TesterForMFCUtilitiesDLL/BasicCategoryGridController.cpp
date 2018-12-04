@@ -2,7 +2,7 @@
 
 #include "BasicCategoryGridController.h"
 
-
+#include "GridCellCheck.h"
 
 using namespace sqlite_orm;
 
@@ -11,7 +11,7 @@ void BasicCategoryGridController::OnInitialUpdate()
 {
 	lines = ORM::Storage::getStorage().get_all<Model::Category>(order_by(&Model::Category::m_name_id));
 	DoInitialUpdate(lines.size());
-	grid.m_sortingFunctions = { JD::Comparison::Text, JD::Comparison::Text };
+	grid.m_sortingFunctions = { JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Text};
 }
 
 void BasicCategoryGridController::RefreshGrid()
@@ -19,15 +19,21 @@ void BasicCategoryGridController::RefreshGrid()
 	FillGrid( lines.size());
 }
 
-void BasicCategoryGridController::OnGridClick(NMHDR * pNotifyStruct)
+void BasicCategoryGridController::HandleGridClick(NM_GRIDVIEW * pItem)
 {
-	NM_GRIDVIEW* pItem = reinterpret_cast<NM_GRIDVIEW*>(pNotifyStruct);
-	TRACE(_T("Clicked on row %d, col %d\n"), pItem->iRow, pItem->iColumn);
-
-	if (pItem->hdr.idFrom == grid.GetDlgCtrlID())
+	if (pItem->iRow == 0 && pItem->iColumn > 0)	// header
 	{
-		//pItem->hdr.hwndFrom;
-		
+		int sortCol = grid.GetSortColumn();
+		auto sortIsAsc = grid.GetSortAscending();
+
+		// sort
+		switch (pItem->iColumn)
+		{
+		case Columns::NAME:
+			break;
+		case Columns::REAL:
+			break;
+		}
 	}
 }
 
@@ -43,7 +49,9 @@ void BasicCategoryGridController::FillLine(int row)
 
 	auto txt = JD::to_cstring(line.m_name_id);
 	grid.SetItemText(row + 1, Columns::NAME, txt);
-	auto boolVal = JD::to_cstring(line.m_real_expense_or_income ? "Real" : "Not real");
-	grid.SetItemText(row + 1, Columns::REAL, boolVal);
 
+
+	grid.SetCellType(row + 1, Columns::REAL, RUNTIME_CLASS(CGridCellCheck));
+	auto realCell = dynamic_cast<CGridCellCheck*>(grid.GetCell(row + 1, Columns::REAL));
+	realCell->SetCheck(line.m_real_expense_or_income);
 }
