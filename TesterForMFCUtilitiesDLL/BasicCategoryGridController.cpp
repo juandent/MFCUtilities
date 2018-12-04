@@ -8,11 +8,15 @@ using namespace sqlite_orm;
 
 void BasicCategoryGridController::OnInitialUpdate(int num_rows)
 {
-	lines = ORM::Storage::getStorage().get_all<Model::Category>(order_by(&Model::Category::m_name_id));
-
-	IGridController::OnInitialUpdate( lines.size() + 1 );
+	IGridController::OnInitialUpdate( num_rows);
 
 	grid.m_sortingFunctions = { JD::Comparison::Text, JD::Comparison::Text };
+}
+
+void BasicCategoryGridController::OnInitialUpdate()
+{
+	lines = ORM::Storage::getStorage().get_all<Model::Category>(order_by(&Model::Category::m_name_id));
+	OnInitialUpdate(lines.size() + 1);
 }
 
 void BasicCategoryGridController::OnUpdate()
@@ -55,12 +59,4 @@ void BasicCategoryGridController::FillLine(int row)
 	auto boolVal = JD::to_cstring(line.m_real_expense_or_income ? "Real" : "Not real");
 	grid.SetItemText(row + 1, Columns::REAL, boolVal);
 
-}
-
-void BasicCategoryGridController::AutoSizeColumns()
-{
-	for (int i = 1; i < Columns::NUM_COLUMNS; ++i)
-	{
-		grid.AutoSizeColumn(i);
-	}
 }

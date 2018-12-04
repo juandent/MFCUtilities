@@ -16,3 +16,20 @@ void IGridController::OnInitialUpdate(int num_rows)
 
 	AutoSizeColumns();
 }
+
+void IGridController::AutoSizeColumns()
+{
+	for (int i = 0; i < count_columns; ++i)
+	{
+		grid.AutoSizeColumn(i);
+	}
+}
+
+void IGridController::FillGrid(int num_rows)
+{
+	for (int i = 0; i < num_rows; ++i)
+	{
+		FillLine(i);
+	}
+}
+
