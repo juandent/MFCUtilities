@@ -200,13 +200,15 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BasicCategoryGridController.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
-    <ClInclude Include="Controllers\Controller.FileLoader.h" />
+    <ClInclude Include="Controllers\Controller.CategoryLoader.h" />
     <ClInclude Include="Controllers\Controller.Interfaces.h" />
     <ClInclude Include="Controllers\Controller.Main.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="FormattedCategory.h" />
+    <ClInclude Include="IGridController.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Model\Model.AccountType.Binding.h" />
     <ClInclude Include="Model\Model.CoinBinding.h" />
@@ -232,9 +234,11 @@
     <ClInclude Include="ViewTree.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Controllers\Controller.FileLoader.cpp" />
+    <ClCompile Include="BasicCategoryGridController.cpp" />
+    <ClCompile Include="Controllers\Controller.CategoryLoader.cpp" />
     <ClCompile Include="Controllers\Controller.Main.cpp" />
     <ClCompile Include="FormattedCategory.cpp" />
+    <ClCompile Include="IGridController.cpp" />
     <ClCompile Include="Model\Model.ORM.Definitions.cpp" />
     <ClCompile Include="Model\Model.StatementBuilder.cpp" />
     <ClCompile Include="Model\Model.StatementFactory.cpp" />
@@ -246,6 +250,7 @@
     <ClCompile Include="ORM\ORM.Repository.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="PropertiesWnd.cpp" />
+    <ClCompile Include="Repositories\CategoryRepository.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

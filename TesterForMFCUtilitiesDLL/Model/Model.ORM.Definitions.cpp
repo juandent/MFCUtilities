@@ -4,9 +4,20 @@
 #include "Model.ORM.Definitions.h"
 #include "Model.DateBinding.h"
 
+#include "../Controllers/Controller.CategoryLoader.h"
+#include "../Repositories/CategoryRepository.h"
+#include "../Repositories/StatementLineRepository.h"
+
 namespace ORM
 {
 	using namespace Model;
+
+	void Storage::initialize()
+	{
+		Storage::empty_database();
+		CategoryRepository repo;
+		repo.utility.LoadCategories(Controller::CategoryLoader{});
+	}
 
 	void Storage::fill_db_with_test_data()
 	{

@@ -3,13 +3,11 @@
 #include <regex>
 
 #include "Controller.Interfaces.h"
-#include "Controller.FileLoader.h"
+#include "Controller.CategoryLoader.h"
 #include "Controller.Main.h"
 
 
 using namespace std;
-
-// TODO: create CategoryRepository
 
 
 void Controller::CategoryLoader::load(const std::string & file_name)

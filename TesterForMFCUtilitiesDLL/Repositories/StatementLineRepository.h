@@ -1,8 +1,8 @@
 #pragma once
-#include "../Model/Model.DataTier.h"
+//#include "../Model/Model.DataTier.h"
 #include <vector>
 #include <memory>
-#include "TesterForMFCUtilitiesDLL/ORM/ORM.Repository.h"
+#include "../ORM/ORM.Repository.h"
 
 
 class StatementLineRepository : public ORM::Repository<Model::StatementLine>

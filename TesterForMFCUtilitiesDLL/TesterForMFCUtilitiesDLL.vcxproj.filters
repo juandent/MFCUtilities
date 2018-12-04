@@ -69,9 +69,6 @@
     <ClInclude Include="Controllers\Controller.Main.h">
       <Filter>Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Controller.FileLoader.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
     <ClInclude Include="Controllers\Controller.Interfaces.h">
       <Filter>Controllers</Filter>
     </ClInclude>
@@ -117,6 +114,15 @@
     <ClInclude Include="FormattedCategory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IGridController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicCategoryGridController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\Controller.CategoryLoader.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TesterForMFCUtilitiesDLL.cpp">
@@ -155,9 +161,6 @@
     <ClCompile Include="Controllers\Controller.Main.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\Controller.FileLoader.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="Model\Model.StatementBuilder.cpp">
       <Filter>Model</Filter>
     </ClCompile>
@@ -175,6 +178,18 @@
     </ClCompile>
     <ClCompile Include="FormattedCategory.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IGridController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicCategoryGridController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Repositories\CategoryRepository.cpp">
+      <Filter>Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\Controller.CategoryLoader.cpp">
+      <Filter>Controllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

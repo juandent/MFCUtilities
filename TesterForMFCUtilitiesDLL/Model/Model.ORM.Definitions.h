@@ -153,9 +153,11 @@ namespace ORM
 		using Storage_t = decltype(Storage_Impl::get_storage());
 
 		Storage() = delete;
+		static void initialize();
 		static Storage_t& getStorage() { return Storage_Impl::get_storage(); }
 		static void fill_db_with_test_data();
 		static void empty_database();
+
 	};
 }
 

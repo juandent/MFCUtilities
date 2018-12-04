@@ -27,6 +27,7 @@ public:
 	}
 };
 
+#if 0
 class UtilityOps
 {
 public:
@@ -36,6 +37,7 @@ public:
 		loader.store();
 	}
 };
+#endif
 
 template<typename StatementLineRepoType = StatementLineRepository,
 typename CategoryRepoType = CategoryRepository>
@@ -55,7 +57,7 @@ public:
 	DbWideOps dbWideOps;
 
 	// Utility operations:
-	UtilityOps utilityOps;
+	///UtilityOps utilityOps;
 	
 	// commit and restart transaction:
 	// returns: 0 if all ok
