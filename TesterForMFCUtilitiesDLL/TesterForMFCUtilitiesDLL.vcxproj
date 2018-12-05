@@ -239,6 +239,7 @@
     <ClCompile Include="Controllers\Controller.Main.cpp" />
     <ClCompile Include="FormattedCategory.cpp" />
     <ClCompile Include="IGridController.cpp" />
+    <ClCompile Include="Model\Model.DataTier.cpp" />
     <ClCompile Include="Model\Model.ORM.Definitions.cpp" />
     <ClCompile Include="Model\Model.StatementBuilder.cpp" />
     <ClCompile Include="Model\Model.StatementFactory.cpp" />

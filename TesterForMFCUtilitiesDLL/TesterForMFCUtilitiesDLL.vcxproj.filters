@@ -191,6 +191,9 @@
     <ClCompile Include="Controllers\Controller.CategoryLoader.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Model.DataTier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TesterForMFCUtilitiesDLL.rc">

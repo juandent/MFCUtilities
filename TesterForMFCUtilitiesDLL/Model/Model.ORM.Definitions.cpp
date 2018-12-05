@@ -17,6 +17,7 @@ namespace ORM
 		Storage::empty_database();
 		CategoryRepository repo;
 		repo.utility.LoadCategories(Controller::CategoryLoader{});
+		fill_db_with_test_data();
 	}
 
 	void Storage::fill_db_with_test_data()
@@ -84,6 +85,9 @@ namespace ORM
 		storage.replace(cred);
 		storage.replace(bank);
 		storage.replace(payment_to);
+
+		auto pers = cred.getPerson();
+
 
 		// Concepts
 		storage.replace(conc);
