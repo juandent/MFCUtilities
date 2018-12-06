@@ -194,6 +194,9 @@
     <ClCompile Include="Model\Model.DataTier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\date\tz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TesterForMFCUtilitiesDLL.rc">

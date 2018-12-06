@@ -379,7 +379,9 @@ namespace JD {
 	{
 		static std::array<CString, 7> days{ L"Sunday", L"Monday", L"Tuesday", L"Wednesday", L"Thursday", L"Friday", L"Saturday" };
 		date::year_month_weekday ymwd{ dp };
-		auto i = ymwd.weekday_indexed().weekday().operator unsigned int();
+		auto wkday = ymwd.weekday();
+		int i = (wkday - date::Sunday).count();
+		//auto i = ymwd.weekday_indexed().weekday().operator unsigned int();
 		return days[i];
 	}
 
@@ -387,7 +389,9 @@ namespace JD {
 	{
 		static std::array<std::string, 7> days{ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 		date::year_month_weekday ymwd{ dp };
-		auto i = ymwd.weekday_indexed().weekday().operator unsigned int();
+		auto wkday = ymwd.weekday();
+		int i = (wkday - date::Sunday).count();
+		//auto i = ymwd.weekday_indexed().weekday().operator unsigned int();
 		return days[i];
 	}
 

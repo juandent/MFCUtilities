@@ -87,7 +87,9 @@ namespace Model
 		//	auto cat = ORM::Storage::getStorage().get<Category>(m_category_name_fid);
 		//	return cat;
 		//}
-		Account getAccount();
+
+		// nullable navigation property:
+		std::shared_ptr<Account> getAccount();
 	/*	{
 			auto act = ORM::Storage::getStorage().get<Account>(m_account_payment_fid);
 			return act;
