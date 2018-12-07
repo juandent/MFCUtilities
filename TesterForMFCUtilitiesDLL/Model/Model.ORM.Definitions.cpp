@@ -110,10 +110,11 @@ namespace ORM
 		auto today = tod.time_since_epoch().count();
 
 		// time_point:
-		auto local_time = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
-		auto local_time_ = local_time.get_local_time();
+		auto zoned_time_ = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
+		auto lt = zoned_time_.get_local_time();
+		auto lt_days = floor<days>(lt);
+		year_month_day ymd_local{ lt_days };
 
-		auto sys_time = local_time.get_sys_time();
 		
 		//sys_days lt = local_time_;
 

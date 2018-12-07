@@ -104,10 +104,6 @@ namespace Model
 			m_account_payment_fid = id;
 		}
 		Category getCategory();
-		//{
-		//	auto cat = ORM::Storage::getStorage().get<Category>(m_category_name_fid);
-		//	return cat;
-		//}
 
 		// nullable navigation property:
 		Model::nullable_field<Account> getAccount();
@@ -118,15 +114,11 @@ namespace Model
 		PK int m_id;
 		FK(Person) int m_person_fid;
 		double m_percentage;	// degree of responsibility
-		void Assign(const Person& person)
+		void AssignFK(const Person& person)
 		{
 			m_person_fid = person.m_id;
 		}
 		Person getPerson();
-		//{
-		//	auto person = ORM::Storage::getStorage().get<Person>(m_person_fid);
-		//	return person;
-		//}
 	};
 
 	// N:M
@@ -135,24 +127,10 @@ namespace Model
 		FK(StatementLine) unsigned long m_statement_fid;
 		FK(Responsible)   int m_responsible_fid;
 
-		void Assign(const StatementLine& stmtLine);
-		//{
-		//	m_statement_fid = stmtLine.m_id;
-		//}
-		void Assign(const Responsible& resp);
-		//{
-		//	m_responsible_fid = resp.m_id;
-		//}
+		void AssignFK(const StatementLine& stmtLine);
+		void AssignFK(const Responsible& resp);
 		StatementLine getStatementLine();
-		//{
-		//	auto stmt = ORM::Storage::getStorage().get<StatementLine>(m_statement_fid);
-		//	return stmt;
-		//}
 		Responsible getResponsible();
-		//{
-		//	auto stmt = ORM::Storage::getStorage().get<Responsible>(m_responsible_fid);
-		//	return stmt;
-		//}
 	};
 
 	struct Statement
@@ -162,15 +140,8 @@ namespace Model
 		date::sys_days			m_statementDate;
 		FK(Account) std::string		m_account_fid;
 
-		void Assign(const Account& act);
-		//{
-		//	m_account_fid = act.m_number_id;
-		//}
+		void AssignFK(const Account& act);
 		Account getAccount();
-		//{
-		//	auto act = ORM::Storage::getStorage().get<Account>(m_account_fid);
-		//	return act;
-		//}
 	};
 
 
@@ -184,50 +155,19 @@ namespace Model
 		Colones						m_amountInLocal;
 		Dolares						m_amountInDollars;
 
-		FK(Category)				std::shared_ptr<std::string>	m_category_fid;
+		FK(Category)				nullable_field<std::string>	m_category_fid;
 		bool						m_enabled;
 		std::string					m_details;
-		FK(Account)					std::shared_ptr<std::string>  m_payment_to_fid;
+		FK(Account)					nullable_field<std::string>  m_payment_to_fid;
 		date::sys_days				m_statement_date;
 
-		void AssignBelonging(const Account& act);
-		//{
-		//	m_account_fid = act.m_number_id;
-		//}
-		void Assign(const Concept& con);
-		//{
-		//	m_concept_fid = con.m_concept_id;
-		//}
-		void Assign(const Category& cat);
-		//{
-		//	auto catid = std::make_shared<std::string>(cat.m_name_id);
-		//	m_category_fid = catid;
-		//}
-		void AssignPayment(const Account& act);
-		//{
-		//	auto actId = std::make_shared<std::string>(act.m_number_id);
-		//	m_payment_to_fid = actId;
-		//}
+		void AssignBelongingFK(const Account& act);
+		void AssignFK(const Concept& con);
+		void AssignFK(const Category& cat);
+		void AssignPaymentFK(const Account& act);
 		Account getAccountBelonging();
-		//{
-		//	auto act = ORM::Storage::getStorage().get<Account>(m_account_fid);
-		//	return act;
-		//}
 		Concept getConcept();
-		//{
-		//	auto conc = ORM::Storage::getStorage().get<Concept>(m_concept_fid);
-		//	return conc;
-		//}
-		std::shared_ptr<Category> getCategory();
-		//{
-		//	if (m_category_fid)
-		//	{
-		//		auto cat = ORM::Storage::getStorage().get<Category>(*m_category_fid);
-		//		auto shared_cat = std::make_shared<Category>(cat);
-		//		return shared_cat;
-		//	}
-		//	return nullptr;
-		//}
+		nullable_field<Category> getCategory();
 	};
 
 
