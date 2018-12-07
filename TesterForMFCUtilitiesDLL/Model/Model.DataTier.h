@@ -17,6 +17,27 @@
 
 namespace Model
 {
+	template<typename T>
+	using nullable_field = std::shared_ptr<T>;
+
+	template<typename T>
+	nullable_field<T> nullable(const T& t)
+	{
+		return std::make_shared<T>(t);
+	}
+
+	template<typename Data, typename...Pks>
+	nullable_field<Data> fromNullablePKs(Pks...pks)
+	{
+		if ((pks && ...))
+		{
+			auto instance = Storage::getStorage().get<Data>(*pks...);
+			return Model::nullable(instance);
+		}
+		return nullptr;
+	}
+
+
 #define PK
 #define FK(Table)
 
@@ -58,7 +79,7 @@ namespace Model
 		std::string m_description;
 		AccountType	m_type;
 
-		void Assign(const Person& person)
+		void AssignFK(const Person& person)
 		{
 			m_owner_fid = person.m_id;
 		}
@@ -69,17 +90,17 @@ namespace Model
 	{
 		PK std::string m_concept_id;
 		FK(Category)  std::string m_category_name_fid;
-		FK(Account)	std::shared_ptr<std::string> m_account_payment_fid;		// TODO
+		FK(Account)	  Model::nullable_field<std::string> m_account_payment_fid;		// TODO
 		bool m_always;		// always apply this mapping rather than just suggesting
 		bool m_is_regex;	// 
 
-		void Assign(const Category& cat)
+		void AssignFK(const Category& cat)
 		{
 			m_category_name_fid = cat.m_name_id;
 		}
-		void Assign(const Account& act)
+		void AssignFK(const Account& act)
 		{
-			auto id = std::make_shared<std::string>(act.m_number_id);
+			auto id = Model::nullable(act.m_number_id);
 			m_account_payment_fid = id;
 		}
 		Category getCategory();
@@ -89,11 +110,7 @@ namespace Model
 		//}
 
 		// nullable navigation property:
-		std::shared_ptr<Account> getAccount();
-	/*	{
-			auto act = ORM::Storage::getStorage().get<Account>(m_account_payment_fid);
-			return act;
-		}*/
+		Model::nullable_field<Account> getAccount();
 	};
 
 	struct Responsible

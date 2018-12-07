@@ -157,13 +157,6 @@ namespace ORM
 		static Storage_t& getStorage() { return Storage_Impl::get_storage(); }
 		static void fill_db_with_test_data();
 		static void empty_database();
-
-		template<typename T>
-		static std::shared_ptr<T> wrap(const T& t)
-		{
-			return std::make_shared<T>(t);
-		}
-
 	};
 }
 

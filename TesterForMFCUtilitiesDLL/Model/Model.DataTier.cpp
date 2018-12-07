@@ -11,13 +11,9 @@ Person Model::Account::getPerson()
 	return person;
 }
 
-std::shared_ptr<Account> Model::Concept::getAccount()
+
+
+nullable_field<Account> Model::Concept::getAccount()
 {
-	if (m_account_payment_fid)
-	{
-		auto act = Storage::getStorage().get<Account>(*m_account_payment_fid);
-		auto account = Storage::wrap(act);
-		return account;
-	}
-	return nullptr;
+	return fromNullablePKs<Account>(m_account_payment_fid);
 }

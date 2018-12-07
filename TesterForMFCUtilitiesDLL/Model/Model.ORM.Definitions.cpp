@@ -44,14 +44,17 @@ namespace ORM
 		Account jurocamaAct{ "15100-01**-****-8336", 3, "", Coin::Dolar, "", AccountType::BankAccount };
 
 		Concept conc{ "Automercado"s, "Supermercado"s, nullptr, true, false };
-		auto jurocamaId = Storage::wrap(jurocamaAct.m_number_id);
+		auto jurocamaId = Model::nullable(jurocamaAct.m_number_id);
 		int count = jurocamaId.use_count();
 		Concept conceptJurocama{ "TFT-SINPE A: 15100-01**-****-8336"s,"PAGO A JUROCAMA"s, jurocamaId, true, false };
 		count = jurocamaId.use_count();
 
-		auto n = std::chrono::system_clock::now(); // .time_since_epoch().count();
+		auto n = std::chrono::system_clock::now();	// a time_point
 		auto since_epoch = n.time_since_epoch();	// a duration in seconds
+		auto dur_in_hours_0 = std::chrono::duration_cast<std::chrono::hours>(since_epoch);
 		since_epoch -= std::chrono::hours{ 6 };
+		auto dur_in_hours_1 = std::chrono::duration_cast<std::chrono::hours>(since_epoch);
+
 
 		//using days = std::chrono::duration
 		//	<int, std::ratio_multiply<std::ratio<24>, std::chrono::hours::period>>;
@@ -109,6 +112,7 @@ namespace ORM
 		// time_point:
 		auto local_time = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
 		auto local_time_ = local_time.get_local_time();
+
 		auto sys_time = local_time.get_sys_time();
 		
 		//sys_days lt = local_time_;
@@ -123,7 +127,7 @@ namespace ORM
 			"Automercado"s,
 			389045000.50,
 			2378.99,
-			Storage::wrap(supermarket.m_name_id),
+			Model::nullable(supermarket.m_name_id),
 			true,
 			"Paseo a Bungalows"s,
 			nullptr, //"4590"s,
