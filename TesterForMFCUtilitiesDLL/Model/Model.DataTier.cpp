@@ -5,7 +5,8 @@
 using namespace Model;
 using namespace ORM;
 
-Person Model::Account::getPerson()
+
+Person Model::Account::getOwner()
 {
 	auto person = ORM::Storage::getStorage().get<Person>(m_owner_fid);
 	return person;
@@ -19,9 +20,9 @@ Category Model::Concept::getCategory()
 	return cat;
 }
 
-nullable_field<Account> Model::Concept::getAccount()
+Nullable::Type<Account> Model::Concept::getAccount()
 {
-	return fromNullablePKs<Account>(m_account_payment_fid);
+	return Nullable::getFromFKs<Account>(m_account_payment_fid);
 }
 
 Person Model::Responsible::getPerson()
@@ -75,13 +76,13 @@ void Model::StatementLine::AssignFK(const Concept & con)
 
 void Model::StatementLine::AssignFK(const Category & cat)
 {
-	auto catid = Model::nullable(cat.m_name_id);
+	auto catid = Nullable::make_nullable(cat.m_name_id);
 	m_category_fid = catid;
 }
 
 void Model::StatementLine::AssignPaymentFK(const Account & act)
 {
-	auto actId = Model::nullable(act.m_number_id);
+	auto actId = Nullable::make_nullable(act.m_number_id);
 	m_payment_to_fid = actId;
 }
 
@@ -97,7 +98,7 @@ Concept Model::StatementLine::getConcept()
 	return conc;
 }
 
-nullable_field<Category> Model::StatementLine::getCategory()
+Nullable::Type<Category> Model::StatementLine::getCategory()
 {
-	return fromNullablePKs<Category>(m_category_fid);
+	return Nullable::getFromFKs<Category>(m_category_fid);
 }

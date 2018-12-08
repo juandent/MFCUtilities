@@ -17,6 +17,8 @@ namespace ORM
 		Storage::empty_database();
 		CategoryRepository repo;
 		repo.utility.LoadCategories(Controller::CategoryLoader{});
+		// do this one time at the start to increase performance
+		auto zoned_time_ = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
 		fill_db_with_test_data();
 	}
 
@@ -44,7 +46,7 @@ namespace ORM
 		Account jurocamaAct{ "15100-01**-****-8336", 3, "", Coin::Dolar, "", AccountType::BankAccount };
 
 		Concept conc{ "Automercado"s, "Supermercado"s, nullptr, true, false };
-		auto jurocamaId = Model::nullable(jurocamaAct.m_number_id);
+		auto jurocamaId = Nullable::make_nullable(jurocamaAct.m_number_id);
 		int count = jurocamaId.use_count();
 		Concept conceptJurocama{ "TFT-SINPE A: 15100-01**-****-8336"s,"PAGO A JUROCAMA"s, jurocamaId, true, false };
 		count = jurocamaId.use_count();
@@ -110,11 +112,23 @@ namespace ORM
 		auto today = tod.time_since_epoch().count();
 
 		// time_point:
-		auto zoned_time_ = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
+		auto zoned_time_ = date::make_zoned(date::current_zone(), std::chrono::floor<std::chrono::seconds>(std::chrono::system_clock::now()));
+		ostringstream oss{};
+		oss << zoned_time_;
+		string sss = oss.str();
 		auto lt = zoned_time_.get_local_time();
 		auto lt_days = floor<days>(lt);
 		year_month_day ymd_local{ lt_days };
 
+		{
+			auto zoned_time_ = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
+			auto lt = zoned_time_.get_local_time();
+			auto lt_days = floor<days>(lt);
+			year_month_day ymd_local{ lt_days };
+			std::stringstream ss{};
+			ss >> date::parse("%F", lt_days);
+			int i = 0;
+		}
 		
 		//sys_days lt = local_time_;
 
@@ -128,7 +142,7 @@ namespace ORM
 			"Automercado"s,
 			389045000.50,
 			2378.99,
-			Model::nullable(supermarket.m_name_id),
+			Nullable::make_nullable(supermarket.m_name_id),
 			true,
 			"Paseo a Bungalows"s,
 			nullptr, //"4590"s,
@@ -158,7 +172,7 @@ namespace ORM
 		storage.replace(payment_to);
 		storage.replace(jurocamaAct);
 
-		auto pers = cred.getPerson();
+		auto pers = cred.getOwner();
 
 
 		// Concepts
@@ -169,7 +183,7 @@ namespace ORM
 		auto assoc_account2 = conceptJurocama.getAccount();
 		if (assoc_account2 != nullptr)
 		{
-			auto pers = assoc_account2->getPerson();
+			auto pers = assoc_account2->getOwner();
 			auto cmp = pers.m_company_name;
 			int i = 0;
 		}

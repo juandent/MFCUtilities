@@ -17,26 +17,31 @@
 
 namespace Model
 {
-	template<typename T>
-	using nullable_field = std::shared_ptr<T>;
-
-	template<typename T>
-	nullable_field<T> nullable(const T& t)
+	struct Nullable
 	{
-		return std::make_shared<T>(t);
-	}
+		template<typename T>
+		using Type = std::shared_ptr<T>;
 
-	template<typename Data, typename...Pks>
-	nullable_field<Data> fromNullablePKs(Pks...pks)
-	{
-		if ((pks && ...))
+		template<typename T>
+		inline
+			static Type<T> make_nullable(const T& t)
 		{
-			auto instance = Storage::getStorage().get<Data>(*pks...);
-			return Model::nullable(instance);
+			return std::make_shared<T>(t);
 		}
-		return nullptr;
-	}
 
+		template<typename Data, typename...Fks>
+		inline
+			static
+			Type<Data> getFromFKs(Fks...fks)
+		{
+			if ((fks && ...))
+			{
+				auto instance = Storage::getStorage().get<Data>(*fks...);
+				return make_nullable(instance);
+			}
+			return nullptr;
+		}
+	};
 
 #define PK
 #define FK(Table)
@@ -83,14 +88,14 @@ namespace Model
 		{
 			m_owner_fid = person.m_id;
 		}
-		Person getPerson();
+		Person getOwner();
 	};
 
 	struct Concept
 	{
 		PK std::string m_concept_id;
 		FK(Category)  std::string m_category_name_fid;
-		FK(Account)	  Model::nullable_field<std::string> m_account_payment_fid;		// TODO
+		FK(Account)	  Nullable::Type<std::string> m_account_payment_fid;		// TODO
 		bool m_always;		// always apply this mapping rather than just suggesting
 		bool m_is_regex;	// 
 
@@ -100,13 +105,13 @@ namespace Model
 		}
 		void AssignFK(const Account& act)
 		{
-			auto id = Model::nullable(act.m_number_id);
+			auto id = Nullable::make_nullable(act.m_number_id);
 			m_account_payment_fid = id;
 		}
 		Category getCategory();
 
 		// nullable navigation property:
-		Model::nullable_field<Account> getAccount();
+		Nullable::Type<Account> getAccount();
 	};
 
 	struct Responsible
@@ -155,10 +160,10 @@ namespace Model
 		Colones						m_amountInLocal;
 		Dolares						m_amountInDollars;
 
-		FK(Category)				nullable_field<std::string>	m_category_fid;
+		FK(Category)				Nullable::Type<std::string>	m_category_fid;
 		bool						m_enabled;
 		std::string					m_details;
-		FK(Account)					nullable_field<std::string>  m_payment_to_fid;
+		FK(Account)					Nullable::Type<std::string>  m_payment_to_fid;
 		date::sys_days				m_statement_date;
 
 		void AssignBelongingFK(const Account& act);
@@ -167,7 +172,7 @@ namespace Model
 		void AssignPaymentFK(const Account& act);
 		Account getAccountBelonging();
 		Concept getConcept();
-		nullable_field<Category> getCategory();
+		Nullable::Type<Category> getCategory();
 	};
 
 
