@@ -18,6 +18,10 @@ enum class Gender {
 
 //  also we need transform functions to make string from enum..
 inline std::string SysDaysToString(date::sys_days pt) {
+#if 0
+	auto ret = date::format("%F", pt);
+	return ret;
+#else
 	date::year_month_day ymd{ pt };
 	std::ostringstream os;
 	os << ymd.year();
@@ -26,6 +30,7 @@ inline std::string SysDaysToString(date::sys_days pt) {
 	os << "-";
 	os << ymd.day();
 	return os.str();
+#endif
 }
 
 
@@ -42,6 +47,16 @@ constexpr auto null_sys_day = date::sys_days{ date::days{0} };
  *  (for example BETTER_ENUM https://github.com/aantron/better-enums)
  */
 inline date::sys_days SysDaysFromString(const std::string &s) {
+#if 0
+	std::stringstream ss{ s };
+	date::sys_days tt;
+	ss >> date::parse("%F", tt);
+	if (!ss.fail())
+	{
+		return tt;
+	}
+	return null_sys_day;
+#else
 	using namespace std;
 
 	smatch m;
@@ -60,6 +75,8 @@ inline date::sys_days SysDaysFromString(const std::string &s) {
 		return ymd;
 	}
 	return null_sys_day;
+#endif
+	
 }
 
 /**

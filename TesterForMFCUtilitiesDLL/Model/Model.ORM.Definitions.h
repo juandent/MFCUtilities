@@ -22,6 +22,43 @@ namespace ORM
 		using namespace std;
 
 		static int flag = 0;
+#if 0
+		static auto storage = make_storage("statements.sqlite",
+			make_table("STATEMENTLINES"s,
+				make_column("id",
+					&StatementLine::m_id,
+					primary_key(),
+					autoincrement()),
+				make_column("belongs_to_account",
+					&StatementLine::m_belongs_to_account_fid),
+				make_column("statement_date",
+					&StatementLine::m_statement_date),
+				make_column("line_date",
+					&StatementLine::m_lineDate),
+				make_column("concept",
+					&StatementLine::m_concept_fid),
+				make_column("colones"s,
+					&StatementLine::m_amountInLocal),
+				make_column("dolares"s,
+					&StatementLine::m_amountInDollars),
+				make_column("category"s,
+					&StatementLine::m_category_fid),
+				make_column("enabled",
+					&StatementLine::m_enabled),
+				make_column("details",
+					&StatementLine::m_details),
+				make_column("refers_to_account",
+					&StatementLine::m_refers_to_account_fid)));
+		/*,
+				foreign_key(&StatementLine::m_belongs_to_account_fid).references(&Account::m_number_id),
+				foreign_key(&StatementLine::m_category_fid).references(&Category::m_name_id),
+				foreign_key(&StatementLine::m_concept_fid).references(&Concept::m_concept_id),
+				foreign_key(&StatementLine::m_refers_to_account_fid).references(&Account::m_number_id)
+				//foreign_key(&StatementLine::m_account_fid, &StatementLine::m_statement_date).references(&Statement::m_account_fid, &Statement::m_statement_date))
+			));
+			*/
+#endif
+#if 1
 		static auto storage = make_storage("statements.sqlite",
 
 			make_table("PERSONS"s,
@@ -86,8 +123,8 @@ namespace ORM
 					&StatementLine::m_id,
 					primary_key(),
 					autoincrement()),
-				make_column("account",
-					&StatementLine::m_account_fid),
+				make_column("belongs_to_account",
+					&StatementLine::m_belongs_to_account_fid),
 				make_column("statement_date",
 					&StatementLine::m_statement_date),
 				make_column("line_date",
@@ -104,12 +141,12 @@ namespace ORM
 					&StatementLine::m_enabled),
 				make_column("details",
 					&StatementLine::m_details),
-				make_column("payment_to",
-					&StatementLine::m_payment_to_fid),
-				foreign_key(&StatementLine::m_account_fid).references(&Account::m_number_id),
+				make_column("refers_to_account",
+					&StatementLine::m_refers_to_account_fid),
+				foreign_key(&StatementLine::m_belongs_to_account_fid).references(&Account::m_number_id),
 				foreign_key(&StatementLine::m_category_fid).references(&Category::m_name_id),
 				foreign_key(&StatementLine::m_concept_fid).references(&Concept::m_concept_id),
-				foreign_key(&StatementLine::m_payment_to_fid).references(&Account::m_number_id)
+				foreign_key(&StatementLine::m_refers_to_account_fid).references(&Account::m_number_id)
 				//foreign_key(&StatementLine::m_account_fid, &StatementLine::m_statement_date).references(&Statement::m_account_fid, &Statement::m_statement_date))
 			),
 
@@ -119,8 +156,7 @@ namespace ORM
 				make_column("responsible_id",
 					&LineResponsibility::m_responsible_fid),
 				foreign_key(&LineResponsibility::m_statement_fid).references(&StatementLine::m_id),
-				foreign_key(&LineResponsibility::m_responsible_fid).references(&Responsible::m_id))
-  ,
+				foreign_key(&LineResponsibility::m_responsible_fid).references(&Responsible::m_id)),
 
 				make_table("ACCOUNTS"s,
 					make_column("number",
@@ -138,6 +174,7 @@ namespace ORM
 						&Account::m_cuenta_cliente),
 					foreign_key(&Account::m_owner_fid).references(&Person::m_id))
 				);
+#endif
 
 		if (flag == 0)
 		{

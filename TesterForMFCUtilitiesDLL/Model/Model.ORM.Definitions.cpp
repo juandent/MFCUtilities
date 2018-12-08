@@ -45,15 +45,16 @@ namespace ORM
 		Account payment_to{ "4590"s, 1, "", Coin::Dolar, "????", AccountType::BankAccount };
 		Account jurocamaAct{ "15100-01**-****-8336", 3, "", Coin::Dolar, "", AccountType::BankAccount };
 
-		Concept conc{ "Automercado"s, "Supermercado"s, nullptr, true, false };
+		Concept conc{ "Automercado"s, Nullable::make_nullable( "Supermercado"s), nullptr, true, false };
 		auto jurocamaId = Nullable::make_nullable(jurocamaAct.m_number_id);
 		int count = jurocamaId.use_count();
-		Concept conceptJurocama{ "TFT-SINPE A: 15100-01**-****-8336"s,"PAGO A JUROCAMA"s, jurocamaId, true, false };
+		Concept conceptJurocama{ "TFT-SINPE A: 15100-01**-****-8336"s, Nullable::make_nullable( "PAGO A JUROCAMA"s), jurocamaId, true, false };
 		count = jurocamaId.use_count();
 
 		auto n = std::chrono::system_clock::now();	// a time_point
 		auto since_epoch = n.time_since_epoch();	// a duration in seconds
 		auto dur_in_hours_0 = std::chrono::duration_cast<std::chrono::hours>(since_epoch);
+		std::chrono::hours h = round<std::chrono::hours>(since_epoch);
 		since_epoch -= std::chrono::hours{ 6 };
 		auto dur_in_hours_1 = std::chrono::duration_cast<std::chrono::hours>(since_epoch);
 
@@ -101,9 +102,12 @@ namespace ORM
 			int j;
 		}
 		year_month_day yymd = 2018_y / month{ 12 } / fri[4];
+		ostringstream osss{};
+		osss << yymd;
+		string str = osss.str();
 		sys_days yymd_dp = yymd;
 		string ss = JD::weekDay(yymd_dp);
-
+		
 
 		year_month_day ymd{ year{2018}, month{8}, day{21} };
 		sys_days tod = ymd;
@@ -121,12 +125,47 @@ namespace ORM
 		year_month_day ymd_local{ lt_days };
 
 		{
+			using namespace std::chrono;
+
 			auto zoned_time_ = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
 			auto lt = zoned_time_.get_local_time();
 			auto lt_days = floor<days>(lt);
 			year_month_day ymd_local{ lt_days };
 			std::stringstream ss{};
-			ss >> date::parse("%F", lt_days);
+
+			to_stream(ss, "%d/%m/%Y", lt_days);
+			string str = ss.str();
+			sys_time<seconds> tt;
+			ss >> date::parse("%d/%m/%Y", tt);
+			if (ss.fail())
+				throw runtime_error("error parsing date");
+			auto rr = format("%d/%m/%Y", tt);
+
+			ss.flush();
+			sys_time<days> tdays;
+			to_stream(ss, "%d/%m/%Y", lt_days);
+			string from_ss = ss.str();
+			ss >> date::parse("%d/%m/%Y", tdays);
+			if (ss.fail())
+				throw runtime_error("error parsing date");
+			auto rre = format("%d/%m/%y", tt);
+
+			from_stream(ss, "%d/%m/%y", tt);
+			//ss >> date::parse("%F", lt_days);
+			
+			auto ret = format("%F %T %Z", tt);
+			int i = 0;
+		}
+		{
+			using namespace std::chrono;
+			auto zoned_time = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
+			auto lt = zoned_time.get_local_time();
+			auto lt_in_days = floor<days>(lt);
+			auto ret = format("%d/%m/%y", lt_in_days);
+			std::stringstream ss{ ret };
+			sys_days tt;
+			ss >> parse("%d/%m/%y", tt);
+			auto r = format("%d/%m/%y", tt);
 			int i = 0;
 		}
 		
@@ -199,7 +238,7 @@ namespace ORM
 			{
 
 			}
-			auto res = storage.get_all<StatementLine>(where(c(&StatementLine::m_account_fid) == "3777-XXXXXX-X6745"s));
+			auto res = storage.get_all<StatementLine>(where(c(&StatementLine::m_belongs_to_account_fid) == "3777-XXXXXX-X6745"s));
 			assert(res.size() == 0);
 			auto str = SysDaysToString(line.m_lineDate);
 			auto num = std::to_string(3);

@@ -13,11 +13,9 @@ Person Model::Account::getOwner()
 }
 
 
-
-Category Model::Concept::getCategory()
+Nullable::Type<Category> Model::Concept::getCategory()
 {
-	auto cat = ORM::Storage::getStorage().get<Category>(m_category_name_fid);
-	return cat;
+	return Nullable::getFromFKs<Category>(m_category_name_fid);
 }
 
 Nullable::Type<Account> Model::Concept::getAccount()
@@ -66,7 +64,7 @@ Account Model::Statement::getAccount()
 
 void Model::StatementLine::AssignBelongingFK(const Account & act)
 {
-	m_account_fid = act.m_number_id;
+	this->m_belongs_to_account_fid = act.m_number_id;
 }
 
 void Model::StatementLine::AssignFK(const Concept & con)
@@ -80,16 +78,22 @@ void Model::StatementLine::AssignFK(const Category & cat)
 	m_category_fid = catid;
 }
 
-void Model::StatementLine::AssignPaymentFK(const Account & act)
+void Model::StatementLine::AssignReferingFK(const Account & act)
 {
 	auto actId = Nullable::make_nullable(act.m_number_id);
-	m_payment_to_fid = actId;
+	this->m_refers_to_account_fid = actId;
 }
 
 Account Model::StatementLine::getAccountBelonging()
 {
-	auto act = ORM::Storage::getStorage().get<Account>(m_account_fid);
+	auto act = ORM::Storage::getStorage().get<Account>(this->m_belongs_to_account_fid);
 	return act;
+}
+
+Nullable::Type<Account> Model::StatementLine::getAccountRefering()
+{
+	auto act = ORM::Storage::getStorage().get<Account>(this->m_refers_to_account_fid);
+	return Nullable::make_nullable(act);
 }
 
 Concept Model::StatementLine::getConcept()

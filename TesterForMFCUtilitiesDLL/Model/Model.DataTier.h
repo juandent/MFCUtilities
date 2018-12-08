@@ -94,21 +94,22 @@ namespace Model
 	struct Concept
 	{
 		PK std::string m_concept_id;
-		FK(Category)  std::string m_category_name_fid;
+		FK(Category)  Nullable::Type<std::string> m_category_name_fid;
 		FK(Account)	  Nullable::Type<std::string> m_account_payment_fid;		// TODO
 		bool m_always;		// always apply this mapping rather than just suggesting
 		bool m_is_regex;	// 
 
 		void AssignFK(const Category& cat)
 		{
-			m_category_name_fid = cat.m_name_id;
+			auto id = Nullable::make_nullable(cat.m_name_id);
+			m_category_name_fid = id;
 		}
 		void AssignFK(const Account& act)
 		{
 			auto id = Nullable::make_nullable(act.m_number_id);
 			m_account_payment_fid = id;
 		}
-		Category getCategory();
+		Nullable::Type<Category> getCategory();
 
 		// nullable navigation property:
 		Nullable::Type<Account> getAccount();
@@ -142,8 +143,8 @@ namespace Model
 	{
 		std::string				m_fileName;
 		std::string				m_filePath;
-		date::sys_days			m_statementDate;
-		FK(Account) std::string		m_account_fid;
+		PK date::sys_days			m_statementDate;
+		PK FK(Account) std::string		m_account_fid;
 
 		void AssignFK(const Account& act);
 		Account getAccount();
@@ -154,7 +155,7 @@ namespace Model
 	struct StatementLine
 	{
 		PK unsigned long	m_id;
-		FK(Account) std::string		m_account_fid;
+		FK(Account) std::string		m_belongs_to_account_fid;
 		date::sys_days				m_lineDate;
 		FK(Concept) std::string		m_concept_fid;
 		Colones						m_amountInLocal;
@@ -163,17 +164,16 @@ namespace Model
 		FK(Category)				Nullable::Type<std::string>	m_category_fid;
 		bool						m_enabled;
 		std::string					m_details;
-		FK(Account)					Nullable::Type<std::string>  m_payment_to_fid;
+		FK(Account)					Nullable::Type<std::string>  m_refers_to_account_fid;
 		date::sys_days				m_statement_date;
 
 		void AssignBelongingFK(const Account& act);
 		void AssignFK(const Concept& con);
 		void AssignFK(const Category& cat);
-		void AssignPaymentFK(const Account& act);
+		void AssignReferingFK(const Account& act);
 		Account getAccountBelonging();
+		Nullable::Type<Account> getAccountRefering();
 		Concept getConcept();
 		Nullable::Type<Category> getCategory();
 	};
-
-
 }
