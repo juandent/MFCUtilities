@@ -121,8 +121,8 @@ namespace ORM
 			make_table("STATEMENTLINES"s,
 				make_column("id",
 					&StatementLine::m_id,
-					primary_key(),
-					autoincrement()),
+					primary_key()/*,
+					autoincrement()*/),
 				make_column("belongs_to_account",
 					&StatementLine::m_belongs_to_account_fid),
 				make_column("statement_date",
@@ -179,7 +179,7 @@ namespace ORM
 		if (flag == 0)
 		{
 			flag = 1;
-			storage.sync_schema();
+			storage.sync_schema(false);
 		}
 		return storage;
 	}
