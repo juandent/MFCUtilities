@@ -175,5 +175,6 @@ namespace Model
 		Nullable::Type<Account> getAccountRefering();
 		Concept getConcept();
 		Nullable::Type<Category> getCategory();
+		Statement				 getStatement();
 	};
 }

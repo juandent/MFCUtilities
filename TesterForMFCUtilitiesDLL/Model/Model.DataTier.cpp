@@ -106,3 +106,17 @@ Nullable::Type<Category> Model::StatementLine::getCategory()
 {
 	return Nullable::getFromFKs<Category>(m_category_fid);
 }
+
+Statement Model::StatementLine::getStatement()
+{
+	try
+	{
+		auto conc = ORM::Storage::getStorage().get<Statement>(this->m_belongs_to_account_fid, this->m_statement_date);
+		return conc;
+	}
+	catch (std::exception& ex)
+	{
+		auto w = ex.what();
+		throw;
+	}
+}

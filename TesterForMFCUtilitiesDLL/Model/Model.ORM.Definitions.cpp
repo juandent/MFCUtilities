@@ -191,7 +191,7 @@ namespace ORM
 		Statement  st {
 			"SomeFile.csv"s,
 			"C:\\Users\\Juan Dent\\Downloads\\"s,
-			tod,
+			ttod,
 			"3777-11**-****-7645"s
 		};
 
@@ -229,6 +229,11 @@ namespace ORM
 
 		line1.m_id = storage.insert(line1);
 
+		// Statements
+		storage.replace(st);
+
+		auto statement = line1.getStatement();
+
 
 		try
 		{
@@ -260,6 +265,7 @@ namespace ORM
 		auto& storage = Storage::getStorage();
 		try
 		{
+			storage.remove_all<Statement>();
 			storage.remove_all<LineResponsibility>();
 			storage.remove_all<StatementLine>();
 			storage.remove_all<Concept>();
