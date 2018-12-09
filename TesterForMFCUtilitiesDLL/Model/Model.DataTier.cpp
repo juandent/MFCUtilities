@@ -4,6 +4,7 @@
 
 using namespace Model;
 using namespace ORM;
+using namespace sqlite_orm;
 
 
 Person Model::Account::getOwner()
@@ -119,4 +120,10 @@ Statement Model::StatementLine::getStatement()
 		auto w = ex.what();
 		throw;
 	}
+}
+
+std::vector<StatementLine> Model::Category::getStatementLines()
+{
+	auto vec = ORM::Storage::getStorage().get_all<StatementLine>(where(c(&StatementLine::m_category_fid) == m_name_id));
+	return vec;
 }

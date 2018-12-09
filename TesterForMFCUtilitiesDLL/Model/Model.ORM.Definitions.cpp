@@ -234,6 +234,7 @@ namespace ORM
 
 		auto statement = line1.getStatement();
 
+		auto vecStatementLines = supermarket.getStatementLines();
 
 		try
 		{

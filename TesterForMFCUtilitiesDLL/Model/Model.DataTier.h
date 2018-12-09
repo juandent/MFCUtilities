@@ -61,6 +61,8 @@ namespace Model
 	{
 		PK std::string					m_name_id;
 		bool						m_real_expense_or_income;
+
+		std::vector<StatementLine> getStatementLines();
 	};
 
 	struct Person					// Leslie, Juan Jr, Juan Sr, Other
