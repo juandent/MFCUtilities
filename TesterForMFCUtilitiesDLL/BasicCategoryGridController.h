@@ -11,6 +11,7 @@ class BasicCategoryGridController : public IGridController
 	virtual void HandleGridClick(NM_GRIDVIEW* pItem) override;
 	virtual void FillHeaders() override;
 	virtual void FillLine(int row) override;
+	virtual void SetSorting() override;
 
 public:
 	BasicCategoryGridController(CJDGridCtrl& grid) : IGridController{ grid, Columns::NUM_COLUMNS } {};

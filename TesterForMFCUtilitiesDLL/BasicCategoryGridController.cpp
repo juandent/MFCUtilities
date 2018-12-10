@@ -9,9 +9,9 @@ using namespace sqlite_orm;
 
 void BasicCategoryGridController::OnInitialUpdate()
 {
-	lines = ORM::Storage::getStorage().get_all<Model::Category>(order_by(&Model::Category::m_name_id));
+	lines = ORM::storage.get_all<Model::Category>(order_by(&Model::Category::m_name_id));
 	DoInitialUpdate(lines.size());
-	grid.m_sortingFunctions = { JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Text};
+
 }
 
 void BasicCategoryGridController::RefreshGrid()
@@ -54,4 +54,9 @@ void BasicCategoryGridController::FillLine(int row)
 	grid.SetCellType(row + 1, Columns::REAL, RUNTIME_CLASS(CGridCellCheck));
 	auto realCell = dynamic_cast<CGridCellCheck*>(grid.GetCell(row + 1, Columns::REAL));
 	realCell->SetCheck(line.m_real_expense_or_income);
+}
+
+void BasicCategoryGridController::SetSorting()
+{
+	grid.m_sortingFunctions = { JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Text };
 }

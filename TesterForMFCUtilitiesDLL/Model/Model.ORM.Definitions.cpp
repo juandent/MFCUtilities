@@ -28,7 +28,7 @@ namespace ORM
 		using namespace date;
 		using namespace std;
 
-		auto& storage = Storage::getStorage();
+		//auto& storage = Storage::getStorage();
 
 		Person leslie{ 1, "Leslie"s, "Hulse"s };
 		Person juan{ 2, "Juan"s, "Dent"s };
@@ -235,6 +235,20 @@ namespace ORM
 		auto statement = line1.getStatement();
 
 		auto vecStatementLines = supermarket.getStatementLines();
+
+#if 1
+		line1.AddResponsible(juan, 0.50);
+		line1.AddResponsible(leslie, 0.50);
+
+		auto v_resp = line1.getResponsibles();
+		for (auto& resp : v_resp)
+		{
+			double percent = resp.m_percentage;
+			Person person = resp.getPerson();
+			string name = person.m_first_name + " " + person.m_last_name;
+			int i = 0;
+		}
+#endif
 
 		try
 		{

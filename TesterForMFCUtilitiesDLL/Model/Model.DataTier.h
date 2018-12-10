@@ -132,7 +132,7 @@ namespace Model
 	// N:M
 	struct LineResponsibility
 	{
-		FK(StatementLine) unsigned long m_statement_fid;
+		FK(StatementLine) unsigned long m_statement_line_fid;
 		FK(Responsible)   int m_responsible_fid;
 
 		void AssignFK(const StatementLine& stmtLine);
@@ -176,7 +176,9 @@ namespace Model
 		Account getAccountBelonging();
 		Nullable::Type<Account> getAccountRefering();
 		Concept getConcept();
-		Nullable::Type<Category> getCategory();
-		Statement				 getStatement();
+		Nullable::Type<Category>	getCategory();
+		Statement					getStatement();
+		std::vector<Responsible>	getResponsibles();
+		void						AddResponsible(const Person& person, double percentage = 1);
 	};
 }

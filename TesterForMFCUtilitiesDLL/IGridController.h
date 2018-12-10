@@ -18,6 +18,7 @@ protected:
 	virtual void HandleGridClick(NM_GRIDVIEW* pItem) = 0;
 	virtual void FillHeaders() = 0;
 	virtual void FillLine(int row) = 0;
+	virtual void SetSorting() = 0;
 public:
 	virtual ~IGridController() {}
 

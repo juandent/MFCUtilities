@@ -121,8 +121,8 @@ namespace ORM
 			make_table("STATEMENTLINES"s,
 				make_column("id",
 					&StatementLine::m_id,
-					primary_key()/*,
-					autoincrement()*/),
+					autoincrement(),
+					primary_key()),
 				make_column("belongs_to_account",
 					&StatementLine::m_belongs_to_account_fid),
 				make_column("statement_date",
@@ -152,10 +152,10 @@ namespace ORM
 
 			make_table("LINE_RESPONSABILITIES"s,
 				make_column("statement_id",
-					&LineResponsibility::m_statement_fid),
+					&LineResponsibility::m_statement_line_fid),
 				make_column("responsible_id",
 					&LineResponsibility::m_responsible_fid),
-				foreign_key(&LineResponsibility::m_statement_fid).references(&StatementLine::m_id),
+				foreign_key(&LineResponsibility::m_statement_line_fid).references(&StatementLine::m_id),
 				foreign_key(&LineResponsibility::m_responsible_fid).references(&Responsible::m_id)),
 
 				make_table("ACCOUNTS"s,
@@ -195,5 +195,7 @@ namespace ORM
 		static void fill_db_with_test_data();
 		static void empty_database();
 	};
+
+	inline Storage::Storage_t& storage = Storage::getStorage();
 }
 

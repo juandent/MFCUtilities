@@ -9,7 +9,7 @@ using namespace sqlite_orm;
 
 Person Model::Account::getOwner()
 {
-	auto person = ORM::Storage::getStorage().get<Person>(m_owner_fid);
+	auto person = ORM::storage.get<Person>(m_owner_fid);
 	return person;
 }
 
@@ -26,13 +26,13 @@ Nullable::Type<Account> Model::Concept::getAccount()
 
 Person Model::Responsible::getPerson()
 {
-	auto person = ORM::Storage::getStorage().get<Person>(m_person_fid);
+	auto person = ORM::storage.get<Person>(m_person_fid);
 	return person;
 }
 
 void Model::LineResponsibility::AssignFK(const StatementLine & stmtLine)
 {
-	m_statement_fid = stmtLine.m_id;
+	m_statement_line_fid = stmtLine.m_id;
 }
 
 void Model::LineResponsibility::AssignFK(const Responsible & resp)
@@ -42,13 +42,13 @@ void Model::LineResponsibility::AssignFK(const Responsible & resp)
 
 StatementLine Model::LineResponsibility::getStatementLine()
 {
-	auto stmt = ORM::Storage::getStorage().get<StatementLine>(m_statement_fid);
+	auto stmt = ORM::storage.get<StatementLine>(m_statement_line_fid);
 	return stmt;
 }
 
 Responsible Model::LineResponsibility::getResponsible()
 {
-	auto stmt = ORM::Storage::getStorage().get<Responsible>(m_responsible_fid);
+	auto stmt = ORM::storage.get<Responsible>(m_responsible_fid);
 	return stmt;
 }
 
@@ -59,7 +59,7 @@ void Model::Statement::AssignFK(const Account & act)
 
 Account Model::Statement::getAccount()
 {
-	auto act = ORM::Storage::getStorage().get<Account>(m_account_fid);
+	auto act = ORM::storage.get<Account>(m_account_fid);
 	return act;
 }
 
@@ -87,19 +87,19 @@ void Model::StatementLine::AssignReferingFK(const Account & act)
 
 Account Model::StatementLine::getAccountBelonging()
 {
-	auto act = ORM::Storage::getStorage().get<Account>(this->m_belongs_to_account_fid);
+	auto act = ORM::storage.get<Account>(this->m_belongs_to_account_fid);
 	return act;
 }
 
 Nullable::Type<Account> Model::StatementLine::getAccountRefering()
 {
-	auto act = ORM::Storage::getStorage().get<Account>(this->m_refers_to_account_fid);
+	auto act = ORM::storage.get<Account>(this->m_refers_to_account_fid);
 	return Nullable::make_nullable(act);
 }
 
 Concept Model::StatementLine::getConcept()
 {
-	auto conc = ORM::Storage::getStorage().get<Concept>(m_concept_fid);
+	auto conc = ORM::storage.get<Concept>(m_concept_fid);
 	return conc;
 }
 
@@ -112,7 +112,7 @@ Statement Model::StatementLine::getStatement()
 {
 	try
 	{
-		auto conc = ORM::Storage::getStorage().get<Statement>(this->m_belongs_to_account_fid, this->m_statement_date);
+		auto conc = ORM::storage.get<Statement>(this->m_belongs_to_account_fid, this->m_statement_date);
 		return conc;
 	}
 	catch (std::exception& ex)
@@ -122,8 +122,34 @@ Statement Model::StatementLine::getStatement()
 	}
 }
 
+std::vector<Responsible> Model::StatementLine::getResponsibles()
+{
+	std::vector<Responsible> r_vec;
+	auto vec = ORM::storage.get_all<LineResponsibility>(where(c(&LineResponsibility::m_statement_line_fid) == m_id));
+	for (auto& lr : vec)
+	{
+		r_vec.push_back(lr.getResponsible());
+	}
+	return r_vec;
+}
+
+void Model::StatementLine::AddResponsible(const Person & person, double percentage)
+{
+	// Responsibles
+	Responsible resp{ -1, person.m_id, percentage};
+
+	resp.m_id = ORM::storage.insert(resp);
+
+	// LineResponsibility
+	LineResponsibility lresp{};
+	lresp.AssignFK(*this);
+	lresp.AssignFK(resp);
+
+	ORM::storage.insert(lresp);
+}
+
 std::vector<StatementLine> Model::Category::getStatementLines()
 {
-	auto vec = ORM::Storage::getStorage().get_all<StatementLine>(where(c(&StatementLine::m_category_fid) == m_name_id));
+	auto vec = ORM::storage.get_all<StatementLine>(where(c(&StatementLine::m_category_fid) == m_name_id));
 	return vec;
 }

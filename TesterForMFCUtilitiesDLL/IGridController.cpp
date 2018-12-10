@@ -15,6 +15,8 @@ void IGridController::DoInitialUpdate(int num_rows)
 	RefreshGrid();
 
 	AutoSizeColumns();
+
+	SetSorting();
 }
 
 void IGridController::AutoSizeColumns()
