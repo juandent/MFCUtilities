@@ -211,6 +211,7 @@
     <ClInclude Include="Controllers\Controller.Main.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="FormattedCategory.h" />
+    <ClInclude Include="GridDisplayer.h" />
     <ClInclude Include="IGridController.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Model\Model.AccountType.Binding.h" />
@@ -247,6 +248,7 @@
     <ClCompile Include="Controllers\Controller.CategoryLoader.cpp" />
     <ClCompile Include="Controllers\Controller.Main.cpp" />
     <ClCompile Include="FormattedCategory.cpp" />
+    <ClCompile Include="GridDisplayer.cpp" />
     <ClCompile Include="IGridController.cpp" />
     <ClCompile Include="Model\Model.DataTier.cpp" />
     <ClCompile Include="Model\Model.ORM.Definitions.cpp" />
