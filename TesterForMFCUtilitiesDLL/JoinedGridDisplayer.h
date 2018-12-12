@@ -2,9 +2,10 @@
 
 
 
-template<typename Container, int MaxCol>
+template<typename T, int MaxCol>
 class JoinedGridDisplayer
 {
+	using Container = std::vector<std::remove_reference_t<T>>;
 	CJDGridCtrl&				grid;
 	Container					lines;
 	std::vector<std::string>	headers;
