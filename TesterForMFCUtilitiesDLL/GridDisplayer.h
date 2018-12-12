@@ -66,4 +66,13 @@ private:
 	{
 		return JD::to_cstring(t);
 	}
+	template<typename T>
+	static CString format(const std::shared_ptr<T>& t)
+	{
+		if (t)
+		{
+			return JD::to_cstring(*t);
+		}
+		return L"";
+	}
 };
