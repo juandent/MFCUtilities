@@ -1,5 +1,5 @@
 ﻿#include "stdafx.h"
-//#include "GridDisplayer.h"
+#include "GridDisplayer.h"
 
 #include "../Model/Model.ORM.Definitions.h"
 
@@ -45,23 +45,23 @@ CString print(const T& t )
 	return JD::to_cstring(t);
 }
 
-#if 0
-template<typename T, typename DataType>
-void getData(T& z, DataType p)
+template<typename T, typename ...Cols>
+struct Q
 {
-	auto value = z.*p;
-	auto cs = print(value);
-}
+	std::tuple<Cols...> tupleOfCols;
+	Q(Cols...cls) : tupleOfCols(cls...)
+	{}
 
+	void getTupleItems()
+	{
+		constexpr const int size = std::tuple_size<tupleOfCols>;
+		for (int i = 0; i < size; ++i)
+		{
+			auto element = std::tuple_element<i, tupleOfCols>;
+		}
+	}
+};
 
-template<typename T, typename DataType, typename ... RestDataTypes>
-void getData(T& z, DataType p, RestDataTypes...qs)
-{
-	auto value = z.*p;
-	auto cs = print(value);
-	getData(z, qs...);
-}
-#endif
 
 
 template<typename T>  //, typename ...Cols>
@@ -71,34 +71,18 @@ struct P
 
 	std::vector<C> lines{ C{"val", "val2", "str", "str2", 5}, C{"val2", "val3", "str2", "str3", 6 } };
 
-#if 0
-	//void callHandle()
-	//{
-	//	doHandle(Cols...cls);
-	//}
-
-	//void doHandle(Cols... dts)
-	//{
-	//	getData(lines[0], dts...);
-	//	getData(lines[1], dts...);
-	//}
-
-	template<typename ...DataTypes>
-	void handle(DataTypes... dts)
-	{
-		getData(lines[0], dts...);
-		getData(lines[1], dts...);
-	}
-#endif
 	template<typename ...DataTypes>
 	void display(DataTypes... dts)
 	{
-		getData(0, 1, lines[0], dts...);
-		getData(1, 1, lines[1], dts...);
+		for(int i=0; i < lines.size(); ++i)
+		{
+			printDataInGrid(i, 1, lines[i], dts...);
+		}
 	}
 
+private:
 	template<typename DataType>
-	void getData(int row, int col, T& z, DataType p)
+	void printDataInGrid(int row, int col, T& z, DataType p)
 	{
 		auto value = z.*p;
 		auto cs = print(value);
@@ -107,12 +91,12 @@ struct P
 
 
 	template<typename DataType, typename ... RestDataTypes>
-	void getData(int row, int col, T& z, DataType p, RestDataTypes...qs)
+	void printDataInGrid(int row, int col, T& z, DataType p, RestDataTypes...qs)
 	{
 		auto value = z.*p;
 		auto cs = print(value);
 		grid.SetItemText(row + 1, col, cs);
-		getData(row, ++col, z, qs...);
+		printDataInGrid(row, ++col, z, qs...);
 	}
 
 };
@@ -145,6 +129,18 @@ void doIT()
 	
 	//P<C, &C::val, &C::str> ppp;
 	//ppp.callHandle();
+
+	//Q<C, &C::val, &C::str> q();
+
+	Q<C, decltype(&C::val), decltype(&C::str)> q(&C::val, &C::str);
+
+
+
+	CJDGridCtrl grid;
+	std::vector<C> lines{ C{"val", "val2", "str", "str2", 5}, C{"val2", "val3", "str2", "str3", 6 } };
+	std::vector<std::string> headers{ "NAME", "REAL?" };
+	GridDisplayer<C> displayer( grid, std::move(lines), std::move( headers) );
+	displayer.display(&C::val, &C::i, &C::str);
 
 #if 0
 

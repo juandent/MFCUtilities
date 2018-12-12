@@ -213,6 +213,7 @@
     <ClInclude Include="FormattedCategory.h" />
     <ClInclude Include="GridDisplayer.h" />
     <ClInclude Include="IGridController.h" />
+    <ClInclude Include="JoinedGridDisplayer.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Model\Model.AccountType.Binding.h" />
     <ClInclude Include="Model\Model.CoinBinding.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="FormattedCategory.cpp" />
     <ClCompile Include="GridDisplayer.cpp" />
     <ClCompile Include="IGridController.cpp" />
+    <ClCompile Include="JoinedGridDisplayer.cpp" />
     <ClCompile Include="Model\Model.DataTier.cpp" />
     <ClCompile Include="Model\Model.ORM.Definitions.cpp" />
     <ClCompile Include="Model\Model.StatementBuilder.cpp" />
