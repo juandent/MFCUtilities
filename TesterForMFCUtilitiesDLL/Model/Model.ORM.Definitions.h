@@ -111,11 +111,8 @@ namespace ORM
 				make_column("file_path",
 					&Statement::m_filePath),
 				make_column("statement_date",
-					&Statement::m_statementDate),
-				make_column("account",
-					&Statement::m_account_fid),
-				primary_key(&Statement::m_account_fid, &Statement::m_statementDate),
-				foreign_key(&Statement::m_account_fid).references(&Account::m_number_id)
+					&Statement::m_statementDate,
+					primary_key())
 			),
 
 			make_table("STATEMENTLINES"s,

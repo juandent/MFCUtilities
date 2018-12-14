@@ -8,10 +8,9 @@ namespace Model
 	class StatementBuilder
 	{
 	public:
-		std::string				m_fileName;
-		std::string				m_filePath;
-		date::sys_days			m_statementDate;
-		std::string				m_account_fid;
+		std::string								m_fileName;
+		std::string								m_filePath;
+		date::sys_days							m_statementDate;
 
 		auto build() const
 		{
@@ -19,8 +18,7 @@ namespace Model
 				Statement{
 					m_fileName,
 					m_filePath,
-					m_statementDate,
-					m_account_fid });
+					m_statementDate});
 		}
 	};
 

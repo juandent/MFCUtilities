@@ -55,6 +55,7 @@ namespace Model
 	struct Concept;
 	struct Person;
 	struct Statement;
+	struct AccountStatement;
 
 
 	struct Category
@@ -146,12 +147,19 @@ namespace Model
 		std::string				m_fileName;
 		std::string				m_filePath;
 		PK date::sys_days			m_statementDate;
-		PK FK(Account) std::string		m_account_fid;
+	};
+
+	// TODO: not yet persisted!!
+	struct AccountStatement
+	{
+		std::string				m_fileName;
+		std::string				m_filePath;
+		PK date::sys_days			m_statementDate;
+		PK FK(Account) std::string	m_account_fid;
 
 		void AssignFK(const Account& act);
 		Account getAccount();
 	};
-
 
 
 	struct StatementLine

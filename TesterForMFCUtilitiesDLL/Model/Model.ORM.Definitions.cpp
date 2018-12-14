@@ -176,7 +176,7 @@ namespace ORM
 		year_month_day ymd__ = dp;
 
 		StatementLine line1{ -1,
-			"3777-11**-****-7645"s,
+			cred.m_number_id,
 			tod,
 			"Automercado"s,
 			389045000.50,
@@ -191,9 +191,9 @@ namespace ORM
 		Statement  st {
 			"SomeFile.csv"s,
 			"C:\\Users\\Juan Dent\\Downloads\\"s,
-			ttod,
-			"3777-11**-****-7645"s
+			ttod
 		};
+
 
 		// Persons
 		storage.replace(leslie);

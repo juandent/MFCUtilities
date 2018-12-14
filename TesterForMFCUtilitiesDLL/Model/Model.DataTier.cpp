@@ -52,12 +52,12 @@ Responsible Model::LineResponsibility::getResponsible()
 	return stmt;
 }
 
-void Model::Statement::AssignFK(const Account & act)
+void Model::AccountStatement::AssignFK(const Account & act)
 {
 	m_account_fid = act.m_number_id;
 }
 
-Account Model::Statement::getAccount()
+Account Model::AccountStatement::getAccount()
 {
 	auto act = ORM::storage.get<Account>(m_account_fid);
 	return act;
@@ -112,7 +112,7 @@ Statement Model::StatementLine::getStatement()
 {
 	try
 	{
-		auto conc = ORM::storage.get<Statement>(this->m_belongs_to_account_fid, this->m_statement_date);
+		auto conc = ORM::storage.get<Statement>(this->m_statement_date);
 		return conc;
 	}
 	catch (std::exception& ex)

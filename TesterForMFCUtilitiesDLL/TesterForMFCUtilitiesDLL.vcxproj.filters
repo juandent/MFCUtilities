@@ -129,6 +129,9 @@
     <ClInclude Include="JoinedGridDisplayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Controllers\Controller.LoadCompoundDocIntoDB.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TesterForMFCUtilitiesDLL.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="JoinedGridDisplayer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\Controller.LoadCompoundDocIntoDB.cpp">
+      <Filter>Controllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

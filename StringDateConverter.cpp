@@ -90,14 +90,14 @@ namespace DateAsString
 	{
 		auto numSeparators = count_if(asText.cbegin(), asText.cend(), [](auto elem) {
 
-			return elem == '/' || elem == '-';
+			return elem == '/' || elem == '-' || elem == '+';
 		});
 		return numSeparators >= 2;
 	}
 
 	std::map<std::string, std::array<int, 3>>	StringDateConverter::s_expressions_for_complete_dates = {
 		{ "([[:d:]]+)[/-]([[:d:]]+)[/-]([[:d:]]{4})"s, {1,2,3} }, 														// dd/mm/yyyy or dd-mm-yyyy
-		{ "([[:d:]]{4})[/-]([[:d:]]{1,2})[/-]([[:d:]]{1,2})", {3,2,1} }														// yyyy-mm-dd or yyyy/mm/dd
+		{ "([[:d:]]{4})[+/-]([[:d:]]{1,2})[+/-]([[:d:]]{1,2})", {3,2,1} }									// yyyy-mm-dd or yyyy/mm/dd or yyyy+mm+dd
 	};
 
 	std::map<std::string, std::array<int, 2>>	StringDateConverter::s_expressions_for_incomplete_dates = {
