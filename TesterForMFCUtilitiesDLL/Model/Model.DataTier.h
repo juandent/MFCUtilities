@@ -87,6 +87,26 @@ namespace Model
 		std::string m_description;
 		AccountType	m_type;
 
+		void AssignPK(const std::string& id)
+		{
+			m_number_id = id;
+			// determine if it is a credit card or a bank account
+			auto pos = id.find_first_of("*");
+			bool isCreditCard = pos != std::string::npos;
+			m_type = isCreditCard ? AccountType::CreditCard : AccountType::BankAccount;
+
+		}
+		void SetCurrencyType(Money dollar_amount)
+		{
+			if (m_type == AccountType::BankAccount)
+			{
+				m_currency = dollar_amount > 0 ? Coin::Dolar : Coin::Colon;
+			}
+			else
+			{
+				m_currency = Coin::Both;
+			}
+		}
 		void AssignFK(const Person& person)
 		{
 			m_owner_fid = person.m_id;
