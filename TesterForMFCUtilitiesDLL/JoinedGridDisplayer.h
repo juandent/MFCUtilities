@@ -6,6 +6,9 @@ template<typename T, int MaxCol>
 class JoinedGridDisplayer
 {
 	using Container = std::vector<std::remove_reference_t<T>>;
+	using RowType = typename Container::value_type;
+	// next cannot be declared constexpr - why??
+	inline static size_t NumCols = std::tuple_size<RowType>::value;
 	CJDGridCtrl&				grid;
 	Container					lines;
 	std::vector<std::string>	headers;
@@ -29,6 +32,7 @@ public:
 			grid.SetItemText(0, col, head);
 			++col;
 		}
+		//static_assert(NumCols == MaxCol, "");
 	}
 
 	void display()

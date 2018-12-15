@@ -27,6 +27,8 @@ namespace Controller
 		explicit LoadCompoundDocIntoDB(const std::string& file_name);
 		~LoadCompoundDocIntoDB();
 		void DoLoadIntoDB();
+		std::vector<std::string> extractOwnerNameParts(const std::string& cs);
+		Model::Nullable::Type<Model::Person> getOwner( const std::vector<std::string>& name_parts);
 		Model::Nullable::Type<Model::Account> getAccount(size_t row, const std::string& pk);
 
 	};

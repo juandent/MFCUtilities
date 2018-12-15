@@ -39,6 +39,67 @@ namespace Controller
 
 	}
 
+	std::vector<std::string> LoadCompoundDocIntoDB::extractOwnerNameParts(const std::string & cs)
+	{
+		auto dash_pos = cs.find('-');
+		std::string full_name;
+		if (dash_pos != std::string::npos)
+		{
+			full_name = cs.substr(0, --dash_pos);
+		}
+		else
+		{
+			full_name = cs;
+		}
+
+		vector<string> name_parts;
+
+		regex sep("[ \t\n]*");  // separated by spaces
+
+		sregex_token_iterator p(full_name.cbegin(), full_name.cend(),  // sequence
+			sep,														// separator
+			-1);														// -1: values between separators
+
+		sregex_token_iterator e;
+		for (; p != e; ++p) {
+			auto str = p->str();
+			name_parts.push_back(str);
+		}
+		return name_parts;
+	}
+
+	Model::Nullable::Type<Model::Person> LoadCompoundDocIntoDB::getOwner(const std::vector<std::string>& name_parts)
+	{
+		string first_name;
+		string last_name;
+		switch(name_parts.size())
+		{
+		case 2:
+			first_name = name_parts[0];
+			last_name = name_parts[1];
+			break;
+		case 3:
+			first_name = name_parts[0];
+			last_name = name_parts[1] + " " + name_parts[2];
+			break;
+		default:
+			throw std::exception("Owner name has unexpected number of parts");
+		}
+
+		auto person = ORM::storage.get_no_throw<Model::Person>(where(
+			c(&Person::m_first_name) == first_name &&
+			c(&Person::m_last_name) == last_name
+			));
+		if( person == nullptr)
+		{
+			person.swap(std::make_shared<Model::Person>());
+			person->m_first_name = first_name;
+			person->m_last_name = last_name;
+			person->m_id = ORM::storage.insert(*person);
+		}
+		return person;
+	}
+
 	Model::Nullable::Type<Model::Account> LoadCompoundDocIntoDB::getAccount(size_t row, const std::string & pk)
 	{
 		auto account_in_storage = ORM::storage.get_no_throw<Model::Account>(pk);
@@ -48,16 +109,14 @@ namespace Controller
 			account_in_storage->AssignPK(pk);
 			auto dollar_amount = m_file_reader.getMoney({ row, Columns::AmountInDollars });
 			account_in_storage->SetCurrencyType(dollar_amount);
-			account_in_storage->m_
-			
+			auto owner_str = m_file_reader.getText( row, Columns::Owner );
+			auto owner_name_parts = extractOwnerNameParts(owner_str);
+			auto owner = getOwner(owner_name_parts);
+			account_in_storage->m_owner_fid = owner->m_id;
+			account_in_storage->m_description = m_file_reader.getText(row, Columns::Description);
 			ORM::storage.replace(*account_in_storage);
 		}
 		return account_in_storage;
-		return Model::Account();
-	}
-
-	void LoadCompoundDocIntoDB::SetCurrencyType(Money dollar_amount)
-	{
 	}
 
 }
