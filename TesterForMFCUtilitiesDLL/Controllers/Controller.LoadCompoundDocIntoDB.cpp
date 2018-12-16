@@ -54,7 +54,7 @@ namespace Controller
 
 		vector<string> name_parts;
 
-		regex sep("[ \t\n]*");  // separated by spaces
+		regex sep("[ \t\n]+");  // separated by spaces
 
 		sregex_token_iterator p(full_name.cbegin(), full_name.cend(),  // sequence
 			sep,														// separator
@@ -86,18 +86,27 @@ namespace Controller
 			throw std::exception("Owner name has unexpected number of parts");
 		}
 
-		auto person = ORM::storage.get_no_throw<Model::Person>(where(
+		auto matching_persons = ORM::storage.get_all<Model::Person>(where(
 			c(&Person::m_first_name) == first_name &&
 			c(&Person::m_last_name) == last_name
 			));
-		if( person == nullptr)
+		if( matching_persons.size() == 0)
 		{
-			person.swap(std::make_shared<Model::Person>());
+			auto person = std::make_shared<Model::Person>();
 			person->m_first_name = first_name;
 			person->m_last_name = last_name;
 			person->m_id = ORM::storage.insert(*person);
+			return person;
 		}
-		return person;
+		else
+		{
+			if( matching_persons.size() > 1)
+			{
+				throw std::exception("too many matches in Person");
+			}
+			auto existing_person = matching_persons.front();
+			return Nullable::make_nullable(existing_person);
+		}
 	}
 
 	Model::Nullable::Type<Model::Account> LoadCompoundDocIntoDB::getAccount(size_t row, const std::string & pk)

@@ -19,7 +19,7 @@ namespace ORM
 		repo.utility.LoadCategories(Controller::CategoryLoader{});
 		// do this one time at the start to increase performance
 		auto zoned_time_ = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
-		fill_db_with_test_data();
+		//fill_db_with_test_data();
 	}
 
 	void Storage::fill_db_with_test_data()

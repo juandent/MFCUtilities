@@ -8,6 +8,9 @@ namespace Controller
 	{
 		CSVFile m_file_reader;
 		Model::Statement m_statement;
+		Model::Account m_account;
+		Model::Person m_owner;
+
 
 		enum Columns
 		{
