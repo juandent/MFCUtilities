@@ -96,7 +96,7 @@ namespace Model
 			m_type = isCreditCard ? AccountType::CreditCard : AccountType::BankAccount;
 
 		}
-		void SetCurrencyType(Money dollar_amount)
+		void SetCurrencyType(Dolares dollar_amount)
 		{
 			if (m_type == AccountType::BankAccount)
 			{
@@ -117,22 +117,22 @@ namespace Model
 	struct Concept
 	{
 		PK std::string m_concept_id;
-		FK(Category)  Nullable::Type<std::string> m_category_name_fid;
+		//FK(Category)  Nullable::Type<std::string> m_category_name_fid;
 		FK(Account)	  Nullable::Type<std::string> m_account_payment_fid;		// TODO
 		bool m_always;		// always apply this mapping rather than just suggesting
 		bool m_is_regex;	// 
 
-		void AssignFK(const Category& cat)
-		{
-			auto id = Nullable::make_nullable(cat.m_name_id);
-			m_category_name_fid = id;
-		}
+		//void AssignFK(const Category& cat)
+		//{
+		//	auto id = Nullable::make_nullable(cat.m_name_id);
+		//	m_category_name_fid = id;
+		//}
 		void AssignFK(const Account& act)
 		{
 			auto id = Nullable::make_nullable(act.m_number_id);
 			m_account_payment_fid = id;
 		}
-		Nullable::Type<Category> getCategory();
+		//Nullable::Type<Category> getCategory();
 
 		// nullable navigation property:
 		Nullable::Type<Account> getAccount();

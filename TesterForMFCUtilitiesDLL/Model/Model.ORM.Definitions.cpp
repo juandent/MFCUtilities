@@ -45,10 +45,10 @@ namespace ORM
 		Account payment_to{ "4590"s, 1, "", Coin::Dolar, "????", AccountType::BankAccount };
 		Account jurocamaAct{ "15100-01**-****-8336", 3, "", Coin::Dolar, "", AccountType::BankAccount };
 
-		Concept conc{ "Automercado"s, Nullable::make_nullable( "Supermercado"s), nullptr, true, false };
+		Concept conc{ "Automercado"s, /*Nullable::make_nullable( "Supermercado"s),*/ nullptr, true, false };
 		auto jurocamaId = Nullable::make_nullable(jurocamaAct.m_number_id);
 		int count = jurocamaId.use_count();
-		Concept conceptJurocama{ "TFT-SINPE A: 15100-01**-****-8336"s, Nullable::make_nullable( "PAGO A JUROCAMA"s), jurocamaId, true, false };
+		Concept conceptJurocama{ "TFT-SINPE A: 15100-01**-****-8336"s, /*Nullable::make_nullable( "PAGO A JUROCAMA"s),*/ jurocamaId, true, false };
 		count = jurocamaId.use_count();
 
 		auto n = std::chrono::system_clock::now();	// a time_point
@@ -287,7 +287,7 @@ namespace ORM
 			storage.remove_all<Category>();
 			storage.remove_all<Account>();
 			storage.remove_all<Responsible>();
-			storage.remove_all<Person>();
+			//storage.remove_all<Person>();
 
 		}
 		catch (std::system_error& exc)

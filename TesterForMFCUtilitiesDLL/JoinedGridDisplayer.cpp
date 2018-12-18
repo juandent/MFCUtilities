@@ -19,6 +19,6 @@ void doITJoined()
 	}
 	CJDGridCtrl grid;
 	std::vector<std::string> headers{ "LINE DATE", "AMOUNT LOCAL", "BELONGS TO", "ACCOUNT ID", "CATEGORY FID" };
-	JoinedGridDisplayer<decltype(lines[0]), 5> displayer( grid, std::move(lines), std::move(headers) );
+	JoinedGridDisplayer<decltype(lines[0])> displayer( grid, std::move(lines), std::move(headers) );
 	displayer.display();
 }

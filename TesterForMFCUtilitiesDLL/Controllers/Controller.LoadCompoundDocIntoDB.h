@@ -8,8 +8,11 @@ namespace Controller
 	{
 		CSVFile m_file_reader;
 		Model::Statement m_statement;
-		Model::Account m_account;
-		Model::Person m_owner;
+		Model::Nullable::Type<Model::Account> m_account;
+		Model::Nullable::Type<Model::Person> m_owner;
+		Model::Nullable::Type<Model::Concept> m_concept;
+		Model::Nullable::Type<Model::Category> m_category;
+		Model::Nullable::Type<Model::StatementLine> m_statement_line;
 
 
 		enum Columns
@@ -25,14 +28,18 @@ namespace Controller
 			Description,
 			Owner
 		};
-
+		std::vector<std::string> extractOwnerNameParts(const std::string& cs);
 	public:
 		explicit LoadCompoundDocIntoDB(const std::string& file_name);
 		~LoadCompoundDocIntoDB();
+
+		void getConcept(size_t row, size_t col);
+		void getCategory(size_t row, size_t col);
+		void getStatementLine(size_t row);
 		void DoLoadIntoDB();
-		std::vector<std::string> extractOwnerNameParts(const std::string& cs);
-		Model::Nullable::Type<Model::Person> getOwner( const std::vector<std::string>& name_parts);
-		Model::Nullable::Type<Model::Account> getAccount(size_t row, const std::string& pk);
+		
+		void getOwner(size_t row, size_t col);
+		void getAccount(size_t row, size_t col);
 
 	};
 

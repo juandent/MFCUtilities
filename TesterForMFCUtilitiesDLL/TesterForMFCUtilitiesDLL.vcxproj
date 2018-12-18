@@ -99,6 +99,7 @@
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -183,6 +184,7 @@
       <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -14,10 +14,10 @@ Person Model::Account::getOwner()
 }
 
 
-Nullable::Type<Category> Model::Concept::getCategory()
-{
-	return Nullable::getFromFKs<Category>(m_category_name_fid);
-}
+//Nullable::Type<Category> Model::Concept::getCategory()
+//{
+//	return Nullable::getFromFKs<Category>(m_category_name_fid);
+//}
 
 Nullable::Type<Account> Model::Concept::getAccount()
 {

@@ -94,15 +94,15 @@ namespace ORM
 				make_column("id",
 					&Concept::m_concept_id,
 					primary_key()),
-				make_column("category",
-					&Concept::m_category_name_fid),
+				/*make_column("category",
+					&Concept::m_category_name_fid),*/
 				make_column("account_payment",
 					&Concept::m_account_payment_fid),
 				make_column("always",
 					&Concept::m_always),
 				make_column("is_regex",
 					&Concept::m_is_regex),
-				foreign_key(&Concept::m_category_name_fid).references(&Category::m_name_id),
+				//foreign_key(&Concept::m_category_name_fid).references(&Category::m_name_id),
 				foreign_key(&Concept::m_account_payment_fid).references(&Account::m_number_id)
 			),
 			make_table("STATEMENTS"s,

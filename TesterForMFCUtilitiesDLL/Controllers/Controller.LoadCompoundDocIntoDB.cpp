@@ -4,6 +4,7 @@
 #include "CSVFile.h"
 #include <filesystem>
 
+using namespace std::string_literals;
 
 namespace Controller
 {
@@ -26,15 +27,87 @@ namespace Controller
 	{
 	}
 
+	void LoadCompoundDocIntoDB::getConcept(size_t row, size_t col)
+	{
+		auto str = m_file_reader.getString({ row,col });
+		m_concept = ORM::storage.get_no_throw<Model::Concept>(str);
+		if( m_concept == nullptr)
+		{
+			m_concept = std::make_shared<Model::Concept>();
+			m_concept->m_concept_id = str;
+			m_concept->m_account_payment_fid = nullptr;
+			m_concept->m_always = true;
+			m_concept->m_is_regex = false;
+			ORM::storage.insert(*m_concept);
+		}
+	}
+
+	void LoadCompoundDocIntoDB::getCategory(size_t row, size_t col)
+	{
+		auto str = m_file_reader.getString({ row, col });
+		m_category = ORM::storage.get_no_throw<Model::Category>(str);
+		if(m_category == nullptr)
+		{
+			m_category = std::make_shared<Model::Category>();
+			m_category->m_name_id = str;
+			// TODO: make a list of categories for which the next is true
+			m_category->m_real_expense_or_income = false;
+			ORM::storage.insert(*m_category);
+		}
+	}
+
+	void LoadCompoundDocIntoDB::getStatementLine(size_t row)
+	{
+		auto line_date = m_file_reader.getDate({ row, Columns::LineDate });
+		auto statement_date = m_file_reader.getDate({ row, Columns::StatementsDate });
+		Colones amount_local = (Colones)m_file_reader.getMoney({ row, Columns::AmountInLocal });
+		Dolares amount_dollars = (Dolares)m_file_reader.getMoney({ row, Columns::AmountInDollars });
+
+		auto matching = ORM::storage.get_all<StatementLine>(
+			where(c(&StatementLine::m_amountInLocal) == amount_local)); // HERE TODO!!!
+				
+		//		c(&StatementLine::m_amountInDollars) == amount_dollars ));//&&
+		////		c(&StatementLine::m_amountInLocal) == amount_local &&
+		////		c(&StatementLine::m_concept_fid) == m_concept->m_concept_id &&
+		////		c(&StatementLine::m_lineDate) == line_date &&
+		////		c(&StatementLine::m_statement_date) == statement_date &&
+		////		c(&StatementLine::m_belongs_to_account_fid) == m_account->m_number_id));
+
+		//std::vector<StatementLine>matching;
+		if( matching.size() > 0)
+		{
+			string str = "Seems statementline is duplicate for account "s + m_account->m_number_id
+				+ " and line date "s + JD::to_string(line_date);
+
+			throw std::exception(str.c_str());
+		}
+
+		m_statement_line = std::make_shared<StatementLine>();
+		m_statement_line->m_belongs_to_account_fid = m_account->m_number_id;
+		//m_statement_line->m_amountInDollars = static_cast<Dolares>(amount_dollars);
+		//m_statement_line->m_amountInLocal = static_cast<Colones>(amount_local);
+		m_statement_line->m_category_fid = Nullable::make_nullable( m_category->m_name_id);
+		m_statement_line->m_concept_fid = m_concept->m_concept_id;
+		m_statement_line->m_details = m_file_reader.getString({ row, Columns::Description });
+		m_statement_line->m_enabled = m_file_reader.getString({ row, Columns::IsEnabled }) == "1";
+		m_statement_line->m_lineDate = line_date;
+		m_statement_line->m_statement_date = statement_date;
+		m_statement_line->m_id = ORM::storage.insert(*m_statement_line);
+
+	}
+
 	void LoadCompoundDocIntoDB::DoLoadIntoDB()
 	{
 		m_statement.m_statementDate = m_file_reader.getDate({ 1,0 });
+		ORM::storage.replace(m_statement);
 
 		for(size_t row=1; row < m_file_reader.getRowCount(); ++row)
 		{
-			auto act = m_file_reader.getString({ row, Columns::Account });
-			auto account = getAccount(row, act);
-
+			getOwner(row, Columns::Owner);
+			getAccount(row, Columns::Account);
+			getCategory(row, Columns::Category);
+			getConcept(row, Columns::Concept);
+			getStatementLine(row);
 		}
 
 	}
@@ -68,8 +141,11 @@ namespace Controller
 		return name_parts;
 	}
 
-	Model::Nullable::Type<Model::Person> LoadCompoundDocIntoDB::getOwner(const std::vector<std::string>& name_parts)
+	void LoadCompoundDocIntoDB::getOwner(size_t row, size_t col)
 	{
+		auto cs = m_file_reader.getString({ row,col });
+		std::vector<std::string> name_parts =  extractOwnerNameParts(cs);
+
 		string first_name;
 		string last_name;
 		switch(name_parts.size())
@@ -92,40 +168,36 @@ namespace Controller
 			));
 		if( matching_persons.size() == 0)
 		{
-			auto person = std::make_shared<Model::Person>();
-			person->m_first_name = first_name;
-			person->m_last_name = last_name;
-			person->m_id = ORM::storage.insert(*person);
-			return person;
+			m_owner = std::make_shared<Model::Person>();
+			m_owner->m_first_name = first_name;
+			m_owner->m_last_name = last_name;
+			m_owner->m_id = ORM::storage.insert(*m_owner);
 		}
 		else
 		{
 			if( matching_persons.size() > 1)
 			{
-				throw std::exception("too many matches in Person");
+				throw std::exception("duplicate persons");
 			}
 			auto existing_person = matching_persons.front();
-			return Nullable::make_nullable(existing_person);
+			m_owner = Nullable::make_nullable(existing_person);
 		}
 	}
 
-	Model::Nullable::Type<Model::Account> LoadCompoundDocIntoDB::getAccount(size_t row, const std::string & pk)
+	void LoadCompoundDocIntoDB::getAccount(size_t row, size_t col)
 	{
-		auto account_in_storage = ORM::storage.get_no_throw<Model::Account>(pk);
-		if (account_in_storage == nullptr)	// then create one
+		auto pk = m_file_reader.getString({ row,col });
+		m_account = ORM::storage.get_no_throw<Model::Account>(pk);
+		if (m_account == nullptr)	// then create one
 		{
-			account_in_storage.swap(std::make_shared<Model::Account>());
-			account_in_storage->AssignPK(pk);
-			auto dollar_amount = m_file_reader.getMoney({ row, Columns::AmountInDollars });
-			account_in_storage->SetCurrencyType(dollar_amount);
-			auto owner_str = m_file_reader.getText( row, Columns::Owner );
-			auto owner_name_parts = extractOwnerNameParts(owner_str);
-			auto owner = getOwner(owner_name_parts);
-			account_in_storage->m_owner_fid = owner->m_id;
-			account_in_storage->m_description = m_file_reader.getText(row, Columns::Description);
-			ORM::storage.replace(*account_in_storage);
+			m_account = std::make_shared<Model::Account>();
+			m_account->AssignPK(pk);
+			auto dollar_amount = (Dolares)m_file_reader.getMoney({ row, Columns::AmountInDollars });
+			m_account->SetCurrencyType(dollar_amount);
+			m_account->m_owner_fid = m_owner->m_id;
+			m_account->m_description = m_file_reader.getText(row, Columns::Description);
+			ORM::storage.replace(*m_account);
 		}
-		return account_in_storage;
 	}
 
 }

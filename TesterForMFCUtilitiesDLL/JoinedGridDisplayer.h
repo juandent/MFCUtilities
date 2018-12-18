@@ -2,13 +2,12 @@
 
 
 
-template<typename T, int MaxCol>
+template<typename T>
 class JoinedGridDisplayer
 {
 	using Container = std::vector<std::remove_reference_t<T>>;
 	using RowType = typename Container::value_type;
-	// next cannot be declared constexpr - why??
-	inline static size_t NumCols = std::tuple_size<RowType>::value;
+	inline static constexpr size_t NumCols = std::tuple_size<RowType>::value;
 	CJDGridCtrl&				grid;
 	Container					lines;
 	std::vector<std::string>	headers;
@@ -61,7 +60,7 @@ private:
 	};
 
 	template<typename Container>
-	struct PrintDataInGrid<MaxCol, Container>
+	struct PrintDataInGrid<NumCols, Container>
 	{
 		static void Apply(int row, const Container& z, CJDGridCtrl& grid)
 		{
