@@ -157,6 +157,13 @@ Money CSVFile::getMoney(const CellPosition & pos) const
 	return JD::to_money(text);		// makes negative values deposits
 }
 
+bool CSVFile::getBool(const CellPosition & pos) const
+{
+	auto text = m_matrix[pos.getRow()][pos.getCol()];
+	int number = stoi(text);
+	return number != 0;
+}
+
 CSVFile::Row CSVFile::getRow(std::size_t rowNumber) const
 {
 	return m_matrix[rowNumber];

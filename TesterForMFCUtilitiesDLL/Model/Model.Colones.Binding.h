@@ -9,24 +9,24 @@
 
 ////// Colones
 
-inline std::wstring ColonesToString(Colones coin) {
-	std::wstring temp = static_cast<std::wstring>(coin);
+inline std::string ColonesToString(Colones coin) {
+	std::string temp = static_cast<std::string>(coin);
 	return temp;
 }
 
-inline Colones ColonesFromString(const std::wstring &s) {
+inline Colones ColonesFromString(const std::string &s) {
 	using namespace std;
 
-	wstring chars_to_remove = L"[$]|[¢]|,|";
-	wregex remove{chars_to_remove};
+	string chars_to_remove = "[$]|[¢]|,|";
+	regex remove{chars_to_remove};
 
-	array<wchar_t, 40> buffer;
-	auto last = std::regex_replace(buffer.begin(), s.begin(), s.end(), remove, L"");
+	array<char, 40> buffer;
+	auto last = std::regex_replace(buffer.begin(), s.begin(), s.end(), remove, "");
 
 	auto dist = distance(buffer.begin(), last);
 
 	buffer[dist] = 0;
-	wstring res{ buffer.data()};
+	string res{ buffer.data()};
 	auto ret = stold(res);
 	return ret;
 }
@@ -43,7 +43,7 @@ namespace sqlite_orm {
 	 *  or `INTEGER` (int/long/short etc) respectively.
 	 */
 	template<>
-	struct type_printer<Colones> : public type_printer<std::wstring> {};  // text_printer{};
+	struct type_printer<Colones> : public text_printer {}; // type_printer<std::wstring> {};  // text_printer{};
 
 	/**
 	 *  This is a binder class. It is used to bind c++ values to sqlite queries.
@@ -56,7 +56,7 @@ namespace sqlite_orm {
 	struct statement_binder<Colones> {
 
 		int bind(sqlite3_stmt *stmt, int index, const Colones &value) {
-			return statement_binder<std::wstring>().bind(stmt, index, ColonesToString(value));
+			return statement_binder<std::string>().bind(stmt, index, ColonesToString(value));
 			//  or return sqlite3_bind_text(stmt, index++, GenderToString(value).c_str(), -1, SQLITE_TRANSIENT);
 		}
 	};
@@ -67,7 +67,7 @@ namespace sqlite_orm {
 	 */
 	template<>
 	struct field_printer<Colones> {
-		std::wstring operator()(const Colones &t) const {
+		std::string operator()(const Colones &t) const {
 			return ColonesToString(t);
 		}
 	};
@@ -89,6 +89,20 @@ namespace sqlite_orm {
 		}
 	};
 #else
+#if 1	// use std::string
+	template<>
+	struct row_extractor<Colones> {
+		Colones extract(const char *row_value) {
+			return ColonesFromString(row_value);
+		}
+
+		Colones extract(sqlite3_stmt *stmt, int columnIndex) {
+			auto str = sqlite3_column_text(stmt, columnIndex);
+			return this->extract((const char*)str);
+		}
+};
+
+#else
 	template<>
 	struct row_extractor<Colones> {
 		Colones extract(sqlite3_stmt *stmt, int columnIndex) {
@@ -97,6 +111,7 @@ namespace sqlite_orm {
 			return ColonesFromString(ws);
 		}
 	};
+#endif
 #endif
 }
 

@@ -71,6 +71,7 @@ public:
 	std::string getString(const CellPosition& pos) const;
 	date::sys_days getDate(const CellPosition& pos) const;
 	Money getMoney(const CellPosition& pos) const;
+	bool getBool(const CellPosition& pas) const;
 
 	Row getRow(std::size_t rowNumber) const;
 
