@@ -153,3 +153,11 @@ std::vector<StatementLine> Model::Category::getStatementLines()
 	auto vec = ORM::storage.get_all<StatementLine>(where(c(&StatementLine::m_category_fid) == m_name_id));
 	return vec;
 }
+
+std::vector<StatementLine> Model::Category::getStatementLines(date::sys_days statement_date)
+{
+	auto vec = ORM::storage.get_all<StatementLine>(where
+		(c(&StatementLine::m_category_fid) == m_name_id &&
+		c(&StatementLine::m_statement_date) == statement_date));
+	return vec;
+}

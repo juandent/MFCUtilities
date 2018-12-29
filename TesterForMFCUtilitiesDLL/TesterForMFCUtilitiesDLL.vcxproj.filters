@@ -132,6 +132,12 @@
     <ClInclude Include="Controllers\Controller.LoadCompoundDocIntoDB.h">
       <Filter>Controllers</Filter>
     </ClInclude>
+    <ClInclude Include="OwnersView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OwnerDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TesterForMFCUtilitiesDLL.cpp">
@@ -214,6 +220,12 @@
     </ClCompile>
     <ClCompile Include="Controllers\Controller.LoadCompoundDocIntoDB.cpp">
       <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="OwnersView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OwnerDoc.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

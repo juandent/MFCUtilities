@@ -99,13 +99,15 @@ namespace Controller
 
 	void LoadCompoundDocIntoDB::DoLoadIntoDB()
 	{
+		ORM::storage.begin_transaction();
+
 		m_statement.m_statementDate = m_file_reader.getDate({ 1,0 });
 		auto matching = ORM::storage.get_all<Statement>(
 			where(c(&Statement::m_statementDate) == m_statement.m_statementDate));
-		if( matching.size() > 0)
+		if (matching.size() > 0)
 		{
 			string msg = "Duplicate compound statement for date "s + JD::to_string(m_statement.m_statementDate);
-			throw std::exception( msg.c_str());
+			throw std::exception(msg.c_str());
 		}
 
 		ORM::storage.replace(m_statement);
@@ -118,7 +120,7 @@ namespace Controller
 			getConcept(row, Columns::Concept);
 			getStatementLine(row);
 		}
-
+		ORM::storage.commit();
 	}
 
 

@@ -64,6 +64,7 @@ namespace Model
 		bool						m_real_expense_or_income;
 
 		std::vector<StatementLine> getStatementLines();
+		std::vector<StatementLine> getStatementLines(date::sys_days statement_date);
 	};
 
 	struct Person					// Leslie, Juan Jr, Juan Sr, Other

@@ -230,6 +230,8 @@
     <ClInclude Include="ORM\ORM.UnitOfWork.h" />
     <ClInclude Include="ORM\ORM.Repository.h" />
     <ClInclude Include="OutputWnd.h" />
+    <ClInclude Include="OwnerDoc.h" />
+    <ClInclude Include="OwnersView.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Repositories\CategoryRepository.h" />
     <ClInclude Include="Repositories\StatementLineRepository.h" />
@@ -267,6 +269,8 @@
     <ClCompile Include="ORM\ORM.UnitOfWork.cpp" />
     <ClCompile Include="ORM\ORM.Repository.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
+    <ClCompile Include="OwnerDoc.cpp" />
+    <ClCompile Include="OwnersView.cpp" />
     <ClCompile Include="PropertiesWnd.cpp" />
     <ClCompile Include="Repositories\CategoryRepository.cpp" />
     <ClCompile Include="stdafx.cpp">

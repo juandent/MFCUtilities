@@ -36,14 +36,21 @@ public:
 
 	void display()
 	{
+		RECT rect;
+		grid.GetWindowRect(&rect);
+
 		for (int i = 0; i < lines.size(); ++i)
 		{
 			PrintDataInGrid<0, Container>::Apply(i, lines, grid);
 		}
+		int width = grid.GetColumnWidth(0);
 		for (int i = 0; i < headers.size(); ++i)
 		{
 			grid.AutoSizeColumn(i + 1);	// skip vertical headers
+			width += grid.GetColumnWidth(i + 1);
 		}
+		auto frame = grid.GetParentFrame();
+		grid.SetWindowPos(frame, 10, 10, width, rect.bottom-rect.top, SWP_NOZORDER | SWP_NOMOVE);
 	}
 
 private:
