@@ -187,6 +187,11 @@ namespace JD {
 		auto str = to_string(m);
 		return str;
 	}
+	inline CString to_cstring(int val)
+	{
+		std::string str = std::to_string(val);
+		return to_cstring(str);
+	}
 	inline CString to_cstring( bool val)
 	{
 		return CString{ val ? L"True" : L"False" };
