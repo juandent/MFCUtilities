@@ -74,7 +74,7 @@ void OwnersView::OnInitialUpdate()
 	CFormView::OnInitialUpdate();
 
 
-	auto lines = ORM::storage.get_all<Person>(order_by(&Person::m_first_name));
+	auto lines = ORM::storage.get_all<Person>(multi_order_by(order_by(&Person::m_last_name), order_by(&Person::m_first_name)));
 	std::vector<std::string> headers{ "PERS ID", "FIRST NAME", "LAST NAME", "COMPANY" };
 
 	m_grid_Displayer.reset(new GridDisplayer<Person>{ m_grid, move(lines), move(headers) });

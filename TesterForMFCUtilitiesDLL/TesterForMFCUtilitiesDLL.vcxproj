@@ -24,7 +24,7 @@
     <ProjectGuid>{6A917F18-D6CA-4573-A61B-6FFF3CC197B0}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
     <RootNamespace>TesterForMFCUtilitiesDLL</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -97,7 +97,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\vcpkg\packages\sqlite3_x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
