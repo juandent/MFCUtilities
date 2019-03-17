@@ -17,7 +17,7 @@ namespace JD
 		CString m_bufferImpl;
 		CharT* m_pointerToBuffer;
 	public:
-		Buffer(size_t num_bytes)
+		Buffer(int num_bytes)
 		{
 			m_pointerToBuffer = m_bufferImpl.GetBuffer(num_bytes);
 		}

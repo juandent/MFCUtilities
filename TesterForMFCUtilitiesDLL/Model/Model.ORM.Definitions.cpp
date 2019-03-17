@@ -17,11 +17,11 @@ namespace ORM
 		// initialize tz library asynchronously
 		std::thread{ date::get_tzdb }.detach();
 
-		Storage::empty_database();
+		//Storage::empty_database();
 		//CategoryRepository repo;
 		//repo.utility.LoadCategories(Controller::CategoryLoader{});
 		// do this one time at the start to increase performance
-		auto zoned_time_ = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
+		//auto zoned_time_ = date::make_zoned(date::current_zone(), std::chrono::system_clock::now());
 		//fill_db_with_test_data();
 	}
 

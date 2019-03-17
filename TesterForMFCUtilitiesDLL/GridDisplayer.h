@@ -40,6 +40,7 @@ public:
 		{
 			printDataInGrid(i, 1, lines[i], dts...);
 		}
+		grid.SetColumnWidth(0, 100);
 		int width = grid.GetColumnWidth(0);
 		for (int i = 0; i < headers.size(); ++i)
 		{
@@ -47,6 +48,7 @@ public:
 			width += grid.GetColumnWidth(i + 1);
 		}
 		auto frame = grid.GetParentFrame();
+		width += GetSystemMetrics(SM_CXVSCROLL);
 		grid.SetWindowPos(frame, 10, 10, width, rect.bottom - rect.top, SWP_NOZORDER | SWP_NOMOVE);
 	}
 

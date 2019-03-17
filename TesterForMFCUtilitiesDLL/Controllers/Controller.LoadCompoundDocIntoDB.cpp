@@ -53,7 +53,7 @@ namespace Controller
 			m_category->m_name_id = str;
 			// TODO: make a list of categories for which the next is true
 			m_category->m_real_expense_or_income = false;
-			ORM::storage.insert(*m_category);
+			ORM::storage.replace(*m_category);
 		}
 	}
 
