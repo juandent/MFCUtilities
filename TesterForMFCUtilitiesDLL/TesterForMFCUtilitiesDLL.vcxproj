@@ -212,8 +212,10 @@
     <ClInclude Include="Controllers\Controller.Interfaces.h" />
     <ClInclude Include="Controllers\Controller.LoadCompoundDocIntoDB.h" />
     <ClInclude Include="Controllers\Controller.Main.h" />
+    <ClInclude Include="DocViewTemplates.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="FormattedCategory.h" />
+    <ClInclude Include="GridDefinition.h" />
     <ClInclude Include="GridDisplayer.h" />
     <ClInclude Include="IGridController.h" />
     <ClInclude Include="JoinedGridDisplayer.h" />
@@ -255,6 +257,7 @@
     <ClCompile Include="Controllers\Controller.CategoryLoader.cpp" />
     <ClCompile Include="Controllers\Controller.LoadCompoundDocIntoDB.cpp" />
     <ClCompile Include="Controllers\Controller.Main.cpp" />
+    <ClCompile Include="DocViewTemplates.cpp" />
     <ClCompile Include="FormattedCategory.cpp" />
     <ClCompile Include="GridDisplayer.cpp" />
     <ClCompile Include="IGridController.cpp" />

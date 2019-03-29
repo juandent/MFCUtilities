@@ -14,7 +14,7 @@ class JoinedGridDisplayer
 public:
 	JoinedGridDisplayer(CJDGridCtrl& grid,
 		Container&& lines_,
-		std::vector<std::string>&& headers_)
+		std::vector<std::string> headers_)
 		: lines{ std::move(lines_) }, grid{ grid }, headers{ std::move(headers_) }
 	{
 		grid.SetColumnCount(headers.size() + 1);

@@ -64,6 +64,7 @@ namespace ORM
 			make_table("PERSONS"s,
 				make_column("id",
 					&Person::m_id,
+					autoincrement(),
 					primary_key()),
 				make_column("first_name",
 					&Person::m_first_name),
