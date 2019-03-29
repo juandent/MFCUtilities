@@ -236,6 +236,7 @@
     <ClInclude Include="OwnersDialog.h" />
     <ClInclude Include="OwnersView.h" />
     <ClInclude Include="PropertiesWnd.h" />
+    <ClInclude Include="Queries.h" />
     <ClInclude Include="Repositories\CategoryRepository.h" />
     <ClInclude Include="Repositories\StatementLineRepository.h" />
     <ClInclude Include="Resource.h" />

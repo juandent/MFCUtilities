@@ -147,6 +147,9 @@
     <ClInclude Include="GridDefinition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Queries.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TesterForMFCUtilitiesDLL.cpp">
