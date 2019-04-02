@@ -1,5 +1,6 @@
 #pragma once
 #include "Model/Model.ORM.Definitions.h"
+#include "GridCellLite.h"
 
 struct Queries
 {
@@ -43,10 +44,10 @@ struct Elements
 {
 	struct StatementLines_ForDate
 	{
-		using type = decltype(Queries::StatementLines_ForDate::getRows(date::sys_days{})[0]);
+		using type = decltype(Queries::StatementLines_ForDate::getRows(std::declval<date::sys_days>())[0]);
 	};
 	struct StatementLines_Joined_Account
 	{
-		using type = decltype(Queries::StatementLines_Joined_Account::getRows());
+		using type = decltype(Queries::StatementLines_Joined_Account::getRows()[0]);
 	};
 };

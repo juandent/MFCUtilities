@@ -150,6 +150,12 @@
     <ClInclude Include="Queries.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FilterStatementLines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelToView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TesterForMFCUtilitiesDLL.cpp">
@@ -243,6 +249,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DocViewTemplates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterStatementLines.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
