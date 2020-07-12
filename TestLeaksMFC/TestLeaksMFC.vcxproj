@@ -23,7 +23,7 @@
     <ProjectGuid>{302763DB-CEF6-4A4D-BBA1-B1632BB06FFC}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
     <RootNamespace>TestLeaksMFC</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

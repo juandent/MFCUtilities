@@ -13,7 +13,7 @@ namespace ORM
 		template<typename ... Ids>
 		T Get(Ids ... ids)
 		{
-			return Storage::getStorage().get<T>(ids);
+			return Storage::getStorage().get<T>(ids...);
 		}
 		template<typename C = std::vector<T>>
 		C GetAll()

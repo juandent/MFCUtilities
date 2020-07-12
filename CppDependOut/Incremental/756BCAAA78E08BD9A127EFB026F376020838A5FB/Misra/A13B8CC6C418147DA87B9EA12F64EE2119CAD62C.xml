@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\winuser.h"><violation beginline="12843" endline="12843" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

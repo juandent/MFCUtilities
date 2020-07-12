@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\inplaceedit.cpp"><violation beginline="108" endline="108" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="163" endline="163" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="217" endline="217" rule="Rule10-3-2" ruleset="Classes">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\inplaceedit.h"><violation beginline="44" endline="44" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

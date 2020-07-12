@@ -79,13 +79,14 @@ namespace sqlite_orm {
 	 *  functions which return a mapped type value.
 	 */
 //#define USING_INHERITANCE
-#if USING_INHERITANCE
+#ifdef USING_INHERITANCE
 	template<>
 	struct row_extractor<Colones> : public row_extractor<std::wstring> {
 		Colones extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			auto ws = row_extractor<std::wstring>::extract( (const char*)str);
-			return ColonesFromString(ws);
+			auto s = JD::to_string(ws);
+			return ColonesFromString(s);
 		}
 	};
 #else

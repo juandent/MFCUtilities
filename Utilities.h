@@ -11,7 +11,10 @@
 #include <type_traits>
 #include "StringDateConverter.h"
 #include <FixedPoint/Money.h>
-#include <experimental/filesystem>
+
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 #ifndef DLLS_H
 #define MFC_UTILITIES_EXPORTS
@@ -370,7 +373,7 @@ namespace JD {
 
 	inline std::string remove_extension(const std::string& fileName)
 	{
-		namespace fs = std::experimental::filesystem;
+		//namespace fs = std::filesystem;
 
 		auto x = fs::path(fileName);
 		auto y = x.filename();

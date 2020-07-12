@@ -66,9 +66,6 @@
     <ClInclude Include="PropertiesWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Controller.Main.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
     <ClInclude Include="Controllers\Controller.Interfaces.h">
       <Filter>Controllers</Filter>
     </ClInclude>
@@ -156,6 +153,12 @@
     <ClInclude Include="ModelToView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ViewUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SubFormView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TesterForMFCUtilitiesDLL.cpp">
@@ -190,9 +193,6 @@
     </ClCompile>
     <ClCompile Include="PropertiesWnd.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Controllers\Controller.Main.cpp">
-      <Filter>Controllers</Filter>
     </ClCompile>
     <ClCompile Include="Model\Model.StatementBuilder.cpp">
       <Filter>Model</Filter>
@@ -252,6 +252,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FilterStatementLines.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SubFormView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

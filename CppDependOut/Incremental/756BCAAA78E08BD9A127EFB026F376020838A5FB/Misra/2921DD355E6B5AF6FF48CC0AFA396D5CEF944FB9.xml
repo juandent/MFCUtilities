@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxdtctl.h"><violation beginline="53" endline="53" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="102" endline="102" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="105" endline="105" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxwin.h"><violation beginline="2323" endline="2323" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2324" endline="2324" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2439" endline="2439" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2304" endline="2304" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2321" endline="2321" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2194" endline="2194" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2279" endline="2279" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2200" endline="2200" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2194" endline="2194" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2304" endline="2304" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2279" endline="2279" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2307" endline="2307" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="3008" endline="3008" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2748" endline="2748" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2194" endline="2194" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2194" endline="2194" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2439" endline="2439" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2519" endline="2519" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2826" endline="2826" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2439" endline="2439" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2519" endline="2519" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2827" endline="2827" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\atltime.h"><violation beginline="93" endline="93" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="93" endline="93" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\winuser.h"><violation beginline="7169" endline="7169" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="7169" endline="7169" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="4372" endline="4372" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="4372" endline="4372" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="4372" endline="4372" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="5753" endline="5753" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\gridcelldatetime.cpp"><violation beginline="30" endline="30" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="30" endline="30" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="30" endline="30" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="47" endline="47" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="51" endline="51" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="54" endline="54" rule="Rule3-1-2" ruleset="Basic Standards">
+</violation><violation beginline="60" endline="60" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="72" endline="72" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="77" endline="77" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="155" endline="155" rule="Rule6-4-4" ruleset="Statements">
+</violation><violation beginline="158" endline="158" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="173" endline="173" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="210" endline="210" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="216" endline="216" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="223" endline="223" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="249" endline="249" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="249" endline="249" rule="Rule5-14-1" ruleset="Statements">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\gridcelldatetime.h"><violation beginline="36" endline="36" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="43" endline="43" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="81" endline="81" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

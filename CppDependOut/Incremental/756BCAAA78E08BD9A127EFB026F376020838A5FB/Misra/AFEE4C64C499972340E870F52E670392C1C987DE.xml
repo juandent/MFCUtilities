@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\cellrange.h"><violation beginline="48" endline="48" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="61" endline="61" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\griddroptarget.h"><violation beginline="56" endline="56" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="57" endline="57" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="58" endline="58" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="59" endline="59" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="60" endline="60" rule="Rule10-3-2" ruleset="Classes">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\titletip.h"><violation beginline="53" endline="53" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="54" endline="54" rule="Rule4-10-2" ruleset="Expressions">
+</violation></file></cppdepend-plugin>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afx.h"><violation beginline="325" endline="325" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxwin.h"><violation beginline="4964" endline="4964" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="3298" endline="3298" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="301" endline="301" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2359" endline="2359" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2359" endline="2359" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="427" endline="427" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2304" endline="2304" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2360" endline="2360" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2307" endline="2307" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2307" endline="2307" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\atltypes.h"><violation beginline="180" endline="180" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="180" endline="180" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\sysinfoapi.h"><violation beginline="208" endline="208" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\winuser.h"><violation beginline="4242" endline="4242" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="10256" endline="10256" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="4187" endline="4187" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="5741" endline="5741" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="6757" endline="6757" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="5741" endline="5741" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\titletip.cpp"><violation beginline="63" endline="63" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="66" endline="66" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="76" endline="76" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="79" endline="79" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="94" endline="94" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="110" endline="110" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="113" endline="113" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="156" endline="156" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="165" endline="165" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="184" endline="184" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="271" endline="271" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="279" endline="279" rule="Rule6-4-4" ruleset="Statements">
+</violation><violation beginline="315" endline="315" rule="Rule6-4-4" ruleset="Statements">
+</violation><violation beginline="343" endline="343" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="346" endline="346" rule="Rule4-10-2" ruleset="Expressions">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\titletip.h"><violation beginline="53" endline="53" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="54" endline="54" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="53" endline="53" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="54" endline="54" rule="Rule4-10-2" ruleset="Expressions">
+</violation></file></cppdepend-plugin>

@@ -1,0 +1,3 @@
+<log>
+ <error level="error" id="err_pp_file_not_found" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\Controllers\Controller.Main.cpp" line="1" col="13" msg="&apos;stdafx.h&apos; file not found" />
+</log>

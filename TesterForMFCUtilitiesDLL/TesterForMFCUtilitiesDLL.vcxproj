@@ -24,7 +24,7 @@
     <ProjectGuid>{6A917F18-D6CA-4573-A61B-6FFF3CC197B0}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
     <RootNamespace>TesterForMFCUtilitiesDLL</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,6 +78,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <EmbedManifest>false</EmbedManifest>
+    <IncludePath>$(IncludePath);</IncludePath>
+    <LibraryPath>$(LibraryPath);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -89,6 +91,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <EmbedManifest>false</EmbedManifest>
+    <IncludePath>$(IncludePath);</IncludePath>
+    <LibraryPath>$(LibraryPath);</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -97,7 +101,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\vcpkg\packages\sqlite3_x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\boost_1_68_0\boost_1_68_0;C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\vcpkg\packages\sqlite3_x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
@@ -126,7 +130,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;OUTPUT_TO_IMMEDIATE_WINDOW;_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>true</ShowIncludes>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,7 +159,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -183,7 +187,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
@@ -211,7 +215,6 @@
     <ClInclude Include="Controllers\Controller.CategoryLoader.h" />
     <ClInclude Include="Controllers\Controller.Interfaces.h" />
     <ClInclude Include="Controllers\Controller.LoadCompoundDocIntoDB.h" />
-    <ClInclude Include="Controllers\Controller.Main.h" />
     <ClInclude Include="DocViewTemplates.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="FilterStatementLines.h" />
@@ -243,11 +246,13 @@
     <ClInclude Include="Repositories\StatementLineRepository.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SubFormView.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TesterForMFCUtilitiesDLL.h" />
     <ClInclude Include="TesterForMFCUtilitiesDLLDoc.h" />
     <ClInclude Include="TesterForMFCUtilitiesDLLView.h" />
     <ClInclude Include="ViewTree.h" />
+    <ClInclude Include="ViewUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\date\tz.cpp">
@@ -259,7 +264,6 @@
     <ClCompile Include="BasicCategoryGridController.cpp" />
     <ClCompile Include="Controllers\Controller.CategoryLoader.cpp" />
     <ClCompile Include="Controllers\Controller.LoadCompoundDocIntoDB.cpp" />
-    <ClCompile Include="Controllers\Controller.Main.cpp" />
     <ClCompile Include="DocViewTemplates.cpp" />
     <ClCompile Include="FilterStatementLines.cpp" />
     <ClCompile Include="FormattedCategory.cpp" />
@@ -288,6 +292,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SubFormView.cpp" />
     <ClCompile Include="TesterForMFCUtilitiesDLL.cpp" />
     <ClCompile Include="TesterForMFCUtilitiesDLLDoc.cpp" />
     <ClCompile Include="TesterForMFCUtilitiesDLLView.cpp" />

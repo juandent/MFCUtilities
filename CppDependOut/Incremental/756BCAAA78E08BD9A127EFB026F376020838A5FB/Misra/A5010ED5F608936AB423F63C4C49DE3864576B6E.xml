@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\xlocale"><violation beginline="2607" endline="2607" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

@@ -73,6 +73,7 @@ namespace Model
 		std::string m_first_name;
 		std::string m_last_name;
 		std::string m_company_name;
+		std::string get_full_name() { return m_first_name + " " + m_last_name; }
 	};
 
 
@@ -114,7 +115,7 @@ namespace Model
 		}
 		Person getOwner();
 	};
-
+	
 	struct Concept
 	{
 		PK std::string m_concept_id;

@@ -1,0 +1,95 @@
+<Externals>
+<cr access="none" depth="0" pod="true" kind="struct" name="HINSTANCE__" id="cbe8864c99146cdfdc678fff1a774a4d_b32e96600c60ce6f9f5e96e0415e5440" file="2" linestart="250" lineend="250"/>
+<cr namespace="ATL" access="none" depth="0" kind="class" name="CTraceFileAndLineInfo" id="c246492cb2419b23a9550099df77c67a_5aacc0bc07a6ae5a7599f45b727dea0f" file="3" linestart="404" lineend="476">
+<c name="CTraceFileAndLineInfo" id="c246492cb2419b23a9550099df77c67a_d4870e2c8892e96764e7478817282c2d" file="3" linestart="407" lineend="412" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pszFileName" proto="const char *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<bt name="char"/>
+</QualType>
+</pt>
+</p>
+<p name="nLineNo" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<initlist id="c246492cb2419b23a9550099df77c67a_95cec11a2ba1323e7d957da85865e1a4"/>
+<initlist id="c246492cb2419b23a9550099df77c67a_bf5104d02d4bc912ab748f03ffae6fb8"/>
+</c>
+<m name="operator()" id="c246492cb2419b23a9550099df77c67a_8862665188efe4ad5790bfc67e2ab8f6" file="3" linestart="459" lineend="467" variadic="true" operator="true" access="public" hasbody="true" isdef="true">
+<Attributed/>
+<p name="pszFmt" proto="const wchar_t *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<bt name="wchar_t"/>
+</QualType>
+</pt>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="AFX_EXTENSION_MODULE" id="ccb41ff3f6b2efac1f18009c651e5c3f_f10d2f27edfe5de7a7708bb20194985f" file="4" linestart="35" lineend="42"/>
+<cr access="none" depth="2" kind="class" name="CDynLinkLibrary" id="ccb41ff3f6b2efac1f18009c651e5c3f_1843a19fb8c45388f8c914c3b61cab49" file="4" linestart="49" lineend="74" previous="a237293ad75024b898169e52d81f2215_1843a19fb8c45388f8c914c3b61cab49">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f"/>
+</rt>
+</base>
+<c name="CDynLinkLibrary" id="ccb41ff3f6b2efac1f18009c651e5c3f_b557520f518eebd33e98e79136c52b57" file="4" linestart="55" lineend="55" explicit="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="AFX_EXTENSION_MODULE &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<rt>
+<cr id="ccb41ff3f6b2efac1f18009c651e5c3f_f10d2f27edfe5de7a7708bb20194985f"/>
+</rt>
+</lrf>
+</p>
+<p name="bSystem" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</c>
+</cr>
+<f name="AfxInitExtensionModule" id="ccb41ff3f6b2efac1f18009c651e5c3f_e060df10d19d32c02f02c70c00dc9fd2" file="4" linestart="77" lineend="77" access="none">
+<Attributed/>
+<p name="" proto="AFX_EXTENSION_MODULE &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<rt>
+<cr id="ccb41ff3f6b2efac1f18009c651e5c3f_f10d2f27edfe5de7a7708bb20194985f"/>
+</rt>
+</lrf>
+</p>
+<p name="hMod" proto="HMODULE" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="cbe8864c99146cdfdc678fff1a774a4d_b32e96600c60ce6f9f5e96e0415e5440"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</Tdef>
+</p>
+</f>
+<f name="AfxTermExtensionModule" id="ccb41ff3f6b2efac1f18009c651e5c3f_ebe26eafb410026eb765602ead4499ca" file="4" linestart="79" lineend="79" access="none">
+<Attributed/>
+<p name="" proto="AFX_EXTENSION_MODULE &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<rt>
+<cr id="ccb41ff3f6b2efac1f18009c651e5c3f_f10d2f27edfe5de7a7708bb20194985f"/>
+</rt>
+</lrf>
+</p>
+<p name="bAll" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</f>
+</Externals>

@@ -1,0 +1,171 @@
+<Externals>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagNMHDR" id="a7d1a534e55e1099364c05856f97493b_4defc6cae3aa0002c83a6fd24cebde79" file="3" linestart="3225" lineend="3230">
+<fl name="code" id="a7d1a534e55e1099364c05856f97493b_dc673898075b5f10f23b47da65def565" file="3" linestart="3229" lineend="3229" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="AFX_MSGMAP_ENTRY" id="6570f3a0862649ad18d4fd7d746ae1b2_0105a5320b0c7203d6e955f483769898" file="4" linestart="2129" lineend="2137" previous="6570f3a0862649ad18d4fd7d746ae1b2_0105a5320b0c7203d6e955f483769898"/>
+<cr access="none" depth="2" kind="class" name="CWnd" id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" file="4" linestart="2181" lineend="3292" previous="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f"/>
+</rt>
+</base>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" access="public" name="AdjustType" id="6570f3a0862649ad18d4fd7d746ae1b2_1360de6429278c401b3ac8ff53263c85" file="4" linestart="2274" lineend="2274">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<v name="wndTop" proto="const CWnd" const="true" id="6570f3a0862649ad18d4fd7d746ae1b2_de3df875671f75f0aff6692819cae6aa" file="4" linestart="2342" lineend="2342" storage="static" access2="public">
+<QualType const="true">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</QualType>
+</v>
+<m name="SetWindowPos" id="6570f3a0862649ad18d4fd7d746ae1b2_b5a304c75e882d93631d5859565969fa" file="4" linestart="2347" lineend="2348" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="pWndInsertAfter" proto="const CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</QualType>
+</pt>
+</p>
+<p name="x" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="y" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="cx" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="cy" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="nFlags" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" access="public" name="RepositionFlags" id="6570f3a0862649ad18d4fd7d746ae1b2_4d42dc68a40ede15a1f7fedd03ae9e2e" file="4" linestart="2579" lineend="2580">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<m name="OnNotify" id="6570f3a0862649ad18d4fd7d746ae1b2_78f0a9172c52a08c7afcc11bc72a99fb" file="4" linestart="2726" lineend="2726" virtual="true" access="protected">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="wParam" proto="WPARAM" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</Tdef>
+</p>
+<p name="lParam" proto="LPARAM" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<Tdef>
+<bt name="long"/>
+</Tdef>
+</Tdef>
+</p>
+<p name="pResult" proto="LRESULT *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<Tdef>
+<Tdef>
+<bt name="long"/>
+</Tdef>
+</Tdef>
+</pt>
+</p>
+</m>
+</cr>
+<cr access="none" depth="3" kind="class" name="CTreeCtrl" id="76ed0a4e7f3cc371714e987e06b36f49_1499d8e50c37840cd245d1c62d52a504" file="5" linestart="709" lineend="985" previous="76ed0a4e7f3cc371714e987e06b36f49_1499d8e50c37840cd245d1c62d52a504">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</base>
+<c name="CTreeCtrl" id="76ed0a4e7f3cc371714e987e06b36f49_5822974b49726ddb5a5289853d98b6d8" file="5" linestart="716" lineend="716" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<m name="GetToolTips" id="76ed0a4e7f3cc371714e987e06b36f49_11bde5aaf0be007ce9bcb8f8f12e9b0b" file="5" linestart="829" lineend="829" access="public">
+<fpt cc="x86_thiscall" const="true" proto="CToolTipCtrl *">
+<pt>
+<rt>
+<cr id="76ed0a4e7f3cc371714e987e06b36f49_ee01e4fb81905efaf4f4f47ec0e0fa3e"/>
+</rt>
+</pt>
+</fpt>
+</m>
+<m name="GetThisMessageMap" id="76ed0a4e7f3cc371714e987e06b36f49_806b255e18718fef4514a91030add9af" file="5" linestart="984" lineend="984" access="protected" storage="static">
+<Attributed/>
+</m>
+</cr>
+<cr access="none" depth="0" kind="class" name="CObject" id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54" file="6" linestart="541" lineend="591" previous="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="AFX_MSGMAP" id="6570f3a0862649ad18d4fd7d746ae1b2_3aefbe810673d879169b4c3b36a63767" file="4" linestart="1229" lineend="1233"/>
+<e access="none" name="AfxSig" id="211cda1356682e02b2c3a6dbf6097792_2e90b9b005cfa7d66beb4ea0a8333e48" file="7" linestart="79" lineend="254">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="AfxSig_end" id="211cda1356682e02b2c3a6dbf6097792_bb6cac538764a896e588133bd3346a48" file="7" linestart="81" lineend="81">
+<et>
+<e id="211cda1356682e02b2c3a6dbf6097792_2e90b9b005cfa7d66beb4ea0a8333e48"/>
+</et>
+</ec>
+</e>
+<cr access="none" depth="1" kind="class" name="CCmdTarget" id="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f" file="4" linestart="1713" lineend="1885" previous="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f">
+<base access="public">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</base>
+</cr>
+<f name="__debugbreak" id="04f3f1cbe9cd67bcb1f6c1615c07577f_09b7f414b2a283fb5618aec2725950a0" file="8" linestart="169" lineend="169" extC="true" implicit="true" access="none" storage="extern">
+<fpt cc="cdecl" proto="void">
+<bt name="void"/>
+</fpt>
+</f>
+<f name="AfxAssertFailedLine" id="b51b67289ce36e487ca03ddebdbacddb_58f26dd8be3e0f31d132fd31ee5a1661" file="6" linestart="311" lineend="321" access="none" inline="true" hasbody="true" isdef="true">
+<Attributed/>
+<p name="lpszFileName" proto="LPCSTR" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<bt name="char"/>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</p>
+<p name="nLine" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</f>
+</Externals>

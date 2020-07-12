@@ -6,7 +6,8 @@ struct Queries
 {
 	struct StatementLines_ForDate
 	{
-		static auto getRows(date::sys_days statement_date)
+		template<typename where_type>
+		static auto getRows(where_type where_clause)
 		{
 			using namespace sqlite_orm;
 			using namespace Model;
@@ -19,7 +20,9 @@ struct Queries
 					&StatementLine::m_amountInLocal,
 					&StatementLine::m_amountInDollars,
 					&StatementLine::m_enabled,
-					&StatementLine::m_category_fid), where(c(&StatementLine::m_statement_date) == statement_date));
+					&StatementLine::m_category_fid),
+					//where(where_clause));
+					where(c(&StatementLine::m_statement_date) == where_clause));
 			return statement_line_flattened;
 		}
 		inline static std::vector<std::string> headers{ "STMT DATE", "ACCOUNT", "LINE DATE", "CONCEPT", "AMT LOCAL","AMT DOLLARS", "ENABLED?","CATEGORY" };

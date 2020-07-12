@@ -1,0 +1,11 @@
+<log>
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\OwnersDialog.cpp" line="12" col="1" msg="zero as null pointer constant" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\OwnersDialog.cpp" line="12" col="1" msg="zero as null pointer constant" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\OwnersDialog.cpp" line="12" col="1" msg="zero as null pointer constant" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\OwnersDialog.cpp" line="12" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_cast_qual" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\OwnersDialog.cpp" line="12" col="1" msg="cast from &apos;const CRuntimeClass *&apos; to &apos;CRuntimeClass *&apos; drops const qualifier" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\OwnersDialog.cpp" line="12" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_cast_qual" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\OwnersDialog.cpp" line="12" col="1" msg="cast from &apos;const CRuntimeClass *&apos; to &apos;CRuntimeClass *&apos; drops const qualifier" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\OwnersDialog.cpp" line="32" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\OwnersDialog.cpp" line="32" col="1" msg="zero as null pointer constant" />
+</log>
