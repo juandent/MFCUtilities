@@ -197,7 +197,6 @@
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.DataTier.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.DateBinding.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.Dolares.Binding.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.ORM.Definitions.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.h" />
     <ClInclude Include="ChildFrm.h" />
@@ -222,6 +221,7 @@
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="DataLoad.cpp" />
     <ClCompile Include="DataTier.cpp" />
     <ClCompile Include="ExpenseManagerSQLite.cpp" />
     <ClCompile Include="ExpenseManagerSQLiteDoc.cpp" />

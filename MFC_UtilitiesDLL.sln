@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCFormView", "TestCFormV
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExpenseManagerSQLite", "ExpenseManagerSQLite\ExpenseManagerSQLite.vcxproj", "{4BA062B0-225F-4ACF-BB2F-3FE2C439023A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boost-multiprecision", "boost-multiprecision\boost-multiprecision.vcxproj", "{8BD05784-FAAC-4563-8A1B-839F86485A3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -111,6 +113,18 @@ Global
 		{4BA062B0-225F-4ACF-BB2F-3FE2C439023A}.Release|x64.Build.0 = Release|x64
 		{4BA062B0-225F-4ACF-BB2F-3FE2C439023A}.Release|x86.ActiveCfg = Release|Win32
 		{4BA062B0-225F-4ACF-BB2F-3FE2C439023A}.Release|x86.Build.0 = Release|Win32
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Debug|x64.ActiveCfg = Debug|x64
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Debug|x64.Build.0 = Debug|x64
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Debug|x86.ActiveCfg = Debug|Win32
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Debug|x86.Build.0 = Debug|Win32
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Release Unicode|x64.ActiveCfg = Release|x64
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Release Unicode|x64.Build.0 = Release|x64
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Release Unicode|x86.ActiveCfg = Release|Win32
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Release Unicode|x86.Build.0 = Release|Win32
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Release|x64.ActiveCfg = Release|x64
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Release|x64.Build.0 = Release|x64
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Release|x86.ActiveCfg = Release|Win32
+		{8BD05784-FAAC-4563-8A1B-839F86485A3B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

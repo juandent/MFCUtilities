@@ -81,9 +81,6 @@
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.Dolares.Binding.h">
       <Filter>DataTier</Filter>
     </ClInclude>
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.ORM.Definitions.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.h">
       <Filter>DataTier</Filter>
     </ClInclude>
@@ -135,6 +132,9 @@
       <Filter>DataTier</Filter>
     </ClCompile>
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.cpp">
+      <Filter>DataTier</Filter>
+    </ClCompile>
+    <ClCompile Include="DataLoad.cpp">
       <Filter>DataTier</Filter>
     </ClCompile>
   </ItemGroup>

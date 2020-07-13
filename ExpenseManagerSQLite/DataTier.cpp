@@ -4,6 +4,7 @@
 
 #include "Data_Tier.h"
 
+#if 1
 
 void Storage::initialize()
 {
@@ -18,6 +19,20 @@ void Storage::initialize()
 	//fill_db_with_test_data();
 }
 
+///////////////////////////////////
+/// Order:
+///
+/// Pais
+/// Banco
+/// AccountOwner
+/// Account
+/// Concepto
+/// StatementLine
+/// Transaccion
+///
+/// 
+
+
 void Storage::fill_db_with_test_data()
 {
 	using namespace sqlite_orm;
@@ -27,27 +42,70 @@ void Storage::fill_db_with_test_data()
 
 	auto& storage = Storage::getStorage();
 
+	storage.remove_all<Concepto>();
+	storage.remove_all<Account>();
+	storage.remove_all<AccountOwner>();
+	storage.remove_all<Banco>();
+	storage.remove_all<Pais>();
+
+
 	year_month_day ymd{ year{2018}, month{8}, day{21} };
 	sys_days tod = ymd;
 	sys_days ttod = tod + days{ 1 };
 
+
+	Pais pais{ -1, "Costa Rica" };
+	pais.id_pais = storage.insert(pais);
+
+	Banco banco{ -1, "BAC San Jose", "Barrio Dent", pais.id_pais };
+	banco.id_bank = storage.insert(banco);
+
+	Banco banco_dest{ -1, "BCR", "San Jose", pais.id_pais };
+	banco_dest.id_bank = storage.insert(banco_dest);
+
+	Banco banco_other{ -1, "BNCR", "San Jose", pais.id_pais };
+	banco_other.id_bank = storage.insert(banco_other);
+
+
+	AccountOwner owner{ -1, "Juan Dent Herrera" };
+	owner.id_owner = storage.insert(owner);
+
+	AccountOwner other{ -1, "Leslie Rachel Hulse" };
+	other.id_owner = storage.insert(other);
+
+
+	Account act{ -1, "3777-11****-*7645", banco.id_bank, owner.id_owner, "AMEX Cashback Premium",true };
+	act.id_account = storage.insert(act);
 	
-	StatementLine line{ -1, ttod, "Gas", -1, 20000, 10, -1 };
-	storage.insert(line);
+	Account actdest{ -1, "CR73400889112311", banco_dest.id_bank, owner.id_owner, "Cuenta de ahorros",false};
+	actdest.id_account = storage.insert(actdest);
+
+	Account actother{ -1, "CR310*********8467", banco_other.id_bank, other.id_owner, "Para platas de Leslie", false };
+	actother.id_account = storage.insert(actother);
+
+	
+	Concepto con{ -1, "TFT-SINPE A: 15103-02**-****-8467", actother.id_account };
+	con.id_concepto = storage.insert(con);
+	
+
+
+	
+//	StatementLine line{ -1, ttod, "Gas", -1, 20000, 10, -1 };
+//	storage.insert(line);
 
 
 	//  If you want to know the total amount of salary on each customer, then GROUP BY query would be as follows:
 //  SELECT NAME, SUM(SALARY)
 //  FROM COMPANY
 //  GROUP BY NAME;
-	auto amount_colones = storage.select(columns(&StatementLine::description, sum(&StatementLine::amount_colones)), group_by(&StatementLine::description));
-	for (auto& t : amount_colones) {
-		ostringstream oss;
-
-		oss << std::get<0>(t) << '\t' << *std::get<1>(t) << endl;
-		auto s = oss.str();
-		int i = 0;
-	}
+	// auto amount_colones = storage.select(columns(&StatementLine::description, sum(&StatementLine::amount_colones)), group_by(&StatementLine::description));
+	// for (auto& t : amount_colones) {
+	// 	ostringstream oss;
+	//
+	// 	oss << std::get<0>(t) << '\t' << *std::get<1>(t) << endl;
+	// 	auto s = oss.str();
+	// 	int i = 0;
+	// }
 	ostringstream oss;
 	oss  << std::numeric_limits<long double>::digits10 << std::endl;											// 123,456,789,012,345
 	auto s = oss.str();
@@ -61,6 +119,7 @@ void Storage::fill_db_with_test_data()
 	auto ss = std::to_string(d);
 	d *= -1;
 	ss = std::to_string(d);
+	
 	
 #if 0
 	Person leslie{ 1, "Leslie"s, "Hulse"s };
@@ -309,4 +368,6 @@ void Storage::empty_database()
 {
 	
 }
+
+#endif
 
