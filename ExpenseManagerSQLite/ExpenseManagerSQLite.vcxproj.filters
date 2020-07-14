@@ -16,6 +16,9 @@
     <Filter Include="DataTier">
       <UniqueIdentifier>{f3f18830-3b01-4f2b-824a-4f4d44adfae3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Grid">
+      <UniqueIdentifier>{671645dc-4261-4ed8-8223-98f74eab7326}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExpenseManagerSQLite.h">
@@ -87,6 +90,21 @@
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.h">
       <Filter>DataTier</Filter>
     </ClInclude>
+    <ClInclude Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TesterForMFCUtilitiesDLL\IGridController.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TesterForMFCUtilitiesDLL\JoinedGridDisplayer.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Nullable.h">
+      <Filter>DataTier</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpenseManagerSQLite.cpp">
@@ -134,7 +152,19 @@
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.cpp">
       <Filter>DataTier</Filter>
     </ClCompile>
-    <ClCompile Include="DataLoad.cpp">
+    <ClCompile Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TesterForMFCUtilitiesDLL\IGridController.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TesterForMFCUtilitiesDLL\JoinedGridDisplayer.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.Factories.h">
       <Filter>DataTier</Filter>
     </ClCompile>
   </ItemGroup>

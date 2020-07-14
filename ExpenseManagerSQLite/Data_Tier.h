@@ -9,11 +9,24 @@
 
 #include "../FixedPoint/Money.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.DateBinding.h"
-//#include "..\TesterForMFCUtilitiesDLL/Model/Model.Colones.Binding.h"
+#include "..\TesterForMFCUtilitiesDLL/Model/Model.Colones.Binding.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.CoinBinding.h"
-//#include "..\TesterForMFCUtilitiesDLL/Model/Model.Dolares.Binding.h"
+#include "..\TesterForMFCUtilitiesDLL/Model/Model.Dolares.Binding.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.AccountType.Binding.h"
 
+#include "Nullable.h"
+
+
+////////// persistence structs//
+struct StatementLine;
+struct Concepto;
+struct Account;
+struct Pais;
+struct Banco;
+struct AccountOwner;
+struct Transaccion;
+struct Categoria;
+////////////////////////////////
 
 struct StatementLine
 {
@@ -21,6 +34,7 @@ struct StatementLine
 	date::sys_days date;
 	std::string description;
 	int fkey_concepto;
+	int fkey_category;						// Categoria
 };
 
 struct Concepto
@@ -39,14 +53,6 @@ struct Account
 	std::string description;		// AMEX Cashback Premium
 	bool is_tarjeta;				// true
 };
-
-#if 0
-struct Concepto_Account
-{
-	int fkey_concepto;
-	int fkey_account;	
-};
-#endif
 
 struct Pais
 {
@@ -84,6 +90,12 @@ struct Transaccion
 
 };
 
+struct Categoria
+{
+	int id_categoria;
+	std::string name;
+	bool is_expense_or_income;
+};
 
 
 class Storage_Impl
@@ -107,11 +119,17 @@ inline 	auto& Storage_Impl::get_storage()
 
 	static auto storage =
 		make_storage(db_name,
+			make_table("Categoria",
+				make_column("id_category", &Categoria::id_categoria, autoincrement(), primary_key()),
+				make_column("name", &Categoria::name),
+				make_column("is_expense_or_income", &Categoria::is_expense_or_income)),
 			make_table("StatementLine",
 				make_column("id_statement_line", &StatementLine::id_statement_line, autoincrement(), primary_key()),
 				make_column("date", &StatementLine::date),
 				make_column("description", &StatementLine::description),
 				make_column("fkey_concepto", &StatementLine::fkey_concepto),
+				make_column("fkey_categoria", &StatementLine::fkey_category),
+				// foreign_key(&StatementLine::fkey_category).references(&Categoria::id_categoria),
 				foreign_key(&StatementLine::fkey_concepto).references(&Concepto::id_concepto)),
 				make_table("Concepto",
 					make_column("id_concepto", &Concepto::id_concepto, autoincrement(), primary_key()),

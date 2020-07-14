@@ -22,6 +22,7 @@ void Storage::initialize()
 ///////////////////////////////////
 /// Order:
 ///
+/// Categoria
 /// Pais
 /// Banco
 /// AccountOwner
@@ -29,7 +30,7 @@ void Storage::initialize()
 /// Concepto
 /// StatementLine
 /// Transaccion
-///
+/// 
 /// 
 
 
@@ -42,6 +43,9 @@ void Storage::fill_db_with_test_data()
 
 	auto& storage = Storage::getStorage();
 
+	storage.remove_all<Transaccion>();
+	storage.remove_all<Categoria>();
+	storage.remove_all<StatementLine>();
 	storage.remove_all<Concepto>();
 	storage.remove_all<Account>();
 	storage.remove_all<AccountOwner>();
@@ -49,11 +53,17 @@ void Storage::fill_db_with_test_data()
 	storage.remove_all<Pais>();
 
 
+
+	
+
 	year_month_day ymd{ year{2018}, month{8}, day{21} };
 	sys_days tod = ymd;
 	sys_days ttod = tod + days{ 1 };
 
 
+	Categoria cat{ -1, "Kisha", true };
+	cat.id_categoria = storage.insert(cat);
+	
 	Pais pais{ -1, "Costa Rica" };
 	pais.id_pais = storage.insert(pais);
 
@@ -88,7 +98,9 @@ void Storage::fill_db_with_test_data()
 	con.id_concepto = storage.insert(con);
 	
 
-
+	StatementLine line{ -1, tod, "sss", con.id_concepto,cat.id_categoria };
+	line.id_statement_line = storage.insert(line);
+	
 	
 //	StatementLine line{ -1, ttod, "Gas", -1, 20000, 10, -1 };
 //	storage.insert(line);

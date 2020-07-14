@@ -191,6 +191,10 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.h" />
+    <ClInclude Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.h" />
+    <ClInclude Include="..\TesterForMFCUtilitiesDLL\IGridController.h" />
+    <ClInclude Include="..\TesterForMFCUtilitiesDLL\JoinedGridDisplayer.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.AccountType.Binding.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.CoinBinding.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.Colones.Binding.h" />
@@ -208,6 +212,7 @@
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Nullable.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="PropertiesWnd.h" />
@@ -216,12 +221,18 @@
     <ClInclude Include="ViewTree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.cpp" />
+    <ClCompile Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\TesterForMFCUtilitiesDLL\IGridController.cpp" />
+    <ClCompile Include="..\TesterForMFCUtilitiesDLL\JoinedGridDisplayer.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.DataTier.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
-    <ClCompile Include="DataLoad.cpp" />
+    <ClCompile Include="Data.Factories.h" />
     <ClCompile Include="DataTier.cpp" />
     <ClCompile Include="ExpenseManagerSQLite.cpp" />
     <ClCompile Include="ExpenseManagerSQLiteDoc.cpp" />
