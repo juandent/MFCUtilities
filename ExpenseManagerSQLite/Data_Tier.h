@@ -129,7 +129,7 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("description", &StatementLine::description),
 				make_column("fkey_concepto", &StatementLine::fkey_concepto),
 				make_column("fkey_categoria", &StatementLine::fkey_category),
-				// foreign_key(&StatementLine::fkey_category).references(&Categoria::id_categoria),
+				foreign_key(&StatementLine::fkey_category).references(&Categoria::id_categoria),
 				foreign_key(&StatementLine::fkey_concepto).references(&Concepto::id_concepto)),
 				make_table("Concepto",
 					make_column("id_concepto", &Concepto::id_concepto, autoincrement(), primary_key()),

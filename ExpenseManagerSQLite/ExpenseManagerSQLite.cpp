@@ -17,6 +17,8 @@
 #define new DEBUG_NEW
 #endif
 
+#include "AssociateConceptAccount.h"
+#include "ConceptsAndAccounts.h"
 #include "Data_Tier.h"
 
 // CExpenseManagerSQLiteApp
@@ -28,6 +30,7 @@ BEGIN_MESSAGE_MAP(CExpenseManagerSQLiteApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
 	// Standard print setup command
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
+	ON_COMMAND(ID_Menu, &CExpenseManagerSQLiteApp::OnAssociateConceptsAccounts)
 END_MESSAGE_MAP()
 
 
@@ -114,16 +117,30 @@ BOOL CExpenseManagerSQLiteApp::InitInstance()
 	theApp.GetTooltipManager()->SetTooltipParams(AFX_TOOLTIP_TYPE_ALL,
 		RUNTIME_CLASS(CMFCToolTipCtrl), &ttParams);
 
-	// Register the application's document templates.  Document templates
-	//  serve as the connection between documents, frame windows and views
-	CMultiDocTemplate* pDocTemplate;
-	pDocTemplate = new CMultiDocTemplate(IDR_ExpenseManagerSQLiteTYPE,
-		RUNTIME_CLASS(CExpenseManagerSQLiteDoc),
-		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
-		RUNTIME_CLASS(CExpenseManagerSQLiteView));
-	if (!pDocTemplate)
-		return FALSE;
-	AddDocTemplate(pDocTemplate);
+
+	{
+		// Register the application's document templates.  Document templates
+		//  serve as the connection between documents, frame windows and views
+		CMultiDocTemplate* pDocTemplate;
+		pDocTemplate = new CMultiDocTemplate(IDR_ExpenseManagerSQLiteTYPE,
+			RUNTIME_CLASS(CExpenseManagerSQLiteDoc),
+			RUNTIME_CLASS(CChildFrame), // custom MDI child frame
+			RUNTIME_CLASS(CExpenseManagerSQLiteView));
+		if (!pDocTemplate)
+			return FALSE;
+		AddDocTemplate(pDocTemplate);
+	}
+	{
+		CMultiDocTemplate* pDocTemplate;
+		pDocTemplate = new CMultiDocTemplate(IDR_ExpenseManagerSQLiteTYPE2,
+			RUNTIME_CLASS(AssociateConceptAccount),
+			RUNTIME_CLASS(CChildFrame), // custom MDI child frame
+			RUNTIME_CLASS(ConceptsAndAccounts));
+		if (!pDocTemplate)
+			return FALSE;
+		AddDocTemplate(pDocTemplate);
+	}
+	
 
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;
@@ -139,7 +156,10 @@ BOOL CExpenseManagerSQLiteApp::InitInstance()
 	CCommandLineInfo cmdInfo;
 	ParseCommandLine(cmdInfo);
 
-
+	if (cmdInfo.m_nShellCommand == CCommandLineInfo::FileNew)
+	{
+		cmdInfo.m_nShellCommand = CCommandLineInfo::FileNothing;
+	}
 
 	// Dispatch commands specified on the command line.  Will return FALSE if
 	// app was launched with /RegServer, /Register, /Unregserver or /Unregister.
@@ -228,3 +248,23 @@ void CExpenseManagerSQLiteApp::SaveCustomState()
 
 
 
+
+
+void CExpenseManagerSQLiteApp::OnAssociateConceptsAccounts()
+{
+	// TODO: Add your command handler code here
+	auto pos = GetFirstDocTemplatePosition();
+
+	CDocTemplate* docTempl = GetNextDocTemplate(pos);
+	CString str;
+	docTempl->GetDocString(str, CDocTemplate::docName);
+
+
+	while (str != L"ConceptsAndAccounts" && pos != NULL)
+	{
+		docTempl = GetNextDocTemplate(pos);
+		docTempl->GetDocString(str, CDocTemplate::docName);
+	}
+	if (docTempl != NULL)
+		docTempl->OpenDocumentFile(NULL);
+}

@@ -105,6 +105,27 @@
     <ClInclude Include="Nullable.h">
       <Filter>DataTier</Filter>
     </ClInclude>
+    <ClInclude Include="ConceptsAndAccounts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JDGridCtrl\JDGridCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssociateConceptAccount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CSVFile.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StatementLineGridController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\Data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpenseManagerSQLite.cpp">
@@ -166,6 +187,18 @@
     </ClCompile>
     <ClCompile Include="Data.Factories.h">
       <Filter>DataTier</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptsAndAccounts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssociateConceptAccount.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CSVFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatementLineGridController.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_AFX;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Components\sqlite_orm\include;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\sqlite_orm\include;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -191,6 +191,10 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\Data.h" />
+    <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\String.h" />
+    <ClInclude Include="..\CSVFile.h" />
+    <ClInclude Include="..\JDGridCtrl\JDGridCtrl.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\IGridController.h" />
@@ -203,8 +207,10 @@
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.Dolares.Binding.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.h" />
+    <ClInclude Include="AssociateConceptAccount.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
+    <ClInclude Include="ConceptsAndAccounts.h" />
     <ClInclude Include="Data_Tier.h" />
     <ClInclude Include="ExpenseManagerSQLite.h" />
     <ClInclude Include="ExpenseManagerSQLiteDoc.h" />
@@ -214,6 +220,7 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Nullable.h" />
     <ClInclude Include="OutputWnd.h" />
+    <ClInclude Include="StatementLineGridController.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Resource.h" />
@@ -221,6 +228,7 @@
     <ClInclude Include="ViewTree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\CSVFile.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -230,8 +238,10 @@
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.DataTier.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.cpp" />
+    <ClCompile Include="AssociateConceptAccount.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="ConceptsAndAccounts.cpp" />
     <ClCompile Include="Data.Factories.h" />
     <ClCompile Include="DataTier.cpp" />
     <ClCompile Include="ExpenseManagerSQLite.cpp" />
@@ -240,6 +250,7 @@
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
+    <ClCompile Include="StatementLineGridController.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
