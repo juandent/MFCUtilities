@@ -86,15 +86,31 @@
 #define IDS_EXPLORER                    305
 #define IDS_EDIT_MENU                   306
 #define IDD_ConceptsAndAccounts         310
-#define IDC_LIST1                       1000
-#define IDC_L_ACCOUNT                   1000
+#define IDC_L_EXPANDED_ACCOUNTS         1000
 #define IDC_GRID                        1001
 #define IDC_B_CONNECT                   1002
 #define IDC_B_DISCONNECT                1003
-#define IDC_EDIT1                       1004
-#define IDC_B_CONNECT2                  1005
+#define IDC_E_ACCOUNT_NUMBER            1004
+#define IDC_B_PAIS_ADD                  1005
 #define IDC_B_DISCONNECT2               1006
 #define IDC_B_LOAD_COMPOUND_DOC         1007
+#define IDC_L_CUENTAS                   1008
+#define IDC_E_DUENO                     1010
+#define IDC_E_PAIS                      1011
+#define IDC_E_ACCOUNT_DESC              1014
+#define IDC_E_BANCO                     1015
+#define IDC_C_IS_TARJETA                1016
+#define IDC_B_BANCO_ADD                 1017
+#define IDC_B_DUENO_ADD                 1018
+#define IDC_B_ADD_PAIS                  1019
+#define IDC_B_CUENTA_ADD                1019
+#define IDC_B_DISCONNECT3               1020
+#define IDC_B_DISCONNECT4               1021
+#define IDC_L_PAISES                    1024
+#define IDC_L_DUENOS                    1025
+#define IDC_B_DISCONNECT7               1026
+#define IDC_L_BANCOS                    1027
+#define IDC_B_DISCONNECT8               1028
 #define ID_Menu                         32771
 
 // Next default values for new objects
@@ -103,7 +119,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        311
 #define _APS_NEXT_COMMAND_VALUE         32772
-#define _APS_NEXT_CONTROL_VALUE         1008
+#define _APS_NEXT_CONTROL_VALUE         1017
 #define _APS_NEXT_SYMED_VALUE           311
 #endif
 #endif

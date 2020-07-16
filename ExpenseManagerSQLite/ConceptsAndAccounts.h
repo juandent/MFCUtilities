@@ -38,7 +38,27 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnBnClickedBLoadCompoundDoc();
 private:
-	CListBox m_listOfAccounts;
+//	CListBox m_listOfAccounts;
+//	CEdit m_account;
+public:
+//	afx_msg void OnBnClickedInsertAccount();
+private:
+	CEdit m_account_number;
+	CEdit m_account_description;
+	CEdit m_dueno;
+	CEdit m_banco;
+	CEdit m_pais;
+	CButton m_is_tarjeta;
+	CListBox m_paises;
+	CListBox m_duenos;
+	CListBox m_bancos;
+	CListBox m_cuentas;
+	CListBox m_expanded_accounts;
+public:
+	afx_msg void OnBnClickedBPaisAdd();
+	afx_msg void OnBnClickedBBancoAdd();
+	afx_msg void OnBnClickedBDuenoAdd();
+	afx_msg void OnBnClickedBCuentaAdd();
 };
 
 

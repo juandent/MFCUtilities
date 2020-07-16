@@ -81,7 +81,7 @@ struct Transaccion
 	double amount_colones;
 	double amount_dolares;
 	int fkey_account_origin;				// Account
-	int fkey_account_destination;			// Account
+	std::optional<int> fkey_account_destination;			// Account optional
 	int fkey_statementline;					// StatementLine
 
 	std::shared_ptr<StatementLine> getStatementLine() const;
@@ -163,7 +163,7 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("fkey_statementline", &Transaccion::fkey_statementline),
 				foreign_key(&Transaccion::fkey_account_origin).references(&Account::id_account),
 				foreign_key(&Transaccion::fkey_account_destination).references(&Account::id_account),
-				foreign_key(&Transaccion::fkey_statementline).references(&Transaccion::id_transaccion)),
+				foreign_key(&Transaccion::fkey_statementline).references(&StatementLine::id_statement_line)),
 			make_table("Pais",
 				make_column("id_pais", &Pais::id_pais, autoincrement(), primary_key()),
 				make_column("name", &Pais::name))

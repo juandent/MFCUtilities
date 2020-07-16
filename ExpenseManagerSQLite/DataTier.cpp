@@ -112,7 +112,23 @@ void Storage::fill_db_with_test_data()
 	StatementLine line{ -1, tod, "sss", con.id_concepto,cat.id_categoria };
 	line.id_statement_line = storage.insert(line);
 	
+
+	//auto ac = make_unique<int>(actother.id_account);
 	
+	//auto acnul = make_shared<int>(nullptr);
+	
+	Transaccion trans{ -1, 1200, 50, act.id_account, actother.id_account, line.id_statement_line };
+	trans.id_transaccion = storage.insert(trans);
+
+	if(trans.fkey_account_destination)
+	{
+		int a = *trans.fkey_account_destination;
+		int i = 0;
+	}
+
+	Transaccion trans2{ -1, 1500, 0, act.id_account, nullopt, line.id_statement_line };
+	trans2.id_transaccion = storage.insert(trans2);
+
 //	StatementLine line{ -1, ttod, "Gas", -1, 20000, 10, -1 };
 //	storage.insert(line);
 

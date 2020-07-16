@@ -27,13 +27,27 @@ void ConceptsAndAccounts::DoDataExchange(CDataExchange* pDX)
 {
 	CFormView::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_GRID, m_statementLines);
-	DDX_Control(pDX, IDC_L_ACCOUNT, m_listOfAccounts);
+	DDX_Control(pDX, IDC_E_ACCOUNT_NUMBER, m_account_number);
+	DDX_Control(pDX, IDC_E_ACCOUNT_DESC, m_account_description);
+	DDX_Control(pDX, IDC_E_DUENO, m_dueno);
+	DDX_Control(pDX, IDC_E_BANCO, m_banco);
+	DDX_Control(pDX, IDC_E_PAIS, m_pais);
+	DDX_Control(pDX, IDC_C_IS_TARJETA, m_is_tarjeta);
+	DDX_Control(pDX, IDC_L_PAISES, m_paises);
+	DDX_Control(pDX, IDC_L_DUENOS, m_duenos);
+	DDX_Control(pDX, IDC_L_BANCOS, m_bancos);
+	DDX_Control(pDX, IDC_L_CUENTAS, m_cuentas);
+	DDX_Control(pDX, IDC_L_EXPANDED_ACCOUNTS, m_expanded_accounts);
 }
 
 BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
 
 	ON_WM_CREATE()
 	ON_BN_CLICKED(IDC_B_LOAD_COMPOUND_DOC, &ConceptsAndAccounts::OnBnClickedBLoadCompoundDoc)
+	ON_BN_CLICKED(IDC_B_PAIS_ADD, &ConceptsAndAccounts::OnBnClickedBPaisAdd)
+	ON_BN_CLICKED(IDC_B_BANCO_ADD, &ConceptsAndAccounts::OnBnClickedBBancoAdd)
+	ON_BN_CLICKED(IDC_B_DUENO_ADD, &ConceptsAndAccounts::OnBnClickedBDuenoAdd)
+	ON_BN_CLICKED(IDC_B_CUENTA_ADD, &ConceptsAndAccounts::OnBnClickedBCuentaAdd)
 END_MESSAGE_MAP()
 
 
@@ -114,4 +128,66 @@ void ConceptsAndAccounts::LoadFile(const std::string& fileName)
 		m_grid_controller.lines.push_back(t);
 	}
 	m_grid_controller.OnInitialUpdate();
+}
+
+#if 0
+void ConceptsAndAccounts::OnBnClickedInsertAccount()
+{
+	// TODO: Add your control notification handler code here
+	CString rStr;
+	m_account.GetWindowTextW(rStr);
+
+	m_listOfAccounts.AddString(rStr);
+	
+}
+#endif
+
+void ConceptsAndAccounts::OnBnClickedBPaisAdd()
+{
+	// TODO: Add your control notification handler code here
+	CString rStr;
+	m_pais.GetWindowTextW(rStr);
+
+	m_paises.AddString(rStr);
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBBancoAdd()
+{
+	// TODO: Add your control notification handler code here
+	CString rStr;
+	m_banco.GetWindowTextW(rStr);
+
+	m_bancos.AddString(rStr);
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBDuenoAdd()
+{
+	// TODO: Add your control notification handler code here
+	CString rStr;
+	m_dueno.GetWindowTextW(rStr);
+
+	m_duenos.AddString(rStr);
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBCuentaAdd()
+{
+	// TODO: Add your control notification handler code here
+	CString numero, descripcion;
+	bool isTarjeta;
+
+	m_account_number.GetWindowTextW(numero);
+	m_account_description.GetWindowTextW(descripcion);
+	isTarjeta = m_is_tarjeta.GetCheck();
+
+	CString cuenta = numero;
+	cuenta += " :";
+	cuenta += descripcion;
+	cuenta += " ";
+	cuenta += isTarjeta ? "Tarjeta" : "Cuenta";
+
+	m_cuentas.AddString(numero);
+	m_expanded_accounts.AddString(cuenta);
 }
