@@ -5,7 +5,14 @@
 #include "ExpenseManagerSQLite.h"
 #include "ConceptsAndAccounts.h"
 
+#include "Data_Tier.h"
+
 #include <afxext.h>
+
+#include "ListboxContents.h"
+
+
+
 
 
 // ConceptsAndAccounts
@@ -14,9 +21,31 @@ IMPLEMENT_DYNCREATE(ConceptsAndAccounts, CFormView)
 
 ConceptsAndAccounts::ConceptsAndAccounts()
 	: CFormView(IDD_ConceptsAndAccounts),
-	m_grid_controller(m_statementLines, 10)
+	m_grid_controller(m_statementLines, 10),
+	m_paisLB{ m_paises, [](Pais& pais)
 {
-
+	auto display = JD::to_cstring(pais.name);
+	return display;
+} },
+m_duenoLB{ m_duenos,
+[](AccountOwner& owner)
+		{
+			auto display = JD::to_cstring(owner.name);
+			return display;
+		} },
+	m_bancoLB{ m_bancos,
+	[](Banco& banco)
+		{
+			auto display = JD::to_cstring(banco.nombre + " - " + banco.ubicacion);
+			return display;
+		} },
+			m_accountLB{ m_cuentas,
+			[](Account& account)
+				{
+					auto display = JD::to_cstring(account.number + " - " + account.description);
+					return display;
+				} }
+{
 }
 
 ConceptsAndAccounts::~ConceptsAndAccounts()
@@ -38,6 +67,7 @@ void ConceptsAndAccounts::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_L_BANCOS, m_bancos);
 	DDX_Control(pDX, IDC_L_CUENTAS, m_cuentas);
 	DDX_Control(pDX, IDC_L_EXPANDED_ACCOUNTS, m_expanded_accounts);
+	DDX_Control(pDX, IDC_E_UBICACION, m_ubicacion);
 }
 
 BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
@@ -48,6 +78,8 @@ BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
 	ON_BN_CLICKED(IDC_B_BANCO_ADD, &ConceptsAndAccounts::OnBnClickedBBancoAdd)
 	ON_BN_CLICKED(IDC_B_DUENO_ADD, &ConceptsAndAccounts::OnBnClickedBDuenoAdd)
 	ON_BN_CLICKED(IDC_B_CUENTA_ADD, &ConceptsAndAccounts::OnBnClickedBCuentaAdd)
+	ON_LBN_SELCHANGE(IDC_L_CUENTAS, &ConceptsAndAccounts::OnLbnSelchangeLCuentas)
+	ON_LBN_SELCHANGE(IDC_L_BANCOS, &ConceptsAndAccounts::OnLbnSelchangeLBancos)
 END_MESSAGE_MAP()
 
 
@@ -78,7 +110,8 @@ int ConceptsAndAccounts::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	// TODO:  Add your specialized creation code here
 
-	/////m_grid_controller.OnInitialUpdate();
+///	m_grid_controller.OnInitialUpdate();
+///	m_banco.SetWindowTextW(L"BANCO");
 	
 	return 0;
 }
@@ -130,17 +163,7 @@ void ConceptsAndAccounts::LoadFile(const std::string& fileName)
 	m_grid_controller.OnInitialUpdate();
 }
 
-#if 0
-void ConceptsAndAccounts::OnBnClickedInsertAccount()
-{
-	// TODO: Add your control notification handler code here
-	CString rStr;
-	m_account.GetWindowTextW(rStr);
 
-	m_listOfAccounts.AddString(rStr);
-	
-}
-#endif
 
 void ConceptsAndAccounts::OnBnClickedBPaisAdd()
 {
@@ -148,17 +171,49 @@ void ConceptsAndAccounts::OnBnClickedBPaisAdd()
 	CString rStr;
 	m_pais.GetWindowTextW(rStr);
 
-	m_paises.AddString(rStr);
+	auto name = JD::from_cstring(rStr);
+
+	auto whereClause = c(&Pais::name) == name.c_str();
+	
+	std::optional<Pais> pais = m_paisLB.exists(whereClause, &Pais::id_pais, &Pais::name);
+
+	if( ! pais)
+	{
+		pais = m_paisLB.insert(name);
+		m_paisLB.insert_into_listbox(*pais);
+	}
 }
 
+
+// banco --> nombre, ubicacion
 
 void ConceptsAndAccounts::OnBnClickedBBancoAdd()
 {
 	// TODO: Add your control notification handler code here
-	CString rStr;
-	m_banco.GetWindowTextW(rStr);
+	CString rBanco, rUbicacion;
+	m_banco.GetWindowTextW(rBanco);
+	m_ubicacion.GetWindowTextW(rUbicacion);
 
-	m_bancos.AddString(rStr);
+	auto name = JD::from_cstring(rBanco);
+	auto ubicacion = JD::from_cstring(rUbicacion);
+
+	auto whereClause = (c(&Banco::nombre) == name.c_str()) && (c(&Banco::ubicacion) == ubicacion.c_str());
+
+	std::optional<Banco> banco = m_bancoLB.exists(whereClause, &Banco::id_bank, &Banco::nombre);
+
+	if (!banco)
+	{
+		// need to get current pais
+		std::optional<Pais> pais = m_paisLB.current();
+		if (!pais)
+		{
+			banco = m_bancoLB.insert(name, ubicacion);
+			m_bancoLB.insert_into_listbox(*banco);
+		}
+	}
+
+
+	//m_bancos.AddString(rStr);
 }
 
 
@@ -190,4 +245,48 @@ void ConceptsAndAccounts::OnBnClickedBCuentaAdd()
 
 	m_cuentas.AddString(numero);
 	m_expanded_accounts.AddString(cuenta);
+}
+
+
+void ConceptsAndAccounts::OnInitialUpdate()
+{
+	CFormView::OnInitialUpdate();
+
+
+	m_paisLB.loadLB();
+	m_duenoLB.loadLB();
+	m_accountLB.loadLB();
+	m_bancoLB.loadLB();
+}
+
+
+void ConceptsAndAccounts::OnLbnSelchangeLCuentas()
+{
+	// TODO: Add your control notification handler code here
+	std::optional<Account> act = m_accountLB.current();
+	if( act)
+	{
+		std::optional<AccountOwner> owner = m_duenoLB.select(act->fkey_account_owner);
+		std::optional<Banco> banco = m_bancoLB.select(act->fkey_bank);
+	
+	}
+}
+
+
+void ConceptsAndAccounts::OnLbnSelchangeLBancos()
+{
+	// TODO: Add your control notification handler code here
+	std::optional<Banco> banco = m_bancoLB.current();
+	if( banco )
+	{
+		std::optional<Pais> pais = m_paisLB.select(banco->fkey_pais);
+	}
+}
+
+
+BOOL ConceptsAndAccounts::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pLResult)
+{
+	// TODO: Add your specialized code here and/or call the base class
+
+	return CFormView::OnChildNotify(message, wParam, lParam, pLResult);
 }

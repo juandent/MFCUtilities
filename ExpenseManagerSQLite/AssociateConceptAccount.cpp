@@ -66,28 +66,4 @@ void AssociateConceptAccount::Serialize(CArchive& ar)
 
 // AssociateConceptAccount commands
 
-#if 0
-void AssociateConceptAccount::OnBnClickedBLoadCompoundDoc()
-{
-	// TODO: Add your control notification handler code here
-	auto startPath = fs::current_path();
-	auto current = startPath.string();
-	auto currPath = JD::to_cstring(current);
-	CFileDialog dlg{ true  };
-	auto ret = dlg.DoModal();
-	if (ret != 1)	return;
-	auto folderPath = dlg.GetPathName();
-	auto selectedFileName = JD::from_cstring(folderPath);
-	LoadFile(selectedFileName);
-}
-
-
-void AssociateConceptAccount::LoadFile(const std::string& fileName)
-{
-	m_file.load(fileName);
-	
-	auto row_count = m_file.getRowCount();
-	m_	
-}
-#endif
 

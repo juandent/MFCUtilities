@@ -20,7 +20,7 @@ void Storage::initialize()
 }
 
 ///////////////////////////////////
-/// Order:
+/// Order for insert:
 ///
 /// Categoria
 /// Pais
@@ -43,16 +43,7 @@ void Storage::fill_db_with_test_data()
 
 	auto& storage = Storage::getStorage();
 
-#if WORKS
-	storage.remove_all<Transaccion>();
-	storage.remove_all<Categoria>();
-	storage.remove_all<StatementLine>();
-	storage.remove_all<Concepto>();
-	storage.remove_all<Account>();
-	storage.remove_all<AccountOwner>();
-	storage.remove_all<Banco>();
-	storage.remove_all<Pais>();
-#else
+	// order is vital!
 	storage.remove_all<Transaccion>();
 	storage.remove_all<StatementLine>();
 	storage.remove_all<Categoria>();
@@ -61,9 +52,6 @@ void Storage::fill_db_with_test_data()
 	storage.remove_all<AccountOwner>();
 	storage.remove_all<Banco>();
 	storage.remove_all<Pais>();
-
-#endif
-
 
 	
 

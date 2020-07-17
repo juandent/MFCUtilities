@@ -1,5 +1,7 @@
 #pragma once
 #include "CSVFile.h"
+#include "Data_Tier.h"
+#include "ListboxContents.h"
 #include "StatementLineGridController.h"
 
 
@@ -9,6 +11,40 @@ class ConceptsAndAccounts : public CFormView
 {
 	DECLARE_DYNCREATE(ConceptsAndAccounts)
 
+	ListboxContents<Pais, &Pais::id_pais> m_paisLB;
+	ListboxContents<AccountOwner, &AccountOwner::id_owner> m_duenoLB;
+	ListboxContents<Banco, &Banco::id_bank> m_bancoLB;
+	ListboxContents<Account, &Account::id_account> m_accountLB;
+#if 0	
+	ListboxContents<Pais, &Pais::id_pais> m_paisLB {m_paises, [](Pais& pais)
+		{
+			auto display = JD::to_cstring(pais.name);
+			return display;
+		}};
+	ListboxContents<AccountOwner, &AccountOwner::id_owner> m_duenoLB { m_duenos,
+		[](AccountOwner& owner)
+		{
+			auto display = JD::to_cstring(owner.name);
+			return display;
+		}
+	};
+#endif
+#if 0
+	ListboxContents<Banco, &Banco::id_bank> m_bancoLB{m_bancos,
+		[](Banco& banco)
+		{
+			auto display = JD::to_cstring(banco.nombre + " - " + banco.ubicacion);
+			return display;
+		}
+	};
+	ListboxContents<Account, &Account::id_account> m_accountLB{ m_cuentas,
+		[](Account& account)
+		{
+			auto display = JD::to_cstring(account.number + " - " + account.description);
+			return display;
+		}
+	};
+#endif
 protected:
 	ConceptsAndAccounts();           // protected constructor used by dynamic creation
 	virtual ~ConceptsAndAccounts();
@@ -59,6 +95,13 @@ public:
 	afx_msg void OnBnClickedBBancoAdd();
 	afx_msg void OnBnClickedBDuenoAdd();
 	afx_msg void OnBnClickedBCuentaAdd();
+private:
+	CEdit m_ubicacion;
+public:
+	virtual void OnInitialUpdate();
+	afx_msg void OnLbnSelchangeLCuentas();
+	afx_msg void OnLbnSelchangeLBancos();
+	virtual BOOL OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pLResult);
 };
 
 

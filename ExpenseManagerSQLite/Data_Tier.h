@@ -34,7 +34,7 @@ struct StatementLine
 	date::sys_days date;
 	std::string description;
 	int fkey_concepto;
-	int fkey_category;						// Categoria
+	std::optional<int> fkey_category;						// Categoria
 };
 
 struct Concepto
@@ -121,39 +121,39 @@ inline 	auto& Storage_Impl::get_storage()
 		make_storage(db_name,
 			make_table("Categoria",
 				make_column("id_category", &Categoria::id_categoria, autoincrement(), primary_key()),
-				make_column("name", &Categoria::name),
+				make_column("name", &Categoria::name, collate_nocase()),
 				make_column("is_expense_or_income", &Categoria::is_expense_or_income)),
 			make_table("StatementLine",
 				make_column("id_statement_line", &StatementLine::id_statement_line, autoincrement(), primary_key()),
 				make_column("date", &StatementLine::date),
-				make_column("description", &StatementLine::description),
+				make_column("description", &StatementLine::description, collate_nocase()),
 				make_column("fkey_concepto", &StatementLine::fkey_concepto),
 				make_column("fkey_categoria", &StatementLine::fkey_category),
 				foreign_key(&StatementLine::fkey_category).references(&Categoria::id_categoria),
 				foreign_key(&StatementLine::fkey_concepto).references(&Concepto::id_concepto)),
 				make_table("Concepto",
 					make_column("id_concepto", &Concepto::id_concepto, autoincrement(), primary_key()),
-					make_column("name", &Concepto::name),
+					make_column("name", &Concepto::name, collate_nocase()),
 					make_column("fkey_account", &Concepto::fkey_account),
 					foreign_key(&Concepto::fkey_account).references(&Account::id_account)),
 				make_table("Account",
 					make_column("id_account", &Account::id_account, autoincrement(), primary_key()),
-					make_column("number", &Account::number),
+					make_column("number", &Account::number, collate_nocase()),
 					make_column("fkey_bank", &Account::fkey_bank),
 					make_column("fkey_account_owner", &Account::fkey_account_owner),
-					make_column("description", &Account::description),
+					make_column("description", &Account::description, collate_nocase()),
 					make_column("is_tarjeta", &Account::is_tarjeta),
 					foreign_key(&Account::fkey_account_owner).references(&AccountOwner::id_owner),
 					foreign_key(&Account::fkey_bank).references(&Banco::id_bank)),
 				make_table("Banco",
 					make_column("id_bank", &Banco::id_bank, autoincrement(), primary_key()),
-					make_column("nombre", &Banco::nombre),
-					make_column("ubicacion", &Banco::ubicacion),
+					make_column("nombre", &Banco::nombre, collate_nocase()),
+					make_column("ubicacion", &Banco::ubicacion, collate_nocase()),
 					make_column("fkey_Pais", &Banco::fkey_pais),
 					foreign_key(&Banco::fkey_pais).references(&Pais::id_pais)),
 			make_table("AccountOwner",
 				make_column("id_owner", &AccountOwner::id_owner, autoincrement(), primary_key()),
-				make_column("name", &AccountOwner::name)),
+				make_column("name", &AccountOwner::name, collate_nocase())),
 			make_table("Transaccion",
 				make_column("id_transaccion", &Transaccion::id_transaccion, autoincrement(), primary_key()),
 				make_column("colones", &Transaccion::amount_colones),
@@ -166,7 +166,7 @@ inline 	auto& Storage_Impl::get_storage()
 				foreign_key(&Transaccion::fkey_statementline).references(&StatementLine::id_statement_line)),
 			make_table("Pais",
 				make_column("id_pais", &Pais::id_pais, autoincrement(), primary_key()),
-				make_column("name", &Pais::name))
+				make_column("name", &Pais::name, collate_nocase()))
 			);
 
 	if (flag == 0)

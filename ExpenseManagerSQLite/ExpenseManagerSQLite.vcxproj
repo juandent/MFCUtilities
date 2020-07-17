@@ -217,6 +217,7 @@
     <ClInclude Include="ExpenseManagerSQLiteView.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="ListboxContents.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Nullable.h" />
     <ClInclude Include="OutputWnd.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="ExpenseManagerSQLiteDoc.cpp" />
     <ClCompile Include="ExpenseManagerSQLiteView.cpp" />
     <ClCompile Include="FileView.cpp" />
+    <ClCompile Include="ListboxContents.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="StatementLineGridController.cpp" />

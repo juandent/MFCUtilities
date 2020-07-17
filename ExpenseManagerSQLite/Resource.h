@@ -102,10 +102,11 @@
 #define IDC_C_IS_TARJETA                1016
 #define IDC_B_BANCO_ADD                 1017
 #define IDC_B_DUENO_ADD                 1018
-#define IDC_B_ADD_PAIS                  1019
 #define IDC_B_CUENTA_ADD                1019
 #define IDC_B_DISCONNECT3               1020
 #define IDC_B_DISCONNECT4               1021
+#define IDC_E_BANCO2                    1022
+#define IDC_E_UBICACION                 1022
 #define IDC_L_PAISES                    1024
 #define IDC_L_DUENOS                    1025
 #define IDC_B_DISCONNECT7               1026
