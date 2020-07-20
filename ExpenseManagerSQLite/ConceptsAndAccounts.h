@@ -15,36 +15,7 @@ class ConceptsAndAccounts : public CFormView
 	ListboxContents<AccountOwner, &AccountOwner::id_owner> m_duenoLB;
 	ListboxContents<Banco, &Banco::id_bank> m_bancoLB;
 	ListboxContents<Account, &Account::id_account> m_accountLB;
-#if 0	
-	ListboxContents<Pais, &Pais::id_pais> m_paisLB {m_paises, [](Pais& pais)
-		{
-			auto display = JD::to_cstring(pais.name);
-			return display;
-		}};
-	ListboxContents<AccountOwner, &AccountOwner::id_owner> m_duenoLB { m_duenos,
-		[](AccountOwner& owner)
-		{
-			auto display = JD::to_cstring(owner.name);
-			return display;
-		}
-	};
-#endif
-#if 0
-	ListboxContents<Banco, &Banco::id_bank> m_bancoLB{m_bancos,
-		[](Banco& banco)
-		{
-			auto display = JD::to_cstring(banco.nombre + " - " + banco.ubicacion);
-			return display;
-		}
-	};
-	ListboxContents<Account, &Account::id_account> m_accountLB{ m_cuentas,
-		[](Account& account)
-		{
-			auto display = JD::to_cstring(account.number + " - " + account.description);
-			return display;
-		}
-	};
-#endif
+	ListboxContents<Concepto, &Concepto::id_concepto> m_conceptoLB;
 protected:
 	ConceptsAndAccounts();           // protected constructor used by dynamic creation
 	virtual ~ConceptsAndAccounts();
@@ -101,7 +72,32 @@ public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnLbnSelchangeLCuentas();
 	afx_msg void OnLbnSelchangeLBancos();
-	virtual BOOL OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pLResult);
+private:
+	CEdit m_concepto;
+//	CEdit m_cuenta_destino;
+//	CEdit m_cuenta_origen;
+	CEdit m_descripcion_linea;
+public:
+	afx_msg void OnBnClickedBReadStatementline();
+private:
+	CEdit m_line_date;
+	CEdit m_stmt_date;
+	CEdit m_amount_local;
+	CEdit m_amount_dolares;
+	CEdit m_cuenta_propia;
+	CEdit m_otra_cuenta;
+	CListBox m_cuentas_propias;
+public:
+	afx_msg void OnLbnSelchangeLDuenos();
+	afx_msg void OnBnClickedBDeselectAccounts();
+private:
+	CListBox m_transacciones;
+	CListBox m_conceptos;
+public:
+	afx_msg void OnBnClickedBDeselectDuenos();
+	afx_msg void OnBnClickedBDeselectBancos();
+	afx_msg void OnBnClickedBDeselectPais();
+	afx_msg void OnBnClickedBConcepto();
 };
 
 

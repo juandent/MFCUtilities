@@ -129,6 +129,12 @@
     <ClInclude Include="ListboxContents.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StatementLineAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TablePool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpenseManagerSQLite.cpp">
@@ -204,6 +210,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ListboxContents.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatementLineAdapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TablePool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -28,6 +28,7 @@ void Storage::initialize()
 /// AccountOwner
 /// Account
 /// Concepto
+/// Statement
 /// StatementLine
 /// Transaccion
 /// 
@@ -46,9 +47,11 @@ void Storage::fill_db_with_test_data()
 	// order is vital!
 	storage.remove_all<Transaccion>();
 	storage.remove_all<StatementLine>();
+	storage.remove_all<Statement>();
 	storage.remove_all<Categoria>();
 	storage.remove_all<Concepto>();
 	storage.remove_all<Account>();
+	//storage.remove_all<MyAccount>();
 	storage.remove_all<AccountOwner>();
 	storage.remove_all<Banco>();
 	storage.remove_all<Pais>();
@@ -57,7 +60,7 @@ void Storage::fill_db_with_test_data()
 
 	year_month_day ymd{ year{2018}, month{8}, day{21} };
 	sys_days tod = ymd;
-	sys_days ttod = tod + days{ 1 };
+	sys_days ttod = tod - days{ 1 };
 
 
 	Categoria cat{ -1, "Kisha", true };
@@ -83,7 +86,10 @@ void Storage::fill_db_with_test_data()
 	other.id_owner = storage.insert(other);
 
 
-	Account act{ -1, "3777-11****-*7645", banco.id_bank, owner.id_owner, "AMEX Cashback Premium",true };
+	// Account act{ -1, "3777-11****-*7645", banco.id_bank, owner.id_owner, "AMEX Cashback Premium",true };
+	// act.id_account = storage.insert(act);
+
+	Account act{-1, "3777-11****-*7645", banco.id_bank, owner.id_owner, "AMEX Cashback Premium",true };
 	act.id_account = storage.insert(act);
 	
 	Account actdest{ -1, "CR73400889112311", banco_dest.id_bank, owner.id_owner, "Cuenta de ahorros",false};
@@ -95,9 +101,11 @@ void Storage::fill_db_with_test_data()
 	
 	Concepto con{ -1, "TFT-SINPE A: 15103-02**-****-8467", actother.id_account };
 	con.id_concepto = storage.insert(con);
-	
 
-	StatementLine line{ -1, tod, "sss", con.id_concepto,cat.id_categoria };
+	Statement statement{ -1, ttod };
+	statement.id_statement = storage.insert(statement);
+
+	StatementLine line{ -1, tod, "sss", con.id_concepto,cat.id_categoria, statement.id_statement };
 	line.id_statement_line = storage.insert(line);
 	
 
@@ -108,9 +116,9 @@ void Storage::fill_db_with_test_data()
 	Transaccion trans{ -1, 1200, 50, act.id_account, actother.id_account, line.id_statement_line };
 	trans.id_transaccion = storage.insert(trans);
 
-	if(trans.fkey_account_destination)
+	if(trans.fkey_account_other)
 	{
-		int a = *trans.fkey_account_destination;
+		int a = *trans.fkey_account_other;
 		int i = 0;
 	}
 

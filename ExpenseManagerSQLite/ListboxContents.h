@@ -88,6 +88,7 @@ public:
 		auto displayStr = displayer(record);
 		auto index = m_listbox.AddString(displayStr);
 		m_listbox.SetItemData(index, get_pk(record));
+		m_listbox.SetCurSel(index);
 		return index;
 	}
 

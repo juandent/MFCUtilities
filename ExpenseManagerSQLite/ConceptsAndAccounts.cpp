@@ -10,9 +10,7 @@
 #include <afxext.h>
 
 #include "ListboxContents.h"
-
-
-
+#include "StatementLineAdapter.h"
 
 
 // ConceptsAndAccounts
@@ -44,7 +42,14 @@ m_duenoLB{ m_duenos,
 				{
 					auto display = JD::to_cstring(account.number + " - " + account.description);
 					return display;
-				} }
+				} },
+			m_conceptoLB{ m_conceptos,
+			[](Concepto& concepto)
+			{
+					auto display = JD::to_cstring(concepto.name);
+					return display;
+			}
+			}
 {
 }
 
@@ -66,8 +71,21 @@ void ConceptsAndAccounts::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_L_DUENOS, m_duenos);
 	DDX_Control(pDX, IDC_L_BANCOS, m_bancos);
 	DDX_Control(pDX, IDC_L_CUENTAS, m_cuentas);
-	DDX_Control(pDX, IDC_L_EXPANDED_ACCOUNTS, m_expanded_accounts);
+//	DDX_Control(pDX, IDC_L_EXPANDED_ACCOUNTS, m_expanded_accounts);
 	DDX_Control(pDX, IDC_E_UBICACION, m_ubicacion);
+	DDX_Control(pDX, IDC_E_CONCEPTO, m_concepto);
+	//DDX_Control(pDX, IDC_E_CUENTA_DEST, m_cuenta_destino);
+	//DDX_Control(pDX, IDC_E_CUENTA_PROPIA, m_cuenta_origen);
+	DDX_Control(pDX, IDC_E_DESCRIPCION, m_descripcion_linea);
+	DDX_Control(pDX, IDC_E_LINE_DATE, m_line_date);
+	DDX_Control(pDX, IDC_E_STMT_DATE, m_stmt_date);
+	DDX_Control(pDX, IDC_E_AMOUNT_LOCAL, m_amount_local);
+	DDX_Control(pDX, IDC_E_AMOUNT_DOLARES, m_amount_dolares);
+	DDX_Control(pDX, IDC_E_CUENTA_PROPIA, m_cuenta_propia);
+	DDX_Control(pDX, IDC_E_CUENTA_OTRA, m_otra_cuenta);
+	//	DDX_Control(pDX, IDC_L_CUENTAS_MIAS, m_cuentas_propias);
+	DDX_Control(pDX, IDC_L_TRANSACTIONS, m_transacciones);
+	DDX_Control(pDX, IDC_L_CONCEPTOS, m_conceptos);
 }
 
 BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
@@ -80,6 +98,13 @@ BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
 	ON_BN_CLICKED(IDC_B_CUENTA_ADD, &ConceptsAndAccounts::OnBnClickedBCuentaAdd)
 	ON_LBN_SELCHANGE(IDC_L_CUENTAS, &ConceptsAndAccounts::OnLbnSelchangeLCuentas)
 	ON_LBN_SELCHANGE(IDC_L_BANCOS, &ConceptsAndAccounts::OnLbnSelchangeLBancos)
+	ON_BN_CLICKED(IDC_B_READ_STATEMENTLINE, &ConceptsAndAccounts::OnBnClickedBReadStatementline)
+	ON_LBN_SELCHANGE(IDC_L_DUENOS, &ConceptsAndAccounts::OnLbnSelchangeLDuenos)
+	ON_BN_CLICKED(IDC_B_DESELECT_ACCOUNTS, &ConceptsAndAccounts::OnBnClickedBDeselectAccounts)
+	ON_BN_CLICKED(IDC_B_DESELECT_DUENOS, &ConceptsAndAccounts::OnBnClickedBDeselectDuenos)
+	ON_BN_CLICKED(IDC_B_DESELECT_BANCOS, &ConceptsAndAccounts::OnBnClickedBDeselectBancos)
+	ON_BN_CLICKED(IDC_B_DESELECT_PAIS, &ConceptsAndAccounts::OnBnClickedBDeselectPais)
+	ON_BN_CLICKED(IDC_B_CONCEPTO, &ConceptsAndAccounts::OnBnClickedBConcepto)
 END_MESSAGE_MAP()
 
 
@@ -98,6 +123,7 @@ void ConceptsAndAccounts::Dump(CDumpContext& dc) const
 }
 #endif
 #endif //_DEBUG
+
 
 
 // ConceptsAndAccounts message handlers
@@ -158,6 +184,8 @@ void ConceptsAndAccounts::LoadFile(const std::string& fileName)
 		if( x.size() > 9)
 			t.owner_name = x[9];
 
+		//StatementLineAdapter adapt(t);
+		
 		m_grid_controller.lines.push_back(t);
 	}
 	m_grid_controller.OnInitialUpdate();
@@ -171,8 +199,13 @@ void ConceptsAndAccounts::OnBnClickedBPaisAdd()
 	CString rStr;
 	m_pais.GetWindowTextW(rStr);
 
-	auto name = JD::from_cstring(rStr);
+	if (rStr.IsEmpty())
+	{
+		MessageBoxW(L"Falta el nombre del pais");
+		return;
+	}
 
+	auto name = JD::from_cstring(rStr);
 	auto whereClause = c(&Pais::name) == name.c_str();
 	
 	std::optional<Pais> pais = m_paisLB.exists(whereClause, &Pais::id_pais, &Pais::name);
@@ -185,6 +218,7 @@ void ConceptsAndAccounts::OnBnClickedBPaisAdd()
 }
 
 
+
 // banco --> nombre, ubicacion
 
 void ConceptsAndAccounts::OnBnClickedBBancoAdd()
@@ -194,6 +228,13 @@ void ConceptsAndAccounts::OnBnClickedBBancoAdd()
 	m_banco.GetWindowTextW(rBanco);
 	m_ubicacion.GetWindowTextW(rUbicacion);
 
+	if (rBanco.IsEmpty() || rUbicacion.IsEmpty())
+	{
+		MessageBoxW(L"Falta el nombre del banco o su ubicacion");
+		return;
+	};
+
+	
 	auto name = JD::from_cstring(rBanco);
 	auto ubicacion = JD::from_cstring(rUbicacion);
 
@@ -223,28 +264,78 @@ void ConceptsAndAccounts::OnBnClickedBDuenoAdd()
 	CString rStr;
 	m_dueno.GetWindowTextW(rStr);
 
-	m_duenos.AddString(rStr);
+	if (rStr.IsEmpty())
+	{
+		MessageBoxW(L"Falta el nombre del dueño");
+		return;
+	}
+
+	auto name = JD::from_cstring(rStr);
+	auto whereClause = (c(&AccountOwner::name) == name.c_str());
+
+	std::optional<AccountOwner> dueno = m_duenoLB.exists(whereClause, &AccountOwner::id_owner, &AccountOwner::name);
+
+	if (!dueno)
+	{
+		dueno = m_duenoLB.insert(name);
+		m_duenoLB.insert_into_listbox(*dueno);
+	}
+
+//	m_duenos.AddString(rStr);
 }
 
 
 void ConceptsAndAccounts::OnBnClickedBCuentaAdd()
 {
 	// TODO: Add your control notification handler code here
-	CString numero, descripcion;
+	CString cs_numero, cs_descripcion;
 	bool isTarjeta;
 
-	m_account_number.GetWindowTextW(numero);
-	m_account_description.GetWindowTextW(descripcion);
+	m_account_number.GetWindowTextW(cs_numero);
+	m_account_description.GetWindowTextW(cs_descripcion);
+
+	if(cs_numero.IsEmpty() || cs_descripcion.IsEmpty())
+	{
+		MessageBox(L"Falta el numero o descripcion de la cuenta");
+		return;
+	}
+
+	auto numero = JD::from_cstring(cs_numero);
+	auto descripcion = JD::from_cstring(cs_descripcion);
+	
 	isTarjeta = m_is_tarjeta.GetCheck();
 
-	CString cuenta = numero;
-	cuenta += " :";
-	cuenta += descripcion;
-	cuenta += " ";
-	cuenta += isTarjeta ? "Tarjeta" : "Cuenta";
+	auto banco = m_bancoLB.current();
 
-	m_cuentas.AddString(numero);
-	m_expanded_accounts.AddString(cuenta);
+	if( ! banco)
+	{
+		MessageBoxW(L"Falta escoger banco");
+		return;
+	}
+
+
+	auto owner = m_duenoLB.current();
+
+	if( ! owner)
+	{
+		MessageBoxW(L"Falta escoger dueño");
+		return;
+
+	}
+
+	auto whereClause = (c(&Account::number) == numero.c_str());
+
+	std::optional<Account> cuenta = m_accountLB.exists(whereClause, &Account::id_account, &Account::number);
+
+	if (!cuenta)
+	{
+		cuenta = m_accountLB.insert(numero,banco->id_bank, owner->id_owner, descripcion, isTarjeta);
+		m_accountLB.insert_into_listbox(*cuenta);
+	}
+
+
+	//m_cuentas.AddString(numero);
+	//m_expanded_accounts.AddString(cuenta);
 }
 
 
@@ -257,6 +348,7 @@ void ConceptsAndAccounts::OnInitialUpdate()
 	m_duenoLB.loadLB();
 	m_accountLB.loadLB();
 	m_bancoLB.loadLB();
+	m_conceptoLB.loadLB();
 }
 
 
@@ -284,9 +376,120 @@ void ConceptsAndAccounts::OnLbnSelchangeLBancos()
 }
 
 
-BOOL ConceptsAndAccounts::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pLResult)
+void ConceptsAndAccounts::OnLbnSelchangeLDuenos()
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// TODO: Add your control notification handler code here
+	std::optional<AccountOwner> owner = m_duenoLB.current();
+	if(owner)
+	{
+	//	std::optional<AccountOwner> 
+	}
 
-	return CFormView::OnChildNotify(message, wParam, lParam, pLResult);
+}
+
+
+namespace
+{
+	bool isNegative(const CString& str)
+	{
+		return str.Find('-') != -1;
+	}
+}
+
+void ConceptsAndAccounts::OnBnClickedBReadStatementline()
+{
+	// TODO: Add your control notification handler code here
+	auto range = m_statementLines.GetSelectedCellRange();
+	int row = range.GetMaxRow();
+
+	if (row == -1)	return;
+
+	CString amount_local = m_statementLines.GetItemText(row, StatementLineGridController::Columns::AMOUNT_LOCAL);
+	m_amount_local.SetWindowTextW(amount_local);
+
+	CString amount_dolares = m_statementLines.GetItemText(row, StatementLineGridController::Columns::AMOUNT_DOLLARS);
+	m_amount_dolares.SetWindowTextW(amount_dolares);
+
+	// bool isNegativeAmount = isNegative(amount_local) || isNegative(amount_dolares);
+	
+	CString own_account = m_statementLines.GetItemText(row, StatementLineGridController::Columns::OWN_ACCOUNT);
+	m_cuenta_propia.SetWindowTextW(own_account);
+
+	CString concepto = m_statementLines.GetItemText(row, StatementLineGridController::Columns::CONCEPTO);
+	m_concepto.SetWindowTextW(concepto);
+
+	CString line_date = m_statementLines.GetItemText(row, StatementLineGridController::Columns::LINE_DATE);
+	m_line_date.SetWindowTextW(line_date);
+
+	CString stmt_date = m_statementLines.GetItemText(row, StatementLineGridController::Columns::STMT_DATE);
+	m_stmt_date.SetWindowTextW(stmt_date);
+
+	CString descrip = m_statementLines.GetItemText(row, StatementLineGridController::Columns::DESCRIPCION);
+	m_descripcion_linea.SetWindowTextW(descrip);
+
+	
+}
+
+
+
+void ConceptsAndAccounts::OnBnClickedBDeselectAccounts()
+{
+	// TODO: Add your control notification handler code here
+	m_cuentas.SetCurSel(-1);
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBDeselectDuenos()
+{
+	// TODO: Add your control notification handler code here
+	m_duenos.SetCurSel(-1);
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBDeselectBancos()
+{
+	// TODO: Add your control notification handler code here
+	m_bancos.SetCurSel(-1);
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBDeselectPais()
+{
+	// TODO: Add your control notification handler code here
+	m_paises.SetCurSel(-1);
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBConcepto()
+{
+	// TODO: Add your control notification handler code here
+	// we must have an account selected
+	CString cs_concepto_name;
+	m_concepto.GetWindowTextW(cs_concepto_name);
+
+	if( cs_concepto_name.IsEmpty())
+	{
+		MessageBoxW(L"Falta el nombre del concepto");
+		return;
+	}
+
+	auto concepto_name = JD::from_cstring(cs_concepto_name);
+
+	auto cuenta = m_accountLB.current();
+	if (!cuenta)
+	{
+		MessageBoxW(L"Falta escoger la cuenta");
+		return;
+	}
+
+	auto whereClause = (c(&Concepto::name) == concepto_name.c_str());
+
+	std::optional<Concepto> concepto = m_conceptoLB.exists(whereClause, &Concepto::id_concepto, &Concepto::name);
+
+	if (!concepto)
+	{
+		concepto = m_conceptoLB.insert(concepto_name, cuenta->id_account);
+		m_conceptoLB.insert_into_listbox(*concepto);
+	}
+
 }

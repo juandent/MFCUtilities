@@ -31,9 +31,10 @@ class StatementLineGridController :     public IGridController
 {
 	friend class ConceptsAndAccounts;
 	std::vector<Translation> lines;
-	enum Columns { STMT_DATE=1, ORIGIN_ACCOUNT, LINE_DATE, CONCEPTO, AMOUNT_LOCAL, AMOUNT_DOLLARS, IS_ENABLED, CATEGORY_NAME, DESCRIPCION, OWNER_NAME, NUM_COLUMNS = OWNER_NAME};
-
 public:
+
+	enum Columns { STMT_DATE=1, OWN_ACCOUNT, LINE_DATE, CONCEPTO, AMOUNT_LOCAL, AMOUNT_DOLLARS, IS_ENABLED, CATEGORY_NAME, DESCRIPCION, OWNER_NAME, NUM_COLUMNS = OWNER_NAME};
+
 	StatementLineGridController(CJDGridCtrl& grid, int count_columns) : IGridController(grid, count_columns) {}
 
 	virtual void HandleGridClick(NM_GRIDVIEW* pItem) override;

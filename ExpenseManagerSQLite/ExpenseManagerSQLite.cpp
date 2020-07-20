@@ -67,7 +67,7 @@ CExpenseManagerSQLiteApp theApp;
 BOOL CExpenseManagerSQLiteApp::InitInstance()
 {
 	Storage::initialize();
-	Storage::fill_db_with_test_data();
+	//Storage::fill_db_with_test_data();
 	
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
