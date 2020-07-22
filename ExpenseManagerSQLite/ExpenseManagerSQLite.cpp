@@ -18,8 +18,12 @@
 #endif
 
 #include "AssociateConceptAccount.h"
+#include "BancoDlg.h"
 #include "ConceptsAndAccounts.h"
+#include "CuentaDlg.h"
 #include "Data_Tier.h"
+#include "PaisesDlg.h"
+#include "TransaccionDlg.h"
 
 // CExpenseManagerSQLiteApp
 
@@ -31,6 +35,10 @@ BEGIN_MESSAGE_MAP(CExpenseManagerSQLiteApp, CWinAppEx)
 	// Standard print setup command
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
 	ON_COMMAND(ID_Menu, &CExpenseManagerSQLiteApp::OnAssociateConceptsAccounts)
+	ON_COMMAND(ID_FILE_CUENTADIALOG, &CExpenseManagerSQLiteApp::OnFileCuentadialog)
+	ON_COMMAND(ID_FILE_TRANSACCIONDIALOG, &CExpenseManagerSQLiteApp::OnFileTransacciondialog)
+	ON_COMMAND(ID_FILE_BANCODIALOG, &CExpenseManagerSQLiteApp::OnFileBancodialog)
+	ON_COMMAND(ID_FILE_PAISDIALOG, &CExpenseManagerSQLiteApp::OnFilePaisdialog)
 END_MESSAGE_MAP()
 
 
@@ -67,7 +75,7 @@ CExpenseManagerSQLiteApp theApp;
 BOOL CExpenseManagerSQLiteApp::InitInstance()
 {
 	Storage::initialize();
-	//Storage::fill_db_with_test_data();
+	Storage::fill_db_with_test_data();
 	
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -267,4 +275,35 @@ void CExpenseManagerSQLiteApp::OnAssociateConceptsAccounts()
 	}
 	if (docTempl != NULL)
 		docTempl->OpenDocumentFile(NULL);
+}
+
+void CExpenseManagerSQLiteApp::OnFileCuentadialog()
+{
+	// TODO: Add your command handler code here
+	CuentaDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CExpenseManagerSQLiteApp::OnFileTransacciondialog()
+{
+	// TODO: Add your command handler code here
+	TransaccionDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CExpenseManagerSQLiteApp::OnFileBancodialog()
+{
+	// TODO: Add your command handler code here
+	BancoDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CExpenseManagerSQLiteApp::OnFilePaisdialog()
+{
+	// TODO: Add your command handler code here
+	PaisesDlg dlg;
+	dlg.DoModal();
 }

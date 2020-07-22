@@ -19,10 +19,8 @@
 
 ////////// persistence structs//
 struct Statement;
-struct StatementLine;
 struct Concepto;
 struct Account;
-// struct MyAccount;
 struct Pais;
 struct Banco;
 struct AccountOwner;
@@ -37,6 +35,7 @@ struct Statement
 	date::sys_days date;
 };
 
+#if 0
 struct StatementLine
 {
 	int id_statement_line;
@@ -46,6 +45,7 @@ struct StatementLine
 	std::optional<int> fkey_category;						// Categoria
 	int fkey_statement;
 };
+#endif
 
 struct Concepto
 {
@@ -104,9 +104,14 @@ struct Transaccion
 	double amount_dolares;
 	int fkey_account_own;				// Account
 	std::optional<int> fkey_account_other;			// Account optional
-	int fkey_statementline;					// StatementLine
+	
+	date::sys_days line_date;
+	std::string descripcion;
+	int fkey_category;
+	int fkey_concepto;
+	int fkey_statement;
 
-	std::shared_ptr<StatementLine> getStatementLine() const;
+
 	std::shared_ptr<Account> getAccountOrigin() const;
 	std::shared_ptr<Account> getAccountDestination() const;
 
@@ -130,6 +135,7 @@ private:
 
 };
 
+
 inline 	auto& Storage_Impl::get_storage()
 {
 	using namespace sqlite_orm;
@@ -148,39 +154,20 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("id_category", &Categoria::id_categoria, autoincrement(), primary_key()),
 				make_column("name", &Categoria::name, collate_nocase()),
 				make_column("is_expense_or_income", &Categoria::is_expense_or_income)),
-			make_table("StatementLine",
-				make_column("id_statement_line", &StatementLine::id_statement_line, autoincrement(), primary_key()),
-				make_column("date", &StatementLine::date),
-				make_column("description", &StatementLine::description, collate_nocase()),
-				make_column("fkey_concepto", &StatementLine::fkey_concepto),
-				make_column("fkey_categoria", &StatementLine::fkey_category),
-				make_column("fkey_statement", &StatementLine::fkey_statement),
-				foreign_key(&StatementLine::fkey_category).references(&Categoria::id_categoria),
-				foreign_key(&StatementLine::fkey_concepto).references(&Concepto::id_concepto),
-				foreign_key(&StatementLine::fkey_statement).references(&Statement::id_statement)),
-				make_table("Concepto",
-					make_column("id_concepto", &Concepto::id_concepto, autoincrement(), primary_key()),
-					make_column("name", &Concepto::name, collate_nocase()),
-					make_column("fkey_account", &Concepto::fkey_account),
-					foreign_key(&Concepto::fkey_account).references(&Account::id_account)),
-				make_table("Account",
-					make_column("id_account", &Account::id_account, autoincrement(), primary_key()),
-					make_column("number", &Account::number, collate_nocase()),
-					make_column("fkey_bank", &Account::fkey_bank),
-					make_column("fkey_account_owner", &Account::fkey_account_owner),
-					make_column("description", &Account::description, collate_nocase()),
-					make_column("is_tarjeta", &Account::is_tarjeta),
-					foreign_key(&Account::fkey_account_owner).references(&AccountOwner::id_owner),
-					foreign_key(&Account::fkey_bank).references(&Banco::id_bank)),
-			// make_table("MyAccount",
-			// 	make_column("id_account", &MyAccount::id_account, autoincrement(), primary_key()),
-			// 	make_column("number", &MyAccount::number, collate_nocase()),
-			// 	make_column("fkey_bank", &MyAccount::fkey_bank),
-			// 	make_column("fkey_account_owner", &MyAccount::fkey_account_owner),
-			// 	make_column("description", &MyAccount::description, collate_nocase()),
-			// 	make_column("is_tarjeta", &MyAccount::is_tarjeta),
-			// 	foreign_key(&MyAccount::fkey_account_owner).references(&AccountOwner::id_owner),
-			// 	foreign_key(&MyAccount::fkey_bank).references(&Banco::id_bank)),
+			make_table("Concepto",
+				make_column("id_concepto", &Concepto::id_concepto, autoincrement(), primary_key()),
+				make_column("name", &Concepto::name, collate_nocase()),
+				make_column("fkey_account", &Concepto::fkey_account),
+				foreign_key(&Concepto::fkey_account).references(&Account::id_account)),
+			make_table("Account",
+				make_column("id_account", &Account::id_account, autoincrement(), primary_key()),
+				make_column("number", &Account::number, collate_nocase()),
+				make_column("fkey_bank", &Account::fkey_bank),
+				make_column("fkey_account_owner", &Account::fkey_account_owner),
+				make_column("description", &Account::description, collate_nocase()),
+				make_column("is_tarjeta", &Account::is_tarjeta),
+				foreign_key(&Account::fkey_account_owner).references(&AccountOwner::id_owner),
+				foreign_key(&Account::fkey_bank).references(&Banco::id_bank)),
 			make_table("Banco",
 				make_column("id_bank", &Banco::id_bank, autoincrement(), primary_key()),
 				make_column("nombre", &Banco::nombre, collate_nocase()),
@@ -196,10 +183,16 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("dolares", &Transaccion::amount_dolares),
 				make_column("fkey_account_own", &Transaccion::fkey_account_own),
 				make_column("fkey_account_other", &Transaccion::fkey_account_other),
-				make_column("fkey_statementline", &Transaccion::fkey_statementline),
+				make_column("line_date", &Transaccion::line_date),
+				make_column( "descripcion", &Transaccion::descripcion),
+				make_column("fkey_category", &Transaccion::fkey_category),
+				make_column( "concepto", &Transaccion::fkey_concepto),
+				make_column( "fkey_statement", &Transaccion::fkey_statement),
 				foreign_key(&Transaccion::fkey_account_own).references(&Account::id_account),
 				foreign_key(&Transaccion::fkey_account_other).references(&Account::id_account),
-				foreign_key(&Transaccion::fkey_statementline).references(&StatementLine::id_statement_line)),
+				foreign_key(&Transaccion::fkey_category).references(&Categoria::id_categoria),
+				foreign_key(&Transaccion::fkey_concepto).references(&Concepto::id_concepto),
+				foreign_key(&Transaccion::fkey_statement).references(&Statement::id_statement)),
 			make_table("Pais",
 				make_column("id_pais", &Pais::id_pais, autoincrement(), primary_key()),
 				make_column("name", &Pais::name, collate_nocase()))

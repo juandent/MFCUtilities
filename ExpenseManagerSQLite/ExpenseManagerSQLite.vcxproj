@@ -208,9 +208,11 @@
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.h" />
     <ClInclude Include="AssociateConceptAccount.h" />
+    <ClInclude Include="BancoDlg.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="ConceptsAndAccounts.h" />
+    <ClInclude Include="CuentaDlg.h" />
     <ClInclude Include="Data_Tier.h" />
     <ClInclude Include="ExpenseManagerSQLite.h" />
     <ClInclude Include="ExpenseManagerSQLiteDoc.h" />
@@ -221,6 +223,7 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Nullable.h" />
     <ClInclude Include="OutputWnd.h" />
+    <ClInclude Include="PaisesDlg.h" />
     <ClInclude Include="StatementLineAdapter.h" />
     <ClInclude Include="StatementLineGridController.h" />
     <ClInclude Include="stdafx.h" />
@@ -228,6 +231,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="TablePool.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TransaccionDlg.h" />
     <ClInclude Include="ViewTree.h" />
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +246,11 @@
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.cpp" />
     <ClCompile Include="AssociateConceptAccount.cpp" />
+    <ClCompile Include="BancoDlg.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="ConceptsAndAccounts.cpp" />
+    <ClCompile Include="CuentaDlg.cpp" />
     <ClCompile Include="Data.Factories.h" />
     <ClCompile Include="DataTier.cpp" />
     <ClCompile Include="ExpenseManagerSQLite.cpp" />
@@ -254,6 +260,7 @@
     <ClCompile Include="ListboxContents.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
+    <ClCompile Include="PaisesDlg.cpp" />
     <ClCompile Include="StatementLineAdapter.cpp" />
     <ClCompile Include="StatementLineGridController.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -266,6 +273,7 @@
     </ClCompile>
     <ClCompile Include="PropertiesWnd.cpp" />
     <ClCompile Include="TablePool.cpp" />
+    <ClCompile Include="TransaccionDlg.cpp" />
     <ClCompile Include="ViewTree.cpp" />
   </ItemGroup>
   <ItemGroup>

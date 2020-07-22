@@ -29,7 +29,6 @@ void Storage::initialize()
 /// Account
 /// Concepto
 /// Statement
-/// StatementLine
 /// Transaccion
 /// 
 /// 
@@ -46,12 +45,10 @@ void Storage::fill_db_with_test_data()
 
 	// order is vital!
 	storage.remove_all<Transaccion>();
-	storage.remove_all<StatementLine>();
 	storage.remove_all<Statement>();
 	storage.remove_all<Categoria>();
 	storage.remove_all<Concepto>();
 	storage.remove_all<Account>();
-	//storage.remove_all<MyAccount>();
 	storage.remove_all<AccountOwner>();
 	storage.remove_all<Banco>();
 	storage.remove_all<Pais>();
@@ -105,15 +102,7 @@ void Storage::fill_db_with_test_data()
 	Statement statement{ -1, ttod };
 	statement.id_statement = storage.insert(statement);
 
-	StatementLine line{ -1, tod, "sss", con.id_concepto,cat.id_categoria, statement.id_statement };
-	line.id_statement_line = storage.insert(line);
-	
-
-	//auto ac = make_unique<int>(actother.id_account);
-	
-	//auto acnul = make_shared<int>(nullptr);
-	
-	Transaccion trans{ -1, 1200, 50, act.id_account, actother.id_account, line.id_statement_line };
+	Transaccion trans{-1, 1200, 50, act.id_account, actother.id_account,tod, "una transaccion", cat.id_categoria, con.id_concepto, statement.id_statement  };
 	trans.id_transaccion = storage.insert(trans);
 
 	if(trans.fkey_account_other)
@@ -122,11 +111,8 @@ void Storage::fill_db_with_test_data()
 		int i = 0;
 	}
 
-	Transaccion trans2{ -1, 1500, 0, act.id_account, nullopt, line.id_statement_line };
+	Transaccion trans2{ -1, 1500, 0, act.id_account, nullopt, tod, "una transaccion", cat.id_categoria, con.id_concepto, statement.id_statement };
 	trans2.id_transaccion = storage.insert(trans2);
-
-//	StatementLine line{ -1, ttod, "Gas", -1, 20000, 10, -1 };
-//	storage.insert(line);
 
 
 	//  If you want to know the total amount of salary on each customer, then GROUP BY query would be as follows:

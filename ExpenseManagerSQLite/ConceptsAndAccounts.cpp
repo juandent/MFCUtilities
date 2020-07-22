@@ -105,6 +105,8 @@ BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
 	ON_BN_CLICKED(IDC_B_DESELECT_BANCOS, &ConceptsAndAccounts::OnBnClickedBDeselectBancos)
 	ON_BN_CLICKED(IDC_B_DESELECT_PAIS, &ConceptsAndAccounts::OnBnClickedBDeselectPais)
 	ON_BN_CLICKED(IDC_B_CONCEPTO, &ConceptsAndAccounts::OnBnClickedBConcepto)
+	ON_LBN_SELCHANGE(IDC_L_CONCEPTOS, &ConceptsAndAccounts::OnLbnSelchangeLConceptos)
+	ON_BN_CLICKED(IDC_B_DESELECT_CONCEPTOS, &ConceptsAndAccounts::OnBnClickedBDeselectConceptos)
 END_MESSAGE_MAP()
 
 
@@ -387,14 +389,17 @@ void ConceptsAndAccounts::OnLbnSelchangeLDuenos()
 
 }
 
-
-namespace
+void ConceptsAndAccounts::OnLbnSelchangeLConceptos()
 {
-	bool isNegative(const CString& str)
+	// TODO: Add your control notification handler code here
+	auto concepto = m_conceptoLB.current();
+	if( concepto)
 	{
-		return str.Find('-') != -1;
+		std::optional<Account> cuenta = m_accountLB.select(concepto->fkey_account);
 	}
 }
+
+
 
 void ConceptsAndAccounts::OnBnClickedBReadStatementline()
 {
@@ -460,6 +465,13 @@ void ConceptsAndAccounts::OnBnClickedBDeselectPais()
 }
 
 
+void ConceptsAndAccounts::OnBnClickedBDeselectConceptos()
+{
+	// TODO: Add your control notification handler code here
+	m_conceptos.SetCurSel(-1);
+}
+
+
 void ConceptsAndAccounts::OnBnClickedBConcepto()
 {
 	// TODO: Add your control notification handler code here
@@ -493,3 +505,5 @@ void ConceptsAndAccounts::OnBnClickedBConcepto()
 	}
 
 }
+
+

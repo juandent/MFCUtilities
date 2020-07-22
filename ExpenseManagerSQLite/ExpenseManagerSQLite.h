@@ -36,6 +36,10 @@ public:
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnAssociateConceptsAccounts();
+	afx_msg void OnFileCuentadialog();
+	afx_msg void OnFileTransacciondialog();
+	afx_msg void OnFileBancodialog();
+	afx_msg void OnFilePaisdialog();
 };
 
 extern CExpenseManagerSQLiteApp theApp;

@@ -135,6 +135,18 @@
     <ClInclude Include="TablePool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BancoDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CuentaDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TransaccionDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PaisesDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpenseManagerSQLite.cpp">
@@ -216,6 +228,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TablePool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BancoDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CuentaDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TransaccionDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PaisesDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

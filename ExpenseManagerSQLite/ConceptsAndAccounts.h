@@ -98,6 +98,8 @@ public:
 	afx_msg void OnBnClickedBDeselectBancos();
 	afx_msg void OnBnClickedBDeselectPais();
 	afx_msg void OnBnClickedBConcepto();
+	afx_msg void OnLbnSelchangeLConceptos();
+	afx_msg void OnBnClickedBDeselectConceptos();
 };
 
 

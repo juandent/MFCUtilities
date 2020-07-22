@@ -86,6 +86,10 @@
 #define IDS_EXPLORER                    305
 #define IDS_EDIT_MENU                   306
 #define IDD_ConceptsAndAccounts         310
+#define IDD_BancoDlg                    311
+#define IDD_CuentaDlg                   312
+#define IDD_TransaccionDlg              313
+#define IDD_PaisesDlg                   314
 #define IDC_L_CONCEPTOS                 1000
 #define IDC_GRID                        1001
 #define IDC_B_CONNECT                   1002
@@ -109,32 +113,61 @@
 #define IDC_E_UBICACION                 1022
 #define IDC_E_DESCRIPCION               1023
 #define IDC_L_PAISES                    1024
+#define IDC_E_NOMBRE_BANCO              1024
 #define IDC_L_DUENOS                    1025
+#define IDC_C_PAIS                      1025
 #define IDC_B_DISCONNECT7               1026
+#define IDC_B_ADD_PAIS                  1026
 #define IDC_L_BANCOS                    1027
 #define IDC_B_DISCONNECT8               1028
+#define IDC_E_ID_CUENTA                 1028
 #define IDC_E_CUENTA_PROPIA             1029
+#define IDC_E_DESCRIPTION               1029
 #define IDC_E_CUENTA_OTRA               1030
+#define IDC_E_NUMERO                    1030
 #define IDC_E_CONCEPTO                  1031
+#define IDC_C_DUENO                     1031
 #define IDC_E_LINE_DATE                 1032
+#define IDC_B_ADD_DUENOS                1032
 #define IDC_E_STMT_DATE                 1033
+#define IDC_R_TARJETA                   1033
 #define IDC_E_AMOUNT_LOCAL              1034
+#define IDC_R_CUENTA_BANCARIA           1034
 #define IDC_E_AMOUNT_DOLARES            1035
+#define IDC_C_BANCOS                    1035
 #define IDC_B_DESELECT_DUENOS           1036
+#define IDC_B_ADD_BANCOS                1036
 #define IDC_B_DESELECT_ACCOUNTS         1037
 #define IDC_B_DESELECT_BANCOS           1038
+#define IDC_C_ESTADO_CUENTA             1038
 #define IDC_B_DESELECT_PAIS             1039
-#define IDC_B_CUENTA_ADD2               1040
+#define IDC_B_ADD_STATEMENT             1039
 #define IDC_B_CONCEPTO                  1040
+#define IDC_C_CATEGORIAS                1040
+#define IDC_B_DESELECT_CONCEPTOS        1041
+#define IDC_E_TRANSACCION               1041
+#define IDC_DATE_TRANSACTION            1043
+#define IDC_C_CONCEPTO                  1045
+#define IDC_B_ADD_CONCEPT               1046
+#define IDC_C_OWN_ACCOUNT               1047
+#define IDC_C_OTHER_ACCOUNT             1048
+#define IDC_E_MONTO_COLONES             1049
+#define IDC_E_MONTO_DOLARES             1050
+#define IDC_E_ID_PAIS                   1050
+#define IDC_E_NOMBRE_PAIS               1051
 #define ID_Menu                         32771
+#define ID_FILE_CUENTADIALOG            32772
+#define ID_FILE_TRANSACCIONDIALOG       32773
+#define ID_FILE_BANCODIALOG             32774
+#define ID_FILE_PAISDIALOG              32775
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        311
-#define _APS_NEXT_COMMAND_VALUE         32772
-#define _APS_NEXT_CONTROL_VALUE         1024
-#define _APS_NEXT_SYMED_VALUE           311
+#define _APS_NEXT_RESOURCE_VALUE        315
+#define _APS_NEXT_COMMAND_VALUE         32776
+#define _APS_NEXT_CONTROL_VALUE         1053
+#define _APS_NEXT_SYMED_VALUE           315
 #endif
 #endif
