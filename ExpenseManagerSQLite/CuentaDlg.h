@@ -1,13 +1,17 @@
 #pragma once
 #include <afxwin.h>
 
+#include "BoxContents.h"
+
 
 // CuentaDlg dialog
 
 class CuentaDlg : public CDialog
 {
 	DECLARE_DYNAMIC(CuentaDlg)
-
+	BoxContents<Banco, &Banco::id_bank, CComboBox> m_bancosCB;
+	BoxContents<AccountOwner, &AccountOwner::id_owner, CComboBox>	m_ownerCB;
+	BoxContents<Account, &Account::id_account> m_cuentasLB;
 public:
 	CuentaDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CuentaDlg();
@@ -36,4 +40,10 @@ private:
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedBAddBancos();
+private:
+	CComboBox m_banco_combo;
+public:
+	afx_msg void OnBnClickedBAplicarCuenta();
+private:
+	CButton m_cuenta_bancaria;
 };

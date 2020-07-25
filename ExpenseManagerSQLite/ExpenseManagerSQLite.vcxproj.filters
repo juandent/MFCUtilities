@@ -126,9 +126,6 @@
     <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\Data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ListboxContents.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StatementLineAdapter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -145,6 +142,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PaisesDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DependentTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordLinks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxContents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DuenosDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConceptosDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StatementDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -221,9 +236,6 @@
     <ClCompile Include="StatementLineGridController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ListboxContents.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StatementLineAdapter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -240,6 +252,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PaisesDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DependentTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordLinks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxContents.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DuenosDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptosDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatementDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

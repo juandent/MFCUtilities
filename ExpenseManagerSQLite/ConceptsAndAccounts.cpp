@@ -9,7 +9,7 @@
 
 #include <afxext.h>
 
-#include "ListboxContents.h"
+#include "BoxContents.h"
 #include "StatementLineAdapter.h"
 
 
@@ -248,8 +248,9 @@ void ConceptsAndAccounts::OnBnClickedBBancoAdd()
 	{
 		// need to get current pais
 		std::optional<Pais> pais = m_paisLB.current();
-		if (!pais)
+		if (pais)
 		{
+			banco->fkey_pais = pais->id_pais;
 			banco = m_bancoLB.insert(name, ubicacion);
 			m_bancoLB.insert_into_listbox(*banco);
 		}

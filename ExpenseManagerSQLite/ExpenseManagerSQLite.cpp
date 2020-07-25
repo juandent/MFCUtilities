@@ -19,10 +19,13 @@
 
 #include "AssociateConceptAccount.h"
 #include "BancoDlg.h"
+#include "ConceptosDlg.h"
 #include "ConceptsAndAccounts.h"
 #include "CuentaDlg.h"
 #include "Data_Tier.h"
+#include "DuenosDlg.h"
 #include "PaisesDlg.h"
+#include "StatementDlg.h"
 #include "TransaccionDlg.h"
 
 // CExpenseManagerSQLiteApp
@@ -39,6 +42,9 @@ BEGIN_MESSAGE_MAP(CExpenseManagerSQLiteApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_TRANSACCIONDIALOG, &CExpenseManagerSQLiteApp::OnFileTransacciondialog)
 	ON_COMMAND(ID_FILE_BANCODIALOG, &CExpenseManagerSQLiteApp::OnFileBancodialog)
 	ON_COMMAND(ID_FILE_PAISDIALOG, &CExpenseManagerSQLiteApp::OnFilePaisdialog)
+	ON_COMMAND(ID_FILE_OWNER, &CExpenseManagerSQLiteApp::OnFileOwner)
+	ON_COMMAND(ID_FILE_CONCEPTOSDIALOG, &CExpenseManagerSQLiteApp::OnFileConceptosdialog)
+	ON_COMMAND(ID_FILE_STATEMENTDIALOG, &CExpenseManagerSQLiteApp::OnFileStatementdialog)
 END_MESSAGE_MAP()
 
 
@@ -75,7 +81,7 @@ CExpenseManagerSQLiteApp theApp;
 BOOL CExpenseManagerSQLiteApp::InitInstance()
 {
 	Storage::initialize();
-	Storage::fill_db_with_test_data();
+	//Storage::fill_db_with_test_data();
 	
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -305,5 +311,31 @@ void CExpenseManagerSQLiteApp::OnFilePaisdialog()
 {
 	// TODO: Add your command handler code here
 	PaisesDlg dlg;
+	dlg.DoModal();
+	auto pais = dlg.m_pais;
+	
+}
+
+
+void CExpenseManagerSQLiteApp::OnFileOwner()
+{
+	// TODO: Add your command handler code here
+	DuenosDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CExpenseManagerSQLiteApp::OnFileConceptosdialog()
+{
+	// TODO: Add your command handler code here
+	ConceptosDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CExpenseManagerSQLiteApp::OnFileStatementdialog()
+{
+	// TODO: Add your command handler code here
+	StatementDlg dlg;
 	dlg.DoModal();
 }

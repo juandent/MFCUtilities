@@ -1,7 +1,7 @@
 #pragma once
 #include "CSVFile.h"
 #include "Data_Tier.h"
-#include "ListboxContents.h"
+#include "boxContents.h"
 #include "StatementLineGridController.h"
 
 
@@ -11,11 +11,11 @@ class ConceptsAndAccounts : public CFormView
 {
 	DECLARE_DYNCREATE(ConceptsAndAccounts)
 
-	ListboxContents<Pais, &Pais::id_pais> m_paisLB;
-	ListboxContents<AccountOwner, &AccountOwner::id_owner> m_duenoLB;
-	ListboxContents<Banco, &Banco::id_bank> m_bancoLB;
-	ListboxContents<Account, &Account::id_account> m_accountLB;
-	ListboxContents<Concepto, &Concepto::id_concepto> m_conceptoLB;
+	BoxContents<Pais, &Pais::id_pais> m_paisLB;
+	BoxContents<AccountOwner, &AccountOwner::id_owner> m_duenoLB;
+	BoxContents<Banco, &Banco::id_bank> m_bancoLB;
+	BoxContents<Account, &Account::id_account> m_accountLB;
+	BoxContents<Concepto, &Concepto::id_concepto> m_conceptoLB;
 protected:
 	ConceptsAndAccounts();           // protected constructor used by dynamic creation
 	virtual ~ConceptsAndAccounts();

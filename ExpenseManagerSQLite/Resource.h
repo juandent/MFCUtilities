@@ -2,6 +2,7 @@
 // Microsoft Visual C++ generated include file.
 // Used by ExpenseManagerSQLite.rc
 //
+#define ID_B_APLICAR_STATEMENT          3
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_POPUP_EDIT                  119
@@ -90,6 +91,9 @@
 #define IDD_CuentaDlg                   312
 #define IDD_TransaccionDlg              313
 #define IDD_PaisesDlg                   314
+#define IDD_DuenosDlg                   315
+#define IDD_ConceptosDlg                316
+#define IDD_StatementDlg                317
 #define IDC_L_CONCEPTOS                 1000
 #define IDC_GRID                        1001
 #define IDC_B_CONNECT                   1002
@@ -155,19 +159,39 @@
 #define IDC_E_MONTO_DOLARES             1050
 #define IDC_E_ID_PAIS                   1050
 #define IDC_E_NOMBRE_PAIS               1051
+#define IDC_B_APLICAR_PAISES            1053
+#define ID_B_BORRAR                     1054
+#define IDC_B_APLICAR_BANCO             1055
+#define IDC_B_APLICAR_CUENTA            1056
+#define ID_B_BORRAR_CUENTA              1057
+#define IDC_B_APPLY_OWNER               1058
+#define IDC_E_NOMBRE                    1059
+#define ID_B_BORRAR_OWNER               1061
+#define IDC_C_ACCOUNT                   1062
+#define IDC_E_NOMBRE_CONCEPTO           1063
+#define IDC_B_ADD_ACCOUNT               1064
+#define IDC_B_APLICAR_CONCEPTO          1065
+#define IDC_L_TRANSACTION               1066
+#define IDC_B_APLICAR_TRANSACTIONS      1067
+#define IDC_DATETIMEPICKER_STATEMENT    1071
+#define IDC_L_ESTADOS_DE_CUENTA         1072
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
 #define ID_FILE_BANCODIALOG             32774
 #define ID_FILE_PAISDIALOG              32775
+#define ID_FILE_DUE32776                32776
+#define ID_FILE_OWNER                   32777
+#define ID_FILE_CONCEPTOSDIALOG         32778
+#define ID_FILE_STATEMENTDIALOG         32779
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        315
-#define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         1053
-#define _APS_NEXT_SYMED_VALUE           315
+#define _APS_NEXT_RESOURCE_VALUE        318
+#define _APS_NEXT_COMMAND_VALUE         32780
+#define _APS_NEXT_CONTROL_VALUE         1073
+#define _APS_NEXT_SYMED_VALUE           318
 #endif
 #endif

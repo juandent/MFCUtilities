@@ -40,6 +40,9 @@ public:
 	afx_msg void OnFileTransacciondialog();
 	afx_msg void OnFileBancodialog();
 	afx_msg void OnFilePaisdialog();
+	afx_msg void OnFileOwner();
+	afx_msg void OnFileConceptosdialog();
+	afx_msg void OnFileStatementdialog();
 };
 
 extern CExpenseManagerSQLiteApp theApp;

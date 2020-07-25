@@ -11,17 +11,17 @@ using Displayer = CString(*)(Table&);
 
 
 
-template<typename Table, typename int Table::*keyCol> 
-class ListboxContents
+template<typename Table, typename int Table::*keyCol, typename BoxType = CListBox> 
+class BoxContents
 {
 private:
 	Storage::Storage_t& storage;
-	CListBox& m_listbox;
+	BoxType& m_box;
 	CString  (*displayer)(Table& record);
 	
 public:
 
-	ListboxContents(CListBox& listbox, Displayer<Table>  f) : storage{ Storage::getStorage() }, m_listbox(listbox), displayer(f) {}
+	BoxContents(BoxType& listbox, Displayer<Table>  f) : storage{ Storage::getStorage() }, m_box(listbox), displayer(f) {}
 	
 	template<typename ...Cols>
 	Table insert(Cols&&... cols)
@@ -48,10 +48,10 @@ public:
 	std::optional<Table> current()
 	{
 		std::optional<Table> record;
-		int cur_sel = m_listbox.GetCurSel();
+		int cur_sel = m_box.GetCurSel();
 		if (cur_sel != npos)
 		{
-			auto id = m_listbox.GetItemData(cur_sel);
+			auto id = m_box.GetItemData(cur_sel);
 			record = storage.get<Table>(id);
 		}
 		return record;
@@ -63,9 +63,9 @@ public:
 		int index = find_in_listbox(pk);
 		if( index != npos )
 		{
-			m_listbox.SetCurSel(index);
+			m_box.SetCurSel(index);
 			record = storage.get<Table>(pk);
-			m_listbox.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_listbox.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_listbox.m_hWnd);
+			m_box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_box.m_hWnd);
 		}
 		return record;
 	}
@@ -86,25 +86,25 @@ public:
 	{
 		assert( get_pk(record) != npos);
 		auto displayStr = displayer(record);
-		auto index = m_listbox.AddString(displayStr);
-		m_listbox.SetItemData(index, get_pk(record));
-		m_listbox.SetCurSel(index);
+		auto index = m_box.AddString(displayStr);
+		m_box.SetItemData(index, get_pk(record));
+		m_box.SetCurSel(index);
 		return index;
 	}
 
 	void delete_current_sel()
 	{
-		int cur_sel = m_listbox.GetCurSel();
+		int cur_sel = m_box.GetCurSel();
 		if (cur_sel != npos )
 		{
-			auto id = m_listbox.GetItemData(cur_sel);
-			m_listbox.DeleteString(cur_sel);
+			auto id = m_box.GetItemData(cur_sel);
+			m_box.DeleteString(cur_sel);
 			Table& record = storage.get<Table>(id);
 			remove(record);
 		}
 	}
 
-	void delete_from_listbox(Table& record)
+	void delete_from_box(Table& record)
 	{
 		
 	}
@@ -116,23 +116,38 @@ public:
 	}
 	void loadLB()
 	{
+		m_box.ResetContent();
 		auto vec = storage.get_all<Table>();
 
 		for (auto& record : vec)
 		{
 			auto displayStr = displayer(record);
-			int index = m_listbox.AddString(displayStr);
-			m_listbox.SetItemData(index, record.*keyCol);
+			int index = m_box.AddString(displayStr);
+			m_box.SetItemData(index, record.*keyCol);
 		}
 	}
+	template<typename whereClause>
+	void loadLB(whereClause clause)
+	{
+		m_box.ResetContent();
+		auto vec = storage.get_all<Table>(where(clause));
+
+		for (auto& record : vec)
+		{
+			auto displayStr = displayer(record);
+			int index = m_box.AddString(displayStr);
+			m_box.SetItemData(index, record.*keyCol);
+		}
+	}
+	
 	constexpr static const int npos = -1;
 private:
 	int find_in_listbox(const int pk)
 	{
-		int index = m_listbox.GetCount();
+		int index = m_box.GetCount();
 		while ( index >= 0)
 		{
-			auto id = m_listbox.GetItemData(index);
+			auto id = m_box.GetItemData(index);
 			if (pk == id)
 			{
 				return index;

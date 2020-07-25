@@ -5,6 +5,8 @@
 #include "ExpenseManagerSQLite.h"
 #include "BancoDlg.h"
 #include "afxdialogex.h"
+#include "Data_Tier.h"
+#include "PaisesDlg.h"
 
 
 // BancoDlg dialog
@@ -12,7 +14,15 @@
 IMPLEMENT_DYNAMIC(BancoDlg, CDialog)
 
 BancoDlg::BancoDlg(CWnd* pParent /*=nullptr*/)
-	: CDialog(IDD_BancoDlg, pParent)
+	: CDialog(IDD_BancoDlg, pParent),
+m_bancosLB{m_list_bancos, []( Banco& banco)
+{
+	return JD::to_cstring(banco.id_bank) + L" - " + JD::to_cstring(banco.nombre) + L" - " + JD::to_cstring(banco.ubicacion);
+}},
+m_paisCB{ m_paises, [](Pais& pais)
+{
+	return JD::to_cstring(pais.name);
+}}
 {
 
 }
@@ -27,10 +37,13 @@ void BancoDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_NOMBRE_BANCO, m_nombre_banco);
 	DDX_Control(pDX, IDC_L_BANCOS, m_list_bancos);
 	DDX_Control(pDX, IDC_C_PAIS, m_paises);
+	DDX_Control(pDX, IDC_E_UBICACION, m_ubicacion);
 }
 
 
 BEGIN_MESSAGE_MAP(BancoDlg, CDialog)
+	ON_BN_CLICKED(IDC_B_ADD_PAIS, &BancoDlg::OnBnClickedBAddPais)
+	ON_BN_CLICKED(IDC_B_APLICAR_BANCO, &BancoDlg::OnBnClickedBAplicarBanco)
 END_MESSAGE_MAP()
 
 
@@ -42,7 +55,56 @@ BOOL BancoDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  Add extra initialization here
+	m_paisCB.loadLB();
+	m_bancosLB.loadLB();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+
+void BancoDlg::OnBnClickedBAddPais()
+{
+	// TODO: Add your control notification handler code here
+	PaisesDlg dlg;
+	dlg.DoModal();
+	m_paisCB.loadLB();
+}
+
+
+void BancoDlg::OnBnClickedBAplicarBanco()
+{
+	// TODO: Add your control notification handler code here
+	CString rBanco, rUbicacion;
+	m_nombre_banco.GetWindowTextW(rBanco);
+	m_ubicacion.GetWindowTextW(rUbicacion);
+
+	if (rBanco.IsEmpty() || rUbicacion.IsEmpty())
+	{
+		MessageBoxW(L"Falta el nombre del banco o su ubicacion");
+		return;
+	};
+
+
+	auto name = JD::from_cstring(rBanco);
+	auto ubicacion = JD::from_cstring(rUbicacion);
+
+	auto whereClause = (c(&Banco::nombre) == name.c_str()) && (c(&Banco::ubicacion) == ubicacion.c_str());
+
+	std::optional<Banco> banco = m_bancosLB.exists(whereClause, &Banco::id_bank, &Banco::nombre);
+
+	if (!banco)
+	{
+		// need to get current pais
+		std::optional<Pais> pais = m_paisCB.current();
+		if (pais)
+		{
+			banco = m_bancosLB.insert(name, ubicacion, pais->id_pais);
+			m_bancosLB.insert_into_listbox(*banco);
+		}
+		else
+		{
+			MessageBoxW(L"Falta escoger el pais");
+		}
+	}
 }
