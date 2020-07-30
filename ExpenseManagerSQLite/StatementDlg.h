@@ -28,4 +28,5 @@ private:
 	CDateTimeCtrl m_transaction_date_picker;
 public:
 	afx_msg void OnBnClickedBAplicarStatement();
+	afx_msg void OnBnClickedBorrarStatement();
 };

@@ -5,6 +5,7 @@
 #include "ExpenseManagerSQLite.h"
 #include "ConceptosDlg.h"
 #include "afxdialogex.h"
+#include "CuentaDlg.h"
 #include "RecordLinks.h"
 
 
@@ -40,6 +41,7 @@ void ConceptosDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(ConceptosDlg, CDialog)
 	ON_BN_CLICKED(ID_B_BORRAR, &ConceptosDlg::OnBnClickedBBorrar)
+	ON_BN_CLICKED(IDC_B_ADD_ACCOUNT, &ConceptosDlg::OnBnClickedBAddAccount)
 END_MESSAGE_MAP()
 
 
@@ -76,4 +78,13 @@ void ConceptosDlg::OnBnClickedBBorrar()
 		m_conceptosLB.delete_current_sel();
 	}
 
+}
+
+
+void ConceptosDlg::OnBnClickedBAddAccount()
+{
+	// TODO: Add your control notification handler code here
+	CuentaDlg dlg;
+	dlg.DoModal();
+	m_accountsCB.loadLB();
 }

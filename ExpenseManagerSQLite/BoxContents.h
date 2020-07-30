@@ -56,7 +56,14 @@ public:
 		}
 		return record;
 	}
-
+	int GetCurSel() const
+	{
+		return m_box.GetCurSel();
+	}
+	void SetCurSel(int index) const
+	{
+		m_box.SetCurSel(index);
+	}
 	std::optional<Table> select(int pk)
 	{
 		std::optional<Table> record;

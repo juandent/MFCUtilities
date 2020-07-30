@@ -37,3 +37,29 @@ bool RecordLinks::has_links(const Concepto& concepto)
 	return count > 0;
 
 }
+
+bool RecordLinks::has_links(const Statement& statement)
+{
+	using namespace sqlite_orm;
+	auto& storage = Storage::getStorage();
+
+	auto count = storage.count<Transaccion>(where(is_equal(&Transaccion::fkey_statement, statement.id_statement)));
+
+	return count > 0;
+
+}
+
+bool RecordLinks::has_links(const Categoria& categoria)
+{
+	using namespace sqlite_orm;
+	auto& storage = Storage::getStorage();
+
+	auto count = storage.count<Transaccion>(where(is_equal(&Transaccion::fkey_category, categoria.id_categoria)));
+
+	return count > 0;
+}
+
+bool RecordLinks::has_links(const Transaccion& trans)
+{
+	return false;
+}

@@ -209,6 +209,7 @@
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.h" />
     <ClInclude Include="AssociateConceptAccount.h" />
     <ClInclude Include="BancoDlg.h" />
+    <ClInclude Include="CategoryDlg.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="ConceptosDlg.h" />
@@ -250,8 +251,10 @@
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.DataTier.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.cpp" />
+    <ClCompile Include="..\Utilities.cpp" />
     <ClCompile Include="AssociateConceptAccount.cpp" />
     <ClCompile Include="BancoDlg.cpp" />
+    <ClCompile Include="CategoryDlg.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="ConceptosDlg.cpp" />

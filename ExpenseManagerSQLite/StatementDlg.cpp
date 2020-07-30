@@ -5,6 +5,7 @@
 #include "ExpenseManagerSQLite.h"
 #include "StatementDlg.h"
 #include "afxdialogex.h"
+#include "RecordLinks.h"
 
 
 // StatementDlg dialog
@@ -35,6 +36,7 @@ void StatementDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(StatementDlg, CDialog)
 	ON_BN_CLICKED(ID_B_APLICAR_STATEMENT, &StatementDlg::OnBnClickedBAplicarStatement)
+	ON_BN_CLICKED(ID_BORRAR_STATEMENT, &StatementDlg::OnBnClickedBorrarStatement)
 END_MESSAGE_MAP()
 
 
@@ -77,4 +79,21 @@ void StatementDlg::OnBnClickedBAplicarStatement()
 		m_statementLB.insert_into_listbox(*statement);
 	}
 
+}
+
+
+void StatementDlg::OnBnClickedBorrarStatement()
+{
+	// TODO: Add your control notification handler code here
+	auto statement = m_statementLB.current();
+	if (!statement)
+	{
+		MessageBoxW(L"Falta escoger estado de cuenta");
+		return;
+	}
+	bool has_links = RecordLinks::has_links(*statement);
+	if (!has_links)
+	{
+		m_statementLB.delete_current_sel();
+	}
 }

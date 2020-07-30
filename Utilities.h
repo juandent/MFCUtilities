@@ -302,6 +302,25 @@ namespace JD {
 		return Money{ val };
 	}
 
+	inline long double strip_to_long_double(std::string moneyAsString)
+	{
+		std::string stripped;
+		for (auto& c : moneyAsString)
+		{
+			if (c != '$' && c != '¢' && c != ',')
+			{
+				stripped += c;
+			}
+		}
+		return stold(stripped);
+	}
+
+	inline Money strip_to_money(std::string moneyAsString)
+	{
+		auto val = strip_to_long_double(moneyAsString);
+		return Money{ val };
+	}
+
 	inline std::string convert(const CString& str)
 	{
 		std::wstring s{ str };

@@ -6,6 +6,8 @@
 #include "TransaccionDlg.h"
 #include "afxdialogex.h"
 #include "ConceptosDlg.h"
+#include "StatementDlg.h"
+#include "RecordLinks.h"
 
 
 // TransaccionDlg dialog
@@ -73,6 +75,8 @@ BEGIN_MESSAGE_MAP(TransaccionDlg, CDialog)
 	ON_CBN_SELCHANGE(IDC_C_ESTADO_CUENTA, &TransaccionDlg::OnCbnSelchangeCEstadoCuenta)
 	ON_CBN_SELCHANGE(IDC_C_OTHER_ACCOUNT, &TransaccionDlg::OnCbnSelchangeCOtherAccount)
 	ON_BN_CLICKED(IDC_B_APLICAR_TRANSACTIONS, &TransaccionDlg::OnBnClickedBAplicarTransactions)
+	ON_LBN_SELCHANGE(IDC_L_TRANSACTION, &TransaccionDlg::OnLbnSelchangeLTransaction)
+	ON_BN_CLICKED(ID_B_BORRAR, &TransaccionDlg::OnBnClickedBBorrar)
 END_MESSAGE_MAP()
 
 
@@ -102,7 +106,9 @@ BOOL TransaccionDlg::OnInitDialog()
 void TransaccionDlg::OnBnClickedBAddStatement()
 {
 	// TODO: Add your control notification handler code here
-	
+	StatementDlg dlg;
+	dlg.DoModal();
+	m_statementCB.loadLB();
 }
 
 
@@ -148,6 +154,24 @@ void TransaccionDlg::OnCbnSelchangeCOtherAccount()
 	// TODO: Add your control notification handler code here
 }
 
+#if 0
+namespace JD
+{
+	Money strip_to_money(std::string moneyAsString)
+	{
+		std::string stripped;
+		for( auto& c : moneyAsString)
+		{
+			if( c != '$' &&  c != '¢' && c != ',')
+			{
+				stripped += c;
+			}
+		}
+		return JD::to_money(stripped);
+		
+	}
+}
+#endif
 
 void TransaccionDlg::OnBnClickedBAplicarTransactions()
 {
@@ -220,9 +244,15 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 	
 	auto str_colones = JD::from_cstring(rColones);
 	auto str_dolares = JD::from_cstring(rDolares);
-	auto colones = std::stod(str_colones);
-	auto dolares = std::stod(str_dolares);
-	
+#if 0
+	auto dolares_money = JD::strip_to_money(str_dolares);
+	auto dolares = dolares_money.getAsLongDouble();
+	auto colones_money = JD::strip_to_money(str_colones);
+	auto colones = colones_money.getAsLongDouble();
+#else
+	auto dolares = JD::strip_to_long_double(str_dolares);
+	auto colones = JD::strip_to_long_double(str_colones);
+#endif
 	
 	auto whereClause = (c(&Transaccion::fkey_concepto) == concepto->id_concepto) && (c(&Transaccion::line_date) == line_date) && (c(&Transaccion::fkey_statement) == statement->id_statement)
 					&& (c(&Transaccion::amount_dolares) == dolares) && (c(&Transaccion::amount_colones) == colones) && (c(&Transaccion::fkey_account_other) == other_account->id_account)
@@ -241,3 +271,58 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 	}
 }
 
+
+
+void TransaccionDlg::OnLbnSelchangeLTransaction()
+{
+	// TODO: Add your control notification handler code here
+	std::optional<Transaccion> trans = m_transaccionLB.current();
+	if( ! trans)
+	{
+		MessageBoxW(L"Falta escoger transacción");
+		return;
+	}
+	int cur_sel = m_transaccionLB.GetCurSel();
+	using namespace date;
+	
+	year_month_day ymd = trans->line_date;
+	auto day_val = static_cast<unsigned>(ymd.day());
+	auto month_val = static_cast<unsigned>(ymd.month());
+	auto year_val = static_cast<int>(ymd.year());
+
+	COleDateTime rOleDateTime;
+	rOleDateTime.SetDate(year_val, month_val, day_val);
+	m_date_transaccion.SetCurSel(rOleDateTime);
+
+	m_statementCB.select(trans->fkey_statement);
+	m_other_accountCB.select(*trans->fkey_account_other);
+	m_conceptoCB.select(trans->fkey_concepto);
+	m_own_accountCB.select(trans->fkey_account_own);
+	m_categoriaCB.select(trans->fkey_category);
+	Colones colones = trans->amount_colones;
+	m_colones.SetWindowTextW(JD::to_cstring(colones));
+	Dolares dolares = trans->amount_dolares;
+	m_dolares.SetWindowTextW(JD::to_cstring(dolares));
+	m_descripcion.SetWindowTextW(JD::to_cstring(trans->descripcion));
+	m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
+
+	m_transaccionLB.SetCurSel(cur_sel);
+}
+
+
+void TransaccionDlg::OnBnClickedBBorrar()
+{
+	// TODO: Add your control notification handler code here
+	auto trans = m_transaccionLB.current();
+	if (!trans)
+	{
+		MessageBoxW(L"Falta escoger transaaccion");
+		return;
+	}
+	bool has_links = RecordLinks::has_links(*trans);
+	// ask to be sure!
+	if (!has_links)
+	{
+		m_transaccionLB.delete_current_sel();
+	}
+}

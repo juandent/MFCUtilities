@@ -53,4 +53,7 @@ private:
 	CEdit m_dolares;
 	CEdit m_descripcion;
 	CEdit m_id;
+public:
+	afx_msg void OnLbnSelchangeLTransaction();
+	afx_msg void OnBnClickedBBorrar();
 };

@@ -19,6 +19,7 @@
 
 #include "AssociateConceptAccount.h"
 #include "BancoDlg.h"
+#include "CategoryDlg.h"
 #include "ConceptosDlg.h"
 #include "ConceptsAndAccounts.h"
 #include "CuentaDlg.h"
@@ -45,6 +46,7 @@ BEGIN_MESSAGE_MAP(CExpenseManagerSQLiteApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_OWNER, &CExpenseManagerSQLiteApp::OnFileOwner)
 	ON_COMMAND(ID_FILE_CONCEPTOSDIALOG, &CExpenseManagerSQLiteApp::OnFileConceptosdialog)
 	ON_COMMAND(ID_FILE_STATEMENTDIALOG, &CExpenseManagerSQLiteApp::OnFileStatementdialog)
+	ON_COMMAND(ID_FILE_CATEGORYDIALOG, &CExpenseManagerSQLiteApp::OnFileCategorydialog)
 END_MESSAGE_MAP()
 
 
@@ -337,5 +339,16 @@ void CExpenseManagerSQLiteApp::OnFileStatementdialog()
 {
 	// TODO: Add your command handler code here
 	StatementDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CExpenseManagerSQLiteApp::OnFileCategorydialog()
+{
+	// TODO: Add your command handler code here
+	// auto dlg = new CategoryDlg;
+	// auto ret = dlg->Create(IDD_CategoryDlg);
+	// dlg->ShowWindow(SW_SHOW);
+	CategoryDlg dlg;
 	dlg.DoModal();
 }

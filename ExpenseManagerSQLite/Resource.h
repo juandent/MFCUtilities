@@ -94,6 +94,7 @@
 #define IDD_DuenosDlg                   315
 #define IDD_ConceptosDlg                316
 #define IDD_StatementDlg                317
+#define IDD_CategoryDlg                 318
 #define IDC_L_CONCEPTOS                 1000
 #define IDC_GRID                        1001
 #define IDC_B_CONNECT                   1002
@@ -175,6 +176,11 @@
 #define IDC_B_APLICAR_TRANSACTIONS      1067
 #define IDC_DATETIMEPICKER_STATEMENT    1071
 #define IDC_L_ESTADOS_DE_CUENTA         1072
+#define ID_BORRAR_STATEMENT             1073
+#define IDC_E_CATEGORIA                 1074
+#define IDC_C_IS_REAL                   1075
+#define IDC_L_CATEGORIAS                1076
+#define IDC_B_APLICAR_CATEGORY          1077
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
@@ -184,14 +190,15 @@
 #define ID_FILE_OWNER                   32777
 #define ID_FILE_CONCEPTOSDIALOG         32778
 #define ID_FILE_STATEMENTDIALOG         32779
+#define ID_FILE_CATEGORYDIALOG          32780
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        318
-#define _APS_NEXT_COMMAND_VALUE         32780
-#define _APS_NEXT_CONTROL_VALUE         1073
-#define _APS_NEXT_SYMED_VALUE           318
+#define _APS_NEXT_RESOURCE_VALUE        319
+#define _APS_NEXT_COMMAND_VALUE         32781
+#define _APS_NEXT_CONTROL_VALUE         1078
+#define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif

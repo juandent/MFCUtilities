@@ -5,24 +5,32 @@
 
 
 
-
-bool safe_remove_pais(int pkey)
+template<typename DependentTable, int DependentTable::* foreignKey, typename Table, int Table::* primaryKey >
+bool exists_Link(Table record)
 {
-	DependentTable<Banco> depTable;
+	using namespace sqlite_orm;
+	auto& storage = Storage::getStorage();
+	auto count = storage.count<DependentTable>(where((c(&DependentTable::foreignKey) == (record.*primaryKey))));
+	return count > 0;
+}
 
-	
+
+
+
+bool exists_link()
+{
 	using namespace sqlite_orm;
 	auto& storage = Storage::getStorage();
 
-	auto count = storage.count<Banco>(where(is_equal(&Banco::fkey_pais, pkey)));
+	auto category_pk = storage.select(columns(&Categoria::id_categoria));
 
-	if( count == 0)
-	{
-////		storage.remove<Pais>(pkey);
-	}
-
-	//auto preciseLilKimsCount = storage.count<Banco>(where(is_equal( Fkey, pkey)));
+	int pk = std::get<0>(category_pk[0]);
 	
+	auto category = storage.get<Categoria>(pk);
+
+	// LinkInfo<Transaccion, c(&Transaccion::fkey_category), Categoria, &Categoria::id_categoria> link;
+	// bool exists = link.existsLink(category);
+	// return exists;
 	return false;
 }
 

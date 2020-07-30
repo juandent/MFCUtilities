@@ -43,6 +43,7 @@ public:
 	afx_msg void OnFileOwner();
 	afx_msg void OnFileConceptosdialog();
 	afx_msg void OnFileStatementdialog();
+	afx_msg void OnFileCategorydialog();
 };
 
 extern CExpenseManagerSQLiteApp theApp;

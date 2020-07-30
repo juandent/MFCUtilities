@@ -16,6 +16,7 @@ class ConceptsAndAccounts : public CFormView
 	BoxContents<Banco, &Banco::id_bank> m_bancoLB;
 	BoxContents<Account, &Account::id_account> m_accountLB;
 	BoxContents<Concepto, &Concepto::id_concepto> m_conceptoLB;
+	BoxContents<Transaccion, &Transaccion::id_transaccion> m_transaccionesLB;
 protected:
 	ConceptsAndAccounts();           // protected constructor used by dynamic creation
 	virtual ~ConceptsAndAccounts();
@@ -100,6 +101,7 @@ public:
 	afx_msg void OnBnClickedBConcepto();
 	afx_msg void OnLbnSelchangeLConceptos();
 	afx_msg void OnBnClickedBDeselectConceptos();
+	afx_msg void OnLbnSelchangeLTransactions();
 };
 
 

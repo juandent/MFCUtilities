@@ -48,8 +48,13 @@ m_duenoLB{ m_duenos,
 			{
 					auto display = JD::to_cstring(concepto.name);
 					return display;
-			}
-			}
+			}},
+			m_transaccionesLB { m_transacciones, [](Transaccion& trans)
+			{
+				Colones  colones = trans.amount_colones;
+				Dolares dolares = trans.amount_dolares;
+				return JD::to_cstring(trans.id_transaccion) + L" - " + JD::to_cstring(trans.line_date) + L" - " + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
+			}}
 {
 }
 
@@ -107,6 +112,7 @@ BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
 	ON_BN_CLICKED(IDC_B_CONCEPTO, &ConceptsAndAccounts::OnBnClickedBConcepto)
 	ON_LBN_SELCHANGE(IDC_L_CONCEPTOS, &ConceptsAndAccounts::OnLbnSelchangeLConceptos)
 	ON_BN_CLICKED(IDC_B_DESELECT_CONCEPTOS, &ConceptsAndAccounts::OnBnClickedBDeselectConceptos)
+	ON_LBN_SELCHANGE(IDC_L_TRANSACTIONS, &ConceptsAndAccounts::OnLbnSelchangeLTransactions)
 END_MESSAGE_MAP()
 
 
@@ -352,6 +358,7 @@ void ConceptsAndAccounts::OnInitialUpdate()
 	m_accountLB.loadLB();
 	m_bancoLB.loadLB();
 	m_conceptoLB.loadLB();
+	m_transaccionesLB.loadLB();
 }
 
 
@@ -508,3 +515,15 @@ void ConceptsAndAccounts::OnBnClickedBConcepto()
 }
 
 
+
+
+void ConceptsAndAccounts::OnLbnSelchangeLTransactions()
+{
+	// TODO: Add your control notification handler code here
+	std::optional<Transaccion> trans = m_transaccionesLB.current();
+	if (trans)
+	{
+		std::optional<Account> acct = m_accountLB.select(*trans->fkey_account_other);
+	}
+
+}

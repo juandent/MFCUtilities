@@ -32,4 +32,6 @@ public:
 private:
 	CComboBox m_listAccounts;
 	CListBox m_listConceptos;
+public:
+	afx_msg void OnBnClickedBAddAccount();
 };
