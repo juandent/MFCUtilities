@@ -11,7 +11,7 @@ using Displayer = CString(*)(Table&);
 
 
 
-template<typename Table, typename int Table::*keyCol, typename BoxType = CListBox> 
+template<typename Table, int Table::*keyCol, typename BoxType = CListBox> 
 class BoxContents
 {
 private:
@@ -29,6 +29,14 @@ public:
 		Table record{ -1, cols... };
 		record.*keyCol = storage.insert(record);
 		return record;
+	}
+
+	//template<int Table::*pKey>
+	void update( const Table& record )
+	{
+		if (record.*keyCol == -1)	return;
+
+		storage.update(record);
 	}
 
 	template<typename WhereClause, typename ...Cols>
@@ -63,6 +71,19 @@ public:
 	void SetCurSel(int index) const
 	{
 		m_box.SetCurSel(index);
+	}
+	std::optional<Table> select(std::optional<int> key)
+	{
+		std::optional<Table> record;
+		if(key)
+		{
+			record = select(*key);
+		}
+		else
+		{
+			m_box.SetCurSel(-1);
+		}
+		return record;
 	}
 	std::optional<Table> select(int pk)
 	{
@@ -105,9 +126,17 @@ public:
 		if (cur_sel != npos )
 		{
 			auto id = m_box.GetItemData(cur_sel);
+			// m_box.DeleteString(cur_sel);
+			try
+			{
+				Table& record = storage.get<Table>(id);
+				remove(record);
+			}
+			catch(...)
+			{
+				m_box.GetParent()->MessageBoxW(L"Error borrando");
+			}
 			m_box.DeleteString(cur_sel);
-			Table& record = storage.get<Table>(id);
-			remove(record);
 		}
 	}
 

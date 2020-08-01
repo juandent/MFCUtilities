@@ -16,6 +16,9 @@ public:
 	CuentaDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CuentaDlg();
 
+	std::string m_numero_val;
+	std::optional<Account> m_account;
+	
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_CuentaDlg };
@@ -46,4 +49,8 @@ public:
 	afx_msg void OnBnClickedBAplicarCuenta();
 private:
 	CButton m_cuenta_bancaria;
+public:
+	afx_msg void OnBnClickedBBorrarCuenta();
+	afx_msg void OnBnClickedBUpdateAccount();
+	afx_msg void OnLbnSelchangeLCuentas();
 };

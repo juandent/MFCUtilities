@@ -38,4 +38,5 @@ public:
 	std::optional<Pais> m_pais{ std::nullopt };
 	afx_msg void OnLbnSelchangeLPaises();
 	afx_msg void OnBnClickedBBorrar();
+	afx_msg void OnBnClickedBUpdatePais();
 };

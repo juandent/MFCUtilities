@@ -17,7 +17,7 @@ BancoDlg::BancoDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_BancoDlg, pParent),
 m_bancosLB{m_list_bancos, []( Banco& banco)
 {
-	return JD::to_cstring(banco.id_bank) + L" - " + JD::to_cstring(banco.nombre) + L" - " + JD::to_cstring(banco.ubicacion);
+	return JD::to_cstring(banco.id_bank) + L" - " + JD::to_cstring(banco.nombre) + L" - " + JD::to_cstring(banco.ubicacion) + L" - " + JD::to_cstring(banco.getPais().name);
 }},
 m_paisCB{ m_paises, [](Pais& pais)
 {
@@ -44,6 +44,7 @@ void BancoDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(BancoDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_ADD_PAIS, &BancoDlg::OnBnClickedBAddPais)
 	ON_BN_CLICKED(IDC_B_APLICAR_BANCO, &BancoDlg::OnBnClickedBAplicarBanco)
+	ON_BN_CLICKED(IDC_B_UPDATE_BANCO, &BancoDlg::OnBnClickedBUpdateBanco)
 END_MESSAGE_MAP()
 
 
@@ -107,4 +108,51 @@ void BancoDlg::OnBnClickedBAplicarBanco()
 			MessageBoxW(L"Falta escoger el pais");
 		}
 	}
+}
+
+
+void BancoDlg::OnBnClickedBUpdateBanco()
+{
+	// TODO: Add your control notification handler code here
+	std::optional<Banco> banco = m_bancosLB.current();
+	if( ! banco)
+	{
+		MessageBoxW(L"Falta escoger el banco");
+		return;
+	}
+	auto whereClause = (c(&Banco::id_bank) == banco->id_bank);
+
+	bool changes = false;
+	CString rNombreBanco;
+	m_nombre_banco.GetWindowTextW(rNombreBanco);
+	if( ! rNombreBanco.IsEmpty())
+	{
+		auto nombre = JD::from_cstring(rNombreBanco);
+		banco->nombre = nombre;
+		changes = true;
+	}
+	CString rUbicacion;
+	m_ubicacion.GetWindowTextW(rUbicacion);
+	if( ! rUbicacion.IsEmpty())
+	{
+		auto ubicacion = JD::from_cstring(rUbicacion);
+		banco->ubicacion = ubicacion;
+		changes = true;
+	}
+
+	auto pais = m_paisCB.current();
+	if( pais )
+	{
+		banco->fkey_pais = pais->id_pais;
+		changes = true;
+	}
+	
+	if( ! changes)
+	{
+		MessageBox(L"No hay cambios en este objeto");
+		return;
+	}
+
+	m_bancosLB.update(*banco);
+	m_bancosLB.loadLB();
 }

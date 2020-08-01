@@ -40,6 +40,7 @@ void CategoryDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CategoryDlg, CDialog)
 	ON_BN_CLICKED(ID_B_BORRAR, &CategoryDlg::OnBnClickedBBorrar)
 	ON_BN_CLICKED(IDC_B_APLICAR_CATEGORY, &CategoryDlg::OnBnClickedBAplicarCategory)
+	ON_BN_CLICKED(IDC_B_UPDATE, &CategoryDlg::OnBnClickedBUpdate)
 END_MESSAGE_MAP()
 
 
@@ -52,6 +53,7 @@ BOOL CategoryDlg::OnInitDialog()
 
 	// TODO:  Add extra initialization here
 	m_categoriasLB.loadLB();
+	m_nombre.SetWindowTextW(JD::to_cstring(m_category_name));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -98,4 +100,47 @@ void CategoryDlg::OnBnClickedBAplicarCategory()
 		categoria = m_categoriasLB.insert(nombre);
 		m_categoriasLB.insert_into_listbox(*categoria);
 	}
+	m_category = categoria;
+}
+
+
+void CategoryDlg::OnBnClickedBUpdate()
+{
+	// TODO: Add your control notification handler code here
+	std::optional<Categoria> cat = m_categoriasLB.current();
+	if (!cat)
+	{
+		MessageBoxW(L"Falta escoger la categoria");
+		return;
+	}
+
+	bool changes = false;
+	CString rNombre;
+	m_nombre.GetWindowTextW(rNombre);
+	
+	if (!rNombre.IsEmpty())
+	{
+		auto nombre = JD::from_cstring(rNombre);
+		cat->name = nombre;
+		changes = true;
+	}
+
+	int is_real = m_gasto_o_ingreso_real.GetCheck();
+	
+	if (  cat->is_expense_or_income != is_real)
+	{
+		cat ->is_expense_or_income = is_real;
+		changes = true;
+	}
+
+	if (!changes)
+	{
+		MessageBox(L"No hay cambios en este objeto");
+		return;
+	}
+
+	m_categoriasLB.update(*cat);
+	m_categoriasLB.loadLB();
+
+	m_category = cat;
 }

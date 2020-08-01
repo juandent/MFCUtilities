@@ -14,11 +14,22 @@ class TransaccionDlg : public CDialog
 	BoxContents<Account, &Account::id_account, CComboBox> m_own_accountCB;
 	BoxContents<Account, &Account::id_account, CComboBox> m_other_accountCB;
 	BoxContents<Categoria, &Categoria::id_categoria, CComboBox> m_categoriaCB;
-
+	std::optional<Transaccion> m_trans;
 public:
-	            TransaccionDlg(CWnd* pParent = nullptr);   // standard constructor
+	TransaccionDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~TransaccionDlg();
 
+
+	void setDiscriminator( std::optional<Transaccion> trans)
+	{
+		m_trans = trans;
+	}
+
+	auto getCompleteObject() const
+	{
+		return m_trans;
+	}
+	
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_TransaccionDlg };
@@ -33,6 +44,8 @@ public:
 	afx_msg void OnBnClickedBAddStatement();
 	afx_msg void OnBnClickedBAddConcept();
 	afx_msg void OnBnClickedOk();
+	std::optional<Transaccion> getCurrent();
+	void postMessage(CListBox& box);
 private:
 	CMonthCalCtrl m_date_transaccion;
 public:
@@ -56,4 +69,5 @@ private:
 public:
 	afx_msg void OnLbnSelchangeLTransaction();
 	afx_msg void OnBnClickedBBorrar();
+	afx_msg void OnBnClickedBUpdateTransaction();
 };

@@ -38,6 +38,8 @@ void DuenosDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(DuenosDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_APPLY_OWNER, &DuenosDlg::OnBnClickedBApplyOwner)
 	ON_BN_CLICKED(ID_B_BORRAR_OWNER, &DuenosDlg::OnBnClickedBBorrarOwner)
+	ON_BN_CLICKED(IDC_B_UPDATE_OWNERS, &DuenosDlg::OnBnClickedBUpdateOwners)
+	ON_LBN_SELCHANGE(IDC_L_DUENOS, &DuenosDlg::OnLbnSelchangeLDuenos)
 END_MESSAGE_MAP()
 
 
@@ -100,4 +102,31 @@ void DuenosDlg::OnBnClickedBBorrarOwner()
 			m_ownerLB.delete_current_sel();
 		}
 	}
+}
+
+
+void DuenosDlg::OnBnClickedBUpdateOwners()
+{
+	// TODO: Add your control notification handler code here
+	auto owner = m_ownerLB.current();
+	if (!owner)
+	{
+		MessageBoxW(L"Falta escoger dueño");
+		return;
+	}
+
+	CString rNombre;
+	m_nombre.GetWindowTextW(rNombre);
+	owner->name = JD::from_cstring(rNombre);
+
+	m_ownerLB.update(*owner);
+	m_ownerLB.loadLB();
+}
+
+
+void DuenosDlg::OnLbnSelchangeLDuenos()
+{
+	// TODO: Add your control notification handler code here
+	auto owner = m_ownerLB.current();
+	m_nombre.SetWindowTextW(JD::to_cstring(owner->name));
 }

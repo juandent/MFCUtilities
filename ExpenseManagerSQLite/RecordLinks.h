@@ -12,7 +12,7 @@ public:
 	static bool has_links(const Statement& statement);
 	static bool has_links(const Categoria& categoria);
 	static bool has_links(const Transaccion& trans);
-
+	static bool has_links(const Account& acct);
 };
 
 

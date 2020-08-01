@@ -41,8 +41,20 @@ private:
 	StatementLineGridController m_grid_controller;
 	CSVFile m_file;
 	void LoadFile(const std::string& fileName);
+	std::string readCell(const int row, const int column);
+	bool verifyRange(const int row);
 public:
+	double getAmountLocal(const int row);
+	double getAmountDolares(const int row);
+	std::string getOwnAccountNumber(const int row);
+	std::string getConceptoName(const int row);
+	date::sys_days getLineDate(const int row);
+	date::sys_days getStatementDate(const int row);
+	std::string getDescripcion(const int row);
+	std::string getCategoryName(const int row);
 
+	
+	
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnBnClickedBLoadCompoundDoc();
 private:
@@ -102,6 +114,7 @@ public:
 	afx_msg void OnLbnSelchangeLConceptos();
 	afx_msg void OnBnClickedBDeselectConceptos();
 	afx_msg void OnLbnSelchangeLTransactions();
+	afx_msg void OnBnClickedBSaveToDb();
 };
 
 

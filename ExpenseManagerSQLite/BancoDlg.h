@@ -37,4 +37,6 @@ public:
 	afx_msg void OnBnClickedBAplicarBanco();
 private:
 	CEdit m_ubicacion;
+public:
+	afx_msg void OnBnClickedBUpdateBanco();
 };

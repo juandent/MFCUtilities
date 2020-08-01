@@ -40,6 +40,7 @@ BEGIN_MESSAGE_MAP(PaisesDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_APLICAR_PAISES, &PaisesDlg::OnBnClickedBAplicarPaises)
 	ON_LBN_SELCHANGE(IDC_L_PAISES, &PaisesDlg::OnLbnSelchangeLPaises)
 	ON_BN_CLICKED(ID_B_BORRAR, &PaisesDlg::OnBnClickedBBorrar)
+	ON_BN_CLICKED(IDC_B_UPDATE_PAIS, &PaisesDlg::OnBnClickedBUpdatePais)
 END_MESSAGE_MAP()
 
 
@@ -95,7 +96,12 @@ void PaisesDlg::OnBnClickedBAplicarPaises()
 void PaisesDlg::OnLbnSelchangeLPaises()
 {
 	// TODO: Add your control notification handler code here
-	m_pais = m_paisLB.current();
+	auto pais = m_paisLB.current();
+
+	CString rNombre;
+
+	m_nombre_pais.SetWindowTextW(JD::to_cstring(pais->name));
+	m_id_pais.SetWindowTextW(JD::to_cstring(pais->id_pais));
 }
 
 
@@ -114,3 +120,21 @@ void PaisesDlg::OnBnClickedBBorrar()
 	}
 }
 
+
+
+void PaisesDlg::OnBnClickedBUpdatePais()
+{
+	// TODO: Add your control notification handler code here
+	auto pais = m_paisLB.current();
+	if( ! pais)
+	{
+		MessageBoxW(L"Falta escoger pais");
+		return;
+	}
+	CString rPais;
+	m_nombre_pais.GetWindowTextW(rPais);
+	pais->name = JD::from_cstring(rPais);
+
+	m_paisLB.update(*pais);
+	m_paisLB.loadLB();
+}

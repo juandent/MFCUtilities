@@ -212,6 +212,7 @@
     <ClInclude Include="CategoryDlg.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
+    <ClInclude Include="CompoundStatementLine.h" />
     <ClInclude Include="ConceptosDlg.h" />
     <ClInclude Include="ConceptsAndAccounts.h" />
     <ClInclude Include="CuentaDlg.h" />
@@ -226,6 +227,7 @@
     <ClInclude Include="BoxContents.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Nullable.h" />
+    <ClInclude Include="ObjectBuilder.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PaisesDlg.h" />
     <ClInclude Include="RecordLinks.h" />
@@ -257,6 +259,7 @@
     <ClCompile Include="CategoryDlg.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="CompoundStatementLine.cpp" />
     <ClCompile Include="ConceptosDlg.cpp" />
     <ClCompile Include="ConceptsAndAccounts.cpp" />
     <ClCompile Include="CuentaDlg.cpp" />
@@ -270,6 +273,7 @@
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="BoxContents.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="ObjectBuilder.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="PaisesDlg.cpp" />
     <ClCompile Include="RecordLinks.cpp" />

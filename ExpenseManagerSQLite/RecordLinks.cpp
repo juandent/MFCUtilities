@@ -63,3 +63,17 @@ bool RecordLinks::has_links(const Transaccion& trans)
 {
 	return false;
 }
+
+bool RecordLinks::has_links(const Account& acct)
+{
+	using namespace sqlite_orm;
+	auto& storage = Storage::getStorage();
+
+	int count[3]{};
+	
+	count[0] = storage.count<Transaccion>(where(is_equal(&Transaccion::fkey_account_own, acct.id_account)));
+	count[1] = storage.count<Transaccion>(where(is_equal(&Transaccion::fkey_account_other, acct.id_account)));
+	count[2] = storage.count<Concepto>(where(is_equal(&Concepto::fkey_account, acct.id_account)));
+	
+	return (count[0] + count[1] + count[2]) > 0;
+}

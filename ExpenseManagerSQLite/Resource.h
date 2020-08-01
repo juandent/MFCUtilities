@@ -181,6 +181,15 @@
 #define IDC_C_IS_REAL                   1075
 #define IDC_L_CATEGORIAS                1076
 #define IDC_B_APLICAR_CATEGORY          1077
+#define IDC_B_UPDATE_BANCO              1078
+#define IDC_B_UPDATE                    1079
+#define IDC_B_UPDATE_STATEMENT          1080
+#define IDC_B_UPDATE_CONCEPTO           1081
+#define IDC_B_UPDATE_ACCOUNT            1082
+#define IDC_B_UPDATE_OWNERS             1083
+#define IDC_B_UPDATE_PAIS               1084
+#define IDC_B_UPDATE_TRANSACTION        1085
+#define IDC_B_SAVE_TO_DB                1086
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
@@ -198,7 +207,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        319
 #define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1078
+#define _APS_NEXT_CONTROL_VALUE         1087
 #define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif

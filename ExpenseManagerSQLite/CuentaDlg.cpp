@@ -8,7 +8,7 @@
 #include "BancoDlg.h"
 #include "Data_Tier.h"
 #include "DuenosDlg.h"
-
+#include "RecordLinks.h"
 
 // CuentaDlg dialog
 
@@ -55,6 +55,9 @@ BEGIN_MESSAGE_MAP(CuentaDlg, CDialog)
 	ON_BN_CLICKED(IDOK, &CuentaDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_B_ADD_BANCOS, &CuentaDlg::OnBnClickedBAddBancos)
 	ON_BN_CLICKED(IDC_B_APLICAR_CUENTA, &CuentaDlg::OnBnClickedBAplicarCuenta)
+	ON_BN_CLICKED(ID_B_BORRAR_CUENTA, &CuentaDlg::OnBnClickedBBorrarCuenta)
+	ON_BN_CLICKED(IDC_B_UPDATE_ACCOUNT, &CuentaDlg::OnBnClickedBUpdateAccount)
+	ON_LBN_SELCHANGE(IDC_L_CUENTAS, &CuentaDlg::OnLbnSelchangeLCuentas)
 END_MESSAGE_MAP()
 
 
@@ -66,6 +69,7 @@ BOOL CuentaDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  Add extra initialization here
+	m_numero.SetWindowTextW(JD::to_cstring(m_numero_val));
 	m_bancosCB.loadLB();
 	m_ownerCB.loadLB();
 	m_cuentasLB.loadLB();
@@ -149,5 +153,70 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 		account = m_cuentasLB.insert(numero, banco->id_bank, owner->id_owner, descripcion, is_tarjeta_checked);
 		m_cuentasLB.insert_into_listbox(*account);
 	}
+	m_account = account;
 }
 
+
+
+void CuentaDlg::OnBnClickedBBorrarCuenta()
+{
+	// TODO: Add your control notification handler code here
+	auto cuenta = m_cuentasLB.current();
+
+	if (!cuenta)
+	{
+		MessageBoxW(L"Falta escoger la cuenta");
+		return;
+	}
+
+	bool has_links = RecordLinks::has_links(*cuenta);
+	if (!has_links)
+	{
+		m_cuentasLB.delete_current_sel();
+	}
+}
+
+
+void CuentaDlg::OnBnClickedBUpdateAccount()
+{
+	// TODO: Add your control notification handler code here
+	auto cuenta = m_cuentasLB.current();
+
+	if (!cuenta)
+	{
+		MessageBoxW(L"Falta escoger la cuenta");
+		return;
+	}
+	CString rNumero;
+	m_numero.GetWindowTextW(rNumero);
+	CString rDescripcion;
+	m_descripcion.GetWindowTextW(rDescripcion);
+	auto owner = m_ownerCB.current();
+	auto banco = m_bancosCB.current();
+	auto is_tarjeta = m_tarjeta.GetCheck();
+
+	cuenta->number = JD::from_cstring(rNumero);
+	cuenta->description = JD::from_cstring(rDescripcion);
+	cuenta->is_tarjeta = is_tarjeta;
+	cuenta->fkey_account_owner = owner->id_owner;
+	cuenta->fkey_bank = banco->id_bank;
+
+	m_cuentasLB.update(*cuenta);
+	m_cuentasLB.loadLB();
+}
+
+
+void CuentaDlg::OnLbnSelchangeLCuentas()
+{
+	// TODO: Add your control notification handler code here
+	auto cuenta = m_cuentasLB.current();
+
+	m_numero.SetWindowTextW(JD::to_cstring(cuenta->number));
+	m_descripcion.SetWindowTextW(JD::to_cstring(cuenta->description));
+	m_id_cuenta.SetWindowTextW(JD::to_cstring(cuenta->id_account));
+
+	m_ownerCB.select(cuenta->fkey_account_owner);
+	m_bancosCB.select(cuenta->fkey_bank);
+	m_tarjeta.SetCheck(cuenta->is_tarjeta);
+	m_cuenta_bancaria.SetCheck(!cuenta->is_tarjeta);
+}

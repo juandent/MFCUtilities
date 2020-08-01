@@ -29,4 +29,6 @@ private:
 	CListBox m_list_duenos;
 public:
 	afx_msg void OnBnClickedBBorrarOwner();
+	afx_msg void OnBnClickedBUpdateOwners();
+	afx_msg void OnLbnSelchangeLDuenos();
 };

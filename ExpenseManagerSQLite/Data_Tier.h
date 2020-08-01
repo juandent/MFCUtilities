@@ -88,6 +88,8 @@ struct Banco
 	std::string nombre;
 	std::string ubicacion;
 	int fkey_pais;
+
+	Pais getPais() const;
 };
 
 struct AccountOwner

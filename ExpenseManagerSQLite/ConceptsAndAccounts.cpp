@@ -10,6 +10,7 @@
 #include <afxext.h>
 
 #include "BoxContents.h"
+#include "CompoundStatementLine.h"
 #include "StatementLineAdapter.h"
 
 
@@ -113,6 +114,7 @@ BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
 	ON_LBN_SELCHANGE(IDC_L_CONCEPTOS, &ConceptsAndAccounts::OnLbnSelchangeLConceptos)
 	ON_BN_CLICKED(IDC_B_DESELECT_CONCEPTOS, &ConceptsAndAccounts::OnBnClickedBDeselectConceptos)
 	ON_LBN_SELCHANGE(IDC_L_TRANSACTIONS, &ConceptsAndAccounts::OnLbnSelchangeLTransactions)
+	ON_BN_CLICKED(IDC_B_SAVE_TO_DB, &ConceptsAndAccounts::OnBnClickedBSaveToDb)
 END_MESSAGE_MAP()
 
 
@@ -438,12 +440,82 @@ void ConceptsAndAccounts::OnBnClickedBReadStatementline()
 	m_stmt_date.SetWindowTextW(stmt_date);
 
 	CString descrip = m_statementLines.GetItemText(row, StatementLineGridController::Columns::DESCRIPCION);
-	m_descripcion_linea.SetWindowTextW(descrip);
-
-	
+	m_descripcion_linea.SetWindowTextW(descrip);	
 }
 
+std::string ConceptsAndAccounts::readCell(const int row, const int column)
+{
+	return JD::from_cstring(m_statementLines.GetItemText(row, column));
+}
 
+bool ConceptsAndAccounts::verifyRange(const int row)
+{
+	bool ok = row >= 1 && row < m_statementLines.GetRowCount();
+	if (!ok) {
+		throw std::exception{ "Row fuera de rango" };
+	}
+	return true;
+}
+
+////////////////////////////////////////////////
+///
+///
+double ConceptsAndAccounts::getAmountLocal(const int row)
+{
+	verifyRange(row);
+	auto val = readCell(row, StatementLineGridController::Columns::AMOUNT_LOCAL);
+	return JD::strip_to_long_double(val);
+}
+double ConceptsAndAccounts::getAmountDolares(const int row)
+{
+	verifyRange(row);
+	auto val = readCell(row, StatementLineGridController::Columns::AMOUNT_DOLLARS);
+	return JD::strip_to_long_double(val);
+}
+std::string ConceptsAndAccounts::getOwnAccountNumber(const int row)
+{
+	verifyRange(row);
+	auto val = readCell(row, StatementLineGridController::Columns::OWN_ACCOUNT);
+	return val;
+}
+
+std::string ConceptsAndAccounts::getConceptoName(const int row)
+{
+	verifyRange(row);
+	auto val = readCell(row, StatementLineGridController::Columns::CONCEPTO);
+	return val;
+}
+
+date::sys_days ConceptsAndAccounts::getLineDate(const int row)
+{
+	verifyRange(row);
+	auto val = readCell(row, StatementLineGridController::Columns::LINE_DATE);
+	return JD::to_date(val);
+}
+
+date::sys_days ConceptsAndAccounts::getStatementDate(const int row)
+{
+	verifyRange(row);
+	auto val = readCell(row, StatementLineGridController::Columns::STMT_DATE);
+	return JD::to_date(val);
+}
+
+std::string ConceptsAndAccounts::getDescripcion(const int row)
+{
+	verifyRange(row);
+	auto val = readCell(row, StatementLineGridController::Columns::DESCRIPCION);
+	return val;
+}
+
+std::string ConceptsAndAccounts::getCategoryName(const int row)
+{
+	verifyRange(row);
+	auto val = readCell(row, StatementLineGridController::Columns::CATEGORY_NAME);
+	return val;
+}
+/// <summary>
+/// ////////////////////////////////
+/// </summary>
 
 void ConceptsAndAccounts::OnBnClickedBDeselectAccounts()
 {
@@ -526,4 +598,30 @@ void ConceptsAndAccounts::OnLbnSelchangeLTransactions()
 		std::optional<Account> acct = m_accountLB.select(*trans->fkey_account_other);
 	}
 
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBSaveToDb()
+{
+	// TODO: Add your control notification handler code here
+	CompoundStatementLine comp{};
+	comp.set_own_account(getOwnAccountNumber(1));
+	comp.set_concepto(getConceptoName(1));
+	comp.setStatement(getStatementDate(1));
+	comp.set_category(getCategoryName(1));
+	comp.set_transaction(getAmountLocal(1), getAmountDolares(1), getLineDate(1), getDescripcion(1));
+#if 0
+	CString amount_local = m_statementLines.GetItemText(row, StatementLineGridController::Columns::AMOUNT_LOCAL);
+	CString amount_dolares = m_statementLines.GetItemText(row, StatementLineGridController::Columns::AMOUNT_DOLLARS);
+	CString own_account = m_statementLines.GetItemText(row, StatementLineGridController::Columns::OWN_ACCOUNT);
+	CString concepto = m_statementLines.GetItemText(row, StatementLineGridController::Columns::CONCEPTO);
+	CString line_date = m_statementLines.GetItemText(row, StatementLineGridController::Columns::LINE_DATE);
+	CString stmt_date = m_statementLines.GetItemText(row, StatementLineGridController::Columns::STMT_DATE);
+	CString descrip = m_statementLines.GetItemText(row, StatementLineGridController::Columns::DESCRIPCION);
+	StatementLineGridController::Columns::CATEGORY_NAME
+#endif
+	for( int row=1; row < m_statementLines.GetRowCount(); ++row)
+	{
+		
+	}
 }

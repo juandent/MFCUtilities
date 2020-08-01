@@ -170,6 +170,12 @@ namespace JD {
 		return msg_as_cstring;
 	}
 
+	inline CString to_cstring( double d)
+	{
+		auto d_str = std::to_string(d);
+		return to_cstring(d_str);
+	}
+
 	inline std::string to_string(date::sys_days dp)
 	{
 		date::year_month_day ymd{ dp };
@@ -319,6 +325,32 @@ namespace JD {
 	{
 		auto val = strip_to_long_double(moneyAsString);
 		return Money{ val };
+	}
+
+	inline COleDateTime to_ole_date_time(date::sys_days fecha)
+	{
+		using namespace date;
+		
+		year_month_day ymd = fecha;
+		auto year_val = static_cast<int>(ymd.year());
+		auto month_val = static_cast<unsigned>(ymd.month());
+		auto day_val = static_cast<unsigned>(ymd.day());
+		COleDateTime rDateTime;
+		rDateTime.SetDate(year_val, month_val, day_val);
+		return rDateTime;
+	}
+
+	inline date::sys_days to_sys_days(const COleDateTime& fecha)
+	{
+		using namespace date;
+		
+		int yearVal = fecha.GetYear();
+		unsigned monthVal = fecha.GetMonth();
+		unsigned dayVal = fecha.GetDay();
+
+		year_month_day ymd{ year{yearVal}, month{monthVal}, day{dayVal} };
+		sys_days date = ymd;
+		return date;
 	}
 
 	inline std::string convert(const CString& str)

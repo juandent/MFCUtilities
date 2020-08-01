@@ -9,11 +9,23 @@ class CategoryDlg : public CDialog
 	DECLARE_DYNAMIC(CategoryDlg)
 
 	BoxContents<Categoria, &Categoria::id_categoria> m_categoriasLB;
-	
+
+	std::string m_category_name;
+	std::optional<Categoria> m_category;
 public:
 	CategoryDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CategoryDlg();
 
+	void setDiscriminator( const std::string& name)
+	{
+		m_category_name = name;
+	}
+
+	auto getCompleteObject()
+	{
+		return m_category;
+	}
+	
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_CategoryDlg };
@@ -32,4 +44,5 @@ private:
 public:
 	afx_msg void OnBnClickedBBorrar();
 	afx_msg void OnBnClickedBAplicarCategory();
+	afx_msg void OnBnClickedBUpdate();
 };

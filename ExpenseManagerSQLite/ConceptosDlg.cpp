@@ -35,13 +35,17 @@ void ConceptosDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_C_ACCOUNT, m_listAccounts);
-	DDX_Control(pDX, IDC_L_BANCOS, m_listConceptos);
+	DDX_Control(pDX, IDC_L_CONCEPTOS, m_listConceptos);
+	DDX_Control(pDX, IDC_E_NOMBRE_CONCEPTO, m_nombre);
 }
 
 
 BEGIN_MESSAGE_MAP(ConceptosDlg, CDialog)
 	ON_BN_CLICKED(ID_B_BORRAR, &ConceptosDlg::OnBnClickedBBorrar)
 	ON_BN_CLICKED(IDC_B_ADD_ACCOUNT, &ConceptosDlg::OnBnClickedBAddAccount)
+	ON_BN_CLICKED(IDC_B_UPDATE_CONCEPTO, &ConceptosDlg::OnBnClickedBUpdateConcepto)
+	ON_LBN_SELCHANGE(IDC_L_CONCEPTOS, &ConceptosDlg::OnLbnSelchangeLConceptos)
+	ON_BN_CLICKED(IDC_B_APLICAR_CONCEPTO, &ConceptosDlg::OnBnClickedBAplicarConcepto)
 END_MESSAGE_MAP()
 
 
@@ -55,7 +59,8 @@ BOOL ConceptosDlg::OnInitDialog()
 	// TODO:  Add extra initialization here
 	m_conceptosLB.loadLB();
 	m_accountsCB.loadLB();
-
+	m_nombre.SetWindowTextW(JD::to_cstring(m_discriminator));
+	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -87,4 +92,96 @@ void ConceptosDlg::OnBnClickedBAddAccount()
 	CuentaDlg dlg;
 	dlg.DoModal();
 	m_accountsCB.loadLB();
+}
+
+
+void ConceptosDlg::OnBnClickedBUpdateConcepto()
+{
+	// TODO: Add your control notification handler code here
+	std::optional<Concepto> concepto = m_conceptosLB.current();
+	if (! concepto)
+	{
+		MessageBoxW(L"Falta escoger el concepto");
+		return;
+	}
+
+	bool changes = false;
+	CString rNombre;
+	m_nombre.GetWindowTextW(rNombre);
+
+	if (!rNombre.IsEmpty())
+	{
+		auto nombre = JD::from_cstring(rNombre);
+		concepto->name = nombre;
+		changes = true;
+	}
+
+	auto cuenta = m_accountsCB.current();
+	if( cuenta)
+	{
+		concepto->fkey_account = cuenta->id_account;
+		changes = true;
+	}
+
+	if (!changes)
+	{
+		MessageBox(L"No hay cambios en este objeto");
+		return;
+	}
+
+	m_conceptosLB.update(*concepto);
+	m_conceptosLB.loadLB();
+
+	m_concepto = concepto;
+}
+
+
+void ConceptosDlg::OnLbnSelchangeLConceptos()
+{
+	// TODO: Add your control notification handler code here
+	auto concepto = m_conceptosLB.current();
+
+	m_nombre.SetWindowTextW(JD::to_cstring(concepto->name));
+	m_accountsCB.select(concepto->fkey_account);
+}
+
+
+void ConceptosDlg::OnBnClickedBAplicarConcepto()
+{
+	// TODO: Add your control notification handler code here
+	std::optional<Concepto> concepto = m_conceptosLB.current();
+	if (!concepto)
+	{
+		MessageBoxW(L"Falta escoger el concepto");
+		return;
+	}
+
+	bool changes = false;
+	CString rNombre;
+	m_nombre.GetWindowTextW(rNombre);
+
+	if (!rNombre.IsEmpty())
+	{
+		auto nombre = JD::from_cstring(rNombre);
+		concepto->name = nombre;
+		changes = true;
+	}
+
+	auto cuenta = m_accountsCB.current();
+	if (cuenta)
+	{
+		concepto->fkey_account = cuenta->id_account;
+		changes = true;
+	}
+
+	if (!changes)
+	{
+		MessageBox(L"No hay cambios en este objeto");
+		return;
+	}
+
+	concepto = m_conceptosLB.insert(concepto->name, concepto->fkey_account);
+	m_conceptosLB.loadLB();
+	
+	m_concepto = concepto;
 }

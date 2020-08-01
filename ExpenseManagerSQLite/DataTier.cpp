@@ -4,6 +4,17 @@
 
 #include "Data_Tier.h"
 
+
+Pais Banco::getPais() const
+{
+	using namespace sqlite_orm;
+
+	auto& storage = Storage::getStorage();
+	return storage.get<Pais>(this->fkey_pais);
+}
+
+
+
 #if 1
 
 void Storage::initialize()

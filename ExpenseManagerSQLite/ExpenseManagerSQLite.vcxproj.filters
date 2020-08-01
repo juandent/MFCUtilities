@@ -165,6 +165,12 @@
     <ClInclude Include="CategoryDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CompoundStatementLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpenseManagerSQLite.cpp">
@@ -279,6 +285,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CompoundStatementLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
