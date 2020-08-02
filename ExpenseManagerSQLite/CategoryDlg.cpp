@@ -99,7 +99,7 @@ void CategoryDlg::OnBnClickedBAplicarCategory()
 
 	if (!categoria)	// new categoria
 	{
-		categoria = m_categoriasLB.insert(nombre);
+		categoria = m_categoriasLB.insert(nombre, is_real);
 		m_categoriasLB.insert_into_listbox(*categoria);
 	}
 	else          //  update

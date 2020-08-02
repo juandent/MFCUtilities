@@ -12,13 +12,21 @@ class CuentaDlg : public CDialog
 	BoxContents<Banco, &Banco::id_bank, CComboBox> m_bancosCB;
 	BoxContents<AccountOwner, &AccountOwner::id_owner, CComboBox>	m_ownerCB;
 	BoxContents<Account, &Account::id_account> m_cuentasLB;
+
+	std::string m_numero_val;
 public:
 	CuentaDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CuentaDlg();
 
-	std::string m_numero_val;
+	void set_discriminator(const std::string& numero)
+	{
+		m_numero_val = numero;
+	}
 	std::optional<Account> m_account;
-	
+	auto getCompleteObject()
+	{
+		return m_account;
+	}
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_CuentaDlg };

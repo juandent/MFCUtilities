@@ -263,11 +263,21 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 	auto dolares = JD::strip_to_long_double(str_dolares);
 	auto colones = JD::strip_to_long_double(str_colones);
 
+	std::optional<int> account_other;
+	if (other_account)
+	{
+		account_other = other_account->id_account;
+	}
+	else
+	{
+		account_other = std::nullopt;
+	}
 	std::optional<Transaccion> trans;
+
 	if (other_account)
 	{
 		auto whereClause = (c(&Transaccion::fkey_concepto) == concepto->id_concepto) && (c(&Transaccion::line_date) == line_date) && (c(&Transaccion::fkey_statement) == statement->id_statement)
-			&& (c(&Transaccion::amount_dolares) == dolares) && (c(&Transaccion::amount_colones) == colones) && (c(&Transaccion::fkey_account_other) == other_account->id_account)
+			&& (c(&Transaccion::amount_dolares) == dolares) && (c(&Transaccion::amount_colones) == colones) && (c(&Transaccion::fkey_account_other) == account_other)
 			&& (c(&Transaccion::descripcion) == descripcion.c_str()) && (c(&Transaccion::fkey_account_own) == own_account->id_account) && (c(&Transaccion::fkey_category) == categoria->id_categoria);
 
 		trans = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::amount_colones, &Transaccion::amount_dolares, &Transaccion::fkey_account_own, &Transaccion::fkey_account_other, &Transaccion::line_date,
@@ -278,14 +288,14 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		auto whereClause = (c(&Transaccion::fkey_concepto) == concepto->id_concepto) && (c(&Transaccion::line_date) == line_date) && (c(&Transaccion::fkey_statement) == statement->id_statement)
 			&& (c(&Transaccion::amount_dolares) == dolares) && (c(&Transaccion::amount_colones) == colones)
 			&& (c(&Transaccion::descripcion) == descripcion.c_str()) && (c(&Transaccion::fkey_account_own) == own_account->id_account) && (c(&Transaccion::fkey_category) == categoria->id_categoria);
-
+	
 		trans = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::amount_colones, &Transaccion::amount_dolares, &Transaccion::fkey_account_own, &Transaccion::line_date,
 			&Transaccion::descripcion, &Transaccion::fkey_category, &Transaccion::fkey_concepto, &Transaccion::fkey_statement);
 	}
 
 	if( !trans)   // insert
 	{
-		trans = m_transaccionLB.insert(colones, dolares, own_account->id_account, other_account->id_account, line_date, descripcion, categoria->id_categoria, concepto->id_concepto, statement->id_statement);
+		trans = m_transaccionLB.insert(colones, dolares, own_account->id_account, account_other, line_date, descripcion, categoria->id_categoria, concepto->id_concepto, statement->id_statement);
 		m_transaccionLB.insert_into_listbox(*trans);
 		m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
 	}
@@ -297,6 +307,7 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		trans->amount_dolares = dolares;
 		trans->amount_colones = colones;
 		trans->fkey_category = categoria->id_categoria;
+#if 0
 		std::optional<int> account_other;
 		if( other_account)
 		{
@@ -306,12 +317,14 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		{
 			account_other = std::nullopt;
 		}
+#endif
 		trans->fkey_account_other = account_other;
 		trans->fkey_account_own = own_account->id_account;
 		trans->fkey_statement = statement->id_statement;
 		
 		m_transaccionLB.update(*trans);
 	}
+	m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
 	m_transaccionLB.loadLB();
 	m_trans = trans;
 }

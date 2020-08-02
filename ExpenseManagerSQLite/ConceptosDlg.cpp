@@ -155,7 +155,7 @@ void ConceptosDlg::OnBnClickedBAplicarConcepto()
 	m_nombre.GetWindowTextW(rNombre);
 
 	auto nombre = JD::from_cstring(rNombre);
-	if (!rNombre.IsEmpty())
+	if (rNombre.IsEmpty())
 	{
 		MessageBox(L"Falta escoger nombre");
 		return;

@@ -6,9 +6,13 @@
 #include "ConceptosDlg.h"
 #include "StatementDlg.h"
 #include "TransaccionDlg.h"
+#include "ConceptsAndAccounts.h"
 
 class CompoundStatementLine
 {
+	inline static std::map<int, std::optional<Transaccion>> s_transaccion_map;
+	
+	int m_row;
 	std::optional<Transaccion> m_trans;
 	std::optional<Account>     m_own_account;
 	std::optional<Account>     m_other_acccount;
@@ -23,9 +27,10 @@ class CompoundStatementLine
 		// FKS:  banco.fkey, account_owner.fkey
 
 		CuentaDlg dlg;
-		dlg.m_numero_val = m_own_account_number;
+		dlg.set_discriminator(m_own_account_number);
+		// dlg.m_numero_val = m_own_account_number;
 		dlg.DoModal();		
-		return dlg.m_account;
+		return dlg.getCompleteObject();
 	}
 	auto insert_concepto()
 	{
@@ -63,14 +68,14 @@ public:
 	auto set_own_account(const std::string& number)
 	{
 		m_own_account_number = number;
-		
+
 		using namespace sqlite_orm;
 		auto& storage = Storage::getStorage();
 
 		auto clause = c(&Account::number) == m_own_account_number;
 		auto vec = storage.select(columns(&Account::id_account, &Account::number), where(clause));
 
-		if( vec.size() == 0)
+		if (vec.size() == 0)
 		{
 			m_own_account = insert_own_account();
 		}
@@ -81,6 +86,18 @@ public:
 		}
 		return m_own_account;
 	}
+	
+public:
+	CompoundStatementLine(int row) : m_row { row} {}
+
+#if 0
+	auto set_own_account( std::string &ConceptAndAccounts::f(int), ConceptAndAccounts* obj)
+	{
+		auto res = obj.*f(m_row);
+		return set_own_account(res);
+	}
+#endif
+	
 	auto set_concepto(const std::string& name )
 	{
 		m_concepto_name = name;
@@ -163,7 +180,15 @@ public:
 		
 		TransaccionDlg dlg;
 		dlg.setDiscriminator(m_trans);
-		dlg.DoModal();
+		auto ret = dlg.DoModal();
+		if( ret != 1)
+		{
+			return std::nullopt;
+		}
+		else
+		{
+			s_transaccion_map[m_row] = m_trans;
+		}
 		m_trans = dlg.getCompleteObject();
 		return m_trans;
 	}

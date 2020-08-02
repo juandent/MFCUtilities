@@ -110,6 +110,7 @@ void BancoDlg::OnBnClickedBAplicarBanco()
 	else               // update
 	{
 		banco->nombre = name;
+		banco->ubicacion = ubicacion;
 		banco->fkey_pais = pais->id_pais;
 		m_bancosLB.update(*banco);
 	}

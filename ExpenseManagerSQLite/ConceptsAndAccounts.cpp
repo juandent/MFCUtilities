@@ -607,12 +607,14 @@ void ConceptsAndAccounts::OnLbnSelchangeLTransactions()
 void ConceptsAndAccounts::OnBnClickedBSaveToDb()
 {
 	// TODO: Add your control notification handler code here
-	CompoundStatementLine comp{};
-	comp.set_own_account(getOwnAccountNumber(2));
-	comp.set_concepto(getConceptoName(2));
-	comp.setStatement(getStatementDate(2));
-	comp.set_category(getCategoryName(2));
-	comp.set_transaction(getAmountLocal(2), getAmountDolares(2), getLineDate(2), getDescripcion(2));
+	int row = 3;
+	CompoundStatementLine comp{row};
+	auto r1 = comp.set_own_account(getOwnAccountNumber(row));
+//	comp.set_other_account(get)
+	comp.set_concepto(getConceptoName(row));
+	comp.setStatement(getStatementDate(row));
+	comp.set_category(getCategoryName(row));
+	comp.set_transaction(getAmountLocal(row), getAmountDolares(row), getLineDate(row), getDescripcion(row));
 
 	refresh();
 	
