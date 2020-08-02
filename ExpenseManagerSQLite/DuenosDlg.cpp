@@ -81,6 +81,12 @@ void DuenosDlg::OnBnClickedBApplyOwner()
 		account_owner = m_ownerLB.insert(nombre);
 		m_ownerLB.insert_into_listbox(*account_owner);
 	}
+	else            // update
+ 	{
+		account_owner->name = nombre;
+		m_ownerLB.update(*account_owner);
+	}
+	m_ownerLB.loadLB();
 }
 
 
@@ -107,6 +113,7 @@ void DuenosDlg::OnBnClickedBBorrarOwner()
 
 void DuenosDlg::OnBnClickedBUpdateOwners()
 {
+#if 0
 	// TODO: Add your control notification handler code here
 	auto owner = m_ownerLB.current();
 	if (!owner)
@@ -121,6 +128,7 @@ void DuenosDlg::OnBnClickedBUpdateOwners()
 
 	m_ownerLB.update(*owner);
 	m_ownerLB.loadLB();
+#endif
 }
 
 

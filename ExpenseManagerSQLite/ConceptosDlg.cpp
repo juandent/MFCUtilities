@@ -97,6 +97,7 @@ void ConceptosDlg::OnBnClickedBAddAccount()
 
 void ConceptosDlg::OnBnClickedBUpdateConcepto()
 {
+#if 0
 	// TODO: Add your control notification handler code here
 	std::optional<Concepto> concepto = m_conceptosLB.current();
 	if (! concepto)
@@ -133,6 +134,7 @@ void ConceptosDlg::OnBnClickedBUpdateConcepto()
 	m_conceptosLB.loadLB();
 
 	m_concepto = concepto;
+#endif
 }
 
 
@@ -149,39 +151,38 @@ void ConceptosDlg::OnLbnSelchangeLConceptos()
 void ConceptosDlg::OnBnClickedBAplicarConcepto()
 {
 	// TODO: Add your control notification handler code here
-	std::optional<Concepto> concepto = m_conceptosLB.current();
-	if (!concepto)
-	{
-		MessageBoxW(L"Falta escoger el concepto");
-		return;
-	}
-
-	bool changes = false;
 	CString rNombre;
 	m_nombre.GetWindowTextW(rNombre);
 
+	auto nombre = JD::from_cstring(rNombre);
 	if (!rNombre.IsEmpty())
 	{
-		auto nombre = JD::from_cstring(rNombre);
-		concepto->name = nombre;
-		changes = true;
-	}
-
-	auto cuenta = m_accountsCB.current();
-	if (cuenta)
-	{
-		concepto->fkey_account = cuenta->id_account;
-		changes = true;
-	}
-
-	if (!changes)
-	{
-		MessageBox(L"No hay cambios en este objeto");
+		MessageBox(L"Falta escoger nombre");
 		return;
 	}
 
-	concepto = m_conceptosLB.insert(concepto->name, concepto->fkey_account);
+	auto cuenta = m_accountsCB.current();
+	if (! cuenta)
+	{
+		MessageBox(L"Falta escoger cuenta");
+		return;
+	}
+
+	auto whereClause = (c(&Concepto::name) == nombre.c_str());
+
+	std::optional<Concepto> concepto_db = m_conceptosLB.exists(whereClause, &Concepto::id_concepto, &Concepto::name);
+
+	if (!concepto_db)    // insert
+	{
+		concepto_db = m_conceptosLB.insert(nombre, cuenta->id_account);
+		m_conceptosLB.insert_into_listbox(*concepto_db);
+	}
+	else               // update
+	{
+		concepto_db->name = nombre;
+		concepto_db->fkey_account = cuenta->id_account;
+		m_conceptosLB.update(*concepto_db);
+	}
 	m_conceptosLB.loadLB();
-	
-	m_concepto = concepto;
+	m_concepto = concepto_db;
 }

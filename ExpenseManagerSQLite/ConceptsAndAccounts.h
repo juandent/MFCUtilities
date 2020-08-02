@@ -37,6 +37,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 private:
+	void refresh();
 	CJDGridCtrl m_statementLines;
 	StatementLineGridController m_grid_controller;
 	CSVFile m_file;

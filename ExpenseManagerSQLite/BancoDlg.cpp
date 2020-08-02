@@ -86,6 +86,13 @@ void BancoDlg::OnBnClickedBAplicarBanco()
 		return;
 	};
 
+	// need to get current pais
+	std::optional<Pais> pais = m_paisCB.current();
+	if( ! pais)
+	{
+		MessageBoxW(L"Falta escoger el pais");
+		return;
+	}
 
 	auto name = JD::from_cstring(rBanco);
 	auto ubicacion = JD::from_cstring(rUbicacion);
@@ -94,25 +101,26 @@ void BancoDlg::OnBnClickedBAplicarBanco()
 
 	std::optional<Banco> banco = m_bancosLB.exists(whereClause, &Banco::id_bank, &Banco::nombre);
 
-	if (!banco)
-	{
+	if (!banco)    // insert
+ 	{
 		// need to get current pais
-		std::optional<Pais> pais = m_paisCB.current();
-		if (pais)
-		{
-			banco = m_bancosLB.insert(name, ubicacion, pais->id_pais);
-			m_bancosLB.insert_into_listbox(*banco);
-		}
-		else
-		{
-			MessageBoxW(L"Falta escoger el pais");
-		}
+		banco = m_bancosLB.insert(name, ubicacion, pais->id_pais);
+		m_bancosLB.insert_into_listbox(*banco);
 	}
+	else               // update
+	{
+		banco->nombre = name;
+		banco->fkey_pais = pais->id_pais;
+		m_bancosLB.update(*banco);
+	}
+	m_bancosLB.loadLB();
+	m_banco = banco;;
 }
 
 
 void BancoDlg::OnBnClickedBUpdateBanco()
 {
+#if 0
 	// TODO: Add your control notification handler code here
 	std::optional<Banco> banco = m_bancosLB.current();
 	if( ! banco)
@@ -155,4 +163,5 @@ void BancoDlg::OnBnClickedBUpdateBanco()
 
 	m_bancosLB.update(*banco);
 	m_bancosLB.loadLB();
+#endif
 }

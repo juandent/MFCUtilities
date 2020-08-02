@@ -16,6 +16,7 @@ public:
 	BancoDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~BancoDlg();
 
+	std::optional<Banco> m_banco;
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_BancoDlg };

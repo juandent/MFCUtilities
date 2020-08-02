@@ -89,6 +89,8 @@ void CategoryDlg::OnBnClickedBAplicarCategory()
 		return;
 	};
 
+	int is_real = m_gasto_o_ingreso_real.GetCheck();
+	
 	auto nombre = JD::from_cstring(rNombre);
 
 	auto whereClause = (c(&Categoria::name) == nombre.c_str());
@@ -100,12 +102,20 @@ void CategoryDlg::OnBnClickedBAplicarCategory()
 		categoria = m_categoriasLB.insert(nombre);
 		m_categoriasLB.insert_into_listbox(*categoria);
 	}
+	else          //  update
+	{
+		categoria->name = nombre;
+		categoria->is_expense_or_income = is_real;
+		m_categoriasLB.update(*categoria);
+	}
+	m_categoriasLB.loadLB();
 	m_category = categoria;
 }
 
 
 void CategoryDlg::OnBnClickedBUpdate()
 {
+#if 0
 	// TODO: Add your control notification handler code here
 	std::optional<Categoria> cat = m_categoriasLB.current();
 	if (!cat)
@@ -143,4 +153,5 @@ void CategoryDlg::OnBnClickedBUpdate()
 	m_categoriasLB.loadLB();
 
 	m_category = cat;
+#endif
 }

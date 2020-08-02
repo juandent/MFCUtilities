@@ -354,7 +354,11 @@ void ConceptsAndAccounts::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
 
+	refresh();
+}
 
+void ConceptsAndAccounts::refresh()
+{
 	m_paisLB.loadLB();
 	m_duenoLB.loadLB();
 	m_accountLB.loadLB();
@@ -362,7 +366,6 @@ void ConceptsAndAccounts::OnInitialUpdate()
 	m_conceptoLB.loadLB();
 	m_transaccionesLB.loadLB();
 }
-
 
 void ConceptsAndAccounts::OnLbnSelchangeLCuentas()
 {
@@ -605,11 +608,14 @@ void ConceptsAndAccounts::OnBnClickedBSaveToDb()
 {
 	// TODO: Add your control notification handler code here
 	CompoundStatementLine comp{};
-	comp.set_own_account(getOwnAccountNumber(1));
-	comp.set_concepto(getConceptoName(1));
-	comp.setStatement(getStatementDate(1));
-	comp.set_category(getCategoryName(1));
-	comp.set_transaction(getAmountLocal(1), getAmountDolares(1), getLineDate(1), getDescripcion(1));
+	comp.set_own_account(getOwnAccountNumber(2));
+	comp.set_concepto(getConceptoName(2));
+	comp.setStatement(getStatementDate(2));
+	comp.set_category(getCategoryName(2));
+	comp.set_transaction(getAmountLocal(2), getAmountDolares(2), getLineDate(2), getDescripcion(2));
+
+	refresh();
+	
 #if 0
 	CString amount_local = m_statementLines.GetItemText(row, StatementLineGridController::Columns::AMOUNT_LOCAL);
 	CString amount_dolares = m_statementLines.GetItemText(row, StatementLineGridController::Columns::AMOUNT_DOLLARS);

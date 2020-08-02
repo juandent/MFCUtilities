@@ -126,6 +126,18 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 		MessageBoxW(L"Falta el numero de cuenta o su descripción");
 		return;
 	};
+	std::optional<AccountOwner> owner = m_ownerCB.current();
+	if (!owner)
+	{
+		MessageBoxW(L"Falta escoger el dueño");
+		return;
+	}
+	std::optional<Banco> banco = m_bancosCB.current();
+	if (!banco)
+	{
+		MessageBoxW(L"Falta escoger el banco");
+		return;
+	}
 
 	auto numero = JD::from_cstring(rNumero);
 	auto descripcion = JD::from_cstring(rDescripcion);
@@ -137,22 +149,19 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 	if (!account)	// new account
 	{
 		// need to get current
-		std::optional<AccountOwner> owner = m_ownerCB.current();
-		if (! owner)
-		{
-			MessageBoxW(L"Falta escoger el dueño");
-			return;
-		}
-		std::optional<Banco> banco = m_bancosCB.current();
-		if( ! banco)
-		{
-			MessageBoxW(L"Falta escoger el banco");
-			return;
-		}
-
 		account = m_cuentasLB.insert(numero, banco->id_bank, owner->id_owner, descripcion, is_tarjeta_checked);
 		m_cuentasLB.insert_into_listbox(*account);
 	}
+	else      // update
+	{
+		account->number = numero;
+		account->description = descripcion;
+		account->is_tarjeta = is_tarjeta_checked;
+		account->fkey_bank = banco->id_bank;
+		account->fkey_account_owner = owner->id_owner;
+		m_cuentasLB.update(*account);
+	}
+	m_cuentasLB.loadLB();
 	m_account = account;
 }
 
@@ -179,6 +188,7 @@ void CuentaDlg::OnBnClickedBBorrarCuenta()
 
 void CuentaDlg::OnBnClickedBUpdateAccount()
 {
+#if 0	
 	// TODO: Add your control notification handler code here
 	auto cuenta = m_cuentasLB.current();
 
@@ -203,6 +213,7 @@ void CuentaDlg::OnBnClickedBUpdateAccount()
 
 	m_cuentasLB.update(*cuenta);
 	m_cuentasLB.loadLB();
+#endif
 }
 
 

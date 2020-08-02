@@ -28,6 +28,7 @@ struct Transaccion;
 struct Categoria;
 ////////////////////////////////
 
+enum class Operation { doUpdate = 1, doInsert = 2};
 
 struct Statement
 {

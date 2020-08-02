@@ -78,6 +78,12 @@ void StatementDlg::OnBnClickedBAplicarStatement()
 		statement = m_statementLB.insert(statement_date);
 		m_statementLB.insert_into_listbox(*statement);
 	}
+	else     // update
+	{
+		statement->date = statement_date;
+		m_statementLB.update(*statement);
+	}
+	m_statementLB.loadLB();
 	m_statement = statement;
 }
 
@@ -122,6 +128,7 @@ void StatementDlg::OnLbnSelchangeLEstadosDeCuenta()
 
 void StatementDlg::OnBnClickedBUpdateStatement()
 {
+#if 0
 	// TODO: Add your control notification handler code here
 	using namespace date;
 
@@ -146,4 +153,5 @@ void StatementDlg::OnBnClickedBUpdateStatement()
 	m_statementLB.loadLB();
 	
 	m_statement = statement;
+#endif
 }

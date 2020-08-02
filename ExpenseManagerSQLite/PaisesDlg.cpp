@@ -83,13 +83,19 @@ void PaisesDlg::OnBnClickedBAplicarPaises()
 
 	std::optional<Pais> pais = m_paisLB.exists(whereClause, &Pais::id_pais, &Pais::name);
 
-	if (!pais)
+	if (!pais)    // insert
 	{
 		pais = m_paisLB.insert(name);
 		m_paisLB.insert_into_listbox(*pais);
 		m_id_pais.SetWindowTextW(JD::to_cstring(pais->id_pais));
 	}
-
+	else           // update
+	{
+		pais->name = name;
+		m_paisLB.update(*pais);
+	}
+	m_paisLB.loadLB();
+	m_pais = pais;
 }
 
 
@@ -124,6 +130,7 @@ void PaisesDlg::OnBnClickedBBorrar()
 
 void PaisesDlg::OnBnClickedBUpdatePais()
 {
+#if 0
 	// TODO: Add your control notification handler code here
 	auto pais = m_paisLB.current();
 	if( ! pais)
@@ -137,4 +144,5 @@ void PaisesDlg::OnBnClickedBUpdatePais()
 
 	m_paisLB.update(*pais);
 	m_paisLB.loadLB();
+#endif
 }
