@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Data_Tier.h"
+#include "RecordLinks.h"
 
 using namespace sqlite_orm;
 
@@ -122,6 +123,16 @@ public:
 
 	void delete_current_sel()
 	{
+		auto current = this->current();
+		if (!current) return;
+		bool has_links = RecordLinks::has_links(*current);
+		if (has_links) return;
+
+#if 1
+		int cur_sel = m_box.GetCurSel();
+		remove(*current);
+		m_box.DeleteString(cur_sel);
+#else
 		int cur_sel = m_box.GetCurSel();
 		if (cur_sel != npos )
 		{
@@ -134,10 +145,11 @@ public:
 			}
 			catch(...)
 			{
-				m_box.GetParent()->MessageBoxW(L"Error borrando");
+				m_box.GetParent()->MessageBoxW(L"Error borrando aunque sin existencia de relacion entre registros");
 			}
 			m_box.DeleteString(cur_sel);
 		}
+#endif
 	}
 
 	void delete_from_box(Table& record)

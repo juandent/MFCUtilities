@@ -22,6 +22,7 @@ void StatementLineGridController::HandleGridClick(NM_GRIDVIEW* pItem)
 
 void StatementLineGridController::FillHeaders()
 {
+	grid.SetItemText(0, Columns::ROW_NUMBER, L"ROW #");
 	grid.SetItemText(0, Columns::STMT_DATE, L"STMT DATE");
 	grid.SetItemText(0, Columns::OWN_ACCOUNT, L"OWN_ACCOUNT");
 	grid.SetItemText(0, Columns::LINE_DATE, L"LINE_DATE");
@@ -38,7 +39,8 @@ void StatementLineGridController::FillHeaders()
 void StatementLineGridController::FillLine(int row)
 {
 	auto line = lines[row++];
-	
+
+	grid.SetItemText(row, Columns::ROW_NUMBER, JD::to_cstring(row));
 	grid.SetItemText(row, Columns::STMT_DATE, JD::to_cstring(line.statement_date));
 	grid.SetItemText(row, Columns::OWN_ACCOUNT, JD::to_cstring( line.origin_account));
 	grid.SetItemText(row, Columns::LINE_DATE, JD::to_cstring(line.line_date));

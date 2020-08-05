@@ -17,11 +17,19 @@ class ConceptsAndAccounts : public CFormView
 	BoxContents<Account, &Account::id_account> m_accountLB;
 	BoxContents<Concepto, &Concepto::id_concepto> m_conceptoLB;
 	BoxContents<Transaccion, &Transaccion::id_transaccion> m_transaccionesLB;
+	BoxContents<Statement, &Statement::id_statement> m_statementsLB;
 protected:
 	ConceptsAndAccounts();           // protected constructor used by dynamic creation
 	virtual ~ConceptsAndAccounts();
 
 public:
+	using DoubleColumn_mem = double (ConceptsAndAccounts::*)(const int row);
+	using SysDaysColumn_mem = date::sys_days(ConceptsAndAccounts::*)(const int row);
+	using StringColumn_mem = std::string(ConceptsAndAccounts::*)(const int row);
+	
+	int Row() const noexcept { return m_row; }
+
+	
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ConceptsAndAccounts };
 #endif
@@ -41,6 +49,7 @@ private:
 	CJDGridCtrl m_statementLines;
 	StatementLineGridController m_grid_controller;
 	CSVFile m_file;
+	int m_row;
 	void LoadFile(const std::string& fileName);
 	std::string readCell(const int row, const int column);
 	bool verifyRange(const int row);
@@ -116,6 +125,13 @@ public:
 	afx_msg void OnBnClickedBDeselectConceptos();
 	afx_msg void OnLbnSelchangeLTransactions();
 	afx_msg void OnBnClickedBSaveToDb();
+private:
+	CListBox m_statement_list;
+public:
+	afx_msg void OnLbnSelchangeLStatements();
+	afx_msg void OnBnClickedBRemoveStatement();
+	afx_msg void OnBnClickedBRemoveAccount();
+	afx_msg void OnBnClickedBRemoveTransaction();
 };
 
 

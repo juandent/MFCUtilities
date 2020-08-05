@@ -10,9 +10,10 @@
 
 class CompoundStatementLine
 {
-	inline static std::map<int, std::optional<Transaccion>> s_transaccion_map;
+	//inline static std::map<int, std::optional<Transaccion>> s_transaccion_map;
 	
-	int m_row;
+	//int m_row;
+	ConceptsAndAccounts*		m_table_source;
 	std::optional<Transaccion> m_trans;
 	std::optional<Account>     m_own_account;
 	std::optional<Account>     m_other_acccount;
@@ -65,9 +66,9 @@ class CompoundStatementLine
 	std::string m_category_name;
 
 public:
-	auto set_own_account(const std::string& number)
+	auto set_own_account( ConceptsAndAccounts::StringColumn_mem fn)
 	{
-		m_own_account_number = number;
+		m_own_account_number = (m_table_source->*fn)(m_table_source->Row());
 
 		using namespace sqlite_orm;
 		auto& storage = Storage::getStorage();
@@ -88,7 +89,7 @@ public:
 	}
 	
 public:
-	CompoundStatementLine(int row) : m_row { row} {}
+	CompoundStatementLine(ConceptsAndAccounts* table_source) : m_table_source(table_source) {}
 
 #if 0
 	auto set_own_account( std::string &ConceptAndAccounts::f(int), ConceptAndAccounts* obj)
@@ -98,9 +99,9 @@ public:
 	}
 #endif
 	
-	auto set_concepto(const std::string& name )
+	auto set_concepto(ConceptsAndAccounts::StringColumn_mem fn )
 	{
-		m_concepto_name = name;
+		m_concepto_name = (m_table_source->*fn)(m_table_source->Row());
 
 		using namespace sqlite_orm;
 		auto& storage = Storage::getStorage();
@@ -119,9 +120,9 @@ public:
 		}
 		return m_concepto;
 	}
-	auto setStatement( date::sys_days fecha)
+	auto setStatement(ConceptsAndAccounts::SysDaysColumn_mem fn )
 	{
-		m_statement_date = fecha;
+		m_statement_date = (m_table_source->*fn)(m_table_source->Row());
 		using namespace sqlite_orm;
 		auto& storage = Storage::getStorage();
 
@@ -139,9 +140,9 @@ public:
 		}
 		return m_statement;
 	}
-	auto set_category( const std::string& category_name)
+	auto set_category(ConceptsAndAccounts::StringColumn_mem fn)
 	{
-		m_category_name = category_name;
+		m_category_name = (m_table_source->*fn)(m_table_source->Row());
 		using namespace sqlite_orm;
 		auto& storage = Storage::getStorage();
 
@@ -159,7 +160,8 @@ public:
 		}
 		return m_categoria;
 	}
-	std::optional<Transaccion> set_transaction(double colones, double dolares, date::sys_days line_date, const std::string& description )
+	std::optional<Transaccion> set_transaction(ConceptsAndAccounts::DoubleColumn_mem colones_fn, ConceptsAndAccounts::DoubleColumn_mem  dolares_fn, 
+		ConceptsAndAccounts::SysDaysColumn_mem line_date_fn, ConceptsAndAccounts::StringColumn_mem description_fn )
 	{
 		if( ! m_concepto || ! m_statement || ! m_categoria || ! m_own_account )
 		{
@@ -172,23 +174,21 @@ public:
 		m_trans->fkey_account_own = m_own_account->id_account;
 		m_trans->fkey_category = m_categoria->id_categoria;
 		m_trans->fkey_statement = m_statement->id_statement;
-		m_trans->amount_colones = colones;
-		m_trans->amount_dolares = dolares;
-		m_trans->descripcion = description;
-		m_trans->line_date = line_date;
-
+		m_trans->amount_colones = (m_table_source->*colones_fn)(m_table_source->Row());
+		m_trans->amount_dolares = (m_table_source->*dolares_fn)(m_table_source->Row());
+		m_trans->descripcion = (m_table_source->*description_fn)(m_table_source->Row());
+		m_trans->line_date = (m_table_source->*line_date_fn)(m_table_source->Row());
+		m_trans->descripcion = (m_table_source->*description_fn)(m_table_source->Row());
+#define MODIFY_SCHEMA
+#ifdef MODIFY_SCHEMA
+		m_trans->row = m_table_source->Row();
+#endif
+		m_trans->id_transaccion = -1;
 		
 		TransaccionDlg dlg;
 		dlg.setDiscriminator(m_trans);
+		dlg.autoexec();
 		auto ret = dlg.DoModal();
-		if( ret != 1)
-		{
-			return std::nullopt;
-		}
-		else
-		{
-			s_transaccion_map[m_row] = m_trans;
-		}
 		m_trans = dlg.getCompleteObject();
 		return m_trans;
 	}

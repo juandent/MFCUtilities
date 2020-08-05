@@ -33,7 +33,7 @@ class StatementLineGridController :     public IGridController
 	std::vector<Translation> lines;
 public:
 
-	enum Columns { STMT_DATE=1, OWN_ACCOUNT, LINE_DATE, CONCEPTO, AMOUNT_LOCAL, AMOUNT_DOLLARS, IS_ENABLED, CATEGORY_NAME, DESCRIPCION, OWNER_NAME, NUM_COLUMNS = OWNER_NAME};
+	enum Columns {ROW_NUMBER, STMT_DATE, OWN_ACCOUNT, LINE_DATE, CONCEPTO, AMOUNT_LOCAL, AMOUNT_DOLLARS, IS_ENABLED, CATEGORY_NAME, DESCRIPCION, OWNER_NAME, NUM_COLUMNS = OWNER_NAME};
 
 	StatementLineGridController(CJDGridCtrl& grid, int count_columns) : IGridController(grid, count_columns) {}
 

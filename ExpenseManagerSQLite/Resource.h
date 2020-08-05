@@ -126,6 +126,7 @@
 #define IDC_L_BANCOS                    1027
 #define IDC_B_DISCONNECT8               1028
 #define IDC_E_ID_CUENTA                 1028
+#define IDC_B_REMOVE_ACCOUNT            1028
 #define IDC_E_CUENTA_PROPIA             1029
 #define IDC_E_DESCRIPTION               1029
 #define IDC_E_CUENTA_OTRA               1030
@@ -151,7 +152,9 @@
 #define IDC_C_CATEGORIAS                1040
 #define IDC_B_DESELECT_CONCEPTOS        1041
 #define IDC_E_TRANSACCION               1041
+#define IDC_B_REMOVE_STATEMENT          1042
 #define IDC_DATE_TRANSACTION            1043
+#define IDC_B_REMOVE_TRANSACTION        1043
 #define IDC_C_CONCEPTO                  1045
 #define IDC_B_ADD_CONCEPT               1046
 #define IDC_C_OWN_ACCOUNT               1047
@@ -190,6 +193,8 @@
 #define IDC_B_UPDATE_PAIS               1084
 #define IDC_B_UPDATE_TRANSACTION        1085
 #define IDC_B_SAVE_TO_DB                1086
+#define IDC_E_ROW                       1087
+#define IDC_L_STATEMENTS                1088
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
@@ -207,7 +212,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        319
 #define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1087
+#define _APS_NEXT_CONTROL_VALUE         1089
 #define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif

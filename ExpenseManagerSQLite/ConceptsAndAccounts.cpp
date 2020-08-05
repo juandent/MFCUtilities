@@ -12,6 +12,7 @@
 #include "BoxContents.h"
 #include "CompoundStatementLine.h"
 #include "StatementLineAdapter.h"
+#include "RecordLinks.h"
 
 
 // ConceptsAndAccounts
@@ -20,7 +21,7 @@ IMPLEMENT_DYNCREATE(ConceptsAndAccounts, CFormView)
 
 ConceptsAndAccounts::ConceptsAndAccounts()
 	: CFormView(IDD_ConceptsAndAccounts),
-	m_grid_controller(m_statementLines, 10),
+	m_grid_controller(m_statementLines, 11),
 	m_paisLB{ m_paises, [](Pais& pais)
 {
 	auto display = JD::to_cstring(pais.name);
@@ -54,7 +55,12 @@ m_duenoLB{ m_duenos,
 			{
 				Colones  colones = trans.amount_colones;
 				Dolares dolares = trans.amount_dolares;
-				return JD::to_cstring(trans.id_transaccion) + L" - " + JD::to_cstring(trans.line_date) + L" - " + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
+				return JD::to_cstring(trans.id_transaccion) + L" - #" + JD::to_cstring(trans.row) + L" - " +
+					JD::to_cstring(trans.line_date) + L" - " + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
+			}},
+			m_statementsLB {  m_statement_list, [](Statement& statement)
+			{
+				return JD::to_cstring(statement.id_statement) + L" - " + JD::to_cstring(statement.date);
 			}}
 {
 }
@@ -77,7 +83,7 @@ void ConceptsAndAccounts::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_L_DUENOS, m_duenos);
 	DDX_Control(pDX, IDC_L_BANCOS, m_bancos);
 	DDX_Control(pDX, IDC_L_CUENTAS, m_cuentas);
-//	DDX_Control(pDX, IDC_L_EXPANDED_ACCOUNTS, m_expanded_accounts);
+	//	DDX_Control(pDX, IDC_L_EXPANDED_ACCOUNTS, m_expanded_accounts);
 	DDX_Control(pDX, IDC_E_UBICACION, m_ubicacion);
 	DDX_Control(pDX, IDC_E_CONCEPTO, m_concepto);
 	//DDX_Control(pDX, IDC_E_CUENTA_DEST, m_cuenta_destino);
@@ -92,6 +98,7 @@ void ConceptsAndAccounts::DoDataExchange(CDataExchange* pDX)
 	//	DDX_Control(pDX, IDC_L_CUENTAS_MIAS, m_cuentas_propias);
 	DDX_Control(pDX, IDC_L_TRANSACTIONS, m_transacciones);
 	DDX_Control(pDX, IDC_L_CONCEPTOS, m_conceptos);
+	DDX_Control(pDX, IDC_L_STATEMENTS, m_statement_list);
 }
 
 BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
@@ -115,6 +122,10 @@ BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
 	ON_BN_CLICKED(IDC_B_DESELECT_CONCEPTOS, &ConceptsAndAccounts::OnBnClickedBDeselectConceptos)
 	ON_LBN_SELCHANGE(IDC_L_TRANSACTIONS, &ConceptsAndAccounts::OnLbnSelchangeLTransactions)
 	ON_BN_CLICKED(IDC_B_SAVE_TO_DB, &ConceptsAndAccounts::OnBnClickedBSaveToDb)
+	ON_LBN_SELCHANGE(IDC_L_STATEMENTS, &ConceptsAndAccounts::OnLbnSelchangeLStatements)
+	ON_BN_CLICKED(IDC_B_REMOVE_STATEMENT, &ConceptsAndAccounts::OnBnClickedBRemoveStatement)
+	ON_BN_CLICKED(IDC_B_REMOVE_ACCOUNT, &ConceptsAndAccounts::OnBnClickedBRemoveAccount)
+	ON_BN_CLICKED(IDC_B_REMOVE_TRANSACTION, &ConceptsAndAccounts::OnBnClickedBRemoveTransaction)
 END_MESSAGE_MAP()
 
 
@@ -365,6 +376,7 @@ void ConceptsAndAccounts::refresh()
 	m_bancoLB.loadLB();
 	m_conceptoLB.loadLB();
 	m_transaccionesLB.loadLB();
+	m_statementsLB.loadLB();
 }
 
 void ConceptsAndAccounts::OnLbnSelchangeLCuentas()
@@ -599,6 +611,7 @@ void ConceptsAndAccounts::OnLbnSelchangeLTransactions()
 	if (trans)
 	{
 		std::optional<Account> acct = m_accountLB.select(*trans->fkey_account_other);
+		auto statement = m_statementsLB.select(trans->fkey_statement);
 	}
 
 }
@@ -607,29 +620,49 @@ void ConceptsAndAccounts::OnLbnSelchangeLTransactions()
 void ConceptsAndAccounts::OnBnClickedBSaveToDb()
 {
 	// TODO: Add your control notification handler code here
-	int row = 3;
-	CompoundStatementLine comp{row};
-	auto r1 = comp.set_own_account(getOwnAccountNumber(row));
-//	comp.set_other_account(get)
-	comp.set_concepto(getConceptoName(row));
-	comp.setStatement(getStatementDate(row));
-	comp.set_category(getCategoryName(row));
-	comp.set_transaction(getAmountLocal(row), getAmountDolares(row), getLineDate(row), getDescripcion(row));
 
-	refresh();
-	
-#if 0
-	CString amount_local = m_statementLines.GetItemText(row, StatementLineGridController::Columns::AMOUNT_LOCAL);
-	CString amount_dolares = m_statementLines.GetItemText(row, StatementLineGridController::Columns::AMOUNT_DOLLARS);
-	CString own_account = m_statementLines.GetItemText(row, StatementLineGridController::Columns::OWN_ACCOUNT);
-	CString concepto = m_statementLines.GetItemText(row, StatementLineGridController::Columns::CONCEPTO);
-	CString line_date = m_statementLines.GetItemText(row, StatementLineGridController::Columns::LINE_DATE);
-	CString stmt_date = m_statementLines.GetItemText(row, StatementLineGridController::Columns::STMT_DATE);
-	CString descrip = m_statementLines.GetItemText(row, StatementLineGridController::Columns::DESCRIPCION);
-	StatementLineGridController::Columns::CATEGORY_NAME
-#endif
-	for( int row=1; row < m_statementLines.GetRowCount(); ++row)
+
+	for (m_row = 1; m_row < m_statementLines.GetRowCount(); ++m_row)
 	{
-		
+		CompoundStatementLine comp{ this };
+		auto r1 = comp.set_own_account(&ConceptsAndAccounts::getOwnAccountNumber);
+		auto r2 = comp.set_concepto(&ConceptsAndAccounts::getConceptoName);
+		auto r3 = comp.setStatement(&ConceptsAndAccounts::getStatementDate);
+		auto r4 = comp.set_category(&ConceptsAndAccounts::getCategoryName);
+		auto r5 = comp.set_transaction(&ConceptsAndAccounts::getAmountLocal, &ConceptsAndAccounts::getAmountDolares, &ConceptsAndAccounts::getLineDate, &ConceptsAndAccounts::getDescripcion);
+
+		int ret = MessageBoxW(L"Desea continuar?", L"Confirme", MB_CANCELTRYCONTINUE);
+		if (ret == 2)
+			break;
 	}
+	refresh();
+}
+
+
+void ConceptsAndAccounts::OnLbnSelchangeLStatements()
+{
+	// TODO: Add your control notification handler code here
+	auto statement = m_statementsLB.current();
+	//m_transaccionesLB.select(statement->)
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBRemoveStatement()
+{
+	// TODO: Add your control notification handler code here
+	m_statementsLB.delete_current_sel();
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBRemoveAccount()
+{
+	// TODO: Add your control notification handler code here
+	m_accountLB.delete_current_sel();
+}
+
+
+void ConceptsAndAccounts::OnBnClickedBRemoveTransaction()
+{
+	// TODO: Add your control notification handler code here
+	m_transaccionesLB.delete_current_sel();
 }

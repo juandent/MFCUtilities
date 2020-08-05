@@ -15,6 +15,7 @@ class TransaccionDlg : public CDialog
 	BoxContents<Account, &Account::id_account, CComboBox> m_other_accountCB;
 	BoxContents<Categoria, &Categoria::id_categoria, CComboBox> m_categoriaCB;
 	std::optional<Transaccion> m_trans;
+	bool m_autoexec = false;
 public:
 	TransaccionDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~TransaccionDlg();
@@ -29,6 +30,8 @@ public:
 	{
 		return m_trans;
 	}
+
+	void autoexec() { m_autoexec = true; }
 	
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
@@ -70,4 +73,6 @@ public:
 	afx_msg void OnLbnSelchangeLTransaction();
 	afx_msg void OnBnClickedBBorrar();
 	afx_msg void OnBnClickedBUpdateTransaction();
+private:
+	CEdit m_row;
 };

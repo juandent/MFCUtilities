@@ -20,7 +20,8 @@ TransaccionDlg::TransaccionDlg(CWnd* pParent /*=nullptr*/)
 	{
 		Colones colones = trans.amount_colones;
 		Dolares dolares = trans.amount_dolares;
-		return JD::to_cstring(trans.id_transaccion) + L" - " + JD::to_cstring(trans.line_date) + L" - " + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
+		return JD::to_cstring(trans.id_transaccion) + L" - " + JD::to_cstring(trans.row) + L"# - " +			
+			JD::to_cstring(trans.line_date) + L" - " + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
 	}},
 	m_conceptoCB{ m_list_concepto, [](Concepto& concepto)
 	{
@@ -64,6 +65,7 @@ void TransaccionDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_MONTO_DOLARES, m_dolares);
 	DDX_Control(pDX, IDC_E_DESCRIPCION, m_descripcion);
 	DDX_Control(pDX, IDC_E_TRANSACCION, m_id);
+	DDX_Control(pDX, IDC_E_ROW, m_row);
 }
 
 
@@ -118,8 +120,16 @@ BOOL TransaccionDlg::OnInitDialog()
 		m_own_accountCB.select(m_trans->fkey_account_own);
 
 		m_id.SetWindowTextW(JD::to_cstring(m_trans->id_transaccion));
+#define MODIFY_SCHEMA
+#ifdef MODIFY_SCHEMA
+		m_row.SetWindowTextW(JD::to_cstring(m_trans->row));
+#endif
 	}
-
+	if( m_autoexec)
+	{
+		this->OnBnClickedBAplicarTransactions();
+		this->OnBnClickedOk();
+	}
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -272,8 +282,26 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 	{
 		account_other = std::nullopt;
 	}
-	std::optional<Transaccion> trans;
 
+
+
+#if 0
+	CString rID;
+	m_id.GetWindowTextW(rID);
+	auto id_str = JD::from_cstring(rID);
+	auto id = stoi(id_str);
+	
+	std::optional<Transaccion> trans = Storage::getStorage().get_optional<Transaccion>(id);
+#else
+	CString rRow;
+	m_row.GetWindowTextW(rRow);
+	auto row_str = JD::from_cstring(rRow);
+	auto row = stoi(row_str);
+	auto whereClause = (c(&Transaccion::row) == row) && (c(&Transaccion::fkey_statement) == statement->id_statement);
+	std::optional<Transaccion> trans = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::row, &Transaccion::fkey_statement);
+
+#endif
+#if 0
 	if (other_account)
 	{
 		auto whereClause = (c(&Transaccion::fkey_concepto) == concepto->id_concepto) && (c(&Transaccion::line_date) == line_date) && (c(&Transaccion::fkey_statement) == statement->id_statement)
@@ -292,10 +320,10 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		trans = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::amount_colones, &Transaccion::amount_dolares, &Transaccion::fkey_account_own, &Transaccion::line_date,
 			&Transaccion::descripcion, &Transaccion::fkey_category, &Transaccion::fkey_concepto, &Transaccion::fkey_statement);
 	}
-
+#endif
 	if( !trans)   // insert
 	{
-		trans = m_transaccionLB.insert(colones, dolares, own_account->id_account, account_other, line_date, descripcion, categoria->id_categoria, concepto->id_concepto, statement->id_statement);
+		trans = m_transaccionLB.insert(colones, dolares, own_account->id_account, account_other, line_date, descripcion, categoria->id_categoria, concepto->id_concepto, statement->id_statement, row);
 		m_transaccionLB.insert_into_listbox(*trans);
 		m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
 	}
@@ -307,21 +335,10 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		trans->amount_dolares = dolares;
 		trans->amount_colones = colones;
 		trans->fkey_category = categoria->id_categoria;
-#if 0
-		std::optional<int> account_other;
-		if( other_account)
-		{
-			account_other = other_account->id_account;
-		}
-		else
-		{
-			account_other = std::nullopt;
-		}
-#endif
 		trans->fkey_account_other = account_other;
 		trans->fkey_account_own = own_account->id_account;
 		trans->fkey_statement = statement->id_statement;
-		
+		trans->row = row;
 		m_transaccionLB.update(*trans);
 	}
 	m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));

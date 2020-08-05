@@ -113,7 +113,7 @@ struct Transaccion
 	int fkey_category;
 	int fkey_concepto;
 	int fkey_statement;
-
+	int row;					 // fkey_statement + row is unique
 
 	std::shared_ptr<Account> getAccountOrigin() const;
 	std::shared_ptr<Account> getAccountDestination() const;
@@ -191,6 +191,7 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("fkey_category", &Transaccion::fkey_category),
 				make_column( "concepto", &Transaccion::fkey_concepto),
 				make_column( "fkey_statement", &Transaccion::fkey_statement),
+				make_column("row", &Transaccion::row),
 				foreign_key(&Transaccion::fkey_account_own).references(&Account::id_account),
 				foreign_key(&Transaccion::fkey_account_other).references(&Account::id_account),
 				foreign_key(&Transaccion::fkey_category).references(&Categoria::id_categoria),
