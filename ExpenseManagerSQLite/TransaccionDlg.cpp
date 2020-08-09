@@ -127,6 +127,20 @@ void TransaccionDlg::Refresh()
 
 }
 
+void TransaccionDlg::Find_id()
+{
+	if (m_trans)
+	{
+		auto whereClause = (c(&Transaccion::row) == m_trans->row) && (c(&Transaccion::fkey_statement) == m_trans->fkey_statement);
+		std::optional<Transaccion> trans_by_value = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::row, &Transaccion::fkey_statement);
+		if (trans_by_value)
+		{
+			m_trans = trans_by_value;
+			setIdFromRecord<Transaccion>(m_id, m_trans->id_transaccion);
+		}
+	}
+}
+
 BOOL TransaccionDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
@@ -134,42 +148,11 @@ BOOL TransaccionDlg::OnInitDialog()
 	// TODO:  Add extra initialization here
 	Refresh();
 	Refresh_discriminator();
-#if 0 
-	m_other_accountCB.loadLB();
-	m_conceptoCB.loadLB();
-	m_statementCB.loadLB();
-	m_own_accountCB.loadLB();
-	m_categoriaCB.loadLB();
-	m_other_accountCB.loadLB();
-	m_transaccionLB.loadLB();
 
-	if (m_trans)
-	{
-		const auto date = JD::to_ole_date_time(m_trans->line_date);
-		m_date_transaccion.SetCurSel(date);
-		
-		m_conceptoCB.select(m_trans->fkey_concepto);
-		m_categoriaCB.select(m_trans->fkey_category);
+	Find_id();
 
-		Colones colones{ m_trans->amount_colones };
-		CString str_colones = JD::to_cstring(colones);
-		m_colones.SetWindowTextW(str_colones);
+	
 
-		Dolares dolares{ m_trans->amount_dolares };
-		CString str_dolares = JD::to_cstring(dolares);
-		m_dolares.SetWindowTextW(str_dolares);
-		
-		m_descripcion.SetWindowTextW(JD::to_cstring(m_trans->descripcion));
-		m_statementCB.select(m_trans->fkey_statement);
-		m_own_accountCB.select(m_trans->fkey_account_own);
-
-		m_id.SetWindowTextW(JD::to_cstring(m_trans->id_transaccion));
-#define MODIFY_SCHEMA
-#ifdef MODIFY_SCHEMA
-		m_row.SetWindowTextW(JD::to_cstring(m_trans->row));
-#endif
-	}
-#endif
 	if( m_autoexec)
 	{
 		this->OnBnClickedBAplicarTransactions();

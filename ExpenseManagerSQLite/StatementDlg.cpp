@@ -137,6 +137,7 @@ void StatementDlg::OnLbnSelchangeLEstadosDeCuenta()
 	COleDateTime rDateTime = JD::to_ole_date_time(fecha);
 	
 	m_transaction_date_picker.SetTime(rDateTime);
+	setIdFromRecord<Statement>(m_id_statement, statement->id_statement);
 
 }
 

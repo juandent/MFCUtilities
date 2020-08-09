@@ -18,6 +18,7 @@ class TransaccionDlg : public CDialog
 	bool m_autoexec = false;
 	void Refresh();
 	void Refresh_discriminator();
+	void Find_id();
 public:
 	TransaccionDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~TransaccionDlg();
