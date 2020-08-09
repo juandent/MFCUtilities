@@ -256,6 +256,8 @@ namespace JD
 void TransaccionDlg::OnBnClickedBAplicarTransactions()
 {
 	// TODO: Add your control notification handler code here
+	auto trans = getCurrent<Transaccion>(m_id);
+	
 	using namespace date;
 	
 	CString rDescripcion;
@@ -330,24 +332,24 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		account_other = std::nullopt;
 	}
 
-
-
-#if 0
-	CString rID;
-	m_id.GetWindowTextW(rID);
-	auto id_str = JD::from_cstring(rID);
-	auto id = stoi(id_str);
-	
-	std::optional<Transaccion> trans = Storage::getStorage().get_optional<Transaccion>(id);
-#else
 	CString rRow;
 	m_row.GetWindowTextW(rRow);
 	auto row_str = JD::from_cstring(rRow);
 	auto row = stoi(row_str);
-	auto whereClause = (c(&Transaccion::row) == row) && (c(&Transaccion::fkey_statement) == statement->id_statement);
-	std::optional<Transaccion> trans = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::row, &Transaccion::fkey_statement);
 
-#endif
+	if (!trans)
+	{
+		auto whereClause = (c(&Transaccion::row) == row) && (c(&Transaccion::fkey_statement) == statement->id_statement);
+		std::optional<Transaccion> trans_by_value = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::row, &Transaccion::fkey_statement);
+
+		if (trans_by_value)
+		{
+			MessageBoxW(L"Transaccion found for another primary key");
+		}
+		trans = trans_by_value;
+
+	}
+
 #if 0
 	if (other_account)
 	{
@@ -388,11 +390,13 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		trans->row = row;
 		m_transaccionLB.update(*trans);
 	}
-	m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
+	//m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
+	setIdFromRecord<Transaccion>(m_id, trans->id_transaccion);
 	m_transaccionLB.loadLB();
 	m_trans = trans;
 }
 
+#if 0
 std::optional<Transaccion> TransaccionDlg::getCurrent()
 {
 	std::optional<Transaccion> trans;
@@ -407,25 +411,24 @@ std::optional<Transaccion> TransaccionDlg::getCurrent()
 	trans = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::row, &Transaccion::fkey_statement);
 	return trans;
 }
-
+#endif
 
 void TransaccionDlg::OnLbnSelchangeLTransaction()
 {
 	// TODO: Add your control notification handler code here
-#if 0
-	auto trans = getCurrent();
-#endif
 	using namespace sqlite_orm;
 
 	auto& storage = Storage::getStorage();
 
 #if 1	
 	std::optional<Transaccion> trans = m_transaccionLB.current();
+#if 0
 	if( ! trans)
 	{
 		MessageBoxW(L"Falta escoger transacción");
 		return;
 	}
+#endif
 	int cur_sel = m_transaccionLB.GetCurSel();
 	using namespace date;
 #endif
@@ -462,8 +465,24 @@ void TransaccionDlg::postMessage(CListBox& box)
 void TransaccionDlg::OnBnClickedBBorrar()
 {
 	// TODO: Add your control notification handler code here
+	auto trans = getCurrent<Transaccion>(m_id);
+	if (!trans)
+	{
+		MessageBoxW(L"Falta escoger transaccion");
+		return;
+	}
+	bool has_links = RecordLinks::has_links(*trans);
+	// ask to be sure!
+	if (!has_links)
+	{
+		int index = m_transaccionLB.find_in_listbox(*trans);
+		m_transaccionLB.SetCurSel(index);
+		m_transaccionLB.delete_current_sel();
+		m_id.SetWindowTextW(L"");
+	}
+#if 0
 #if 1
-	auto trans = getCurrent();
+	//auto trans = getCurrent();
 #else
 	auto trans = m_transaccionLB.current();
 #endif
@@ -481,6 +500,7 @@ void TransaccionDlg::OnBnClickedBBorrar()
 		m_transaccionLB.delete_current_sel();
 		m_id.SetWindowTextW(L"");
 	}
+#endif
 }
 
 

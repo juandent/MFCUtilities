@@ -42,6 +42,7 @@ BEGIN_MESSAGE_MAP(CategoryDlg, CDialog)
 	ON_BN_CLICKED(ID_B_BORRAR, &CategoryDlg::OnBnClickedBBorrar)
 	ON_BN_CLICKED(IDC_B_APLICAR_CATEGORY, &CategoryDlg::OnBnClickedBAplicarCategory)
 	ON_BN_CLICKED(IDC_B_UPDATE, &CategoryDlg::OnBnClickedBUpdate)
+	ON_LBN_SELCHANGE(IDC_L_CATEGORIAS, &CategoryDlg::OnLbnSelchangeLCategorias)
 END_MESSAGE_MAP()
 
 
@@ -159,4 +160,16 @@ void CategoryDlg::OnBnClickedBUpdate()
 
 	m_category = cat;
 #endif
+}
+
+
+void CategoryDlg::OnLbnSelchangeLCategorias()
+{
+	// TODO: Add your control notification handler code here
+	auto categoria = m_categoriasLB.current();
+
+
+	m_id_categoria.SetWindowTextW(JD::to_cstring(categoria->id_categoria));
+	m_nombre.SetWindowTextW(JD::to_cstring(categoria->name));
+	m_gasto_o_ingreso_real.SetCheck(categoria->is_expense_or_income);
 }

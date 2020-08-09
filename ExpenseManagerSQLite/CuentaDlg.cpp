@@ -58,6 +58,7 @@ BEGIN_MESSAGE_MAP(CuentaDlg, CDialog)
 	ON_BN_CLICKED(ID_B_BORRAR_CUENTA, &CuentaDlg::OnBnClickedBBorrarCuenta)
 	ON_BN_CLICKED(IDC_B_UPDATE_ACCOUNT, &CuentaDlg::OnBnClickedBUpdateAccount)
 	ON_LBN_SELCHANGE(IDC_L_CUENTAS, &CuentaDlg::OnLbnSelchangeLCuentas)
+	ON_EN_SETFOCUS(IDC_E_ID_CUENTA, &CuentaDlg::OnEnSetfocusEIdCuenta)
 END_MESSAGE_MAP()
 
 
@@ -103,6 +104,7 @@ void CuentaDlg::OnBnClickedBAddBancos()
 	m_bancosCB.loadLB();
 }
 
+#if 0
 std::optional<Account> CuentaDlg::getCurrent() const
 {
 	/// <summary>
@@ -122,11 +124,13 @@ Operation CuentaDlg::whatOperation() const
 	auto cuenta = getCurrent();
 	return cuenta ? Operation::doUpdate : Operation::doInsert;
 }
+#endif
 
 void CuentaDlg::OnBnClickedBAplicarCuenta()
 {
 	// TODO: Add your control notification handler code here
-	Operation op = whatOperation();
+	auto cuenta = getCurrent<Account>(m_id_cuenta);
+	
 		
 	CString rNumero, rDescripcion;
 	m_numero.GetWindowTextW(rNumero);
@@ -162,32 +166,35 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 	auto numero = JD::from_cstring(rNumero);
 	auto descripcion = JD::from_cstring(rDescripcion);
 
-	std::optional<Account> account;
-	
-	if (op == Operation::doInsert) // first verify number does not exist
+	if (! cuenta) 
 	{
 		auto whereClause = (c(&Account::number) == numero.c_str());
 
-		account = m_cuentasLB.exists(whereClause, &Account::id_account, &Account::number);
+		std::optional<Account> account_by_value = m_cuentasLB.exists(whereClause, &Account::id_account, &Account::number);
+		if (account_by_value)
+		{
+			MessageBoxW(L"Cuenta found for another primary key");
+		}
+		cuenta = account_by_value;
 	}
-	if (!account)	// new account
+	if (!cuenta)	// new account
 	{
 		// need to get current
-		account = m_cuentasLB.insert(numero, banco->id_bank, owner->id_owner, descripcion, is_tarjeta_checked);
-		m_cuentasLB.insert_into_listbox(*account);
+		cuenta = m_cuentasLB.insert(numero, banco->id_bank, owner->id_owner, descripcion, is_tarjeta_checked);
+		m_cuentasLB.insert_into_listbox(*cuenta);
 	}
 	else      // update
 	{
-		account->number = numero;
-		account->description = descripcion;
-		account->is_tarjeta = is_tarjeta_checked;
-		account->fkey_bank = banco->id_bank;
-		account->fkey_account_owner = owner->id_owner;
-		m_cuentasLB.update(*account);
+		cuenta->number = numero;
+		cuenta->description = descripcion;
+		cuenta->is_tarjeta = is_tarjeta_checked;
+		cuenta->fkey_bank = banco->id_bank;
+		cuenta->fkey_account_owner = owner->id_owner;
+		m_cuentasLB.update(*cuenta);
 	}
 	m_cuentasLB.loadLB();
-	m_id_cuenta.SetWindowTextW(JD::to_cstring(account->id_account));
-	m_account = account;
+	m_account = cuenta;
+	setIdFromRecord<Account>(m_id_cuenta, cuenta->id_account);
 }
 
 
@@ -259,4 +266,11 @@ void CuentaDlg::OnLbnSelchangeLCuentas()
 	m_bancosCB.select(cuenta->fkey_bank);
 	m_tarjeta.SetCheck(cuenta->is_tarjeta);
 	m_cuenta_bancaria.SetCheck(!cuenta->is_tarjeta);
+}
+
+
+void CuentaDlg::OnEnSetfocusEIdCuenta()
+{
+	// TODO: Add your control notification handler code here
+	m_id_cuenta.SendMessage(WM_KILLFOCUS);
 }

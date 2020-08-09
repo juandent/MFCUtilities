@@ -156,6 +156,8 @@ void ConceptosDlg::OnLbnSelchangeLConceptos()
 void ConceptosDlg::OnBnClickedBAplicarConcepto()
 {
 	// TODO: Add your control notification handler code here
+	auto concepto = getCurrent<Concepto>(m_id);
+	
 	CString rNombre;
 	m_nombre.GetWindowTextW(rNombre);
 
@@ -173,22 +175,31 @@ void ConceptosDlg::OnBnClickedBAplicarConcepto()
 		return;
 	}
 
-	auto whereClause = (c(&Concepto::name) == nombre.c_str());
-
-	std::optional<Concepto> concepto_db = m_conceptosLB.exists(whereClause, &Concepto::id_concepto, &Concepto::name);
-
-	if (!concepto_db)    // insert
+	if (!concepto)
 	{
-		concepto_db = m_conceptosLB.insert(nombre, cuenta->id_account);
-		m_conceptosLB.insert_into_listbox(*concepto_db);
+		auto whereClause = (c(&Concepto::name) == nombre.c_str());
+
+		std::optional<Concepto> concepto_by_value = m_conceptosLB.exists(whereClause, &Concepto::id_concepto, &Concepto::name);
+
+		if (concepto_by_value)
+		{
+			MessageBoxW(L"Concepto found for another primary key");
+		}
+		concepto = concepto_by_value;
+	}
+	if (!concepto)    // insert
+	{
+		concepto = m_conceptosLB.insert(nombre, cuenta->id_account);
+		m_conceptosLB.insert_into_listbox(*concepto);
 	}
 	else               // update
 	{
-		concepto_db->name = nombre;
-		concepto_db->fkey_account = cuenta->id_account;
-		m_conceptosLB.update(*concepto_db);
+		concepto->name = nombre;
+		concepto->fkey_account = cuenta->id_account;
+		m_conceptosLB.update(*concepto);
 	}
 	m_conceptosLB.loadLB();
-	m_concepto = concepto_db;
-	m_id.SetWindowTextW(JD::to_cstring( m_concepto->id_concepto));
+	m_concepto = concepto;
+
+	setIdFromRecord<Concepto>(m_id, concepto->id_concepto);
 }

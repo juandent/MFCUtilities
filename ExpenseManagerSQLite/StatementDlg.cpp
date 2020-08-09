@@ -31,6 +31,7 @@ void StatementDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_L_ESTADOS_DE_CUENTA, m_list_statement);
 	DDX_Control(pDX, IDC_DATETIMEPICKER_STATEMENT, m_transaction_date_picker);
+	DDX_Control(pDX, IDC_E_ID_STATEMENT, m_id_statement);
 }
 
 
@@ -62,17 +63,26 @@ BOOL StatementDlg::OnInitDialog()
 void StatementDlg::OnBnClickedBAplicarStatement()
 {
 	// TODO: Add your control notification handler code here
+	auto statement = getCurrent<Statement>(m_id_statement);
+	
 	using namespace date;
 	
 	COleDateTime rOleDateTime;
 	m_transaction_date_picker.GetTime(rOleDateTime);
 
 	sys_days statement_date = JD::to_sys_days(rOleDateTime);
-	
-	auto whereClause = (c(&Statement::date) == statement_date);
 
-	std::optional<Statement> statement = m_statementLB.exists(whereClause, &Statement::id_statement, &Statement::date);
+	if (!statement)
+	{
+		auto whereClause = (c(&Statement::date) == statement_date);
+		std::optional<Statement> statement_by_value = m_statementLB.exists(whereClause, &Statement::id_statement, &Statement::date);
+		if (statement_by_value)
+		{
+			MessageBoxW(L"Estado de cuenta found for another primary key");
+		}
+		statement = statement_by_value;
 
+	}
 	if (!statement)	// new account
 	{
 		statement = m_statementLB.insert(statement_date);
@@ -85,6 +95,7 @@ void StatementDlg::OnBnClickedBAplicarStatement()
 	}
 	m_statementLB.loadLB();
 	m_statement = statement;
+	setIdFromRecord<Statement>(m_id_statement, statement->id_statement);
 }
 
 

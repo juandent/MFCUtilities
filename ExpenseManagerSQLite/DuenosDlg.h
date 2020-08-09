@@ -31,4 +31,6 @@ public:
 	afx_msg void OnBnClickedBBorrarOwner();
 	afx_msg void OnBnClickedBUpdateOwners();
 	afx_msg void OnLbnSelchangeLDuenos();
+private:
+	CEdit m_id_owner;
 };

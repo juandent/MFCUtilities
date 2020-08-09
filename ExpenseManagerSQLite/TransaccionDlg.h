@@ -49,7 +49,6 @@ public:
 	afx_msg void OnBnClickedBAddStatement();
 	afx_msg void OnBnClickedBAddConcept();
 	afx_msg void OnBnClickedOk();
-	std::optional<Transaccion> getCurrent();
 	void postMessage(CListBox& box);
 private:
 	CMonthCalCtrl m_date_transaccion;

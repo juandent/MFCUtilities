@@ -198,8 +198,10 @@
 #define IDC_L_STATEMENTS                1088
 #define IDC_E_ID_CONCEPTO               1089
 #define IDC_E_ID_BANCO                  1090
-#define IDC_EDIT1                       1091
 #define IDC_E_ID_CATEGORIA              1091
+#define IDC_E_ID_OWNER                  1092
+#define IDC_EDIT1                       1093
+#define IDC_E_ID_STATEMENT              1093
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
@@ -217,7 +219,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        319
 #define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1092
+#define _APS_NEXT_CONTROL_VALUE         1094
 #define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif

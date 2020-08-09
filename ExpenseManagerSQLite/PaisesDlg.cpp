@@ -69,6 +69,8 @@ void PaisesDlg::OnBnClickedOk()
 void PaisesDlg::OnBnClickedBAplicarPaises()
 {
 	// TODO: Add your control notification handler code here
+	auto pais = getCurrent<Pais>(m_id_pais);
+
 	CString rStr;
 	m_nombre_pais.GetWindowTextW(rStr);
 
@@ -79,10 +81,19 @@ void PaisesDlg::OnBnClickedBAplicarPaises()
 	}
 
 	auto name = JD::from_cstring(rStr);
-	auto whereClause = c(&Pais::name) == name.c_str();
 
-	std::optional<Pais> pais = m_paisLB.exists(whereClause, &Pais::id_pais, &Pais::name);
+	if (!pais)
+	{
 
+		auto whereClause = c(&Pais::name) == name.c_str();
+		std::optional<Pais> pais_by_value = m_paisLB.exists(whereClause, &Pais::id_pais, &Pais::name);
+		if (pais_by_value)
+		{
+			MessageBoxW(L"Pais found for another primary key");
+		}
+		pais = pais_by_value;
+
+	}
 	if (!pais)    // insert
 	{
 		pais = m_paisLB.insert(name);
@@ -96,6 +107,8 @@ void PaisesDlg::OnBnClickedBAplicarPaises()
 	}
 	m_paisLB.loadLB();
 	m_pais = pais;
+
+	setIdFromRecord<Pais>(m_id_pais, pais->id_pais);
 }
 
 

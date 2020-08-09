@@ -236,6 +236,10 @@ std::optional<Table> getCurrent(CEdit& editCtrl)
 
 	CString rId;
 	editCtrl.GetWindowTextW(rId);
+	if( rId.IsEmpty())
+	{
+		return std::nullopt;
+	}
 	auto id_str = JD::from_cstring(rId);
 	auto id = std::stoi(id_str);
 	auto record = Storage::getStorage().get_optional < Table>(id);

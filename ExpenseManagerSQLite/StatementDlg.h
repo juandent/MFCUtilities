@@ -44,4 +44,6 @@ public:
 	afx_msg void OnBnClickedBorrarStatement();
 	afx_msg void OnLbnSelchangeLEstadosDeCuenta();
 	afx_msg void OnBnClickedBUpdateStatement();
+private:
+	CEdit m_id_statement;
 };

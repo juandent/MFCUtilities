@@ -32,6 +32,7 @@ void DuenosDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_E_NOMBRE, m_nombre);
 	DDX_Control(pDX, IDC_L_DUENOS, m_list_duenos);
+	DDX_Control(pDX, IDC_E_ID_OWNER, m_id_owner);
 }
 
 
@@ -61,6 +62,8 @@ BOOL DuenosDlg::OnInitDialog()
 void DuenosDlg::OnBnClickedBApplyOwner()
 {
 	// TODO: Add your control notification handler code here
+	auto account_owner= getCurrent<AccountOwner>(m_id_owner);
+	
 	CString rNombre;
 	m_nombre.GetWindowTextW(rNombre);
 
@@ -72,9 +75,18 @@ void DuenosDlg::OnBnClickedBApplyOwner()
 
 	auto nombre = JD::from_cstring(rNombre);
 
-	auto whereClause = (c(&AccountOwner::id_owner) == nombre.c_str());
+	if (! account_owner)
+	{
+		auto whereClause = (c(&AccountOwner::id_owner) == nombre.c_str());
 
-	std::optional<AccountOwner> account_owner = m_ownerLB.exists(whereClause, &AccountOwner::id_owner, &AccountOwner::name);
+		std::optional<AccountOwner> account_owner_by_value = m_ownerLB.exists(whereClause, &AccountOwner::id_owner, &AccountOwner::name);
+
+		if (account_owner_by_value)
+		{
+			MessageBoxW(L"Dueño de Cuenta found for another primary key");
+		}
+		account_owner = account_owner_by_value;
+	}
 
 	if (!account_owner)	// new account
 	{
@@ -87,6 +99,7 @@ void DuenosDlg::OnBnClickedBApplyOwner()
 		m_ownerLB.update(*account_owner);
 	}
 	m_ownerLB.loadLB();
+	setIdFromRecord<AccountOwner>(m_id_owner, account_owner->id_owner);
 }
 
 

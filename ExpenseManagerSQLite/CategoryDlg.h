@@ -47,4 +47,6 @@ public:
 	afx_msg void OnBnClickedBUpdate();
 private:
 	CEdit m_id_categoria;
+public:
+	afx_msg void OnLbnSelchangeLCategorias();
 };
