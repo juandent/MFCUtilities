@@ -13,7 +13,9 @@ class CuentaDlg : public CDialog
 	BoxContents<AccountOwner, &AccountOwner::id_owner, CComboBox>	m_ownerCB;
 	BoxContents<Account, &Account::id_account> m_cuentasLB;
 
-	std::string m_numero_val;
+	std::string m_numero_val;	// discriminator
+	std::optional<Account> getCurrent() const;
+	Operation whatOperation() const;
 public:
 	CuentaDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CuentaDlg();

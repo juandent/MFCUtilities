@@ -34,6 +34,7 @@ void CategoryDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_CATEGORIA, m_nombre);
 	DDX_Control(pDX, IDC_C_IS_REAL, m_gasto_o_ingreso_real);
 	DDX_Control(pDX, IDC_L_CATEGORIAS, m_list_categorias);
+	DDX_Control(pDX, IDC_E_ID_CATEGORIA, m_id_categoria);
 }
 
 
@@ -63,23 +64,15 @@ BOOL CategoryDlg::OnInitDialog()
 void CategoryDlg::OnBnClickedBBorrar()
 {
 	// TODO: Add your control notification handler code here
-	auto categoria = m_categoriasLB.current();
-	if (!categoria)
-	{
-		MessageBoxW(L"Falta escoger categoría");
-		return;
-	}
-	bool has_links = RecordLinks::has_links(*categoria);
-	if (!has_links)
-	{
-		m_categoriasLB.delete_current_sel();
-	}
+	m_categoriasLB.delete_current_sel();
 }
 
 
 void CategoryDlg::OnBnClickedBAplicarCategory()
 {
 	// TODO: Add your control notification handler code here
+	auto categoria = getCurrent<Categoria>(m_id_categoria);
+
 	CString rNombre;
 	m_nombre.GetWindowTextW(rNombre);
 
@@ -93,9 +86,18 @@ void CategoryDlg::OnBnClickedBAplicarCategory()
 	
 	auto nombre = JD::from_cstring(rNombre);
 
-	auto whereClause = (c(&Categoria::name) == nombre.c_str());
+	if (! categoria)
+	{
+		auto whereClause = (c(&Categoria::name) == nombre.c_str());
+		std::optional<Categoria> categoria_by_value = m_categoriasLB.exists(whereClause, &Categoria::id_categoria, &Categoria::name);
 
-	std::optional<Categoria> categoria = m_categoriasLB.exists(whereClause, &Categoria::id_categoria, &Categoria::name);
+		if (categoria_by_value)
+		{
+			MessageBoxW(L"Categoria found for another primary key");
+		}
+		categoria = categoria_by_value;
+	}
+
 
 	if (!categoria)	// new categoria
 	{
@@ -110,6 +112,9 @@ void CategoryDlg::OnBnClickedBAplicarCategory()
 	}
 	m_categoriasLB.loadLB();
 	m_category = categoria;
+
+	setIdFromRecord<Categoria>(m_id_categoria, categoria->id_categoria);
+
 }
 
 

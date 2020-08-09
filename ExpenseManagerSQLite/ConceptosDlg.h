@@ -52,4 +52,6 @@ private:
 public:
 	afx_msg void OnLbnSelchangeLConceptos();
 	afx_msg void OnBnClickedBAplicarConcepto();
+private:
+	CEdit m_id;
 };

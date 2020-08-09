@@ -37,6 +37,7 @@ void ConceptosDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_C_ACCOUNT, m_listAccounts);
 	DDX_Control(pDX, IDC_L_CONCEPTOS, m_listConceptos);
 	DDX_Control(pDX, IDC_E_NOMBRE_CONCEPTO, m_nombre);
+	DDX_Control(pDX, IDC_E_ID_CONCEPTO, m_id);
 }
 
 
@@ -69,6 +70,7 @@ BOOL ConceptosDlg::OnInitDialog()
 void ConceptosDlg::OnBnClickedBBorrar()
 {
 	// TODO: Add your control notification handler code here
+#if 0
 	auto concepto = m_conceptosLB.current();
 
 	if( ! concepto)
@@ -82,7 +84,9 @@ void ConceptosDlg::OnBnClickedBBorrar()
 	{
 		m_conceptosLB.delete_current_sel();
 	}
-
+#else
+	m_conceptosLB.delete_current_sel();
+#endif
 }
 
 
@@ -145,6 +149,7 @@ void ConceptosDlg::OnLbnSelchangeLConceptos()
 
 	m_nombre.SetWindowTextW(JD::to_cstring(concepto->name));
 	m_accountsCB.select(concepto->fkey_account);
+	m_id.SetWindowTextW(JD::to_cstring(concepto->id_concepto));
 }
 
 
@@ -185,4 +190,5 @@ void ConceptosDlg::OnBnClickedBAplicarConcepto()
 	}
 	m_conceptosLB.loadLB();
 	m_concepto = concepto_db;
+	m_id.SetWindowTextW(JD::to_cstring( m_concepto->id_concepto));
 }

@@ -616,24 +616,54 @@ void ConceptsAndAccounts::OnLbnSelchangeLTransactions()
 
 }
 
+void ScrollDownNRows(CGridCtrl& grid, int num_rows)
+{
+	for (int row = 0; row < num_rows; ++row)
+	{
+		grid.SendMessage(WM_VSCROLL, SB_LINEDOWN, 0);
+	}
+}
+
+void ScrollUpNRows(CGridCtrl& grid, int num_rows)
+{
+	for (int row = 0; row < num_rows; ++row)
+	{
+		grid.SendMessage(WM_VSCROLL, SB_LINEUP, 0);
+	}
+}
 
 void ConceptsAndAccounts::OnBnClickedBSaveToDb()
 {
 	// TODO: Add your control notification handler code here
 
-
-	for (m_row = 1; m_row < m_statementLines.GetRowCount(); ++m_row)
-	{
+	const auto row_count = m_statementLines.GetRowCount();
+	for (m_row = 1; m_row < row_count ; ++m_row)
+	{		
+		m_statementLines.SetSelectedRange(m_row, 0, m_row, 10);
+		
 		CompoundStatementLine comp{ this };
 		auto r1 = comp.set_own_account(&ConceptsAndAccounts::getOwnAccountNumber);
-		auto r2 = comp.set_concepto(&ConceptsAndAccounts::getConceptoName);
-		auto r3 = comp.setStatement(&ConceptsAndAccounts::getStatementDate);
-		auto r4 = comp.set_category(&ConceptsAndAccounts::getCategoryName);
-		auto r5 = comp.set_transaction(&ConceptsAndAccounts::getAmountLocal, &ConceptsAndAccounts::getAmountDolares, &ConceptsAndAccounts::getLineDate, &ConceptsAndAccounts::getDescripcion);
-
+		if (r1)
+		{
+			auto r2 = comp.set_concepto(&ConceptsAndAccounts::getConceptoName);
+			if (r2)
+			{
+				auto r3 = comp.setStatement(&ConceptsAndAccounts::getStatementDate);
+				if (r3)
+				{
+					auto r4 = comp.set_category(&ConceptsAndAccounts::getCategoryName);
+					if (r4)
+					{
+						auto r5 = comp.set_transaction(&ConceptsAndAccounts::getAmountLocal, &ConceptsAndAccounts::getAmountDolares, &ConceptsAndAccounts::getLineDate, &ConceptsAndAccounts::getDescripcion);
+					}
+				}
+			}
+		}
 		int ret = MessageBoxW(L"Desea continuar?", L"Confirme", MB_CANCELTRYCONTINUE);
 		if (ret == 2)
 			break;
+		;
+		ScrollDownNRows(m_statementLines, 1);
 	}
 	refresh();
 }

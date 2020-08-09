@@ -115,6 +115,7 @@ void PaisesDlg::OnLbnSelchangeLPaises()
 void PaisesDlg::OnBnClickedBBorrar()
 {
 	// TODO: Add your control notification handler code here
+#if 0
 	auto pais = m_paisLB.current();
 	if (pais)
 	{
@@ -124,6 +125,9 @@ void PaisesDlg::OnBnClickedBBorrar()
 			m_paisLB.delete_current_sel();
 		}
 	}
+#else
+	m_paisLB.delete_current_sel();
+#endif
 }
 
 

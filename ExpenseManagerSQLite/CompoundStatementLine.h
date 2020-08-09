@@ -187,7 +187,7 @@ public:
 		
 		TransaccionDlg dlg;
 		dlg.setDiscriminator(m_trans);
-		dlg.autoexec();
+		//dlg.autoexec();
 		auto ret = dlg.DoModal();
 		m_trans = dlg.getCompleteObject();
 		return m_trans;

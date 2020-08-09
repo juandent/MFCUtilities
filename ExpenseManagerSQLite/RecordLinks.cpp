@@ -77,3 +77,13 @@ bool RecordLinks::has_links(const Account& acct)
 	
 	return (count[0] + count[1] + count[2]) > 0;
 }
+
+bool RecordLinks::has_links(const Banco& banco)
+{
+	using namespace sqlite_orm;
+	auto& storage = Storage::getStorage();
+
+	auto count = storage.count<Account>(where(is_equal(&Account::fkey_bank, banco.id_bank)));
+	
+	return count > 0;
+}

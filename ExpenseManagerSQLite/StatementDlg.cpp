@@ -91,6 +91,7 @@ void StatementDlg::OnBnClickedBAplicarStatement()
 void StatementDlg::OnBnClickedBorrarStatement()
 {
 	// TODO: Add your control notification handler code here
+#if 0
 	auto statement = m_statementLB.current();
 	if (!statement)
 	{
@@ -102,6 +103,9 @@ void StatementDlg::OnBnClickedBorrarStatement()
 	{
 		m_statementLB.delete_current_sel();
 	}
+#else
+	m_statementLB.delete_current_sel();
+#endif
 }
 
 

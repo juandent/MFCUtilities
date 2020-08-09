@@ -36,6 +36,11 @@ void StatementLineGridController::FillHeaders()
 
 }
 
+void StatementLineGridController::FillGrid(int num_rows)
+{
+	IGridController::FillGrid(num_rows);
+}
+
 void StatementLineGridController::FillLine(int row)
 {
 	auto line = lines[row++];
@@ -64,6 +69,7 @@ void StatementLineGridController::FillLine(int row)
 
 void StatementLineGridController::SetSorting()
 {
+	grid.m_sortingFunctions = { JD::Comparison::Money, JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Money,JD::Comparison::Money };
 }
 
 void StatementLineGridController::OnInitialUpdate()

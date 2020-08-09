@@ -40,4 +40,9 @@ private:
 	CEdit m_ubicacion;
 public:
 	afx_msg void OnBnClickedBUpdateBanco();
+	afx_msg void OnBnClickedBBorrar();
+private:
+	CEdit m_id_banco;
+public:
+	afx_msg void OnLbnSelchangeLBancos();
 };

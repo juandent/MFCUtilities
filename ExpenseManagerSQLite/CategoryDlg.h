@@ -45,4 +45,6 @@ public:
 	afx_msg void OnBnClickedBBorrar();
 	afx_msg void OnBnClickedBAplicarCategory();
 	afx_msg void OnBnClickedBUpdate();
+private:
+	CEdit m_id_categoria;
 };

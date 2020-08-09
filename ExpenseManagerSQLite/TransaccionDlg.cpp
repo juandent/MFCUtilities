@@ -6,6 +6,7 @@
 #include "TransaccionDlg.h"
 #include "afxdialogex.h"
 #include "ConceptosDlg.h"
+#include "CuentaDlg.h"
 #include "StatementDlg.h"
 #include "RecordLinks.h"
 
@@ -80,17 +81,60 @@ BEGIN_MESSAGE_MAP(TransaccionDlg, CDialog)
 	ON_LBN_SELCHANGE(IDC_L_TRANSACTION, &TransaccionDlg::OnLbnSelchangeLTransaction)
 	ON_BN_CLICKED(ID_B_BORRAR, &TransaccionDlg::OnBnClickedBBorrar)
 	ON_BN_CLICKED(IDC_B_UPDATE_TRANSACTION, &TransaccionDlg::OnBnClickedBUpdateTransaction)
+	ON_BN_CLICKED(IDC_B_ADD_OTHER_ACCOUNT, &TransaccionDlg::OnBnClickedBAddOtherAccount)
 END_MESSAGE_MAP()
 
 
 // TransaccionDlg message handlers
+void TransaccionDlg::Refresh_discriminator()
+{
+	if (m_trans)
+	{
+		const auto date = JD::to_ole_date_time(m_trans->line_date);
+		m_date_transaccion.SetCurSel(date);
 
+		m_conceptoCB.select(m_trans->fkey_concepto);
+		m_categoriaCB.select(m_trans->fkey_category);
+
+		Colones colones{ m_trans->amount_colones };
+		CString str_colones = JD::to_cstring(colones);
+		m_colones.SetWindowTextW(str_colones);
+
+		Dolares dolares{ m_trans->amount_dolares };
+		CString str_dolares = JD::to_cstring(dolares);
+		m_dolares.SetWindowTextW(str_dolares);
+
+		m_descripcion.SetWindowTextW(JD::to_cstring(m_trans->descripcion));
+		m_statementCB.select(m_trans->fkey_statement);
+		m_own_accountCB.select(m_trans->fkey_account_own);
+
+		m_id.SetWindowTextW(JD::to_cstring(m_trans->id_transaccion));
+#define MODIFY_SCHEMA
+#ifdef MODIFY_SCHEMA
+		m_row.SetWindowTextW(JD::to_cstring(m_trans->row));
+#endif
+	}
+}
+void TransaccionDlg::Refresh()
+{
+	m_other_accountCB.loadLB();
+	m_conceptoCB.loadLB();
+	m_statementCB.loadLB();
+	m_own_accountCB.loadLB();
+	m_categoriaCB.loadLB();
+	m_other_accountCB.loadLB();
+	m_transaccionLB.loadLB();
+
+}
 
 BOOL TransaccionDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
 	// TODO:  Add extra initialization here
+	Refresh();
+	Refresh_discriminator();
+#if 0 
 	m_other_accountCB.loadLB();
 	m_conceptoCB.loadLB();
 	m_statementCB.loadLB();
@@ -125,6 +169,7 @@ BOOL TransaccionDlg::OnInitDialog()
 		m_row.SetWindowTextW(JD::to_cstring(m_trans->row));
 #endif
 	}
+#endif
 	if( m_autoexec)
 	{
 		this->OnBnClickedBAplicarTransactions();
@@ -141,7 +186,8 @@ void TransaccionDlg::OnBnClickedBAddStatement()
 	// TODO: Add your control notification handler code here
 	StatementDlg dlg;
 	dlg.DoModal();
-	m_statementCB.loadLB();
+	// m_statementCB.loadLB();
+	Refresh();
 }
 
 
@@ -150,6 +196,7 @@ void TransaccionDlg::OnBnClickedBAddConcept()
 	// TODO: Add your control notification handler code here
 	ConceptosDlg dlg;
 	dlg.DoModal();
+	Refresh();
 }
 
 
@@ -348,22 +395,16 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 
 std::optional<Transaccion> TransaccionDlg::getCurrent()
 {
-	CString rId;
-	m_id.GetWindowTextW(rId);
-
-	if( rId.IsEmpty())
-	{
-		return std::nullopt;
-	}
-	auto s_id = JD::from_cstring(rId);
-	auto id = stoi(s_id);
+	std::optional<Transaccion> trans;
 	
-	using namespace sqlite_orm;
-
-	auto& storage = Storage::getStorage();
-
-	// auto trans = storage.get_pointer<Transaccion>(id);
-	std::optional<Transaccion> trans = storage.get_optional<Transaccion>(id);
+	auto statement = m_statementCB.current();
+	if (!statement)	return trans;
+	CString rRow;
+	m_row.GetWindowTextW(rRow);
+	auto row_str = JD::from_cstring(rRow);
+	auto row = stoi(row_str);
+	auto whereClause = (c(&Transaccion::row) == row) && (c(&Transaccion::fkey_statement) == statement->id_statement);
+	trans = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::row, &Transaccion::fkey_statement);
 	return trans;
 }
 
@@ -403,6 +444,7 @@ void TransaccionDlg::OnLbnSelchangeLTransaction()
 	m_dolares.SetWindowTextW(JD::to_cstring(dolares));
 	m_descripcion.SetWindowTextW(JD::to_cstring(trans->descripcion));
 	m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
+	m_row.SetWindowTextW(JD::to_cstring(trans->row));
 
 	//postMessage(m_listTransactions  );
 	//m_transaccionLB.SetCurSel(cur_sel);
@@ -493,4 +535,18 @@ void TransaccionDlg::OnBnClickedBUpdateTransaction()
 
 	m_trans = trans;
 #endif
+}
+
+
+void TransaccionDlg::OnBnClickedBAddOtherAccount()
+{
+	// TODO: Add your control notification handler code here
+	CuentaDlg dlg;
+	dlg.DoModal();
+	auto cuenta_other = dlg.getCompleteObject();
+	m_other_accountCB.loadLB();
+	if( cuenta_other)
+	{
+		m_other_accountCB.select(cuenta_other->id_account);
+	}
 }

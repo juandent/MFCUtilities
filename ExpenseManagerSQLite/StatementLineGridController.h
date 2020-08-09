@@ -31,6 +31,9 @@ class StatementLineGridController :     public IGridController
 {
 	friend class ConceptsAndAccounts;
 	std::vector<Translation> lines;
+
+protected:
+	void FillGrid(int num_rows) override;
 public:
 
 	enum Columns {ROW_NUMBER, STMT_DATE, OWN_ACCOUNT, LINE_DATE, CONCEPTO, AMOUNT_LOCAL, AMOUNT_DOLLARS, IS_ENABLED, CATEGORY_NAME, DESCRIPCION, OWNER_NAME, NUM_COLUMNS = OWNER_NAME};

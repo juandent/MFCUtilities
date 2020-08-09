@@ -163,6 +163,7 @@
 #define IDC_E_MONTO_DOLARES             1050
 #define IDC_E_ID_PAIS                   1050
 #define IDC_E_NOMBRE_PAIS               1051
+#define IDC_B_ADD_OTHER_ACCOUNT         1051
 #define IDC_B_APLICAR_PAISES            1053
 #define ID_B_BORRAR                     1054
 #define IDC_B_APLICAR_BANCO             1055
@@ -195,6 +196,10 @@
 #define IDC_B_SAVE_TO_DB                1086
 #define IDC_E_ROW                       1087
 #define IDC_L_STATEMENTS                1088
+#define IDC_E_ID_CONCEPTO               1089
+#define IDC_E_ID_BANCO                  1090
+#define IDC_EDIT1                       1091
+#define IDC_E_ID_CATEGORIA              1091
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
@@ -212,7 +217,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        319
 #define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1089
+#define _APS_NEXT_CONTROL_VALUE         1092
 #define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif

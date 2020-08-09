@@ -93,6 +93,7 @@ void DuenosDlg::OnBnClickedBApplyOwner()
 void DuenosDlg::OnBnClickedBBorrarOwner()
 {
 	// TODO: Add your control notification handler code here
+#if 0
 	auto owner = m_ownerLB.current();
 	if( !owner)
 	{
@@ -108,6 +109,9 @@ void DuenosDlg::OnBnClickedBBorrarOwner()
 			m_ownerLB.delete_current_sel();
 		}
 	}
+#else
+	m_ownerLB.delete_current_sel();
+#endif
 }
 
 

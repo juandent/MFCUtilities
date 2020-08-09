@@ -103,11 +103,31 @@ void CuentaDlg::OnBnClickedBAddBancos()
 	m_bancosCB.loadLB();
 }
 
+std::optional<Account> CuentaDlg::getCurrent() const
+{
+	/// <summary>
+	/// does cuenta exist already?
+	/// </summary>
+	CString rId;
+	m_id_cuenta.GetWindowTextW(rId);
+	auto id_str = JD::from_cstring(rId);
+	auto id = std::stoi(id_str);
+	auto cuenta = Storage::getStorage().get_optional<Account>(id);
+	///////////	
+	return cuenta;
+}
 
+Operation CuentaDlg::whatOperation() const
+{
+	auto cuenta = getCurrent();
+	return cuenta ? Operation::doUpdate : Operation::doInsert;
+}
 
 void CuentaDlg::OnBnClickedBAplicarCuenta()
 {
 	// TODO: Add your control notification handler code here
+	Operation op = whatOperation();
+		
 	CString rNumero, rDescripcion;
 	m_numero.GetWindowTextW(rNumero);
 	m_descripcion.GetWindowTextW(rDescripcion);
@@ -142,10 +162,14 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 	auto numero = JD::from_cstring(rNumero);
 	auto descripcion = JD::from_cstring(rDescripcion);
 
-	auto whereClause = (c(&Account::number ) == numero.c_str());
+	std::optional<Account> account;
+	
+	if (op == Operation::doInsert) // first verify number does not exist
+	{
+		auto whereClause = (c(&Account::number) == numero.c_str());
 
-	std::optional<Account> account = m_cuentasLB.exists(whereClause, &Account::id_account, &Account::number);
-
+		account = m_cuentasLB.exists(whereClause, &Account::id_account, &Account::number);
+	}
 	if (!account)	// new account
 	{
 		// need to get current
@@ -162,6 +186,7 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 		m_cuentasLB.update(*account);
 	}
 	m_cuentasLB.loadLB();
+	m_id_cuenta.SetWindowTextW(JD::to_cstring(account->id_account));
 	m_account = account;
 }
 
@@ -170,6 +195,7 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 void CuentaDlg::OnBnClickedBBorrarCuenta()
 {
 	// TODO: Add your control notification handler code here
+#if 0
 	auto cuenta = m_cuentasLB.current();
 
 	if (!cuenta)
@@ -183,6 +209,9 @@ void CuentaDlg::OnBnClickedBBorrarCuenta()
 	{
 		m_cuentasLB.delete_current_sel();
 	}
+#else
+	m_cuentasLB.delete_current_sel();
+#endif
 }
 
 

@@ -13,7 +13,7 @@ protected:
 	
 	void DoInitialUpdate(int num_rows);
 	void AutoSizeColumns();
-	void FillGrid(int num_rows);
+	virtual void FillGrid(int num_rows);
 
 	virtual void HandleGridClick(NM_GRIDVIEW* pItem) = 0;
 	virtual void FillHeaders() = 0;

@@ -38,6 +38,7 @@ void BancoDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_L_BANCOS, m_list_bancos);
 	DDX_Control(pDX, IDC_C_PAIS, m_paises);
 	DDX_Control(pDX, IDC_E_UBICACION, m_ubicacion);
+	DDX_Control(pDX, IDC_E_ID_BANCO, m_id_banco);
 }
 
 
@@ -45,6 +46,8 @@ BEGIN_MESSAGE_MAP(BancoDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_ADD_PAIS, &BancoDlg::OnBnClickedBAddPais)
 	ON_BN_CLICKED(IDC_B_APLICAR_BANCO, &BancoDlg::OnBnClickedBAplicarBanco)
 	ON_BN_CLICKED(IDC_B_UPDATE_BANCO, &BancoDlg::OnBnClickedBUpdateBanco)
+	ON_BN_CLICKED(ID_B_BORRAR, &BancoDlg::OnBnClickedBBorrar)
+	ON_LBN_SELCHANGE(IDC_L_BANCOS, &BancoDlg::OnLbnSelchangeLBancos)
 END_MESSAGE_MAP()
 
 
@@ -76,6 +79,8 @@ void BancoDlg::OnBnClickedBAddPais()
 void BancoDlg::OnBnClickedBAplicarBanco()
 {
 	// TODO: Add your control notification handler code here
+	auto banco = getCurrent<Banco>(m_id_banco);
+	
 	CString rBanco, rUbicacion;
 	m_nombre_banco.GetWindowTextW(rBanco);
 	m_ubicacion.GetWindowTextW(rUbicacion);
@@ -97,11 +102,19 @@ void BancoDlg::OnBnClickedBAplicarBanco()
 	auto name = JD::from_cstring(rBanco);
 	auto ubicacion = JD::from_cstring(rUbicacion);
 
-	auto whereClause = (c(&Banco::nombre) == name.c_str()) && (c(&Banco::ubicacion) == ubicacion.c_str());
+	std::optional<Banco> banco_by_value;
+	if (! banco)
+	{
+		auto whereClause = (c(&Banco::nombre) == name.c_str()) && (c(&Banco::ubicacion) == ubicacion.c_str());
 
-	std::optional<Banco> banco = m_bancosLB.exists(whereClause, &Banco::id_bank, &Banco::nombre);
-
-	if (!banco)    // insert
+		banco_by_value = m_bancosLB.exists(whereClause, &Banco::id_bank, &Banco::nombre);
+		if( banco_by_value )
+		{
+			MessageBoxW(L"Banco found for another primary key");
+		}
+		banco = banco_by_value;
+	}
+	if (! banco )    // insert
  	{
 		// need to get current pais
 		banco = m_bancosLB.insert(name, ubicacion, pais->id_pais);
@@ -115,7 +128,8 @@ void BancoDlg::OnBnClickedBAplicarBanco()
 		m_bancosLB.update(*banco);
 	}
 	m_bancosLB.loadLB();
-	m_banco = banco;;
+	m_banco = banco;
+	setIdFromRecord<Banco>(m_id_banco, banco->id_bank);
 }
 
 
@@ -165,4 +179,22 @@ void BancoDlg::OnBnClickedBUpdateBanco()
 	m_bancosLB.update(*banco);
 	m_bancosLB.loadLB();
 #endif
+}
+
+
+void BancoDlg::OnBnClickedBBorrar()
+{
+	// TODO: Add your control notification handler code here
+	m_bancosLB.delete_current_sel();
+}
+
+
+void BancoDlg::OnLbnSelchangeLBancos()
+{
+	// TODO: Add your control notification handler code here
+	auto banco = m_bancosLB.current();
+	m_id_banco.SetWindowTextW(JD::to_cstring(banco->id_bank));
+	m_nombre_banco.SetWindowTextW(JD::to_cstring(banco->nombre));
+	m_ubicacion.SetWindowTextW(JD::to_cstring(banco->ubicacion));
+	m_paisCB.select(banco->fkey_pais);
 }

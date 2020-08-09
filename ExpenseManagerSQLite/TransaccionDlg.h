@@ -16,6 +16,8 @@ class TransaccionDlg : public CDialog
 	BoxContents<Categoria, &Categoria::id_categoria, CComboBox> m_categoriaCB;
 	std::optional<Transaccion> m_trans;
 	bool m_autoexec = false;
+	void Refresh();
+	void Refresh_discriminator();
 public:
 	TransaccionDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~TransaccionDlg();
@@ -75,4 +77,6 @@ public:
 	afx_msg void OnBnClickedBUpdateTransaction();
 private:
 	CEdit m_row;
+public:
+	afx_msg void OnBnClickedBAddOtherAccount();
 };
