@@ -104,6 +104,7 @@ void ConceptsAndAccounts::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(ConceptsAndAccounts, CFormView)
 
 	ON_WM_CREATE()
+	ON_NOTIFY(NM_CLICK, IDC_GRID, OnGridClick)
 	ON_BN_CLICKED(IDC_B_LOAD_COMPOUND_DOC, &ConceptsAndAccounts::OnBnClickedBLoadCompoundDoc)
 	ON_BN_CLICKED(IDC_B_PAIS_ADD, &ConceptsAndAccounts::OnBnClickedBPaisAdd)
 	ON_BN_CLICKED(IDC_B_BANCO_ADD, &ConceptsAndAccounts::OnBnClickedBBancoAdd)
@@ -148,6 +149,27 @@ void ConceptsAndAccounts::Dump(CDumpContext& dc) const
 
 
 // ConceptsAndAccounts message handlers
+
+void ConceptsAndAccounts::OnGridClick(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
+{
+	NM_GRIDVIEW* pItem = (NM_GRIDVIEW*)pNotifyStruct;
+	TRACE(_T("Clicked on row %d, col %d\n"), pItem->iRow, pItem->iColumn);
+
+	if (pItem->hdr.idFrom == IDC_GRID)
+	{
+		if( pItem->iRow > 0)
+		{
+			m_row = pItem->iRow;
+			SaveRowToDb();
+		}
+
+		
+		// m_grid_controller.OnGridClick(pNotifyStruct);
+		//m_controller->toggleEnableForLine(pItem->iRow, pItem->iColumn);
+		//m_statementLinesController->toggleEnableForLine(pItem->iRow, pItem->iColumn);
+	}
+}
+
 
 
 int ConceptsAndAccounts::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -632,13 +654,40 @@ void ScrollUpNRows(CGridCtrl& grid, int num_rows)
 	}
 }
 
+void ConceptsAndAccounts::SaveRowToDb()
+{
+	m_statementLines.SetSelectedRange(m_row, 0, m_row, 10);
+
+	CompoundStatementLine comp{ this };
+	auto r1 = comp.set_own_account(&ConceptsAndAccounts::getOwnAccountNumber);
+	if (r1)
+	{
+		auto r2 = comp.set_concepto(&ConceptsAndAccounts::getConceptoName);
+		if (r2)
+		{
+			auto r3 = comp.setStatement(&ConceptsAndAccounts::getStatementDate);
+			if (r3)
+			{
+				auto r4 = comp.set_category(&ConceptsAndAccounts::getCategoryName);
+				if (r4)
+				{
+					auto r5 = comp.set_transaction(&ConceptsAndAccounts::getAmountLocal, &ConceptsAndAccounts::getAmountDolares, &ConceptsAndAccounts::getLineDate, &ConceptsAndAccounts::getDescripcion);
+				}
+			}
+		}
+	}
+}
+
 void ConceptsAndAccounts::OnBnClickedBSaveToDb()
 {
 	// TODO: Add your control notification handler code here
 
 	const auto row_count = m_statementLines.GetRowCount();
 	for (m_row = 1; m_row < row_count ; ++m_row)
-	{		
+	{
+#if 1
+		SaveRowToDb();
+#else	
 		m_statementLines.SetSelectedRange(m_row, 0, m_row, 10);
 		
 		CompoundStatementLine comp{ this };
@@ -659,6 +708,7 @@ void ConceptsAndAccounts::OnBnClickedBSaveToDb()
 				}
 			}
 		}
+#endif
 		int ret = MessageBoxW(L"Desea continuar?", L"Confirme", MB_CANCELTRYCONTINUE);
 		if (ret == 2)
 			break;

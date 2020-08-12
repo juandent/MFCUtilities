@@ -37,6 +37,7 @@ public:
 	virtual void AssertValid() const;
 #ifndef _WIN32_WCE
 	virtual void Dump(CDumpContext& dc) const;
+	void OnGridClick(NMHDR* pNotifyStruct, LRESULT*);
 #endif
 #endif
 
@@ -124,7 +125,8 @@ public:
 	afx_msg void OnLbnSelchangeLConceptos();
 	afx_msg void OnBnClickedBDeselectConceptos();
 	afx_msg void OnLbnSelchangeLTransactions();
-	afx_msg void OnBnClickedBSaveToDb();
+	afx_msg void SaveRowToDb();
+	void OnBnClickedBSaveToDb();
 private:
 	CListBox m_statement_list;
 public:

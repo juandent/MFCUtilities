@@ -171,6 +171,9 @@
     <ClInclude Include="CompoundStatementLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TransactionState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpenseManagerSQLite.cpp">
@@ -291,6 +294,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CompoundStatementLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TransactionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

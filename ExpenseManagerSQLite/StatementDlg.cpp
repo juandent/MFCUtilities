@@ -52,9 +52,14 @@ BOOL StatementDlg::OnInitDialog()
 
 	// TODO:  Add extra initialization here
 	m_statementLB.loadLB();
-	auto date = JD::to_ole_date_time(m_statement_date);
-	m_transaction_date_picker.SetTime(date);
-
+	
+	//m_statement = m_statementLB.current();
+	if (m_statement)
+	{
+		auto date = JD::to_ole_date_time(m_statement_date);
+		m_transaction_date_picker.SetTime(date);
+		setIdFromRecord<Statement>(m_id_statement, m_statement->id_statement);
+	}
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -102,21 +107,10 @@ void StatementDlg::OnBnClickedBAplicarStatement()
 void StatementDlg::OnBnClickedBorrarStatement()
 {
 	// TODO: Add your control notification handler code here
-#if 0
-	auto statement = m_statementLB.current();
-	if (!statement)
+	if (m_statementLB.delete_current_sel())
 	{
-		MessageBoxW(L"Falta escoger estado de cuenta");
-		return;
+		setIdFromRecord<Statement>(m_id_statement, -1);
 	}
-	bool has_links = RecordLinks::has_links(*statement);
-	if (!has_links)
-	{
-		m_statementLB.delete_current_sel();
-	}
-#else
-	m_statementLB.delete_current_sel();
-#endif
 }
 
 

@@ -4,6 +4,7 @@
 
 void StatementLineGridController::HandleGridClick(NM_GRIDVIEW* pItem)
 {
+#if 0
 	if(::OpenClipboard(grid.m_hWnd))
 	{
 		::EmptyClipboard();
@@ -18,6 +19,7 @@ void StatementLineGridController::HandleGridClick(NM_GRIDVIEW* pItem)
 		::SetClipboardData(CF_UNICODETEXT, hData);
 		::CloseClipboard();
 	}
+#endif
 }
 
 void StatementLineGridController::FillHeaders()

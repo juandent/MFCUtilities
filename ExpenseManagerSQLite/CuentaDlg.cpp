@@ -74,6 +74,12 @@ BOOL CuentaDlg::OnInitDialog()
 	m_bancosCB.loadLB();
 	m_ownerCB.loadLB();
 	m_cuentasLB.loadLB();
+
+	if(m_account)
+	{
+		// loads all controls by responding to PostMessage
+		m_cuentasLB.select(m_account->id_account);
+	}
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE

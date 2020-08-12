@@ -9,6 +9,7 @@
 #include "CuentaDlg.h"
 #include "StatementDlg.h"
 #include "RecordLinks.h"
+#include "TransactionState.h"
 
 
 // TransaccionDlg dialog
@@ -107,6 +108,7 @@ void TransaccionDlg::Refresh_discriminator()
 		m_descripcion.SetWindowTextW(JD::to_cstring(m_trans->descripcion));
 		m_statementCB.select(m_trans->fkey_statement);
 		m_own_accountCB.select(m_trans->fkey_account_own);
+		m_other_accountCB.select(m_trans->fkey_account_other);
 
 		m_id.SetWindowTextW(JD::to_cstring(m_trans->id_transaccion));
 #define MODIFY_SCHEMA
@@ -137,6 +139,7 @@ void TransaccionDlg::Find_id()
 		{
 			m_trans = trans_by_value;
 			setIdFromRecord<Transaccion>(m_id, m_trans->id_transaccion);
+			m_other_accountCB.select(m_trans->fkey_account_other);
 		}
 	}
 }
@@ -163,14 +166,18 @@ BOOL TransaccionDlg::OnInitDialog()
 				  // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-
 void TransaccionDlg::OnBnClickedBAddStatement()
 {
 	// TODO: Add your control notification handler code here
 	StatementDlg dlg;
+//	auto statement = m_statementCB.current();
+	TransactionState state(*this);
 	dlg.DoModal();
-	// m_statementCB.loadLB();
 	Refresh();
+	// if( statement )
+	// {
+	// 	m_statementCB.select(statement->id_statement);
+	// }
 }
 
 
@@ -178,6 +185,7 @@ void TransaccionDlg::OnBnClickedBAddConcept()
 {
 	// TODO: Add your control notification handler code here
 	ConceptosDlg dlg;
+	TransactionState state(*this );
 	dlg.DoModal();
 	Refresh();
 }
@@ -215,6 +223,7 @@ void TransaccionDlg::OnCbnSelchangeCEstadoCuenta()
 void TransaccionDlg::OnCbnSelchangeCOtherAccount()
 {
 	// TODO: Add your control notification handler code here
+//	m_other_accountCB.
 }
 
 #if 0
@@ -317,6 +326,11 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 
 	CString rRow;
 	m_row.GetWindowTextW(rRow);
+	if( rRow.IsEmpty())
+	{
+		MessageBox(L"Falta el numero de fila (row)");
+		return;
+	}
 	auto row_str = JD::from_cstring(rRow);
 	auto row = stoi(row_str);
 
@@ -545,6 +559,13 @@ void TransaccionDlg::OnBnClickedBAddOtherAccount()
 {
 	// TODO: Add your control notification handler code here
 	CuentaDlg dlg;
+	auto account = m_other_accountCB.current();
+	if (account)
+	{
+		dlg.set_discriminator(account);
+		//dlg.set_discriminator(account->number);
+	}
+	//dlg.m_account = account;
 	dlg.DoModal();
 	auto cuenta_other = dlg.getCompleteObject();
 	m_other_accountCB.loadLB();

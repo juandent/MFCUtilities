@@ -6,6 +6,8 @@
 
 class TransaccionDlg : public CDialog
 {
+	friend class TransactionState;
+	
 	DECLARE_DYNAMIC(TransaccionDlg)
 
 	BoxContents<Transaccion, &Transaccion::id_transaccion> m_transaccionLB;
@@ -47,6 +49,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	virtual BOOL OnInitDialog();
+	void SaveState();
 	afx_msg void OnBnClickedBAddStatement();
 	afx_msg void OnBnClickedBAddConcept();
 	afx_msg void OnBnClickedOk();

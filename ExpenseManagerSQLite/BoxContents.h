@@ -121,17 +121,18 @@ public:
 		return index;
 	}
 
-	void delete_current_sel()
+	bool delete_current_sel()
 	{
 		auto current = this->current();
-		if (!current) return;
+		if (!current) return false;
 		bool has_links = RecordLinks::has_links(*current);
-		if (has_links) return;
+		if (has_links) return false;
 
 #if 1
 		int cur_sel = m_box.GetCurSel();
 		remove(*current);
 		m_box.DeleteString(cur_sel);
+		return true;
 #else
 		int cur_sel = m_box.GetCurSel();
 		if (cur_sel != npos )
