@@ -170,6 +170,7 @@
 #define IDC_B_APLICAR_CUENTA            1056
 #define ID_B_BORRAR_CUENTA              1057
 #define IDC_B_APPLY_OWNER               1058
+#define ID_B_NUEVA_CUENTA               1058
 #define IDC_E_NOMBRE                    1059
 #define ID_B_BORRAR_OWNER               1061
 #define IDC_C_ACCOUNT                   1062
@@ -200,7 +201,6 @@
 #define IDC_E_ID_BANCO                  1090
 #define IDC_E_ID_CATEGORIA              1091
 #define IDC_E_ID_OWNER                  1092
-#define IDC_EDIT1                       1093
 #define IDC_E_ID_STATEMENT              1093
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772

@@ -81,7 +81,7 @@ BEGIN_MESSAGE_MAP(TransaccionDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_APLICAR_TRANSACTIONS, &TransaccionDlg::OnBnClickedBAplicarTransactions)
 	ON_LBN_SELCHANGE(IDC_L_TRANSACTION, &TransaccionDlg::OnLbnSelchangeLTransaction)
 	ON_BN_CLICKED(ID_B_BORRAR, &TransaccionDlg::OnBnClickedBBorrar)
-	ON_BN_CLICKED(IDC_B_UPDATE_TRANSACTION, &TransaccionDlg::OnBnClickedBUpdateTransaction)
+	// ON_BN_CLICKED(IDC_B_UPDATE_TRANSACTION, &TransaccionDlg::OnBnClickedBUpdateTransaction)
 	ON_BN_CLICKED(IDC_B_ADD_OTHER_ACCOUNT, &TransaccionDlg::OnBnClickedBAddOtherAccount)
 END_MESSAGE_MAP()
 
@@ -501,64 +501,15 @@ void TransaccionDlg::OnBnClickedBBorrar()
 }
 
 
-void TransaccionDlg::OnBnClickedBUpdateTransaction()
-{
-#if 0
-	// TODO: Add your control notification handler code here
-#if 1
-	auto trans = getCurrent();
-#else
-	auto trans = m_transaccionLB.current();
-#endif
-	if (!trans)
-	{
-		MessageBoxW(L"Falta escoger transaccion");
-		return;
-	}
-
-	auto statement = m_statementCB.current();
-	auto other_account = m_other_accountCB.current();
-	auto concepto = m_conceptoCB.current();
-	auto own_account = m_own_accountCB.current();
-	auto category = m_categoriaCB.current();
-
-	trans->fkey_statement = statement->id_statement;
-	if (other_account)
-	{
-		trans->fkey_account_other = other_account->id_account;
-	}
-	trans->fkey_concepto = concepto->id_concepto;
-	trans->fkey_account_own = own_account->id_account;
-	trans->fkey_category = category->id_categoria;
-	
-	CString rDescripcion;
-	m_descripcion.GetWindowTextW(rDescripcion);
-	trans->descripcion = JD::from_cstring(rDescripcion);
-	CString rColones;
-	m_colones.GetWindowTextW(rColones);
-	auto colones = JD::from_cstring(rColones);
-	trans->amount_colones = JD::strip_to_long_double(colones);
-	CString rDolares;
-	m_dolares.GetWindowTextW(rDolares);
-	auto dolares = JD::from_cstring(rDolares);
-	trans->amount_dolares = JD::strip_to_long_double(dolares);
-
-	COleDateTime rDateTime;
-	m_date_transaccion.GetCurSel(rDateTime);
-	trans->line_date = JD::to_sys_days(rDateTime);
-
-	m_transaccionLB.update(*trans);
-	m_transaccionLB.loadLB();
-
-	m_trans = trans;
-#endif
-}
-
 
 void TransaccionDlg::OnBnClickedBAddOtherAccount()
 {
 	// TODO: Add your control notification handler code here
 	CuentaDlg dlg;
+	TransactionState state(*this);
+	dlg.DoModal();
+	Refresh();
+#if 0	
 	auto account = m_other_accountCB.current();
 	if (account)
 	{
@@ -573,4 +524,5 @@ void TransaccionDlg::OnBnClickedBAddOtherAccount()
 	{
 		m_other_accountCB.select(cuenta_other->id_account);
 	}
+#endif
 }

@@ -59,6 +59,7 @@ BEGIN_MESSAGE_MAP(CuentaDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_UPDATE_ACCOUNT, &CuentaDlg::OnBnClickedBUpdateAccount)
 	ON_LBN_SELCHANGE(IDC_L_CUENTAS, &CuentaDlg::OnLbnSelchangeLCuentas)
 	ON_EN_SETFOCUS(IDC_E_ID_CUENTA, &CuentaDlg::OnEnSetfocusEIdCuenta)
+	ON_BN_CLICKED(ID_B_NUEVA_CUENTA, &CuentaDlg::OnBnClickedBNuevaCuenta)
 END_MESSAGE_MAP()
 
 
@@ -200,6 +201,7 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 	}
 	m_cuentasLB.loadLB();
 	m_account = cuenta;
+	m_cuentasLB.select(m_account->id_account);
 	setIdFromRecord<Account>(m_id_cuenta, cuenta->id_account);
 }
 
@@ -223,7 +225,10 @@ void CuentaDlg::OnBnClickedBBorrarCuenta()
 		m_cuentasLB.delete_current_sel();
 	}
 #else
-	m_cuentasLB.delete_current_sel();
+	if(m_cuentasLB.delete_current_sel())
+	{
+		this->OnBnClickedBNuevaCuenta();
+	}
 #endif
 }
 
@@ -279,4 +284,19 @@ void CuentaDlg::OnEnSetfocusEIdCuenta()
 {
 	// TODO: Add your control notification handler code here
 	m_id_cuenta.SendMessage(WM_KILLFOCUS);
+}
+
+
+void CuentaDlg::OnBnClickedBNuevaCuenta()
+{
+	// TODO: Add your control notification handler code here
+	m_id_cuenta.SetWindowTextW(L"");
+	m_numero.SetWindowTextW(L"");
+	m_descripcion.SetWindowTextW(L"");
+
+	m_ownerCB.select(-1);
+	m_bancosCB.select(-1);
+	m_tarjeta.SetCheck(-1);
+	m_cuenta_bancaria.SetCheck(false);
+	m_cuentasLB.select(-1);
 }

@@ -89,6 +89,11 @@ public:
 	std::optional<Table> select(int pk)
 	{
 		std::optional<Table> record;
+		if(pk < 0)
+		{
+			m_box.SetCurSel(npos);
+			return record;
+		}
 		int index = find_in_listbox(pk);
 		if( index != npos )
 		{

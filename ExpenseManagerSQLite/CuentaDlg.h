@@ -66,4 +66,5 @@ public:
 	afx_msg void OnBnClickedBUpdateAccount();
 	afx_msg void OnLbnSelchangeLCuentas();
 	afx_msg void OnEnSetfocusEIdCuenta();
+	afx_msg void OnBnClickedBNuevaCuenta();
 };

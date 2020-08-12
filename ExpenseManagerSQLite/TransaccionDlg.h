@@ -2,7 +2,7 @@
 #include "BoxContents.h"
 
 #include "Data_Tier.h"
-// TransaccionDlg dialog
+
 
 class TransaccionDlg : public CDialog
 {
@@ -77,7 +77,7 @@ private:
 public:
 	afx_msg void OnLbnSelchangeLTransaction();
 	afx_msg void OnBnClickedBBorrar();
-	afx_msg void OnBnClickedBUpdateTransaction();
+	// afx_msg void OnBnClickedBUpdateTransaction();
 private:
 	CEdit m_row;
 public:
