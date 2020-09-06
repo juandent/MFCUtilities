@@ -55,8 +55,13 @@ m_duenoLB{ m_duenos,
 			{
 				Colones  colones = trans.amount_colones;
 				Dolares dolares = trans.amount_dolares;
+#if 0
 				return JD::to_cstring(trans.id_transaccion) + L" - #" + JD::to_cstring(trans.row) + L" - " +
 					JD::to_cstring(trans.line_date) + L" - " + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
+#else
+				return JD::to_cstring(trans.line_date) + L" - #" + JD::to_cstring(trans.row) + L" : " + JD::to_cstring(trans.id_transaccion) + L" - " 
+					 + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
+#endif
 			}},
 			m_statementsLB {  m_statement_list, [](Statement& statement)
 			{

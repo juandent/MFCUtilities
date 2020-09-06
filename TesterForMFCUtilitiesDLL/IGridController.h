@@ -19,8 +19,9 @@ protected:
 	virtual void FillHeaders() = 0;
 	virtual void FillLine(int row) = 0;
 	virtual void SetSorting() = 0;
-public:
 	virtual ~IGridController() {}
+public:
+
 
 	virtual void OnInitialUpdate() = 0;
 	virtual void RefreshGrid() = 0;

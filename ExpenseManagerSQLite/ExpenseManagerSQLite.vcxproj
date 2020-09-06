@@ -231,6 +231,7 @@
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PaisesDlg.h" />
     <ClInclude Include="RecordLinks.h" />
+    <ClInclude Include="RefIntegrity.h" />
     <ClInclude Include="StatementDlg.h" />
     <ClInclude Include="StatementLineAdapter.h" />
     <ClInclude Include="StatementLineGridController.h" />

@@ -2,13 +2,14 @@
 
 #include "Data_Tier.h"
 #include "RecordLinks.h"
+#include "RefIntegrity.h"
 
 using namespace sqlite_orm;
 
 
 
 template<typename Table>
-using Displayer = CString(*)(Table&);
+using TableStringizer = CString(*)(Table&);
 
 
 
@@ -16,42 +17,49 @@ template<typename Table, int Table::*keyCol, typename BoxType = CListBox>
 class BoxContents
 {
 private:
-	Storage::Storage_t& storage;
+//	Storage::Storage_t& storage;
 	BoxType& m_box;
-	CString  (*displayer)(Table& record);
+	CString  (*asString)(Table& record);
+
+
+	RefIntegrityManager<Table, keyCol> refIntManager;
 	
 public:
 
-	BoxContents(BoxType& listbox, Displayer<Table>  f) : storage{ Storage::getStorage() }, m_box(listbox), displayer(f) {}
+	BoxContents(BoxType& listbox, TableStringizer<Table>  f) : m_box(listbox), asString(f) {}
 	
 	template<typename ...Cols>
 	Table insert(Cols&&... cols)
 	{
-		Table record{ -1, cols... };
-		record.*keyCol = storage.insert(record);
-		return record;
+		return refIntManager.insert(cols...);
+		// Table record{ -1, cols... };
+		// record.*keyCol = storage.insert(record);
+		// return record;
 	}
 
 	//template<int Table::*pKey>
 	void update( const Table& record )
 	{
-		if (record.*keyCol == -1)	return;
-
-		storage.update(record);
+		refIntManager.update(record);
+		// if (record.*keyCol == -1)	return;
+		//
+		// storage.update(record);
 	}
 
 	template<typename WhereClause, typename ...Cols>
 	std::optional<Table> exists( WhereClause& clause, Cols&& ... cols )
 	{
-		std::optional<Table> record;
-		auto e = storage.select( columns(cols...), where(clause));
-		if(e.size() > 0)
-		{
-			auto id = std::get<0>(e[0]);
-			record = storage.get<Table>(id);
-		}
-		
+		std::optional<Table> record = refIntManager.exists(clause, cols...);
 		return record;
+		
+		// auto e = storage.select( columns(cols...), where(clause));
+		// if(e.size() > 0)
+		// {
+		// 	auto id = std::get<0>(e[0]);
+		// 	record = storage.get<Table>(id);
+		// }
+		//
+		// return record;
 	}
 
 	std::optional<Table> current()
@@ -61,7 +69,8 @@ public:
 		if (cur_sel != npos)
 		{
 			auto id = m_box.GetItemData(cur_sel);
-			record = storage.get<Table>(id);
+			// record = storage.get<Table>(id);
+			record = refIntManager.get(id);
 		}
 		return record;
 	}
@@ -98,7 +107,8 @@ public:
 		if( index != npos )
 		{
 			m_box.SetCurSel(index);
-			record = storage.get<Table>(pk);
+			// record = storage.get<Table>(pk);
+			record = refIntManager.get(pk);
 			m_box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_box.m_hWnd);
 		}
 		return record;
@@ -106,8 +116,12 @@ public:
 
 	void remove(Table& record)
 	{
-		assert(record.*keyCol > -1);
-		storage.remove<Table>(get_pk(record));
+		refIntManager.remove(record);
+		// assert(record.*keyCol > -1);
+		// if (!RefIntegrity::canDelete(*current))
+		// 	return;
+		//
+		// storage.remove<Table>(get_pk(record));
 	}
 
 	int get_pk( Table& record)
@@ -119,7 +133,7 @@ public:
 	int insert_into_listbox( Table& record)
 	{
 		assert( get_pk(record) != npos);
-		auto displayStr = displayer(record);
+		auto displayStr = asString(record);
 		auto index = m_box.AddString(displayStr);
 		m_box.SetItemData(index, get_pk(record));
 		m_box.SetCurSel(index);
@@ -130,32 +144,24 @@ public:
 	{
 		auto current = this->current();
 		if (!current) return false;
-		bool has_links = RecordLinks::has_links(*current);
-		if (has_links) return false;
-
-#if 1
-		int cur_sel = m_box.GetCurSel();
-		remove(*current);
-		m_box.DeleteString(cur_sel);
-		return true;
-#else
-		int cur_sel = m_box.GetCurSel();
-		if (cur_sel != npos )
+		if( refIntManager.remove(*current))
 		{
-			auto id = m_box.GetItemData(cur_sel);
-			// m_box.DeleteString(cur_sel);
-			try
-			{
-				Table& record = storage.get<Table>(id);
-				remove(record);
-			}
-			catch(...)
-			{
-				m_box.GetParent()->MessageBoxW(L"Error borrando aunque sin existencia de relacion entre registros");
-			}
+			int cur_sel = m_box.GetCurSel();
 			m_box.DeleteString(cur_sel);
+			return true;
 		}
-#endif
+// #if 0
+// 		bool has_links = RecordLinks::has_links(*current);
+// 		if (has_links) return false;
+// #else
+// 		if (! RefIntegrity::canDelete(*current))
+// 			return false;
+// #endif
+
+		// int cur_sel = m_box.GetCurSel();
+		// // remove(*current);
+		// m_box.DeleteString(cur_sel);
+		// return true;
 	}
 
 	void delete_from_box(Table& record)
@@ -171,11 +177,12 @@ public:
 	void loadLB()
 	{
 		m_box.ResetContent();
-		auto vec = storage.get_all<Table>();
-
+		// auto vec = storage.get_all<Table>();
+		auto vec = refIntManager.getAll();
+		
 		for (auto& record : vec)
 		{
-			auto displayStr = displayer(record);
+			auto displayStr = asString(record);
 			int index = m_box.AddString(displayStr);
 			m_box.SetItemData(index, record.*keyCol);
 		}
@@ -184,11 +191,11 @@ public:
 	void loadLB(whereClause clause)
 	{
 		m_box.ResetContent();
-		auto vec = storage.get_all<Table>(where(clause));
-
+		// auto vec = storage.get_all<Table>(where(clause));
+		auto vec = refIntManager.getAll(clause);
 		for (auto& record : vec)
 		{
-			auto displayStr = displayer(record);
+			auto displayStr = asString(record);
 			int index = m_box.AddString(displayStr);
 			m_box.SetItemData(index, record.*keyCol);
 		}

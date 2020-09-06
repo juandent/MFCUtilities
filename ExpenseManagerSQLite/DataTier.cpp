@@ -110,7 +110,7 @@ void Storage::fill_db_with_test_data()
 	Concepto con{ -1, "TFT-SINPE A: 15103-02**-****-8467", actother.id_account };
 	con.id_concepto = storage.insert(con);
 
-	Statement statement{ -1, ttod };
+	Statement statement{ - 1, ttod };
 	statement.id_statement = storage.insert(statement);
 
 	Transaccion trans{-1, 1200, 50, act.id_account, actother.id_account,tod, "una transaccion", cat.id_categoria, con.id_concepto, statement.id_statement  };

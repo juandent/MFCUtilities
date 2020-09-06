@@ -30,11 +30,22 @@ struct Categoria;
 
 
 
-struct Statement
+struct Statement // : RefIntegrity<Statement>
 {
 	int id_statement;
 	date::sys_days date;
 };
+
+
+#if 0
+void testRefIntegrity()
+{
+	Statement stmt;
+	stmt.canDelete();
+	constexpr size_t size = sizeof(stmt);
+	
+}
+#endif
 
 #if 0
 struct StatementLine

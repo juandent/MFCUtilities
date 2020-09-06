@@ -107,6 +107,11 @@ void StatementDlg::OnBnClickedBAplicarStatement()
 void StatementDlg::OnBnClickedBorrarStatement()
 {
 	// TODO: Add your control notification handler code here
+	// if (m_statement)
+	// {
+	// 	bool can = RefIntegrity::canDelete(m_statement);
+	// }
+	
 	if (m_statementLB.delete_current_sel())
 	{
 		setIdFromRecord<Statement>(m_id_statement, -1);
@@ -125,13 +130,14 @@ void StatementDlg::OnLbnSelchangeLEstadosDeCuenta()
 		MessageBoxW(L"Falta escoger estado de cuenta");
 		return;
 	}
-
-	auto fecha = statement->date;
+	m_statement = statement;
+	
+	auto fecha = m_statement->date;
 
 	COleDateTime rDateTime = JD::to_ole_date_time(fecha);
 	
 	m_transaction_date_picker.SetTime(rDateTime);
-	setIdFromRecord<Statement>(m_id_statement, statement->id_statement);
+	setIdFromRecord<Statement>(m_id_statement, m_statement->id_statement);
 
 }
 

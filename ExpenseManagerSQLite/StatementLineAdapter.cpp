@@ -103,7 +103,7 @@ void StatementLineAdapter::adapt(const Translation& t)
 		}
 		else
 		{
-			Statement statement{ -1, t.statement_date };
+			Statement statement{- 1, t.statement_date };
 			statement.id_statement = storage.insert(statement);
 			//statement_pool.insert(search_val, statement);
 		}
