@@ -134,7 +134,8 @@ bool RecordLinks::foreignKeysExist(const Transaccion& trans)
 	count[3] = storage.count<Categoria>(where(is_equal(&Categoria::id_categoria, trans.fkey_category)));
 	count[4] = storage.count<Statement>(where(is_equal(&Statement::id_statement, trans.fkey_statement)));
 
-	return count[0] && count[1] && count[2] && count[3] && count[4];
+	return allNonZero(count[0], count[1], count[2], count[3], count[4]);
+//	return count[0] && count[1] && count[2] && count[3] && count[4];
 }
 
 bool RecordLinks::foreignKeysExist(const Account& acct)

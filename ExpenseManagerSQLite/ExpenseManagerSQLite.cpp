@@ -29,6 +29,9 @@
 #include "StatementDlg.h"
 #include "TransaccionDlg.h"
 
+#include "ExpenseManagerSQLite/JoinedGridDisplayerDoc.h"
+#include "ExpenseManagerSQLite/JoinedGridDisplayerView.h"
+
 // CExpenseManagerSQLiteApp
 
 BEGIN_MESSAGE_MAP(CExpenseManagerSQLiteApp, CWinAppEx)
@@ -79,10 +82,13 @@ CExpenseManagerSQLiteApp theApp;
 
 
 // CExpenseManagerSQLiteApp initialization
+// void doIT();
 
 BOOL CExpenseManagerSQLiteApp::InitInstance()
 {
 	Storage::initialize();
+	// doIT();
+	
 	//Storage::fill_db_with_test_data();
 	
 	// InitCommonControlsEx() is required on Windows XP if an application
@@ -156,7 +162,17 @@ BOOL CExpenseManagerSQLiteApp::InitInstance()
 			return FALSE;
 		AddDocTemplate(pDocTemplate);
 	}
-	
+	{
+		CMultiDocTemplate* pDocTemplate;
+		pDocTemplate = new CMultiDocTemplate(IDR_ExpenseManagerSQLiteTYPE3,
+			RUNTIME_CLASS(JoinedGridDisplayerDoc),
+			RUNTIME_CLASS(CChildFrame), // custom MDI child frame
+			RUNTIME_CLASS(JoinedGridDisplayerView));
+		if (!pDocTemplate)
+			return FALSE;
+		AddDocTemplate(pDocTemplate);
+	}
+
 
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;

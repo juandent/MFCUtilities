@@ -1,9 +1,9 @@
 ﻿#include "stdafx.h"
 #include "GridDisplayer.h"
 
-#include "../Model/Model.ORM.Definitions.h"
+// #include "../Model/Model.ORM.Definitions.h"
 
-using namespace Model;
+// using namespace Model;
 
 //void getPointerToDataMember( &Category::(*member))
 //{
@@ -134,6 +134,7 @@ void doIT()
 
 	Q<C, decltype(&C::val), decltype(&C::str)> q(&C::val, &C::str);
 
+	// Q<C> qq(&C::val, &C::str);
 
 
 	CJDGridCtrl grid;

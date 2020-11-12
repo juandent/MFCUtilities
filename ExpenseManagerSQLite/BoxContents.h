@@ -11,6 +11,36 @@ using namespace sqlite_orm;
 template<typename Table>
 using TableStringizer = CString(*)(Table&);
 
+struct Posting
+{
+private:
+	Posting() = default;
+	std::unordered_set<HWND> m_postingWindows;
+public:
+
+	static Posting& get()
+	{
+		static Posting posting;
+		return posting;
+	}
+
+	void AddWindow(HWND hwnd)
+	{
+		m_postingWindows.insert(hwnd);
+	}
+
+	bool exists(LPARAM lParam)
+	{
+		HWND hwnd = reinterpret_cast<HWND>(lParam);
+		auto f = m_postingWindows.find(hwnd);
+		if (f != m_postingWindows.end())
+		{
+			m_postingWindows.erase(hwnd);
+			return true;
+		}
+		return false;
+	}
+};
 
 
 template<typename Table, int Table::*keyCol, typename BoxType = CListBox> 
@@ -29,7 +59,7 @@ public:
 	BoxContents(BoxType& listbox, TableStringizer<Table>  f) : m_box(listbox), asString(f) {}
 	
 	template<typename ...Cols>
-	Table insert(Cols&&... cols)
+	std::optional<Table> insert(Cols&&... cols)
 	{
 		return refIntManager.insert(cols...);
 		// Table record{ -1, cols... };
@@ -92,9 +122,20 @@ public:
 		else
 		{
 			m_box.SetCurSel(-1);
+			CString buffer;
+			m_box.GetWindowTextW(buffer);
+			m_box.SetWindowTextW(L"");
 		}
 		return record;
 	}
+
+	// bool isPosting() noexcept
+	// {
+	// 	bool is = Posting::PostingWindow == m_box.m_hWnd;
+	// 	Posting::PostingWindow = 0;
+	// 	return is;
+	// }
+	
 	std::optional<Table> select(int pk)
 	{
 		std::optional<Table> record;
@@ -109,6 +150,8 @@ public:
 			m_box.SetCurSel(index);
 			// record = storage.get<Table>(pk);
 			record = refIntManager.get(pk);
+			// Posting::PostingWindow = m_box.m_hWnd;
+			Posting::get().AddWindow(m_box.m_hWnd);
 			m_box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_box.m_hWnd);
 		}
 		return record;
@@ -150,6 +193,7 @@ public:
 			m_box.DeleteString(cur_sel);
 			return true;
 		}
+		return false;
 // #if 0
 // 		bool has_links = RecordLinks::has_links(*current);
 // 		if (has_links) return false;
@@ -186,6 +230,8 @@ public:
 			int index = m_box.AddString(displayStr);
 			m_box.SetItemData(index, record.*keyCol);
 		}
+		// ???
+		SetCurSel(-1);
 	}
 	template<typename whereClause>
 	void loadLB(whereClause clause)
@@ -198,6 +244,7 @@ public:
 			auto displayStr = asString(record);
 			int index = m_box.AddString(displayStr);
 			m_box.SetItemData(index, record.*keyCol);
+			SetCurSel(index);
 		}
 	}
 	

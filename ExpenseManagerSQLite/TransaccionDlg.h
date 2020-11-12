@@ -68,6 +68,7 @@ private:
 public:
 	afx_msg void OnCbnSelchangeCEstadoCuenta();
 	afx_msg void OnCbnSelchangeCOtherAccount();
+	void SetAccountOwner(std::optional<Account>& account);
 	afx_msg void OnBnClickedBAplicarTransactions();
 private:
 	CEdit m_colones;
@@ -82,4 +83,7 @@ private:
 	CEdit m_row;
 public:
 	afx_msg void OnBnClickedBAddOtherAccount();
+private:
+	CEdit m_cuenta_otra_owner;
+	virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
 };

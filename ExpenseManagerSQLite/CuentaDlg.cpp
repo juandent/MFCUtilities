@@ -269,6 +269,11 @@ void CuentaDlg::OnLbnSelchangeLCuentas()
 	// TODO: Add your control notification handler code here
 	auto cuenta = m_cuentasLB.current();
 
+	if(! cuenta)
+	{
+		return;
+	}
+
 	m_numero.SetWindowTextW(JD::to_cstring(cuenta->number));
 	m_descripcion.SetWindowTextW(JD::to_cstring(cuenta->description));
 	m_id_cuenta.SetWindowTextW(JD::to_cstring(cuenta->id_account));

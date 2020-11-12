@@ -19,8 +19,6 @@ struct RefIntegrityManager
 {
 private:
 	Storage::Storage_t& storage;
-public:
-	RefIntegrityManager() : storage{ Storage::getStorage() } {}
 
 	bool canDelete(Table const& record)
 	{
@@ -31,18 +29,43 @@ public:
 	{
 		return RecordLinks::foreignKeysExist(record);
 	}
+
+	///
 	template<typename ...Cols>
-	Table insert(Cols&&... cols)
+	Table do_insert(Cols&&... cols)
 	{
 		Table record{ -1, cols... };
 		record.*keyCol = storage.insert(record);
 		return record;
 	}
-	void update(const Table& record)
+	void do_update(const Table& record)
 	{
 		if (record.*keyCol == -1)	return;
 
 		storage.update(record);
+	}
+public:
+	RefIntegrityManager() : storage{ Storage::getStorage() } {}
+
+	template<typename ...Cols>
+	std::optional<Table> insert(Cols&&... cols)
+	{
+		Table record{ -1, cols... };
+		if( !canInsertUpdate(record))
+		{
+			return std::nullopt;
+		}
+		record.*keyCol = storage.insert(record);
+		return record;
+	}
+	void update(const Table& record)
+	{
+		if (record.*keyCol == -1)	return;	// not persisted yet!
+
+		if (canInsertUpdate(record))
+		{
+			storage.update(record);
+		}
 	}
 
 	Table get(int id)

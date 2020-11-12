@@ -1,9 +1,14 @@
 ﻿#pragma once
 
+struct IDisplayer
+{
+	virtual void display() = 0;
+};
+
 
 
 template<typename T>
-class JoinedGridDisplayer
+class JoinedGridDisplayer  :  public IDisplayer
 {
 	using Container = std::vector<std::remove_reference_t<T>>;
 	using RowType = typename Container::value_type;
@@ -34,7 +39,7 @@ public:
 		//static_assert(NumCols == MaxCol, "");
 	}
 
-	void display()
+	void display() override
 	{
 		RECT rect;
 		grid.GetWindowRect(&rect);

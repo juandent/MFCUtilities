@@ -177,6 +177,12 @@
     <ClInclude Include="RefIntegrity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JoinedGridDisplayerView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JoinedGridDisplayerDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpenseManagerSQLite.cpp">
@@ -300,6 +306,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TransactionState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JoinedGridDisplayerView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JoinedGridDisplayerDoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

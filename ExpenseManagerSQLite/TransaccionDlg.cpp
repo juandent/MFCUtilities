@@ -68,6 +68,7 @@ void TransaccionDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_DESCRIPCION, m_descripcion);
 	DDX_Control(pDX, IDC_E_TRANSACCION, m_id);
 	DDX_Control(pDX, IDC_E_ROW, m_row);
+	DDX_Control(pDX, IDC_EDIT_CUENTA_OTRA_OWNER, m_cuenta_otra_owner);
 }
 
 
@@ -126,7 +127,13 @@ void TransaccionDlg::Refresh()
 	m_categoriaCB.loadLB();
 	m_other_accountCB.loadLB();
 	m_transaccionLB.loadLB();
+	
+	auto other_account = m_other_accountCB.current();
 
+	// if(other_account)
+	// {
+	SetAccountOwner(other_account);
+	// }
 }
 
 void TransaccionDlg::Find_id()
@@ -223,8 +230,58 @@ void TransaccionDlg::OnCbnSelchangeCEstadoCuenta()
 void TransaccionDlg::OnCbnSelchangeCOtherAccount()
 {
 	// TODO: Add your control notification handler code here
-//	m_other_accountCB.
+	// if (m_other_accountCB.isPosting()) return;
+	
+	auto other = m_other_accountCB.current();
+	if( other)
+	{
+		if (m_trans)
+		{
+			m_trans->fkey_account_other = other->id_account;
+		}
+		
+		std::optional<int> ops = other->id_account;
+		auto whereClause = c(&Account::id_account) == other->id_account;
+
+		
+		auto rows = Storage::getStorage().select(columns(&Transaccion::fkey_account_other, &Account::fkey_account_owner, &AccountOwner::name),
+			inner_join<Account>(on(c(&Transaccion::fkey_account_other) == &Account::id_account)),
+			inner_join<AccountOwner>(on(c(&Account::fkey_account_owner) == &AccountOwner::id_owner))); // ,
+			// where(c(&Transaccion::fkey_account_other)== other->id_account));
+
+		m_other_accountCB.select(other->id_account); //    loadLB(whereClause);
+		
+		auto account = m_other_accountCB.current();
+
+		SetAccountOwner(account);
+	}
+	else
+	{
+		std::optional<Account> empty;
+		SetAccountOwner(empty);
+	}
 }
+
+void TransaccionDlg::SetAccountOwner(std::optional<Account>& account)
+{
+	if (account)
+	{
+		int fkey_account_owner = account->fkey_account_owner;
+
+		auto res = Storage::getStorage().select(&AccountOwner::name, where(c(&AccountOwner::id_owner) == fkey_account_owner));
+		if (res.size())
+		{
+			auto r = res[0];
+			auto csr = JD::to_cstring(r);
+			m_cuenta_otra_owner.SetWindowTextW(csr);
+		}
+	}
+	else
+	{
+		m_cuenta_otra_owner.SetWindowTextW(L"");
+	}
+}
+
 
 #if 0
 namespace JD
@@ -525,4 +582,27 @@ void TransaccionDlg::OnBnClickedBAddOtherAccount()
 		m_other_accountCB.select(cuenta_other->id_account);
 	}
 #endif
+}
+
+
+LRESULT TransaccionDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+// m_box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_box.m_hWnd);
+
+	if(message == WM_COMMAND)
+	{
+		auto loword = LOWORD(wParam);
+		auto hiword = HIWORD(wParam);
+		
+		if( loword == LBN_SELCHANGE || hiword == LBN_SELCHANGE )
+		{
+			int i=0;
+			++i;
+			if( Posting::get().exists(lParam) )		// this window already responded to initial LBN_SELCHANGE
+			{
+				return 0;
+			}
+		}
+	}
+	return CDialog::WindowProc(message, wParam, lParam);
 }

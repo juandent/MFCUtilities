@@ -94,7 +94,7 @@
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_AFX;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\sqlite_orm\include;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -225,6 +225,8 @@
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="BoxContents.h" />
+    <ClInclude Include="JoinedGridDisplayerDoc.h" />
+    <ClInclude Include="JoinedGridDisplayerView.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Nullable.h" />
     <ClInclude Include="ObjectBuilder.h" />
@@ -248,7 +250,7 @@
     <ClCompile Include="..\CSVFile.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\IGridController.cpp" />
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\JoinedGridDisplayer.cpp" />
@@ -274,6 +276,8 @@
     <ClCompile Include="ExpenseManagerSQLiteView.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="BoxContents.cpp" />
+    <ClCompile Include="JoinedGridDisplayerDoc.cpp" />
+    <ClCompile Include="JoinedGridDisplayerView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="ObjectBuilder.cpp" />
     <ClCompile Include="OutputWnd.cpp" />

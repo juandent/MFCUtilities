@@ -14,8 +14,18 @@ struct Categoria;
 
 class RecordLinks
 {
-	// template<int...Counts>
-	// static bool allNonZero(Counts...counts);
+	// template<typename T, T ...Counts>
+	// static bool allNonZero(T...counts)
+	// {
+	// 	bool all_none_zero = (counts && ...);
+	// }
+	template<typename ...Counts>
+	static bool allNonZero(Counts ... counts) requires (std::is_same_v<Counts, int> && ...)
+	{
+//		static_assert((std::is_same_v<Counts, int> && ...));
+		return (counts && ...);
+	}
+
 public:
 	static bool has_links(const Pais& pais);
 	static bool has_links(const AccountOwner& owner);
