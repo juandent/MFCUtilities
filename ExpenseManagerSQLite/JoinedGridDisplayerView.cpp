@@ -69,13 +69,15 @@ void JoinedGridDisplayerView::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
 
-	auto lines = Storage::getStorage().select(columns(&Transaccion::line_date, &Transaccion::amount_colones, &Transaccion::fkey_account_own, &Account::number,
-		&Transaccion::fkey_category, &Categoria::name),
-		inner_join<Account>(on(c(&Transaccion::fkey_account_own) == &Account::id_account)), inner_join<Categoria>(on(c(&Transaccion::fkey_category) == &Categoria::id_categoria)));
+	auto lines = Storage::getStorage().select(columns(&Transaccion::line_date, &Transaccion::amount_colones, &Transaccion::amount_dolares, &Transaccion::fkey_account_own, &Account::number,
+		&Transaccion::fkey_category, &Categoria::name, &Statement::date),
+		inner_join<Account>(on(c(&Transaccion::fkey_account_own) == &Account::id_account)), inner_join<Categoria>(on(c(&Transaccion::fkey_category) == &Categoria::id_categoria)),
+		inner_join<Statement>(on(c(&Transaccion::fkey_statement)== &Statement::id_statement)),
+		where(c(&Statement::id_statement) == 15));
 
 
 	
-	std::vector<std::string> headers{ "LINE DATE", "AMOUNT LOCAL", "BELONGS TO", "ACCOUNT ID", "CATEGORY FID", "CATEGORY" };
+	std::vector<std::string> headers{ "LINE DATE", "AMOUNT LOCAL", "AMOUNT DOLARES", "BELONGS TO", "ACCOUNT ID", "CATEGORY FID", "CATEGORY", "STATEMENT DATE" };
 
 	m_displayer.reset(new JoinedGridDisplayer<decltype(lines[0])> (m_grid, std::move(lines), std::move(headers)));
 	m_displayer->display();

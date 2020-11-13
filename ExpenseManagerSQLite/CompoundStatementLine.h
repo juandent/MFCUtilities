@@ -20,6 +20,7 @@ class CompoundStatementLine
 	std::optional<Concepto>    m_concepto;
 	std::optional<Statement>   m_statement;
 	std::optional<Categoria>   m_categoria;
+	std::optional<AccountOwner> m_account_owner;
 
 	auto insert_own_account()
 	{
@@ -85,6 +86,15 @@ public:
 			auto id = std::get<0>(vec[0]);
 			m_own_account = storage.get<Account>(id);
 		}
+		// load related objects
+		if(m_own_account->fkey_account_owner)
+		{
+			auto clause = c(&AccountOwner::id_owner) == m_own_account->fkey_account_owner;
+			auto vec = storage.select(columns(&AccountOwner::id_owner), where(clause));
+			auto id = std::get<0>(vec[0]);
+			m_account_owner = storage.get<AccountOwner>(id);
+		}
+
 		return m_own_account;
 	}
 	
@@ -117,6 +127,14 @@ public:
 		{
 			auto id = std::get<0>(vec[0]);
 			m_concepto = storage.get<Concepto>(id);
+		}
+		// load related objects
+		if(m_concepto->fkey_account)
+		{
+			auto clause = c(&Account::id_account) == m_concepto->fkey_account;
+			auto vec = storage.select(columns(&Account::id_account), where(clause));
+			auto id = std::get<0>(vec[0]);
+			m_other_acccount = storage.get<Account>(id);
 		}
 		return m_concepto;
 	}
@@ -160,16 +178,21 @@ public:
 		}
 		return m_categoria;
 	}
-	std::optional<Transaccion> set_transaction(ConceptsAndAccounts::DoubleColumn_mem colones_fn, ConceptsAndAccounts::DoubleColumn_mem  dolares_fn, 
+	std::pair<std::optional<Transaccion>,bool> set_transaction(ConceptsAndAccounts::DoubleColumn_mem colones_fn, ConceptsAndAccounts::DoubleColumn_mem  dolares_fn, 
 		ConceptsAndAccounts::SysDaysColumn_mem line_date_fn, ConceptsAndAccounts::StringColumn_mem description_fn )
 	{
 		if( ! m_concepto || ! m_statement || ! m_categoria || ! m_own_account )
 		{
-			return std::nullopt;
+			std::pair<std::optional<Transaccion>, bool > pair{ std::nullopt, false };
+			return pair;
 		}
 		Transaccion trans;
 		m_trans = trans;
 
+		if( m_other_acccount )
+		{
+			m_trans->fkey_account_other = m_other_acccount->id_account;
+		}
 		m_trans->fkey_concepto = m_concepto->id_concepto;
 		m_trans->fkey_account_own = m_own_account->id_account;
 		m_trans->fkey_category = m_categoria->id_categoria;
@@ -189,8 +212,14 @@ public:
 		dlg.setDiscriminator(m_trans);
 		//dlg.autoexec();
 		auto ret = dlg.DoModal();
+		if( ret == 0)
+		{
+			// cancel
+		}
 		m_trans = dlg.getCompleteObject();
-		return m_trans;
+
+		std::pair<std::optional<Transaccion>, bool> pair{ m_trans, ret == 1 };	// 1 es Continue, 0 es Abort
+		return pair;
 	}
 	
 };

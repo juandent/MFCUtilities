@@ -2,6 +2,7 @@
 // Microsoft Visual C++ generated include file.
 // Used by ExpenseManagerSQLite.rc
 //
+#define IDOK2                           2
 #define ID_B_APLICAR_STATEMENT          3
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -19,6 +20,7 @@
 #define ID_WINDOW_MANAGER               131
 #define IDR_ExpenseManagerSQLiteTYPE2   132
 #define ID_VIEW_FILEVIEW                133
+#define IDR_ExpenseManagerSQLiteTYPE3   133
 #define ID_VIEW_CLASSVIEW               134
 #define ID_PROPERTIES                   135
 #define ID_OPEN                         136
@@ -95,6 +97,7 @@
 #define IDD_ConceptosDlg                316
 #define IDD_StatementDlg                317
 #define IDD_CategoryDlg                 318
+#define IDD_JoinedGridDisplayerView     319
 #define IDC_L_CONCEPTOS                 1000
 #define IDC_GRID                        1001
 #define IDC_B_CONNECT                   1002
@@ -202,6 +205,8 @@
 #define IDC_E_ID_CATEGORIA              1091
 #define IDC_E_ID_OWNER                  1092
 #define IDC_E_ID_STATEMENT              1093
+#define IDC_GRID_2                      1094
+#define IDC_EDIT_CUENTA_OTRA_OWNER      1095
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
@@ -217,9 +222,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        319
+#define _APS_NEXT_RESOURCE_VALUE        320
 #define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1094
-#define _APS_NEXT_SYMED_VALUE           319
+#define _APS_NEXT_CONTROL_VALUE         1096
+#define _APS_NEXT_SYMED_VALUE           320
 #endif
 #endif

@@ -152,11 +152,11 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 		return;
 	}
 
-	if (rNumero.IsEmpty() || rDescripcion.IsEmpty())
-	{
-		MessageBoxW(L"Falta el numero de cuenta o su descripción");
-		return;
-	};
+	// if (rNumero.IsEmpty() || rDescripcion.IsEmpty())
+	// {
+	// 	MessageBoxW(L"Falta el numero de cuenta o su descripción");
+	// 	return;
+	// };
 	std::optional<AccountOwner> owner = m_ownerCB.current();
 	if (!owner)
 	{

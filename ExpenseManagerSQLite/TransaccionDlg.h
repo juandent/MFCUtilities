@@ -52,7 +52,7 @@ public:
 	void SaveState();
 	afx_msg void OnBnClickedBAddStatement();
 	afx_msg void OnBnClickedBAddConcept();
-	afx_msg void OnBnClickedOk();
+	afx_msg void OnBnClickedCancel();
 	void postMessage(CListBox& box);
 private:
 	CMonthCalCtrl m_date_transaccion;
@@ -86,4 +86,6 @@ public:
 private:
 	CEdit m_cuenta_otra_owner;
 	virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
+public:
+	afx_msg void OnBnClickedOk();
 };

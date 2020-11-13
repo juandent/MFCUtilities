@@ -75,7 +75,7 @@ void TransaccionDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(TransaccionDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_ADD_STATEMENT, &TransaccionDlg::OnBnClickedBAddStatement)
 	ON_BN_CLICKED(IDC_B_ADD_CONCEPT, &TransaccionDlg::OnBnClickedBAddConcept)
-	ON_BN_CLICKED(IDOK, &TransaccionDlg::OnBnClickedOk)
+	ON_BN_CLICKED(IDNO, &TransaccionDlg::OnBnClickedCancel)
 	ON_NOTIFY(MCN_SELCHANGE, IDC_DATE_TRANSACTION, &TransaccionDlg::OnMcnSelchangeDateTransaction)
 	ON_CBN_SELCHANGE(IDC_C_ESTADO_CUENTA, &TransaccionDlg::OnCbnSelchangeCEstadoCuenta)
 	ON_CBN_SELCHANGE(IDC_C_OTHER_ACCOUNT, &TransaccionDlg::OnCbnSelchangeCOtherAccount)
@@ -84,6 +84,7 @@ BEGIN_MESSAGE_MAP(TransaccionDlg, CDialog)
 	ON_BN_CLICKED(ID_B_BORRAR, &TransaccionDlg::OnBnClickedBBorrar)
 	// ON_BN_CLICKED(IDC_B_UPDATE_TRANSACTION, &TransaccionDlg::OnBnClickedBUpdateTransaction)
 	ON_BN_CLICKED(IDC_B_ADD_OTHER_ACCOUNT, &TransaccionDlg::OnBnClickedBAddOtherAccount)
+	ON_BN_CLICKED(IDOK, &TransaccionDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -109,7 +110,8 @@ void TransaccionDlg::Refresh_discriminator()
 		m_descripcion.SetWindowTextW(JD::to_cstring(m_trans->descripcion));
 		m_statementCB.select(m_trans->fkey_statement);
 		m_own_accountCB.select(m_trans->fkey_account_own);
-		m_other_accountCB.select(m_trans->fkey_account_other);
+		std::optional<Account> act  = m_other_accountCB.select(m_trans->fkey_account_other);
+		SetAccountOwner(act);
 
 		m_id.SetWindowTextW(JD::to_cstring(m_trans->id_transaccion));
 #define MODIFY_SCHEMA
@@ -198,10 +200,10 @@ void TransaccionDlg::OnBnClickedBAddConcept()
 }
 
 
-void TransaccionDlg::OnBnClickedOk()
+void TransaccionDlg::OnBnClickedCancel()
 {
 	// TODO: Add your control notification handler code here
-	CDialog::OnOK();
+	CDialog::OnCancel();
 }
 
 
@@ -594,10 +596,8 @@ LRESULT TransaccionDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 		auto loword = LOWORD(wParam);
 		auto hiword = HIWORD(wParam);
 		
-		if( loword == LBN_SELCHANGE || hiword == LBN_SELCHANGE )
+		if( /*loword == LBN_SELCHANGE ||*/ hiword == LBN_SELCHANGE )
 		{
-			int i=0;
-			++i;
 			if( Posting::get().exists(lParam) )		// this window already responded to initial LBN_SELCHANGE
 			{
 				return 0;
@@ -605,4 +605,11 @@ LRESULT TransaccionDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 		}
 	}
 	return CDialog::WindowProc(message, wParam, lParam);
+}
+
+
+void TransaccionDlg::OnBnClickedOk()
+{
+	// TODO: Add your control notification handler code here
+	CDialog::OnOK();
 }

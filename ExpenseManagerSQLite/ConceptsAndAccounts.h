@@ -125,7 +125,7 @@ public:
 	afx_msg void OnLbnSelchangeLConceptos();
 	afx_msg void OnBnClickedBDeselectConceptos();
 	afx_msg void OnLbnSelchangeLTransactions();
-	afx_msg void SaveRowToDb();
+	afx_msg bool SaveRowToDb();
 	void OnBnClickedBSaveToDb();
 private:
 	CListBox m_statement_list;

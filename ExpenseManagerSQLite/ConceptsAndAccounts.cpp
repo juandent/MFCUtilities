@@ -659,7 +659,7 @@ void ScrollUpNRows(CGridCtrl& grid, int num_rows)
 	}
 }
 
-void ConceptsAndAccounts::SaveRowToDb()
+bool ConceptsAndAccounts::SaveRowToDb()
 {
 	m_statementLines.SetSelectedRange(m_row, 0, m_row, 10);
 
@@ -677,10 +677,12 @@ void ConceptsAndAccounts::SaveRowToDb()
 				if (r4)
 				{
 					auto r5 = comp.set_transaction(&ConceptsAndAccounts::getAmountLocal, &ConceptsAndAccounts::getAmountDolares, &ConceptsAndAccounts::getLineDate, &ConceptsAndAccounts::getDescripcion);
+					return r5.second;
 				}
 			}
 		}
 	}
+	return false;
 }
 
 void ConceptsAndAccounts::OnBnClickedBSaveToDb()
@@ -690,34 +692,12 @@ void ConceptsAndAccounts::OnBnClickedBSaveToDb()
 	const auto row_count = m_statementLines.GetRowCount();
 	for (m_row = 1; m_row < row_count ; ++m_row)
 	{
-#if 1
-		SaveRowToDb();
-#else	
-		m_statementLines.SetSelectedRange(m_row, 0, m_row, 10);
-		
-		CompoundStatementLine comp{ this };
-		auto r1 = comp.set_own_account(&ConceptsAndAccounts::getOwnAccountNumber);
-		if (r1)
-		{
-			auto r2 = comp.set_concepto(&ConceptsAndAccounts::getConceptoName);
-			if (r2)
-			{
-				auto r3 = comp.setStatement(&ConceptsAndAccounts::getStatementDate);
-				if (r3)
-				{
-					auto r4 = comp.set_category(&ConceptsAndAccounts::getCategoryName);
-					if (r4)
-					{
-						auto r5 = comp.set_transaction(&ConceptsAndAccounts::getAmountLocal, &ConceptsAndAccounts::getAmountDolares, &ConceptsAndAccounts::getLineDate, &ConceptsAndAccounts::getDescripcion);
-					}
-				}
-			}
-		}
-#endif
-		int ret = MessageBoxW(L"Desea continuar?", L"Confirme", MB_CANCELTRYCONTINUE);
-		if (ret == 2)
+		if (!SaveRowToDb())
 			break;
-		;
+		// int ret = MessageBoxW(L"Desea continuar?", L"Confirme", MB_CANCELTRYCONTINUE);
+		// if (ret == 2)
+		// 	break;
+		// ;
 		ScrollDownNRows(m_statementLines, 1);
 	}
 	refresh();
