@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// module CSVFile;
 
 CSVFile::CSVFile()
 {
@@ -119,9 +120,9 @@ void CSVFile::saveAs(std::string outputFileName)
 		throw ios_base::failure{ os.str() };
 	}
 
-	for ( auto& r = m_matrix.begin(); r != m_matrix.end(); ++r)
+	for ( auto&& r = m_matrix.begin(); r != m_matrix.end(); ++r)
 	{
-		for (auto& c = r->begin(); c != r->end(); ++c)
+		for (auto&& c = r->begin(); c != r->end(); ++c)
 		{
 			out << *c;
 			if (next(c) != r->end())

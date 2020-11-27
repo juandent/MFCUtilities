@@ -116,9 +116,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CATCH_CONFIG_MAIN;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);CATCH_CONFIG_RUNNER;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\sqlite_orm\binary\tests\third_party\sqlite\sqlite-amalgamation-3210000;C:\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -1,9 +1,10 @@
 #pragma once
-#include "CSVFile.h"
+// #include "CSVFile.h"
 #include "Data_Tier.h"
 #include "boxContents.h"
 #include "StatementLineGridController.h"
 
+import CSV_File;
 
 // ConceptsAndAccounts form view
 
@@ -49,7 +50,7 @@ private:
 	void refresh();
 	CJDGridCtrl m_statementLines;
 	StatementLineGridController m_grid_controller;
-	CSVFile m_file;
+	csv::CSV_File m_file;
 	int m_row;
 	void LoadFile(const std::string& fileName);
 	std::string readCell(const int row, const int column);

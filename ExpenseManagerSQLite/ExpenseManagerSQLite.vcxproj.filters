@@ -78,9 +78,6 @@
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.Colones.Binding.h">
       <Filter>DataTier</Filter>
     </ClInclude>
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.DataTier.h">
-      <Filter>DataTier</Filter>
-    </ClInclude>
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.Dolares.Binding.h">
       <Filter>DataTier</Filter>
     </ClInclude>
@@ -183,6 +180,12 @@
     <ClInclude Include="JoinedGridDisplayerDoc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JoinedComboDisplayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDisplayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpenseManagerSQLite.cpp">
@@ -241,9 +244,6 @@
     </ClCompile>
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.cpp">
       <Filter>Grid</Filter>
-    </ClCompile>
-    <ClCompile Include="Data.Factories.h">
-      <Filter>DataTier</Filter>
     </ClCompile>
     <ClCompile Include="ConceptsAndAccounts.cpp">
       <Filter>Source Files</Filter>

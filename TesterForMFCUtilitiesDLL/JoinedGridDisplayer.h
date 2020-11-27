@@ -1,11 +1,7 @@
 ﻿#pragma once
+#include <optional>
 
-struct IDisplayer
-{
-	virtual void display() = 0;
-};
-
-
+#include "..\ExpenseManagerSQLite/IDisplayer.h"
 
 template<typename T>
 class JoinedGridDisplayer  :  public IDisplayer
@@ -22,12 +18,15 @@ public:
 		std::vector<std::string> headers_)
 		: lines{ std::move(lines_) }, grid{ grid }, headers{ std::move(headers_) }
 	{
-		grid.SetColumnCount(headers.size() + 1);
+		grid.SetColumnCount(NumCols + 1); // headers.size() + 1);
 		grid.SetRowCount(lines.size() + 1);
 		grid.SetFixedRowCount();
 		grid.SetFixedColumnCount();
 		grid.SetHeaderSort(true);
 		grid.SetSingleRowSelection(true);
+
+		grid.m_sortingFunctions.resize(NumCols + 1);
+		grid.m_sortingFunctions[0] = JD::Comparison::Text;
 
 		int col = 1;
 		for (auto& str : headers)
@@ -67,6 +66,17 @@ private:
 		static void Apply(int row, const Container& z, CJDGridCtrl& grid)
 		{
 			auto value = std::get<Col>(z[row]);
+
+			using ValueType = decltype(value);
+
+			if (row == 0)
+			{
+				if constexpr (std::is_integral_v<ValueType> || std::is_floating_point_v<ValueType>)
+					grid.m_sortingFunctions[Col + 1] = JD::Comparison::Money;
+				else
+					grid.m_sortingFunctions[Col + 1] = JD::Comparison::Text;
+			}
+			
 			auto cs = format(value);
 			grid.SetItemText(row + 1, Col + 1, cs);
 			PrintDataInGrid<Col+1, Container>::Apply(row, z, grid);
@@ -84,6 +94,9 @@ private:
 	template<typename T>
 	static CString format(const T& t)
 	{
+		T* pT;
+		auto s = typeid(T).name();
+		
 		return JD::to_cstring(t);
 	}
 

@@ -9,6 +9,7 @@
 
 #pragma once
 
+
 #if 1
 #include <sqlite_orm/sqlite_orm.h>
 #include <vector>
@@ -44,13 +45,16 @@
 #include <variant>
 #endif
 
+
 // add headers that you want to pre-compile here
 #include "framework.h"
 
 #if 1
 #include <DLLs.h>
 #include <JDGridCtrl.h>
-#include "Utilities.h"
+// #include "Utilities.h"
+
+
 
 #else
 #include <afxwin.h>
@@ -60,5 +64,9 @@
 #include <afxext.h>
 #include "Utilities.h"
 #endif
+
+
+
+
 
 #endif //PCH_H

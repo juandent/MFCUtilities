@@ -1,32 +1,33 @@
-#pragma once
 
-#include <string>
-#include <regex>
-#include <locale>
+#include <debugapi.h>
+#include <date/date.h>
 #include <array>
-#include <cassert>
-// #include <fstream>
-#include <sstream>
-//#include <date.h>
-#include <type_traits>
-#include "StringDateConverter.h"
-#include <FixedPoint/Money.h>
-
+#include <string>
+#include <fstream>
+#include <vector>
+#include <regex>
 #include <filesystem>
 
 namespace fs = std::filesystem;
 
-#ifndef DLLS_H
-#define MFC_UTILITIES_EXPORTS
-#include <Dlls.h>
-#endif
 
+#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
+
+#include <afxwin.h>         // MFC core and standard components
+#include <afxext.h>         // MFC extensions
+#include <afxole.h>         // MFC OLE classes
+
+#include <FixedPoint/Money.h>
+//#include "StringDateConverter.h"
 
 class CGridCellBase;
 
-#include "Buffer.h"
+export module JD;
+import DateAsString;
 
-namespace JD {
+
+namespace JD 
+{
 
 	// Sample diagnostics class:
 	namespace diag
@@ -34,6 +35,7 @@ namespace JD {
 		template<typename T>
 		struct TypeName;	// un purpose not defined!
 
+#define OUTPUT_TO_IMMEDIATE_WINDOW
 #ifdef OUTPUT_TO_IMMEDIATE_WINDOW
 
 		template<size_t Size>
@@ -101,52 +103,53 @@ namespace JD {
 		inline void endl() {}
 #endif
 	}
+
+
 	// using pointers
-	template <typename T, typename U, typename X = std::remove_pointer<T>::type, typename Y = std::remove_pointer<U>::type,
+	export template <typename T, typename U, typename X = std::remove_pointer<T>::type, typename Y = std::remove_pointer<U>::type,
 		typename A = std::enable_if< std::is_base_of<Y, X>::value>::type,
 		typename B = std::enable_if<std::is_pointer<T>::value>::type,
 		typename C = std::enable_if<std::is_pointer<U>::value>::type
 	>
-		MFC_UTILITIES_API	T  polymorphic_cast(U p)
+		T  polymorphic_cast(U p)
 	{
 		assert(dynamic_cast<T>(p));
 		return static_cast<T>(p);
 	}
 	// using references
-	template <typename T, typename U, typename X = std::remove_reference<T>::type, typename Y = std::remove_reference<U>::type,
+	export template <typename T, typename U, typename X = std::remove_reference<T>::type, typename Y = std::remove_reference<U>::type,
 		typename A = std::enable_if< std::is_base_of<Y, X>::value>::type>
-		MFC_UTILITIES_API	T&  polymorphic_cast(U& p)
+		T& polymorphic_cast(U& p)
 	{
 		assert(dynamic_cast<T&>(p));
 		return static_cast<T&>(p);
 	}
 
 	// convert string to uppercase
-	inline std::string touppercase(const std::string& name)
+	export inline std::string touppercase(const std::string& name)
 	{
 		// pass 'name' to upper case
 		std::string upper_name{ name };
 		std::transform(name.cbegin(), name.cend(), upper_name.begin(), [](char c) {
 			return std::toupper(c, std::locale{});
-		});
+			});
 		return upper_name;
 	}
 
 	// convert string to lowercase
-	inline std::string tolowercase(const std::string& name)
+	export inline std::string tolowercase(const std::string& name)
 	{
 		// pass 'name' to upper case
 		std::string lower_name{ name };
 		std::transform(name.cbegin(), name.cend(), lower_name.begin(), [](char c) {
 			return std::tolower(c, std::locale{});
-		});
+			});
 		return lower_name;
 	}
 
 
-
 	// convert string to wstring
-	inline std::wstring to_wstring(const std::string& str, const std::locale& loc = std::locale{})
+	export inline std::wstring to_wstring(const std::string& str, const std::locale& loc = std::locale{})
 	{
 		std::vector<wchar_t> buf(str.size());
 		std::use_facet<std::ctype<wchar_t>>(loc).widen(str.data(), str.data() + str.size(), buf.data());
@@ -155,7 +158,7 @@ namespace JD {
 	}
 
 	// convert wstring to string
-	inline std::string to_string(const std::wstring& str, const std::locale& loc = std::locale{})
+	export inline std::string to_string(const std::wstring& str, const std::locale& loc = std::locale{})
 	{
 		std::vector<char> buf(str.size());
 		std::use_facet<std::ctype<wchar_t>>(loc).narrow(str.data(), str.data() + str.size(), '?', buf.data());
@@ -163,20 +166,20 @@ namespace JD {
 		return std::string(buf.data(), buf.size());
 	}
 
-	inline CString to_cstring(const std::string& msg)
+	export inline CString to_cstring(const std::string& msg)
 	{
 		std::wstring message = to_wstring(msg);
 		CString msg_as_cstring{ message.c_str() };
 		return msg_as_cstring;
 	}
 
-	inline CString to_cstring( double d)
+	export CString to_cstring(double d)
 	{
 		auto d_str = std::to_string(d);
 		return to_cstring(d_str);
 	}
 
-	inline std::string to_string(date::sys_days dp)
+	export inline std::string to_string(date::sys_days dp)
 	{
 		date::year_month_day ymd{ dp };
 		std::ostringstream os;
@@ -184,66 +187,49 @@ namespace JD {
 		return os.str();
 	}
 
-	inline CString to_cstring(date::sys_days dp)
+	export inline CString to_cstring(date::sys_days dp)
 	{
 		auto str = to_string(dp);
 		return to_cstring(str);
 	}
 
-	inline std::string from_cstring(const CString& msg)
+	export inline std::string from_cstring(const CString& msg)
 	{
 		auto m = static_cast<LPCTSTR>(msg);
 		auto str = to_string(m);
 		return str;
 	}
-	inline CString to_cstring(int val)
+	export inline CString to_cstring(int val)
 	{
 		std::string str = std::to_string(val);
 		return to_cstring(str);
 	}
-	inline CString to_cstring( bool val)
+	export inline CString to_cstring(bool val)
 	{
 		return CString{ val ? L"True" : L"False" };
 	}
 
-	inline CString to_cstring( Colones amount)
+	export inline CString to_cstring(Colones amount)
 	{
 		std::wstring tmp = static_cast<std::wstring>(amount);
 		return CString{ tmp.c_str() };
 	}
 
-	inline CString to_cstring(Dolares amount)
+	export inline CString to_cstring(Dolares amount)
 	{
 		std::wstring tmp = amount;
 		return CString{ tmp.c_str() };
 	}
-#if 0
-	template<class T>
-	inline std::string to_string(T&& t)
-	{
-		std::ostringstream oss;
-		oss << std::forward<T>(t);
-		return oss.str();
-	}
 
-	template<>
-	inline std::string to_string(std::wstring&& t)
+	export template<typename Element>
+	struct get_quote
 	{
-		to_string()
-		std::ostringstream oss;
-		oss << std::forward<T>(t);
-		return oss.str();
-	}
-#endif
-	template<typename Element>
-	struct MFC_UTILITIES_API get_quote
-	{
-		static constexpr void const* chars[2] = {"\"", L"\"" };
-		static constexpr Element const * quote_char = reinterpret_cast<Element const *>( chars[sizeof(Element) - 1]);
+		static constexpr void const* chars[2] = { "\"", L"\"" };
+		static constexpr Element const* quote_char = reinterpret_cast<Element const*>(chars[sizeof(Element) - 1]);
 	};
 
 
-	template<typename Element >
+	export template<typename Element >
 	inline std::basic_string<Element> quote(const std::basic_string<Element>& str)
 	{
 		constexpr Element const* quoted_char = get_quote<Element>::quote_char;
@@ -254,61 +240,41 @@ namespace JD {
 		return quoted;
 	}
 
-#if 0
-	namespace boost_hana_namespace
-	{
-		using boost::hana::make_map;
-		using boost::hana::make_pair;
-		using boost::hana::type_c;
-
-		constexpr auto m = make_map(
-			make_pair(type_c<char>, '"'),
-			make_pair(type_c<char16_t>, u'"'),
-			make_pair(type_c<char32_t>, U'"'),
-			make_pair(type_c<wchar_t>, L'"')
-		);
-
-		template<class CharT>
-		std::basic_string<CharT> quote(const std::basic_string<CharT>& str)
-		{
-			return m[hana::type_c<CharT>] + str + m[hana::type_c<CharT>];
-		}
-	}
-#endif
-	struct SingletonsInitializer
+	export struct SingletonsInitializer
 	{
 		SingletonsInitializer();
 		~SingletonsInitializer();
 	};
 
-	extern SingletonsInitializer initializer;
+	// jd how does it work?
+	export extern SingletonsInitializer initializer;
 
-	CString local_to_cstring(Money money, int width = 13);
+	export CString local_to_cstring(Money money, int width = 13);
 
-	CString dollars_to_cstring(Money money, int width = 13);
+	export CString dollars_to_cstring(Money money, int width = 13);
 
-	CString number_to_cstring(Money money, int width = 13);
+	export CString number_to_cstring(Money money, int width = 13);
 
-	std::string to_string(Colones money, int width = 13);
+	export std::string to_string(Colones money, int width = 13);
 
-	std::wstring to_wstring(Colones money, int width = 13);
+	export std::wstring to_wstring(Colones money, int width = 13);
 
-	std::string to_string(Dolares money, int width = 13);
+	export std::string to_string(Dolares money, int width = 13);
 
-	std::wstring to_wstring(Dolares money, int width = 13);
+	export std::wstring to_wstring(Dolares money, int width = 13);
 
 
-	Money from_local_cstring(const CString& s);
+	export Money from_local_cstring(const CString& s);
 
-	Money from_dollars_cstring(const CString& s);
+	export Money from_dollars_cstring(const CString& s);
 
-	inline Money to_money(const std::string& s)
+	export inline Money to_money(const std::string& s)
 	{
 		auto val = stold(s);
 		return Money{ val };
 	}
 
-	inline long double strip_to_long_double(std::string moneyAsString)
+	export inline long double strip_to_long_double(std::string moneyAsString)
 	{
 		std::string stripped;
 		for (auto& c : moneyAsString)
@@ -321,16 +287,16 @@ namespace JD {
 		return stold(stripped);
 	}
 
-	inline Money strip_to_money(std::string moneyAsString)
+	export inline Money strip_to_money(std::string moneyAsString)
 	{
 		auto val = strip_to_long_double(moneyAsString);
 		return Money{ val };
 	}
 
-	inline COleDateTime to_ole_date_time(date::sys_days fecha)
+	export inline COleDateTime to_ole_date_time(date::sys_days fecha)
 	{
 		using namespace date;
-		
+
 		year_month_day ymd = fecha;
 		auto year_val = static_cast<int>(ymd.year());
 		auto month_val = static_cast<unsigned>(ymd.month());
@@ -340,10 +306,10 @@ namespace JD {
 		return rDateTime;
 	}
 
-	inline date::sys_days to_sys_days(const COleDateTime& fecha)
+	export inline date::sys_days to_sys_days(const COleDateTime& fecha)
 	{
 		using namespace date;
-		
+
 		int yearVal = fecha.GetYear();
 		unsigned monthVal = fecha.GetMonth();
 		unsigned dayVal = fecha.GetDay();
@@ -353,13 +319,13 @@ namespace JD {
 		return date;
 	}
 
-	inline std::string convert(const CString& str)
+	export inline std::string convert(const CString& str)
 	{
 		std::wstring s{ str };
 		return to_string(s);
 	}
 
-	inline unsigned lineYear(int lineMonth, unsigned statementMonth, unsigned statementYear)
+	export inline unsigned lineYear(int lineMonth, unsigned statementMonth, unsigned statementYear)
 	{
 		assert(statementYear != 0);
 
@@ -377,7 +343,7 @@ namespace JD {
 		}
 	}
 
-	inline date::sys_days selected_criteria_to_date(const std::string& asText)
+	export inline date::sys_days selected_criteria_to_date(const std::string& asText)
 	{
 		using namespace std;
 		using namespace date;
@@ -404,7 +370,7 @@ namespace JD {
 		return year_month_day{ year{0}, month{0}, day{0} };
 	}
 
-	inline date::sys_days to_date(const std::string& asText, unsigned statementMonth = 0, int statementYear = 0)
+	export inline date::sys_days to_date(const std::string& asText, unsigned statementMonth = 0, int statementYear = 0)
 	{
 		DateAsString::StringDateConverter converter{ asText, statementMonth, statementYear };
 		auto ret = converter.convert();
@@ -415,14 +381,14 @@ namespace JD {
 		return ret.second;
 	}
 
-	inline bool is_date(const std::string& asText)
+	export inline bool is_date(const std::string& asText)
 	{
 		DateAsString::StringDateConverter converter{ asText, 0, 0 };
 		auto ret = converter.convert();
 		return ret.first;
 	}
 
-	inline std::string remove_extension(const std::string& fileName)
+	export inline std::string remove_extension(const std::string& fileName)
 	{
 		//namespace fs = std::filesystem;
 
@@ -438,7 +404,7 @@ namespace JD {
 		return file;
 	}
 
-	inline CString weekDayCS(const date::sys_days dp)
+	export inline CString weekDayCS(const date::sys_days dp)
 	{
 		static std::array<CString, 7> days{ L"Sunday", L"Monday", L"Tuesday", L"Wednesday", L"Thursday", L"Friday", L"Saturday" };
 		date::year_month_weekday ymwd{ dp };
@@ -448,7 +414,7 @@ namespace JD {
 		return days[i];
 	}
 
-	inline const std::string& weekDay(const date::sys_days dp)
+	export inline const std::string& weekDay(const date::sys_days dp)
 	{
 		static std::array<std::string, 7> days{ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 		date::year_month_weekday ymwd{ dp };
@@ -458,18 +424,18 @@ namespace JD {
 		return days[i];
 	}
 
-	inline LPARAM weekDayAsData(const date::sys_days dp)
+	export inline LPARAM weekDayAsData(const date::sys_days dp)
 	{
 		auto& dayName = weekDay(dp);
 		return reinterpret_cast<LPARAM>(dayName.c_str());
 	}
 
-	inline LPARAM stringAsData(const std::string& str)
+	export inline LPARAM stringAsData(const std::string& str)
 	{
 		return reinterpret_cast<LPARAM>(str.c_str());
 	}
-	///
-	struct MFC_UTILITIES_API Comparison
+
+	export struct Comparison
 	{
 		static std::locale loc;
 		static std::ostringstream os;
@@ -493,10 +459,10 @@ namespace JD {
 
 
 	// for map or multimap insertion or updating: (Effective STL, pg 110 by Scott Meyers)
-	template< typename MapType,
+	export template< typename MapType,
 		typename KeyArgType,
 		typename ValueArgType>
-		auto MFC_UTILITIES_API efficientAddOrUpdate(MapType& m, const KeyArgType& k, const ValueArgType& v)
+		auto efficientAddOrUpdate(MapType& m, const KeyArgType& k, const ValueArgType& v)
 	{
 		auto lb = m.lower_bound(k);			// find where k is or should be
 
@@ -512,7 +478,7 @@ namespace JD {
 		}
 	}
 	// utility for when pointers, iterators or smart pointers are stored in associative containers (Effective STL, pg 91, Scott Meyers)
-	struct MFC_UTILITIES_API DereferenceLess
+	export struct DereferenceLess
 	{
 		template<typename PtrType>
 		bool operator()(PtrType pT1, PtrType pT2) const
@@ -521,8 +487,8 @@ namespace JD {
 		}
 	};
 
-	using MoneyPair = std::pair<Money, Money>;
-	inline MoneyPair& operator+=(MoneyPair& lhs, MoneyPair rhs)
+	export using MoneyPair = std::pair<Money, Money>;
+	export inline MoneyPair& operator+=(MoneyPair& lhs, MoneyPair rhs)
 	{
 		lhs.first += rhs.first;
 		lhs.second += rhs.second;
@@ -530,3 +496,7 @@ namespace JD {
 	}
 
 }
+
+
+
+

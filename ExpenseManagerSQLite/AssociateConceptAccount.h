@@ -1,6 +1,7 @@
 #pragma once
-#include "CSVFile.h"
+// #include "CSVFile.h"
 
+import CSV_File;
 // AssociateConceptAccount document
 
 class AssociateConceptAccount : public CDocument
@@ -8,7 +9,7 @@ class AssociateConceptAccount : public CDocument
 	friend class ConceptsAndAccounts;
 	DECLARE_DYNCREATE(AssociateConceptAccount)
 
-	CSVFile m_file;
+	csv::CSV_File m_file;
 	void LoadFile(const std::string& fileName);
 public:
 	AssociateConceptAccount();
@@ -29,4 +30,5 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedBLoadCompoundDoc();
+	// afx_msg void OnCbnSelchangeCStatementdates();
 };

@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "StatementLineGridController.h"
 
+import JD;
+// import DateAsString;
+//
+// void use()
+// {
+// 	DateAsString::yearFromLineMonthAndStatement(10u, 10u, 10u);
+// }
 
 void StatementLineGridController::HandleGridClick(NM_GRIDVIEW* pItem)
 {

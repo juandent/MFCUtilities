@@ -8,10 +8,14 @@
 namespace fs = std::filesystem;
 // AssociateConceptAccount
 
+import CSV_File;
+
 IMPLEMENT_DYNCREATE(AssociateConceptAccount, CDocument)
 
 AssociateConceptAccount::AssociateConceptAccount()
 {
+	csv::CSV_File f{};
+	
 }
 
 BOOL AssociateConceptAccount::OnNewDocument()
@@ -28,6 +32,7 @@ AssociateConceptAccount::~AssociateConceptAccount()
 
 BEGIN_MESSAGE_MAP(AssociateConceptAccount, CDocument)
 	//ON_BN_CLICKED(IDC_B_LOAD_COMPOUND_DOC, &AssociateConceptAccount::OnBnClickedBLoadCompoundDoc)
+	// ON_CBN_SELCHANGE(IDC_C_STATEMENTDATES, &AssociateConceptAccount::OnCbnSelchangeCStatementdates)
 END_MESSAGE_MAP()
 
 
@@ -65,5 +70,4 @@ void AssociateConceptAccount::Serialize(CArchive& ar)
 
 
 // AssociateConceptAccount commands
-
 

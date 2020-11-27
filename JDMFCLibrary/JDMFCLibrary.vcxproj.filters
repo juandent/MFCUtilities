@@ -66,6 +66,28 @@
     <ClCompile Include="..\CSVFile.cpp">
       <Filter>CSVFiles</Filter>
     </ClCompile>
+    <ClCompile Include="CSV_File.ixx" />
+    <ClCompile Include="CSV_File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.ixx" />
+    <ClCompile Include="Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Partition1.ixx" />
+    <ClCompile Include="Partition2.ixx" />
+    <ClCompile Include="Partition1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Partition.ixx" />
+    <ClCompile Include="JD.ixx" />
+    <ClCompile Include="JD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DateAsString.ixx" />
+    <ClCompile Include="DateAsString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="JDMFCLibrary.def">

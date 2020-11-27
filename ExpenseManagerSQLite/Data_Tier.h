@@ -4,7 +4,7 @@
 #undef max
 
 #include <sqlite_orm/sqlite_orm.h>
-#include <catch2/catch.hpp>
+// #include <catch2/catch.hpp>
 #include <date/date.h>
 
 #include "../FixedPoint/Money.h"
@@ -14,7 +14,7 @@
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.Dolares.Binding.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.AccountType.Binding.h"
 
-#include "Nullable.h"
+// #include "Nullable.h"
 
 
 ////////// persistence structs//
@@ -30,34 +30,11 @@ struct Categoria;
 
 
 
-struct Statement // : RefIntegrity<Statement>
+struct Statement 
 {
 	int id_statement;
 	date::sys_days date;
 };
-
-
-#if 0
-void testRefIntegrity()
-{
-	Statement stmt;
-	stmt.canDelete();
-	constexpr size_t size = sizeof(stmt);
-	
-}
-#endif
-
-#if 0
-struct StatementLine
-{
-	int id_statement_line;
-	date::sys_days date;
-	std::string description;
-	int fkey_concepto;
-	std::optional<int> fkey_category;						// Categoria
-	int fkey_statement;
-};
-#endif
 
 struct Concepto
 {
@@ -75,18 +52,6 @@ struct Account
 	std::string description;		// AMEX Cashback Premium
 	bool is_tarjeta;				// true
 };
-
-#if 0
-struct MyAccount
-{
-	int id_account;
-	std::string number;				// 15103-02**-****-8467
-	int fkey_bank;					// { BAC San Jose, "Barrio Dent", { Costa Rica} }
-	int fkey_account_owner;			// { Juan Dent Herrera, ... }
-	std::string description;		// AMEX Cashback Premium
-	bool is_tarjeta;				// true
-};
-#endif
 
 struct Pais
 {
@@ -157,8 +122,11 @@ inline 	auto& Storage_Impl::get_storage()
 	using namespace std;
 
 	static int flag = 0;
-	constexpr const char* db_name{ "ExpenseManagerSQLite.sqlite" };
+	// constexpr const char* db_name{ "ExpenseManagerSQLite.sqlite" };
 
+	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\ExpenseManagerMFC\\ExpenseManagerSQLite\\ExpenseManagerSQLite.sqlite" };
+
+	
 	static auto storage =
 		make_storage(db_name,
 			make_table( "Statement",
@@ -261,7 +229,7 @@ std::optional<Table> getCurrent(CEdit& editCtrl)
 template<typename Table>
 Operation whatOperation(CEdit& editCtrl)
 {
-	auto record = getCurrent(editCtrl);
+	auto record = getCurrent<Table>(editCtrl);
 	return record ? Operation::doUpdate : Operation::doInsert;
 }
 
@@ -285,7 +253,7 @@ struct IdManager
 	}
 	std::optional<Table> GetIdToCurrent()
 	{
-		record = getCurrent(editCtrl);
+		record = getCurrent<Table>(editCtrl);
 	}
 };
 

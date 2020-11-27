@@ -5,14 +5,17 @@
 #include "Model.DataTier.h"
 #include "Model.AccountType.Binding.h"
 
-class CSVFile;
+namespace csv
+{
+	class CSV_File;
+}
 
 namespace Model
 {
 
 	class StatementFactory
 	{
-		static AccountType selectType(const CSVFile& csv);
+		static AccountType selectType(const csv::CSV_File& csv);
 	public:
 		static std::shared_ptr<Statement> Create(const std::string& rawFileName, date::sys_days dp);
 	};

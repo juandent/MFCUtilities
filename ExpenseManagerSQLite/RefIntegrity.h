@@ -95,12 +95,15 @@ public:
 	template<typename whereClause>
 	std::vector<Table> getAll(whereClause clause)
 	{
+		using namespace sqlite_orm;
 		return storage.get_all<Table>(where(clause));
 	}
 
 	template<typename WhereClause, typename ...Cols>
 	std::optional<Table> exists(WhereClause& clause, Cols&& ... cols)
 	{
+		using namespace sqlite_orm;
+		
 		std::optional<Table> record;
 		auto e = storage.select(columns(cols...), where(clause));
 		if (e.size() > 0)

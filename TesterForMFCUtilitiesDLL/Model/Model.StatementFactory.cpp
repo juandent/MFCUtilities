@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Model.StatementFactory.h"
-#include "CSVFile.h"
+// #include "CSVFile.h"
 #include "Model.AccountType.Binding.h"
 
 // subclasses of Statement;
@@ -12,7 +12,7 @@ using namespace std;
 namespace Model
 {
 
-	AccountType StatementFactory::selectType(const CSVFile & csv)
+	AccountType StatementFactory::selectType(const csv::CSV_File& csv)
 	{
 		auto cols = csv.getRow(0);
 

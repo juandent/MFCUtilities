@@ -32,8 +32,15 @@ protected:
 private:
 	CJDGridCtrl m_grid;
 	std::unique_ptr<IDisplayer> m_displayer;
+	std::unique_ptr<IDisplayer> m_combo_displayer;
 public:
 	virtual void OnInitialUpdate();
+private:
+	CComboBox m_statement_dates;
+	template<typename T>
+	void InitializeGrid(const T& t);
+public:
+	afx_msg void OnCbnSelchangeCStatementdates();
 };
 
 

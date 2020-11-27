@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-
+import JD;
 
 template<typename T> 
 class GridDisplayer

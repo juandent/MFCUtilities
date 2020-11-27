@@ -3,6 +3,7 @@
 //
 
 #include "stdafx.h"
+#include <catch2/catch.hpp>
 #include "framework.h"
 #include "afxwinappex.h"
 #include "afxdialogex.h"

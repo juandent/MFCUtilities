@@ -2,17 +2,19 @@
 //
 
 #include "stdafx.h"
+#include "Data_Tier.h"
+
 #include "ExpenseManagerSQLite.h"
 #include "ConceptsAndAccounts.h"
 
-#include "Data_Tier.h"
+// #include "Data_Tier.h"
 
 #include <afxext.h>
 
 #include "BoxContents.h"
 #include "CompoundStatementLine.h"
-#include "StatementLineAdapter.h"
-#include "RecordLinks.h"
+// #include "StatementLineAdapter.h"
+// #include "RecordLinks.h"
 
 
 // ConceptsAndAccounts
@@ -210,7 +212,7 @@ void ConceptsAndAccounts::LoadFile(const std::string& fileName)
 {
 	m_file.load(fileName);
 	bool isFirstLine = true;
-	for( auto& it = m_file.cbegin(); it != m_file.cend(); ++it)
+	for( auto it = m_file.cbegin(); it != m_file.cend(); ++it)
 	{
 		if( isFirstLine)
 		{

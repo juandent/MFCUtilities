@@ -2,7 +2,7 @@
 
 
 
-
+#if 0
 
 
 template<typename Table, typename SearchType>
@@ -34,6 +34,8 @@ public:
 	template<typename WhereClause, typename ...Cols>
 	Record find(Table record, SearchType search_val, WhereClause& clause, Cols&& ... cols)
 	{
+		using namespace sqlite_orm;
+		
 		MapIterator it = lookupInPool(search_val);
 		if( it != pool.end())
 		{
@@ -57,3 +59,4 @@ public:
 	}
 
 };
+#endif
