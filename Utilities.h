@@ -10,7 +10,7 @@
 //#include <date.h>
 #include <type_traits>
 #include "StringDateConverter.h"
-#include <FixedPoint/Money.h>
+// #include <FixedPoint/Money.h>
 
 #include <filesystem>
 
@@ -428,7 +428,7 @@ namespace JD {
 
 		auto x = fs::path(fileName);
 		auto y = x.filename();
-		auto file = JD::to_string(y);
+		auto file = Util::to_string(y);
 		std::string::size_type n = file.find('.');
 		// remove extension:
 		if (n != std::string::npos)

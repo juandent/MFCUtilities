@@ -2,6 +2,10 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
+
 #include "ExpenseManagerSQLite.h"
 #include "TransaccionDlg.h"
 #include "afxdialogex.h"
@@ -22,28 +26,28 @@ TransaccionDlg::TransaccionDlg(CWnd* pParent /*=nullptr*/)
 	{
 		Colones colones = trans.amount_colones;
 		Dolares dolares = trans.amount_dolares;
-		return JD::to_cstring(trans.id_transaccion) + L" - " + JD::to_cstring(trans.row) + L"# - " +			
-			JD::to_cstring(trans.line_date) + L" - " + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
+		return Util::to_cstring(trans.id_transaccion) + L" - " + Util::to_cstring(trans.row) + L"# - " +			
+			Util::to_cstring(trans.line_date) + L" - " + Util::to_cstring(trans.descripcion) + L" - " + Util::to_cstring(colones) + L" - " + Util::to_cstring(dolares);
 	}},
 	m_conceptoCB{ m_list_concepto, [](Concepto& concepto)
 	{
-		return JD::to_cstring(concepto.name);
+		return Util::to_cstring(concepto.name);
 	}},
 	m_statementCB{ m_list_statement, [](Statement& statement)
 	{
-		return JD::to_cstring(statement.date);
+		return Util::to_cstring(statement.date);
 	}},
 	m_categoriaCB{ m_list_category, [](Categoria& categoria)
 	{
-		return JD::to_cstring(categoria.name) + L" - " + (categoria.is_expense_or_income ? L"Expense or income" : L"*");
+		return Util::to_cstring(categoria.name) + L" - " + (categoria.is_expense_or_income ? L"Expense or income" : L"*");
 	}},
 	m_own_accountCB{ m_list_own_accounts, [](Account& account)
 	{
-		return JD::to_cstring(account.number);
+		return Util::to_cstring(account.number);
 	}},
 	m_other_accountCB{ m_list_other_account, [](Account& account)
 	{
-		return JD::to_cstring(account.number);
+		return Util::to_cstring(account.number);
 	}}
 {
 
@@ -93,30 +97,30 @@ void TransaccionDlg::Refresh_discriminator()
 {
 	if (m_trans)
 	{
-		const auto date = JD::to_ole_date_time(m_trans->line_date);
+		const auto date = Util::to_ole_date_time(m_trans->line_date);
 		m_date_transaccion.SetCurSel(date);
 
 		m_conceptoCB.select(m_trans->fkey_concepto);
 		m_categoriaCB.select(m_trans->fkey_category);
 
 		Colones colones{ m_trans->amount_colones };
-		CString str_colones = JD::to_cstring(colones);
+		CString str_colones = Util::to_cstring(colones);
 		m_colones.SetWindowTextW(str_colones);
 
 		Dolares dolares{ m_trans->amount_dolares };
-		CString str_dolares = JD::to_cstring(dolares);
+		CString str_dolares = Util::to_cstring(dolares);
 		m_dolares.SetWindowTextW(str_dolares);
 
-		m_descripcion.SetWindowTextW(JD::to_cstring(m_trans->descripcion));
+		m_descripcion.SetWindowTextW(Util::to_cstring(m_trans->descripcion));
 		m_statementCB.select(m_trans->fkey_statement);
 		m_own_accountCB.select(m_trans->fkey_account_own);
 		std::optional<Account> act  = m_other_accountCB.select(m_trans->fkey_account_other);
 		SetAccountOwner(act);
 
-		m_id.SetWindowTextW(JD::to_cstring(m_trans->id_transaccion));
+		m_id.SetWindowTextW(Util::to_cstring(m_trans->id_transaccion));
 #define MODIFY_SCHEMA
 #ifdef MODIFY_SCHEMA
-		m_row.SetWindowTextW(JD::to_cstring(m_trans->row));
+		m_row.SetWindowTextW(Util::to_cstring(m_trans->row));
 #endif
 	}
 }
@@ -274,7 +278,7 @@ void TransaccionDlg::SetAccountOwner(std::optional<Account>& account)
 		if (res.size())
 		{
 			auto r = res[0];
-			auto csr = JD::to_cstring(r);
+			auto csr = Util::to_cstring(r);
 			m_cuenta_otra_owner.SetWindowTextW(csr);
 		}
 	}
@@ -286,7 +290,7 @@ void TransaccionDlg::SetAccountOwner(std::optional<Account>& account)
 
 
 #if 0
-namespace JD
+namespace Util
 {
 	Money strip_to_money(std::string moneyAsString)
 	{
@@ -298,7 +302,7 @@ namespace JD
 				stripped += c;
 			}
 		}
-		return JD::to_money(stripped);
+		return Util::to_money(stripped);
 		
 	}
 }
@@ -313,7 +317,7 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 	
 	CString rDescripcion;
 	m_descripcion.GetWindowTextW(rDescripcion);
-	auto descripcion = JD::from_cstring(rDescripcion);
+	auto descripcion = Util::from_cstring(rDescripcion);
 
 	auto statement = m_statementCB.current();
 	if( !statement)
@@ -355,7 +359,7 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		MessageBoxW(L"Falta escoger la fecha de la transaccion");
 		return;
 	}
-	sys_days line_date = JD::to_sys_days(rDateTime);
+	sys_days line_date = Util::to_sys_days(rDateTime);
 
 	CString rColones;
 	m_colones.GetWindowTextW(rColones);
@@ -368,10 +372,10 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		return;
 	}
 	
-	auto str_colones = JD::from_cstring(rColones);
-	auto str_dolares = JD::from_cstring(rDolares);
-	auto dolares = JD::strip_to_long_double(str_dolares);
-	auto colones = JD::strip_to_long_double(str_colones);
+	auto str_colones = Util::from_cstring(rColones);
+	auto str_dolares = Util::from_cstring(rDolares);
+	auto dolares = Util::strip_to_long_double(str_dolares);
+	auto colones = Util::strip_to_long_double(str_colones);
 
 	std::optional<int> account_other;
 	if (other_account)
@@ -390,7 +394,7 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		MessageBox(L"Falta el numero de fila (row)");
 		return;
 	}
-	auto row_str = JD::from_cstring(rRow);
+	auto row_str = Util::from_cstring(rRow);
 	auto row = stoi(row_str);
 
 	if (!trans)
@@ -430,7 +434,7 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 	{
 		trans = m_transaccionLB.insert(colones, dolares, own_account->id_account, account_other, line_date, descripcion, categoria->id_categoria, concepto->id_concepto, statement->id_statement, row);
 		m_transaccionLB.insert_into_listbox(*trans);
-		m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
+		m_id.SetWindowTextW(Util::to_cstring(trans->id_transaccion));
 	}
 	else         // update
 	{
@@ -446,7 +450,7 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 		trans->row = row;
 		m_transaccionLB.update(*trans);
 	}
-	//m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
+	//m_id.SetWindowTextW(Util::to_cstring(trans->id_transaccion));
 	setIdFromRecord<Transaccion>(m_id, trans->id_transaccion);
 	m_transaccionLB.loadLB();
 	m_trans = trans;
@@ -461,7 +465,7 @@ std::optional<Transaccion> TransaccionDlg::getCurrent()
 	if (!statement)	return trans;
 	CString rRow;
 	m_row.GetWindowTextW(rRow);
-	auto row_str = JD::from_cstring(rRow);
+	auto row_str = Util::from_cstring(rRow);
 	auto row = stoi(row_str);
 	auto whereClause = (c(&Transaccion::row) == row) && (c(&Transaccion::fkey_statement) == statement->id_statement);
 	trans = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::row, &Transaccion::fkey_statement);
@@ -489,7 +493,7 @@ void TransaccionDlg::OnLbnSelchangeLTransaction()
 	using namespace date;
 #endif
 
-	auto rOleDateTime = JD::to_ole_date_time(trans->line_date);
+	auto rOleDateTime = Util::to_ole_date_time(trans->line_date);
 	m_date_transaccion.SetCurSel(rOleDateTime);
 
 	m_statementCB.select(trans->fkey_statement);
@@ -498,12 +502,12 @@ void TransaccionDlg::OnLbnSelchangeLTransaction()
 	m_own_accountCB.select(trans->fkey_account_own);
 	m_categoriaCB.select(trans->fkey_category);
 	Colones colones = trans->amount_colones;
-	m_colones.SetWindowTextW(JD::to_cstring(colones));
+	m_colones.SetWindowTextW(Util::to_cstring(colones));
 	Dolares dolares = trans->amount_dolares;
-	m_dolares.SetWindowTextW(JD::to_cstring(dolares));
-	m_descripcion.SetWindowTextW(JD::to_cstring(trans->descripcion));
-	m_id.SetWindowTextW(JD::to_cstring(trans->id_transaccion));
-	m_row.SetWindowTextW(JD::to_cstring(trans->row));
+	m_dolares.SetWindowTextW(Util::to_cstring(dolares));
+	m_descripcion.SetWindowTextW(Util::to_cstring(trans->descripcion));
+	m_id.SetWindowTextW(Util::to_cstring(trans->id_transaccion));
+	m_row.SetWindowTextW(Util::to_cstring(trans->row));
 
 	//postMessage(m_listTransactions  );
 	//m_transaccionLB.SetCurSel(cur_sel);

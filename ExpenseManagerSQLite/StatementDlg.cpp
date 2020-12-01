@@ -2,6 +2,10 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
+
 #include "ExpenseManagerSQLite.h"
 #include "StatementDlg.h"
 #include "afxdialogex.h"
@@ -16,7 +20,7 @@ StatementDlg::StatementDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_StatementDlg, pParent),
 	m_statementLB{ m_list_statement, [](Statement& statement)
 	{
-		return JD::to_cstring(statement.date);
+		return Util::to_cstring(statement.date);
 	}}
 {
 
@@ -56,7 +60,7 @@ BOOL StatementDlg::OnInitDialog()
 	//m_statement = m_statementLB.current();
 	if (m_statement)
 	{
-		auto date = JD::to_ole_date_time(m_statement_date);
+		auto date = Util::to_ole_date_time(m_statement_date);
 		m_transaction_date_picker.SetTime(date);
 		setIdFromRecord<Statement>(m_id_statement, m_statement->id_statement);
 	}
@@ -75,7 +79,7 @@ void StatementDlg::OnBnClickedBAplicarStatement()
 	COleDateTime rOleDateTime;
 	m_transaction_date_picker.GetTime(rOleDateTime);
 
-	sys_days statement_date = JD::to_sys_days(rOleDateTime);
+	sys_days statement_date = Util::to_sys_days(rOleDateTime);
 
 	if (!statement)
 	{
@@ -134,7 +138,7 @@ void StatementDlg::OnLbnSelchangeLEstadosDeCuenta()
 	
 	auto fecha = m_statement->date;
 
-	COleDateTime rDateTime = JD::to_ole_date_time(fecha);
+	COleDateTime rDateTime = Util::to_ole_date_time(fecha);
 	
 	m_transaction_date_picker.SetTime(rDateTime);
 	setIdFromRecord<Statement>(m_id_statement, m_statement->id_statement);
@@ -157,7 +161,7 @@ void StatementDlg::OnBnClickedBUpdateStatement()
 
 	COleDateTime rDateTime;
 	m_transaction_date_picker.GetTime(rDateTime);
-	auto fecha = JD::to_sys_days(rDateTime);
+	auto fecha = Util::to_sys_days(rDateTime);
 	if( statement->date == fecha)
 	{
 		MessageBox(L"No hay cambios en este objeto");

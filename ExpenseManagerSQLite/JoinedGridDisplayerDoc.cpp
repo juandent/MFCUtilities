@@ -2,6 +2,10 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
+
 #include "ExpenseManagerSQLite.h"
 #include "JoinedGridDisplayerDoc.h"
 

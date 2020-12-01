@@ -10,7 +10,7 @@
 
 using namespace std;
 
-namespace JD
+namespace Util
 {
 //#define USING_HANA
 #ifdef USING_HANA

@@ -2,6 +2,9 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
 #include "ExpenseManagerSQLite.h"
 #include "CuentaDlg.h"
 #include "afxdialogex.h"
@@ -18,15 +21,15 @@ CuentaDlg::CuentaDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_CuentaDlg, pParent),
 	m_bancosCB{ m_banco_combo, [](Banco& banco)
 	{
-		return JD::to_cstring(banco.id_bank) + L" - " + JD::to_cstring(banco.nombre) + L" - " + JD::to_cstring(banco.ubicacion);
+		return Util::to_cstring(banco.id_bank) + L" - " + Util::to_cstring(banco.nombre) + L" - " + Util::to_cstring(banco.ubicacion);
 	} },
 	m_ownerCB{ m_dueno_combo, [](AccountOwner& owner)
 	{
-			return JD::to_cstring(owner.name);
+			return Util::to_cstring(owner.name);
 	} },
 	m_cuentasLB{ m_list_cuentas, [](Account& account)
 	{
-		return JD::to_cstring(account.id_account) + L" - " + JD::to_cstring(account.number) + L" - " + (account.is_tarjeta ? L"Tarjeta" : L"Cuenta Bancaria");
+		return Util::to_cstring(account.id_account) + L" - " + Util::to_cstring(account.number) + L" - " + (account.is_tarjeta ? L"Tarjeta" : L"Cuenta Bancaria");
 	} }
 {
 
@@ -71,7 +74,7 @@ BOOL CuentaDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  Add extra initialization here
-	m_numero.SetWindowTextW(JD::to_cstring(m_numero_val));
+	m_numero.SetWindowTextW(Util::to_cstring(m_numero_val));
 	m_bancosCB.loadLB();
 	m_ownerCB.loadLB();
 	m_cuentasLB.loadLB();
@@ -119,7 +122,7 @@ std::optional<Account> CuentaDlg::getCurrent() const
 	/// </summary>
 	CString rId;
 	m_id_cuenta.GetWindowTextW(rId);
-	auto id_str = JD::from_cstring(rId);
+	auto id_str = Util::from_cstring(rId);
 	auto id = std::stoi(id_str);
 	auto cuenta = Storage::getStorage().get_optional<Account>(id);
 	///////////	
@@ -170,8 +173,8 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 		return;
 	}
 
-	auto numero = JD::from_cstring(rNumero);
-	auto descripcion = JD::from_cstring(rDescripcion);
+	auto numero = Util::from_cstring(rNumero);
+	auto descripcion = Util::from_cstring(rDescripcion);
 
 	if (! cuenta) 
 	{
@@ -252,8 +255,8 @@ void CuentaDlg::OnBnClickedBUpdateAccount()
 	auto banco = m_bancosCB.current();
 	auto is_tarjeta = m_tarjeta.GetCheck();
 
-	cuenta->number = JD::from_cstring(rNumero);
-	cuenta->description = JD::from_cstring(rDescripcion);
+	cuenta->number = Util::from_cstring(rNumero);
+	cuenta->description = Util::from_cstring(rDescripcion);
 	cuenta->is_tarjeta = is_tarjeta;
 	cuenta->fkey_account_owner = owner->id_owner;
 	cuenta->fkey_bank = banco->id_bank;
@@ -274,9 +277,9 @@ void CuentaDlg::OnLbnSelchangeLCuentas()
 		return;
 	}
 
-	m_numero.SetWindowTextW(JD::to_cstring(cuenta->number));
-	m_descripcion.SetWindowTextW(JD::to_cstring(cuenta->description));
-	m_id_cuenta.SetWindowTextW(JD::to_cstring(cuenta->id_account));
+	m_numero.SetWindowTextW(Util::to_cstring(cuenta->number));
+	m_descripcion.SetWindowTextW(Util::to_cstring(cuenta->description));
+	m_id_cuenta.SetWindowTextW(Util::to_cstring(cuenta->id_account));
 
 	m_ownerCB.select(cuenta->fkey_account_owner);
 	m_bancosCB.select(cuenta->fkey_bank);

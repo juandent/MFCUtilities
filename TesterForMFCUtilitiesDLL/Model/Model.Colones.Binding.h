@@ -1,7 +1,12 @@
 #pragma once
 
-#include <FixedPoint/Money.h>
-#include "Utilities.h"
+// #include <FixedPoint/Money.h>
+// #include "Utilities.h"
+
+import Util;
+
+using namespace Util;
+
 #include <regex>
 #include <array>
 
@@ -85,7 +90,7 @@ namespace sqlite_orm {
 		Colones extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			auto ws = row_extractor<std::wstring>::extract( (const char*)str);
-			auto s = JD::to_string(ws);
+			auto s = Util::to_string(ws);
 			return ColonesFromString(s);
 		}
 	};

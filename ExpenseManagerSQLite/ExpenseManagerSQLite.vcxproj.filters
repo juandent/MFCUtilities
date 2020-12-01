@@ -111,9 +111,6 @@
     <ClInclude Include="AssociateConceptAccount.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\CSVFile.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="StatementLineGridController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -251,9 +248,6 @@
     <ClCompile Include="AssociateConceptAccount.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\CSVFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StatementLineGridController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -294,9 +288,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CategoryDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ObjectBuilder.cpp">

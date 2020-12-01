@@ -198,9 +198,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\Data.h" />
     <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\String.h" />
-    <ClInclude Include="..\CSVFile.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="..\JDGridCtrl\JDGridCtrl.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.h" />
     <ClInclude Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.h" />
@@ -255,9 +252,6 @@
     <ClInclude Include="ViewTree.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\CSVFile.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -275,9 +269,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\Utilities.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="AssociateConceptAccount.cpp" />

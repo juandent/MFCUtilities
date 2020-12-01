@@ -28,9 +28,6 @@
     <Filter Include="DLL Support">
       <UniqueIdentifier>{f9fa9333-08d5-4cf3-a5bb-c8b33956eef7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CSVFiles">
-      <UniqueIdentifier>{bfb7b2a1-9360-4ef5-a6f1-44cb79a582ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Statements">
       <UniqueIdentifier>{7daed940-2475-4fe3-a22a-15c10b4d0eb7}</UniqueIdentifier>
     </Filter>
@@ -48,9 +45,6 @@
     <ClCompile Include="..\FixedPoint\arithmetic_types.cpp">
       <Filter>Money</Filter>
     </ClCompile>
-    <ClCompile Include="..\FixedPoint\Money.cpp">
-      <Filter>Money</Filter>
-    </ClCompile>
     <ClCompile Include="..\DateCapsule.cpp">
       <Filter>Date</Filter>
     </ClCompile>
@@ -63,15 +57,8 @@
     <ClCompile Include="..\Utilities.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\CSVFile.cpp">
-      <Filter>CSVFiles</Filter>
-    </ClCompile>
     <ClCompile Include="CSV_File.ixx" />
     <ClCompile Include="CSV_File.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.ixx" />
-    <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Partition1.ixx" />
@@ -80,12 +67,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Partition.ixx" />
-    <ClCompile Include="JD.ixx" />
-    <ClCompile Include="JD.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DateAsString.ixx" />
     <ClCompile Include="DateAsString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.ixx" />
+    <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,9 +97,6 @@
     <ClInclude Include="..\FixedPoint\arithmetic_types.h">
       <Filter>Money</Filter>
     </ClInclude>
-    <ClInclude Include="..\FixedPoint\Money.h">
-      <Filter>Money</Filter>
-    </ClInclude>
     <ClInclude Include="..\DateCapsule.h">
       <Filter>Date</Filter>
     </ClInclude>
@@ -133,9 +117,6 @@
     </ClInclude>
     <ClInclude Include="..\DLLs.h">
       <Filter>DLL Support</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CSVFile.h">
-      <Filter>CSVFiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

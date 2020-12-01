@@ -49,7 +49,7 @@ void BasicCategoryGridController::FillLine(int row)
 {
 	auto line = lines[row];
 
-	auto txt = JD::to_cstring(line.m_name_id);
+	auto txt = Util::to_cstring(line.m_name_id);
 	grid.SetItemText(row + 1, Columns::NAME, txt);
 
 
@@ -60,5 +60,5 @@ void BasicCategoryGridController::FillLine(int row)
 
 void BasicCategoryGridController::SetSorting()
 {
-	grid.m_sortingFunctions = { JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Text };
+	grid.m_sortingFunctions = { Util::Comparison::Text, Util::Comparison::Text, Util::Comparison::Text };
 }

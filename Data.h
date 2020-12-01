@@ -16,17 +16,17 @@ inline namespace MFC_LOW_LEVEL
 		const LPARAM	m_data;
 	public:
 		Data(const std::string& str)
-			: m_data{ JD::stringAsData(str)}
+			: m_data{ Util::stringAsData(str)}
 		{}
 		/*
 		Data(const CString& str)
-			: m_data{ JD::stringAsData(str) }
+			: m_data{ Util::stringAsData(str) }
 		{}
 		*/
 
 
 		Data(date::sys_days dp)
-			: m_data{ JD::weekDayAsData(dp)}
+			: m_data{ Util::weekDayAsData(dp)}
 		{}
 		 
 		operator LPARAM() const noexcept

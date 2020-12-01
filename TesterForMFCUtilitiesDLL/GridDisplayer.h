@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-import JD;
+import Util;
 
 template<typename T> 
 class GridDisplayer
@@ -24,7 +24,7 @@ public:
 		int col = 1;
 		for( auto& str : headers)
 		{
-			auto head = JD::to_cstring(str);
+			auto head = Util::to_cstring(str);
 			grid.SetItemText(0, col, head);
 			++col;
 		}
@@ -73,14 +73,14 @@ private:
 	template<typename T>
 	CString format(const T& t)
 	{
-		return JD::to_cstring(t);
+		return Util::to_cstring(t);
 	}
 	template<typename T>
 	static CString format(const std::shared_ptr<T>& t)
 	{
 		if (t)
 		{
-			return JD::to_cstring(*t);
+			return Util::to_cstring(*t);
 		}
 		return L"";
 	}

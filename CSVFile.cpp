@@ -35,7 +35,7 @@ void CSVFile::load(const std::string & fileName)
 	{
 		vector<string> columns;
 		string strBuffer{ buffer };
-		JD::diag::display(strBuffer);
+		Util::diag::display(strBuffer);
 
 #if 0
 		regex double_quote{ "\"" };
@@ -44,7 +44,7 @@ void CSVFile::load(const std::string & fileName)
 		auto strInserter = back_inserter(quotes_replaced);
 		regex_replace( strInserter, 
 			strBuffer.begin(), strBuffer.end(), double_quote, ".");
-		JD::diag::display(quotes_replaced);
+		Util::diag::display(quotes_replaced);
 #endif
 
 		regex sep("[ \t\n]*[,][ \t\n]*");  // separated by , and spaces
@@ -56,20 +56,20 @@ void CSVFile::load(const std::string & fileName)
 		sregex_token_iterator e;
 		for (; p != e; ++p) {
 			auto str = p->str();
-			JD::diag::display(str);
+			Util::diag::display(str);
 			if (str[0] == '"')
 			{
 				//str = str.substr(1);	// skip the double quote '"'
 				do {
 					++p;
 					str += "," + p->str();
-					JD::diag::display(str);
+					Util::diag::display(str);
 					//auto pos_of_double_quote = str.find("\"");
 					auto lastCharIter = str.rbegin();
 					if ( *lastCharIter == '"')	// if last char is the closing double quote
 					{
 						//*lastCharIter = '\0';
-						JD::diag::display(str);
+						Util::diag::display(str);
 						break;
 					}
 				} while (true);
@@ -149,13 +149,13 @@ std::string CSVFile::getString(const CellPosition & pos) const
 date::sys_days CSVFile::getDate(const CellPosition & pos) const
 {
 	auto text = m_matrix[pos.getRow()][pos.getCol()];
-	return JD::to_date(text);
+	return Util::to_date(text);
 }
 
 Money CSVFile::getMoney(const CellPosition & pos) const
 {
 	auto text = m_matrix[pos.getRow()][pos.getCol()];
-	return JD::to_money(text);		// makes negative values deposits
+	return Util::to_money(text);		// makes negative values deposits
 }
 
 bool CSVFile::getBool(const CellPosition & pos) const

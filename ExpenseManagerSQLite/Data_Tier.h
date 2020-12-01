@@ -7,7 +7,10 @@
 // #include <catch2/catch.hpp>
 #include <date/date.h>
 
-#include "../FixedPoint/Money.h"
+
+import Util;
+
+// #include "../FixedPoint/Money.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.DateBinding.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.Colones.Binding.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.CoinBinding.h"
@@ -15,6 +18,7 @@
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.AccountType.Binding.h"
 
 // #include "Nullable.h"
+
 
 
 ////////// persistence structs//
@@ -219,7 +223,7 @@ std::optional<Table> getCurrent(CEdit& editCtrl)
 	{
 		return std::nullopt;
 	}
-	auto id_str = JD::from_cstring(rId);
+	auto id_str = Util::from_cstring(rId);
 	auto id = std::stoi(id_str);
 	auto record = Storage::getStorage().get_optional < Table>(id);
 	///////////	
@@ -236,7 +240,7 @@ Operation whatOperation(CEdit& editCtrl)
 template<typename Table>
 void setIdFromRecord(CEdit& editCtrl, int pk)
 {
-	editCtrl.SetWindowTextW(JD::to_cstring(pk));
+	editCtrl.SetWindowTextW(Util::to_cstring(pk));
 }
 
 template<typename Table, int Table::* key>
@@ -249,7 +253,7 @@ struct IdManager
 	{}
 	void SetId()
 	{
-		editCtrl.SetWindowTextW(JD::to_cstring(record->*key));
+		editCtrl.SetWindowTextW(Util::to_cstring(record->*key));
 	}
 	std::optional<Table> GetIdToCurrent()
 	{

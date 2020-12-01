@@ -42,7 +42,7 @@ DataType getDataPointer(T& z, DataType T::*p, DataType2 T::*q )
 template<typename T>
 CString print(const T& t )
 {
-	return JD::to_cstring(t);
+	return Util::to_cstring(t);
 }
 
 template<typename T, typename ...Cols>

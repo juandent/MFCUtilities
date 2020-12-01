@@ -1,13 +1,11 @@
 #include "stdafx.h"
+
+import Util;
+
+
 #include "StatementLineGridController.h"
 
-import JD;
-// import DateAsString;
-//
-// void use()
-// {
-// 	DateAsString::yearFromLineMonthAndStatement(10u, 10u, 10u);
-// }
+using namespace Util;
 
 void StatementLineGridController::HandleGridClick(NM_GRIDVIEW* pItem)
 {
@@ -54,31 +52,31 @@ void StatementLineGridController::FillLine(int row)
 {
 	auto line = lines[row++];
 
-	grid.SetItemText(row, Columns::ROW_NUMBER, JD::to_cstring(row));
-	grid.SetItemText(row, Columns::STMT_DATE, JD::to_cstring(line.statement_date));
-	grid.SetItemText(row, Columns::OWN_ACCOUNT, JD::to_cstring( line.origin_account));
-	grid.SetItemText(row, Columns::LINE_DATE, JD::to_cstring(line.line_date));
-	grid.SetItemText(row, Columns::CONCEPTO, JD::to_cstring(line.concepto));
+	grid.SetItemText(row, Columns::ROW_NUMBER, Util::to_cstring(row));
+	grid.SetItemText(row, Columns::STMT_DATE, Util::to_cstring(line.statement_date));
+	grid.SetItemText(row, Columns::OWN_ACCOUNT, Util::to_cstring( line.origin_account));
+	grid.SetItemText(row, Columns::LINE_DATE, Util::to_cstring(line.line_date));
+	grid.SetItemText(row, Columns::CONCEPTO, Util::to_cstring(line.concepto));
 
 
 	double local = line.amount_local;
 	Colones c{ local };
-	grid.SetItemText(row, Columns::AMOUNT_LOCAL, JD::to_cstring(c));
+	grid.SetItemText(row, Columns::AMOUNT_LOCAL, Util::to_cstring(c));
 
 	double dolar = line.amount_dollars;
 	Dolares d{ dolar };
-	grid.SetItemText(row, Columns::AMOUNT_DOLLARS, JD::to_cstring(d));
+	grid.SetItemText(row, Columns::AMOUNT_DOLLARS, Util::to_cstring(d));
 	
-	grid.SetItemText(row, Columns::IS_ENABLED, JD::to_cstring(line.is_enabled));
-	grid.SetItemText(row, Columns::CATEGORY_NAME, JD::to_cstring(line.category_name));
-	grid.SetItemText(row, Columns::DESCRIPCION, JD::to_cstring(line.description));
-	grid.SetItemText(row, Columns::OWNER_NAME, JD::to_cstring(line.owner_name));
+	grid.SetItemText(row, Columns::IS_ENABLED, Util::to_cstring(line.is_enabled));
+	grid.SetItemText(row, Columns::CATEGORY_NAME, Util::to_cstring(line.category_name));
+	grid.SetItemText(row, Columns::DESCRIPCION, Util::to_cstring(line.description));
+	grid.SetItemText(row, Columns::OWNER_NAME, Util::to_cstring(line.owner_name));
 
 }
 
 void StatementLineGridController::SetSorting()
 {
-	grid.m_sortingFunctions = { JD::Comparison::Money, JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Text, JD::Comparison::Money,JD::Comparison::Money };
+	grid.m_sortingFunctions = { Util::Comparison::Money, Util::Comparison::Text, Util::Comparison::Text, Util::Comparison::Text, Util::Comparison::Text, Util::Comparison::Money,Util::Comparison::Money };
 }
 
 void StatementLineGridController::OnInitialUpdate()

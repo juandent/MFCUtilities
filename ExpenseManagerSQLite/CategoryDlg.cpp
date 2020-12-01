@@ -2,6 +2,9 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
 #include "ExpenseManagerSQLite.h"
 #include "CategoryDlg.h"
 #include "afxdialogex.h"
@@ -18,7 +21,7 @@ CategoryDlg::CategoryDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_CategoryDlg, pParent),
 	m_categoriasLB{ m_list_categorias, [](Categoria& categoria)
 	{
-		return JD::to_cstring(categoria.id_categoria) + L" - " + JD::to_cstring(categoria.name) + (categoria.is_expense_or_income ? L" - Real" : L" - Ignore");
+		return Util::to_cstring(categoria.id_categoria) + L" - " + Util::to_cstring(categoria.name) + (categoria.is_expense_or_income ? L" - Real" : L" - Ignore");
 	}}
 {
 
@@ -55,7 +58,7 @@ BOOL CategoryDlg::OnInitDialog()
 
 	// TODO:  Add extra initialization here
 	m_categoriasLB.loadLB();
-	m_nombre.SetWindowTextW(JD::to_cstring(m_category_name));
+	m_nombre.SetWindowTextW(Util::to_cstring(m_category_name));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -85,7 +88,7 @@ void CategoryDlg::OnBnClickedBAplicarCategory()
 
 	int is_real = m_gasto_o_ingreso_real.GetCheck();
 	
-	auto nombre = JD::from_cstring(rNombre);
+	auto nombre = Util::from_cstring(rNombre);
 
 	if (! categoria)
 	{
@@ -136,7 +139,7 @@ void CategoryDlg::OnBnClickedBUpdate()
 	
 	if (!rNombre.IsEmpty())
 	{
-		auto nombre = JD::from_cstring(rNombre);
+		auto nombre = Util::from_cstring(rNombre);
 		cat->name = nombre;
 		changes = true;
 	}
@@ -169,7 +172,7 @@ void CategoryDlg::OnLbnSelchangeLCategorias()
 	auto categoria = m_categoriasLB.current();
 
 
-	m_id_categoria.SetWindowTextW(JD::to_cstring(categoria->id_categoria));
-	m_nombre.SetWindowTextW(JD::to_cstring(categoria->name));
+	m_id_categoria.SetWindowTextW(Util::to_cstring(categoria->id_categoria));
+	m_nombre.SetWindowTextW(Util::to_cstring(categoria->name));
 	m_gasto_o_ingreso_real.SetCheck(categoria->is_expense_or_income);
 }

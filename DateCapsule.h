@@ -2,12 +2,14 @@
 
 #include <string>
 #include <date/date.h>
-#include "Utilities.h"
+// #include "Utilities.h"
+
 
 #ifndef DLLS_H
 #define MFC_UTILITIES_EXPORTS
 #include <Dlls.h>
 #endif
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	A date capsule. Encapsulates a date given as a string and 
@@ -25,6 +27,6 @@ public:
 		: m_dateInString{ extract(stringIncludingDate) }
 	{}
 
-	date::sys_days asDate() const { return JD::to_date(m_dateInString); }
+	date::sys_days asDate() const;
 	std::string		asString() const { return m_dateInString;  }
 };

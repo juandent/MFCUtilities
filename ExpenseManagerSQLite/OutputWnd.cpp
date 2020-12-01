@@ -1,5 +1,9 @@
 
 #include "stdafx.h"
+
+import Util;
+
+
 #include "framework.h"
 
 #include "OutputWnd.h"

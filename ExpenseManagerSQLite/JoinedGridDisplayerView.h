@@ -5,11 +5,19 @@
 
 
 // JoinedGridDisplayerView form view
+template<auto N> constexpr auto val = N;
 
 class JoinedGridDisplayerView : public CFormView
 {
 	DECLARE_DYNCREATE(JoinedGridDisplayerView)
 	
+	struct WhereParameters
+	{
+		JoinedGridDisplayerView*	view;
+		std::optional<std::string>	conceptoPattern {"%"};
+		std::optional<int>			fkey_statement;
+		void executeWhere();
+	} whereParameters{ this };
 protected:
 	JoinedGridDisplayerView();           // protected constructor used by dynamic creation
 	virtual ~JoinedGridDisplayerView();
@@ -41,6 +49,13 @@ private:
 	void InitializeGrid(const T& t);
 public:
 	afx_msg void OnCbnSelchangeCStatementdates();
+private:
+	CEdit m_conceptoSearch;
+public:
+	afx_msg void OnEnKillfocusEConcepto();
+	afx_msg void OnBnClickedBFilter();
+private:
+	CEdit m_countMainGrid;
 };
 
 

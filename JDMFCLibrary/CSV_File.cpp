@@ -5,14 +5,27 @@
 #include <fstream>
 #include <vector>
 #include <regex>
+#include <date/date.h>
 
-#include "Utilities.h"
+// /******************************************************************************
+// CLASS exp10 -- template helper for computing powers of 10
+// ARGUMENTS
+// 	N	--	exponent
+// IMPLEMENTATION
+// 	exp10 computes powers of 10 recursively using a specialization for 0 to
+// 	end recursion
+// ******************************************************************************/
+// template <int N> struct exp10 { enum { value = 10 * exp10<N - 1>::value }; };
+// template <>      struct exp10<0> { enum { value = 1 }; };
+
+#include <FixedPoint/arithmetic_types.h>
 
 module CSV_File;
 
 import Util;
 
 using namespace std;
+using namespace Util;
 
 namespace csv
 {
@@ -44,7 +57,7 @@ namespace csv
 		{
 			vector<string> columns;
 			string strBuffer{ buffer };
-			JD::diag::display(strBuffer);
+			diag::display(strBuffer);
 
 
 			regex sep("[ \t\n]*[,][ \t\n]*");  // separated by , and spaces
@@ -56,20 +69,20 @@ namespace csv
 			sregex_token_iterator e;
 			for (; p != e; ++p) {
 				auto str = p->str();
-				JD::diag::display(str);
+				diag::display(str);
 				if (str[0] == '"')
 				{
 					//str = str.substr(1);	// skip the double quote '"'
 					do {
 						++p;
 						str += "," + p->str();
-						JD::diag::display(str);
+						diag::display(str);
 						//auto pos_of_double_quote = str.find("\"");
 						auto lastCharIter = str.rbegin();
 						if (*lastCharIter == '"')	// if last char is the closing double quote
 						{
 							//*lastCharIter = '\0';
-							JD::diag::display(str);
+							diag::display(str);
 							break;
 						}
 					} while (true);
@@ -128,13 +141,13 @@ namespace csv
 	date::sys_days CSV_File::getDate(const Cell_Position& pos) const
 	{
 		auto text = m_matrix[pos.getRow()][pos.getCol()];
-		return JD::to_date(text);
+		return Util::to_date(text);
 	}
 
 	Money CSV_File::getMoney(const Cell_Position& pos) const
 	{
 		auto text = m_matrix[pos.getRow()][pos.getCol()];
-		return JD::to_money(text);		// makes negative values deposits
+		return Util::to_money(text);		// makes negative values deposits
 	}
 
 	bool CSV_File::getBool(const Cell_Position& pos) const

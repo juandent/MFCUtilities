@@ -2,6 +2,8 @@
 
 #include "stdafx.h"
 
+import Util;
+
 #include "Data_Tier.h"
 
 
@@ -196,7 +198,7 @@ void Storage::fill_db_with_test_data()
 	int d = (unsigned)now.day();
 	sys_days now_dp = now;
 
-	string dayName = JD::weekDay(now_dp);
+	string dayName = Util::weekDay(now_dp);
 
 
 	//auto x = sun[last]/may/2018;
@@ -230,7 +232,7 @@ void Storage::fill_db_with_test_data()
 	osss << yymd;
 	string str = osss.str();
 	sys_days yymd_dp = yymd;
-	string ss = JD::weekDay(yymd_dp);
+	string ss = Util::weekDay(yymd_dp);
 
 
 	year_month_day ymd{ year{2018}, month{8}, day{21} };

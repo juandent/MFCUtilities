@@ -6,7 +6,7 @@ struct IDisplayer
 	virtual void display() = 0;
 };
 
-namespace JD
+namespace Util
 {
 	inline CString to_cstring(const std::optional<int>& o)
 	{

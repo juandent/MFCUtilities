@@ -197,9 +197,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\CSVFile.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\DateCapsule.cpp" />
     <ClCompile Include="..\FixedPoint\arithmetic_types.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -207,7 +204,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\FixedPoint\Money.cpp" />
     <ClCompile Include="..\MessageDialog.cpp" />
     <ClCompile Include="..\StringDateConverter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -233,16 +229,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="JD.cpp" />
-    <ClCompile Include="JD.ixx" />
+    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="Util.ixx" />
     <ClCompile Include="JDMFCLibrary.cpp" />
     <ClCompile Include="Partition.ixx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Partition1.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Partition1.ixx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Partition2.ixx">
@@ -254,8 +252,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Util.cpp" />
-    <ClCompile Include="Util.ixx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="JDMFCLibrary.def" />
@@ -263,14 +259,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Buffer.h" />
-    <ClInclude Include="..\CSVFile.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="..\Data.h" />
     <ClInclude Include="..\DateCapsule.h" />
     <ClInclude Include="..\DLLs.h" />
     <ClInclude Include="..\FixedPoint\arithmetic_types.h" />
-    <ClInclude Include="..\FixedPoint\Money.h" />
     <ClInclude Include="..\MessageDialog.h" />
     <ClInclude Include="..\StringDateConverter.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

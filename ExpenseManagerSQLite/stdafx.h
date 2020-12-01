@@ -11,6 +11,7 @@
 
 
 #if 1
+
 #include <sqlite_orm/sqlite_orm.h>
 #include <vector>
 #include <string>
@@ -40,7 +41,7 @@
 #include <stdexcept>
 //#include "Utilities.h"
 //#include <JDGridCtrl.h>
-#include <FixedPoint/Money.h>
+#include <FixedPoint/arithmetic_types.h>
 #include <any>
 #include <variant>
 #endif
@@ -64,8 +65,6 @@
 #include <afxext.h>
 #include "Utilities.h"
 #endif
-
-
 
 
 

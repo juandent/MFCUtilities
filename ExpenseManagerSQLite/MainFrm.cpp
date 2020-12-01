@@ -3,6 +3,10 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
+
 #include "framework.h"
 #include "ExpenseManagerSQLite.h"
 

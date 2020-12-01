@@ -2,6 +2,9 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
 #include "Data_Tier.h"
 
 #include "ExpenseManagerSQLite.h"
@@ -17,6 +20,9 @@
 // #include "RecordLinks.h"
 
 
+namespace fs = std::filesystem;
+
+
 // ConceptsAndAccounts
 
 IMPLEMENT_DYNCREATE(ConceptsAndAccounts, CFormView)
@@ -26,31 +32,31 @@ ConceptsAndAccounts::ConceptsAndAccounts()
 	m_grid_controller(m_statementLines, 11),
 	m_paisLB{ m_paises, [](Pais& pais)
 {
-	auto display = JD::to_cstring(pais.name);
+	auto display = Util::to_cstring(pais.name);
 	return display;
 } },
 m_duenoLB{ m_duenos,
 [](AccountOwner& owner)
 		{
-			auto display = JD::to_cstring(owner.name);
+			auto display = Util::to_cstring(owner.name);
 			return display;
 		} },
 	m_bancoLB{ m_bancos,
 	[](Banco& banco)
 		{
-			auto display = JD::to_cstring(banco.nombre + " - " + banco.ubicacion);
+			auto display = Util::to_cstring(banco.nombre + " - " + banco.ubicacion);
 			return display;
 		} },
 			m_accountLB{ m_cuentas,
 			[](Account& account)
 				{
-					auto display = JD::to_cstring(account.number + " - " + account.description);
+					auto display = Util::to_cstring(account.number + " - " + account.description);
 					return display;
 				} },
 			m_conceptoLB{ m_conceptos,
 			[](Concepto& concepto)
 			{
-					auto display = JD::to_cstring(concepto.name);
+					auto display = Util::to_cstring(concepto.name);
 					return display;
 			}},
 			m_transaccionesLB { m_transacciones, [](Transaccion& trans)
@@ -58,16 +64,16 @@ m_duenoLB{ m_duenos,
 				Colones  colones = trans.amount_colones;
 				Dolares dolares = trans.amount_dolares;
 #if 0
-				return JD::to_cstring(trans.id_transaccion) + L" - #" + JD::to_cstring(trans.row) + L" - " +
-					JD::to_cstring(trans.line_date) + L" - " + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
+				return Util::to_cstring(trans.id_transaccion) + L" - #" + Util::to_cstring(trans.row) + L" - " +
+					Util::to_cstring(trans.line_date) + L" - " + Util::to_cstring(trans.descripcion) + L" - " + Util::to_cstring(colones) + L" - " + Util::to_cstring(dolares);
 #else
-				return JD::to_cstring(trans.line_date) + L" - #" + JD::to_cstring(trans.row) + L" : " + JD::to_cstring(trans.id_transaccion) + L" - " 
-					 + JD::to_cstring(trans.descripcion) + L" - " + JD::to_cstring(colones) + L" - " + JD::to_cstring(dolares);
+				return Util::to_cstring(trans.line_date) + L" - #" + Util::to_cstring(trans.row) + L" : " + Util::to_cstring(trans.id_transaccion) + L" - " 
+					 + Util::to_cstring(trans.descripcion) + L" - " + Util::to_cstring(colones) + L" - " + Util::to_cstring(dolares);
 #endif
 			}},
 			m_statementsLB {  m_statement_list, [](Statement& statement)
 			{
-				return JD::to_cstring(statement.id_statement) + L" - " + JD::to_cstring(statement.date);
+				return Util::to_cstring(statement.id_statement) + L" - " + Util::to_cstring(statement.date);
 			}}
 {
 }
@@ -198,12 +204,12 @@ void ConceptsAndAccounts::OnBnClickedBLoadCompoundDoc()
 	// TODO: Add your control notification handler code here
 	auto startPath = fs::current_path();
 	auto current = startPath.string();
-	auto currPath = JD::to_cstring(current);
+	auto currPath = Util::to_cstring(current);
 	CFileDialog dlg{ true };
 	auto ret = dlg.DoModal();
 	if (ret != 1)	return;
 	auto folderPath = dlg.GetPathName();
-	auto selectedFileName = JD::from_cstring(folderPath);
+	auto selectedFileName = Util::from_cstring(folderPath);
 	LoadFile(selectedFileName);
 }
 
@@ -222,9 +228,9 @@ void ConceptsAndAccounts::LoadFile(const std::string& fileName)
 		auto x = *it;
 
 		Translation t;
-		t.statement_date = JD::to_date(x[0]);
+		t.statement_date = Util::to_date(x[0]);
 		t.origin_account = x[1];
-		t.line_date = JD::to_date(x[2]);
+		t.line_date = Util::to_date(x[2]);
 		t.concepto = x[3];
 		t.amount_local = std::stod(x[4]);
 		t.amount_dollars = std::stod(x[5]);
@@ -255,7 +261,7 @@ void ConceptsAndAccounts::OnBnClickedBPaisAdd()
 		return;
 	}
 
-	auto name = JD::from_cstring(rStr);
+	auto name = Util::from_cstring(rStr);
 	auto whereClause = c(&Pais::name) == name.c_str();
 	
 	std::optional<Pais> pais = m_paisLB.exists(whereClause, &Pais::id_pais, &Pais::name);
@@ -285,8 +291,8 @@ void ConceptsAndAccounts::OnBnClickedBBancoAdd()
 	};
 
 	
-	auto name = JD::from_cstring(rBanco);
-	auto ubicacion = JD::from_cstring(rUbicacion);
+	auto name = Util::from_cstring(rBanco);
+	auto ubicacion = Util::from_cstring(rUbicacion);
 
 	auto whereClause = (c(&Banco::nombre) == name.c_str()) && (c(&Banco::ubicacion) == ubicacion.c_str());
 
@@ -321,7 +327,7 @@ void ConceptsAndAccounts::OnBnClickedBDuenoAdd()
 		return;
 	}
 
-	auto name = JD::from_cstring(rStr);
+	auto name = Util::from_cstring(rStr);
 	auto whereClause = (c(&AccountOwner::name) == name.c_str());
 
 	std::optional<AccountOwner> dueno = m_duenoLB.exists(whereClause, &AccountOwner::id_owner, &AccountOwner::name);
@@ -351,8 +357,8 @@ void ConceptsAndAccounts::OnBnClickedBCuentaAdd()
 		return;
 	}
 
-	auto numero = JD::from_cstring(cs_numero);
-	auto descripcion = JD::from_cstring(cs_descripcion);
+	auto numero = Util::from_cstring(cs_numero);
+	auto descripcion = Util::from_cstring(cs_descripcion);
 	
 	isTarjeta = m_is_tarjeta.GetCheck();
 
@@ -489,7 +495,7 @@ void ConceptsAndAccounts::OnBnClickedBReadStatementline()
 
 std::string ConceptsAndAccounts::readCell(const int row, const int column)
 {
-	return JD::from_cstring(m_statementLines.GetItemText(row, column));
+	return Util::from_cstring(m_statementLines.GetItemText(row, column));
 }
 
 bool ConceptsAndAccounts::verifyRange(const int row)
@@ -508,13 +514,13 @@ double ConceptsAndAccounts::getAmountLocal(const int row)
 {
 	verifyRange(row);
 	auto val = readCell(row, StatementLineGridController::Columns::AMOUNT_LOCAL);
-	return JD::strip_to_long_double(val);
+	return Util::strip_to_long_double(val);
 }
 double ConceptsAndAccounts::getAmountDolares(const int row)
 {
 	verifyRange(row);
 	auto val = readCell(row, StatementLineGridController::Columns::AMOUNT_DOLLARS);
-	return JD::strip_to_long_double(val);
+	return Util::strip_to_long_double(val);
 }
 std::string ConceptsAndAccounts::getOwnAccountNumber(const int row)
 {
@@ -534,14 +540,14 @@ date::sys_days ConceptsAndAccounts::getLineDate(const int row)
 {
 	verifyRange(row);
 	auto val = readCell(row, StatementLineGridController::Columns::LINE_DATE);
-	return JD::to_date(val);
+	return Util::to_date(val);
 }
 
 date::sys_days ConceptsAndAccounts::getStatementDate(const int row)
 {
 	verifyRange(row);
 	auto val = readCell(row, StatementLineGridController::Columns::STMT_DATE);
-	return JD::to_date(val);
+	return Util::to_date(val);
 }
 
 std::string ConceptsAndAccounts::getDescripcion(const int row)
@@ -609,7 +615,7 @@ void ConceptsAndAccounts::OnBnClickedBConcepto()
 		return;
 	}
 
-	auto concepto_name = JD::from_cstring(cs_concepto_name);
+	auto concepto_name = Util::from_cstring(cs_concepto_name);
 
 	auto cuenta = m_accountLB.current();
 	if (!cuenta)

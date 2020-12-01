@@ -2,11 +2,15 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
 #include "ExpenseManagerSQLite.h"
 #include "BancoDlg.h"
 #include "afxdialogex.h"
 #include "Data_Tier.h"
 #include "PaisesDlg.h"
+
 
 
 // BancoDlg dialog
@@ -17,11 +21,11 @@ BancoDlg::BancoDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_BancoDlg, pParent),
 m_bancosLB{m_list_bancos, []( Banco& banco)
 {
-	return JD::to_cstring(banco.id_bank) + L" - " + JD::to_cstring(banco.nombre) + L" - " + JD::to_cstring(banco.ubicacion) + L" - " + JD::to_cstring(banco.getPais().name);
+	return Util::to_cstring(banco.id_bank) + L" - " + Util::to_cstring(banco.nombre) + L" - " + Util::to_cstring(banco.ubicacion) + L" - " + Util::to_cstring(banco.getPais().name);
 }},
 m_paisCB{ m_paises, [](Pais& pais)
 {
-	return JD::to_cstring(pais.name);
+	return Util::to_cstring(pais.name);
 }}
 {
 
@@ -99,8 +103,8 @@ void BancoDlg::OnBnClickedBAplicarBanco()
 		return;
 	}
 
-	auto name = JD::from_cstring(rBanco);
-	auto ubicacion = JD::from_cstring(rUbicacion);
+	auto name = Util::from_cstring(rBanco);
+	auto ubicacion = Util::from_cstring(rUbicacion);
 
 	std::optional<Banco> banco_by_value;
 	if (! banco)
@@ -150,7 +154,7 @@ void BancoDlg::OnBnClickedBUpdateBanco()
 	m_nombre_banco.GetWindowTextW(rNombreBanco);
 	if( ! rNombreBanco.IsEmpty())
 	{
-		auto nombre = JD::from_cstring(rNombreBanco);
+		auto nombre = Util::from_cstring(rNombreBanco);
 		banco->nombre = nombre;
 		changes = true;
 	}
@@ -158,7 +162,7 @@ void BancoDlg::OnBnClickedBUpdateBanco()
 	m_ubicacion.GetWindowTextW(rUbicacion);
 	if( ! rUbicacion.IsEmpty())
 	{
-		auto ubicacion = JD::from_cstring(rUbicacion);
+		auto ubicacion = Util::from_cstring(rUbicacion);
 		banco->ubicacion = ubicacion;
 		changes = true;
 	}
@@ -193,8 +197,8 @@ void BancoDlg::OnLbnSelchangeLBancos()
 {
 	// TODO: Add your control notification handler code here
 	auto banco = m_bancosLB.current();
-	m_id_banco.SetWindowTextW(JD::to_cstring(banco->id_bank));
-	m_nombre_banco.SetWindowTextW(JD::to_cstring(banco->nombre));
-	m_ubicacion.SetWindowTextW(JD::to_cstring(banco->ubicacion));
+	m_id_banco.SetWindowTextW(Util::to_cstring(banco->id_bank));
+	m_nombre_banco.SetWindowTextW(Util::to_cstring(banco->nombre));
+	m_ubicacion.SetWindowTextW(Util::to_cstring(banco->ubicacion));
 	m_paisCB.select(banco->fkey_pais);
 }

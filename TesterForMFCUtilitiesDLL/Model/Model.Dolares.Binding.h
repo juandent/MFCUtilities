@@ -2,12 +2,15 @@
 
 #pragma once
 
-#include <FixedPoint/Money.h>
-#include "Utilities.h"
+#include <FixedPoint/arithmetic_types.h>
+
+// #include "Utilities.h"
 #include <regex>
 #include <array>
 
 #include <sqlite_orm/sqlite_orm.h>
+
+import Util;
 
 ////// Dolares
 

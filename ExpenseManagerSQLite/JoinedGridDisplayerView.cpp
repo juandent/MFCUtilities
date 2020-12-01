@@ -2,6 +2,10 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
+
 #include "ExpenseManagerSQLite.h"
 #include "JoinedGridDisplayerView.h"
 
@@ -59,10 +63,16 @@ void JoinedGridDisplayerView::DoDataExchange(CDataExchange* pDX)
 	CFormView::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_GRID_2, m_grid);
 	DDX_Control(pDX, IDC_C_STATEMENTDATES, m_statement_dates);
+	DDX_Control(pDX, IDC_E_CONCEPTO, m_conceptoSearch);
+	DDX_Control(pDX, IDC_E_COUNT, m_countMainGrid);
 }
 
 BEGIN_MESSAGE_MAP(JoinedGridDisplayerView, CFormView)
 	ON_CBN_SELCHANGE(IDC_C_STATEMENTDATES, &JoinedGridDisplayerView::OnCbnSelchangeCStatementdates)
+	// ON_EN_CHANGE(IDC_E_CONCEPTO, &JoinedGridDisplayerView::OnEnChangeEConcepto)
+	// ON_EN_UPDATE(IDC_E_CONCEPTO, &JoinedGridDisplayerView::OnEnUpdateEConcepto)
+	ON_EN_KILLFOCUS(IDC_E_CONCEPTO, &JoinedGridDisplayerView::OnEnKillfocusEConcepto)
+	ON_BN_CLICKED(IDC_B_FILTER, &JoinedGridDisplayerView::OnBnClickedBFilter)
 END_MESSAGE_MAP()
 
 
@@ -139,8 +149,10 @@ void JoinedGridDisplayerView::InitializeGrid(const T& t)
 		left_join<als_p>(on(c(alias_column<als_a>(&Account::fkey_account_owner)) == alias_column<als_p>(&AccountOwner::id_owner))),
 		where(t));
 
-
-
+	long count = otherlines.size();
+	auto strCount = Util::to_cstring(count);
+	m_countMainGrid.SetWindowTextW(strCount);
+	
 	std::vector<std::string> headers{ "TRANS ID", "ACCOUNT OTHER ID", "ACCOUNT OTHER OWNER", "ACCOUNT OTHER NUMBER", "CONCEPTO ID", "CONCEPTO", "ACCOUNT OWN NUMBER", "CATEGORIA", "STATEMENT DATE", "TRANS DATE", "OWN ACCOUNT OWNER NAME", "STATEMENT ID",  "COLONES", "DOLARES" }; // , "ACCOUNT ID", "CATEGORY FID", "CATEGORY", "STATEMENT DATE"
 
 
@@ -155,8 +167,51 @@ void JoinedGridDisplayerView::OnCbnSelchangeCStatementdates()
 	const int index = m_statement_dates.GetCurSel();
 	int fkey_statement = m_statement_dates.GetItemData(index);
 
-	auto whereClause = c(alias_column<als_t>(&Transaccion::fkey_statement)) == fkey_statement;
+	whereParameters.fkey_statement = fkey_statement;
 
 	
-	InitializeGrid(whereClause);
+	// auto whereClause = c(alias_column<als_t>(&Transaccion::fkey_statement)) == fkey_statement;
+
+
+	// InitializeGrid(whereClause);
+}
+
+
+void JoinedGridDisplayerView::OnEnKillfocusEConcepto()
+{
+	// TODO: Add your control notification handler code here
+
+	CString str;
+	m_conceptoSearch.GetWindowTextW(str);
+
+	auto concepto = Util::from_cstring(str);
+
+	whereParameters.conceptoPattern = concepto;
+
+	// auto whereClause = (like(alias_column<als_d>(&Concepto::name), concepto));
+
+
+	// InitializeGrid(whereClause);
+
+}
+
+void JoinedGridDisplayerView::WhereParameters::executeWhere()
+{
+	auto fkey_statement = this->fkey_statement.value_or(1);
+
+	auto whereStatement = c(alias_column<als_t>(&Transaccion::fkey_statement)) == fkey_statement;
+
+	auto conceptoPattern = this->conceptoPattern.value_or("%");
+
+	auto whereConcepto = like(alias_column<als_d>(&Concepto::name), conceptoPattern);
+
+	auto whereClause = whereStatement && whereConcepto;
+
+	view->InitializeGrid(whereClause);
+}
+
+void JoinedGridDisplayerView::OnBnClickedBFilter()
+{
+	// TODO: Add your control notification handler code here
+	whereParameters.executeWhere();
 }

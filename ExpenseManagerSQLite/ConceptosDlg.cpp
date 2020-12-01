@@ -2,6 +2,9 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
 #include "ExpenseManagerSQLite.h"
 #include "ConceptosDlg.h"
 #include "afxdialogex.h"
@@ -17,11 +20,11 @@ ConceptosDlg::ConceptosDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_ConceptosDlg, pParent),
 	m_conceptosLB{ m_listConceptos, [](Concepto& concepto)
 	{
-		return JD::to_cstring(concepto.id_concepto) + L" - " + JD::to_cstring(concepto.name) + L" - " + JD::to_cstring(concepto.fkey_account);
+		return Util::to_cstring(concepto.id_concepto) + L" - " + Util::to_cstring(concepto.name) + L" - " + Util::to_cstring(concepto.fkey_account);
 	}},
 	m_accountsCB{ m_listAccounts, [](Account& account)
 	{
-		return JD::to_cstring(account.id_account) + L" - " + JD::to_cstring(account.number);
+		return Util::to_cstring(account.id_account) + L" - " + Util::to_cstring(account.number);
 	}}
 {
 
@@ -60,7 +63,7 @@ BOOL ConceptosDlg::OnInitDialog()
 	// TODO:  Add extra initialization here
 	m_conceptosLB.loadLB();
 	m_accountsCB.loadLB();
-	m_nombre.SetWindowTextW(JD::to_cstring(m_discriminator));
+	m_nombre.SetWindowTextW(Util::to_cstring(m_discriminator));
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -116,7 +119,7 @@ void ConceptosDlg::OnBnClickedBUpdateConcepto()
 
 	if (!rNombre.IsEmpty())
 	{
-		auto nombre = JD::from_cstring(rNombre);
+		auto nombre = Util::from_cstring(rNombre);
 		concepto->name = nombre;
 		changes = true;
 	}
@@ -147,9 +150,9 @@ void ConceptosDlg::OnLbnSelchangeLConceptos()
 	// TODO: Add your control notification handler code here
 	auto concepto = m_conceptosLB.current();
 
-	m_nombre.SetWindowTextW(JD::to_cstring(concepto->name));
+	m_nombre.SetWindowTextW(Util::to_cstring(concepto->name));
 	m_accountsCB.select(concepto->fkey_account);
-	m_id.SetWindowTextW(JD::to_cstring(concepto->id_concepto));
+	m_id.SetWindowTextW(Util::to_cstring(concepto->id_concepto));
 }
 
 
@@ -161,7 +164,7 @@ void ConceptosDlg::OnBnClickedBAplicarConcepto()
 	CString rNombre;
 	m_nombre.GetWindowTextW(rNombre);
 
-	auto nombre = JD::from_cstring(rNombre);
+	auto nombre = Util::from_cstring(rNombre);
 	if (rNombre.IsEmpty())
 	{
 		MessageBox(L"Falta escoger nombre");

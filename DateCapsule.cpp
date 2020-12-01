@@ -4,6 +4,8 @@
 
 using namespace std;
 
+import Util;
+
 
 std::string DateCapsule::extract(const std::string & stringIncludingDate) const
 {
@@ -20,4 +22,9 @@ std::string DateCapsule::extract(const std::string & stringIncludingDate) const
 
 	string dateInString = m.str(1);
 	return dateInString;
+}
+
+date::sys_days DateCapsule::asDate() const
+{
+	return Util::to_date(m_dateInString);
 }

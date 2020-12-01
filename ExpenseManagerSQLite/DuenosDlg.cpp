@@ -2,6 +2,9 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
 #include "ExpenseManagerSQLite.h"
 #include "DuenosDlg.h"
 #include "afxdialogex.h"
@@ -17,7 +20,7 @@ DuenosDlg::DuenosDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_DuenosDlg, pParent),
 	m_ownerLB{ m_list_duenos, [](AccountOwner& owner)
 		{
-				return JD::to_cstring(owner.name);
+				return Util::to_cstring(owner.name);
 		} }
 {
 
@@ -73,7 +76,7 @@ void DuenosDlg::OnBnClickedBApplyOwner()
 		return;
 	};
 
-	auto nombre = JD::from_cstring(rNombre);
+	auto nombre = Util::from_cstring(rNombre);
 
 	if (! account_owner)
 	{
@@ -141,7 +144,7 @@ void DuenosDlg::OnBnClickedBUpdateOwners()
 
 	CString rNombre;
 	m_nombre.GetWindowTextW(rNombre);
-	owner->name = JD::from_cstring(rNombre);
+	owner->name = Util::from_cstring(rNombre);
 
 	m_ownerLB.update(*owner);
 	m_ownerLB.loadLB();
@@ -153,5 +156,5 @@ void DuenosDlg::OnLbnSelchangeLDuenos()
 {
 	// TODO: Add your control notification handler code here
 	auto owner = m_ownerLB.current();
-	m_nombre.SetWindowTextW(JD::to_cstring(owner->name));
+	m_nombre.SetWindowTextW(Util::to_cstring(owner->name));
 }

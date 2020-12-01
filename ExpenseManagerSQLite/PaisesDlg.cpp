@@ -2,6 +2,10 @@
 //
 
 #include "stdafx.h"
+
+import Util;
+
+
 #include "ExpenseManagerSQLite.h"
 #include "PaisesDlg.h"
 #include "afxdialogex.h"
@@ -16,7 +20,7 @@ PaisesDlg::PaisesDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_PaisesDlg, pParent),
 	m_paisLB{ m_list_paises, [](Pais& pais)
 	{
-		return JD::to_cstring(pais.id_pais) + L" - " + JD::to_cstring(pais.name);
+		return Util::to_cstring(pais.id_pais) + L" - " + Util::to_cstring(pais.name);
 	}}
 {
 
@@ -80,7 +84,7 @@ void PaisesDlg::OnBnClickedBAplicarPaises()
 		return;
 	}
 
-	auto name = JD::from_cstring(rStr);
+	auto name = Util::from_cstring(rStr);
 
 	if (!pais)
 	{
@@ -98,7 +102,7 @@ void PaisesDlg::OnBnClickedBAplicarPaises()
 	{
 		pais = m_paisLB.insert(name);
 		m_paisLB.insert_into_listbox(*pais);
-		m_id_pais.SetWindowTextW(JD::to_cstring(pais->id_pais));
+		m_id_pais.SetWindowTextW(Util::to_cstring(pais->id_pais));
 	}
 	else           // update
 	{
@@ -119,8 +123,8 @@ void PaisesDlg::OnLbnSelchangeLPaises()
 
 	CString rNombre;
 
-	m_nombre_pais.SetWindowTextW(JD::to_cstring(pais->name));
-	m_id_pais.SetWindowTextW(JD::to_cstring(pais->id_pais));
+	m_nombre_pais.SetWindowTextW(Util::to_cstring(pais->name));
+	m_id_pais.SetWindowTextW(Util::to_cstring(pais->id_pais));
 }
 
 
@@ -157,7 +161,7 @@ void PaisesDlg::OnBnClickedBUpdatePais()
 	}
 	CString rPais;
 	m_nombre_pais.GetWindowTextW(rPais);
-	pais->name = JD::from_cstring(rPais);
+	pais->name = Util::from_cstring(rPais);
 
 	m_paisLB.update(*pais);
 	m_paisLB.loadLB();

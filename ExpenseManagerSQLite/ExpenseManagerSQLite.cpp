@@ -3,6 +3,10 @@
 //
 
 #include "stdafx.h"
+
+
+import Util;
+
 #include <catch2/catch.hpp>
 #include "framework.h"
 #include "afxwinappex.h"

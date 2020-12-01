@@ -43,7 +43,7 @@ private:
 		T* pT;
 		auto s = typeid(T).name();
 
-		return JD::to_cstring(t);
+		return Util::to_cstring(t);
 	}
 
 	template<typename T>
@@ -51,7 +51,7 @@ private:
 	{
 		if (t)
 		{
-			return JD::to_cstring(*t);
+			return Util::to_cstring(*t);
 		}
 		return L"";
 	}

@@ -26,12 +26,12 @@ public:
 		grid.SetSingleRowSelection(true);
 
 		grid.m_sortingFunctions.resize(NumCols + 1);
-		grid.m_sortingFunctions[0] = JD::Comparison::Text;
+		grid.m_sortingFunctions[0] = Util::Comparison::Text;
 
 		int col = 1;
 		for (auto& str : headers)
 		{
-			auto head = JD::to_cstring(str);
+			auto head = Util::to_cstring(str);
 			grid.SetItemText(0, col, head);
 			++col;
 		}
@@ -72,9 +72,9 @@ private:
 			if (row == 0)
 			{
 				if constexpr (std::is_integral_v<ValueType> || std::is_floating_point_v<ValueType>)
-					grid.m_sortingFunctions[Col + 1] = JD::Comparison::Money;
+					grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
 				else
-					grid.m_sortingFunctions[Col + 1] = JD::Comparison::Text;
+					grid.m_sortingFunctions[Col + 1] = Util::Comparison::Text;
 			}
 			
 			auto cs = format(value);
@@ -97,7 +97,7 @@ private:
 		T* pT;
 		auto s = typeid(T).name();
 		
-		return JD::to_cstring(t);
+		return Util::to_cstring(t);
 	}
 
 	template<typename T>
@@ -105,7 +105,7 @@ private:
 	{
 		if (t)
 		{
-			return JD::to_cstring(*t);
+			return Util::to_cstring(*t);
 		}
 		return L"";
 	}
