@@ -98,8 +98,6 @@
 #define IDD_StatementDlg                317
 #define IDD_CategoryDlg                 318
 #define IDD_JoinedGridDisplayerView     319
-#define _APS_NEXT_RESOURCE_VALUE        320
-#define _APS_NEXT_SYMED_VALUE           320
 #define IDC_L_CONCEPTOS                 1000
 #define IDC_GRID                        1001
 #define IDC_B_CONNECT                   1002
@@ -210,7 +208,9 @@
 #define IDC_GRID_2                      1094
 #define IDC_EDIT_CUENTA_OTRA_OWNER      1095
 #define IDC_C_STATEMENTDATES            1096
-#define _APS_NEXT_CONTROL_VALUE         1097
+#define IDC_B_FILTER                    1098
+#define IDC_EDIT1                       1099
+#define IDC_E_COUNT                     1099
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
@@ -221,7 +221,6 @@
 #define ID_FILE_CONCEPTOSDIALOG         32778
 #define ID_FILE_STATEMENTDIALOG         32779
 #define ID_FILE_CATEGORYDIALOG          32780
-#define _APS_NEXT_COMMAND_VALUE         32781
 
 // Next default values for new objects
 // 
@@ -229,7 +228,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        320
 #define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1097
+#define _APS_NEXT_CONTROL_VALUE         1100
 #define _APS_NEXT_SYMED_VALUE           320
 #endif
 #endif

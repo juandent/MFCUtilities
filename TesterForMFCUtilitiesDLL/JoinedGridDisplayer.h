@@ -3,7 +3,39 @@
 
 #include "..\ExpenseManagerSQLite/IDisplayer.h"
 
-template<typename T>
+
+template<int N>
+struct ColonesFormat
+{
+	std::array<unsigned, N> colsToFormat;
+	ColonesFormat(const std::initializer_list<unsigned>& list)
+	{
+		std::copy(list.begin(), list.end(), colsToFormat.begin());
+	}
+	bool IsColonFormat(const unsigned col) const
+	{
+		return (std::find(colsToFormat.begin(), colsToFormat.end(), col) != colsToFormat.end());
+	}
+};
+
+template<int N>
+struct DolaresFormat
+{
+	std::array<unsigned, N> dolsToFormat;
+	DolaresFormat(const std::initializer_list<unsigned>& list)
+	{
+		std::copy(list.begin(), list.end(), dolsToFormat.begin());
+	}
+	bool IsDollarFormat(const unsigned col) const
+	{
+		return (std::find(dolsToFormat.begin(), dolsToFormat.end(), col) != dolsToFormat.end());
+	}
+};
+
+
+// template<typename T> colonesList;
+
+template<typename T, typename ColonesCols, typename DollarsCols>
 class JoinedGridDisplayer  :  public IDisplayer
 {
 	using Container = std::vector<std::remove_reference_t<T>>;
@@ -12,11 +44,17 @@ class JoinedGridDisplayer  :  public IDisplayer
 	CJDGridCtrl&				grid;
 	Container					lines;
 	std::vector<std::string>	headers;
+	ColonesFormat<NumCols>		colones;
+	DolaresFormat <NumCols>		dolares;
+	// ColonesCols					colonList;
+	// DollarsCols					dollarList;
 public:
 	JoinedGridDisplayer(CJDGridCtrl& grid,
 		Container&& lines_,
-		std::vector<std::string> headers_)
-		: lines{ std::move(lines_) }, grid{ grid }, headers{ std::move(headers_) }
+		std::vector<std::string> headers_,
+		const ColonesFormat<NumCols>& colones,
+		const DolaresFormat<NumCols>& dolares)
+		: lines{ std::move(lines_) }, grid{ grid }, headers{ std::move(headers_) }, colones{ colones }, dolares{ dolares }
 	{
 		grid.SetColumnCount(NumCols + 1); // headers.size() + 1);
 		grid.SetRowCount(lines.size() + 1);
@@ -45,7 +83,7 @@ public:
 
 		for (int i = 0; i < lines.size(); ++i)
 		{
-			PrintDataInGrid<0, Container>::Apply(i, lines, grid);
+			PrintDataInGrid<0, Container, NumCols>::Apply(i, lines, grid, colones, dolares);
 		}
 		grid.SetColumnWidth(0, 100);
 		int width = grid.GetColumnWidth(0);
@@ -60,33 +98,60 @@ public:
 	}
 
 private:
-	template<int Col, typename Container>
+	template<int Col, typename Container, unsigned NumCols>
 	struct PrintDataInGrid
 	{
-		static void Apply(int row, const Container& z, CJDGridCtrl& grid)
+		static void Apply(int row, const Container& z, CJDGridCtrl& grid, const ColonesFormat<NumCols>& colones, const DolaresFormat<NumCols>& dollars)
 		{
 			auto value = std::get<Col>(z[row]);
 
 			using ValueType = decltype(value);
 
-			if (row == 0)
+			CString cs;
+
+			if constexpr (std::is_integral_v<ValueType> || std::is_floating_point_v<ValueType>)
 			{
-				if constexpr (std::is_integral_v<ValueType> || std::is_floating_point_v<ValueType>)
-					grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
+				grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
+
+				if( ColonesCols::template found<Col+1>() )
+				{
+					Util::Colones c(value);
+					cs = format(c);
+				}
+				else if ( DollarsCols::template found<Col+1>() )
+				{
+					Util::Dolares d(value);
+					cs = format(d);
+				}
+				// if (colones.IsColonFormat(Col + 1))
+				// {
+				// 	Util::Colones c(value);
+				// 	cs = format(c);
+				// }
+				// else if (dollars.IsDollarFormat(Col + 1))
+				// {
+				// 	Util::Dolares d(value);
+				// 	cs = format(d);
+				// }
 				else
-					grid.m_sortingFunctions[Col + 1] = Util::Comparison::Text;
+				{
+					cs = format(value);
+				}
 			}
-			
-			auto cs = format(value);
+			else
+			{
+				grid.m_sortingFunctions[Col + 1] = Util::Comparison::Text;
+				cs = format(value);
+			}
 			grid.SetItemText(row + 1, Col + 1, cs);
-			PrintDataInGrid<Col+1, Container>::Apply(row, z, grid);
+			PrintDataInGrid<Col+1, Container, NumCols>::Apply(row, z, grid, colones, dollars);
 		}
 	};
 
 	template<typename Container>
-	struct PrintDataInGrid<NumCols, Container>
+	struct PrintDataInGrid<NumCols, Container, NumCols>
 	{
-		static void Apply(int row, const Container& z, CJDGridCtrl& grid)
+		static void Apply(int row, const Container& z, CJDGridCtrl& grid, const ColonesFormat<NumCols>& colones, const DolaresFormat<NumCols>& dollars)
 		{
 		}
 	};

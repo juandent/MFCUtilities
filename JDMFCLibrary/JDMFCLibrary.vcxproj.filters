@@ -48,9 +48,6 @@
     <ClCompile Include="..\DateCapsule.cpp">
       <Filter>Date</Filter>
     </ClCompile>
-    <ClCompile Include="..\StringDateConverter.cpp">
-      <Filter>Date</Filter>
-    </ClCompile>
     <ClCompile Include="..\MessageDialog.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -98,9 +95,6 @@
       <Filter>Money</Filter>
     </ClInclude>
     <ClInclude Include="..\DateCapsule.h">
-      <Filter>Date</Filter>
-    </ClInclude>
-    <ClInclude Include="..\StringDateConverter.h">
       <Filter>Date</Filter>
     </ClInclude>
     <ClInclude Include="..\MessageDialog.h">

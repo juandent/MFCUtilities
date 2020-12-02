@@ -152,17 +152,99 @@ void JoinedGridDisplayerView::InitializeGrid(const T& t)
 	long count = otherlines.size();
 	auto strCount = Util::to_cstring(count);
 	m_countMainGrid.SetWindowTextW(strCount);
-	
+
 	std::vector<std::string> headers{ "TRANS ID", "ACCOUNT OTHER ID", "ACCOUNT OTHER OWNER", "ACCOUNT OTHER NUMBER", "CONCEPTO ID", "CONCEPTO", "ACCOUNT OWN NUMBER", "CATEGORIA", "STATEMENT DATE", "TRANS DATE", "OWN ACCOUNT OWNER NAME", "STATEMENT ID",  "COLONES", "DOLARES" }; // , "ACCOUNT ID", "CATEGORY FID", "CATEGORY", "STATEMENT DATE"
 
 
-	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0])>(m_grid, std::move(otherlines), std::move(headers)));
+	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<13>, IntegerList<14>>(m_grid, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer->display();
 
 }
 
+
+
+using namespace std;
+
+#if 0
+template<int N>
+struct Integral
+{
+	static constexpr int Int = N;
+};
+
+
+template<int Value, typename List, int Index>
+struct Find
+{
+	constexpr static bool same = std::get<Index>(List::Values).Int == Value;
+	constexpr static bool Check()
+	{
+		// if same, found it - end recursion
+		return same || Find<Value, List, Index - 1>::Check();	// not found at Index, try at Index - 1
+	}
+};
+
+template<int Value, typename List>
+struct Find<Value, List, 0>
+{
+	constexpr static bool same = std::get<0>(List::Values).Int == Value;
+	constexpr static bool Check()
+	{
+		return same;
+	}
+};
+
+
+/// <summary>
+/// is Value in values list?
+/// </summary>
+template<int...N>
+struct IntegerList
+{
+	constexpr inline static std::tuple<Integral<N>...> Values;
+	constexpr static unsigned Count = std::tuple_size_v<decltype(Values)>;
+
+	template<int Value>
+	static bool found()
+	{
+		using lista = IntegerList;
+		static bool found = Find<Value, lista, lista::Count - 1>::Check();
+		return found;
+	}
+};
+
+
+void useList()
+{
+	using lista = IntegerList<10, 13>;
+
+	auto v = std::get<1>(lista::Values).Int;
+	
+	static bool same = std::get<1>(lista::Values).Int == 10;
+
+	int s = same ? 1 : 50;
+
+	static bool found = Find<10, lista, lista::Count - 1>::Check();
+
+	if( found )
+	{
+		int s = 0;
+		
+	}
+
+	bool f = IntegerList<10, 13, 15>::found<10>();
+	f = IntegerList<10, 13, 15>::found<13>();
+	f = IntegerList<10, 13, 15>::found<15>();
+	f = IntegerList<10, 13, 15>::found<16>();
+}
+#endif
+
+
 void JoinedGridDisplayerView::OnCbnSelchangeCStatementdates()
 {
+	// useList();
+
+	
 	// TODO: Add your control notification handler code here
 	const int index = m_statement_dates.GetCurSel();
 	int fkey_statement = m_statement_dates.GetItemData(index);
@@ -171,8 +253,11 @@ void JoinedGridDisplayerView::OnCbnSelchangeCStatementdates()
 
 	
 	// auto whereClause = c(alias_column<als_t>(&Transaccion::fkey_statement)) == fkey_statement;
+	// Util::to_cstring()
 
-
+	Util::Money money;
+	int i;
+	//Str::dollars_to_string(money, i);
 	// InitializeGrid(whereClause);
 }
 

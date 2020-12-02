@@ -163,16 +163,24 @@ namespace Util
 		{
 			m_crOs.str("");
 			m_crOs << right << setw(width);
-			m_crMoney_put.put(m_crOs, false, m_crOs, ' ', money.getAsLongDouble()); //   money.rep());
+#if 0	// plain
+			auto temp = std::to_string(money.getAsLongDouble());
+#else
+			m_crMoney_put.put(m_crOs, false, m_crOs, ' ', 100 * money.getAsLongDouble()); //   money.rep()
 			auto temp = m_crOs.str();
+#endif
 			return temp;
 		}
 		string putDollars(Money money, int width)
 		{
 			m_usOs.str("");
 			m_usOs << right << setw(width);
-			m_usMoney_put.put(m_usOs, false, m_usOs, ' ', money.getAsLongDouble());	// money.rep());
+#if 0 // plain
+			auto temp = std::to_string(money.getAsLongDouble());
+#else
+			m_usMoney_put.put(m_usOs, false, m_usOs, ' ', 100 * money.getAsLongDouble());	// money.rep());
 			auto temp = m_usOs.str();
+#endif
 			return temp;
 		}
 		Money getColones(const std::string& asColones)
@@ -291,15 +299,15 @@ namespace Util
 	{
 		return to_wstring(*this, m_width);
 	}
-		
-	Money from_local_cstring(const CString& s)
+
+	Money Str::from_local_cstring(const CString& s)
 	{
 		auto str = from_cstring(s);
 		auto temp = moneyHelper->getColones(str);
 		return temp;
 	}
 
-	Money from_dollars_cstring(const CString& s)
+	Money Str::from_dollars_cstring(const CString& s)
 	{
 		auto str = from_cstring(s);
 		auto temp = moneyHelper->getDollars(str);

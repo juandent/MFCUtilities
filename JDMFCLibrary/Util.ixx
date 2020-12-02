@@ -1,4 +1,6 @@
 
+
+
 #include <debugapi.h>
 #include <date/date.h>
 #include <array>
@@ -17,13 +19,15 @@ namespace fs = std::filesystem;
 #include <afxext.h>         // MFC extensions
 #include <afxole.h>         // MFC OLE classes
 
-#include <FixedPoint/arithmetic_types.h>
-//#include "StringDateConverter.h"
+#include <FixedPoint/arithmetic_types.cpp>
+
 
 class CGridCellBase;
 
+
 export module Util;
-import DateAsString;
+
+export import DateAsString;
 
 
 // Sample diagnostics class:
@@ -100,20 +104,22 @@ namespace diag
 #endif
 }
 
-namespace Util
+export namespace Util
 {
 	export using Money = fixed_decimal<2, long long>;
+
+	export Money;
 
 	export class Colones : public Money
 	{
 		unsigned m_width = 13;
 	public:
 		using Money::Money;
-		Colones() : Money(0) {}
-		Colones(const Money& money)
+		inline Colones() : Money(0) {}
+		inline Colones(const Money& money)
 			: Money(money.rep() / (long double)money.scale_)
 		{}
-		void setWidth(unsigned w) { m_width = w; }
+		inline void setWidth(unsigned w) { m_width = w; }
 		operator std::string();
 		operator std::wstring();
 	};
@@ -124,11 +130,11 @@ namespace Util
 		unsigned m_width = 13;
 	public:
 		using Money::Money;
-		Dolares() : Money(0) {}
-		Dolares(const Money& money)
+		inline Dolares() : Money(0) {}
+		inline Dolares(const Money& money)
 			: Money(money.rep() / (long double)money.scale_)
 		{}
-		void setWidth(unsigned w) { m_width = w; }
+		inline void setWidth(unsigned w) { m_width = w; }
 		operator std::string();
 		operator std::wstring();
 	};
@@ -298,11 +304,17 @@ namespace Util
 
 	export std::wstring to_wstring(Dolares money, int width = 13);
 
+	export struct Str
+	{
+		static Money from_local_cstring(const CString& s);
 
+		static Money from_dollars_cstring(const CString& s);
+	};
+#if 0
 	export Money from_local_cstring(const CString& s);
 
 	export Money from_dollars_cstring(const CString& s);
-
+#endif
 	export inline Money to_money(const std::string& s)
 	{
 		auto val = stold(s);
