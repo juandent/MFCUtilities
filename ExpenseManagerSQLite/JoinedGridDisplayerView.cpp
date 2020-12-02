@@ -65,6 +65,8 @@ void JoinedGridDisplayerView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_C_STATEMENTDATES, m_statement_dates);
 	DDX_Control(pDX, IDC_E_CONCEPTO, m_conceptoSearch);
 	DDX_Control(pDX, IDC_E_COUNT, m_countMainGrid);
+	DDX_Control(pDX, IDC_E_SUMCOLONES, m_sumColones);
+	DDX_Control(pDX, IDC_E_SUMDOLARES, m_sumDollars);
 }
 
 BEGIN_MESSAGE_MAP(JoinedGridDisplayerView, CFormView)
@@ -159,6 +161,22 @@ void JoinedGridDisplayerView::InitializeGrid(const T& t)
 	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<13>, IntegerList<14>>(m_grid, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer->display();
 
+
+	auto sum_results = Storage::getStorage().select(columns(
+		alias_column<als_t>(&Transaccion::id_transaccion), 
+		alias_column<als_d>(&Concepto::id_concepto), 
+		sum(alias_column<als_t>(&Transaccion::amount_colones)),
+		sum(alias_column<als_t>(&Transaccion::amount_dolares))),
+		left_join< als_d>(on(c(alias_column<als_t>(&Transaccion::fkey_concepto)) == alias_column<als_d>(&Concepto::id_concepto))), where(t));
+	Colones c(*std::get<2>(sum_results[0]));
+	auto ss = Util::to_cstring(c);
+
+	m_sumColones.SetWindowTextW(ss);
+	
+	Dolares d(*std::get<3>(sum_results[0]));
+	auto dd = Util::to_cstring(d);
+	
+	m_sumDollars.SetWindowTextW(dd);
 }
 
 

@@ -3,7 +3,7 @@
 
 #include "..\ExpenseManagerSQLite/IDisplayer.h"
 
-
+#if 0 // DEPRECATED
 template<int N>
 struct ColonesFormat
 {
@@ -31,7 +31,7 @@ struct DolaresFormat
 		return (std::find(dolsToFormat.begin(), dolsToFormat.end(), col) != dolsToFormat.end());
 	}
 };
-
+#endif
 
 // template<typename T> colonesList;
 
@@ -44,17 +44,11 @@ class JoinedGridDisplayer  :  public IDisplayer
 	CJDGridCtrl&				grid;
 	Container					lines;
 	std::vector<std::string>	headers;
-	ColonesFormat<NumCols>		colones;
-	DolaresFormat <NumCols>		dolares;
-	// ColonesCols					colonList;
-	// DollarsCols					dollarList;
 public:
 	JoinedGridDisplayer(CJDGridCtrl& grid,
 		Container&& lines_,
-		std::vector<std::string> headers_,
-		const ColonesFormat<NumCols>& colones,
-		const DolaresFormat<NumCols>& dolares)
-		: lines{ std::move(lines_) }, grid{ grid }, headers{ std::move(headers_) }, colones{ colones }, dolares{ dolares }
+		std::vector<std::string> headers_)
+		: lines{ std::move(lines_) }, grid{ grid }, headers{ std::move(headers_) } 
 	{
 		grid.SetColumnCount(NumCols + 1); // headers.size() + 1);
 		grid.SetRowCount(lines.size() + 1);
@@ -83,7 +77,7 @@ public:
 
 		for (int i = 0; i < lines.size(); ++i)
 		{
-			PrintDataInGrid<0, Container, NumCols>::Apply(i, lines, grid, colones, dolares);
+			PrintDataInGrid<0, Container, NumCols>::Apply(i, lines, grid);
 		}
 		grid.SetColumnWidth(0, 100);
 		int width = grid.GetColumnWidth(0);
@@ -101,7 +95,7 @@ private:
 	template<int Col, typename Container, unsigned NumCols>
 	struct PrintDataInGrid
 	{
-		static void Apply(int row, const Container& z, CJDGridCtrl& grid, const ColonesFormat<NumCols>& colones, const DolaresFormat<NumCols>& dollars)
+		static void Apply(int row, const Container& z, CJDGridCtrl& grid)
 		{
 			auto value = std::get<Col>(z[row]);
 
@@ -123,16 +117,6 @@ private:
 					Util::Dolares d(value);
 					cs = format(d);
 				}
-				// if (colones.IsColonFormat(Col + 1))
-				// {
-				// 	Util::Colones c(value);
-				// 	cs = format(c);
-				// }
-				// else if (dollars.IsDollarFormat(Col + 1))
-				// {
-				// 	Util::Dolares d(value);
-				// 	cs = format(d);
-				// }
 				else
 				{
 					cs = format(value);
@@ -144,14 +128,14 @@ private:
 				cs = format(value);
 			}
 			grid.SetItemText(row + 1, Col + 1, cs);
-			PrintDataInGrid<Col+1, Container, NumCols>::Apply(row, z, grid, colones, dollars);
+			PrintDataInGrid<Col+1, Container, NumCols>::Apply(row, z, grid);
 		}
 	};
 
 	template<typename Container>
 	struct PrintDataInGrid<NumCols, Container, NumCols>
 	{
-		static void Apply(int row, const Container& z, CJDGridCtrl& grid, const ColonesFormat<NumCols>& colones, const DolaresFormat<NumCols>& dollars)
+		static void Apply(int row, const Container& z, CJDGridCtrl& grid)
 		{
 		}
 	};

@@ -69,3 +69,12 @@ struct IntegerList
 		return found;
 	}
 };
+
+
+#if 0
+template<int...N>
+using ColonesCols = IntegerList;
+
+template<int...N>
+using DollarsCols = IntegerList;
+#endif

@@ -56,6 +56,8 @@ public:
 	afx_msg void OnBnClickedBFilter();
 private:
 	CEdit m_countMainGrid;
+	CEdit m_sumColones;
+	CEdit m_sumDollars;
 };
 
 
