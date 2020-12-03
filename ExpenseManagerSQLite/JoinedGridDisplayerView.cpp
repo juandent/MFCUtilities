@@ -67,6 +67,7 @@ void JoinedGridDisplayerView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_COUNT, m_countMainGrid);
 	DDX_Control(pDX, IDC_E_SUMCOLONES, m_sumColones);
 	DDX_Control(pDX, IDC_E_SUMDOLARES, m_sumDollars);
+	DDX_Control(pDX, IDC_E_CATEGORIA, m_categoriaFilter);
 }
 
 BEGIN_MESSAGE_MAP(JoinedGridDisplayerView, CFormView)
@@ -75,6 +76,7 @@ BEGIN_MESSAGE_MAP(JoinedGridDisplayerView, CFormView)
 	// ON_EN_UPDATE(IDC_E_CONCEPTO, &JoinedGridDisplayerView::OnEnUpdateEConcepto)
 	ON_EN_KILLFOCUS(IDC_E_CONCEPTO, &JoinedGridDisplayerView::OnEnKillfocusEConcepto)
 	ON_BN_CLICKED(IDC_B_FILTER, &JoinedGridDisplayerView::OnBnClickedBFilter)
+	ON_EN_KILLFOCUS(IDC_E_CATEGORIA, &JoinedGridDisplayerView::OnEnKillfocusECategoria)
 END_MESSAGE_MAP()
 
 
@@ -167,7 +169,10 @@ void JoinedGridDisplayerView::InitializeGrid(const T& t)
 		alias_column<als_d>(&Concepto::id_concepto), 
 		sum(alias_column<als_t>(&Transaccion::amount_colones)),
 		sum(alias_column<als_t>(&Transaccion::amount_dolares))),
-		left_join< als_d>(on(c(alias_column<als_t>(&Transaccion::fkey_concepto)) == alias_column<als_d>(&Concepto::id_concepto))), where(t));
+		left_join< als_d>(on(c(alias_column<als_t>(&Transaccion::fkey_concepto)) == alias_column<als_d>(&Concepto::id_concepto))), 
+		left_join< als_c>(on(c(alias_column<als_t>(&Transaccion::fkey_category)) == alias_column<als_c>(&Categoria::id_categoria))),
+		where(t));
+
 	Colones c(*std::get<2>(sum_results[0]));
 	auto ss = Util::to_cstring(c);
 
@@ -268,15 +273,6 @@ void JoinedGridDisplayerView::OnCbnSelchangeCStatementdates()
 	int fkey_statement = m_statement_dates.GetItemData(index);
 
 	whereParameters.fkey_statement = fkey_statement;
-
-	
-	// auto whereClause = c(alias_column<als_t>(&Transaccion::fkey_statement)) == fkey_statement;
-	// Util::to_cstring()
-
-	Util::Money money;
-	int i;
-	//Str::dollars_to_string(money, i);
-	// InitializeGrid(whereClause);
 }
 
 
@@ -290,12 +286,6 @@ void JoinedGridDisplayerView::OnEnKillfocusEConcepto()
 	auto concepto = Util::from_cstring(str);
 
 	whereParameters.conceptoPattern = concepto;
-
-	// auto whereClause = (like(alias_column<als_d>(&Concepto::name), concepto));
-
-
-	// InitializeGrid(whereClause);
-
 }
 
 void JoinedGridDisplayerView::WhereParameters::executeWhere()
@@ -308,7 +298,12 @@ void JoinedGridDisplayerView::WhereParameters::executeWhere()
 
 	auto whereConcepto = like(alias_column<als_d>(&Concepto::name), conceptoPattern);
 
-	auto whereClause = whereStatement && whereConcepto;
+	auto categoriaPattern = this->categoriaPattern.value_or("%");
+
+	auto whereCategoria = like(alias_column<als_c>(&Categoria::name), categoriaPattern);
+
+	
+	auto whereClause = whereStatement && whereConcepto && whereCategoria;
 
 	view->InitializeGrid(whereClause);
 }
@@ -317,4 +312,16 @@ void JoinedGridDisplayerView::OnBnClickedBFilter()
 {
 	// TODO: Add your control notification handler code here
 	whereParameters.executeWhere();
+}
+
+
+void JoinedGridDisplayerView::OnEnKillfocusECategoria()
+{
+	// TODO: Add your control notification handler code here
+	CString str;
+	m_categoriaFilter.GetWindowTextW(str);
+
+	auto categoria = Util::from_cstring(str);
+
+	whereParameters.categoriaPattern = categoria;
 }

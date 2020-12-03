@@ -211,7 +211,6 @@
 #define IDC_B_FILTER                    1098
 #define IDC_E_COUNT                     1099
 #define IDC_E_SUMCOLONES                1100
-#define IDC_E_SUMCOLONES2               1101
 #define IDC_E_SUMDOLARES                1101
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772

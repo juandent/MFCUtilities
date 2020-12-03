@@ -16,6 +16,7 @@ class JoinedGridDisplayerView : public CFormView
 		JoinedGridDisplayerView*	view;
 		std::optional<std::string>	conceptoPattern {"%"};
 		std::optional<int>			fkey_statement;
+		std::optional<std::string>	categoriaPattern;
 		void executeWhere();
 	} whereParameters{ this };
 protected:
@@ -58,6 +59,9 @@ private:
 	CEdit m_countMainGrid;
 	CEdit m_sumColones;
 	CEdit m_sumDollars;
+	CEdit m_categoriaFilter;
+public:
+	afx_msg void OnEnKillfocusECategoria();
 };
 
 
