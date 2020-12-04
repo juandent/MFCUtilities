@@ -24,6 +24,8 @@ protected:
 	virtual ~ConceptsAndAccounts();
 
 public:
+	bool m_autoexec{ false };
+	
 	using DoubleColumn_mem = double (ConceptsAndAccounts::*)(const int row);
 	using SysDaysColumn_mem = date::sys_days(ConceptsAndAccounts::*)(const int row);
 	using StringColumn_mem = std::string(ConceptsAndAccounts::*)(const int row);

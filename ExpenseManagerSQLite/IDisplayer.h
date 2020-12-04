@@ -62,7 +62,7 @@ struct IntegerList
 	constexpr static unsigned Count = std::tuple_size_v<decltype(Values)>;
 
 	template<int Value>
-	static bool found()
+	constexpr static bool found()
 	{
 		using lista = IntegerList;
 		static bool found = Find<Value, lista, lista::Count - 1>::Check();

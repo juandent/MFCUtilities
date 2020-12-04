@@ -73,6 +73,7 @@ void TransaccionDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_TRANSACCION, m_id);
 	DDX_Control(pDX, IDC_E_ROW, m_row);
 	DDX_Control(pDX, IDC_EDIT_CUENTA_OTRA_OWNER, m_cuenta_otra_owner);
+	DDX_Control(pDX, IDC_L_DUMMY, m_list_dummy);
 }
 
 
@@ -89,6 +90,7 @@ BEGIN_MESSAGE_MAP(TransaccionDlg, CDialog)
 	// ON_BN_CLICKED(IDC_B_UPDATE_TRANSACTION, &TransaccionDlg::OnBnClickedBUpdateTransaction)
 	ON_BN_CLICKED(IDC_B_ADD_OTHER_ACCOUNT, &TransaccionDlg::OnBnClickedBAddOtherAccount)
 	ON_BN_CLICKED(IDOK, &TransaccionDlg::OnBnClickedOk)
+	ON_LBN_SELCHANGE(IDC_L_DUMMY, &TransaccionDlg::OnLbnSelchangeLDummyCatchCOMMAND)
 END_MESSAGE_MAP()
 
 
@@ -171,8 +173,8 @@ BOOL TransaccionDlg::OnInitDialog()
 
 	if( m_autoexec)
 	{
-		this->OnBnClickedBAplicarTransactions();
-		this->OnBnClickedOk();
+		// 
+		m_list_dummy.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_list_dummy.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_list_dummy.m_hWnd);
 	}
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -616,4 +618,12 @@ void TransaccionDlg::OnBnClickedOk()
 {
 	// TODO: Add your control notification handler code here
 	CDialog::OnOK();
+}
+
+
+void TransaccionDlg::OnLbnSelchangeLDummyCatchCOMMAND()
+{
+	// TODO: Add your control notification handler code here
+	this->OnBnClickedBAplicarTransactions();
+	this->OnBnClickedOk();
 }

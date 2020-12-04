@@ -163,7 +163,6 @@ void JoinedGridDisplayerView::InitializeGrid(const T& t)
 	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<13>, IntegerList<14>>(m_grid, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer->display();
 
-
 	auto sum_results = Storage::getStorage().select(columns(
 		alias_column<als_t>(&Transaccion::id_transaccion), 
 		alias_column<als_d>(&Concepto::id_concepto), 
@@ -173,15 +172,22 @@ void JoinedGridDisplayerView::InitializeGrid(const T& t)
 		left_join< als_c>(on(c(alias_column<als_t>(&Transaccion::fkey_category)) == alias_column<als_c>(&Categoria::id_categoria))),
 		where(t));
 
-	Colones c(*std::get<2>(sum_results[0]));
-	auto ss = Util::to_cstring(c);
+	auto&& line = sum_results[0];
+	auto&& pc = std::get<2>(line);
 
-	m_sumColones.SetWindowTextW(ss);
+	Colones c(pc ? *pc : 0);
+	auto ss = Util::to_cstring(c);
 	
-	Dolares d(*std::get<3>(sum_results[0]));
+	m_sumColones.SetWindowTextW(ss);
+
+
+	auto&& pd = std::get<3>(line);
+
+	Dolares d(pd ? *pd : 0);
 	auto dd = Util::to_cstring(d);
 	
 	m_sumDollars.SetWindowTextW(dd);
+
 }
 
 

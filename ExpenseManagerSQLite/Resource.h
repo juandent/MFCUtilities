@@ -212,6 +212,8 @@
 #define IDC_E_COUNT                     1099
 #define IDC_E_SUMCOLONES                1100
 #define IDC_E_SUMDOLARES                1101
+#define IDC_LIST1                       1101
+#define IDC_L_DUMMY                     1101
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
@@ -229,7 +231,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        320
 #define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1101
+#define _APS_NEXT_CONTROL_VALUE         1102
 #define _APS_NEXT_SYMED_VALUE           320
 #endif
 #endif

@@ -173,6 +173,7 @@ void ConceptsAndAccounts::OnGridClick(NMHDR* pNotifyStruct, LRESULT* /*pResult*/
 		if( pItem->iRow > 0)
 		{
 			m_row = pItem->iRow;
+			m_autoexec = false;
 			SaveRowToDb();
 		}
 
@@ -698,6 +699,7 @@ void ConceptsAndAccounts::OnBnClickedBSaveToDb()
 	// TODO: Add your control notification handler code here
 
 	const auto row_count = m_statementLines.GetRowCount();
+	m_autoexec = true;
 	for (m_row = 1; m_row < row_count ; ++m_row)
 	{
 		if (!SaveRowToDb())

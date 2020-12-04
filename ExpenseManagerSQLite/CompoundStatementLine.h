@@ -210,7 +210,8 @@ public:
 		
 		TransaccionDlg dlg;
 		dlg.setDiscriminator(m_trans);
-		//dlg.autoexec();
+		dlg.setAutoExec(this->m_table_source->m_autoexec);
+		
 		auto ret = dlg.DoModal();
 		if( ret == 0)
 		{

@@ -25,6 +25,7 @@ public:
 	TransaccionDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~TransaccionDlg();
 
+	void setAutoExec(bool is_on) { m_autoexec = is_on; }
 
 	void setDiscriminator( std::optional<Transaccion> trans)
 	{
@@ -88,4 +89,9 @@ private:
 	virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
 public:
 	afx_msg void OnBnClickedOk();
+private:
+	// to receive messages for autoexec
+	CListBox m_list_dummy;
+public:
+	afx_msg void OnLbnSelchangeLDummyCatchCOMMAND();
 };
