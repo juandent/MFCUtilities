@@ -91,6 +91,8 @@ BEGIN_MESSAGE_MAP(TransaccionDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_ADD_OTHER_ACCOUNT, &TransaccionDlg::OnBnClickedBAddOtherAccount)
 	ON_BN_CLICKED(IDOK, &TransaccionDlg::OnBnClickedOk)
 	ON_LBN_SELCHANGE(IDC_L_DUMMY, &TransaccionDlg::OnLbnSelchangeLDummyCatchCOMMAND)
+	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_B_HOLD, &TransaccionDlg::OnBnClickedBHold)
 END_MESSAGE_MAP()
 
 
@@ -173,8 +175,10 @@ BOOL TransaccionDlg::OnInitDialog()
 
 	if( m_autoexec)
 	{
-		// 
-		m_list_dummy.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_list_dummy.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_list_dummy.m_hWnd);
+		SetTimer(1, 2000, NULL);
+		//
+		// postMessage(m_list_dummy);
+		//m_list_dummy.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_list_dummy.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_list_dummy.m_hWnd);
 	}
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -626,4 +630,32 @@ void TransaccionDlg::OnLbnSelchangeLDummyCatchCOMMAND()
 	// TODO: Add your control notification handler code here
 	this->OnBnClickedBAplicarTransactions();
 	this->OnBnClickedOk();
+}
+
+
+void TransaccionDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: Add your message handler code here and/or call default
+	if (!m_hold)
+	{
+		if (nIDEvent == 1)
+		{
+			CDialog::OnTimer(nIDEvent);
+			this->OnBnClickedBAplicarTransactions();
+			KillTimer(1);
+			SetTimer(2, 3000, NULL);
+		}
+		else if( nIDEvent == 2)
+		{
+			this->OnBnClickedOk();
+		}
+		// OnLbnSelchangeLDummyCatchCOMMAND();
+	}
+}
+
+
+void TransaccionDlg::OnBnClickedBHold()
+{
+	// TODO: Add your control notification handler code here
+	m_hold = true;
 }

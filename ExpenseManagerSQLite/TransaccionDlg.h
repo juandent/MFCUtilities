@@ -18,6 +18,7 @@ class TransaccionDlg : public CDialog
 	BoxContents<Categoria, &Categoria::id_categoria, CComboBox> m_categoriaCB;
 	std::optional<Transaccion> m_trans;
 	bool m_autoexec = false;
+	bool m_hold{ false };
 	void Refresh();
 	void Refresh_discriminator();
 	void Find_id();
@@ -94,4 +95,6 @@ private:
 	CListBox m_list_dummy;
 public:
 	afx_msg void OnLbnSelchangeLDummyCatchCOMMAND();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnBnClickedBHold();
 };

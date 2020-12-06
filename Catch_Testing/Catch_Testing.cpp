@@ -18,6 +18,7 @@ TEST_CASE("Learning Catch")
 	{
 		int i = 7;
 		REQUIRE(++i == 8);
+		std::cout << "Hola"<< std::endl;
 	}
 	
 }
