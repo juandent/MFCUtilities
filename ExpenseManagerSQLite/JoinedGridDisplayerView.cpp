@@ -289,7 +289,9 @@ void JoinedGridDisplayerView::OnEnKillfocusEConcepto()
 	CString str;
 	m_conceptoSearch.GetWindowTextW(str);
 
-	auto concepto = Util::from_cstring(str);
+	std::string concepto = Util::from_cstring(str);
+
+	if (concepto.empty())  concepto = "%";
 
 	whereParameters.conceptoPattern = concepto;
 }
@@ -328,6 +330,8 @@ void JoinedGridDisplayerView::OnEnKillfocusECategoria()
 	m_categoriaFilter.GetWindowTextW(str);
 
 	auto categoria = Util::from_cstring(str);
+
+	if (categoria.empty()) categoria = "%";
 
 	whereParameters.categoriaPattern = categoria;
 }
