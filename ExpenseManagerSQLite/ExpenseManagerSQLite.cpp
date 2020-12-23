@@ -4,6 +4,8 @@
 
 #include "stdafx.h"
 
+#include "DuenoCuentasDlg.h"
+
 
 import Util;
 
@@ -55,6 +57,8 @@ BEGIN_MESSAGE_MAP(CExpenseManagerSQLiteApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_CONCEPTOSDIALOG, &CExpenseManagerSQLiteApp::OnFileConceptosdialog)
 	ON_COMMAND(ID_FILE_STATEMENTDIALOG, &CExpenseManagerSQLiteApp::OnFileStatementdialog)
 	ON_COMMAND(ID_FILE_CATEGORYDIALOG, &CExpenseManagerSQLiteApp::OnFileCategorydialog)
+	// ON_COMMAND(ID_FILE_CUENTASDEDUE32782, &CExpenseManagerSQLiteApp::OnFileCuentasdedueno)
+	ON_COMMAND(ID_FILE_CUENTASDEDUENO, &CExpenseManagerSQLiteApp::OnFileCuentasdeDuenoDlg)
 END_MESSAGE_MAP()
 
 
@@ -371,5 +375,13 @@ void CExpenseManagerSQLiteApp::OnFileCategorydialog()
 	// auto ret = dlg->Create(IDD_CategoryDlg);
 	// dlg->ShowWindow(SW_SHOW);
 	CategoryDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CExpenseManagerSQLiteApp::OnFileCuentasdeDuenoDlg()
+{
+	// TODO: Add your command handler code here
+	DuenoCuentasDlg dlg;
 	dlg.DoModal();
 }

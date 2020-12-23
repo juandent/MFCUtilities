@@ -44,6 +44,8 @@ public:
 	afx_msg void OnFileConceptosdialog();
 	afx_msg void OnFileStatementdialog();
 	afx_msg void OnFileCategorydialog();
+	// afx_msg void OnFileCuentasdedueno();
+	afx_msg void OnFileCuentasdeDuenoDlg();
 };
 
 extern CExpenseManagerSQLiteApp theApp;

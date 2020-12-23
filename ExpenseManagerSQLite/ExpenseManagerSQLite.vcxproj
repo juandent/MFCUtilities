@@ -221,6 +221,7 @@
     <ClInclude Include="CuentaDlg.h" />
     <ClInclude Include="Data_Tier.h" />
     <ClInclude Include="DependentTable.h" />
+    <ClInclude Include="DuenoCuentasDlg.h" />
     <ClInclude Include="DuenosDlg.h" />
     <ClInclude Include="ExpenseManagerSQLite.h" />
     <ClInclude Include="ExpenseManagerSQLiteDoc.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="CuentaDlg.cpp" />
     <ClCompile Include="DataTier.cpp" />
     <ClCompile Include="DependentTable.cpp" />
+    <ClCompile Include="DuenoCuentasDlg.cpp" />
     <ClCompile Include="DuenosDlg.cpp" />
     <ClCompile Include="ExpenseManagerSQLite.cpp" />
     <ClCompile Include="ExpenseManagerSQLiteDoc.cpp" />

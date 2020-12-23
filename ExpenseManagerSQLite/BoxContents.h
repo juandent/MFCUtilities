@@ -221,7 +221,6 @@ public:
 	void loadLB()
 	{
 		m_box.ResetContent();
-		// auto vec = storage.get_all<Table>();
 		auto vec = refIntManager.getAll();
 		
 		for (auto& record : vec)
@@ -237,7 +236,7 @@ public:
 	void loadLB(whereClause clause)
 	{
 		m_box.ResetContent();
-		// auto vec = storage.get_all<Table>(where(clause));
+
 		auto vec = refIntManager.getAll(clause);
 		for (auto& record : vec)
 		{
