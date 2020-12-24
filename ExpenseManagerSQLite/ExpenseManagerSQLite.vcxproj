@@ -236,6 +236,7 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Nullable.h" />
     <ClInclude Include="ObjectBuilder.h" />
+    <ClInclude Include="OneToMany.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PaisesDlg.h" />
     <ClInclude Include="RecordLinks.h" />
@@ -294,6 +295,7 @@
     <ClCompile Include="JoinedGridDisplayerView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="ObjectBuilder.cpp" />
+    <ClCompile Include="OneToMany.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="PaisesDlg.cpp" />
     <ClCompile Include="RecordLinks.cpp" />

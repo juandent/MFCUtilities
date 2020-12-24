@@ -1,6 +1,7 @@
 #pragma once
 #include "BoxContents.h"
 #include "Data_Tier.h"
+#include "OneToMany.h"
 
 
 // DuenoCuentasDlg dialog
@@ -8,8 +9,8 @@
 class DuenoCuentasDlg : public CDialog
 {
 	DECLARE_DYNAMIC(DuenoCuentasDlg)
-	BoxContents<Account, &Account::id_account> m_cuentasLB;
-	BoxContents<AccountOwner, &AccountOwner::id_owner, CComboBox> m_ownersCB;
+
+	OneToMany < AccountOwner, &AccountOwner::id_owner, Account, &Account::fkey_account_owner, &Account::id_account> OneToN;
 public:
 	DuenoCuentasDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~DuenoCuentasDlg();

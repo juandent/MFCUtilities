@@ -47,7 +47,7 @@ template<typename Table, int Table::*keyCol, typename BoxType = CListBox>
 class BoxContents
 {
 private:
-//	Storage::Storage_t& storage;
+
 	BoxType& m_box;
 	CString  (*asString)(Table& record);
 
@@ -62,18 +62,12 @@ public:
 	std::optional<Table> insert(Cols&&... cols)
 	{
 		return refIntManager.insert(cols...);
-		// Table record{ -1, cols... };
-		// record.*keyCol = storage.insert(record);
-		// return record;
 	}
 
 	//template<int Table::*pKey>
 	void update( const Table& record )
 	{
 		refIntManager.update(record);
-		// if (record.*keyCol == -1)	return;
-		//
-		// storage.update(record);
 	}
 
 	template<typename WhereClause, typename ...Cols>
@@ -81,15 +75,6 @@ public:
 	{
 		std::optional<Table> record = refIntManager.exists(clause, cols...);
 		return record;
-		
-		// auto e = storage.select( columns(cols...), where(clause));
-		// if(e.size() > 0)
-		// {
-		// 	auto id = std::get<0>(e[0]);
-		// 	record = storage.get<Table>(id);
-		// }
-		//
-		// return record;
 	}
 
 	std::optional<Table> current()
@@ -129,13 +114,6 @@ public:
 		return record;
 	}
 
-	// bool isPosting() noexcept
-	// {
-	// 	bool is = Posting::PostingWindow == m_box.m_hWnd;
-	// 	Posting::PostingWindow = 0;
-	// 	return is;
-	// }
-	
 	std::optional<Table> select(int pk)
 	{
 		std::optional<Table> record;
@@ -194,18 +172,6 @@ public:
 			return true;
 		}
 		return false;
-// #if 0
-// 		bool has_links = RecordLinks::has_links(*current);
-// 		if (has_links) return false;
-// #else
-// 		if (! RefIntegrity::canDelete(*current))
-// 			return false;
-// #endif
-
-		// int cur_sel = m_box.GetCurSel();
-		// // remove(*current);
-		// m_box.DeleteString(cur_sel);
-		// return true;
 	}
 
 	void delete_from_box(Table& record)

@@ -14,14 +14,13 @@ IMPLEMENT_DYNAMIC(DuenoCuentasDlg, CDialog)
 
 DuenoCuentasDlg::DuenoCuentasDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_DuenoCuentasDlg, pParent),
-	m_cuentasLB{m_cuentas_list, [](Account& account)
-		{
-				return Util::to_cstring(account.number);
-		} },
-	m_ownersCB{ m_ownersName_box, [](AccountOwner& owner)
+OneToN{ m_ownersName_box, [](AccountOwner& owner)
 	{
 		return Util::to_cstring(owner.id_owner) + L" " + Util::to_cstring(owner.name);
-	}}
+	}, m_cuentas_list, [](Account& account)
+		{
+				return Util::to_cstring(account.number);
+		} }
 {
 
 }
@@ -52,8 +51,7 @@ BOOL DuenoCuentasDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  Add extra initialization here
-	m_ownersCB.loadLB();
-	m_cuentasLB.loadLB();
+	OneToN.OnInitDialog();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -63,21 +61,15 @@ BOOL DuenoCuentasDlg::OnInitDialog()
 void DuenoCuentasDlg::OnCbnSelchangeOwnerName()
 {
 	// TODO: Add your control notification handler code here
-	auto acc_owner = m_ownersCB.current();
-
-	if (!acc_owner)	return;
-
-	auto whereClause = (c(&Account::fkey_account_owner) == acc_owner->id_owner);
-	
-	m_cuentasLB.loadLB(whereClause);
+	OneToN.On1SelectionChanged();
 }
 
 
 void DuenoCuentasDlg::OnLbnSelchangeLAccounts()
 {
 	// TODO: Add your control notification handler code here
-	auto account= m_cuentasLB.current();
 
+	auto account = OneToN.OnNSelectionChanged();
 	if (!account) return;
 
 	CuentaDlg dlg;
