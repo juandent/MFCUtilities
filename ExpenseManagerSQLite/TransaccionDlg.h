@@ -18,6 +18,11 @@ class TransaccionDlg : public CDialog
 	BoxContents<Categoria, &Categoria::id_categoria, CComboBox> m_categoriaCB;
 	std::optional<Transaccion> m_trans;
 	bool m_autoexec = false;
+	inline static UINT elapsed1 = 2000;
+	inline static UINT elapsed2 = 3000;
+	static constexpr UINT delta = 100;
+	static constexpr UINT minimum = 50;
+
 	bool m_hold{ false };
 	void Refresh();
 	void Refresh_discriminator();
@@ -97,4 +102,6 @@ public:
 	afx_msg void OnLbnSelchangeLDummyCatchCOMMAND();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedBHold();
+	afx_msg void OnBnClickedBAccelerate();
+	afx_msg void OnBnClickedBDecelerate();
 };

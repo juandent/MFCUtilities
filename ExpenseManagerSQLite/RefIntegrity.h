@@ -99,6 +99,14 @@ public:
 		return storage.get_all<Table>(where(clause));
 	}
 
+	template<typename orderByClause>
+	std::vector<Table> getAllOrderBy(orderByClause clause)
+	{
+		using namespace sqlite_orm;
+		return storage.get_all<Table>(order_by(clause));
+	}
+
+
 	template<typename WhereClause, typename ...Cols>
 	std::optional<Table> exists(WhereClause& clause, Cols&& ... cols)
 	{

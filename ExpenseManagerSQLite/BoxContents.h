@@ -194,6 +194,7 @@ public:
 			auto displayStr = asString(record);
 			int index = m_box.AddString(displayStr);
 			m_box.SetItemData(index, record.*keyCol);
+			// SetCurSel(index);
 		}
 		// ???
 		SetCurSel(-1);
@@ -209,9 +210,27 @@ public:
 			auto displayStr = asString(record);
 			int index = m_box.AddString(displayStr);
 			m_box.SetItemData(index, record.*keyCol);
-			SetCurSel(index);
+			// SetCurSel(index);
 		}
+		SetCurSel(-1);
 	}
+
+	template<typename orderByClause>
+	void loadLBOrderBy(orderByClause clause)
+	{
+		m_box.ResetContent();
+
+		auto vec = refIntManager.getAllOrderBy(clause);
+		for (auto& record : vec)
+		{
+			auto displayStr = asString(record);
+			int index = m_box.AddString(displayStr);
+			m_box.SetItemData(index, record.*keyCol);
+			// SetCurSel(index);
+		}
+		SetCurSel(-1);
+	}
+
 	
 	constexpr static const int npos = -1;
 private:

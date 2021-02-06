@@ -57,7 +57,7 @@ BOOL CategoryDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  Add extra initialization here
-	m_categoriasLB.loadLB();
+	m_categoriasLB.loadLBOrderBy(&Categoria::name);
 	m_nombre.SetWindowTextW(Util::to_cstring(m_category_name));
 
 	return TRUE;  // return TRUE unless you set the focus to a control

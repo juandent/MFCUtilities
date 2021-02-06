@@ -188,7 +188,12 @@ inline 	auto& Storage_Impl::get_storage()
 	if (flag == 0)
 	{
 		flag = 1;
-		storage.sync_schema(false);
+		auto map = storage.sync_schema(false);
+		for(auto  [key, value] : map)
+		{
+			auto k = key;
+			auto v = value;
+		}
 	}
 
 	return storage;

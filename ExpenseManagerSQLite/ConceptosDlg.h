@@ -44,8 +44,10 @@ public:
 private:
 	CComboBox m_listAccounts;
 	CListBox m_listConceptos;
+	void FindNombreInAccountCombo();
 public:
 	afx_msg void OnBnClickedBAddAccount();
+	void OnRefresh();
 	afx_msg void OnBnClickedBUpdateConcepto();
 private:
 	CEdit m_nombre;

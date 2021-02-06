@@ -62,13 +62,109 @@ BOOL ConceptosDlg::OnInitDialog()
 
 	// TODO:  Add extra initialization here
 	m_conceptosLB.loadLB();
-	m_accountsCB.loadLB();
+	// m_accountsCB.loadLB();
+	// m_listAccounts.GetExStyle()
+	m_accountsCB.loadLBOrderBy(&Account::number);
+	
 	m_nombre.SetWindowTextW(Util::to_cstring(m_discriminator));
+
+	FindNombreInAccountCombo();
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
 }
 
+void ConceptosDlg::FindNombreInAccountCombo()
+{
+	using namespace std;
+#if 0	
+	std::string data = "<person>\n"
+		" <first>Nico</first>\n"
+		" <last>Josuttis</last>\n"
+		"</person>\n";
+
+	regex reg("<(.*)>(.*)</(\\1)>");
+	sregex_token_iterator pos{ data.cbegin(), data.cend(), reg, {0,2} };
+	sregex_token_iterator end;
+
+	string ss{};
+	for( ; pos != end; ++pos)
+	{
+		auto s = pos->str();
+		ss += s;
+	}
+
+	string names = m_discriminator; // "juan, roberto,leslie;hulse";
+	regex sep{ "[ \t\n]*[,;.][ \t\n]*" };
+	sregex_token_iterator p{ names.cbegin(), names.cend(), sep, -1 };
+	sregex_token_iterator e;
+
+	string pp;
+	for( ; p!=e; ++p)
+	{
+		string _p = *p;
+		pp += _p;
+	}
+
+
+	string sdata = "RRERRERR TREEX 3777-11**-****-3030";
+	
+	
+	// TEF A: 9877777777	=> 9877777777
+	// TFT DE: 90876666		=> 90876666
+	// RRERRERR TREEX 3777-11**-****-3030 => 3777-11**-****-3030
+	// TFT SINPE A: 3777-11**-****-3030$^1   => 3777-11**-****-3030$^1
+
+	regex searchPhrase{ "([[:alnum:]-*$^]*)$" };
+
+	smatch m;
+	bool ok = regex_search(sdata, m, searchPhrase);
+
+
+
+	string ssdata = "TFT SINPE A: 3777-11**-****-3030$^1";
+	ok = regex_search(ssdata, m, searchPhrase);
+	
+	// TEF A:898877778 ==> take last word
+	// loop accounts to find this word within account number
+	// stop if found and make current selection
+	// std::string nombre_concepto = 
+	// auto pos = m_discriminator.find_last_of(" ");
+	// auto search = m_discriminator.substr(pos + 1);
+
+	auto x = m.str();
+	x = m[1].str();
+#endif
+
+	if (m_discriminator.empty())	return;
+	
+	const regex searchPhrase{ "([[:alnum:]-*$^]*)$" };
+
+	smatch m;
+	bool ok = regex_search(m_discriminator, m, searchPhrase);
+
+	auto x = m.str();
+
+	if (x.empty())	return;
+
+	auto lx = Util::to_cstring(x);
+
+	for (auto index = 0u; index < m_listAccounts.GetCount(); ++index)
+	{
+		CString str;
+		m_listAccounts.GetLBText(index, str);
+		assert(str.GetLength() > 0);
+		auto found = str.Find(lx);
+		if (found != -1)
+		{
+			auto pk = m_listAccounts.GetItemData(index);
+			m_accountsCB.select(pk);
+			break;
+		}
+	}
+
+	
+}
 
 void ConceptosDlg::OnBnClickedBBorrar()
 {
@@ -98,9 +194,15 @@ void ConceptosDlg::OnBnClickedBAddAccount()
 	// TODO: Add your control notification handler code here
 	CuentaDlg dlg;
 	dlg.DoModal();
-	m_accountsCB.loadLB();
+	OnRefresh();
+	// m_accountsCB.loadLB();
 }
 
+
+void ConceptosDlg::OnRefresh()
+{
+	m_accountsCB.loadLBOrderBy(&Account::number);
+}
 
 void ConceptosDlg::OnBnClickedBUpdateConcepto()
 {

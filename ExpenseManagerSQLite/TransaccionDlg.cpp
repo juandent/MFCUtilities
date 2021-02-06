@@ -93,6 +93,8 @@ BEGIN_MESSAGE_MAP(TransaccionDlg, CDialog)
 	ON_LBN_SELCHANGE(IDC_L_DUMMY, &TransaccionDlg::OnLbnSelchangeLDummyCatchCOMMAND)
 	ON_WM_TIMER()
 	ON_BN_CLICKED(IDC_B_HOLD, &TransaccionDlg::OnBnClickedBHold)
+	ON_BN_CLICKED(IDC_B_ACCELERATE, &TransaccionDlg::OnBnClickedBAccelerate)
+	ON_BN_CLICKED(IDC_B_DECELERATE, &TransaccionDlg::OnBnClickedBDecelerate)
 END_MESSAGE_MAP()
 
 
@@ -175,7 +177,7 @@ BOOL TransaccionDlg::OnInitDialog()
 
 	if( m_autoexec)
 	{
-		SetTimer(1, 2000, NULL);
+		SetTimer(1, elapsed1, NULL);
 		//
 		// postMessage(m_list_dummy);
 		//m_list_dummy.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_list_dummy.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_list_dummy.m_hWnd);
@@ -643,7 +645,7 @@ void TransaccionDlg::OnTimer(UINT_PTR nIDEvent)
 			CDialog::OnTimer(nIDEvent);
 			this->OnBnClickedBAplicarTransactions();
 			KillTimer(1);
-			SetTimer(2, 3000, NULL);
+			SetTimer(2, elapsed2, NULL);
 		}
 		else if( nIDEvent == 2)
 		{
@@ -658,4 +660,26 @@ void TransaccionDlg::OnBnClickedBHold()
 {
 	// TODO: Add your control notification handler code here
 	m_hold = true;
+}
+
+
+void TransaccionDlg::OnBnClickedBAccelerate()
+{
+	// TODO: Add your control notification handler code here
+	if (delta < elapsed1 )
+	{
+		elapsed1 = std::max(minimum, elapsed1 - delta);
+	}
+	if (delta < elapsed2)
+	{
+		elapsed2 = std::max(minimum, elapsed2 - delta);
+	}
+}
+
+
+void TransaccionDlg::OnBnClickedBDecelerate()
+{
+	// TODO: Add your control notification handler code here
+	elapsed1 += delta;
+	elapsed2 += delta;
 }
