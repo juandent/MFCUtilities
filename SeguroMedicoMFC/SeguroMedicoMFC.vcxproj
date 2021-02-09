@@ -20,10 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{4BA062B0-225F-4ACF-BB2F-3FE2C439023A}</ProjectGuid>
+    <ProjectGuid>{832ABB83-D5F6-4FD0-9E19-E32812942555}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
-    <RootNamespace>ExpenseManagerSQLite</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <RootNamespace>SeguroMedicoMFC</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -88,23 +88,16 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_AFX;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\ExpenseManagerSQLite;C:\Components\dev_merged_626\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\vcpkg\installed\x64-windows\include;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalBMIDirectories>
-      </AdditionalBMIDirectories>
-      <AdditionalModuleDependencies>
-      </AdditionalModuleDependencies>
+      <AdditionalIncludeDirectories>C:\Components\dev_merged_626\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>sqlite3.lib;GridCtrlDll.lib;JDMFCLibrary.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\vcpkg\installed\x64-windows\lib;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\x64\Debug</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -122,7 +115,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions);SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -146,7 +139,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions);SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -172,17 +165,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_AFX;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Components\sqlite_orm\include;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Components\dev_merged_626\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\vcpkg\installed\x64-windows\include;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\Release\sqlite3.lib;GridCtrlDll.lib;JDMFCLibrary.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\x64\Release</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -196,141 +187,50 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\Data.h" />
-    <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\String.h" />
-    <ClInclude Include="..\JDGridCtrl\JDGridCtrl.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\IGridController.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\JoinedGridDisplayer.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.AccountType.Binding.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.CoinBinding.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.Colones.Binding.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.DateBinding.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.Dolares.Binding.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.h" />
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.h" />
-    <ClInclude Include="AssociateConceptAccount.h" />
-    <ClInclude Include="BancoDlg.h" />
-    <ClInclude Include="CategoryDlg.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
-    <ClInclude Include="CompoundStatementLine.h" />
-    <ClInclude Include="ConceptosDlg.h" />
-    <ClInclude Include="ConceptsAndAccounts.h" />
-    <ClInclude Include="CuentaDlg.h" />
-    <ClInclude Include="Data_Tier.h" />
-    <ClInclude Include="DependentTable.h" />
-    <ClInclude Include="DuenoCuentasDlg.h" />
-    <ClInclude Include="DuenosDlg.h" />
-    <ClInclude Include="ExpenseManagerSQLite.h" />
-    <ClInclude Include="ExpenseManagerSQLiteDoc.h" />
-    <ClInclude Include="ExpenseManagerSQLiteView.h" />
+    <ClInclude Include="Data.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="BoxContents.h" />
-    <ClInclude Include="IDisplayer.h" />
-    <ClInclude Include="JoinedComboDisplayer.h" />
-    <ClInclude Include="JoinedGridDisplayerDoc.h" />
-    <ClInclude Include="JoinedGridDisplayerView.h" />
     <ClInclude Include="MainFrm.h" />
-    <ClInclude Include="Nullable.h" />
-    <ClInclude Include="ObjectBuilder.h" />
-    <ClInclude Include="OneToMany.h" />
-    <ClInclude Include="ORMUtil.h" />
     <ClInclude Include="OutputWnd.h" />
-    <ClInclude Include="PaisesDlg.h" />
-    <ClInclude Include="RecordLinks.h" />
-    <ClInclude Include="RefIntegrity.h" />
-    <ClInclude Include="StatementDlg.h" />
-    <ClInclude Include="StatementLineAdapter.h" />
-    <ClInclude Include="StatementLineGridController.h" />
+    <ClInclude Include="PersistentClasses.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="TablePool.h" />
+    <ClInclude Include="SeguroMedicoMFC.h" />
+    <ClInclude Include="SeguroMedicoMFCDoc.h" />
+    <ClInclude Include="SeguroMedicoMFCView.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TransaccionDlg.h" />
-    <ClInclude Include="TransactionState.h" />
     <ClInclude Include="ViewTree.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\TesterForMFCUtilitiesDLL\BasicCategoryGridController.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\TesterForMFCUtilitiesDLL\IGridController.cpp" />
-    <ClCompile Include="..\TesterForMFCUtilitiesDLL\JoinedGridDisplayer.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.DataTier.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementBuilder.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\TesterForMFCUtilitiesDLL\Model\Model.StatementFactory.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="AssociateConceptAccount.cpp" />
-    <ClCompile Include="BancoDlg.cpp" />
-    <ClCompile Include="CategoryDlg.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
-    <ClCompile Include="CompoundStatementLine.cpp" />
-    <ClCompile Include="ConceptosDlg.cpp" />
-    <ClCompile Include="ConceptsAndAccounts.cpp" />
-    <ClCompile Include="CuentaDlg.cpp" />
-    <ClCompile Include="DataTier.cpp" />
-    <ClCompile Include="DependentTable.cpp" />
-    <ClCompile Include="DuenoCuentasDlg.cpp" />
-    <ClCompile Include="DuenosDlg.cpp" />
-    <ClCompile Include="ExpenseManagerSQLite.cpp" />
-    <ClCompile Include="ExpenseManagerSQLiteDoc.cpp" />
-    <ClCompile Include="ExpenseManagerSQLiteView.cpp" />
+    <ClCompile Include="Data.cpp" />
     <ClCompile Include="FileView.cpp" />
-    <ClCompile Include="BoxContents.cpp" />
-    <ClCompile Include="JoinedGridDisplayerDoc.cpp" />
-    <ClCompile Include="JoinedGridDisplayerView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="ObjectBuilder.cpp" />
-    <ClCompile Include="OneToMany.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
-    <ClCompile Include="PaisesDlg.cpp" />
-    <ClCompile Include="RecordLinks.cpp" />
-    <ClCompile Include="StatementDlg.cpp" />
-    <ClCompile Include="StatementLineAdapter.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="StatementLineGridController.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="PropertiesWnd.cpp" />
-    <ClCompile Include="TablePool.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="TransaccionDlg.cpp" />
-    <ClCompile Include="TransactionState.cpp" />
+    <ClCompile Include="SeguroMedicoMFC.cpp" />
+    <ClCompile Include="SeguroMedicoMFCDoc.cpp" />
+    <ClCompile Include="SeguroMedicoMFCView.cpp" />
     <ClCompile Include="ViewTree.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ExpenseManagerSQLite.rc" />
+    <ResourceCompile Include="SeguroMedicoMFC.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\classview.bmp" />
     <Image Include="res\classview_hc.bmp" />
     <Image Include="res\class_view.ico" />
     <Image Include="res\class_view_hc.ico" />
-    <Image Include="res\ExpenseManagerSQLite.ico" />
-    <Image Include="res\ExpenseManagerSQLiteDoc.ico" />
     <Image Include="res\explorer.bmp" />
     <Image Include="res\explorer_hc.bmp" />
     <Image Include="res\fileview.bmp" />
@@ -345,6 +245,8 @@
     <Image Include="res\properties_hc.bmp" />
     <Image Include="res\properties_wnd.ico" />
     <Image Include="res\properties_wnd_hc.ico" />
+    <Image Include="res\SeguroMedicoMFC.ico" />
+    <Image Include="res\SeguroMedicoMFCDoc.ico" />
     <Image Include="res\sort.bmp" />
     <Image Include="res\sort_hc.bmp" />
     <Image Include="res\Toolbar.bmp" />
@@ -352,7 +254,7 @@
     <Image Include="res\userimages.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\ExpenseManagerSQLite.rc2" />
+    <None Include="res\SeguroMedicoMFC.rc2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JDMFCLibrary\JDMFCLibrary.vcxproj">

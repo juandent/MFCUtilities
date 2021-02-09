@@ -189,6 +189,9 @@
     <ClInclude Include="OneToMany.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ORMUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpenseManagerSQLite.cpp">
