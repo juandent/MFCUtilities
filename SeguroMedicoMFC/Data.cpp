@@ -26,6 +26,7 @@ void Storage::initialize()
 /// Doctor
 /// Medication
 /// Claim
+/// INSResponses
 /// Invoice
 /// 
 /// 
@@ -42,6 +43,7 @@ void Storage::fill_db_with_test_data()
 
 	// order is vital!
 	storage.remove_all<Invoice>();
+	storage.remove_all <INSResponse>();
 	storage.remove_all<Claim>();
 	storage.remove_all<Medication>();
 	storage.remove_all<Doctor>();
@@ -54,6 +56,13 @@ void Storage::fill_db_with_test_data()
 	sys_days ttod = tod - days{ 1 };
 
 
+	Patient p{ -1, "Juan", "Dent" };
+	p.id = storage.insert(p);
+
+	Patient p2{ -1, "Roberto", "Hulse" };
+	p2.id = storage.insert(p2);
+
+	
 #if 0	
 	Categoria cat{ -1, "Kisha", true };
 	cat.id_categoria = storage.insert(cat);

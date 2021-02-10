@@ -85,7 +85,22 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("amount", &Invoice::amount),
 				make_column("type", &Invoice::type),
 				make_column("description", &Invoice::description),
-				foreign_key(&Invoice::fkey_claim).references(&Claim::id)));
+				make_column("fkey_INSResponse", &Invoice::fkey_INSResponse),
+				foreign_key(&Invoice::fkey_claim).references(&Claim::id),
+				foreign_key(&Invoice::fkey_INSResponse).references(&INSResponse::id)),
+			make_table("INSResponses",
+				make_column("id_INSResponse", &INSResponse::id, autoincrement(), primary_key()),
+				make_column("liquidacion_num", &INSResponse::liquidacion_num),
+				make_column("numero_caso", &INSResponse::numero_caso),
+				make_column("total_bruto", &INSResponse::total_bruto),
+				make_column("otras_deducciones", &INSResponse::otras_deducciones),
+				make_column("copagos" , &INSResponse::copagos),
+				make_column( "coaseguros", &INSResponse::coaseguros),
+				make_column("deducible_anual", &INSResponse::deducible_anual),
+				make_column ("total_neto", &INSResponse::total_neto),
+				make_column("retencion",&INSResponse::retencion),
+				make_column("total_a_pagar", &INSResponse::total_a_pagar),
+				make_column( "comentario", &INSResponse::comentarios)));
 
 
 	if (flag == 0)

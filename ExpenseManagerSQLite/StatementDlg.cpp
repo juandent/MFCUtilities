@@ -84,7 +84,7 @@ void StatementDlg::OnBnClickedBAplicarStatement()
 	if (!statement)
 	{
 		auto whereClause = (c(&Statement::date) == statement_date);
-		std::optional<Statement> statement_by_value = m_statementLB.exists(whereClause, &Statement::id_statement, &Statement::date);
+		std::optional<Statement> statement_by_value = m_statementLB.exists(whereClause); // , & Statement::id_statement, & Statement::date);
 		if (statement_by_value)
 		{
 			MessageBoxW(L"Estado de cuenta found for another primary key");

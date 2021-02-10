@@ -284,7 +284,7 @@ void ConceptosDlg::OnBnClickedBAplicarConcepto()
 	{
 		auto whereClause = (c(&Concepto::name) == nombre.c_str());
 
-		std::optional<Concepto> concepto_by_value = m_conceptosLB.exists(whereClause, &Concepto::id_concepto, &Concepto::name);
+		std::optional<Concepto> concepto_by_value = m_conceptosLB.exists(whereClause); // , & Concepto::id_concepto, & Concepto::name);
 
 		if (concepto_by_value)
 		{

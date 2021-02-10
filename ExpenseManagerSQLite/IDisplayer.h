@@ -1,6 +1,7 @@
 #pragma once
 
 
+// template<typename ... DataTypes>
 struct IDisplayer
 {
 	virtual void display() = 0;

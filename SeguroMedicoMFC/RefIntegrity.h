@@ -1,18 +1,8 @@
 #pragma once
+#pragma once
 
 #include "RecordLinks.h"
-#include "Data_Tier.h"
-
-#if 0
-template<typename Table>
-struct RefIntegrity 
-{
-	bool canDelete()
-	{
-		return ! RecordLinks::has_links( static_cast<Table&>(*this));
-	}
-};
-#endif
+#include "Data.h"
 
 template<typename Table, int Table::* keyCol>
 struct RefIntegrityManager
@@ -40,6 +30,7 @@ private:
 	}
 	void do_update(const Table& record)
 	{
+		// TODO: we must ensure keyCol is not -1 in the caller! Remove this if...
 		if (record.*keyCol == -1)	return;
 
 		storage.update(record);
@@ -51,7 +42,7 @@ public:
 	std::optional<Table> insert(Cols&&... cols)
 	{
 		Table record{ -1, cols... };
-		if( !canInsertUpdate(record))
+		if (!canInsertUpdate(record))
 		{
 			return std::nullopt;
 		}
@@ -77,7 +68,7 @@ public:
 
 	bool remove(Table& record)
 	{
-		if (! canDelete(record)) 	return false;
+		if (!canDelete(record)) 	return false;
 
 		storage.remove<Table>(get_pk(record));
 		return true;
@@ -106,13 +97,14 @@ public:
 		return storage.get_all<Table>(order_by(clause));
 	}
 
-	// first column must be primary key!!
-	template<typename WhereClause>  //, typename ...Cols>
-	std::optional<Table> exists(WhereClause& clause)  //, Cols&& ... cols)
+
+	template<typename WhereClause> //, typename ...Cols>
+	std::optional<Table> exists(WhereClause& clause) //, Cols&& ... cols)
 	{
 		using namespace sqlite_orm;
-		
+
 		std::optional<Table> record;
+		// auto e = storage.select(columns(cols...), where(clause));
 		auto e = storage.select(columns(keyCol), where(clause));
 		if (e.size() > 0)
 		{

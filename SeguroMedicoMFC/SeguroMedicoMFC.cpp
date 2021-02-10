@@ -11,6 +11,7 @@
 #include "ChildFrm.h"
 #include "SeguroMedicoMFCDoc.h"
 #include "SeguroMedicoMFCView.h"
+#include "MainView.h"
 
 #include "Data.h"
 
@@ -120,7 +121,8 @@ BOOL CSeguroMedicoMFCApp::InitInstance()
 	pDocTemplate = new CMultiDocTemplate(IDR_SeguroMedicoMFCTYPE,
 		RUNTIME_CLASS(CSeguroMedicoMFCDoc),
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
-		RUNTIME_CLASS(CSeguroMedicoMFCView));
+		RUNTIME_CLASS(MainView));
+//		RUNTIME_CLASS(CSeguroMedicoMFCView));
 	if (!pDocTemplate)
 		return FALSE;
 	AddDocTemplate(pDocTemplate);

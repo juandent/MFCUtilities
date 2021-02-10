@@ -90,7 +90,7 @@ void PaisesDlg::OnBnClickedBAplicarPaises()
 	{
 
 		auto whereClause = c(&Pais::name) == name.c_str();
-		std::optional<Pais> pais_by_value = m_paisLB.exists(whereClause, &Pais::id_pais, &Pais::name);
+		std::optional<Pais> pais_by_value = m_paisLB.exists(whereClause); // , & Pais::id_pais, & Pais::name);
 		if (pais_by_value)
 		{
 			MessageBoxW(L"Pais found for another primary key");

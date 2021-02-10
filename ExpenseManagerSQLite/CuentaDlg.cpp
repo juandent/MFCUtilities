@@ -180,7 +180,7 @@ void CuentaDlg::OnBnClickedBAplicarCuenta()
 	{
 		auto whereClause = (c(&Account::number) == numero.c_str());
 
-		std::optional<Account> account_by_value = m_cuentasLB.exists(whereClause, &Account::id_account, &Account::number);
+		std::optional<Account> account_by_value = m_cuentasLB.exists(whereClause); // , & Account::id_account, & Account::number);
 		if (account_by_value)
 		{
 			MessageBoxW(L"Cuenta found for another primary key");

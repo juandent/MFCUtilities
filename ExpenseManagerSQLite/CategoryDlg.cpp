@@ -93,7 +93,7 @@ void CategoryDlg::OnBnClickedBAplicarCategory()
 	if (! categoria)
 	{
 		auto whereClause = (c(&Categoria::name) == nombre.c_str());
-		std::optional<Categoria> categoria_by_value = m_categoriasLB.exists(whereClause, &Categoria::id_categoria, &Categoria::name);
+		std::optional<Categoria> categoria_by_value = m_categoriasLB.exists(whereClause); // , & Categoria::id_categoria, & Categoria::name);
 
 		if (categoria_by_value)
 		{

@@ -265,7 +265,7 @@ void ConceptsAndAccounts::OnBnClickedBPaisAdd()
 	auto name = Util::from_cstring(rStr);
 	auto whereClause = c(&Pais::name) == name.c_str();
 	
-	std::optional<Pais> pais = m_paisLB.exists(whereClause, &Pais::id_pais, &Pais::name);
+	std::optional<Pais> pais = m_paisLB.exists(whereClause); // , & Pais::id_pais, & Pais::name);
 
 	if( ! pais)
 	{
@@ -297,7 +297,7 @@ void ConceptsAndAccounts::OnBnClickedBBancoAdd()
 
 	auto whereClause = (c(&Banco::nombre) == name.c_str()) && (c(&Banco::ubicacion) == ubicacion.c_str());
 
-	std::optional<Banco> banco = m_bancoLB.exists(whereClause, &Banco::id_bank, &Banco::nombre);
+	std::optional<Banco> banco = m_bancoLB.exists(whereClause); // , & Banco::id_bank, & Banco::nombre);
 
 	if (!banco)
 	{
@@ -331,7 +331,7 @@ void ConceptsAndAccounts::OnBnClickedBDuenoAdd()
 	auto name = Util::from_cstring(rStr);
 	auto whereClause = (c(&AccountOwner::name) == name.c_str());
 
-	std::optional<AccountOwner> dueno = m_duenoLB.exists(whereClause, &AccountOwner::id_owner, &AccountOwner::name);
+	std::optional<AccountOwner> dueno = m_duenoLB.exists(whereClause); // , & AccountOwner::id_owner, & AccountOwner::name);
 
 	if (!dueno)
 	{
@@ -383,7 +383,7 @@ void ConceptsAndAccounts::OnBnClickedBCuentaAdd()
 
 	auto whereClause = (c(&Account::number) == numero.c_str());
 
-	std::optional<Account> cuenta = m_accountLB.exists(whereClause, &Account::id_account, &Account::number);
+	std::optional<Account> cuenta = m_accountLB.exists(whereClause); // , & Account::id_account, & Account::number);
 
 	if (!cuenta)
 	{
@@ -627,7 +627,7 @@ void ConceptsAndAccounts::OnBnClickedBConcepto()
 
 	auto whereClause = (c(&Concepto::name) == concepto_name.c_str());
 
-	std::optional<Concepto> concepto = m_conceptoLB.exists(whereClause, &Concepto::id_concepto, &Concepto::name);
+	std::optional<Concepto> concepto = m_conceptoLB.exists(whereClause); // , & Concepto::id_concepto, & Concepto::name);
 
 	if (!concepto)
 	{

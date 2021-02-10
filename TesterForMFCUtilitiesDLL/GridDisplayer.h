@@ -2,15 +2,20 @@
 
 import Util;
 
-template<typename T> 
+template<typename T>
 class GridDisplayer
 {
 	CJDGridCtrl&				grid;
-	std::vector<T>				lines;
+	using Container = std::vector<std::remove_reference_t<T>>;
+	Container lines;
+	using ValueType = typename Container::value_type;
+	
+	// std::tuple<DataTypes...> tuple;
 	std::vector<std::string>	headers;
 public:
+	// template<typename ...DataTypes>
 	GridDisplayer(CJDGridCtrl& grid, 
-		std::vector<T>&& lines_,
+		Container&& lines_,
 		std::vector<std::string>&& headers_) 
 	: lines{std::move(lines_)}, grid{grid}, headers{ std::move(headers_)}
 	{

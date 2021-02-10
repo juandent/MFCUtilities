@@ -1,6 +1,7 @@
-﻿#pragma once
+#pragma once
 
-#include "Data_Tier.h"
+// #include "Data_Tier.h"
+#include <unordered_set>
 #include "RecordLinks.h"
 #include "RefIntegrity.h"
 
@@ -43,21 +44,21 @@ public:
 };
 
 
-template<typename Table, int Table::*keyCol, typename BoxType = CListBox> 
+template<typename Table, int Table::* keyCol, typename BoxType = CListBox>
 class BoxContents
 {
 private:
 
 	BoxType& m_box;
-	CString  (*asString)(Table& record);
+	CString(*asString)(Table& record);
 
 
 	RefIntegrityManager<Table, keyCol> refIntManager;
-	
+
 public:
 
 	BoxContents(BoxType& listbox, TableStringizer<Table>  f) : m_box(listbox), asString(f) {}
-	
+
 	template<typename ...Cols>
 	std::optional<Table> insert(Cols&&... cols)
 	{
@@ -65,16 +66,15 @@ public:
 	}
 
 	//template<int Table::*pKey>
-	void update( const Table& record )
+	void update(const Table& record)
 	{
 		refIntManager.update(record);
 	}
 
-	template<typename WhereClause>
-	std::optional<Table> exists( WhereClause& clause)
+	template<typename WhereClause> 
+	std::optional<Table> exists(WhereClause& clause)
 	{
-		// std::optional<Table> record = refIntManager.exists(clause, cols...);
-		std::optional<Table> record = refIntManager.exists(clause); // , keyCol);
+		std::optional<Table> record = refIntManager.exists(clause);
 		return record;
 	}
 
@@ -101,7 +101,7 @@ public:
 	std::optional<Table> select(std::optional<int> key)
 	{
 		std::optional<Table> record;
-		if(key)
+		if (key)
 		{
 			record = select(*key);
 		}
@@ -118,13 +118,13 @@ public:
 	std::optional<Table> select(int pk)
 	{
 		std::optional<Table> record;
-		if(pk < 0)
+		if (pk < 0)
 		{
 			m_box.SetCurSel(npos);
 			return record;
 		}
 		int index = find_in_listbox(pk);
-		if( index != npos )
+		if (index != npos)
 		{
 			m_box.SetCurSel(index);
 			// record = storage.get<Table>(pk);
@@ -146,15 +146,15 @@ public:
 		// storage.remove<Table>(get_pk(record));
 	}
 
-	int get_pk( Table& record)
+	int get_pk(Table& record)
 	{
 		return record.*keyCol;
 	}
 
 	// record MUST not exist in listbox!
-	int insert_into_listbox( Table& record)
+	int insert_into_listbox(Table& record)
 	{
-		assert( get_pk(record) != npos);
+		assert(get_pk(record) != npos);
 		auto displayStr = asString(record);
 		auto index = m_box.AddString(displayStr);
 		m_box.SetItemData(index, get_pk(record));
@@ -166,7 +166,7 @@ public:
 	{
 		auto current = this->current();
 		if (!current) return false;
-		if( refIntManager.remove(*current))
+		if (refIntManager.remove(*current))
 		{
 			int cur_sel = m_box.GetCurSel();
 			m_box.DeleteString(cur_sel);
@@ -177,9 +177,9 @@ public:
 
 	void delete_from_box(Table& record)
 	{
-		
+
 	}
-	
+
 	int find_in_listbox(Table& record)
 	{
 		const int pk = record.*keyCol;
@@ -189,7 +189,7 @@ public:
 	{
 		m_box.ResetContent();
 		auto vec = refIntManager.getAll();
-		
+
 		for (auto& record : vec)
 		{
 			auto displayStr = asString(record);
@@ -232,13 +232,13 @@ public:
 		SetCurSel(-1);
 	}
 
-	
+
 	constexpr static const int npos = -1;
 private:
 	int find_in_listbox(const int pk)
 	{
 		int index = m_box.GetCount();
-		while ( index >= 0)
+		while (index >= 0)
 		{
 			auto id = m_box.GetItemData(index);
 			if (pk == id)

@@ -82,7 +82,7 @@ void DuenosDlg::OnBnClickedBApplyOwner()
 	{
 		auto whereClause = (c(&AccountOwner::id_owner) == nombre.c_str());
 
-		std::optional<AccountOwner> account_owner_by_value = m_ownerLB.exists(whereClause, &AccountOwner::id_owner, &AccountOwner::name);
+		std::optional<AccountOwner> account_owner_by_value = m_ownerLB.exists(whereClause); // , & AccountOwner::id_owner, & AccountOwner::name);
 
 		if (account_owner_by_value)
 		{

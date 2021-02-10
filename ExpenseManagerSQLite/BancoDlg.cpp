@@ -111,7 +111,7 @@ void BancoDlg::OnBnClickedBAplicarBanco()
 	{
 		auto whereClause = (c(&Banco::nombre) == name.c_str()) && (c(&Banco::ubicacion) == ubicacion.c_str());
 
-		banco_by_value = m_bancosLB.exists(whereClause, &Banco::id_bank, &Banco::nombre);
+		banco_by_value = m_bancosLB.exists(whereClause); // , & Banco::id_bank, & Banco::nombre);
 		if( banco_by_value )
 		{
 			MessageBoxW(L"Banco found for another primary key");

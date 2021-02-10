@@ -153,7 +153,7 @@ void TransaccionDlg::Find_id()
 	if (m_trans)
 	{
 		auto whereClause = (c(&Transaccion::row) == m_trans->row) && (c(&Transaccion::fkey_statement) == m_trans->fkey_statement);
-		std::optional<Transaccion> trans_by_value = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::row, &Transaccion::fkey_statement);
+		std::optional<Transaccion> trans_by_value = m_transaccionLB.exists(whereClause); // , & Transaccion::id_transaccion, & Transaccion::row, & Transaccion::fkey_statement);
 		if (trans_by_value)
 		{
 			m_trans = trans_by_value;
@@ -408,7 +408,7 @@ void TransaccionDlg::OnBnClickedBAplicarTransactions()
 	if (!trans)
 	{
 		auto whereClause = (c(&Transaccion::row) == row) && (c(&Transaccion::fkey_statement) == statement->id_statement);
-		std::optional<Transaccion> trans_by_value = m_transaccionLB.exists(whereClause, &Transaccion::id_transaccion, &Transaccion::row, &Transaccion::fkey_statement);
+		std::optional<Transaccion> trans_by_value = m_transaccionLB.exists(whereClause); // , & Transaccion::id_transaccion, & Transaccion::row, & Transaccion::fkey_statement);
 
 		if (trans_by_value)
 		{

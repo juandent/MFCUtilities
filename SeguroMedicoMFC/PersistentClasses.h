@@ -65,8 +65,24 @@ struct Invoice
 	double amount;
 	int type;
 	std::string description;
+	int fkey_INSResponse;
 };
 
+struct INSResponse
+{
+	int id;
+	std::string liquidacion_num;
+	long numero_caso;
+	double total_bruto;
+	double otras_deducciones;
+	double copagos;
+	double coaseguros;
+	double deducible_anual;
+	double total_neto;
+	double retencion;
+	double total_a_pagar;
+	std::string comentarios;
+};
 /////////////////////////////////////////////////////////////////
 ///
 ///
