@@ -203,6 +203,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MainView.h" />
+    <ClInclude Include="MedicationDlg.h" />
     <ClInclude Include="ORM_Utilities.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PatientDlg.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MainView.cpp" />
+    <ClCompile Include="MedicationDlg.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="PatientDlg.cpp" />
     <ClCompile Include="RecordLinks.cpp" />

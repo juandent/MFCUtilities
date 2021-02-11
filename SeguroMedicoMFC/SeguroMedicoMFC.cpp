@@ -15,6 +15,7 @@
 
 #include "Data.h"
 #include "DoctorDlg.h"
+#include "MedicationDlg.h"
 #include "PatientDlg.h"
 #include "SpecialtyDlg.h"
 
@@ -37,6 +38,7 @@ BEGIN_MESSAGE_MAP(CSeguroMedicoMFCApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_SPECIALTYDLG, &CSeguroMedicoMFCApp::OnFileSpecialtydlg)
 	ON_COMMAND(ID_FILE_DOCTORDLG, &CSeguroMedicoMFCApp::OnFileDoctordlg)
 	ON_COMMAND(ID_FILE_PATIENTDLG, &CSeguroMedicoMFCApp::OnFilePatientdlg)
+	ON_COMMAND(ID_FILE_MEDICATIONDLG, &CSeguroMedicoMFCApp::OnFileMedicationdlg)
 END_MESSAGE_MAP()
 
 
@@ -261,5 +263,13 @@ void CSeguroMedicoMFCApp::OnFilePatientdlg()
 {
 	// TODO: Add your command handler code here
 	PatientDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CSeguroMedicoMFCApp::OnFileMedicationdlg()
+{
+	// TODO: Add your command handler code here
+	MedicationDlg dlg;
 	dlg.DoModal();
 }

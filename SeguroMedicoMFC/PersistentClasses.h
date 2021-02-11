@@ -70,6 +70,12 @@ struct Medication
 {
 	int id;
 	std::string name;
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + name;
+		return str;
+	}
 };
 
 enum class InvoiceType

@@ -38,6 +38,7 @@ public:
 	afx_msg void OnFileSpecialtydlg();
 	afx_msg void OnFileDoctordlg();
 	afx_msg void OnFilePatientdlg();
+	afx_msg void OnFileMedicationdlg();
 };
 
 extern CSeguroMedicoMFCApp theApp;

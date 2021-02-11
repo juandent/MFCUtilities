@@ -90,6 +90,7 @@
 #define IDD_SpecialtyDlg                311
 #define IDD_DoctorDlg                   312
 #define IDD_PatientDlg                  313
+#define IDD_MedicationDlg               314
 #define IDC_GRID_1                      1000
 #define IDC_E_ID_SPECIALTY              1001
 #define IDC_E_NOMBRE_SPECIALTY          1002
@@ -110,17 +111,21 @@
 #define ID_APLICAR_PACIENTE             1017
 #define ID_NEW_PATIENT                  1018
 #define ID_BORRAR_PATIENT               1019
+#define IDC_E_ID_MEDICATION             1020
+#define IDC_E_NOMBRE_MEDICATION         1021
+#define IDC_L_MEDICATIONS               1022
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
+#define ID_FILE_MEDICATIONDLG           32774
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        314
-#define _APS_NEXT_COMMAND_VALUE         32774
-#define _APS_NEXT_CONTROL_VALUE         1020
-#define _APS_NEXT_SYMED_VALUE           314
+#define _APS_NEXT_RESOURCE_VALUE        315
+#define _APS_NEXT_COMMAND_VALUE         32775
+#define _APS_NEXT_CONTROL_VALUE         1023
+#define _APS_NEXT_SYMED_VALUE           315
 #endif
 #endif
