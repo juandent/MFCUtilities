@@ -2,6 +2,8 @@
 // Microsoft Visual C++ generated include file.
 // Used by SeguroMedicoMFC.rc
 //
+#define ID_BORRAR                       3
+#define ID_NUEVO                        4
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_POPUP_EDIT                  119
@@ -85,16 +87,40 @@
 #define IDS_EXPLORER                    305
 #define IDS_EDIT_MENU                   306
 #define IDD_MainView                    310
-#define IDC_CUSTOM1                     1000
+#define IDD_SpecialtyDlg                311
+#define IDD_DoctorDlg                   312
+#define IDD_PatientDlg                  313
 #define IDC_GRID_1                      1000
+#define IDC_E_ID_SPECIALTY              1001
+#define IDC_E_NOMBRE_SPECIALTY          1002
+#define IDC_L_SPECIALTIES               1004
+#define ID_APPLY                        1005
+#define ID_CERRAR                       1006
+#define IDC_E_ID_DOCTOR                 1007
+#define IDC_E_PRIMER_NOMBRE             1008
+#define IDC_E_APELLIDOS                 1009
+#define IDC_CB_SPECIALIDADES            1010
+#define IDC_L_DOCTORES                  1011
+#define ID_APLICAR_DOCTOR               1012
+#define ID_NEW_DOCTOR                   1013
+#define ID_BORRAR_DOCTOR                1014
+#define ID_EDIT_SPECIALTIES             1015
+#define IDC_E_ID_PATIENT                1015
+#define IDC_L_PACIENTES                 1016
+#define ID_APLICAR_PACIENTE             1017
+#define ID_NEW_PATIENT                  1018
+#define ID_BORRAR_PATIENT               1019
+#define ID_FILE_SPECIALTYDLG            32771
+#define ID_FILE_DOCTORDLG               32772
+#define ID_FILE_PATIENTDLG              32773
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        311
-#define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1001
-#define _APS_NEXT_SYMED_VALUE           311
+#define _APS_NEXT_RESOURCE_VALUE        314
+#define _APS_NEXT_COMMAND_VALUE         32774
+#define _APS_NEXT_CONTROL_VALUE         1020
+#define _APS_NEXT_SYMED_VALUE           314
 #endif
 #endif

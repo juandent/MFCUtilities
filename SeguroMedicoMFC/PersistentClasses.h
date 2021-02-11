@@ -1,5 +1,7 @@
 #pragma once
 
+using namespace std::string_literals;
+
 enum class AcknowledgementType
 {
 	None, Minimum, Full
@@ -29,6 +31,12 @@ struct Patient
 	int id;
 	std::string first_name;
 	std::string last_name;
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + first_name + " "s + last_name;
+		return str;
+	}
 };
 
 struct Doctor
@@ -37,12 +45,25 @@ struct Doctor
 	std::string first_name;
 	std::string last_name;
 	int fkey_specialty;
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + first_name + " "s + last_name;
+		return str;
+	}
 };
 
 struct Specialty
 {
 	int id;
 	std::string name;
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + name;
+		return str;
+	}
+
 };
 
 struct Medication

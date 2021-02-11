@@ -91,7 +91,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL;C:\Components\dev_merged_626\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
@@ -198,14 +198,18 @@
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="Data.h" />
+    <ClInclude Include="DoctorDlg.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MainView.h" />
+    <ClInclude Include="ORM_Utilities.h" />
     <ClInclude Include="OutputWnd.h" />
+    <ClInclude Include="PatientDlg.h" />
     <ClInclude Include="PersistentClasses.h" />
     <ClInclude Include="RecordLinks.h" />
     <ClInclude Include="RefIntegrity.h" />
+    <ClInclude Include="SpecialtyDlg.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Resource.h" />
@@ -225,11 +229,14 @@
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="DoctorDlg.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MainView.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
+    <ClCompile Include="PatientDlg.cpp" />
     <ClCompile Include="RecordLinks.cpp" />
+    <ClCompile Include="SpecialtyDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

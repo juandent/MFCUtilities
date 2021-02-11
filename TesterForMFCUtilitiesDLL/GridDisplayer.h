@@ -70,9 +70,12 @@ private:
 	template<typename DataType, typename ... RestDataTypes>
 	void printDataInGrid(int row, int col, T& z, DataType p, RestDataTypes...qs)
 	{
+#if 0
 		auto value = z.*p;
 		auto cs = format(value);
 		grid.SetItemText(row + 1, col, cs);
+#endif
+		printDataInGrid(row, col, z, p);
 		printDataInGrid(row, ++col, z, qs...);
 	}
 	template<typename T>

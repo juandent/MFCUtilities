@@ -14,6 +14,11 @@
 #include "MainView.h"
 
 #include "Data.h"
+#include "DoctorDlg.h"
+#include "PatientDlg.h"
+#include "SpecialtyDlg.h"
+
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -29,6 +34,9 @@ BEGIN_MESSAGE_MAP(CSeguroMedicoMFCApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
 	// Standard print setup command
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
+	ON_COMMAND(ID_FILE_SPECIALTYDLG, &CSeguroMedicoMFCApp::OnFileSpecialtydlg)
+	ON_COMMAND(ID_FILE_DOCTORDLG, &CSeguroMedicoMFCApp::OnFileDoctordlg)
+	ON_COMMAND(ID_FILE_PATIENTDLG, &CSeguroMedicoMFCApp::OnFilePatientdlg)
 END_MESSAGE_MAP()
 
 
@@ -65,7 +73,7 @@ CSeguroMedicoMFCApp theApp;
 BOOL CSeguroMedicoMFCApp::InitInstance()
 {
 	Storage::initialize();
-	Storage::fill_db_with_test_data();
+	//Storage::fill_db_with_test_data();
 	
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -230,3 +238,28 @@ void CSeguroMedicoMFCApp::SaveCustomState()
 
 
 
+
+
+void CSeguroMedicoMFCApp::OnFileSpecialtydlg()
+{
+	// TODO: Add your command handler code here
+	SpecialtyDlg dlg;
+	dlg.DoModal();
+}
+
+
+
+void CSeguroMedicoMFCApp::OnFileDoctordlg()
+{
+	// TODO: Add your command handler code here
+	DoctorDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CSeguroMedicoMFCApp::OnFilePatientdlg()
+{
+	// TODO: Add your command handler code here
+	PatientDlg dlg;
+	dlg.DoModal();
+}

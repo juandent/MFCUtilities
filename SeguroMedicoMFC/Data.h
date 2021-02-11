@@ -126,6 +126,8 @@ public:
 
 //inline Storage::Storage_t& storage = Storage::getStorage();
 
+#include "ORM_Utilities.h"
+
 #if 0
 
 enum class Operation { doUpdate = 1, doInsert = 2 };
