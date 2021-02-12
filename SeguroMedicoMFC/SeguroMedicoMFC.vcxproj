@@ -196,6 +196,7 @@
     <ClInclude Include="AcknowledgementType.Binding.h" />
     <ClInclude Include="BoxContents.h" />
     <ClInclude Include="ChildFrm.h" />
+    <ClInclude Include="ClaimDlg.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="DoctorDlg.h" />
@@ -228,6 +229,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ChildFrm.cpp" />
+    <ClCompile Include="ClaimDlg.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="DoctorDlg.cpp" />

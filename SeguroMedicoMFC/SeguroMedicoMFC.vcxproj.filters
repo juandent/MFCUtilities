@@ -105,6 +105,9 @@
     <ClInclude Include="MedicationDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClaimDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SeguroMedicoMFC.cpp">
@@ -165,6 +168,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MedicationDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClaimDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

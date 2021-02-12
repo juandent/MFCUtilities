@@ -91,6 +91,7 @@
 #define IDD_DoctorDlg                   312
 #define IDD_PatientDlg                  313
 #define IDD_MedicationDlg               314
+#define IDD_ClaimDlg                    315
 #define IDC_GRID_1                      1000
 #define IDC_E_ID_SPECIALTY              1001
 #define IDC_E_NOMBRE_SPECIALTY          1002
@@ -114,6 +115,23 @@
 #define IDC_E_ID_MEDICATION             1020
 #define IDC_E_NOMBRE_MEDICATION         1021
 #define IDC_L_MEDICATIONS               1022
+#define IDC_E_ID_CLAIM                  1023
+#define IDC_C_PATIENTS                  1024
+#define IDC_C_DOCTORES                  1025
+#define IDC_C_MEDICAMENTOS              1026
+#define IDC_START_DATE                  1027
+#define IDC_FECHA_ENTREGADO             1028
+#define IDC_E_ASPROSE_CLAIM_NUMBER      1029
+#define IDC_E_ASPROSE_CASE_NUMBER2      1030
+#define IDC_E_ASPROSE_AMOUNT_PRESENTED  1031
+#define IDC_E_INS_CLAIM_NUMBER2         1032
+#define IDC_RADIO1                      1033
+#define IDC_RADIO2                      1034
+#define IDC_RADIO3                      1035
+#define IDC_E_TOTAL_CLAIM_AMOUNT        1036
+#define IDC_E_COMMENT                   1037
+#define IDC_CUSTOM1                     1038
+#define IDC_CLAIMS_GRID                 1038
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
@@ -123,9 +141,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        315
+#define _APS_NEXT_RESOURCE_VALUE        316
 #define _APS_NEXT_COMMAND_VALUE         32775
-#define _APS_NEXT_CONTROL_VALUE         1023
-#define _APS_NEXT_SYMED_VALUE           315
+#define _APS_NEXT_CONTROL_VALUE         1039
+#define _APS_NEXT_SYMED_VALUE           316
 #endif
 #endif
