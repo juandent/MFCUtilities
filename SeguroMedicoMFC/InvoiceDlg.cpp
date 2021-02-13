@@ -201,6 +201,7 @@ void InvoiceDlg::OnLbnSelchangeLInvoices()
 	SetText(m_descripcion, invoice->description);
 	SetAmount(m_monto, invoice->amount);
 	m_responseCB.select(invoice->fkey_INSResponse);
+	m_invoice = invoice;
 }
 
 

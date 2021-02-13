@@ -67,6 +67,7 @@ BEGIN_MESSAGE_MAP(ClaimDlg, CDialog)
 	ON_BN_CLICKED(ID_NUEVO, &ClaimDlg::OnBnClickedNuevo)
 	ON_BN_CLICKED(ID_BORRAR, &ClaimDlg::OnBnClickedBorrar)
 	ON_BN_CLICKED(ID_CERRAR, &ClaimDlg::OnBnClickedCerrar)
+	ON_LBN_SELCHANGE(IDC_L_CLAIM_LIST, &ClaimDlg::OnLbnSelchangeLClaimList)
 END_MESSAGE_MAP()
 
 
@@ -277,6 +278,18 @@ void ClaimDlg::OnBnClickedApply()
 void ClaimDlg::OnBnClickedNuevo()
 {
 	// TODO: Add your control notification handler code here
+	SetText(m_id_reclamo, ""s);
+	// SetDate(m_start_date, claim->start_date);
+	// SetDate(m_date_submitted, claim->submission_date);
+	m_acknowledgement.set_value(0);
+	SetText(m_asprose_case_number, ""s);
+	SetText(m_asprose_claim_number, ""s );
+	SetAmount(m_asprose_amount_recognized, 0);
+	// SetAmount();
+	m_doctorCB.select(std::nullopt);
+	m_patientCB.select(std::nullopt);
+	m_medicationCB.select(std::nullopt);
+
 }
 
 
@@ -289,4 +302,24 @@ void ClaimDlg::OnBnClickedBorrar()
 void ClaimDlg::OnBnClickedCerrar()
 {
 	// TODO: Add your control notification handler code here
+}
+
+
+void ClaimDlg::OnLbnSelchangeLClaimList()
+{
+	// TODO: Add your control notification handler code here
+	auto claim = m_claimLB.current();
+	SetText(m_id_reclamo, claim->id);
+	SetDate(m_start_date, claim->start_date);
+	SetDate(m_date_submitted, claim->submission_date);
+	m_acknowledgement.set_value(claim->asprose_acknowledgement_type);
+	SetText(m_asprose_case_number, claim->asprose_case_number);
+	SetText(m_asprose_claim_number, claim->asprose_claim_number);
+	SetAmount(m_asprose_amount_recognized, claim->asprose_amount_presented);
+	// SetAmount();
+	m_doctorCB.select(claim->fkey_doctor);
+	m_patientCB.select(claim->fkey_patient);
+	m_medicationCB.select(claim->fkey_medication);
+	m_claim = claim;
+	
 }

@@ -64,4 +64,6 @@ public:
 	afx_msg void OnBnClickedCerrar();
 private:
 	CListBox m_claim_list;
+public:
+	afx_msg void OnLbnSelchangeLClaimList();
 };
