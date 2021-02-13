@@ -4,6 +4,8 @@
 //
 #define ID_BORRAR                       3
 #define ID_NUEVO                        4
+#define ID_B_RECLAMOS                   5
+#define ID_B_INS_RESPONSE               6
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_POPUP_EDIT                  119

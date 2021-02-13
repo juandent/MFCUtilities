@@ -46,6 +46,21 @@ inline void NullText(CEdit& edit_box)
 	edit_box.SetWindowTextW(L"");
 }
 
+inline void SetColones(CEdit& edit_box, double amount)
+{
+	Util::Colones col{ amount };
+	auto col_str = Util::to_string(col);
+	auto str = Util::to_cstring(col_str);
+	edit_box.SetWindowTextW(str);
+}
+
+inline void SetAmount(CEdit& edit_box, double amount)
+{
+	auto str = Util::to_cstring(amount);
+	edit_box.SetWindowTextW(str);
+}
+
+
 template<typename Table, int Table::* key>
 struct IdManager
 {

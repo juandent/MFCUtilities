@@ -99,14 +99,40 @@ struct Invoice
 	double amount;
 	int type;
 	std::string description;
-	int fkey_INSResponse;
+	std::optional<int> fkey_INSResponse;
 
 	std::string simple_dump() const
 	{
-		std::string str = std::to_string(id) + " - "s + std::to_string(number) + " "s + std::to_string(amount);
+		std::string str = std::to_string(id) + " - "s + std::to_string(number) + " "s + amountInColones();
+		str += " "s + get_type();
 		return str;
 	}
 
+	std::string amountInColones() const
+	{
+		Util::Colones col{amount};
+		auto col_str = Util::to_string(col);
+		return col_str;
+	}
+	
+	std::string get_type() const
+	{
+		switch(static_cast<InvoiceType>(type))
+		{
+		case InvoiceType::Medication:
+			return "Medicinas"s;
+		case InvoiceType::Appointment:
+			return "Consulta"s;
+		case InvoiceType::Exam:
+			return "Examenes"s;
+		case InvoiceType::Procedure:
+			return "Procedimiento"s;
+		case InvoiceType::Therapy:
+			return "Terapia";
+		default:
+			return "?"s;
+		}
+	}
 };
 
 struct INSResponse

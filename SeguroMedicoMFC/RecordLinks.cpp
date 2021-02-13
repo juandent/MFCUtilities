@@ -82,10 +82,13 @@ bool RecordLinks::foreignKeysExist(const Invoice& invoice)
 	using namespace sqlite_orm;
 	auto& storage = Storage::getStorage();
 
-	int count[2]{};
+	int count[2]{1,1};
 	count[0] = storage.count<Claim>(where(is_equal(&Claim::id, invoice.fkey_claim)));
-	count[1] = storage.count<INSResponse>(where(is_equal(&INSResponse::id, invoice.fkey_INSResponse)));
-
+	if (invoice.fkey_INSResponse)
+	{
+		count[1] = storage.count<INSResponse>(where(is_equal(&INSResponse::id, invoice.fkey_INSResponse)));
+	}
+	
 	return allNonZero(count[0], count[1]);
 }
 

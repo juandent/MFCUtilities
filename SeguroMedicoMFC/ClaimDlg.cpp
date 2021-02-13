@@ -122,7 +122,13 @@ void ClaimDlg::InitializeGrid(const T& t)
 #else
 	// TODO: invoices go here!!
 	
-	auto otherlines = Storage::getStorage().select(columns(&Claim::id));
+	auto otherlines = Storage::getStorage().select(columns(
+		alias_column<als_i>(&Invoice::id),
+		alias_column<als_i>(&Invoice::number),
+		alias_column<als_i>(&Invoice::amount),
+		alias_column<als_i>(&Invoice::fkey_claim)),
+		order_by(alias_column<als_i>(&Invoice::fkey_claim)));
+
 	
 #endif
 	
@@ -157,7 +163,7 @@ void ClaimDlg::InitializeGrid(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID" }; // , "PATIENT LAST", "PATIENT FIRST", "DOCTOR LAST", "DOCTOR FIRST", "ID MEDICATION"
+	std::vector<std::string> headers{ "ID", "INV NUMBER", "INV AMOUNT", "CLAIM ID" }; // , "PATIENT LAST", "PATIENT FIRST", "DOCTOR LAST", "DOCTOR FIRST", "ID MEDICATION"
 
 	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<0>, IntegerList<0>>(m_grid_claims, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer->display();

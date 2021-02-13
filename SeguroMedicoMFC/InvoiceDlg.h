@@ -53,4 +53,7 @@ public:
 	afx_msg void OnBnClickedNuevo();
 	afx_msg void OnBnClickedBorrar();
 	afx_msg void OnBnClickedCerrar();
+	afx_msg void OnLbnSelchangeLInvoices();
+	afx_msg void OnBnClickedBReclamos();
+	afx_msg void OnBnClickedBInsResponse();
 };

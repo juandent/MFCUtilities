@@ -5,6 +5,7 @@
 #include "SeguroMedicoMFC.h"
 #include "InvoiceDlg.h"
 #include "afxdialogex.h"
+#include "ClaimDlg.h"
 
 
 // InvoiceDlg dialog
@@ -57,6 +58,9 @@ BEGIN_MESSAGE_MAP(InvoiceDlg, CDialog)
 	ON_BN_CLICKED(ID_NUEVO, &InvoiceDlg::OnBnClickedNuevo)
 	ON_BN_CLICKED(ID_BORRAR, &InvoiceDlg::OnBnClickedBorrar)
 	ON_BN_CLICKED(ID_CERRAR, &InvoiceDlg::OnBnClickedCerrar)
+	ON_LBN_SELCHANGE(IDC_L_INVOICES, &InvoiceDlg::OnLbnSelchangeLInvoices)
+	ON_BN_CLICKED(ID_B_RECLAMOS, &InvoiceDlg::OnBnClickedBReclamos)
+	ON_BN_CLICKED(ID_B_INS_RESPONSE, &InvoiceDlg::OnBnClickedBInsResponse)
 END_MESSAGE_MAP()
 
 
@@ -68,6 +72,8 @@ BOOL InvoiceDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  Add extra initialization here
+	m_invoice_type.Initialize();
+	
 	Refresh();
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -106,11 +112,11 @@ void InvoiceDlg::OnBnClickedApply()
 		return;
 	}
 	// ins_response can be nullopt!
-	if( ! ins_response)
-	{
-		MessageBoxW(L"Falta escoger INS Response");
-		return;
-	}
+	// if( ! ins_response)
+	// {
+	// 	MessageBoxW(L"Falta escoger INS Response");
+	// 	return;
+	// }
 
 #if 0	
 	if (!claim)
@@ -121,44 +127,94 @@ void InvoiceDlg::OnBnClickedApply()
 		claim = doctor_by_value;
 	}
 #endif
-#if 1
 	if (!invoice)	// insert
 	{
 		// std::optional<int> ins_response_id = ins_response ? ins_response->id : std::nullopt;
-		invoice = m_invoiceLB.insert(claim->id, number, amount, static_cast<int>(type), description, ins_response->id);
+		std::optional<int> ins = std::nullopt;
+		if(ins_response)
+		{
+			ins = ins_response->id;
+		}
+		invoice = m_invoiceLB.insert(claim->id, number, amount, static_cast<int>(type), description, ins);
 		m_invoiceLB.insert_into_listbox(*invoice);
 	}
 	else                // update
 	{
+		std::optional<int> ins = std::nullopt;
+		if (ins_response)
+		{
+			ins = ins_response->id;
+		}
+
 		invoice->amount = amount;
 		invoice->fkey_claim = claim->id;
 		invoice->description = description;
-		invoice->fkey_INSResponse = ins_response->id;
+		invoice->fkey_INSResponse = ins;
 		invoice->number = number;
 		invoice->type = static_cast<int>(type);
 		m_invoiceLB.update(*invoice);
 	}
-#endif
 	m_invoiceLB.loadLBOrderBy(&Invoice::number);
 	m_invoice = invoice;
 	setIdFromRecord<Invoice>(m_id_invoice, m_invoice->id);
-
 }
 
 
 void InvoiceDlg::OnBnClickedNuevo()
 {
 	// TODO: Add your control notification handler code here
+	SetText(m_id_invoice, ""s);
+	m_claimCB.select(std::nullopt);
+	m_invoice_type.set_value(0);
+	SetText(m_factura_num, ""s);
+	SetText(m_descripcion, ""s);
+	SetAmount(m_monto, 0);
+	m_responseCB.select(std::nullopt);
 }
 
 
 void InvoiceDlg::OnBnClickedBorrar()
 {
 	// TODO: Add your control notification handler code here
+	if (m_invoiceLB.delete_current_sel())
+	{
+		OnBnClickedNuevo();
+	}
 }
 
 
 void InvoiceDlg::OnBnClickedCerrar()
 {
 	// TODO: Add your control notification handler code here
+	CDialog::OnOK();
+}
+
+
+void InvoiceDlg::OnLbnSelchangeLInvoices()
+{
+	// TODO: Add your control notification handler code here
+	auto invoice = m_invoiceLB.current();
+	SetText(m_id_invoice, invoice->id);
+	m_claimCB.select(invoice->fkey_claim);
+	m_invoice_type.set_value(invoice->type);
+	SetText(m_factura_num, invoice->number);
+	SetText(m_descripcion, invoice->description);
+	SetAmount(m_monto, invoice->amount);
+	m_responseCB.select(invoice->fkey_INSResponse);
+}
+
+
+void InvoiceDlg::OnBnClickedBReclamos()
+{
+	// TODO: Add your control notification handler code here
+	ClaimDlg dlg;
+	dlg.DoModal();
+	Refresh();
+}
+
+
+void InvoiceDlg::OnBnClickedBInsResponse()
+{
+	// TODO: Add your control notification handler code here
+	MessageBoxW(L"TODO");
 }
