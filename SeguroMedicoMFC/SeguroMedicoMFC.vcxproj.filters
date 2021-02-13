@@ -108,6 +108,12 @@
     <ClInclude Include="ClaimDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RadioButtonGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InvoiceDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SeguroMedicoMFC.cpp">
@@ -171,6 +177,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ClaimDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RadioButtonGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoiceDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

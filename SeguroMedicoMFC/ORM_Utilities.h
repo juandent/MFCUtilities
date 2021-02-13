@@ -64,3 +64,42 @@ struct IdManager
 	}
 };
 
+
+inline void SetDate(CDateTimeCtrl& ctrl, date::sys_days sysdate)
+{
+	auto date = Util::to_ole_date_time(sysdate);
+	ctrl.SetTime(date);
+}
+
+inline date::sys_days GetDate(CDateTimeCtrl& ctrl)
+{
+	COleDateTime rOleDateTime;
+	ctrl.GetTime(rOleDateTime);
+	date::sys_days date = Util::to_sys_days(rOleDateTime);
+	return date;
+}
+
+inline std::string GetText(CEdit& ctrl)
+{
+	CString str;
+	ctrl.GetWindowTextW(str);
+	if (str.IsEmpty())
+		return ""s;
+	auto s = Util::from_cstring(str);
+	return s;
+}
+
+inline double GetAmount(CEdit& ctrl)
+{
+	auto str = GetText(ctrl);
+	if (str.empty())	return 0.0;
+	return std::stold(str);
+}
+
+
+inline int GetInteger(CEdit& ctrl)
+{
+	auto str = GetText(ctrl);
+	if (str.empty())	return 0.0;
+	return std::stoi(str);
+}

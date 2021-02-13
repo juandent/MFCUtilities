@@ -92,6 +92,7 @@
 #define IDD_PatientDlg                  313
 #define IDD_MedicationDlg               314
 #define IDD_ClaimDlg                    315
+#define IDD_InvoiceDlg                  316
 #define IDC_GRID_1                      1000
 #define IDC_E_ID_SPECIALTY              1001
 #define IDC_E_NOMBRE_SPECIALTY          1002
@@ -120,30 +121,44 @@
 #define IDC_C_DOCTORES                  1025
 #define IDC_C_MEDICAMENTOS              1026
 #define IDC_START_DATE                  1027
-#define IDC_FECHA_ENTREGADO             1028
 #define IDC_E_ASPROSE_CLAIM_NUMBER      1029
 #define IDC_E_ASPROSE_CASE_NUMBER2      1030
 #define IDC_E_ASPROSE_AMOUNT_PRESENTED  1031
-#define IDC_E_INS_CLAIM_NUMBER2         1032
-#define IDC_RADIO1                      1033
-#define IDC_RADIO2                      1034
-#define IDC_RADIO3                      1035
+#define IDC_E_INS_CLAIM_NUMBER          1032
+#define IDC_R_FULL                      1033
+#define IDC_R_PARTIAL                   1034
+#define IDC_R_NONE                      1035
 #define IDC_E_TOTAL_CLAIM_AMOUNT        1036
 #define IDC_E_COMMENT                   1037
-#define IDC_CUSTOM1                     1038
 #define IDC_CLAIMS_GRID                 1038
+#define IDC_FECHA_ENTREGADO             1040
+#define IDC_L_CLAIM_LIST                1041
+#define IDC_E_ID_INVOICE                1042
+#define IDC_C_CLAIM_LIST                1043
+#define IDC_E_NUMERO_FACTURA            1044
+#define IDC_E_AMOUNT                    1045
+#define IDC_R_CONSULTA                  1046
+#define IDC_R_EXAMEN                    1047
+#define IDC_R_MEDICATION                1048
+#define IDC_R_THERAPY                   1049
+#define IDC_R_PROCEDIMIENTO             1050
+#define IDC_E_DESCRIPTION               1051
+#define IDC_C_INS_RESPONSE              1052
+#define IDC_L_INVOICES                  1053
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
 #define ID_FILE_MEDICATIONDLG           32774
+#define ID_FILE_CLAIMDLG                32775
+#define ID_FILE_INVOICEDLG              32776
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        316
-#define _APS_NEXT_COMMAND_VALUE         32775
-#define _APS_NEXT_CONTROL_VALUE         1039
-#define _APS_NEXT_SYMED_VALUE           316
+#define _APS_NEXT_RESOURCE_VALUE        317
+#define _APS_NEXT_COMMAND_VALUE         32777
+#define _APS_NEXT_CONTROL_VALUE         1054
+#define _APS_NEXT_SYMED_VALUE           317
 #endif
 #endif

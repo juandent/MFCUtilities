@@ -94,7 +94,7 @@
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL;C:\Components\dev_merged_626\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ExpenseManagerSQLite;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL;C:\Components\dev_merged_626\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -202,6 +202,7 @@
     <ClInclude Include="DoctorDlg.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="InvoiceDlg.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MainView.h" />
     <ClInclude Include="MedicationDlg.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PatientDlg.h" />
     <ClInclude Include="PersistentClasses.h" />
+    <ClInclude Include="RadioButtonGroup.h" />
     <ClInclude Include="RecordLinks.h" />
     <ClInclude Include="RefIntegrity.h" />
     <ClInclude Include="SpecialtyDlg.h" />
@@ -234,11 +236,13 @@
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="DoctorDlg.cpp" />
     <ClCompile Include="FileView.cpp" />
+    <ClCompile Include="InvoiceDlg.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MainView.cpp" />
     <ClCompile Include="MedicationDlg.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="PatientDlg.cpp" />
+    <ClCompile Include="RadioButtonGroup.cpp" />
     <ClCompile Include="RecordLinks.cpp" />
     <ClCompile Include="SpecialtyDlg.cpp" />
     <ClCompile Include="stdafx.cpp">

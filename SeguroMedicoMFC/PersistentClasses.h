@@ -4,7 +4,7 @@ using namespace std::string_literals;
 
 enum class AcknowledgementType
 {
-	None, Minimum, Full
+	None, Partial, Full
 };
 
 
@@ -16,13 +16,20 @@ struct Claim
 	int fkey_medication;					// for chronic meds
 	date::sys_days start_date;
 	date::sys_days submission_date;
-	int asprose_claim_number;				// Claim: 85481
+	std::string asprose_claim_number;				// Claim: 85481
 	std::string asprose_case_number;		// Case : 21INSENE0085
 	double asprose_amount_presented;		// in colones
 	std::string ins_claim_number;			// 202001017481-ACCSA0120094110
 	int asprose_acknowledgement_type;		// full, partial, none: TODO: create an enum instead
 	std::string comment;
 	double amount;
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + Util::to_string(start_date) + " - "s + Util::to_string(submission_date) + " " + std::to_string(fkey_patient);
+		return str;
+	}
+
 };
 
 
@@ -80,7 +87,7 @@ struct Medication
 
 enum class InvoiceType
 {
-	Appointment=1, Exam, Medication, Therapy, Procedure
+	Appointment, Exam, Medication, Therapy, Procedure
 };
 
 
@@ -93,6 +100,13 @@ struct Invoice
 	int type;
 	std::string description;
 	int fkey_INSResponse;
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + std::to_string(number) + " "s + std::to_string(amount);
+		return str;
+	}
+
 };
 
 struct INSResponse
@@ -109,6 +123,12 @@ struct INSResponse
 	double retencion;
 	double total_a_pagar;
 	std::string comentarios;
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + liquidacion_num + " "s + std::to_string(total_a_pagar);
+		return str;
+	}
 };
 /////////////////////////////////////////////////////////////////
 ///

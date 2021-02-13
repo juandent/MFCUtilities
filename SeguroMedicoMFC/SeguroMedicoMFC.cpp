@@ -9,12 +9,14 @@
 #include "MainFrm.h"
 
 #include "ChildFrm.h"
+#include "ClaimDlg.h"
 #include "SeguroMedicoMFCDoc.h"
 #include "SeguroMedicoMFCView.h"
 #include "MainView.h"
 
 #include "Data.h"
 #include "DoctorDlg.h"
+#include "InvoiceDlg.h"
 #include "MedicationDlg.h"
 #include "PatientDlg.h"
 #include "SpecialtyDlg.h"
@@ -39,6 +41,8 @@ BEGIN_MESSAGE_MAP(CSeguroMedicoMFCApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_DOCTORDLG, &CSeguroMedicoMFCApp::OnFileDoctordlg)
 	ON_COMMAND(ID_FILE_PATIENTDLG, &CSeguroMedicoMFCApp::OnFilePatientdlg)
 	ON_COMMAND(ID_FILE_MEDICATIONDLG, &CSeguroMedicoMFCApp::OnFileMedicationdlg)
+	ON_COMMAND(ID_FILE_CLAIMDLG, &CSeguroMedicoMFCApp::OnFileClaimdlg)
+	ON_COMMAND(ID_FILE_INVOICEDLG, &CSeguroMedicoMFCApp::OnFileInvoicedlg)
 END_MESSAGE_MAP()
 
 
@@ -271,5 +275,21 @@ void CSeguroMedicoMFCApp::OnFileMedicationdlg()
 {
 	// TODO: Add your command handler code here
 	MedicationDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CSeguroMedicoMFCApp::OnFileClaimdlg()
+{
+	// TODO: Add your command handler code here
+	ClaimDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CSeguroMedicoMFCApp::OnFileInvoicedlg()
+{
+	// TODO: Add your command handler code here
+	InvoiceDlg dlg;
 	dlg.DoModal();
 }
