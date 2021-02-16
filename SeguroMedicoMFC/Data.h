@@ -94,13 +94,28 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("numero_caso", &INSResponse::numero_caso),
 				make_column("total_bruto", &INSResponse::total_bruto),
 				make_column("otras_deducciones", &INSResponse::otras_deducciones),
-				make_column("copagos" , &INSResponse::copagos),
-				make_column( "coaseguros", &INSResponse::coaseguros),
+				make_column("copagos", &INSResponse::copagos),
+				make_column("coaseguros", &INSResponse::coaseguros),
 				make_column("deducible_anual", &INSResponse::deducible_anual),
-				make_column ("total_neto", &INSResponse::total_neto),
-				make_column("retencion",&INSResponse::retencion),
+				make_column("total_neto", &INSResponse::total_neto),
+				make_column("retencion", &INSResponse::retencion),
 				make_column("total_a_pagar", &INSResponse::total_a_pagar),
-				make_column( "comentario", &INSResponse::comentarios)));
+				make_column("comentario", &INSResponse::comentarios),
+				make_column("tipo_cambio", &INSResponse::tipo_cambio)),
+			make_table("INSResponseLine",
+				make_column("id_INSResponseLine", &INSResponseLine::id, autoincrement(), primary_key()),
+				make_column("fkey_INSResponse", &INSResponseLine::fkey_INSResponse),
+				make_column("fkey_factura", &INSResponseLine::fkey_factura),
+				make_column("monto_cubierto", &INSResponseLine::monto_cubierto),
+				make_column("deducciones", &INSResponseLine::deducciones),
+				make_column("copago", &INSResponseLine::copago),
+				make_column("coaseguros", &INSResponseLine::coaseguros),
+				make_column("deducible_anual", &INSResponseLine::deducible_anual),
+				make_column("total_rubro_factura", &INSResponseLine::total_rubro_factura),
+				make_column("porcentaje_de_monto_cubierto", &INSResponseLine::porcentaje_de_monto_cubierto),
+				make_column( "porcentaje_de_factura_cubierto", &INSResponseLine::porcentaje_de_factura_cubierto),
+				foreign_key(&INSResponseLine::fkey_INSResponse).references(&INSResponse::id),
+				foreign_key(&INSResponseLine::fkey_factura).references(&Invoice::id)));
 
 
 	if (flag == 0)

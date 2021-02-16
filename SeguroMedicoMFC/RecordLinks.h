@@ -1,4 +1,5 @@
 #pragma once
+#include "PersistentClasses.h"
 struct Patient;
 struct Specialty;
 struct Doctor;
@@ -6,6 +7,7 @@ struct Medication;
 struct Claim;
 struct INSResponse;
 struct Invoice;
+struct INSResponseLine;
 
 
 class RecordLinks
@@ -31,7 +33,8 @@ public:
 	static bool has_links(const INSResponse& trans);
 	static bool has_links(const Invoice& invoice);
 
-	static bool foreignKeysExist(const Patient& patient);
+      static bool foreignKeysExist(const INSResponseLine &line);
+        static bool foreignKeysExist(const Patient& patient);
 	static bool foreignKeysExist(const Specialty& specialty);
 	static bool foreignKeysExist(const Doctor& doctor);
 	static bool foreignKeysExist(const Medication& med);

@@ -1,5 +1,8 @@
 #pragma once
 
+import Util;
+
+
 using namespace std::string_literals;
 
 enum class AcknowledgementType
@@ -30,6 +33,9 @@ struct Claim
 		return str;
 	}
 
+	std::string dump() const;
+
+	double get_total_amount();
 };
 
 
@@ -39,6 +45,10 @@ struct Patient
 	std::string first_name;
 	std::string last_name;
 
+	std::string name() const
+	{
+		return first_name + " "s + last_name;
+	}
 	std::string simple_dump() const
 	{
 		std::string str = std::to_string(id) + " - "s + first_name + " "s + last_name;
@@ -53,6 +63,10 @@ struct Doctor
 	std::string last_name;
 	int fkey_specialty;
 
+	std::string name() const
+	{
+		return first_name + " "s + last_name;
+	}
 	std::string simple_dump() const
 	{
 		std::string str = std::to_string(id) + " - "s + first_name + " "s + last_name;
@@ -138,17 +152,18 @@ struct Invoice
 struct INSResponse
 {
 	int id;
-	std::string liquidacion_num;
-	long numero_caso;
-	double total_bruto;
-	double otras_deducciones;
-	double copagos;
-	double coaseguros;
-	double deducible_anual;
-	double total_neto;
-	double retencion;
-	double total_a_pagar;
-	std::string comentarios;
+	std::string liquidacion_num;	// ACCSA0121008421
+	long numero_caso;				// 20200101
+	double total_bruto;				// $291.47
+	double otras_deducciones;		// 0.00
+	double copagos;					// 0.00
+	double coaseguros;				// $58.29
+	double deducible_anual;			// 0.00
+	double total_neto;				// CRC 142,134.87
+	double retencion;				// 0.00
+	double total_a_pagar;			// CRC 142,134.87
+	std::string comentarios;		// deducible acumulado en su totalidad
+	double tipo_cambio;				// 609.55
 
 	std::string simple_dump() const
 	{
@@ -156,7 +171,39 @@ struct INSResponse
 		return str;
 	}
 };
+
+struct INSResponseLine
+{
+	int id;
+	int fkey_INSResponse;
+	int fkey_factura;
+	//int fkey_claim;							// fkey_factura->fkey_claim
+	double monto_cubierto;
+	double deducciones;
+	double copago;
+	double coaseguros;
+	double deducible_anual;
+	double total_rubro_factura;
+	double porcentaje_de_monto_cubierto;	// total_rubro_factura/monto_cubierto
+	double porcentaje_de_factura_cubierto;	// total_rubro_factura/fkey_factura->amount
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " : "s + std::to_string(fkey_INSResponse) + " - "s + std::to_string(fkey_factura);
+		return str;
+	}
+};
+
 /////////////////////////////////////////////////////////////////
 ///
 ///
 
+using namespace sqlite_orm;
+
+using als_c = alias_c<Claim>;
+using als_p = alias_p<Patient>;
+using als_d = alias_d<Doctor>;
+using als_s = alias_s<Specialty>;
+using als_m = alias_m<Medication>;
+using als_i = alias_i<Invoice>;
+using als_j = alias_j<INSResponse>;

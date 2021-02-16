@@ -28,6 +28,7 @@ void Storage::initialize()
 /// Claim
 /// INSResponses
 /// Invoice
+/// INSResponseLine
 /// 
 /// 
 
@@ -42,6 +43,7 @@ void Storage::fill_db_with_test_data()
 	auto& storage = Storage::getStorage();
 
 	// order is vital!
+	storage.remove_all<INSResponseLine>();
 	storage.remove_all<Invoice>();
 	storage.remove_all <INSResponse>();
 	storage.remove_all<Claim>();
@@ -394,3 +396,27 @@ void Storage::empty_database()
 
 }
 
+////////////////////////////////////////
+///DB access
+///
+///
+
+double Claim::get_total_amount()
+{
+	auto sum_results = Storage::getStorage().select(columns(
+		sum(alias_column<als_i>(&Invoice::amount))),
+		where(c(alias_column<als_i>(&Invoice::fkey_claim)) == this->id));
+
+	auto&& line = sum_results[0];
+	auto&& pc = std::get<0>(line);
+	return *pc;
+}
+
+std::string Claim::dump() const
+{
+	Patient patient = Storage::getStorage().get<Patient>(this->fkey_patient);
+	Doctor doctor = Storage::getStorage().get<Doctor>(this->fkey_doctor);
+	std::string str = std::to_string(id) + " - "s + Util::to_string(start_date) + " - "s + Util::to_string(submission_date) + " "s + patient.name() + " Dr(a) "s + doctor.name();
+	return str;
+
+}

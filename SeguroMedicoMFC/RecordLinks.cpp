@@ -23,9 +23,11 @@ bool RecordLinks::has_links(const INSResponse& response)
 	using namespace sqlite_orm;
 	auto& storage = Storage::getStorage();
 
-	auto count = storage.count<Invoice>(where(is_equal(&Invoice::fkey_INSResponse, response.id)));
+	int count[2]{ 1,1 };
+	count[0] = storage.count<Invoice>(where(is_equal(&Invoice::fkey_INSResponse, response.id)));
+	count[1] = storage.count<INSResponseLine>(where(is_equal(&INSResponseLine::fkey_INSResponse, response.id)));
 
-	return count > 0;
+	return count[0] && count[1];
 }
 
 
@@ -72,9 +74,28 @@ bool RecordLinks::has_links(const Specialty& specialty)
 	return count > 0;
 }
 
-bool RecordLinks::has_links(const Invoice& )
+bool RecordLinks::has_links(const Invoice& factura)
 {
+	using namespace sqlite_orm;
+	auto& storage = Storage::getStorage();
+
+	auto count = storage.count<INSResponseLine>(where(is_equal(&INSResponseLine::fkey_factura, factura.id)));
+
 	return false;
+}
+
+bool RecordLinks::foreignKeysExist(const INSResponseLine& line)
+{
+	using namespace sqlite_orm;
+	auto& storage = Storage::getStorage();
+
+
+	int count[2]{ 1,1 };
+
+	count[0] = storage.count<INSResponse>(where(is_equal(&INSResponse::id, line.fkey_INSResponse)));
+	count[1] = storage.count<Invoice>(where(is_equal(&Invoice::id, line.fkey_factura)));
+
+	return count[0] && count[1];
 }
 
 bool RecordLinks::foreignKeysExist(const Invoice& invoice)

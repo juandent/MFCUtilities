@@ -41,6 +41,8 @@ public:
 	afx_msg void OnFileMedicationdlg();
 	afx_msg void OnFileClaimdlg();
 	afx_msg void OnFileInvoicedlg();
+	afx_msg void OnFileInsresponsedlg();
+	afx_msg void OnFileInsresponselinedlg();
 };
 
 extern CSeguroMedicoMFCApp theApp;

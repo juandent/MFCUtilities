@@ -6,6 +6,7 @@
 #include "InvoiceDlg.h"
 #include "afxdialogex.h"
 #include "ClaimDlg.h"
+#include "INSResponseDlg.h"
 
 
 // InvoiceDlg dialog
@@ -21,7 +22,7 @@ m_responseCB(m_list_ins_response, [](INSResponse& response)
 }),
 m_claimCB(m_list_reclamos, [](Claim& claim)
 {
-		return Util::to_cstring(claim.simple_dump());
+		return Util::to_cstring(claim.dump());
 }),
 m_invoiceLB(m_list_facturas, [](Invoice& invoice)
 {
@@ -217,5 +218,7 @@ void InvoiceDlg::OnBnClickedBReclamos()
 void InvoiceDlg::OnBnClickedBInsResponse()
 {
 	// TODO: Add your control notification handler code here
-	MessageBoxW(L"TODO");
+	INSResponseDlg dlg;
+	dlg.DoModal();
+	Refresh();
 }

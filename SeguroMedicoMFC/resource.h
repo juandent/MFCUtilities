@@ -5,6 +5,7 @@
 #define ID_BORRAR                       3
 #define ID_NUEVO                        4
 #define ID_B_RECLAMOS                   5
+#define ID_B_FILTER                     5
 #define ID_B_INS_RESPONSE               6
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -95,6 +96,8 @@
 #define IDD_MedicationDlg               314
 #define IDD_ClaimDlg                    315
 #define IDD_InvoiceDlg                  316
+#define IDD_INSResponseDlg              317
+#define IDD_m_INSResponseLineDlg        318
 #define IDC_GRID_1                      1000
 #define IDC_E_ID_SPECIALTY              1001
 #define IDC_E_NOMBRE_SPECIALTY          1002
@@ -102,6 +105,7 @@
 #define ID_APPLY                        1005
 #define ID_CERRAR                       1006
 #define IDC_E_ID_DOCTOR                 1007
+#define ID_CALCULATE                    1007
 #define IDC_E_PRIMER_NOMBRE             1008
 #define IDC_E_APELLIDOS                 1009
 #define IDC_CB_SPECIALIDADES            1010
@@ -147,20 +151,50 @@
 #define IDC_E_DESCRIPTION               1051
 #define IDC_C_INS_RESPONSE              1052
 #define IDC_L_INVOICES                  1053
+#define IDC_E_ID_INSRESPONSE            1054
+#define IDC_E_LIQUIDACION_NUM           1055
+#define IDC_E_NUMERO_CASO               1056
+#define IDC_E_TOTAL_BRUTO               1057
+#define IDC_E_OTRAS_DEDUCCIONES         1058
+#define IDC_E_COPAGOS                   1059
+#define IDC_E_COASEGUROS                1060
+#define IDC_E_DEDUCIBLE_ANUAL           1061
+#define IDC_E_TOTAL_NETO                1062
+#define IDC_E_RETENCION                 1063
+#define IDC_E_TIPO_CAMBIO               1064
+#define IDC_E_TOTAL_A_PAGAR             1065
+#define IDC_E_COMENTARIOS               1066
+#define IDC_L_INSRESPONSES_LIST         1067
+#define IDC_GRID                        1069
+#define IDC_E_ID                        1070
+#define IDC_C_FKEY_INSRESPONSE          1071
+#define IDC_C_FKEY_INVOICE              1072
+#define IDC_E_MONTO_CUBIERTO            1073
+#define IDC_E_MONTO_FACTURA             1074
+#define IDC_E_MONTO_DEDUCCIONES         1075
+#define IDC_E_MONTO_COPAGOS             1076
+#define IDC_E_MONTO_COASEGUROS          1077
+#define IDC_E_MONTO_DEDUCIBLE_ANUAL     1078
+#define IDC_E_MONTO_A_PAGAR             1079
+#define IDC_E_MONTO_CUBIERTO_P100       1080
+#define IDC_E_FACTURA_CUBIERTO_P100     1081
+#define IDC_L_INSRESPONSELINE           1082
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
 #define ID_FILE_MEDICATIONDLG           32774
 #define ID_FILE_CLAIMDLG                32775
 #define ID_FILE_INVOICEDLG              32776
+#define ID_FILE_INSRESPONSEDLG          32777
+#define ID_FILE_INSRESPONSELINEDLG      32778
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        317
-#define _APS_NEXT_COMMAND_VALUE         32777
-#define _APS_NEXT_CONTROL_VALUE         1054
-#define _APS_NEXT_SYMED_VALUE           317
+#define _APS_NEXT_RESOURCE_VALUE        319
+#define _APS_NEXT_COMMAND_VALUE         32779
+#define _APS_NEXT_CONTROL_VALUE         1083
+#define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif

@@ -114,6 +114,12 @@
     <ClInclude Include="InvoiceDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="INSResponseDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INSResponseLineDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SeguroMedicoMFC.cpp">
@@ -183,6 +189,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InvoiceDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="INSResponseDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="INSResponseLineDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

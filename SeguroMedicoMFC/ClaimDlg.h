@@ -18,6 +18,16 @@ class ClaimDlg : public CDialog
 	std::optional<Claim> m_claim;
 	RadioButtonGroup m_acknowledgement;
 
+	struct WhereParameters
+	{
+		ClaimDlg* dlg;
+		// std::optional<std::string>	conceptoPattern{ "%" };
+		std::optional<int>			claim_id;
+		// std::optional<std::string>	categoriaPattern;
+		void executeWhere();
+	} whereParameters{ this };
+
+
 	void Refresh();
 	template <class T>
 	void InitializeGrid(const T& t);
@@ -66,4 +76,5 @@ private:
 	CListBox m_claim_list;
 public:
 	afx_msg void OnLbnSelchangeLClaimList();
+	afx_msg void OnBnClickedBFilter();
 };

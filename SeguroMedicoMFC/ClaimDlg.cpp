@@ -28,7 +28,7 @@ m_medicationCB(m_medicamento_list, [](Medication& med)
 }),
 m_claimLB(m_claim_list, [](Claim& claim)
 {
-		return Util::to_cstring(claim.simple_dump());
+		return Util::to_cstring(claim.dump());
 }),
 m_acknowledgement({ &m_acknowledge_none, &m_acknowledge_partial, &m_acknowledge_full  })
 {
@@ -68,6 +68,7 @@ BEGIN_MESSAGE_MAP(ClaimDlg, CDialog)
 	ON_BN_CLICKED(ID_BORRAR, &ClaimDlg::OnBnClickedBorrar)
 	ON_BN_CLICKED(ID_CERRAR, &ClaimDlg::OnBnClickedCerrar)
 	ON_LBN_SELCHANGE(IDC_L_CLAIM_LIST, &ClaimDlg::OnLbnSelchangeLClaimList)
+	ON_BN_CLICKED(ID_B_FILTER, &ClaimDlg::OnBnClickedBFilter)
 END_MESSAGE_MAP()
 
 
@@ -94,7 +95,7 @@ void ClaimDlg::Refresh()
 	m_medicationCB.loadLBOrderBy(&Medication::name);
 	m_patientCB.loadLBOrderBy(&Patient::last_name);
 	m_claimLB.loadLBOrderBy(&Claim::start_date);
-	InitializeGrid(true);
+	// InitializeGrid(true);
 	// grid	
 }
 
@@ -106,6 +107,27 @@ using als_s = alias_s<Specialty>;
 using als_m = alias_m<Medication>;
 using als_i = alias_i<Invoice>;
 using als_j = alias_j<INSResponse>;
+
+void ClaimDlg::WhereParameters::executeWhere()
+{
+	auto fkey_claim = this->claim_id.value_or(1);
+
+	auto whereClaim = c(alias_column<als_i>(&Invoice::fkey_claim)) == fkey_claim;
+
+	// auto conceptoPattern = this->conceptoPattern.value_or("%");
+	//
+	// auto whereConcepto = like(alias_column<als_d>(&Concepto::name), conceptoPattern);
+	//
+	// auto categoriaPattern = this->categoriaPattern.value_or("%");
+	//
+	// auto whereCategoria = like(alias_column<als_c>(&Categoria::name), categoriaPattern);
+
+
+	auto whereClause = whereClaim;  // whereStatement&& whereConcepto&& whereCategoria;
+
+	dlg->InitializeGrid(whereClause);
+
+}
 
 template<typename T>
 void ClaimDlg::InitializeGrid(const T& t)
@@ -127,14 +149,26 @@ void ClaimDlg::InitializeGrid(const T& t)
 		alias_column<als_i>(&Invoice::id),
 		alias_column<als_i>(&Invoice::number),
 		alias_column<als_i>(&Invoice::amount),
-		alias_column<als_i>(&Invoice::fkey_claim)),
+		alias_column<als_i>(&Invoice::fkey_claim),
+		alias_column<als_c>(&Claim::start_date),
+		alias_column<als_c>(&Claim::submission_date),
+		alias_column<als_c>(&Claim::amount)),
+		// sum(alias_column<als_i>(&Invoice::amount))),
+		inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
+		where(t),
 		order_by(alias_column<als_i>(&Invoice::fkey_claim)));
 
+
+	auto sum_results = Storage::getStorage().select(columns(
+		sum(alias_column<als_i>(&Invoice::amount))),
+		where(t));
+
+	auto&& line = sum_results[0];
+	auto&& pc = std::get<0>(line);
+
+	SetAmount(m_total_claim_amount, *pc);
 	
 #endif
-	
-		// where(t)));
-		// left_join<als_d>(on(c(alias_column<als_c>(&Claim::fkey_doctor)) == alias_column<als_d>(&Doctor::id))),
 
 #if 0		
 		,					// fkey_medication int nullable
@@ -164,36 +198,10 @@ void ClaimDlg::InitializeGrid(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID", "INV NUMBER", "INV AMOUNT", "CLAIM ID" }; // , "PATIENT LAST", "PATIENT FIRST", "DOCTOR LAST", "DOCTOR FIRST", "ID MEDICATION"
+	std::vector<std::string> headers{ "ID", "INV NUMBER", "INV AMOUNT", "CLAIM ID", "START DATE", "SUBMISSION DATE", "CLAIM AMOUNT" }; // , "PATIENT LAST", "PATIENT FIRST", "DOCTOR LAST", "DOCTOR FIRST", "ID MEDICATION"
 
-	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<0>, IntegerList<0>>(m_grid_claims, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
+	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<3,7>, IntegerList<0>>(m_grid_claims, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer->display();
-#if 0
-	auto sum_results = Storage::getStorage().select(columns(
-		alias_column<als_t>(&Transaccion::id_transaccion),
-		alias_column<als_d>(&Concepto::id_concepto),
-		sum(alias_column<als_t>(&Transaccion::amount_colones)),
-		sum(alias_column<als_t>(&Transaccion::amount_dolares))),
-		left_join< als_d>(on(c(alias_column<als_t>(&Transaccion::fkey_concepto)) == alias_column<als_d>(&Concepto::id_concepto))),
-		left_join< als_c>(on(c(alias_column<als_t>(&Transaccion::fkey_category)) == alias_column<als_c>(&Categoria::id_categoria))),
-		where(t));
-
-	auto&& line = sum_results[0];
-	auto&& pc = std::get<2>(line);
-
-	Colones c(pc ? *pc : 0);
-	auto ss = Util::to_cstring(c);
-
-	m_sumColones.SetWindowTextW(ss);
-
-
-	auto&& pd = std::get<3>(line);
-
-	Dolares d(pd ? *pd : 0);
-	auto dd = Util::to_cstring(d);
-
-	m_sumDollars.SetWindowTextW(dd);
-#endif
 }
 
 
@@ -212,6 +220,7 @@ void ClaimDlg::OnBnClickedApply()
 	auto asprose_num_reclamo = GetText(m_asprose_claim_number);
 	auto asprose_caso_numero = GetText(m_asprose_case_number);
 	auto asprose_amount_recognized = GetAmount(m_asprose_amount_recognized);
+	// auto monto_total = GetAmount(m_total_claim_amount);
 
 	auto val = static_cast<AcknowledgementType>(m_acknowledgement.get_value());
 
@@ -254,9 +263,10 @@ void ClaimDlg::OnBnClickedApply()
 	}
 	else                // update
 	{
+		claim->amount = claim->get_total_amount();
 		claim->start_date = start_date;
 		claim->submission_date = submission_date;
-		claim->amount = amount_claim;
+		// claim->amount = amount_claim;
 		claim->asprose_acknowledgement_type = static_cast<int>(val);
 		claim->asprose_amount_presented = asprose_amount_recognized;
 		claim->asprose_case_number = asprose_caso_numero;
@@ -289,19 +299,25 @@ void ClaimDlg::OnBnClickedNuevo()
 	m_doctorCB.select(std::nullopt);
 	m_patientCB.select(std::nullopt);
 	m_medicationCB.select(std::nullopt);
-
+	m_claimLB.select(std::nullopt);
+	SetAmount(m_total_claim_amount, 0);
 }
 
 
 void ClaimDlg::OnBnClickedBorrar()
 {
 	// TODO: Add your control notification handler code here
+	if (m_claimLB.delete_current_sel())
+	{
+		OnBnClickedNuevo();
+	}
 }
 
 
 void ClaimDlg::OnBnClickedCerrar()
 {
 	// TODO: Add your control notification handler code here
+	CDialog::OnOK();
 }
 
 
@@ -309,6 +325,8 @@ void ClaimDlg::OnLbnSelchangeLClaimList()
 {
 	// TODO: Add your control notification handler code here
 	auto claim = m_claimLB.current();
+	if (!claim)	 return;
+	SetText(m_comment, claim->comment);
 	SetText(m_id_reclamo, claim->id);
 	SetDate(m_start_date, claim->start_date);
 	SetDate(m_date_submitted, claim->submission_date);
@@ -316,10 +334,32 @@ void ClaimDlg::OnLbnSelchangeLClaimList()
 	SetText(m_asprose_case_number, claim->asprose_case_number);
 	SetText(m_asprose_claim_number, claim->asprose_claim_number);
 	SetAmount(m_asprose_amount_recognized, claim->asprose_amount_presented);
-	// SetAmount();
+	// SetAmount(m_total_claim_amount, claim->amount);
 	m_doctorCB.select(claim->fkey_doctor);
 	m_patientCB.select(claim->fkey_patient);
 	m_medicationCB.select(claim->fkey_medication);
 	m_claim = claim;
+
+
+	auto sum_results = Storage::getStorage().select(columns(
+		sum(alias_column<als_i>(&Invoice::amount))),
+		where(c(alias_column<als_i>(&Invoice::fkey_claim)) == claim->id));
+
+	auto&& line = sum_results[0];
+	auto&& pc = std::get<0>(line);
+
+	SetAmount(m_total_claim_amount, *pc);
+
+	// set
+	Storage::getStorage().update_all(set(assign(&Claim::amount, *pc)), where(is_equal(&Claim::id, claim->id)));
+}
+
+
+void ClaimDlg::OnBnClickedBFilter()
+{
+	// TODO: Add your control notification handler code here
+	if (!m_claim)  return;
 	
+	whereParameters.claim_id = m_claim->id;
+	whereParameters.executeWhere();
 }

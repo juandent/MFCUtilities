@@ -202,10 +202,12 @@
     <ClInclude Include="DoctorDlg.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="INSResponseDlg.h" />
     <ClInclude Include="InvoiceDlg.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MainView.h" />
     <ClInclude Include="MedicationDlg.h" />
+    <ClInclude Include="INSResponseLineDlg.h" />
     <ClInclude Include="ORM_Utilities.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PatientDlg.h" />
@@ -236,10 +238,12 @@
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="DoctorDlg.cpp" />
     <ClCompile Include="FileView.cpp" />
+    <ClCompile Include="INSResponseDlg.cpp" />
     <ClCompile Include="InvoiceDlg.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MainView.cpp" />
     <ClCompile Include="MedicationDlg.cpp" />
+    <ClCompile Include="INSResponseLineDlg.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="PatientDlg.cpp" />
     <ClCompile Include="RadioButtonGroup.cpp" />
