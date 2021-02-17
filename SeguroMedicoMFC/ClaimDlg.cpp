@@ -99,7 +99,7 @@ void ClaimDlg::Refresh()
 	// grid	
 }
 
-
+#if 0
 using als_c = alias_c<Claim>;
 using als_p = alias_p<Patient>;
 using als_d = alias_d<Doctor>;
@@ -107,6 +107,8 @@ using als_s = alias_s<Specialty>;
 using als_m = alias_m<Medication>;
 using als_i = alias_i<Invoice>;
 using als_j = alias_j<INSResponse>;
+#endif
+
 
 void ClaimDlg::WhereParameters::executeWhere()
 {

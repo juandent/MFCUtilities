@@ -27,7 +27,7 @@ bool RecordLinks::has_links(const INSResponse& response)
 	count[0] = storage.count<Invoice>(where(is_equal(&Invoice::fkey_INSResponse, response.id)));
 	count[1] = storage.count<INSResponseLine>(where(is_equal(&INSResponseLine::fkey_INSResponse, response.id)));
 
-	return count[0] && count[1];
+	return count[0] || count[1];
 }
 
 
@@ -81,6 +81,11 @@ bool RecordLinks::has_links(const Invoice& factura)
 
 	auto count = storage.count<INSResponseLine>(where(is_equal(&INSResponseLine::fkey_factura, factura.id)));
 
+	return count > 0;
+}
+
+bool RecordLinks::has_links(const INSResponseLine& trans)
+{
 	return false;
 }
 

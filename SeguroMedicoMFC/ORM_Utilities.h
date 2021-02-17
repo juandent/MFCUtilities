@@ -60,6 +60,12 @@ inline void SetAmount(CEdit& edit_box, double amount)
 	edit_box.SetWindowTextW(str);
 }
 
+inline void SetLongLong(CEdit& edit_box, long long amount)
+{
+	auto str = Util::to_cstring(amount);
+	edit_box.SetWindowTextW(str);
+}
+
 
 template<typename Table, int Table::* key>
 struct IdManager
@@ -118,3 +124,18 @@ inline int GetInteger(CEdit& ctrl)
 	if (str.empty())	return 0.0;
 	return std::stoi(str);
 }
+
+inline long GetLong(CEdit& ctrl)
+{
+	auto str = GetText(ctrl);
+	if (str.empty())	return 0.0;
+	return std::stol(str);
+}
+
+inline long long GetLongLong(CEdit& ctrl)
+{
+	auto str = GetText(ctrl);
+	if (str.empty())	return 0.0;
+	return std::stoll(str);
+}
+

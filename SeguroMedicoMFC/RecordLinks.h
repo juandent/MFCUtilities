@@ -23,7 +23,18 @@ class RecordLinks
 		//		static_assert((std::is_same_v<Counts, int> && ...));
 		return (counts && ...);
 	}
-
+#if 0
+	template<int N, int vec&[N]>
+	static bool anyNonZero( int vec[N])
+	{
+		for( int i=0; i < N; ++i)
+		{
+			if (array[i] != 0)
+				return true;
+		}
+		return false;
+	}
+#endif
 public:
 	static bool has_links(const Patient& patient);
 	static bool has_links(const Specialty& specialty);
@@ -32,6 +43,7 @@ public:
 	static bool has_links(const Claim& claim);
 	static bool has_links(const INSResponse& trans);
 	static bool has_links(const Invoice& invoice);
+	static bool has_links(const INSResponseLine& trans);
 
       static bool foreignKeysExist(const INSResponseLine &line);
         static bool foreignKeysExist(const Patient& patient);

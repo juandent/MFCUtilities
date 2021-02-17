@@ -101,6 +101,7 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("retencion", &INSResponse::retencion),
 				make_column("total_a_pagar", &INSResponse::total_a_pagar),
 				make_column("comentario", &INSResponse::comentarios),
+				make_column("date_response", &INSResponse::date_response),
 				make_column("tipo_cambio", &INSResponse::tipo_cambio)),
 			make_table("INSResponseLine",
 				make_column("id_INSResponseLine", &INSResponseLine::id, autoincrement(), primary_key()),

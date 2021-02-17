@@ -1,11 +1,24 @@
 #pragma once
 
+#include "BoxContents.h"
+#include "IDisplayer.h"
 
 // INSResponseDlg dialog
 
 class INSResponseDlg : public CDialog
 {
 	DECLARE_DYNAMIC(INSResponseDlg)
+
+	BoxContents<INSResponse, &INSResponse::id> m_list_insresponsesLB;
+
+	std::optional<INSResponse> m_ins_response;
+
+	void Refresh();
+	template <class T>
+	void InitializeGrid(const T& t);
+
+	std::unique_ptr<IDisplayer> m_displayer;
+
 
 public:
 	INSResponseDlg(CWnd* pParent = nullptr);   // standard constructor
@@ -38,4 +51,15 @@ private:
 	CEdit m_comentarios;
 	CListBox m_list_INSResponses;
 	CJDGridCtrl m_grid;
+public:
+	afx_msg void OnBnClickedApply();
+	afx_msg void OnBnClickedNuevo();
+	afx_msg void OnBnClickedBorrar();
+	afx_msg void OnBnClickedCerrar();
+private:
+	CDateTimeCtrl m_date_response;
+public:
+	afx_msg void OnBnClickedCalculate();
+	afx_msg void OnLbnSelchangeLInsresponsesList();
+	afx_msg void OnBnClickedFilter();
 };

@@ -153,7 +153,7 @@ struct INSResponse
 {
 	int id;
 	std::string liquidacion_num;	// ACCSA0121008421
-	long numero_caso;				// 20200101
+	long long numero_caso;				// 20200101
 	double total_bruto;				// $291.47
 	double otras_deducciones;		// 0.00
 	double copagos;					// 0.00
@@ -164,11 +164,18 @@ struct INSResponse
 	double total_a_pagar;			// CRC 142,134.87
 	std::string comentarios;		// deducible acumulado en su totalidad
 	double tipo_cambio;				// 609.55
+	date::sys_days date_response;
 
 	std::string simple_dump() const
 	{
-		std::string str = std::to_string(id) + " - "s + liquidacion_num + " "s + std::to_string(total_a_pagar);
+		std::string str = std::to_string(id) + " - "s + liquidacion_num + " "s + amountInColones();
 		return str;
+	}
+	std::string amountInColones() const
+	{
+		Util::Colones col{ total_a_pagar};
+		auto col_str = Util::to_string(col);
+		return col_str;
 	}
 };
 
@@ -207,3 +214,4 @@ using als_s = alias_s<Specialty>;
 using als_m = alias_m<Medication>;
 using als_i = alias_i<Invoice>;
 using als_j = alias_j<INSResponse>;
+using als_k = alias_k<INSResponseLine>;
