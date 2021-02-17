@@ -99,7 +99,8 @@ void INSResponseDlg::InitializeGrid(const T& t)
 		alias_column<als_k>(&INSResponseLine::fkey_factura),
 		alias_column<als_k>(&INSResponseLine::monto_cubierto),
 		alias_column<als_i>(&Invoice::amount),
-		alias_column<als_k>(&INSResponseLine::porcentaje_de_factura_cubierto)),
+		alias_column<als_k>(&INSResponseLine::porcentaje_de_factura_cubierto),
+		alias_column<als_k>(&INSResponseLine::fkey_INSResponse)),
 		inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::id)) == alias_column<als_k>(&INSResponseLine::fkey_factura))),
 		where(true),
 		order_by(alias_column<als_k>(&INSResponseLine::monto_cubierto)));
@@ -116,7 +117,7 @@ void INSResponseDlg::InitializeGrid(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID", "INV ID", "AMOUNT COVERED", "INV AMOUNT", "% INV COVERED" };
+	std::vector<std::string> headers{ "ID", "INV ID", "AMOUNT COVERED", "INV AMOUNT", "% INV COVERED", "INS RESPONSE ID" };
 
 	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<4>, IntegerList<3>>(m_grid, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer->display();

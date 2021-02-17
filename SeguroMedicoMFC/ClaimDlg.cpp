@@ -166,10 +166,14 @@ void ClaimDlg::InitializeGrid(const T& t)
 		where(t));
 
 	auto&& line = sum_results[0];
-	auto&& pc = std::get<0>(line);
 
-	SetAmount(m_total_claim_amount, *pc);
-	
+	{
+		auto&& pc = std::get<0>(line);
+		if (pc)
+		{
+			SetAmount(m_total_claim_amount, *pc);
+		}
+	}
 #endif
 
 #if 0		
@@ -349,11 +353,12 @@ void ClaimDlg::OnLbnSelchangeLClaimList()
 
 	auto&& line = sum_results[0];
 	auto&& pc = std::get<0>(line);
-
-	SetAmount(m_total_claim_amount, *pc);
-
-	// set
-	Storage::getStorage().update_all(set(assign(&Claim::amount, *pc)), where(is_equal(&Claim::id, claim->id)));
+	if (pc)
+	{
+		SetAmount(m_total_claim_amount, *pc);
+		// set
+		Storage::getStorage().update_all(set(assign(&Claim::amount, *pc)), where(is_equal(&Claim::id, claim->id)));
+	}
 }
 
 

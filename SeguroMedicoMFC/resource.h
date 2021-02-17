@@ -107,6 +107,7 @@
 #define IDC_E_ID_DOCTOR                 1007
 #define ID_CALCULATE                    1007
 #define IDC_E_PRIMER_NOMBRE             1008
+#define ID_FILTER                       1008
 #define IDC_E_APELLIDOS                 1009
 #define IDC_CB_SPECIALIDADES            1010
 #define IDC_L_DOCTORES                  1011
@@ -179,6 +180,7 @@
 #define IDC_E_MONTO_CUBIERTO_P100       1080
 #define IDC_E_FACTURA_CUBIERTO_P100     1081
 #define IDC_L_INSRESPONSELINE           1082
+#define IDC_D_DATE_RESPONSE             1083
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
@@ -194,7 +196,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        319
 #define _APS_NEXT_COMMAND_VALUE         32779
-#define _APS_NEXT_CONTROL_VALUE         1083
+#define _APS_NEXT_CONTROL_VALUE         1085
 #define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif

@@ -409,7 +409,11 @@ double Claim::get_total_amount()
 
 	auto&& line = sum_results[0];
 	auto&& pc = std::get<0>(line);
-	return *pc;
+	if (pc)
+	{
+		return *pc;
+	}
+	return 0.0;
 }
 
 std::string Claim::dump() const
