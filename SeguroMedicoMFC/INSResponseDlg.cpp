@@ -77,6 +77,14 @@ void INSResponseDlg::Refresh()
 	m_list_insresponsesLB.loadLBOrderBy(&INSResponse::total_a_pagar);
 }
 
+void INSResponseDlg::OnBnClickedFilter()
+{
+	// TODO: Add your control notification handler code here
+	auto whereClause = c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == m_ins_response->id;
+
+	InitializeGrid(whereClause);
+}
+
 template <class T>
 void INSResponseDlg::InitializeGrid(const T& t)
 {
@@ -102,7 +110,7 @@ void INSResponseDlg::InitializeGrid(const T& t)
 		alias_column<als_k>(&INSResponseLine::porcentaje_de_factura_cubierto),
 		alias_column<als_k>(&INSResponseLine::fkey_INSResponse)),
 		inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::id)) == alias_column<als_k>(&INSResponseLine::fkey_factura))),
-		where(true),
+		where(t),
 		order_by(alias_column<als_k>(&INSResponseLine::monto_cubierto)));
 
 
@@ -119,7 +127,9 @@ void INSResponseDlg::InitializeGrid(const T& t)
 
 	std::vector<std::string> headers{ "ID", "INV ID", "AMOUNT COVERED", "INV AMOUNT", "% INV COVERED", "INS RESPONSE ID" };
 
-	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<4>, IntegerList<3>>(m_grid, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
+	// m_grid.SetRowCount(0);
+	// m_grid.SetColumnCount(0);
+	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<4>, IntegerList<3>>(m_grid, std::move(otherlines), std::move(headers)));
 	m_displayer->display();
 
 }
@@ -255,11 +265,8 @@ void INSResponseDlg::OnLbnSelchangeLInsresponsesList()
 	SetAmount(m_total_pagar, m_ins_response->total_a_pagar);
 	SetText(m_comentarios, m_ins_response->comentarios);
 	SetDate(m_date_response, m_ins_response->date_response);
+
+	OnBnClickedFilter();
 }
 
 
-void INSResponseDlg::OnBnClickedFilter()
-{
-	// TODO: Add your control notification handler code here
-	InitializeGrid(true);
-}

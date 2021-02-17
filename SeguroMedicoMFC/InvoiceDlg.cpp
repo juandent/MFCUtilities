@@ -112,12 +112,11 @@ void InvoiceDlg::OnBnClickedApply()
 		MessageBoxW(L"Falta escoger Reclamo");
 		return;
 	}
-	// ins_response can be nullopt!
-	// if( ! ins_response)
-	// {
-	// 	MessageBoxW(L"Falta escoger INS Response");
-	// 	return;
-	// }
+	if( ! ins_response)
+	{
+		MessageBoxW(L"Falta escoger INS Response");
+		return;
+	}
 
 #if 0	
 	if (!claim)
@@ -138,6 +137,9 @@ void InvoiceDlg::OnBnClickedApply()
 		}
 		invoice = m_invoiceLB.insert(claim->id, number, amount, static_cast<int>(type), description, ins);
 		m_invoiceLB.insert_into_listbox(*invoice);
+
+		INSResponseLine line{ -1, ins_response->id, invoice->id,0,0,0,0,0,0,0,0 };
+		Storage::getStorage().insert(line);
 	}
 	else                // update
 	{

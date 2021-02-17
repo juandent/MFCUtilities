@@ -154,9 +154,11 @@ void ClaimDlg::InitializeGrid(const T& t)
 		alias_column<als_i>(&Invoice::fkey_claim),
 		alias_column<als_c>(&Claim::start_date),
 		alias_column<als_c>(&Claim::submission_date),
-		alias_column<als_c>(&Claim::amount)),
+		alias_column<als_c>(&Claim::amount),
+		alias_column<als_i>(&Invoice::fkey_INSResponse)),
 		// sum(alias_column<als_i>(&Invoice::amount))),
 		inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
+		// inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))
 		where(t),
 		order_by(alias_column<als_i>(&Invoice::fkey_claim)));
 
@@ -204,7 +206,7 @@ void ClaimDlg::InitializeGrid(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID", "INV NUMBER", "INV AMOUNT", "CLAIM ID", "START DATE", "SUBMISSION DATE", "CLAIM AMOUNT" }; // , "PATIENT LAST", "PATIENT FIRST", "DOCTOR LAST", "DOCTOR FIRST", "ID MEDICATION"
+	std::vector<std::string> headers{ "ID", "INV NUMBER", "INV AMOUNT", "CLAIM ID", "START DATE", "SUBMISSION DATE", "CLAIM AMOUNT", "INS RESPONSE ID" };
 
 	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<3,7>, IntegerList<0>>(m_grid_claims, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer->display();
@@ -359,6 +361,7 @@ void ClaimDlg::OnLbnSelchangeLClaimList()
 		// set
 		Storage::getStorage().update_all(set(assign(&Claim::amount, *pc)), where(is_equal(&Claim::id, claim->id)));
 	}
+	OnBnClickedBFilter();
 }
 
 

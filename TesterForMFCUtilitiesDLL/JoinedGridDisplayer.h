@@ -50,6 +50,10 @@ public:
 		std::vector<std::string> headers_)
 		: lines{ std::move(lines_) }, grid{ grid }, headers{ std::move(headers_) } 
 	{
+		    // reset grid
+		grid.SetRowCount(0);
+		grid.SetColumnCount(0);
+                // new grid
 		grid.SetColumnCount(NumCols + 1); // headers.size() + 1);
 		grid.SetRowCount(lines.size() + 1);
 		grid.SetFixedRowCount();
