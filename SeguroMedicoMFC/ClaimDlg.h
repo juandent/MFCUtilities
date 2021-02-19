@@ -77,4 +77,10 @@ private:
 public:
 	afx_msg void OnLbnSelchangeLClaimList();
 	afx_msg void OnBnClickedBFilter();
+private:
+	CEdit m_other_system_id;
+public:
+	afx_msg void OnBnClickedBPatients();
+	afx_msg void OnBnClickedBDoctores();
+	afx_msg void OnBnClickedBMedications();
 };

@@ -23,16 +23,11 @@ class RecordLinks
 		//		static_assert((std::is_same_v<Counts, int> && ...));
 		return (counts && ...);
 	}
-#if 0
-	template<int N, int vec&[N]>
-	static bool anyNonZero( int vec[N])
+#if 1
+	template<size_t N>
+	static bool anyNonZero( int (&vec)[N])
 	{
-		for( int i=0; i < N; ++i)
-		{
-			if (array[i] != 0)
-				return true;
-		}
-		return false;
+          return std::any_of(std::begin(vec), std::end(vec), [](int i) { return i != 0; });
 	}
 #endif
 public:

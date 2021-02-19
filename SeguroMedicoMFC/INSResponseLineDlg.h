@@ -60,4 +60,6 @@ public:
 	afx_msg void OnEnChangeEMontoAPagar();
 	afx_msg void OnLbnSelchangeLInsresponseline();
 	afx_msg void OnBnClickedCalculate();
+	afx_msg void OnBnClickedBInsResponses();
+	afx_msg void OnBnClickedBInvoices();
 };

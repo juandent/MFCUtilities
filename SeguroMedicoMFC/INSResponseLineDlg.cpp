@@ -5,6 +5,8 @@
 #include "SeguroMedicoMFC.h"
 #include "INSResponseLineDlg.h"
 #include "afxdialogex.h"
+#include "INSResponseDlg.h"
+#include "InvoiceDlg.h"
 
 
 // INSResponseLineDlg dialog
@@ -63,6 +65,8 @@ BEGIN_MESSAGE_MAP(INSResponseLineDlg, CDialog)
 	ON_EN_CHANGE(IDC_E_MONTO_A_PAGAR, &INSResponseLineDlg::OnEnChangeEMontoAPagar)
 	ON_LBN_SELCHANGE(IDC_L_INSRESPONSELINE, &INSResponseLineDlg::OnLbnSelchangeLInsresponseline)
 	ON_BN_CLICKED(ID_CALCULATE, &INSResponseLineDlg::OnBnClickedCalculate)
+	ON_BN_CLICKED(IDC_B_INS_RESPONSES, &INSResponseLineDlg::OnBnClickedBInsResponses)
+	ON_BN_CLICKED(IDC_B_INVOICES, &INSResponseLineDlg::OnBnClickedBInvoices)
 END_MESSAGE_MAP()
 
 
@@ -292,4 +296,22 @@ void INSResponseLineDlg::OnBnClickedCalculate()
 		SetAmount(m_monto_cubierto_p100, monto_cubierto_p100);
 		SetAmount(m_factura_cubierta_p100, factura_cubierto_p100);
 	}
+}
+
+
+void INSResponseLineDlg::OnBnClickedBInsResponses()
+{
+	// TODO: Add your control notification handler code here
+	INSResponseDlg dlg;
+	dlg.DoModal();
+	Refresh();
+}
+
+
+void INSResponseLineDlg::OnBnClickedBInvoices()
+{
+	// TODO: Add your control notification handler code here
+	InvoiceDlg dlg;
+	dlg.DoModal();
+	Refresh();
 }

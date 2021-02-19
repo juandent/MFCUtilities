@@ -181,6 +181,25 @@
 #define IDC_E_FACTURA_CUBIERTO_P100     1081
 #define IDC_L_INSRESPONSELINE           1082
 #define IDC_D_DATE_RESPONSE             1083
+#define IDC_E_OTHER_SYSTEM_ID           1085
+#define IDC_B_PATIENTS                  1086
+#define IDC_B_DOCTORES                  1087
+#define IDC_B_INS_RESPONSES             1087
+#define IDC_B_MEDICATIONS               1088
+#define IDC_B_INVOICES                  1088
+#define IDC_FECHA_INICIO                1088
+#define IDC_FECHA_FINAL                 1089
+#define IDC_B_FILTER                    1090
+#define IDC_C_LISTA_DOCTORES            1091
+#define IDC_C_LISTA_PACIENTES           1092
+#define IDC_C_FILTER_BY_DATES           1093
+#define IDC_E_CLAIM_AMOUNT              1094
+#define IDC_GRID_2                      1095
+#define IDC_B_FILTER_INSRESPONSES       1096
+#define IDC_C_CLAIM_IDS                 1097
+#define IDC_B_CLEAR_FILTERS             1098
+#define IDC_B_CLEAR_FILTERS2            1099
+#define IDC_B_REFRESH                   1099
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
@@ -196,7 +215,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        319
 #define _APS_NEXT_COMMAND_VALUE         32779
-#define _APS_NEXT_CONTROL_VALUE         1085
+#define _APS_NEXT_CONTROL_VALUE         1099
 #define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif

@@ -59,6 +59,7 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("asprose_acknowledgement_type", &Claim::asprose_acknowledgement_type),
 				make_column("comment", &Claim::comment),
 				make_column("amount", &Claim::amount),
+				make_column("other_system_id", &Claim::other_system_id),
 				foreign_key(&Claim::fkey_doctor).references(&Doctor::id),
 				foreign_key(&Claim::fkey_medication).references(&Medication::id),
 				foreign_key(&Claim::fkey_patient).references(&Patient::id)),
@@ -122,7 +123,7 @@ inline 	auto& Storage_Impl::get_storage()
 	if (flag == 0)
 	{
 		flag = 1;
-		storage.sync_schema(true);
+		storage.sync_schema(false);
 	}
 
 	return storage;

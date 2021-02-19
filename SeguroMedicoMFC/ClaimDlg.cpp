@@ -5,7 +5,10 @@
 #include "SeguroMedicoMFC.h"
 #include "ClaimDlg.h"
 #include "afxdialogex.h"
+#include "DoctorDlg.h"
 #include "JoinedGridDisplayer.h"
+#include "MedicationDlg.h"
+#include "PatientDlg.h"
 
 
 // ClaimDlg dialog
@@ -59,6 +62,7 @@ void ClaimDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_COMMENT, m_comment);
 	DDX_Control(pDX, IDC_CLAIMS_GRID, m_grid_claims);
 	DDX_Control(pDX, IDC_L_CLAIM_LIST, m_claim_list);
+	DDX_Control(pDX, IDC_E_OTHER_SYSTEM_ID, m_other_system_id);
 }
 
 
@@ -69,6 +73,9 @@ BEGIN_MESSAGE_MAP(ClaimDlg, CDialog)
 	ON_BN_CLICKED(ID_CERRAR, &ClaimDlg::OnBnClickedCerrar)
 	ON_LBN_SELCHANGE(IDC_L_CLAIM_LIST, &ClaimDlg::OnLbnSelchangeLClaimList)
 	ON_BN_CLICKED(ID_B_FILTER, &ClaimDlg::OnBnClickedBFilter)
+	ON_BN_CLICKED(IDC_B_PATIENTS, &ClaimDlg::OnBnClickedBPatients)
+	ON_BN_CLICKED(IDC_B_DOCTORES, &ClaimDlg::OnBnClickedBDoctores)
+	ON_BN_CLICKED(IDC_B_MEDICATIONS, &ClaimDlg::OnBnClickedBMedications)
 END_MESSAGE_MAP()
 
 
@@ -236,6 +243,7 @@ void ClaimDlg::OnBnClickedApply()
 
 	auto comments = GetText(m_comment);
 	auto amount_claim = GetAmount(m_total_claim_amount);
+	auto other_system_id = GetInteger(m_other_system_id);
 
 	if(!patient)
 	{
@@ -266,7 +274,7 @@ void ClaimDlg::OnBnClickedApply()
 #if 1
 	if (!claim)	// insert
 	{
-		claim = m_claimLB.insert(patient->id, doctor->id, medicina->id, start_date, submission_date, asprose_num_reclamo, asprose_caso_numero, asprose_amount_recognized, ins_num_reclamo, static_cast<int>(val), comments, amount_claim);
+		claim = m_claimLB.insert(patient->id, doctor->id, medicina->id, start_date, submission_date, asprose_num_reclamo, asprose_caso_numero, asprose_amount_recognized, ins_num_reclamo, static_cast<int>(val), comments, amount_claim, other_system_id);
 		m_claimLB.insert_into_listbox(*claim);
 	}
 	else                // update
@@ -284,6 +292,7 @@ void ClaimDlg::OnBnClickedApply()
 		claim->fkey_doctor = doctor->id;
 		claim->fkey_medication = medicina->id;
 		claim->fkey_patient = patient->id;
+		claim->other_system_id = other_system_id;
 		m_claimLB.update(*claim);
 	}
 #endif
@@ -309,6 +318,8 @@ void ClaimDlg::OnBnClickedNuevo()
 	m_medicationCB.select(std::nullopt);
 	m_claimLB.select(std::nullopt);
 	SetAmount(m_total_claim_amount, 0);
+	m_claim = std::nullopt;
+	OnBnClickedBFilter();
 }
 
 
@@ -368,8 +379,39 @@ void ClaimDlg::OnLbnSelchangeLClaimList()
 void ClaimDlg::OnBnClickedBFilter()
 {
 	// TODO: Add your control notification handler code here
-	if (!m_claim)  return;
+	if (!m_claim)
+	{
+		InitializeGrid(false);
+		return;
+	}
 	
 	whereParameters.claim_id = m_claim->id;
 	whereParameters.executeWhere();
+}
+
+
+void ClaimDlg::OnBnClickedBPatients()
+{
+	// TODO: Add your control notification handler code here
+	PatientDlg dlg;
+	dlg.DoModal();
+	Refresh();
+}
+
+
+void ClaimDlg::OnBnClickedBDoctores()
+{
+	// TODO: Add your control notification handler code here
+	DoctorDlg dlg;
+	dlg.DoModal();
+	Refresh();
+}
+
+
+void ClaimDlg::OnBnClickedBMedications()
+{
+	// TODO: Add your control notification handler code here
+	MedicationDlg dlg;
+	dlg.DoModal();
+	Refresh();
 }

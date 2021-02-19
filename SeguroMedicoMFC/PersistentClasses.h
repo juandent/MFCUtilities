@@ -26,6 +26,7 @@ struct Claim
 	int asprose_acknowledgement_type;		// full, partial, none: TODO: create an enum instead
 	std::string comment;
 	double amount;
+	std::optional<int> other_system_id;
 
 	std::string simple_dump() const
 	{
