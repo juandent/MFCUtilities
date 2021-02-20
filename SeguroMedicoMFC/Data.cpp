@@ -411,6 +411,7 @@ double Claim::get_total_amount()
 	auto&& pc = std::get<0>(line);
 	if (pc)
 	{
+		this->amount = *pc;	// need to save this
 		return *pc;
 	}
 	return 0.0;

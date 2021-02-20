@@ -124,6 +124,7 @@ void SpecialtyDlg::OnLbnSelchangeLSpecialties()
 {
 	// TODO: Add your control notification handler code here
 	auto specialty = m_specialtyLB.current();
+	if (!specialty)  return;
 	SetText(m_id_specialty, specialty->id);
 	SetText(m_nombre_specialty, specialty->name);
 

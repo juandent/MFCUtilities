@@ -71,6 +71,7 @@ void DoctorDlg::OnLbnSelchangeLDoctores()
 {
 	// TODO: Add your control notification handler code here
 	auto doctor = m_doctoresLB.current();
+	if (!doctor) return;
 	SetText(m_id_doctor, doctor->id);
 	SetText(m_first_name, doctor->first_name);
 	SetText(m_last_name, doctor->last_name);

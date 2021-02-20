@@ -138,6 +138,7 @@ void PatientDlg::OnLbnSelchangeLPacientes()
 {
 	// TODO: Add your control notification handler code here
 	auto patient = m_patientLB.current();
+	if (!patient) return;
 	SetText(m_id_patient, patient->id);
 	SetText(m_first_name, patient->first_name);
 	SetText(m_last_name, patient->last_name);

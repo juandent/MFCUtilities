@@ -134,6 +134,7 @@ void MedicationDlg::OnLbnSelchangeLMedications()
 {
 	// TODO: Add your control notification handler code here
 	auto medication = m_medicationLB.current();
+	if (!medication) return;
 	SetText(m_id_medication, medication->id);
 	SetText(m_name, medication->name);
 }

@@ -157,6 +157,9 @@ void InvoiceDlg::OnBnClickedApply()
 		invoice->type = static_cast<int>(type);
 		m_invoiceLB.update(*invoice);
 	}
+	claim->get_total_amount();
+	Storage::getStorage().replace(*claim);
+	SetAmount(m_monto, claim->amount);
 	m_invoiceLB.loadLBOrderBy(&Invoice::number);
 	m_invoice = invoice;
 	setIdFromRecord<Invoice>(m_id_invoice, m_invoice->id);
@@ -197,6 +200,7 @@ void InvoiceDlg::OnLbnSelchangeLInvoices()
 {
 	// TODO: Add your control notification handler code here
 	auto invoice = m_invoiceLB.current();
+	if (!invoice)	return;
 	SetText(m_id_invoice, invoice->id);
 	m_claimCB.select(invoice->fkey_claim);
 	m_invoice_type.set_value(invoice->type);
