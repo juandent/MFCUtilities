@@ -76,6 +76,11 @@ BOOL InvoiceDlg::OnInitDialog()
 	m_invoice_type.Initialize();
 	
 	Refresh();
+
+	if(m_id != -1)
+	{
+		m_invoiceLB.select(m_id);
+	}
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -227,4 +232,18 @@ void InvoiceDlg::OnBnClickedBInsResponse()
 	INSResponseDlg dlg;
 	dlg.DoModal();
 	Refresh();
+}
+
+
+BOOL InvoiceDlg::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult)
+{
+	// TODO: Add your specialized code here and/or call the base class
+	if(message == WM_COMMAND)
+	{
+		if(wParam== 0xFFFF && lParam == 0xFFFF)
+		{
+			int i = 0;
+		}
+	}
+	return CDialog::OnWndMsg(message, wParam, lParam, pResult);
 }

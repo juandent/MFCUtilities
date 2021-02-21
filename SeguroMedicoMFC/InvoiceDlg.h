@@ -35,6 +35,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	virtual BOOL OnInitDialog();
+	int m_id{ -1 };
 private:
 	CEdit m_id_invoice;
 	CComboBox m_list_reclamos;
@@ -56,4 +57,5 @@ public:
 	afx_msg void OnLbnSelchangeLInvoices();
 	afx_msg void OnBnClickedBReclamos();
 	afx_msg void OnBnClickedBInsResponse();
+	virtual BOOL OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult);
 };

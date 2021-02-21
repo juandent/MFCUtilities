@@ -65,6 +65,9 @@ private:
 public:
 	afx_msg void OnBnClickedBClearFilters();
 	afx_msg void OnBnClickedBRefresh();
+	afx_msg void OnFilePrint();
+	void OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT*);
+	void OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 };
 
 

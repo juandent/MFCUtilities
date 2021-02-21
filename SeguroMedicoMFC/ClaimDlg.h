@@ -49,6 +49,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	virtual BOOL OnInitDialog();
+	int m_id{ -1 };
 private:
 	CEdit m_id_reclamo;
 	CComboBox m_patient_list;

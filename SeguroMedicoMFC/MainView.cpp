@@ -7,6 +7,10 @@
 #include "Data.h"
 #include "GridDisplayer.h"
 #include <tuple>
+
+
+#include "ClaimDlg.h"
+#include "InvoiceDlg.h"
 #include "JoinedComboDisplayer.h"
 
 // MainView
@@ -50,10 +54,13 @@ void MainView::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(MainView, CFormView)
+	ON_NOTIFY(GVN_SELCHANGING, IDC_GRID_2, OnGrid2StartSelChange)
+	ON_NOTIFY(GVN_SELCHANGING, IDC_GRID_1, OnGrid1StartSelChange)
 	ON_BN_CLICKED(IDC_B_FILTER, &MainView::OnBnClickedBFilter)
 	ON_BN_CLICKED(IDC_B_FILTER_INSRESPONSES, &MainView::OnBnClickedBFilterInsresponses)
 	ON_BN_CLICKED(IDC_B_CLEAR_FILTERS, &MainView::OnBnClickedBClearFilters)
 	ON_BN_CLICKED(IDC_B_REFRESH, &MainView::OnBnClickedBRefresh)
+	ON_COMMAND(ID_FILE_PRINT, &MainView::OnFilePrint)
 END_MESSAGE_MAP()
 
 
@@ -265,3 +272,49 @@ void MainView::OnBnClickedBRefresh()
 	// TODO: Add your control notification handler code here
 	Refresh();
 }
+
+
+
+
+void MainView::OnFilePrint()
+{
+	// TODO: Add your command handler code here
+	m_grid_1.Print();
+}
+
+void MainView::OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
+{
+	NM_GRIDVIEW* pItem = (NM_GRIDVIEW*)pNotifyStruct;
+	auto row = pItem->iRow;
+	auto col = pItem->iColumn;
+
+
+	auto invoice_id_cs = m_grid_2.GetItemText(row, 1);
+	auto invoice_id_s = Util::to_string(invoice_id_cs.GetBuffer());
+	auto invoice_id = std::stoi(invoice_id_s);
+
+	InvoiceDlg dlg;
+	dlg.m_id = invoice_id;
+	dlg.DoModal();
+	Refresh();
+
+}
+
+
+void MainView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
+{
+	NM_GRIDVIEW* pItem = (NM_GRIDVIEW*)pNotifyStruct;
+	auto row = pItem->iRow;
+	auto col = pItem->iColumn;
+
+
+	auto claim_id_cs = m_grid_1.GetItemText(row, 1);
+	auto claim_id_s = Util::to_string(claim_id_cs.GetBuffer());
+	auto claim_id = std::stoi(claim_id_s);
+
+	ClaimDlg dlg;
+	dlg.m_id = claim_id;
+	dlg.DoModal();
+	Refresh();
+}
+

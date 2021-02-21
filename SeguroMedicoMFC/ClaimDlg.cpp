@@ -90,6 +90,11 @@ BOOL ClaimDlg::OnInitDialog()
 	m_acknowledge_none.SetCheck(BST_CHECKED);
 	
 	Refresh();
+
+	if(m_id!= -1)
+	{
+		m_claimLB.select(m_id);
+	}
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
