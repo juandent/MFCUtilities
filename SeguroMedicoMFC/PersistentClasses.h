@@ -110,7 +110,7 @@ struct Invoice
 {
 	int id;
 	int fkey_claim;
-	int number;
+	std::string number;
 	double amount;
 	int type;
 	std::string description;
@@ -118,7 +118,7 @@ struct Invoice
 
 	std::string simple_dump() const
 	{
-		std::string str = std::to_string(id) + " - "s + std::to_string(number) + " "s + amountInColones();
+		std::string str = std::to_string(id) + " - "s + number + " "s + amountInColones();
 		str += " "s + get_type();
 		return str;
 	}

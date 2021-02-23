@@ -62,4 +62,5 @@ public:
 	afx_msg void OnBnClickedCalculate();
 	afx_msg void OnLbnSelchangeLInsresponsesList();
 	afx_msg void OnBnClickedFilter();
+	void OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 };

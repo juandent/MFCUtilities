@@ -51,6 +51,7 @@ void MainView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_CLAIM_AMOUNT, m_claim_amount);
 	DDX_Control(pDX, IDC_GRID_2, m_grid_2);
 	DDX_Control(pDX, IDC_C_CLAIM_IDS, m_list_claim_ids);
+	DDX_Control(pDX, IDC_E_NUM_FACTURA, m_num_Factura);
 }
 
 BEGIN_MESSAGE_MAP(MainView, CFormView)
@@ -134,7 +135,7 @@ void MainView::InitializeGridClaims(const T& t)
 
 	
 	auto otherlines = Storage::getStorage().select(columns(
-		alias_column<als_c>(&Claim::id),
+		distinct(alias_column<als_c>(&Claim::id)),
 		alias_column<als_p>(&Patient::last_name),
 		alias_column<als_d>(&Doctor::last_name),
 		alias_column<als_d>(&Doctor::first_name),
@@ -155,7 +156,7 @@ void MainView::InitializeGridClaims(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID", "PATIENT", "DOCTOR LAST", "DOCTOR FIRST", "START DATE", "SUBMISSION DATE", "CLAIM AMOUNT" };
+	std::vector<std::string> headers{ "ID RECLAMO", "PACIENTE", "DOCTOR", "DOCTOR", "FECHA INICIAL", "FECHA ENTREGA", "MONTO RECLAMO" };
 
 	m_displayer_claims.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<7>, IntegerList<0>>(m_grid_1, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer_claims->display();
@@ -176,15 +177,15 @@ void MainView::InitializeGridINSResponses(const T& t)
 		// alias_column<als_i>(&Invoice::id),
 		alias_column<als_i>(&Invoice::number),
 		alias_column<als_i>(&Invoice::amount),
-		alias_column<als_i>(&Invoice::description),
-		alias_column<als_c>(&Claim::id),
-		alias_column<als_c>(&Claim::amount)),
+		substr(alias_column<als_i>(&Invoice::description),0, 50),
+		alias_column<als_c>(&Claim::id)),
+		// alias_column<als_c>(&Claim::amount)),
 		inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
 		inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
 		where(t),
 		order_by(alias_column<als_c>(&Claim::start_date)).desc());
 
-	std::vector<std::string> headers{ "ID", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "INV #", "INV AMNT", "DESC", "CLAIM ID", "CLAIM AMNT" };
+	std::vector<std::string> headers{ "ID LINEA INS", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "FACT #", "FACT MONTO", "DESC", "ID RECLAMO" /*, "MONTO RECLAMO"*/ };
 	m_displayer_responses.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<8,11>, IntegerList<0>>(m_grid_2, std::move(otherlines), std::move(headers)));
 	m_displayer_responses->display();
 }
@@ -193,6 +194,10 @@ void MainView::InitializeGridINSResponses(const T& t)
 
 auto MainView::GetWhereStatement()
 {
+	auto num_factura = GetText(m_num_Factura);
+	if (num_factura.empty())	num_factura = "%";
+	auto factura_where = like(alias_column<als_i>(&Invoice::number), num_factura);
+	
 	auto claim = m_claimsCB.current();
 
 	auto claimWhere = (not claim or (c(alias_column<als_c>(&Claim::id)) == claim->id));
@@ -212,7 +217,8 @@ auto MainView::GetWhereStatement()
 		&& (not doctor.has_value() or (c(alias_column<als_c>(&Claim::fkey_doctor)) == doctor->id))
 		&& (not paciente.has_value() or (c(alias_column<als_c>(&Claim::fkey_patient)) == paciente->id))
 		&& (not claim_amount_lower_bound > 0 or (c(alias_column<als_c>(&Claim::amount)) >= claim_amount_lower_bound))
-		&& claimWhere;
+		&& claimWhere
+		&& factura_where;
 	
 	return whereStatement;
 }
@@ -261,6 +267,7 @@ void MainView::OnBnClickedBClearFilters()
 	m_pacientesCB.select(std::nullopt);
 	m_filter_by_dates.SetCheck(0);
 	SetAmount(m_claim_amount, 0);
+	SetText(m_num_Factura, "%"s);
 	OnBnClickedBFilter();
 	// OnBnClickedBFilterInsresponses();
 }
@@ -288,6 +295,7 @@ void MainView::OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
 	auto row = pItem->iRow;
 	auto col = pItem->iColumn;
 
+	if (row < 1) return;
 
 	auto invoice_id_cs = m_grid_2.GetItemText(row, 1);
 	auto invoice_id_s = Util::to_string(invoice_id_cs.GetBuffer());
@@ -307,7 +315,8 @@ void MainView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 	auto row = pItem->iRow;
 	auto col = pItem->iColumn;
 
-
+	if (row < 1) return;
+	
 	auto claim_id_cs = m_grid_1.GetItemText(row, 1);
 	auto claim_id_s = Util::to_string(claim_id_cs.GetBuffer());
 	auto claim_id = std::stoi(claim_id_s);
@@ -316,5 +325,6 @@ void MainView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 	dlg.m_id = claim_id;
 	dlg.DoModal();
 	Refresh();
+	OnBnClickedBFilter();
 }
 

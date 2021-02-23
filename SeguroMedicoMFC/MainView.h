@@ -68,6 +68,8 @@ public:
 	afx_msg void OnFilePrint();
 	void OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 	void OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*);
+private:
+	CEdit m_num_Factura;
 };
 
 

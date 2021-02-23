@@ -198,8 +198,9 @@
 #define IDC_B_FILTER_INSRESPONSES       1096
 #define IDC_C_CLAIM_IDS                 1097
 #define IDC_B_CLEAR_FILTERS             1098
-#define IDC_B_CLEAR_FILTERS2            1099
 #define IDC_B_REFRESH                   1099
+#define IDC_E_CLAIM_AMOUNT2             1100
+#define IDC_E_NUM_FACTURA               1100
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773

@@ -105,7 +105,7 @@ void InvoiceDlg::OnBnClickedApply()
 
 	// date::sys_days start_date = GetDate(m_start_date);
 	// date::sys_days submission_date = GetDate(m_date_submitted);
-	auto number = GetInteger(m_factura_num);
+	auto number = GetText(m_factura_num);
 	auto amount = GetAmount(m_monto);
 
 	auto type = static_cast<InvoiceType>(m_invoice_type.get_value());
@@ -164,7 +164,7 @@ void InvoiceDlg::OnBnClickedApply()
 	}
 	claim->get_total_amount();
 	Storage::getStorage().replace(*claim);
-	SetAmount(m_monto, claim->amount);
+	// SetAmount(m_monto, claim->amount);
 	m_invoiceLB.loadLBOrderBy(&Invoice::number);
 	m_invoice = invoice;
 	setIdFromRecord<Invoice>(m_id_invoice, m_invoice->id);

@@ -5,6 +5,7 @@
 #include "SeguroMedicoMFC.h"
 #include "INSResponseDlg.h"
 #include "afxdialogex.h"
+#include "INSResponseLineDlg.h"
 #include "JoinedGridDisplayer.h"
 
 // INSResponseDlg dialog
@@ -55,7 +56,31 @@ BEGIN_MESSAGE_MAP(INSResponseDlg, CDialog)
 	ON_BN_CLICKED(ID_CALCULATE, &INSResponseDlg::OnBnClickedCalculate)
 	ON_LBN_SELCHANGE(IDC_L_INSRESPONSES_LIST, &INSResponseDlg::OnLbnSelchangeLInsresponsesList)
 	ON_BN_CLICKED(ID_FILTER, &INSResponseDlg::OnBnClickedFilter)
+	ON_NOTIFY(GVN_SELCHANGING, IDC_GRID, OnGridStartSelChange)
 END_MESSAGE_MAP()
+
+
+
+void INSResponseDlg::OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT*)
+{
+	NM_GRIDVIEW* pItem = (NM_GRIDVIEW*)pNotifyStruct;
+	auto row = pItem->iRow;
+	auto col = pItem->iColumn;
+
+	if (row < 1) return;
+
+	auto ins_response_line_id_cs = m_grid.GetItemText(row, 1);
+	auto ins_response_line_id_s = Util::to_string(ins_response_line_id_cs.GetBuffer());
+	auto ins_response_line_id = std::stoi(ins_response_line_id_s);
+
+	INSResponseLineDlg dlg;
+	dlg.m_id = ins_response_line_id;
+	dlg.DoModal();
+	Refresh();
+	m_liquidacion.SetFocus();
+	OnBnClickedFilter();
+}
+
 
 
 // INSResponseDlg message handlers
@@ -125,7 +150,7 @@ void INSResponseDlg::InitializeGrid(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID", "INV ID", "AMOUNT COVERED", "INV AMOUNT", "% INV COVERED", "INS RESPONSE ID" };
+	std::vector<std::string> headers{ "ID", "FAC ID", "MONTO CUBIERTO", "FAC MONTO", "% FACT CUBIERTA", "INS RESPUESTA ID" };
 
 	// m_grid.SetRowCount(0);
 	// m_grid.SetColumnCount(0);

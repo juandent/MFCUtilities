@@ -79,6 +79,11 @@ BOOL INSResponseLineDlg::OnInitDialog()
 
 	// TODO:  Add extra initialization here
 	Refresh();
+
+	if(m_id!=-1)
+	{
+		m_INSResponseLinesLB.select(m_id);
+	}
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -206,6 +211,7 @@ void INSResponseLineDlg::OnBnClickedBorrar()
 void INSResponseLineDlg::OnBnClickedCerrar()
 {
 	// TODO: Add your control notification handler code here
+	CDialog::OnOK();
 }
 
 
