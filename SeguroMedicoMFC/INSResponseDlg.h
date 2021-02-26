@@ -24,6 +24,8 @@ public:
 	INSResponseDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~INSResponseDlg();
 
+	int m_id{ -1 };
+
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_INSResponseDlg };

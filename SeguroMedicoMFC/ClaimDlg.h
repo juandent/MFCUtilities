@@ -84,4 +84,5 @@ public:
 	afx_msg void OnBnClickedBPatients();
 	afx_msg void OnBnClickedBDoctores();
 	afx_msg void OnBnClickedBMedications();
+	void OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 };

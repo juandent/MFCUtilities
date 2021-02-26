@@ -55,8 +55,8 @@ void MainView::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(MainView, CFormView)
-	ON_NOTIFY(GVN_SELCHANGING, IDC_GRID_2, OnGrid2StartSelChange)
-	ON_NOTIFY(GVN_SELCHANGING, IDC_GRID_1, OnGrid1StartSelChange)
+	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_2, OnGrid2StartSelChange)
+	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_1, OnGrid1StartSelChange)
 	ON_BN_CLICKED(IDC_B_FILTER, &MainView::OnBnClickedBFilter)
 	ON_BN_CLICKED(IDC_B_FILTER_INSRESPONSES, &MainView::OnBnClickedBFilterInsresponses)
 	ON_BN_CLICKED(IDC_B_CLEAR_FILTERS, &MainView::OnBnClickedBClearFilters)

@@ -286,7 +286,11 @@ void INSResponseLineDlg::OnBnClickedCalculate()
 	{
 		// auto total_pagar = GetAmount(m_total_pagar);
 		auto monto_cubierto = GetAmount(m_monto_cubierto);
-		if (monto_cubierto == 0)   return;
+		if (monto_cubierto == 0)
+		{
+			MessageBoxW(L"Falta monto cubierto");
+			return;
+		}
 
 		auto deducciones = GetAmount(m_deducciones);
 		auto copago = GetAmount(m_copago);
@@ -309,6 +313,8 @@ void INSResponseLineDlg::OnBnClickedBInsResponses()
 {
 	// TODO: Add your control notification handler code here
 	INSResponseDlg dlg;
+	auto ins_resp = m_ins_responseCB.current();
+	dlg.m_id = ins_resp ? ins_resp->id : -1;
 	dlg.DoModal();
 	Refresh();
 }

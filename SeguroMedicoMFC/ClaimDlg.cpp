@@ -6,6 +6,7 @@
 #include "ClaimDlg.h"
 #include "afxdialogex.h"
 #include "DoctorDlg.h"
+#include "InvoiceDlg.h"
 #include "JoinedGridDisplayer.h"
 #include "MedicationDlg.h"
 #include "PatientDlg.h"
@@ -67,6 +68,7 @@ void ClaimDlg::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(ClaimDlg, CDialog)
+	ON_NOTIFY(GVN_SELCHANGED, IDC_CLAIMS_GRID, OnGridStartSelChange)
 	ON_BN_CLICKED(ID_APPLY, &ClaimDlg::OnBnClickedApply)
 	ON_BN_CLICKED(ID_NUEVO, &ClaimDlg::OnBnClickedNuevo)
 	ON_BN_CLICKED(ID_BORRAR, &ClaimDlg::OnBnClickedBorrar)
@@ -218,7 +220,7 @@ void ClaimDlg::InitializeGrid(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID", "INV NUMBER", "INV AMOUNT", "CLAIM ID", "START DATE", "SUBMISSION DATE", "CLAIM AMOUNT", "INS RESPONSE ID" };
+	std::vector<std::string> headers{ "ID FAC", "FAC NUMERO", "FAC MONTO", "ID RECLAMO", "FECHA INICIAL", "FECHA ENTREGA", "MONTO RECLAMO", "ID RESPUESTA INS" };
 
 	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<3,7>, IntegerList<0>>(m_grid_claims, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer->display();
@@ -419,4 +421,23 @@ void ClaimDlg::OnBnClickedBMedications()
 	MedicationDlg dlg;
 	dlg.DoModal();
 	Refresh();
+}
+
+void ClaimDlg::OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
+{
+	NM_GRIDVIEW* pItem = (NM_GRIDVIEW*)pNotifyStruct;
+	auto row = pItem->iRow;
+	auto col = pItem->iColumn;
+
+	if (row < 1) return;
+
+	auto invoice_id_cs = m_grid_claims.GetItemText(row, 1);
+	auto invoice_id_s = Util::to_string(invoice_id_cs.GetBuffer());
+	auto invoice_id = std::stoi(invoice_id_s);
+
+	InvoiceDlg dlg;
+	dlg.m_id = invoice_id;
+	dlg.DoModal();
+	Refresh();
+
 }

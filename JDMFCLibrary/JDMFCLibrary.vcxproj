@@ -49,7 +49,7 @@
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -176,7 +176,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;NDEBUG;_AFXEXT;%(PreprocessorDefinitions);NOMINMAX;NOMINMAX;_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING;_HAS_CXX20;_HAS_CXX17=0</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;NDEBUG;_AFXEXT;%(PreprocessorDefinitions);NOMINMAX;NOMINMAX;_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING;_HAS_CXX20;_HAS_CXX17;_AMD64_;_AFX</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
@@ -207,6 +207,8 @@
     <ClCompile Include="..\MessageDialog.cpp" />
     <ClCompile Include="..\Utilities.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <EnableModules Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</EnableModules>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CSV_File.cpp" />
     <ClCompile Include="CSV_File.ixx" />
@@ -235,6 +237,7 @@
     </ClCompile>
     <ClCompile Include="Partition1.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Partition1.ixx">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>

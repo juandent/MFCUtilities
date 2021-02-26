@@ -161,6 +161,20 @@ void InvoiceDlg::OnBnClickedApply()
 		invoice->number = number;
 		invoice->type = static_cast<int>(type);
 		m_invoiceLB.update(*invoice);
+
+		auto storage = Storage::getStorage();
+		
+		// auto resp_line = storage.get<INSResponseLine>(where(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == invoice->id));
+
+		auto res = storage.select(columns(&INSResponseLine::fkey_factura, &INSResponseLine::id), where(c(&INSResponseLine::fkey_factura) == invoice->id));
+		if(! res.empty())
+		{
+			auto l = res[0];
+			auto id_response_line = std::get<1>(l);
+			auto line = storage.get<INSResponseLine>(id_response_line);
+			line.fkey_INSResponse = *ins;
+			storage.replace(line);
+		}
 	}
 	claim->get_total_amount();
 	Storage::getStorage().replace(*claim);
@@ -230,6 +244,8 @@ void InvoiceDlg::OnBnClickedBInsResponse()
 {
 	// TODO: Add your control notification handler code here
 	INSResponseDlg dlg;
+	auto resp = m_responseCB.current();
+	dlg.m_id = resp ? resp->id : -1;
 	dlg.DoModal();
 	Refresh();
 }

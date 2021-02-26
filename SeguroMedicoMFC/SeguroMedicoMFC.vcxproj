@@ -95,6 +95,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>..\ExpenseManagerSQLite;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL;C:\Components\dev_merged_626\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
+      <EnableModules>true</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -167,15 +168,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Components\dev_merged_626\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\vcpkg\installed\x64-windows\include;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ExpenseManagerSQLite;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL;C:\Components\dev_merged_626\sqlite_orm\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;C:\Components\Catch2\_binary_\CMakeFiles\Export\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sqlite3.lib;GridCtrlDll.lib;JDMFCLibrary.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\vcpkg\installed\x64-windows\lib;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\x64\Release</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -228,9 +231,11 @@
   <ItemGroup>
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\JoinedGridDisplayer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClaimDlg.cpp" />

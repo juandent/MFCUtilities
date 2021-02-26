@@ -56,7 +56,7 @@ BEGIN_MESSAGE_MAP(INSResponseDlg, CDialog)
 	ON_BN_CLICKED(ID_CALCULATE, &INSResponseDlg::OnBnClickedCalculate)
 	ON_LBN_SELCHANGE(IDC_L_INSRESPONSES_LIST, &INSResponseDlg::OnLbnSelchangeLInsresponsesList)
 	ON_BN_CLICKED(ID_FILTER, &INSResponseDlg::OnBnClickedFilter)
-	ON_NOTIFY(GVN_SELCHANGING, IDC_GRID, OnGridStartSelChange)
+	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID, OnGridStartSelChange)
 END_MESSAGE_MAP()
 
 
@@ -92,6 +92,11 @@ BOOL INSResponseDlg::OnInitDialog()
 
 	// TODO:  Add extra initialization here
 	Refresh();
+
+	if(m_id!= -1)
+	{
+		m_list_insresponsesLB.select(m_id);
+	}
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -230,6 +235,32 @@ void INSResponseDlg::OnBnClickedApply()
 void INSResponseDlg::OnBnClickedNuevo()
 {
 	// TODO: Add your control notification handler code here
+	SetText(m_id_insresponse, ""s);
+
+	// date::sys_days date = GetDate(m_date_response);
+
+	// date::sys_days submission_date = GetDate(m_date_submitted);
+
+	SetText(m_liquidacion, ""s);
+	SetLongLong(m_no_caso, 0LL);
+	SetAmount(m_total_bruto, 0.0);
+	SetAmount(m_deducciones, 0.0);
+	SetAmount(m_copagos, 0.0);
+	SetAmount(m_coaseguros, 0.0);
+	SetAmount(m_deducible_anual, 0.0);
+	SetAmount(m_tipo_cambio, 0.0);
+	SetAmount(m_neto, 0.0);
+	SetAmount(m_retencion, 0.0);
+	SetAmount(m_total_pagar, 0.0);
+	SetText(m_comentarios, ""s);
+
+	// calculados
+	// auto monto_cubierto_p100 = 100 * monto_cubierto != 0 ? total_a_pagar / monto_cubierto : 0; //GetAmount(m_monto_cubierto_p100);
+	// auto factura_cubierta_p100 = 100 * monto_factura != 0 ? total_a_pagar / monto_factura : 0;
+
+	m_list_insresponsesLB.loadLBOrderBy(&INSResponse::date_response);
+	m_list_insresponsesLB.select(-1);
+	m_ins_response = std::nullopt;
 }
 
 
