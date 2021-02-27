@@ -120,6 +120,12 @@
     <ClInclude Include="INSResponseLineDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="INSResponseView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INSResponseDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SeguroMedicoMFC.cpp">
@@ -195,6 +201,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="INSResponseLineDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="INSResponseView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="INSResponseDoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

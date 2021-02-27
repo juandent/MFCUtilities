@@ -22,7 +22,8 @@
 #include "MedicationDlg.h"
 #include "PatientDlg.h"
 #include "SpecialtyDlg.h"
-
+#include "INSResponseDoc.h"
+#include "INSResponseView.h"
 
 
 #ifdef _DEBUG
@@ -135,15 +136,27 @@ BOOL CSeguroMedicoMFCApp::InitInstance()
 
 	// Register the application's document templates.  Document templates
 	//  serve as the connection between documents, frame windows and views
-	CMultiDocTemplate* pDocTemplate;
-	pDocTemplate = new CMultiDocTemplate(IDR_SeguroMedicoMFCTYPE,
-		RUNTIME_CLASS(CSeguroMedicoMFCDoc),
-		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
-		RUNTIME_CLASS(MainView));
-//		RUNTIME_CLASS(CSeguroMedicoMFCView));
-	if (!pDocTemplate)
-		return FALSE;
-	AddDocTemplate(pDocTemplate);
+	{
+		CMultiDocTemplate* pDocTemplate;
+		pDocTemplate = new CMultiDocTemplate(IDR_SeguroMedicoMFCTYPE,
+			RUNTIME_CLASS(CSeguroMedicoMFCDoc),
+			RUNTIME_CLASS(CChildFrame), // custom MDI child frame
+			RUNTIME_CLASS(MainView));
+		//		RUNTIME_CLASS(CSeguroMedicoMFCView));
+		if (!pDocTemplate)
+			return FALSE;
+		AddDocTemplate(pDocTemplate);
+	}
+	{
+		CMultiDocTemplate* pDocTemplate;
+		pDocTemplate = new CMultiDocTemplate(IDR_INSResponseMFCTYPE,
+			RUNTIME_CLASS(INSResponseDoc),
+			RUNTIME_CLASS(CChildFrame), // custom MDI child frame
+			RUNTIME_CLASS(INSResponseView));
+		if (!pDocTemplate)
+			return FALSE;
+		AddDocTemplate(pDocTemplate);
+	}
 
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;

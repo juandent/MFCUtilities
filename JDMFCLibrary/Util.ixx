@@ -200,7 +200,7 @@ export namespace Util
 		return std::string(buf.data(), buf.size());
 	}
 
-	export inline CString to_cstring(const std::string& msg)
+	export inline CString to_cstring(std::string msg)
 	{
 		std::wstring message = to_wstring(msg);
 		CString msg_as_cstring{ message.c_str() };
@@ -212,6 +212,39 @@ export namespace Util
 		auto d_str = std::to_string(d);
 		return to_cstring(d_str);
 	}
+
+	export CString to_cstring(double&& d)
+	{
+		auto d_str = std::to_string(d);
+		return to_cstring(d_str);
+	}
+
+	export template<typename T>
+	CString to_cstring(std::unique_ptr<T>&& d)
+	{
+		auto p = d.get();
+
+		if (p)
+		{
+			auto val = *p;
+			return to_cstring(val);
+		}
+		return L"";
+	}
+
+	export template<typename T>
+	CString unique_ptr_to_cstring(std::unique_ptr<T>&& d)
+	{
+
+		auto p = d.get();
+		if (p)
+		{
+			auto val = *p;
+			return to_cstring(val);
+		}
+		return L"";
+	}
+
 
 	export inline std::string to_string(date::sys_days dp)
 	{

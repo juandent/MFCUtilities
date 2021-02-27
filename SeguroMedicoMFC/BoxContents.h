@@ -185,11 +185,9 @@ public:
 		const int pk = record.*keyCol;
 		return find_in_listbox(pk);
 	}
-	void loadLB()
+	template<typename T>
+	void moveVectorIntoBox( const T& vec)
 	{
-		m_box.ResetContent();
-		auto vec = refIntManager.getAll();
-
 		for (auto& record : vec)
 		{
 			auto displayStr = asString(record);
@@ -200,12 +198,32 @@ public:
 		// ???
 		SetCurSel(-1);
 	}
+	void loadLB()
+	{
+		m_box.ResetContent();
+		auto vec = refIntManager.getAll();
+
+		// moveVectorIntoBox(vec);
+#if 1		
+		for (auto& record : vec)
+		{
+			auto displayStr = asString(record);
+			int index = m_box.AddString(displayStr);
+			m_box.SetItemData(index, record.*keyCol);
+			// SetCurSel(index);
+		}
+		// ???
+		SetCurSel(-1);
+#endif
+	}
 	template<typename whereClause>
 	void loadLB(whereClause clause)
 	{
 		m_box.ResetContent();
 
 		auto vec = refIntManager.getAll(clause);
+		// moveVectorIntoBox(vec);
+#if 1
 		for (auto& record : vec)
 		{
 			auto displayStr = asString(record);
@@ -214,6 +232,7 @@ public:
 			// SetCurSel(index);
 		}
 		SetCurSel(-1);
+#endif
 	}
 
 	template<typename orderByClause>
@@ -222,6 +241,8 @@ public:
 		m_box.ResetContent();
 
 		auto vec = refIntManager.getAllOrderBy(clause);
+		// moveVectorIntoBox(vec);
+#if 1
 		for (auto& record : vec)
 		{
 			auto displayStr = asString(record);
@@ -230,8 +251,26 @@ public:
 			// SetCurSel(index);
 		}
 		SetCurSel(-1);
+#endif
 	}
 
+	template<typename orderByClause>
+	void loadLBOrderByDesc(orderByClause clause)
+	{
+		m_box.ResetContent();
+		auto vec = refIntManager.getAllOrderByDesc(clause);
+		// moveVectorIntoBox(vec);
+#if 1
+		for (auto& record : vec)
+		{
+			auto displayStr = asString(record);
+			int index = m_box.AddString(displayStr);
+			m_box.SetItemData(index, record.*keyCol);
+			// SetCurSel(index);
+		}
+		SetCurSel(-1);
+#endif
+	}
 
 	constexpr static const int npos = -1;
 private:

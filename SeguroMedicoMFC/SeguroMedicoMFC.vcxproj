@@ -206,6 +206,8 @@
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="INSResponseDlg.h" />
+    <ClInclude Include="INSResponseDoc.h" />
+    <ClInclude Include="INSResponseView.h" />
     <ClInclude Include="InvoiceDlg.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MainView.h" />
@@ -244,6 +246,8 @@
     <ClCompile Include="DoctorDlg.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="INSResponseDlg.cpp" />
+    <ClCompile Include="INSResponseDoc.cpp" />
+    <ClCompile Include="INSResponseView.cpp" />
     <ClCompile Include="InvoiceDlg.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MainView.cpp" />
