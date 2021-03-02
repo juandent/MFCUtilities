@@ -78,6 +78,7 @@ BEGIN_MESSAGE_MAP(ClaimDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_PATIENTS, &ClaimDlg::OnBnClickedBPatients)
 	ON_BN_CLICKED(IDC_B_DOCTORES, &ClaimDlg::OnBnClickedBDoctores)
 	ON_BN_CLICKED(IDC_B_MEDICATIONS, &ClaimDlg::OnBnClickedBMedications)
+	ON_BN_CLICKED(IDC_B_ADD_FACTURA, &ClaimDlg::OnBnClickedBAddFactura)
 END_MESSAGE_MAP()
 
 
@@ -108,7 +109,7 @@ void ClaimDlg::Refresh()
 	m_doctorCB.loadLBOrderBy(&Doctor::last_name);
 	m_medicationCB.loadLBOrderBy(&Medication::name);
 	m_patientCB.loadLBOrderBy(&Patient::last_name);
-	m_claimLB.loadLBOrderBy(&Claim::start_date);
+	m_claimLB.loadLBOrderByDesc(&Claim::start_date);
 	// InitializeGrid(true);
 	// grid	
 }
@@ -169,7 +170,8 @@ void ClaimDlg::InitializeGrid(const T& t)
 		alias_column<als_c>(&Claim::start_date),
 		alias_column<als_c>(&Claim::submission_date),
 		alias_column<als_c>(&Claim::amount),
-		alias_column<als_i>(&Invoice::fkey_INSResponse)),
+		alias_column<als_i>(&Invoice::fkey_INSResponse),
+		alias_column<als_i>(&Invoice::description)),
 		// sum(alias_column<als_i>(&Invoice::amount))),
 		inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
 		// inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))
@@ -220,7 +222,7 @@ void ClaimDlg::InitializeGrid(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID FAC", "FAC NUMERO", "FAC MONTO", "ID RECLAMO", "FECHA INICIAL", "FECHA ENTREGA", "MONTO RECLAMO", "ID RESPUESTA INS" };
+	std::vector<std::string> headers{ "ID FAC", "FAC NUMERO", "FAC MONTO", "ID RECLAMO", "FECHA INICIAL", "FECHA ENTREGA", "MONTO RECLAMO", "ID RESPUESTA INS", "DESCRIPCION" };
 
 	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<3,7>, IntegerList<0>>(m_grid_claims, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer->display();
@@ -303,7 +305,7 @@ void ClaimDlg::OnBnClickedApply()
 		m_claimLB.update(*claim);
 	}
 #endif
-	m_claimLB.loadLBOrderBy(&Claim::start_date);
+	m_claimLB.loadLBOrderByDesc(&Claim::start_date);
 	m_claim = claim;
 	setIdFromRecord<Doctor>(m_id_reclamo, m_claim->id);
 }
@@ -440,4 +442,15 @@ void ClaimDlg::OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
 	dlg.DoModal();
 	Refresh();
 
+}
+
+
+void ClaimDlg::OnBnClickedBAddFactura()
+{
+	// TODO: Add your control notification handler code here
+	InvoiceDlg dlg;
+	// dlg.m_id = m
+	dlg.DoModal();
+	Refresh();
+	OnBnClickedBFilter();
 }

@@ -6,6 +6,7 @@
 #include "INSResponseView.h"
 #include "INSResponseDoc.h"
 #include "Data.h"
+#include "INSResponseDlg.h"
 
 #include "JoinedGridDisplayer.h"
 
@@ -23,6 +24,14 @@ m_insresponseCB(m_lista_ins_response, [](INSResponse& resp)
 m_doctoresCB(m_lista_doctores, [](Doctor& doctor)
 {
 		return Util::to_cstring(doctor.simple_dump());
+}),
+m_patientsCB(m_lista_pacientes, [](Patient& patient)
+{
+		return Util::to_cstring(patient.simple_dump());
+}),
+m_medicationsCB(m_lista_medicamentos, [](Medication& med)
+{
+		return Util::to_cstring(med.simple_dump());
 })
 {
 	
@@ -39,10 +48,19 @@ void INSResponseView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_GRID_VIEW_2, m_grid_2);
 	DDX_Control(pDX, IDC_C_INS_RESPONSE_IDS, m_lista_ins_response);
 	DDX_Control(pDX, IDC_C_LISTA_DOCTORES, m_lista_doctores);
+	DDX_Control(pDX, IDC_C_LISTA_PACIENTES, m_lista_pacientes);
+	DDX_Control(pDX, IDC_C_LISTA_MEDICAMENTOS, m_lista_medicamentos);
+	DDX_Control(pDX, IDC_FECHA_INICIO, m_fecha_inicio);
+	DDX_Control(pDX, IDC_FECHA_FINAL, m_fecha_final);
+	DDX_Control(pDX, IDC_C_FILTER_BY_DATES, m_filter_by_dates);
+	DDX_Control(pDX, IDC_E_INSREPONSE_AMOUNT, m_insresponse_amount);
+	DDX_Control(pDX, IDC_E_NUM_FACTURA2, m_num_factura);
 }
 
 BEGIN_MESSAGE_MAP(INSResponseView, CFormView)
 	ON_BN_CLICKED(IDC_B_FILTER, &INSResponseView::OnBnClickedBFilter)
+	ON_BN_CLICKED(IDC_B_CLEAR_FILTERS, &INSResponseView::OnBnClickedBClearFilters)
+	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_VIEW_1, OnGrid1StartSelChange)
 END_MESSAGE_MAP()
 
 
@@ -90,6 +108,8 @@ void INSResponseView::Refresh()
 {
 	m_insresponseCB.loadLBOrderByDesc(&INSResponse::date_response);
 	m_doctoresCB.loadLBOrderBy(&Doctor::last_name);
+	m_patientsCB.loadLBOrderBy(&Patient::last_name);
+	m_medicationsCB.loadLBOrderBy(&Medication::name);
 }
 
 
@@ -111,6 +131,7 @@ void INSResponseView::InitializeGridINSResponse(const T& t)
 
 	auto otherlines = Storage::getStorage().select(columns(
 		alias_column<als_j>(&INSResponse::id),
+		alias_column<als_j>(&INSResponse::date_response),
 		alias_column<als_k>(&INSResponseLine::id),
 		alias_column<als_k>(&INSResponseLine::monto_cubierto),
 		alias_column<als_k>(&INSResponseLine::porcentaje_de_monto_cubierto),
@@ -123,6 +144,8 @@ void INSResponseView::InitializeGridINSResponse(const T& t)
 		inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
 		inner_join<als_c>( on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
 		inner_join<als_d>(on(c(alias_column<als_c>(&Claim::fkey_doctor)) == alias_column<als_d>(&Doctor::id))),
+		inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
+		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 
 		where(t),
 		// group_by(&INSResponse::id));
@@ -134,9 +157,9 @@ void INSResponseView::InitializeGridINSResponse(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID RESPUESTA", "ID LINEA RESP", "MONTO CUBIERTO", "% MONTO CUBIERTO", "% FACTURA", "NUM FACT", "MONTO FACT" };
+	std::vector<std::string> headers{ "ID RESPUESTA", "FECHA RESP", "ID LINEA RESP", "MONTO CUBIERTO", "% MONTO CUBIERTO", "% FACTURA", "NUM FACT", "MONTO FACT" };
 
-	m_displayer_ins_response.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<3,7>, IntegerList<0>>(m_grid_1, std::move(otherlines), std::move(headers)));
+	m_displayer_ins_response.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<8>, IntegerList<4>>(m_grid_1, std::move(otherlines), std::move(headers)));
 	m_displayer_ins_response->display();
 
 }
@@ -152,6 +175,10 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 		// sum(alias_column<als_i>(&Invoice::amount))),
 		inner_join<als_k>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
 		inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
+		inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
+		inner_join<als_d>(on(c(alias_column<als_c>(&Claim::fkey_doctor)) == alias_column<als_d>(&Doctor::id))),
+		inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
+		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 
 		where(t),
 		// group_by(&INSResponse::id));
@@ -210,8 +237,35 @@ auto INSResponseView::GetWhereStatement()
 	auto doctor = m_doctoresCB.current();
 
 	auto doctorWhere = (not doctor or (c(alias_column<als_d>(&Doctor::id)) == doctor->id));
+
+	auto patient = m_patientsCB.current();
+
+	auto patientWhere = (not patient or (c(alias_column<als_p>(&Patient::id)) == patient->id));
+
+	auto medication = m_medicationsCB.current();
+
+	auto medicationWhere = (not medication or (c(alias_column<als_m>(&Medication::id)) == medication->id));
+
+	auto filter_by_dates = m_filter_by_dates.GetCheck();
+
+	auto start_date = GetDate(m_fecha_inicio);
+	auto finish_date = GetDate(m_fecha_final);
+
+	auto filter_by_dates_where = (not filter_by_dates or
+		(c(alias_column<als_j>(&INSResponse::date_response)) >= start_date
+			&& (c(alias_column<als_j>(&INSResponse::date_response)) <= finish_date)));
+
+	auto amount = GetAmount(m_insresponse_amount);
+
+	auto amount_where = (not amount or (c(alias_column<als_j>(&INSResponse::total_a_pagar))));
+
+	auto num_factura = GetText(m_num_factura);
+
+	num_factura = num_factura.empty() ? "%" : num_factura;
+
+	auto num_factura_where = (like (alias_column<als_i>(&Invoice::number) ,num_factura));
 	
-	return responseWhere && doctorWhere;
+	return responseWhere && doctorWhere && patientWhere && medicationWhere && filter_by_dates_where && amount_where && num_factura_where;
 }
 
 void INSResponseView::OnBnClickedBFilter()
@@ -221,4 +275,38 @@ void INSResponseView::OnBnClickedBFilter()
 	InitializeGridINSResponse(whereStatement);
 	InitializeGridINSResponseSummary(whereStatement);
 	
+}
+
+
+void INSResponseView::OnBnClickedBClearFilters()
+{
+	// TODO: Add your control notification handler code here
+	m_medicationsCB.select(std::nullopt);
+	m_doctoresCB.select(std::nullopt);
+	m_insresponseCB.select(std::nullopt);
+	m_patientsCB.select(std::nullopt);
+	m_filter_by_dates.SetCheck(0);
+	SetAmount(m_insresponse_amount, 0.0);
+	SetText(m_num_factura, "%"s);
+	OnBnClickedBFilter();
+}
+
+
+void INSResponseView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
+{
+	NM_GRIDVIEW* pItem = (NM_GRIDVIEW*)pNotifyStruct;
+	auto row = pItem->iRow;
+	auto col = pItem->iColumn;
+
+	if (row < 1) return;
+
+	auto response_id_cs = m_grid_1.GetItemText(row, 1);
+	auto response_id_s = Util::to_string(response_id_cs.GetBuffer());
+	auto response_id = std::stoi(response_id_s);
+
+	INSResponseDlg dlg;
+	dlg.m_id = response_id;
+	dlg.DoModal();
+	Refresh();
+	OnBnClickedBFilter();
 }

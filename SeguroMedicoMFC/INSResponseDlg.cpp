@@ -45,6 +45,7 @@ void INSResponseDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_L_INSRESPONSES_LIST, m_list_INSResponses);
 	DDX_Control(pDX, IDC_GRID, m_grid);
 	DDX_Control(pDX, IDC_D_DATE_RESPONSE, m_date_response);
+	DDX_Control(pDX, IDC_E_SUM_INVOICES_AMOUNTS, m_sum_invoices_amount);
 }
 
 
@@ -135,6 +136,7 @@ void INSResponseDlg::InitializeGrid(const T& t)
 	auto otherlines = Storage::getStorage().select(columns(
 		alias_column<als_k>(&INSResponseLine::id),
 		alias_column<als_k>(&INSResponseLine::fkey_factura),
+		alias_column<als_i>(&Invoice::number),
 		alias_column<als_k>(&INSResponseLine::monto_cubierto),
 		alias_column<als_i>(&Invoice::amount),
 		alias_column<als_k>(&INSResponseLine::porcentaje_de_factura_cubierto),
@@ -146,20 +148,26 @@ void INSResponseDlg::InitializeGrid(const T& t)
 
 	auto sum_results = Storage::getStorage().select(columns(
 		sum(alias_column<als_i>(&Invoice::amount))),
-		where(t));
+		inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::id)) == alias_column<als_k>(&INSResponseLine::fkey_factura))),
+		where(t),
+		group_by(alias_column<als_i>(&Invoice::fkey_INSResponse)));    // join 
 
-	auto&& line = sum_results[0];
-	auto&& pc = std::get<0>(line);
-
+	if (!sum_results.empty())
+	{
+		auto&& line = sum_results[0];
+		auto&& pc = std::get<0>(line);
+		auto sum_amounts = *pc;
+		SetColones(m_sum_invoices_amount, sum_amounts);
+	}
 	long count = otherlines.size();
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID", "FAC ID", "MONTO CUBIERTO", "FAC MONTO", "% FACT CUBIERTA", "INS RESPUESTA ID" };
+	std::vector<std::string> headers{ "ID", "FAC ID",  "FAC NUM", "MONTO CUBIERTO", "FAC MONTO", "% FACT CUBIERTA", "INS RESPUESTA ID" };
 
 	// m_grid.SetRowCount(0);
 	// m_grid.SetColumnCount(0);
-	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<4>, IntegerList<3>>(m_grid, std::move(otherlines), std::move(headers)));
+	m_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<5>, IntegerList<4>>(m_grid, std::move(otherlines), std::move(headers)));
 	m_displayer->display();
 
 }
@@ -183,7 +191,7 @@ void INSResponseDlg::OnBnClickedApply()
 	auto coaseguros = GetAmount(m_coaseguros);
 	auto deducible_anual = GetAmount(m_deducible_anual);
 	auto tipo_cambio = GetAmount(m_tipo_cambio);
-	auto total_neto = GetAmount(m_neto);
+	auto total_neto = GetDolares(m_neto).getAsLongDouble();
 	auto retenciones = GetAmount(m_retencion);
 	auto total_pagar = GetAmount(m_total_pagar);
 	auto comentarios = GetText(m_comentarios);
@@ -249,7 +257,7 @@ void INSResponseDlg::OnBnClickedNuevo()
 	SetAmount(m_coaseguros, 0.0);
 	SetAmount(m_deducible_anual, 0.0);
 	SetAmount(m_tipo_cambio, 0.0);
-	SetAmount(m_neto, 0.0);
+	SetDolares(m_neto, 0.0);
 	SetAmount(m_retencion, 0.0);
 	SetAmount(m_total_pagar, 0.0);
 	SetText(m_comentarios, ""s);
@@ -294,7 +302,8 @@ void INSResponseDlg::OnBnClickedCalculate()
 	auto tipo_cambio = GetAmount(m_tipo_cambio);
 	auto total_neto_en_colones = total_neto_en_dolares * tipo_cambio;
 
-	SetAmount(m_neto, total_neto_en_colones);
+//	SetAmount(m_neto, total_neto_en_dolares);
+	SetDolares(m_neto, total_neto_en_dolares);
 	auto retencion = GetAmount(m_retencion);
 	auto total_a_pagar = total_neto_en_colones - retencion;
 	SetAmount(m_total_pagar, total_a_pagar);
@@ -316,7 +325,7 @@ void INSResponseDlg::OnLbnSelchangeLInsresponsesList()
 	SetAmount(m_coaseguros, m_ins_response->coaseguros);
 	SetAmount(m_deducible_anual, m_ins_response->deducible_anual);
 	SetAmount(m_tipo_cambio, m_ins_response->tipo_cambio);
-	SetAmount(m_neto, m_ins_response->total_neto);
+	SetDolares(m_neto, m_ins_response->total_neto);
 	SetAmount(m_retencion, m_ins_response->retencion);
 	SetAmount(m_total_pagar, m_ins_response->total_a_pagar);
 	SetText(m_comentarios, m_ins_response->comentarios);

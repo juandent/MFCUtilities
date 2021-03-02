@@ -209,6 +209,9 @@
     <ClCompile Include="INSResponseDoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\JDMFCLibrary\Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SeguroMedicoMFC.rc">

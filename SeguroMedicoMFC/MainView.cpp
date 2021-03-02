@@ -141,11 +141,14 @@ void MainView::InitializeGridClaims(const T& t)
 		alias_column<als_d>(&Doctor::first_name),
 		alias_column<als_c>(&Claim::start_date),
 		alias_column<als_c>(&Claim::submission_date),
-		alias_column<als_c>(&Claim::amount)),
+		alias_column<als_c>(&Claim::amount),
+		alias_column<als_m>(&Medication::name)),
 		// alias_column<als_i>(&Invoice::fkey_INSResponse)),
 		// sum(alias_column<als_i>(&Invoice::amount))),
 		inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
 		inner_join<als_d>(on(c(alias_column<als_d>(&Doctor::id)) == alias_column<als_c>(&Claim::fkey_doctor))),
+		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+		// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 		// inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))
 		where(t),
 		order_by(alias_column<als_c>(&Claim::start_date)).desc());
@@ -156,7 +159,7 @@ void MainView::InitializeGridClaims(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID RECLAMO", "PACIENTE", "DOCTOR", "DOCTOR", "FECHA INICIAL", "FECHA ENTREGA", "MONTO RECLAMO" };
+	std::vector<std::string> headers{ "RECLAMO", "PACIENTE", "DOCTOR", "DOCTOR", "INICIAL", "ENTREGA", "MONTO RECLAMO", "MEDICATION" };
 
 	m_displayer_claims.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<7>, IntegerList<0>>(m_grid_1, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer_claims->display();
@@ -179,14 +182,16 @@ void MainView::InitializeGridINSResponses(const T& t)
 		alias_column<als_i>(&Invoice::amount),
 		substr(alias_column<als_i>(&Invoice::description),0, 50),
 		alias_column<als_c>(&Claim::id)),
+		// alias_column<als_m>(&Medication::id)),
 		// alias_column<als_c>(&Claim::amount)),
 		inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
 		inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
+		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 		where(t),
 		order_by(alias_column<als_c>(&Claim::start_date)).desc());
 
-	std::vector<std::string> headers{ "ID LINEA INS", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "FACT #", "FACT MONTO", "DESC", "ID RECLAMO" /*, "MONTO RECLAMO"*/ };
-	m_displayer_responses.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<8,11>, IntegerList<0>>(m_grid_2, std::move(otherlines), std::move(headers)));
+	std::vector<std::string> headers{ "ID LINEA INS", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "FACT #", "FACT MONTO", "DESC", "ID RECLAMO" };
+	m_displayer_responses.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<8>, IntegerList<2, 3, 4, 5>>(m_grid_2, std::move(otherlines), std::move(headers)));
 	m_displayer_responses->display();
 }
 

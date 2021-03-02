@@ -17,6 +17,8 @@ class INSResponseView : public CFormView
 
 	BoxContents<INSResponse, &INSResponse::id, CComboBox> m_insresponseCB;
 	BoxContents<Doctor, &Doctor::id, CComboBox> m_doctoresCB;
+	BoxContents<Patient, &Patient::id, CComboBox> m_patientsCB;
+	BoxContents<Medication, &Medication::id, CComboBox> m_medicationsCB;
 
 protected:
 	INSResponseView();           // protected constructor used by dynamic creation
@@ -57,6 +59,17 @@ public:
 	afx_msg void OnBnClickedBFilter();
 private:
 	CComboBox m_lista_doctores;
+	CComboBox m_lista_pacientes;
+	CComboBox m_lista_medicamentos;
+public:
+	afx_msg void OnBnClickedBClearFilters();
+	void OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*);
+private:
+	CDateTimeCtrl m_fecha_inicio;
+	CDateTimeCtrl m_fecha_final;
+	CButton m_filter_by_dates;
+	CEdit m_insresponse_amount;
+	CEdit m_num_factura;
 };
 
 

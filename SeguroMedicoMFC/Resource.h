@@ -196,6 +196,7 @@
 #define IDC_C_LISTA_PACIENTES           1092
 #define IDC_C_FILTER_BY_DATES           1093
 #define IDC_E_CLAIM_AMOUNT              1094
+#define IDC_C_LISTA_MEDICAMENTOS        1094
 #define IDC_GRID_2                      1095
 #define IDC_B_FILTER_INSRESPONSES       1096
 #define IDC_C_CLAIM_IDS                 1097
@@ -208,6 +209,9 @@
 #define IDC_B_REFRESH2                  1102
 #define IDC_C_INS_RESPONSE_IDS          1103
 #define IDC_E_INSREPONSE_AMOUNT         1104
+#define IDC_B_ADD_FACTURA               1105
+#define IDC_EDIT1                       1106
+#define IDC_E_SUM_INVOICES_AMOUNTS      1106
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
@@ -223,7 +227,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        320
 #define _APS_NEXT_COMMAND_VALUE         32779
-#define _APS_NEXT_CONTROL_VALUE         1105
+#define _APS_NEXT_CONTROL_VALUE         1107
 #define _APS_NEXT_SYMED_VALUE           320
 #endif
 #endif

@@ -1,5 +1,6 @@
 #pragma once
 
+import Util;
 
 enum class Operation { doUpdate = 1, doInsert = 2 };
 
@@ -52,6 +53,24 @@ inline void SetColones(CEdit& edit_box, double amount)
 	auto col_str = Util::to_string(col);
 	auto str = Util::to_cstring(col_str);
 	edit_box.SetWindowTextW(str);
+}
+
+inline void SetDolares(CEdit& edit_box, double amount)
+{
+	// SetAmount(edit_box, amount);
+	
+	Util::Dolares col{ amount };
+	CString str = Util::to_cstring(col);
+	// CString str = Util::dollars_to_cstring(col);
+	edit_box.SetWindowTextW(str);
+}
+inline Util::Dolares GetDolares(CEdit& edit_box)
+{
+	CString str;
+	edit_box.GetWindowTextW(str);
+
+	Util::Dolares dollars{ Util::Str::from_dollars_cstring(str) };
+	return dollars;
 }
 
 inline void SetAmount(CEdit& edit_box, double amount)
