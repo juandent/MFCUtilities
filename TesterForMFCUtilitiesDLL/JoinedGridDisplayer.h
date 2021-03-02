@@ -33,6 +33,27 @@ struct DolaresFormat
 };
 #endif
 
+inline double& extractValue(const std::unique_ptr<double>& val)
+{
+	static double null_value = 0.0;
+	if (val)
+	{
+		return *val;
+	}
+	return null_value;
+}
+template<typename T> requires (!std::is_same_v<T, std::unique_ptr<double>&>)
+inline static T& extractValue(T& t)
+	{
+		return t;
+	}
+template<typename T>
+inline static T& extractValue(std::optional<T>& opt)
+{
+	return *opt;
+}
+
+
 // template<typename T> colonesList;
 
 template<typename T, typename ColonesCols, typename DollarsCols>
@@ -96,40 +117,90 @@ public:
 	}
 
 private:
+	template<int Col, typename FieldType, typename T>
+	static CString FormatCol(T& value, CJDGridCtrl& grid)
+	{
+		CString cs;
+		if constexpr (std::is_integral_v<FieldType> || std::is_floating_point_v<FieldType>)
+		{
+			grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
+
+			if (ColonesCols::template found<Col + 1>())
+			{
+				Util::Colones c(value);
+				cs = format(c);
+			}
+			else if (DollarsCols::template found<Col + 1>())
+			{
+				Util::Dolares d(value);
+				cs = format(d);
+			}
+			else
+			{
+				cs = format(value);
+			}
+		}
+		else
+		{
+			grid.m_sortingFunctions[Col + 1] = Util::Comparison::Text;
+			cs = format(value);
+		}
+		return cs;
+	}
 	template<int Col, typename Container, unsigned NumCols>
 	struct PrintDataInGrid
 	{
 		static void Apply(int row, const Container& z, CJDGridCtrl& grid)
 		{
-			auto value = std::get<Col>(z[row]);
-
-			using ValueType = decltype(value);
-
+			// auto value = std::get<Col>(z[row]);
+			// auto&& value = extractValue(std::get<Col>(z[row]));
 			CString cs;
 
-			if constexpr (std::is_integral_v<ValueType> || std::is_floating_point_v<ValueType>)
+			using FieldType = std::remove_reference_t<decltype(std::get<Col>(z[row]))>;
+			FieldType* pT = nullptr;
+			if constexpr( std::is_same_v<FieldType, const std::unique_ptr<double>>)
 			{
-				grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
-
-				if( ColonesCols::template found<Col+1>() )
-				{
-					Util::Colones c(value);
-					cs = format(c);
-				}
-				else if ( DollarsCols::template found<Col+1>() )
-				{
-					Util::Dolares d(value);
-					cs = format(d);
-				}
-				else
-				{
-					cs = format(value);
-				}
+				// auto&& value = std::move(std::get<Col>(z[row]));
+				auto&& value = extractValue(std::move(std::get<Col>(z[row])));
+				// cs = format(value);
+				cs = FormatCol<Col, double>(value, grid);
 			}
 			else
 			{
-				grid.m_sortingFunctions[Col + 1] = Util::Comparison::Text;
-				cs = format(value);
+				auto&& value = std::get<Col>(z[row]);
+				// cs = format(value);
+
+				//
+				// auto value = std::get<Col>(z[row]);
+				//
+				// using ValueType = decltype(value);
+
+				cs = FormatCol<Col, FieldType>(value, grid);
+
+				// if constexpr (std::is_integral_v<FieldType> || std::is_floating_point_v<FieldType>)
+				// {
+				// 	grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
+				//
+				// 	if (ColonesCols::template found<Col + 1>())
+				// 	{
+				// 		Util::Colones c(value);
+				// 		cs = format(c);
+				// 	}
+				// 	else if (DollarsCols::template found<Col + 1>())
+				// 	{
+				// 		Util::Dolares d(value);
+				// 		cs = format(d);
+				// 	}
+				// 	else
+				// 	{
+				// 		cs = format(value);
+				// 	}
+				// }
+				// else
+				// {
+				// 	grid.m_sortingFunctions[Col + 1] = Util::Comparison::Text;
+				// 	cs = format(value);
+				// }
 			}
 			grid.SetItemText(row + 1, Col + 1, cs);
 			PrintDataInGrid<Col+1, Container, NumCols>::Apply(row, z, grid);
@@ -144,13 +215,11 @@ private:
 		}
 	};
 
+
 	template<typename T>
-	static CString format(const T& t)
+	static CString format(T&& t)
 	{
-		T* pT;
-		auto s = typeid(T).name();
-		
-		return Util::to_cstring(t);
+		return Util::to_cstring(std::forward<T>(t));
 	}
 
 	template<typename T>

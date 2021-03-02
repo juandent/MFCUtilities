@@ -163,6 +163,21 @@ void INSResponseView::InitializeGridINSResponse(const T& t)
 	m_displayer_ins_response->display();
 
 }
+#if 0
+static double extractValue(std::unique_ptr<double>& val)
+{
+	if (val)
+	{
+		return *val;
+	}
+	return 0.0;
+}
+template<typename T> requires !std::is_same_v<T, std::unique_ptr<double>&>
+	static T extractValue(const T& t)
+	{
+		return t;
+	}
+#endif
 
 template<typename T>
 void INSResponseView::InitializeGridINSResponseSummary(const T& t)
@@ -170,9 +185,9 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 
 	auto otherlines = Storage::getStorage().select(columns(
 		alias_column<als_i>(&Invoice::id),
-		alias_column<als_i>(&Invoice::description)),
+		alias_column<als_i>(&Invoice::description),
 
-		// sum(alias_column<als_i>(&Invoice::amount))),
+		sum(alias_column<als_i>(&Invoice::amount))),
 		inner_join<als_k>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
 		inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
 		inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
@@ -192,9 +207,21 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 #if 0
 		auto line = std::move(otherlines[0]);
 		auto&& val = std::get<2>(line);
-		using ValueType = decltype(val);
+		using ValueType = decltype(std::get<2>(line));
+		static_assert(std::is_same_v<ValueType, std::unique_ptr<double>&>);
 
-
+		double v;
+		
+		if constexpr (std::is_same_v<ValueType, std::unique_ptr<double>&>)
+		{
+			v = *val;
+		}
+		
+		// auto& ve = extractValue(std::move(std::get<2>(line)));
+		// CString str = Util::to_cstring(ve);
+		auto& desc = extractValue(std::get<1>(line));
+		CString str = Util::to_cstring(desc);
+#if 0
 		// if constexpr (std::is_same_v<std::unique_ptr<double>&, ValueType>)
 		static_assert(std::is_same_v<std::unique_ptr<double>&, ValueType>);
 		auto x = Util::to_cstring(std::move(val));
@@ -204,6 +231,7 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 		auto xx= Util::to_cstring(std::move(v0));
 
 		int i = 0;
+#endif
 #elif 0	
 		//CString cs = Util::to_cstring( val);
 
@@ -219,7 +247,7 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID FACT", "DESC" };
+	std::vector<std::string> headers{ "ID FACT", "DESC", "SUM" };
 
 #if 1
 	m_displayer_ins_response_summary.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<3, 7>, IntegerList<0>>(m_grid_2, std::move(otherlines), std::move(headers)));
