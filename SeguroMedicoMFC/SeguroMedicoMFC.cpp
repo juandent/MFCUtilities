@@ -84,6 +84,8 @@ CSeguroMedicoMFCApp theApp;
 BOOL CSeguroMedicoMFCApp::InitInstance()
 {
 	Storage::initialize();
+	// Storage::upgrade_database();
+	// return false;
 	//Storage::fill_db_with_test_data();
 	
 	// InitCommonControlsEx() is required on Windows XP if an application

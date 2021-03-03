@@ -202,6 +202,11 @@ void INSResponseDlg::OnBnClickedApply()
 
 	auto count = Storage::getStorage().count<INSResponse>(where(is_equal(&INSResponse::liquidacion_num, liquidacion)));
 
+	if(tipo_cambio == 0)
+	{
+		MessageBoxW(L"No se puede dejar en 0 el tipo de cambio");
+		return;
+	}
 	if (!ins_response)
 	{
 		if (count == 1)		// INSResponse already exists

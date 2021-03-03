@@ -64,4 +64,6 @@ public:
 	afx_msg void OnBnClickedCalculate();
 	afx_msg void OnBnClickedBInsResponses();
 	afx_msg void OnBnClickedBInvoices();
+private:
+	CEdit m_total_pagar_colones;
 };

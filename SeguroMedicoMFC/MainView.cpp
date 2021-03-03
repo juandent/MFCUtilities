@@ -138,7 +138,7 @@ void MainView::InitializeGridClaims(const T& t)
 		distinct(alias_column<als_c>(&Claim::id)),
 		alias_column<als_p>(&Patient::last_name),
 		alias_column<als_d>(&Doctor::last_name),
-		alias_column<als_d>(&Doctor::first_name),
+		alias_column<als_c>(&Claim::status),
 		alias_column<als_c>(&Claim::start_date),
 		alias_column<als_c>(&Claim::submission_date),
 		alias_column<als_c>(&Claim::amount),
@@ -159,7 +159,7 @@ void MainView::InitializeGridClaims(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "RECLAMO", "PACIENTE", "DOCTOR", "DOCTOR", "INICIAL", "ENTREGA", "MONTO RECLAMO", "MEDICATION" };
+	std::vector<std::string> headers{ "RECLAMO", "PACIENTE", "DOCTOR", "SENT", "INICIAL", "ENTREGA", "MONTO RECLAMO", "MEDICATION" };
 
 	m_displayer_claims.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<7>, IntegerList<0>>(m_grid_1, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer_claims->display();
@@ -292,6 +292,7 @@ void MainView::OnFilePrint()
 {
 	// TODO: Add your command handler code here
 	m_grid_1.Print();
+	m_grid_2.Print();
 }
 
 void MainView::OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
@@ -309,7 +310,7 @@ void MainView::OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
 	InvoiceDlg dlg;
 	dlg.m_id = invoice_id;
 	dlg.DoModal();
-	Refresh();
+	//Refresh();
 
 }
 
@@ -329,7 +330,7 @@ void MainView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 	ClaimDlg dlg;
 	dlg.m_id = claim_id;
 	dlg.DoModal();
-	Refresh();
-	OnBnClickedBFilter();
+	//Refresh();
+	//OnBnClickedBFilter();
 }
 

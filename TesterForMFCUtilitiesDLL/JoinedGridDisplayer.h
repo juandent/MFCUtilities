@@ -168,39 +168,8 @@ private:
 			else
 			{
 				auto&& value = std::get<Col>(z[row]);
-				// cs = format(value);
-
-				//
-				// auto value = std::get<Col>(z[row]);
-				//
-				// using ValueType = decltype(value);
 
 				cs = FormatCol<Col, FieldType>(value, grid);
-
-				// if constexpr (std::is_integral_v<FieldType> || std::is_floating_point_v<FieldType>)
-				// {
-				// 	grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
-				//
-				// 	if (ColonesCols::template found<Col + 1>())
-				// 	{
-				// 		Util::Colones c(value);
-				// 		cs = format(c);
-				// 	}
-				// 	else if (DollarsCols::template found<Col + 1>())
-				// 	{
-				// 		Util::Dolares d(value);
-				// 		cs = format(d);
-				// 	}
-				// 	else
-				// 	{
-				// 		cs = format(value);
-				// 	}
-				// }
-				// else
-				// {
-				// 	grid.m_sortingFunctions[Col + 1] = Util::Comparison::Text;
-				// 	cs = format(value);
-				// }
 			}
 			grid.SetItemText(row + 1, Col + 1, cs);
 			PrintDataInGrid<Col+1, Container, NumCols>::Apply(row, z, grid);

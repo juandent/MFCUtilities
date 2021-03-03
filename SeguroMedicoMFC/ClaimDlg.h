@@ -86,4 +86,6 @@ public:
 	afx_msg void OnBnClickedBMedications();
 	void OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 	afx_msg void OnBnClickedBAddFactura();
+private:
+	CButton m_sent;
 };

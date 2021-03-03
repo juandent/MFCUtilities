@@ -10,6 +10,7 @@ enum class AcknowledgementType
 	None, Partial, Full
 };
 
+#define VERSION_2
 
 struct Claim
 {
@@ -27,6 +28,9 @@ struct Claim
 	std::string comment;
 	double amount;
 	std::optional<int> other_system_id;
+#ifdef VERSION_2
+	int status;								// sent to asprose (true or false)
+#endif
 
 	std::string simple_dump() const
 	{

@@ -52,6 +52,7 @@ void INSResponseLineDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_L_INSRESPONSELINE, m_list_INSResponseLines);
 	DDX_Control(pDX, IDC_E_ID, m_id_response_line);
 	DDX_Control(pDX, IDC_E_TIPO_CAMBIO, m_tipo_cambio);
+	DDX_Control(pDX, IDC_E_MONTO_A_PAGAR_COLONES, m_total_pagar_colones);
 }
 
 
@@ -291,18 +292,25 @@ void INSResponseLineDlg::OnBnClickedCalculate()
 			MessageBoxW(L"Falta monto cubierto");
 			return;
 		}
-
+		if(m_ins_response->tipo_cambio == 0)
+		{
+			MessageBoxW(L"Falta tipo de cambio");
+			return;
+		}
+		auto monto_cubierto_colones = monto_cubierto * m_ins_response->tipo_cambio;
 		auto deducciones = GetAmount(m_deducciones);
 		auto copago = GetAmount(m_copago);
 		auto coaseguro = GetAmount(m_coaseguros);
 		auto deducible_anual = GetAmount(m_deducible_anual);
 
-		auto total_pagar = monto_cubierto - deducciones - copago - coaseguro - deducible_anual;
-		SetAmount(m_total_pagar, total_pagar);
+		auto total_pagar_dolares = monto_cubierto - deducciones - copago - coaseguro - deducible_anual;
+		auto total_pagar = total_pagar_dolares * m_ins_response->tipo_cambio;
+		SetAmount(m_total_pagar_colones, total_pagar);
+		SetAmount(m_total_pagar, total_pagar_dolares);
 		SetAmount(m_monto_factura, m_invoice->amount);
 
-		auto factura_cubierto_p100 = total_pagar * m_ins_response->tipo_cambio / m_invoice->amount * 100;
-		auto monto_cubierto_p100 = total_pagar / monto_cubierto * 100;
+		auto factura_cubierto_p100 = total_pagar / m_invoice->amount * 100;
+		auto monto_cubierto_p100 = total_pagar / monto_cubierto_colones * 100;
 		SetAmount(m_monto_cubierto_p100, monto_cubierto_p100);
 		SetAmount(m_factura_cubierta_p100, factura_cubierto_p100);
 	}

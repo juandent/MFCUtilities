@@ -18,6 +18,10 @@ void Storage::initialize()
 	//fill_db_with_test_data();
 }
 
+void Storage::upgrade_database()
+{
+	Storage_Impl::copy_old_to_new();
+}
 ///////////////////////////////////
 /// Order for insert:
 ///
@@ -32,6 +36,68 @@ void Storage::initialize()
 /// 
 /// 
 
+void Storage_Impl::copy_old_to_new()
+{
+	// starts full
+	auto old = get_old_storage();
+	// starts empty
+	auto fresh = get_new_storage();
+
+	auto patients = old.get_all<Patient>();
+	for( auto& record : patients)
+	{
+		fresh.replace(record);
+	}
+
+	auto specialties = old.get_all<Specialty>();
+	for( auto& record : specialties)
+	{
+		fresh.replace(record);
+	}
+
+	auto doctors = old.get_all<Doctor>();
+	for (auto& record : doctors)
+	{
+		fresh.replace(record);
+	}
+
+	auto medications = old.get_all<Medication>();
+	
+	for (auto& record : medications)
+	{
+		fresh.replace(record);
+	}
+
+	auto claims = old.get_all<Claim>();
+
+	for (auto& record : claims)
+	{
+		record.status = 0;
+		fresh.replace(record);
+	}
+
+	auto ins_responses = old.get_all<INSResponse>();
+
+	for (auto& record : ins_responses)
+	{
+		fresh.replace(record);
+	}
+
+	auto invoices = old.get_all<Invoice>();
+
+	for (auto& record : invoices)
+	{
+		fresh.replace(record);
+	}
+
+	auto ins_response_lines = old.get_all<INSResponseLine>();
+
+	for (auto& record : ins_response_lines)
+	{
+		fresh.replace(record);
+	}
+
+}
 
 void Storage::fill_db_with_test_data()
 {

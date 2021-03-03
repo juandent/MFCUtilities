@@ -64,6 +64,7 @@ void ClaimDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CLAIMS_GRID, m_grid_claims);
 	DDX_Control(pDX, IDC_L_CLAIM_LIST, m_claim_list);
 	DDX_Control(pDX, IDC_E_OTHER_SYSTEM_ID, m_other_system_id);
+	DDX_Control(pDX, IDC_C_SENT, m_sent);
 }
 
 
@@ -253,6 +254,7 @@ void ClaimDlg::OnBnClickedApply()
 	auto comments = GetText(m_comment);
 	auto amount_claim = GetAmount(m_total_claim_amount);
 	auto other_system_id = GetInteger(m_other_system_id);
+	auto sent = m_sent.GetCheck();
 
 	if(!patient)
 	{
@@ -283,7 +285,7 @@ void ClaimDlg::OnBnClickedApply()
 #if 1
 	if (!claim)	// insert
 	{
-		claim = m_claimLB.insert(patient->id, doctor->id, medicina->id, start_date, submission_date, asprose_num_reclamo, asprose_caso_numero, asprose_amount_recognized, ins_num_reclamo, static_cast<int>(val), comments, amount_claim, other_system_id);
+		claim = m_claimLB.insert(patient->id, doctor->id, medicina->id, start_date, submission_date, asprose_num_reclamo, asprose_caso_numero, asprose_amount_recognized, ins_num_reclamo, static_cast<int>(val), comments, amount_claim, other_system_id,sent);
 		m_claimLB.insert_into_listbox(*claim);
 	}
 	else                // update
@@ -302,6 +304,7 @@ void ClaimDlg::OnBnClickedApply()
 		claim->fkey_medication = medicina->id;
 		claim->fkey_patient = patient->id;
 		claim->other_system_id = other_system_id;
+		claim->status = sent;
 		m_claimLB.update(*claim);
 	}
 #endif
@@ -325,7 +328,8 @@ void ClaimDlg::OnBnClickedNuevo()
 	m_doctorCB.select(std::nullopt);
 	m_patientCB.select(std::nullopt);
 	m_medicationCB.select(std::nullopt);
-	m_claimLB.select(std::nullopt);
+	m_claimLB.select(std::nullopt); 
+	m_sent.SetCheck(0);
 	SetAmount(m_total_claim_amount, 0);
 	m_claim = std::nullopt;
 	OnBnClickedBFilter();
@@ -362,6 +366,7 @@ void ClaimDlg::OnLbnSelchangeLClaimList()
 	SetText(m_asprose_case_number, claim->asprose_case_number);
 	SetText(m_asprose_claim_number, claim->asprose_claim_number);
 	SetAmount(m_asprose_amount_recognized, claim->asprose_amount_presented);
+	m_sent.SetCheck(claim->status);
 	// SetAmount(m_total_claim_amount, claim->amount);
 	m_doctorCB.select(claim->fkey_doctor);
 	m_patientCB.select(claim->fkey_patient);
