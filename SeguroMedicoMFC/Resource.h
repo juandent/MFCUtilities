@@ -183,7 +183,6 @@
 #define IDC_E_FACTURA_CUBIERTO_P100     1081
 #define IDC_L_INSRESPONSELINE           1082
 #define IDC_D_DATE_RESPONSE             1083
-#define IDC_E_MONTO_A_PAGAR2            1083
 #define IDC_E_MONTO_A_PAGAR_COLONES     1083
 #define IDC_E_OTHER_SYSTEM_ID           1085
 #define IDC_B_PATIENTS                  1086
@@ -214,6 +213,8 @@
 #define IDC_B_ADD_FACTURA               1105
 #define IDC_E_SUM_INVOICES_AMOUNTS      1106
 #define IDC_C_SENT                      1107
+#define IDC_EDIT1                       1108
+#define IDC_E_PORCENTAJE_PAGADO         1108
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
@@ -229,7 +230,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        320
 #define _APS_NEXT_COMMAND_VALUE         32779
-#define _APS_NEXT_CONTROL_VALUE         1108
+#define _APS_NEXT_CONTROL_VALUE         1109
 #define _APS_NEXT_SYMED_VALUE           320
 #endif
 #endif

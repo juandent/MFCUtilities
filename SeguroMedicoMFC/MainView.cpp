@@ -151,7 +151,7 @@ void MainView::InitializeGridClaims(const T& t)
 		// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 		// inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))
 		where(t),
-		order_by(alias_column<als_c>(&Claim::start_date)).desc());
+		order_by(alias_column<als_c>(&Claim::submission_date)).desc());
 
 
 
@@ -159,7 +159,7 @@ void MainView::InitializeGridClaims(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "RECLAMO", "PACIENTE", "DOCTOR", "SENT", "INICIAL", "ENTREGA", "MONTO RECLAMO", "MEDICATION" };
+	std::vector<std::string> headers{ "REENBOLSO", "PACIENTE", "DOCTOR", "SENT", "INICIAL", "ENTREGA", "MONTO REENBOLSO", "MEDICATION" };
 
 	m_displayer_claims.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<7>, IntegerList<0>>(m_grid_1, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer_claims->display();
@@ -190,7 +190,7 @@ void MainView::InitializeGridINSResponses(const T& t)
 		where(t),
 		order_by(alias_column<als_c>(&Claim::start_date)).desc());
 
-	std::vector<std::string> headers{ "ID LINEA INS", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "FACT #", "FACT MONTO", "DESC", "ID RECLAMO" };
+	std::vector<std::string> headers{ "ID LINEA INS", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "FACT #", "FACT MONTO", "DESC", "ID REENBOLSO" };
 	m_displayer_responses.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<8>, IntegerList<2, 3, 4, 5>>(m_grid_2, std::move(otherlines), std::move(headers)));
 	m_displayer_responses->display();
 }

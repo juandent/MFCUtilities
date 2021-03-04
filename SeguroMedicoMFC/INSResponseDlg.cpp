@@ -46,6 +46,7 @@ void INSResponseDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_GRID, m_grid);
 	DDX_Control(pDX, IDC_D_DATE_RESPONSE, m_date_response);
 	DDX_Control(pDX, IDC_E_SUM_INVOICES_AMOUNTS, m_sum_invoices_amount);
+	DDX_Control(pDX, IDC_E_PORCENTAJE_PAGADO, m_porcentaje_pagado_INS_response);
 }
 
 
@@ -152,12 +153,13 @@ void INSResponseDlg::InitializeGrid(const T& t)
 		where(t),
 		group_by(alias_column<als_i>(&Invoice::fkey_INSResponse)));    // join 
 
+	assert(sum_results.size() <= 1);
 	if (!sum_results.empty())
 	{
 		auto&& line = sum_results[0];
 		auto&& pc = std::get<0>(line);
 		auto sum_amounts = *pc;
-		SetColones(m_sum_invoices_amount, sum_amounts);
+		SetAmount(m_sum_invoices_amount, sum_amounts);
 	}
 	long count = otherlines.size();
 	auto strCount = Util::to_cstring(count);
@@ -312,6 +314,14 @@ void INSResponseDlg::OnBnClickedCalculate()
 	auto retencion = GetAmount(m_retencion);
 	auto total_a_pagar = total_neto_en_colones - retencion;
 	SetAmount(m_total_pagar, total_a_pagar);
+	auto suma_facturas = GetAmount(m_sum_invoices_amount);
+	if( suma_facturas == 0)
+	{
+		MessageBoxW(L"Suma facturas esta vacio");
+		return;
+	}
+	auto porcentaje_pagado = total_a_pagar / suma_facturas * 100;
+	SetAmount(m_porcentaje_pagado_INS_response, porcentaje_pagado);
 }
 
 
