@@ -205,10 +205,17 @@ auto MainView::GetWhereStatement()
 	
 	auto claim = m_claimsCB.current();
 
-	auto claimWhere = (not claim or (c(alias_column<als_c>(&Claim::id)) == claim->id));
+
+	int claim_id = claim ? claim->id : -1;
+
+	// auto claimWhere = (not claim.has_value() or (c(alias_column<als_c>(&Claim::id)) == claim->id));
 
 	auto doctor = m_doctoresCB.current();
+	int doctor_id = doctor ? doctor->id : -1;
+	
 	auto paciente = m_pacientesCB.current();
+	int paciente_id = paciente ? paciente->id : -1;
+	
 	auto claim_amount_lower_bound = GetAmount(m_claim_amount);
 
 	bool filter_dates = m_filter_by_dates.GetCheck();
@@ -219,11 +226,19 @@ auto MainView::GetWhereStatement()
 
 	auto whereStatement = (not filter_dates or (c(alias_column<als_c>(&Claim::start_date)) >= start
 		&& c(alias_column<als_c>(&Claim::start_date)) <= end))
-		&& (not doctor.has_value() or (c(alias_column<als_c>(&Claim::fkey_doctor)) == doctor->id))
-		&& (not paciente.has_value() or (c(alias_column<als_c>(&Claim::fkey_patient)) == paciente->id))
+		&& (not doctor.has_value() or (c(alias_column<als_c>(&Claim::fkey_doctor)) == doctor_id))
+		&& (not paciente.has_value() or (c(alias_column<als_c>(&Claim::fkey_patient)) == paciente_id))
 		&& (not claim_amount_lower_bound > 0 or (c(alias_column<als_c>(&Claim::amount)) >= claim_amount_lower_bound))
-		&& claimWhere
+		&& (not claim.has_value() or (c(alias_column<als_c>(&Claim::id)) == claim_id))
 		&& factura_where;
+
+	// auto whereStatement = (not filter_dates or (c(alias_column<als_c>(&Claim::start_date)) >= start
+	// 	&& c(alias_column<als_c>(&Claim::start_date)) <= end))
+	// 	&& (not doctor.has_value() or (c(alias_column<als_c>(&Claim::fkey_doctor)) == doctor->id))
+	// 	&& (not paciente.has_value() or (c(alias_column<als_c>(&Claim::fkey_patient)) == paciente->id))
+	// 	&& (not claim_amount_lower_bound > 0 or (c(alias_column<als_c>(&Claim::amount)) >= claim_amount_lower_bound))
+	// 	&& (not claim.has_value() or (c(alias_column<als_c>(&Claim::id)) == claim->id))
+	// 	&& factura_where;
 	
 	return whereStatement;
 }
