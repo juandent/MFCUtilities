@@ -47,6 +47,7 @@ void INSResponseDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_D_DATE_RESPONSE, m_date_response);
 	DDX_Control(pDX, IDC_E_SUM_INVOICES_AMOUNTS, m_sum_invoices_amount);
 	DDX_Control(pDX, IDC_E_PORCENTAJE_PAGADO, m_porcentaje_pagado_INS_response);
+	DDX_Control(pDX, IDC_E_SUM_PAGOS, m_sum_pagos);
 }
 
 
@@ -154,13 +155,34 @@ void INSResponseDlg::InitializeGrid(const T& t)
 		group_by(alias_column<als_i>(&Invoice::fkey_INSResponse)));    // join 
 
 	assert(sum_results.size() <= 1);
+	auto sum_amounts = 0.0;
 	if (!sum_results.empty())
 	{
 		auto&& line = sum_results[0];
 		auto&& pc = std::get<0>(line);
-		auto sum_amounts = *pc;
+		sum_amounts = *pc;
 		SetAmount(m_sum_invoices_amount, sum_amounts);
 	}
+
+	auto sum_total_pagar = Storage::getStorage().select(columns(
+		sum(alias_column<als_k>(&INSResponseLine::total_rubro_factura))),
+		// inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::id)) == alias_column<als_k>(&INSResponseLine::fkey_factura))),
+		where(t),
+		group_by(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)));    // join
+
+	
+	if( !sum_total_pagar.empty())
+	{
+		auto&& line = sum_total_pagar[0];
+		auto&& pc = std::get<0>(line);
+		auto sum_total_pagar_amount = *pc;
+		auto tipo_cambio = GetAmount(m_tipo_cambio);
+		sum_total_pagar_amount *= tipo_cambio;
+		SetAmount(m_sum_pagos, sum_total_pagar_amount );
+		auto percent = sum_total_pagar_amount / sum_amounts * 100;
+		SetAmount(m_porcentaje_pagado_INS_response, percent);
+	}
+	
 	long count = otherlines.size();
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);

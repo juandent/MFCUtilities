@@ -260,20 +260,25 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 auto INSResponseView::GetWhereStatement()
 {
 	auto response = m_insresponseCB.current();
-	
-	auto responseWhere = (not response or (c(alias_column<als_j>(&INSResponse::id)) == response->id));
+
+	auto response_id = response ? response->id : -1;
+	auto responseWhere = (not response or (c(alias_column<als_j>(&INSResponse::id)) == response_id));
 
 	auto doctor = m_doctoresCB.current();
-
-	auto doctorWhere = (not doctor or (c(alias_column<als_d>(&Doctor::id)) == doctor->id));
+	auto doctor_id = doctor ? doctor->id : -1;
+	
+	auto doctorWhere = (not doctor or (c(alias_column<als_d>(&Doctor::id)) == doctor_id));
 
 	auto patient = m_patientsCB.current();
+	auto patient_id = patient ? patient->id : -1;
 
-	auto patientWhere = (not patient or (c(alias_column<als_p>(&Patient::id)) == patient->id));
+	
+	auto patientWhere = (not patient or (c(alias_column<als_p>(&Patient::id)) == patient_id));
 
 	auto medication = m_medicationsCB.current();
+	auto medication_id = medication ? medication->id : -1;
 
-	auto medicationWhere = (not medication or (c(alias_column<als_m>(&Medication::id)) == medication->id));
+	auto medicationWhere = (not medication or (c(alias_column<als_m>(&Medication::id)) == medication_id));
 
 	auto filter_by_dates = m_filter_by_dates.GetCheck();
 

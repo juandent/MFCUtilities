@@ -68,4 +68,5 @@ public:
 private:
 	CEdit m_sum_invoices_amount;
 	CEdit m_porcentaje_pagado_INS_response;
+	CEdit m_sum_pagos;
 };

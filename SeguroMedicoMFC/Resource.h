@@ -215,6 +215,9 @@
 #define IDC_C_SENT                      1107
 #define IDC_EDIT1                       1108
 #define IDC_E_PORCENTAJE_PAGADO         1108
+#define IDC_B_SELECT_REEMBOLSO          1110
+#define IDC_EDIT2                       1111
+#define IDC_E_SUM_PAGOS                 1111
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
@@ -230,7 +233,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        320
 #define _APS_NEXT_COMMAND_VALUE         32779
-#define _APS_NEXT_CONTROL_VALUE         1109
+#define _APS_NEXT_CONTROL_VALUE         1112
 #define _APS_NEXT_SYMED_VALUE           320
 #endif
 #endif

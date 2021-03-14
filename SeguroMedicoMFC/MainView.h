@@ -16,6 +16,7 @@ class MainView : public CFormView
 	BoxContents<Patient, &Patient::id, CComboBox> m_pacientesCB;
 	BoxContents<Claim, &Claim::id, CComboBox> m_claimsCB;
 
+	enum { ID_REEMBOLSO_COLUMN=10};
 	
 protected:
 	MainView();           // protected constructor used by dynamic creation
@@ -70,6 +71,8 @@ public:
 	void OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 private:
 	CEdit m_num_Factura;
+public:
+	afx_msg void OnBnClickedBSelectReembolso();
 };
 
 

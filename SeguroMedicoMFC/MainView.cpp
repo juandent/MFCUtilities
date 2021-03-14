@@ -62,6 +62,7 @@ BEGIN_MESSAGE_MAP(MainView, CFormView)
 	ON_BN_CLICKED(IDC_B_CLEAR_FILTERS, &MainView::OnBnClickedBClearFilters)
 	ON_BN_CLICKED(IDC_B_REFRESH, &MainView::OnBnClickedBRefresh)
 	ON_COMMAND(ID_FILE_PRINT, &MainView::OnFilePrint)
+	ON_BN_CLICKED(IDC_B_SELECT_REEMBOLSO, &MainView::OnBnClickedBSelectReembolso)
 END_MESSAGE_MAP()
 
 
@@ -142,6 +143,7 @@ void MainView::InitializeGridClaims(const T& t)
 		alias_column<als_c>(&Claim::start_date),
 		alias_column<als_c>(&Claim::submission_date),
 		alias_column<als_c>(&Claim::amount),
+		alias_column<als_c>(&Claim::asprose_claim_number),
 		alias_column<als_m>(&Medication::name)),
 		// alias_column<als_i>(&Invoice::fkey_INSResponse)),
 		// sum(alias_column<als_i>(&Invoice::amount))),
@@ -159,7 +161,7 @@ void MainView::InitializeGridClaims(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "REENBOLSO", "PACIENTE", "DOCTOR", "SENT", "INICIAL", "ENTREGA", "MONTO REENBOLSO", "MEDICATION" };
+	std::vector<std::string> headers{ "REENBOLSO", "PACIENTE", "DOCTOR", "SENT", "INICIAL", "ENTREGA", "MONTO REENBOLSO", "ASPROSE", "MEDICATION" };
 
 	m_displayer_claims.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<7>, IntegerList<0>>(m_grid_1, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer_claims->display();
@@ -349,3 +351,30 @@ void MainView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 	//OnBnClickedBFilter();
 }
 
+
+
+void MainView::OnBnClickedBSelectReembolso()
+{
+	// TODO: Add your control notification handler code here
+
+	auto selected =m_grid_2.GetSelectedCellRange();
+	auto minrow = selected.GetMinRow();
+	auto maxrow = selected.GetMaxRow();
+
+	if (minrow < 0 || maxrow < 0)
+		return;
+
+	if (minrow != maxrow)
+		return;
+	
+	auto text = m_grid_2.GetItemText(minrow, ID_REEMBOLSO_COLUMN);
+	auto str = Util::from_cstring(text);
+	auto id_reembolso = std::stoi(str);
+	int i = 0;
+
+
+	auto whereStatement = (c(alias_column<als_c>(&Claim::id)) == id_reembolso);
+	InitializeGridClaims(whereStatement);
+	InitializeGridINSResponses(whereStatement);
+
+}
