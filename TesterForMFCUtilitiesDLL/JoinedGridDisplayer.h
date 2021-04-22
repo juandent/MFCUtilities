@@ -105,11 +105,14 @@ public:
 			PrintDataInGrid<0, Container, NumCols>::Apply(i, lines, grid);
 		}
 		grid.SetColumnWidth(0, 100);
-		int width = grid.GetColumnWidth(0);
-		for (int i = 0; i < headers.size(); ++i)
+		// int width = grid.GetColumnWidth(0);
+		int width {};
+		for (int i = 0; i <= headers.size(); ++i)
 		{
-			grid.AutoSizeColumn(i + 1);	// skip vertical headers
-			width += grid.GetColumnWidth(i + 1);
+			// grid.AutoSizeColumn(i + 1);	// skip vertical headers
+			// width += grid.GetColumnWidth(i + 1);
+			grid.AutoSizeColumn(i );	// skip vertical headers
+			width += grid.GetColumnWidth(i );
 		}
 		auto frame = grid.GetParentFrame();
 		width += GetSystemMetrics(SM_CXVSCROLL);

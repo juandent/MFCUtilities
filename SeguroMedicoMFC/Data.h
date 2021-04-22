@@ -145,7 +145,8 @@ inline auto& Storage_Impl::get_old_storage()
 	// this file will start full
 	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\old.sqlite" };
 
-
+	constexpr int version = 2;
+	
 	static auto storage =
 		make_storage(db_name,
 			make_table("Claims",
@@ -163,7 +164,7 @@ inline auto& Storage_Impl::get_old_storage()
 				make_column("comment", &Claim::comment),
 				make_column("amount", &Claim::amount),
 				make_column("other_system_id", &Claim::other_system_id),
-				// make_column("status", &Claim::status),
+				make_column("status", &Claim::status),
 				foreign_key(&Claim::fkey_doctor).references(&Doctor::id),
 				foreign_key(&Claim::fkey_medication).references(&Medication::id),
 				foreign_key(&Claim::fkey_patient).references(&Patient::id)),
@@ -231,7 +232,6 @@ inline auto& Storage_Impl::get_old_storage()
 	}
 
 	return storage;
-
 }
 
 inline auto& Storage_Impl::get_new_storage()
@@ -243,7 +243,8 @@ inline auto& Storage_Impl::get_new_storage()
 	static int flag = 0;
 	// this file will start empty
 	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\New.sqlite" };
-
+	
+	constexpr int version = 3;
 
 	static auto storage =
 		make_storage(db_name,

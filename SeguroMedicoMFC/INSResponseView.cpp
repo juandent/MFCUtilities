@@ -101,7 +101,7 @@ void INSResponseView::OnInitialUpdate()
 	
 	// TODO: Add your specialized code here and/or call the base class
 	InitializeGridINSResponse(true);
-	InitializeGridINSResponseSummary(true);
+	// InitializeGridINSResponseSummary(true);
 }
 
 void INSResponseView::Refresh()
@@ -184,19 +184,19 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 {
 
 	auto otherlines = Storage::getStorage().select(columns(
-		alias_column<als_i>(&Invoice::id),
-		alias_column<als_i>(&Invoice::description),
+		alias_column< als_j>(&INSResponse::id),
+		// alias_column<als_i>(&Invoice::description),
 
-		sum(alias_column<als_i>(&Invoice::amount)),
-		alias_column<als_k>(&INSResponseLine::id)),
+		sum(alias_column<als_i>(&Invoice::amount))),
+		// alias_column<als_k>(&INSResponseLine::id)),
 		inner_join<als_k>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
 		inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
-		inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
-		inner_join<als_d>(on(c(alias_column<als_c>(&Claim::fkey_doctor)) == alias_column<als_d>(&Doctor::id))),
-		inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
-		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+		// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
+		// inner_join<als_d>(on(c(alias_column<als_c>(&Claim::fkey_doctor)) == alias_column<als_d>(&Doctor::id))),
+		// inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
+		// inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 
-		where(t),
+		where(true),
 		group_by(alias_column < als_j>(&INSResponse::id))); // ,
 		// order_by(alias_column<als_j>(&INSResponse::date_response)).desc());
 
@@ -248,10 +248,10 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID FACT", "DESC", "SUM", "ID LINEA RESP" };
+	std::vector<std::string> headers{ "INS RESP ID", "SUM" };
 
 #if 1
-	m_displayer_ins_response_summary.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<3, 7>, IntegerList<0>>(m_grid_2, std::move(otherlines), std::move(headers)));
+	m_displayer_ins_response_summary.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<2>, IntegerList<0>>(m_grid_2, std::move(otherlines), std::move(headers)));
 	m_displayer_ins_response_summary->display();
 #endif
 }

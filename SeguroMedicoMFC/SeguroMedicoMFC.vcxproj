@@ -190,6 +190,10 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\x64\Release\*.dll"   "C:\Users\juan_\OneDrive\C++\Applications\SeguroMedicoMFC\*.*"
+copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\x64\Release\Seguro*.exe"   "C:\Users\juan_\OneDrive\C++\Applications\SeguroMedicoMFC\*.*"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\ExpenseManagerSQLite\IDisplayer.h" />
@@ -234,6 +238,7 @@
     <ClCompile Include="..\JDMFCLibrary\Util.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

@@ -73,6 +73,9 @@ private:
 	CEdit m_num_Factura;
 public:
 	afx_msg void OnBnClickedBSelectReembolso();
+	afx_msg void OnBnClickedBCrearReembolso();
+private:
+	CEdit m_invoice_description;
 };
 
 

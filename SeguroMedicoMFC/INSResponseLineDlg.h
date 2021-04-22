@@ -23,6 +23,7 @@ public:
 	virtual ~INSResponseLineDlg();
 
 	int m_id{ -1 };
+	std::string m_factura_numero;
 	
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
@@ -66,4 +67,5 @@ public:
 	afx_msg void OnBnClickedBInvoices();
 private:
 	CEdit m_total_pagar_colones;
+	CEdit m_factura_num;
 };

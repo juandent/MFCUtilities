@@ -52,6 +52,7 @@ void MainView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_GRID_2, m_grid_2);
 	DDX_Control(pDX, IDC_C_CLAIM_IDS, m_list_claim_ids);
 	DDX_Control(pDX, IDC_E_NUM_FACTURA, m_num_Factura);
+	DDX_Control(pDX, IDC_E_DESC, m_invoice_description);
 }
 
 BEGIN_MESSAGE_MAP(MainView, CFormView)
@@ -63,6 +64,7 @@ BEGIN_MESSAGE_MAP(MainView, CFormView)
 	ON_BN_CLICKED(IDC_B_REFRESH, &MainView::OnBnClickedBRefresh)
 	ON_COMMAND(ID_FILE_PRINT, &MainView::OnFilePrint)
 	ON_BN_CLICKED(IDC_B_SELECT_REEMBOLSO, &MainView::OnBnClickedBSelectReembolso)
+	ON_BN_CLICKED(IDC_B_CREAR_REEMBOLSO, &MainView::OnBnClickedBCrearReembolso)
 END_MESSAGE_MAP()
 
 
@@ -138,7 +140,7 @@ void MainView::InitializeGridClaims(const T& t)
 	auto otherlines = Storage::getStorage().select(columns(
 		distinct(alias_column<als_c>(&Claim::id)),
 		alias_column<als_p>(&Patient::last_name),
-		alias_column<als_d>(&Doctor::last_name),
+		conc(conc(alias_column<als_d>(&Doctor::last_name), " "),alias_column<als_d>(&Doctor::first_name)),
 		alias_column<als_c>(&Claim::status),
 		alias_column<als_c>(&Claim::start_date),
 		alias_column<als_c>(&Claim::submission_date),
@@ -183,16 +185,19 @@ void MainView::InitializeGridINSResponses(const T& t)
 		alias_column<als_i>(&Invoice::number),
 		alias_column<als_i>(&Invoice::amount),
 		substr(alias_column<als_i>(&Invoice::description),0, 50),
-		alias_column<als_c>(&Claim::id)),
+		alias_column<als_c>(&Claim::id),
+		alias_column<als_k>(&INSResponseLine::fkey_INSResponse)),
 		// alias_column<als_m>(&Medication::id)),
 		// alias_column<als_c>(&Claim::amount)),
-		inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
+		left_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
+		// left_join<als_i>(on(c(alias_column<als_i>(&Invoice::id) == alias_column<als_k>(&INSResponseLine::fkey_factura))),
 		inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
 		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+		// inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
 		where(t),
 		order_by(alias_column<als_c>(&Claim::start_date)).desc());
 
-	std::vector<std::string> headers{ "ID LINEA INS", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "FACT #", "FACT MONTO", "DESC", "ID REENBOLSO" };
+	std::vector<std::string> headers{ "ID LINEA INS", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "FACT #", "FACT MONTO", "DESC", "ID REENBOLSO", "ID RESPUESTA" };
 	m_displayer_responses.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<8>, IntegerList<2, 3, 4, 5>>(m_grid_2, std::move(otherlines), std::move(headers)));
 	m_displayer_responses->display();
 }
@@ -204,6 +209,10 @@ auto MainView::GetWhereStatement()
 	auto num_factura = GetText(m_num_Factura);
 	if (num_factura.empty())	num_factura = "%";
 	auto factura_where = like(alias_column<als_i>(&Invoice::number), num_factura);
+
+	auto desc_factura = GetText(m_invoice_description);
+	if (desc_factura.empty())	desc_factura = "%";
+	auto desc_where = like(alias_column<als_i>(&Invoice::description), desc_factura);
 	
 	auto claim = m_claimsCB.current();
 
@@ -232,7 +241,8 @@ auto MainView::GetWhereStatement()
 		&& (not paciente.has_value() or (c(alias_column<als_c>(&Claim::fkey_patient)) == paciente_id))
 		&& (not claim_amount_lower_bound > 0 or (c(alias_column<als_c>(&Claim::amount)) >= claim_amount_lower_bound))
 		&& (not claim.has_value() or (c(alias_column<als_c>(&Claim::id)) == claim_id))
-		&& factura_where;
+		&& factura_where
+		&& desc_where;
 
 	// auto whereStatement = (not filter_dates or (c(alias_column<als_c>(&Claim::start_date)) >= start
 	// 	&& c(alias_column<als_c>(&Claim::start_date)) <= end))
@@ -290,6 +300,7 @@ void MainView::OnBnClickedBClearFilters()
 	m_filter_by_dates.SetCheck(0);
 	SetAmount(m_claim_amount, 0);
 	SetText(m_num_Factura, "%"s);
+	SetText(m_invoice_description, "%"s);
 	OnBnClickedBFilter();
 	// OnBnClickedBFilterInsresponses();
 }
@@ -377,4 +388,13 @@ void MainView::OnBnClickedBSelectReembolso()
 	InitializeGridClaims(whereStatement);
 	InitializeGridINSResponses(whereStatement);
 
+}
+
+
+void MainView::OnBnClickedBCrearReembolso()
+{
+	// TODO: Add your control notification handler code here
+	ClaimDlg dlg;
+	dlg.DoModal();
+	Refresh();
 }

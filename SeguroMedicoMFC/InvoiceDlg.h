@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BoxContents.h"
+#include "IDisplayer.h"
 #include "RadioButtonGroup.h"
 
 
@@ -17,6 +18,9 @@ class InvoiceDlg : public CDialog
 	std::optional<Invoice> m_invoice;
 
 	void Refresh();
+	template <class T>
+	void InitializeGridClaims(const T& t);
+	void OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 
 	RadioButtonGroup m_invoice_type;
 	
@@ -49,6 +53,7 @@ private:
 	CEdit m_descripcion;
 	CComboBox m_list_ins_response;
 	CListBox m_list_facturas;
+	std::unique_ptr<IDisplayer> m_response_lines;
 public:
 	afx_msg void OnBnClickedApply();
 	afx_msg void OnBnClickedNuevo();
@@ -58,4 +63,6 @@ public:
 	afx_msg void OnBnClickedBReclamos();
 	afx_msg void OnBnClickedBInsResponse();
 	virtual BOOL OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult);
+private:
+	CJDGridCtrl m_grid_response_lines;
 };

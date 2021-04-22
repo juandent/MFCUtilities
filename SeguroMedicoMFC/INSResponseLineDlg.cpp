@@ -53,6 +53,7 @@ void INSResponseLineDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_ID, m_id_response_line);
 	DDX_Control(pDX, IDC_E_TIPO_CAMBIO, m_tipo_cambio);
 	DDX_Control(pDX, IDC_E_MONTO_A_PAGAR_COLONES, m_total_pagar_colones);
+	DDX_Control(pDX, IDC_E_FACTURA_NUM, m_factura_num);
 }
 
 
@@ -84,6 +85,10 @@ BOOL INSResponseLineDlg::OnInitDialog()
 	if(m_id!=-1)
 	{
 		m_INSResponseLinesLB.select(m_id);
+	}
+	if(! m_factura_numero.empty())
+	{
+		SetText(m_factura_num, m_factura_numero);
 	}
 	
 	return TRUE;  // return TRUE unless you set the focus to a control

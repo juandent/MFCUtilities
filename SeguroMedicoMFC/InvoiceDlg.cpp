@@ -7,6 +7,8 @@
 #include "afxdialogex.h"
 #include "ClaimDlg.h"
 #include "INSResponseDlg.h"
+#include "INSResponseLineDlg.h"
+#include "JoinedGridDisplayer.h"
 
 
 // InvoiceDlg dialog
@@ -51,10 +53,12 @@ void InvoiceDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_DESCRIPTION, m_descripcion);
 	DDX_Control(pDX, IDC_C_INS_RESPONSE, m_list_ins_response);
 	DDX_Control(pDX, IDC_L_INVOICES, m_list_facturas);
+	DDX_Control(pDX, IDC_GRID_INSRESPONSE_LINES, m_grid_response_lines);
 }
 
 
 BEGIN_MESSAGE_MAP(InvoiceDlg, CDialog)
+	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_INSRESPONSE_LINES, OnGridStartSelChange)
 	ON_BN_CLICKED(ID_APPLY, &InvoiceDlg::OnBnClickedApply)
 	ON_BN_CLICKED(ID_NUEVO, &InvoiceDlg::OnBnClickedNuevo)
 	ON_BN_CLICKED(ID_BORRAR, &InvoiceDlg::OnBnClickedBorrar)
@@ -74,23 +78,103 @@ BOOL InvoiceDlg::OnInitDialog()
 
 	// TODO:  Add extra initialization here
 	m_invoice_type.Initialize();
-	
-	Refresh();
 
+	Refresh();
+	
 	if(m_id != -1)
 	{
 		m_invoiceLB.select(m_id);
+		m_invoice = m_invoiceLB.current();
+		// m_invoice->number;
 	}
 	
+	InitializeGridClaims(true);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
 }
 
 void InvoiceDlg::Refresh()
 {
-	m_claimCB.loadLBOrderBy(&Claim::start_date);
+	m_claimCB.loadLBOrderByDesc(&Claim::start_date);
 	m_invoiceLB.loadLBOrderBy(&Invoice::number);
-	m_responseCB.loadLBOrderBy(&INSResponse::total_a_pagar);
+	m_responseCB.loadLBOrderByDesc(&INSResponse::total_a_pagar);
+	InitializeGridClaims(true);
+
+}
+
+template<typename T>
+void InvoiceDlg::InitializeGridClaims(const T& t)
+{
+#if 0
+	auto otherlines = Storage::getStorage().get_all<Patient>();
+
+	std::vector<std::string> headers{ "ID", "FIRST NAME", "LAST NAME" };
+
+	m_displayer_patients.reset(new GridDisplayer<Patient>(m_grid_1, std::move(otherlines), std::move(headers)));
+
+	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Text);
+	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Money);
+	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Text);
+	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Text);
+
+	m_displayer_patients->display(&Patient::id, &Patient::first_name, &Patient::last_name);
+#else
+	if (!m_invoice)
+		return;
+
+	
+	auto whereClause = c(alias_column<als_i>(&Invoice::id)) == m_invoice->id;
+
+	auto otherlines = Storage::getStorage().select(columns(
+		distinct(alias_column<als_k>(&INSResponseLine::id)),
+		alias_column<als_k>(&INSResponseLine::monto_cubierto),
+		alias_column<als_k>(&INSResponseLine::porcentaje_de_factura_cubierto),
+		alias_column<als_k>(&INSResponseLine::porcentaje_de_monto_cubierto),
+		alias_column<als_k>(&INSResponseLine::total_rubro_factura),
+		alias_column<als_j>(&INSResponse::date_response),
+		alias_column<als_i>(&Invoice::id)),
+
+		// inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
+		// inner_join<als_d>(on(c(alias_column<als_d>(&Doctor::id)) == alias_column<als_c>(&Claim::fkey_doctor))),
+		// inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+		inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::id)) == alias_column<als_k>(&INSResponseLine::fkey_factura))),
+		inner_join<als_j>(on(c(alias_column<als_j>(&INSResponse::id)) == alias_column<als_k>(&INSResponseLine::fkey_INSResponse))),
+		where(whereClause),
+		order_by(alias_column<als_j>(&INSResponse::date_response)).desc());
+
+
+
+	long count = otherlines.size();
+	auto strCount = Util::to_cstring(count);
+	// m_countMainGrid.SetWindowTextW(strCount);
+
+	std::vector<std::string> headers{ "ID LINEA RES", "MONTO CUBIERTO", "% FACT CUBIERTO", "% MONTO CUBIERTO", "TOTAL", "FECHA RES", "FACT ID" };
+
+	m_response_lines.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<0>, IntegerList<2,5>>(m_grid_response_lines, std::move(otherlines), std::move(headers))); 
+	m_response_lines->display();
+
+
+#endif
+}
+
+void InvoiceDlg::OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
+{
+	NM_GRIDVIEW* pItem = (NM_GRIDVIEW*)pNotifyStruct;
+	auto row = pItem->iRow;
+	auto col = pItem->iColumn;
+
+	if (row < 1) return;
+
+	auto response_line_id_cs = m_grid_response_lines.GetItemText(row, 1);
+	auto response_line_id_s = Util::to_string(response_line_id_cs.GetBuffer());
+	auto response_line_id = std::stoi(response_line_id_s);
+
+	INSResponseLineDlg dlg;
+	dlg.m_id = response_line_id;
+	dlg.m_factura_numero = m_invoice  ? m_invoice->number : ""s;
+	dlg.DoModal();
+	//Refresh();
 
 }
 
