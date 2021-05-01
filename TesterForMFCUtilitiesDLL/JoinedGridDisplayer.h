@@ -123,8 +123,15 @@ private:
 	template<int Col, typename FieldType, typename T>
 	static CString FormatCol(T& value, CJDGridCtrl& grid)
 	{
+#if 0
+		FieldType* pT = nullptr;
+		if constexpr (std::is_same_v<std::remove_const_t<FieldType>, bool>)
+		{
+			int i = 0;
+		}
+#endif
 		CString cs;
-		if constexpr (std::is_integral_v<FieldType> || std::is_floating_point_v<FieldType>)
+		if constexpr ((std::is_integral_v<FieldType> || std::is_floating_point_v<FieldType>) && ! std::is_same_v<std::remove_const_t<FieldType>, bool>)
 		{
 			grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
 
@@ -191,6 +198,7 @@ private:
 	template<typename T>
 	static CString format(T&& t)
 	{
+		// static_assert(std::is_same_v<decltype(t), T>);
 		return Util::to_cstring(std::forward<T>(t));
 	}
 

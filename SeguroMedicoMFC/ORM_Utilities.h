@@ -73,11 +73,28 @@ inline Util::Dolares GetDolares(CEdit& edit_box)
 	return dollars;
 }
 
+
+
+template<typename T> requires std::is_arithmetic<T>::value
+inline void SetAmount(CEdit & edit_box, T amount)
+{
+	auto str = Util::to_cstring(amount);
+	edit_box.SetWindowTextW(str);
+}
+
+#if 0
 inline void SetAmount(CEdit& edit_box, double amount)
 {
 	auto str = Util::to_cstring(amount);
 	edit_box.SetWindowTextW(str);
 }
+
+inline void SetAmount(CEdit& edit_box, long long amount)
+{
+	auto str = Util::to_cstring(amount);
+	edit_box.SetWindowTextW(str);
+}
+#endif
 
 inline void SetLongLong(CEdit& edit_box, long long amount)
 {
@@ -140,21 +157,21 @@ inline double GetAmount(CEdit& ctrl)
 inline int GetInteger(CEdit& ctrl)
 {
 	auto str = GetText(ctrl);
-	if (str.empty())	return 0.0;
+	if (str.empty())	return 0;
 	return std::stoi(str);
 }
 
 inline long GetLong(CEdit& ctrl)
 {
 	auto str = GetText(ctrl);
-	if (str.empty())	return 0.0;
+	if (str.empty())	return 0L;
 	return std::stol(str);
 }
 
 inline long long GetLongLong(CEdit& ctrl)
 {
 	auto str = GetText(ctrl);
-	if (str.empty())	return 0.0;
+	if (str.empty())	return 0LL;
 	return std::stoll(str);
 }
 

@@ -220,3 +220,5 @@ using als_m = alias_m<Medication>;
 using als_i = alias_i<Invoice>;
 using als_j = alias_j<INSResponse>;
 using als_k = alias_k<INSResponseLine>;
+using als_l = alias_l<Claim>;
+using als_q = alias_q<Invoice>;

@@ -174,7 +174,7 @@ void InvoiceDlg::OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/
 	dlg.m_id = response_line_id;
 	dlg.m_factura_numero = m_invoice  ? m_invoice->number : ""s;
 	dlg.DoModal();
-	//Refresh();
+	Refresh();
 
 }
 

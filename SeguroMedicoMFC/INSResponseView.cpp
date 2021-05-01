@@ -100,8 +100,9 @@ void INSResponseView::OnInitialUpdate()
 
 	
 	// TODO: Add your specialized code here and/or call the base class
-	InitializeGridINSResponse(true);
+	// InitializeGridINSResponse(true);
 	// InitializeGridINSResponseSummary(true);
+	OnBnClickedBFilter();
 }
 
 void INSResponseView::Refresh()
@@ -179,6 +180,16 @@ template<typename T> requires !std::is_same_v<T, std::unique_ptr<double>&>
 	}
 #endif
 
+struct pagado : alias_tag {
+	static const std::string& get() {
+		static const std::string res = "pagado";
+		return res;
+	}
+};
+
+
+
+
 template<typename T>
 void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 {
@@ -187,8 +198,11 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 		alias_column< als_j>(&INSResponse::id),
 		// alias_column<als_i>(&Invoice::description),
 
-		sum(alias_column<als_i>(&Invoice::amount))),
+		sum(alias_column<als_i>(&Invoice::amount)),
+		// div(sum(mul(alias_column<als_k>(&INSResponseLine::total_rubro_factura), alias_column<als_j>(&INSResponse::tipo_cambio))), sum(alias_column<als_i>(&Invoice::amount))),
+		sum( mul(alias_column<als_k>(&INSResponseLine::total_rubro_factura), alias_column<als_j>(&INSResponse::tipo_cambio)))),
 		// alias_column<als_k>(&INSResponseLine::id)),
+
 		inner_join<als_k>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
 		inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
 		// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
@@ -248,10 +262,10 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "INS RESP ID", "SUM" };
+	std::vector<std::string> headers{ "INS RESP ID", "SUM INV AMT", "SUM INV PAID" };
 
 #if 1
-	m_displayer_ins_response_summary.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<2>, IntegerList<0>>(m_grid_2, std::move(otherlines), std::move(headers)));
+	m_displayer_ins_response_summary.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<2,3>, IntegerList<0>>(m_grid_2, std::move(otherlines), std::move(headers)));
 	m_displayer_ins_response_summary->display();
 #endif
 }

@@ -116,6 +116,20 @@ void MainView::Refresh()
 	// OnBnClickedBFilterInsresponses();
 }
 
+struct response_1_count : alias_tag {
+	static const std::string& get() {
+		static const std::string res = "response_1_count";
+		return res;
+	}
+};
+
+struct ii : alias_tag {
+	static const std::string& get() {
+		static const std::string res = "ii";
+		return res;
+	}
+};
+
 
 template<typename T>
 void MainView::InitializeGridClaims(const T& t)
@@ -135,10 +149,11 @@ void MainView::InitializeGridClaims(const T& t)
 	m_displayer_patients->display(&Patient::id, &Patient::first_name, &Patient::last_name);
 #else
 
-
-	
+// #define NESTED_SELECT
+#ifndef  NESTED_SELECT	
 	auto otherlines = Storage::getStorage().select(columns(
 		distinct(alias_column<als_c>(&Claim::id)),
+		// alias_column<als_c>(&Claim::id),
 		alias_column<als_p>(&Patient::last_name),
 		conc(conc(alias_column<als_d>(&Doctor::last_name), " "),alias_column<als_d>(&Doctor::first_name)),
 		alias_column<als_c>(&Claim::status),
@@ -146,25 +161,88 @@ void MainView::InitializeGridClaims(const T& t)
 		alias_column<als_c>(&Claim::submission_date),
 		alias_column<als_c>(&Claim::amount),
 		alias_column<als_c>(&Claim::asprose_claim_number),
-		alias_column<als_m>(&Medication::name)),
-		// alias_column<als_i>(&Invoice::fkey_INSResponse)),
+		alias_column<als_m>(&Medication::name),
+		// alias_column<als_i>(&Invoice::fkey_INSResponse),
+		is_equal(alias_column<als_i>(&Invoice::fkey_INSResponse),1)),
 		// sum(alias_column<als_i>(&Invoice::amount))),
 		inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
 		inner_join<als_d>(on(c(alias_column<als_d>(&Doctor::id)) == alias_column<als_c>(&Claim::fkey_doctor))),
 		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 		// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
-		// inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))
+		inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
 		where(t),
 		order_by(alias_column<als_c>(&Claim::submission_date)).desc());
+#else
+	auto& storage = Storage::getStorage();
+	
+	// select c.id_claim, (SELECT count(*) > 0 from Invoices ii WHERE ii.fkey_claim = c.id_claim and ii.fkey_INSResponse = 1), i.fkey_INSResponse = 1, i.number from Invoices i INNER JOIN Claims c on i.fkey_claim = c.id_claim
+	// auto otherlines = Storage::getStorage().select(columns(alias_column<als_c>(&Claim::id), greater_than(count<als_i>(), 0)),
+	// 	inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))));
 
+	// auto otherlines = storage.select(columns(alias_column<als_p>(&Invoice::id), greater_than(count<als_p>(), 0)),
+	// 	inner_join<als_k>(on(c(alias_column<als_k>(&Claim::id)) == alias_column<als_p>(&Invoice::fkey_claim))),
+	// 	where(c(alias_column<als_p>(&Invoice::fkey_INSResponse)) == 1));
 
+	// auto otherlines = storage.select(columns(count<als_q>()),
+	// 	inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_q>(&Invoice::fkey_claim))),
+	// 	where(c(alias_column<als_q>(&Invoice::fkey_INSResponse)) == 1));
+/*
+
+	SELECT
+		c.*,
+		IFNULL(i.response_1_count, 0)  AS response_1_count
+		FROM
+		Claims c
+		LEFT JOIN
+		(
+			SELECT fkey_claim, COUNT(*) AS response_1_count
+			FROM Invoices
+			WHERE fkey_INSResponse = 1
+			GROUP BY fkey_claim
+		)
+		AS i
+		ON i.fkey_claim = c.id_claim
+*/
+	// auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id), as<response_1_count>(coalesce<int>(alias_column<als_c>(&Claim::other_system_id), 0))),
+	// 	as<ii>(left_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))));
+
+	// auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id), as<response_1_count>(coalesce<int>(alias_column<als_c>(&Claim::other_system_id), 0))),
+	// 	left_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))));
+#if 1
+	auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id),
+		select(columns(greater_than(count<als_p>(), 0)),
+			inner_join<als_m>(on(c(alias_column<als_m>(&Claim::id)) == alias_column<als_p>(&Invoice::fkey_claim))),
+			where(c(alias_column<als_p>(&Invoice::fkey_INSResponse)) == 1))),
+		inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))));
+#else
+	auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id),
+		select(columns(count<als_i>(),
+			inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim)))),
+			where(c(alias_column<als_i>(&Invoice::fkey_INSResponse)) == 0)),
+		inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id));
+#endif
+	auto x1 = std::get<0>(otherlines[0]);
+	auto x2 = std::get<1>(otherlines[0]);
+	auto x3 = std::get<0>(x2);
+	constexpr auto size = std::tuple_size_v<decltype(x2)>;
+
+	// auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id), 
+	// 	storage.select(columns(greater_than(count<als_q>(), 0)),
+	// 		inner_join<als_l>(on(c(alias_column<als_l>(&Claim::id)) == alias_column<als_q>(&Invoice::fkey_claim))),
+	// 		where(c(alias_column<als_q>(&Invoice::fkey_INSResponse)) == 1))),
+	// 	inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))));
+
+#endif
 
 	long count = otherlines.size();
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "REENBOLSO", "PACIENTE", "DOCTOR", "SENT", "INICIAL", "ENTREGA", "MONTO REENBOLSO", "ASPROSE", "MEDICATION" };
-
+#ifndef  NESTED_SELECT	
+	std::vector<std::string> headers{ "REENBOLSO", "PACIENTE", "DOCTOR", "SENT", "INICIAL", "ENTREGA", "MONTO REENBOLSO", "ASPROSE", "MEDICATION", "PENDING"};
+#else
+	std::vector<std::string> headers{ "REENBOLSO", "PACIENTE" };  //, "DOCTOR", "SENT", "INICIAL", "ENTREGA", "MONTO REENBOLSO", "ASPROSE", "MEDICATION", "RESP PENDING"};
+#endif
 	m_displayer_claims.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<7>, IntegerList<0>>(m_grid_1, std::move(otherlines), std::move(headers))); // , ColonesFormat<14>{13}, DolaresFormat<14>{14}));
 	m_displayer_claims->display();
 

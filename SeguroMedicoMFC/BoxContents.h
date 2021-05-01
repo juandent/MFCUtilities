@@ -84,7 +84,8 @@ public:
 		int cur_sel = m_box.GetCurSel();
 		if (cur_sel != npos)
 		{
-			auto id = m_box.GetItemData(cur_sel);
+			auto id = static_cast<unsigned long long>(m_box.GetItemData(cur_sel));
+			// DWORD_PTR
 			// record = storage.get<Table>(id);
 			record = refIntManager.get(id);
 		}

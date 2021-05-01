@@ -27,7 +27,11 @@ using namespace std;
 
 namespace Util
 {
-
+	void ff()
+	{
+		auto str = Util::to_cstring(56);
+	}
+	
 	// to deal with unneeded positive sign!!
 	class costaRicaNumPunct : public moneypunct_byname<char>
 	{
@@ -58,13 +62,19 @@ namespace Util
 	string Comparison::stripNonDigits(const CString& s)
 	{
 		os.str("");
+		int count = 0;
 		for (int i = 0; i < s.GetLength(); ++i)
 		{
 			auto c = s.GetAt(i);
 			if (c == '-' || c == '.' || std::isdigit(c, loc))
 			{
 				os << static_cast<char>(c);
+				count++;
 			}
+		}
+		if(count == 0)
+		{
+			return "0"s;
 		}
 		return os.str();
 	}

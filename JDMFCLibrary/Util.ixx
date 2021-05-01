@@ -219,6 +219,45 @@ export namespace Util
 		return to_cstring(d_str);
 	}
 
+	export CString to_cstring(long d)
+	{
+		auto d_str = std::to_string(d);
+		return to_cstring(d_str);
+	}
+
+	export CString to_cstring(long long d)
+	{
+		auto d_str = std::to_string(d);
+		return to_cstring(d_str);
+	}
+
+	export CString to_cstring(std::size_t d)
+	{
+		auto d_str = std::to_string(d);
+		return to_cstring(d_str);
+	}
+	
+	export CString to_cstring(int d)
+	{
+		auto d_str = std::to_string(d);
+		return to_cstring(d_str);
+	}
+#if 1
+	export template<typename T> requires std::is_integral<T>::value || std::is_floating_point<T>::value
+		CString to_cstring(T&& t)
+	{
+		auto d_str = std::to_string(std::forward<T>(t));
+		return to_cstring(d_str);
+	}
+#endif
+
+	export template<typename...Args>
+		CString to_cstring(std::tuple<Args...> tuple)
+	{
+		auto str = std::get<0>(tuple);
+		return to_cstring(str);
+	}
+
 	export template<typename T>
 	CString to_cstring(std::unique_ptr<T>&& d)
 	{
@@ -265,11 +304,6 @@ export namespace Util
 		auto m = static_cast<LPCTSTR>(msg);
 		auto str = to_string(m);
 		return str;
-	}
-	export inline CString to_cstring(int val)
-	{
-		std::string str = std::to_string(val);
-		return to_cstring(str);
 	}
 
 	export template<typename T> requires std::is_integral_v<T>

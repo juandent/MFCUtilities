@@ -184,6 +184,8 @@
 #define IDC_L_INSRESPONSELINE           1082
 #define IDC_D_DATE_RESPONSE             1083
 #define IDC_E_MONTO_A_PAGAR_COLONES     1083
+#define IDC_E_MONTO_FACTURA2            1084
+#define IDC_E_FACTURA_NUM               1084
 #define IDC_E_OTHER_SYSTEM_ID           1085
 #define IDC_B_PATIENTS                  1086
 #define IDC_B_DOCTORES                  1087
@@ -207,7 +209,9 @@
 #define IDC_E_NUM_FACTURA               1100
 #define IDC_GRID_VIEW_2                 1100
 #define IDC_E_NUM_FACTURA2              1101
+#define IDC_B_CREAR_REEMBOLSO           1101
 #define IDC_B_REFRESH2                  1102
+#define IDC_E_DESC                      1102
 #define IDC_C_INS_RESPONSE_IDS          1103
 #define IDC_E_INSREPONSE_AMOUNT         1104
 #define IDC_B_ADD_FACTURA               1105
@@ -215,6 +219,9 @@
 #define IDC_C_SENT                      1107
 #define IDC_EDIT1                       1108
 #define IDC_E_PORCENTAJE_PAGADO         1108
+#define IDC_B_SELECT_REEMBOLSO          1110
+#define IDC_E_SUM_PAGOS                 1111
+#define IDC_GRID_INSRESPONSE_LINES      1112
 #define ID_FILE_SPECIALTYDLG            32771
 #define ID_FILE_DOCTORDLG               32772
 #define ID_FILE_PATIENTDLG              32773
@@ -230,7 +237,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        320
 #define _APS_NEXT_COMMAND_VALUE         32779
-#define _APS_NEXT_CONTROL_VALUE         1109
+#define _APS_NEXT_CONTROL_VALUE         1113
 #define _APS_NEXT_SYMED_VALUE           320
 #endif
 #endif

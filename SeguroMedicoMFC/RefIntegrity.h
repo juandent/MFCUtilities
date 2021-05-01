@@ -59,7 +59,7 @@ public:
 		}
 	}
 
-	Table get(int id)
+	Table get(unsigned long long id)
 	{
 		Table record;
 		record = storage.get<Table>(id);
