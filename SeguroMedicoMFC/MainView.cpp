@@ -203,12 +203,50 @@ void MainView::InitializeGridClaims(const T& t)
 		AS i
 		ON i.fkey_claim = c.id_claim
 */
+
+/*
+	select c.id_claim, (
+		SELECT count(*) > 0
+		from Invoices ii
+		WHERE ii.fkey_claim = c.id_claim and ii.fkey_INSResponse = 1
+		), i.fkey_INSResponse = 1, i.number
+		from Invoices i
+		INNER JOIN Claims c on i.fkey_claim = c.id_claim
+	*/
+	
 	// auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id), as<response_1_count>(coalesce<int>(alias_column<als_c>(&Claim::other_system_id), 0))),
 	// 	as<ii>(left_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))));
 
 	// auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id), as<response_1_count>(coalesce<int>(alias_column<als_c>(&Claim::other_system_id), 0))),
 	// 	left_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))));
 #if 1
+	// auto lines = storage.select(columns( count<als_i>()),
+	// 	where(c(alias_column<als_i>(&Invoice::fkey_INSResponse)) == 1 && c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)));
+
+	// auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id),
+	// 	select(columns(greater_than(count<als_i>(), 0)),
+	// 			where(c(alias_column<als_i>(&Invoice::fkey_INSResponse)) == 1),
+	// 			inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim)))),
+	// 	inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))));
+
+	auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id),
+		select(columns(greater_than(count<als_q>(), 0)), from<als_q>(),
+			where(c(alias_column<als_q>(&Invoice::fkey_INSResponse)) == 1 && c(alias_column<als_q>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))),
+		from<als_i>(), inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))), group_by(alias_column<als_c>(&Claim::id)));
+
+#elif 0
+	auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id),
+		select(columns(greater_than(count<als_q>(), 0)),
+			where(c(alias_column<als_q>(&Invoice::fkey_INSResponse)) == 1 && c(alias_column<als_q>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))),
+		inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))));
+
+#elif 0
+	auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id),
+		select(columns(greater_than(count<als_q>(), 0)),
+			inner_join<als_l>(on(c(alias_column<als_l>(&Claim::id)) == alias_column<als_q>(&Invoice::fkey_claim))),
+			where(c(alias_column<als_q>(&Invoice::fkey_INSResponse)) == 1))),
+		inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))));
+#elif 0
 	auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id),
 		select(columns(greater_than(count<als_p>(), 0)),
 			inner_join<als_m>(on(c(alias_column<als_m>(&Claim::id)) == alias_column<als_p>(&Invoice::fkey_claim))),
