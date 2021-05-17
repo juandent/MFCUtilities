@@ -107,11 +107,17 @@ BOOL ClaimDlg::OnInitDialog()
 
 void ClaimDlg::Refresh()
 {
+	auto claim = m_claimLB.current();
+	
 	m_doctorCB.loadLBOrderBy(&Doctor::last_name);
 	m_medicationCB.loadLBOrderBy(&Medication::name);
 	m_patientCB.loadLBOrderBy(&Patient::last_name);
 	m_claimLB.loadLBOrderByDesc(&Claim::start_date);
-	// InitializeGrid(true);
+	if( claim )
+	{
+		m_claimLB.select(claim->id);
+	}
+	OnBnClickedBFilter();
 	// grid	
 }
 

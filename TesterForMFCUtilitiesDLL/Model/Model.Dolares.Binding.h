@@ -14,12 +14,12 @@ import Util;
 
 ////// Dolares
 
-inline std::string DolaresToString(Dolares coin) {
+inline std::string DolaresToString(Util::Dolares coin) {
 	std::string temp = coin;
 	return temp;
 }
 
-inline Dolares DolaresFromString(const std::string &s) {
+inline Util::Dolares DolaresFromString(const std::string &s) {
 	using namespace std;
 
 	string chars_to_remove = "[$]|[¢]|,|";
@@ -48,7 +48,7 @@ namespace sqlite_orm {
 	 *  or `INTEGER` (int/long/short etc) respectively.
 	 */
 	template<>
-	struct type_printer<Dolares> : public text_printer{};
+	struct type_printer<Util::Dolares> : public text_printer{};
 
 	/**
 	 *  This is a binder class. It is used to bind c++ values to sqlite queries.
@@ -58,9 +58,9 @@ namespace sqlite_orm {
 	 *  More here https://www.sqlite.org/c3ref/bind_blob.html
 	 */
 	template<>
-	struct statement_binder<Dolares> {
+	struct statement_binder<Util::Dolares> {
 
-		int bind(sqlite3_stmt *stmt, int index, const Dolares &value) {
+		int bind(sqlite3_stmt *stmt, int index, const Util::Dolares &value) {
 			return statement_binder<std::string>().bind(stmt, index, DolaresToString(value));
 			//  or return sqlite3_bind_text(stmt, index++, GenderToString(value).c_str(), -1, SQLITE_TRANSIENT);
 		}
@@ -71,8 +71,8 @@ namespace sqlite_orm {
 	 *  a string from mapped object.
 	 */
 	template<>
-	struct field_printer<Dolares> {
-		std::string operator()(const Dolares &t) const {
+	struct field_printer<Util::Dolares> {
+		std::string operator()(const Util::Dolares &t) const {
 			return DolaresToString(t);
 		}
 	};
@@ -84,12 +84,12 @@ namespace sqlite_orm {
 	 *  functions which return a mapped type value.
 	 */
 	template<>
-	struct row_extractor<Dolares> {
-		Dolares extract(const char *row_value) {
+	struct row_extractor<Util::Dolares> {
+		Util::Dolares extract(const char *row_value) {
 			return DolaresFromString(row_value);
 		}
 
-		Dolares extract(sqlite3_stmt *stmt, int columnIndex) {
+		Util::Dolares extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			return this->extract((const char*)str);
 		}

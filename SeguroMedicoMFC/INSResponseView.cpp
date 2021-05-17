@@ -268,6 +268,29 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 	m_displayer_ins_response_summary.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<2,3>, IntegerList<0>>(m_grid_2, std::move(otherlines), std::move(headers)));
 	m_displayer_ins_response_summary->display();
 #endif
+
+	auto totallines = Storage::getStorage().select(columns(
+
+		sum(alias_column<als_i>(&Invoice::amount)),
+		// div(sum(mul(alias_column<als_k>(&INSResponseLine::total_rubro_factura), alias_column<als_j>(&INSResponse::tipo_cambio))), sum(alias_column<als_i>(&Invoice::amount))),
+		sum(mul(alias_column<als_k>(&INSResponseLine::total_rubro_factura), alias_column<als_j>(&INSResponse::tipo_cambio)))),
+		// alias_column<als_k>(&INSResponseLine::id)),
+
+		inner_join<als_k>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
+		inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
+		// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
+		// inner_join<als_d>(on(c(alias_column<als_c>(&Claim::fkey_doctor)) == alias_column<als_d>(&Doctor::id))),
+		// inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
+		// inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+
+		where(true));
+
+	assert(totallines.size() == 1);
+	auto inv_amounts = std::get<0>(std::move(totallines[0]));
+	auto amounts_paid = std::get<1>( std::move(totallines[0]));
+
+	
+
 }
 
 

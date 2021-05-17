@@ -150,7 +150,33 @@ void MainView::InitializeGridClaims(const T& t)
 #else
 
 // #define NESTED_SELECT
-#ifndef  NESTED_SELECT	
+#ifndef  NESTED_SELECT
+#if 1
+	auto otherlines = Storage::getStorage().select(columns(
+		// distinct(alias_column<als_c>(&Claim::id)),
+		alias_column<als_c>(&Claim::id),
+		alias_column<als_p>(&Patient::last_name),
+		conc(conc(alias_column<als_d>(&Doctor::last_name), " "), alias_column<als_d>(&Doctor::first_name)),
+		alias_column<als_c>(&Claim::status),
+		alias_column<als_c>(&Claim::start_date),
+		alias_column<als_c>(&Claim::submission_date),
+		alias_column<als_c>(&Claim::amount),
+		alias_column<als_c>(&Claim::asprose_claim_number),
+		alias_column<als_m>(&Medication::name),
+		// alias_column<als_i>(&Invoice::fkey_INSResponse),
+		select(greater_than(count<als_q>(), 0), from<als_q>(),
+			where(c(alias_column<als_q>(&Invoice::fkey_INSResponse)) == 1 && c(alias_column<als_q>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))),
+		// sum(alias_column<als_i>(&Invoice::amount))),
+		inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
+		inner_join<als_d>(on(c(alias_column<als_d>(&Doctor::id)) == alias_column<als_c>(&Claim::fkey_doctor))),
+		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+		// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+		inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
+		where(t),
+		group_by(alias_column<als_c>(&Claim::id)));
+		// order_by(alias_column<als_c>(&Claim::submission_date)).desc());
+
+#else
 	auto otherlines = Storage::getStorage().select(columns(
 		distinct(alias_column<als_c>(&Claim::id)),
 		// alias_column<als_c>(&Claim::id),
@@ -172,6 +198,7 @@ void MainView::InitializeGridClaims(const T& t)
 		inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
 		where(t),
 		order_by(alias_column<als_c>(&Claim::submission_date)).desc());
+#endif
 #else
 	auto& storage = Storage::getStorage();
 	
@@ -230,7 +257,7 @@ void MainView::InitializeGridClaims(const T& t)
 	// 	inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))));
 
 	auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id),
-		select(columns(greater_than(count<als_q>(), 0)), from<als_q>(),
+		select(greater_than(count<als_q>(), 0), from<als_q>(),
 			where(c(alias_column<als_q>(&Invoice::fkey_INSResponse)) == 1 && c(alias_column<als_q>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))),
 		from<als_i>(), inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))), group_by(alias_column<als_c>(&Claim::id)));
 
@@ -259,10 +286,11 @@ void MainView::InitializeGridClaims(const T& t)
 			where(c(alias_column<als_i>(&Invoice::fkey_INSResponse)) == 0)),
 		inner_join<als_i>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id));
 #endif
-	auto x1 = std::get<0>(otherlines[0]);
-	auto x2 = std::get<1>(otherlines[0]);
-	auto x3 = std::get<0>(x2);
-	constexpr auto size = std::tuple_size_v<decltype(x2)>;
+
+	// auto x1 = std::get<0>(otherlines[0]);
+	// auto x2 = std::get<1>(otherlines[0]);
+	// auto x3 = std::get<0>(x2);
+	// constexpr auto size = std::tuple_size_v<decltype(x2)>;
 
 	// auto otherlines = storage.select(columns(alias_column<als_c>(&Claim::id), 
 	// 	storage.select(columns(greater_than(count<als_q>(), 0)),
@@ -290,6 +318,37 @@ void MainView::InitializeGridClaims(const T& t)
 template <class T>
 void MainView::InitializeGridINSResponses(const T& t)
 {
+#if 1
+	
+
+		auto otherlines = Storage::getStorage().select(columns(
+			alias_column<als_c>(&Claim::id),
+			alias_column<als_k>(&INSResponseLine::id),
+			alias_column<als_k>(&INSResponseLine::fkey_factura),
+			alias_column<als_k>(&INSResponseLine::fkey_INSResponse),
+			alias_column<als_k>(&INSResponseLine::deducible_anual),
+			alias_column<als_k>(&INSResponseLine::coaseguros),
+			alias_column<als_k>(&INSResponseLine::copago),
+			alias_column<als_k>(&INSResponseLine::monto_cubierto),
+			alias_column<als_k>(&INSResponseLine::porcentaje_de_factura_cubierto),
+			// alias_column<als_i>(&Invoice::id),
+			alias_column<als_i>(&Invoice::number),
+			alias_column<als_i>(&Invoice::amount),
+			substr(alias_column<als_i>(&Invoice::description), 0, 50)),
+			
+			// alias_column<als_m>(&Medication::id)),
+			// alias_column<als_c>(&Claim::amount)),
+			left_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_factura)) == alias_column<als_i>(&Invoice::id))),
+			// left_join<als_i>(on(c(alias_column<als_i>(&Invoice::id) == alias_column<als_k>(&INSResponseLine::fkey_factura))),
+			inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
+			inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+			// inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
+			where(t),
+			// order_by(alias_column<als_c>(&Claim::start_date)).desc());
+			order_by(alias_column<als_c>(&Claim::id)));
+
+	
+#else
 	auto otherlines = Storage::getStorage().select(columns(
 		alias_column<als_k>(&INSResponseLine::id),
 		alias_column<als_k>(&INSResponseLine::deducible_anual),
@@ -300,7 +359,7 @@ void MainView::InitializeGridINSResponses(const T& t)
 		// alias_column<als_i>(&Invoice::id),
 		alias_column<als_i>(&Invoice::number),
 		alias_column<als_i>(&Invoice::amount),
-		substr(alias_column<als_i>(&Invoice::description),0, 50),
+		substr(alias_column<als_i>(&Invoice::description), 0, 50),
 		alias_column<als_c>(&Claim::id),
 		alias_column<als_k>(&INSResponseLine::fkey_INSResponse)),
 		// alias_column<als_m>(&Medication::id)),
@@ -311,10 +370,15 @@ void MainView::InitializeGridINSResponses(const T& t)
 		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 		// inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
 		where(t),
-		order_by(alias_column<als_c>(&Claim::start_date)).desc());
+		// order_by(alias_column<als_c>(&Claim::start_date)).desc());
+		order_by(alias_column<als_c>(&Claim::id)));
 
-	std::vector<std::string> headers{ "ID LINEA INS", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "FACT #", "FACT MONTO", "DESC", "ID REENBOLSO", "ID RESPUESTA" };
-	m_displayer_responses.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<8>, IntegerList<2, 3, 4, 5>>(m_grid_2, std::move(otherlines), std::move(headers)));
+#endif
+	
+	
+	
+	std::vector<std::string> headers{ "REENBOLSO", "LINEA RES", "FACT", "RESPUESTA", "DEDUCIBLE", "COASEGURO", "COPAGO", "MONTO CUBIERTO", "% DE FACTURA", "FACT #", "FACT MONTO", "DESC" };
+	m_displayer_responses.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<11>, IntegerList<5, 6, 7, 8>>(m_grid_2, std::move(otherlines), std::move(headers)));
 	m_displayer_responses->display();
 }
 
@@ -447,7 +511,7 @@ void MainView::OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
 
 	if (row < 1) return;
 
-	auto invoice_id_cs = m_grid_2.GetItemText(row, 1);
+	auto invoice_id_cs = m_grid_2.GetItemText(row, 3);
 	auto invoice_id_s = Util::to_string(invoice_id_cs.GetBuffer());
 	auto invoice_id = std::stoi(invoice_id_s);
 
@@ -470,6 +534,14 @@ void MainView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 	auto claim_id_cs = m_grid_1.GetItemText(row, 1);
 	auto claim_id_s = Util::to_string(claim_id_cs.GetBuffer());
 	auto claim_id = std::stoi(claim_id_s);
+
+
+	m_claimsCB.select(claim_id);
+
+	auto whereStatement = (c(alias_column<als_c>(&Claim::id)) == claim_id);
+	InitializeGridClaims(whereStatement);
+	InitializeGridINSResponses(whereStatement);
+
 
 	ClaimDlg dlg;
 	dlg.m_id = claim_id;

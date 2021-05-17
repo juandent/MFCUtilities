@@ -14,12 +14,12 @@ using namespace Util;
 
 ////// Colones
 
-inline std::string ColonesToString(Colones coin) {
+inline std::string ColonesToString(Util::Colones coin) {
 	std::string temp = static_cast<std::string>(coin);
 	return temp;
 }
 
-inline Colones ColonesFromString(const std::string &s) {
+inline Util::Colones ColonesFromString(const std::string &s) {
 	using namespace std;
 
 	string chars_to_remove = "[$]|[¢]|,|";
@@ -48,7 +48,7 @@ namespace sqlite_orm {
 	 *  or `INTEGER` (int/long/short etc) respectively.
 	 */
 	template<>
-	struct type_printer<Colones> : public text_printer {}; // type_printer<std::wstring> {};  // text_printer{};
+	struct type_printer<Util::Colones> : public text_printer {}; // type_printer<std::wstring> {};  // text_printer{};
 
 	/**
 	 *  This is a binder class. It is used to bind c++ values to sqlite queries.
@@ -58,9 +58,9 @@ namespace sqlite_orm {
 	 *  More here https://www.sqlite.org/c3ref/bind_blob.html
 	 */
 	template<>
-	struct statement_binder<Colones> {
+	struct statement_binder<Util::Colones> {
 
-		int bind(sqlite3_stmt *stmt, int index, const Colones &value) {
+		int bind(sqlite3_stmt *stmt, int index, const Util::Colones &value) {
 			return statement_binder<std::string>().bind(stmt, index, ColonesToString(value));
 			//  or return sqlite3_bind_text(stmt, index++, GenderToString(value).c_str(), -1, SQLITE_TRANSIENT);
 		}
@@ -71,8 +71,8 @@ namespace sqlite_orm {
 	 *  a string from mapped object.
 	 */
 	template<>
-	struct field_printer<Colones> {
-		std::string operator()(const Colones &t) const {
+	struct field_printer<Util::Colones> {
+		std::string operator()(const Util::Colones &t) const {
 			return ColonesToString(t);
 		}
 	};
@@ -97,12 +97,12 @@ namespace sqlite_orm {
 #else
 #if 1	// use std::string
 	template<>
-	struct row_extractor<Colones> {
-		Colones extract(const char *row_value) {
+	struct row_extractor<Util::Colones> {
+		Util::Colones extract(const char *row_value) {
 			return ColonesFromString(row_value);
 		}
 
-		Colones extract(sqlite3_stmt *stmt, int columnIndex) {
+		Util::Colones extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			return this->extract((const char*)str);
 		}

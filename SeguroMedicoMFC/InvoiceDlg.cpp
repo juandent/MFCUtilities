@@ -96,9 +96,15 @@ BOOL InvoiceDlg::OnInitDialog()
 
 void InvoiceDlg::Refresh()
 {
+	auto inv = m_invoiceLB.current();
+	
 	m_claimCB.loadLBOrderByDesc(&Claim::start_date);
 	m_invoiceLB.loadLBOrderBy(&Invoice::number);
 	m_responseCB.loadLBOrderByDesc(&INSResponse::total_a_pagar);
+	if(inv)
+	{
+		m_invoiceLB.select(inv->id);
+	}
 	InitializeGridClaims(true);
 
 }

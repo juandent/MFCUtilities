@@ -20,6 +20,7 @@ namespace ORM
 		using namespace sqlite_orm;
 		using namespace date;
 		using namespace std;
+		using namespace Model;
 
 		static int flag = 0;
 #if 0
@@ -104,15 +105,15 @@ namespace ORM
 				make_column("is_regex",
 					&Concept::m_is_regex),
 				//foreign_key(&Concept::m_category_name_fid).references(&Category::m_name_id),
-				foreign_key(&Concept::m_account_payment_fid).references(&Account::m_number_id)
+				foreign_key(&Concept::m_account_payment_fid).references(&Model::Account::m_number_id)
 			),
 			make_table("STATEMENTS"s,
 				make_column("file_name",
-					&Statement::m_fileName),
+					&Model::Statement::m_fileName),
 				make_column("file_path",
-					&Statement::m_filePath),
+					&Model::Statement::m_filePath),
 				make_column("statement_date",
-					&Statement::m_statementDate,
+					&Model::Statement::m_statementDate,
 					primary_key())
 			),
 

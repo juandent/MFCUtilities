@@ -16,7 +16,7 @@ class MainView : public CFormView
 	BoxContents<Patient, &Patient::id, CComboBox> m_pacientesCB;
 	BoxContents<Claim, &Claim::id, CComboBox> m_claimsCB;
 
-	enum { ID_REEMBOLSO_COLUMN=10};
+	enum { ID_REEMBOLSO_COLUMN=1};
 	
 protected:
 	MainView();           // protected constructor used by dynamic creation
