@@ -40,6 +40,7 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 	int m_id{ -1 };
+	int m_claim_id{ -1 };
 private:
 	CEdit m_id_invoice;
 	CComboBox m_list_reclamos;

@@ -87,6 +87,10 @@ BOOL InvoiceDlg::OnInitDialog()
 		m_invoice = m_invoiceLB.current();
 		// m_invoice->number;
 	}
+	if( m_claim_id != -1)
+	{
+		m_claimCB.select(m_claim_id);
+	}
 	
 	InitializeGridClaims(true);
 
@@ -134,12 +138,12 @@ void InvoiceDlg::InitializeGridClaims(const T& t)
 
 	auto otherlines = Storage::getStorage().select(columns(
 		distinct(alias_column<als_k>(&INSResponseLine::id)),
+		alias_column<als_i>(&Invoice::id),
 		alias_column<als_k>(&INSResponseLine::monto_cubierto),
 		alias_column<als_k>(&INSResponseLine::porcentaje_de_factura_cubierto),
 		alias_column<als_k>(&INSResponseLine::porcentaje_de_monto_cubierto),
 		alias_column<als_k>(&INSResponseLine::total_rubro_factura),
-		alias_column<als_j>(&INSResponse::date_response),
-		alias_column<als_i>(&Invoice::id)),
+		alias_column<als_j>(&INSResponse::date_response)),
 
 		// inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
 		// inner_join<als_d>(on(c(alias_column<als_d>(&Doctor::id)) == alias_column<als_c>(&Claim::fkey_doctor))),
@@ -155,9 +159,9 @@ void InvoiceDlg::InitializeGridClaims(const T& t)
 	auto strCount = Util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
-	std::vector<std::string> headers{ "ID LINEA RES", "MONTO CUBIERTO", "% FACT CUBIERTO", "% MONTO CUBIERTO", "TOTAL", "FECHA RES", "FACT ID" };
+	std::vector<std::string> headers{ "ID LINEA RES", "FACT ID", "MONTO CUBIERTO", "% FACT CUBIERTO", "% MONTO CUBIERTO", "TOTAL", "FECHA RES" };
 
-	m_response_lines.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<0>, IntegerList<2,5>>(m_grid_response_lines, std::move(otherlines), std::move(headers))); 
+	m_response_lines.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<0>, IntegerList<3,6>>(m_grid_response_lines, std::move(otherlines), std::move(headers))); 
 	m_response_lines->display();
 
 

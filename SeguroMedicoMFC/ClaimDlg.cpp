@@ -460,7 +460,10 @@ void ClaimDlg::OnBnClickedBAddFactura()
 {
 	// TODO: Add your control notification handler code here
 	InvoiceDlg dlg;
-	// dlg.m_id = m
+	auto claim = m_claimLB.current();
+	int claim_id = claim ? claim->id : -1;
+	
+	dlg.m_claim_id = claim_id;
 	dlg.DoModal();
 	Refresh();
 	OnBnClickedBFilter();
