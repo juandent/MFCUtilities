@@ -66,6 +66,7 @@ BEGIN_MESSAGE_MAP(InvoiceDlg, CDialog)
 	ON_LBN_SELCHANGE(IDC_L_INVOICES, &InvoiceDlg::OnLbnSelchangeLInvoices)
 	ON_BN_CLICKED(ID_B_RECLAMOS, &InvoiceDlg::OnBnClickedBReclamos)
 	ON_BN_CLICKED(ID_B_INS_RESPONSE, &InvoiceDlg::OnBnClickedBInsResponse)
+	ON_BN_CLICKED(IDC_R_CONSULTA, &InvoiceDlg::OnBnClickedRConsulta)
 END_MESSAGE_MAP()
 
 
@@ -356,4 +357,19 @@ BOOL InvoiceDlg::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* p
 		}
 	}
 	return CDialog::OnWndMsg(message, wParam, lParam, pResult);
+}
+
+
+void InvoiceDlg::OnBnClickedRConsulta()
+{
+	// TODO: Add your control notification handler code here
+	auto desc = GetText(m_descripcion);
+	if( std::string::npos != desc.find("Consulta") || std::string::npos != desc.find( "consulta"))
+	{
+		//
+	}
+	else
+	{
+		SetText(m_descripcion, "Consulta"s);
+	}
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="MyVector&lt;*&gt;">
+    <!-- <DisplayString>{{ ptr ={_Myfirst} }}</DisplayString> -->
+    <StringView>{_Myfirst}</StringView>
+    <Expand>
+      <Item Name="[size]" ExcludeView="sim">_Mylast - _Myfirst</Item>
+      <!-- <Item Name="[capacity]" ExcludeView="sim">_Myend - _Myfirst</Item> -->
+      <ArrayItems>
+        <Size>_Mylast - _Myfirst</Size>
+        <ValuePointer>_Myfirst</ValuePointer>
+      </ArrayItems>
+    </Expand>
+  </Type>
+  <!-- <Type Name="CSeguroMedicoMFCApp"> -->
+    <!-- <DisplayString>{{pointer = {this->m_vec}}</DisplayString> -->
+    <!-- <DisplayString>{{vec = {theApp.m_vec}}</DisplayString> -->
+    <!-- <StringView>{this->m_vec}</StringView> -->
+    <!-- <Expand> -->
+    <!--   <ArrayItems> -->
+    <!--     <Size>1</Size> -->
+    <!--     ~1~ <ValuePointer>this->m_vec._Myfirst</ValuePointer> @1@ -->
+    <!--   </ArrayItems> -->
+    <!-- </Expand> -->
+  <!-- </Type> -->
+  <Type Name="InvoiceDlg">
+    <DisplayString>{{id = {m_id}, claim = {m_claim_id}}</DisplayString>
+  </Type>
+</AutoVisualizer>

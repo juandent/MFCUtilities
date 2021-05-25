@@ -66,4 +66,6 @@ public:
 	virtual BOOL OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult);
 private:
 	CJDGridCtrl m_grid_response_lines;
+public:
+	afx_msg void OnBnClickedRConsulta();
 };
