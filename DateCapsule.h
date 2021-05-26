@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include <date/date.h>
+// #include <date/date.h>
 // #include "Utilities.h"
-
+#include <chrono>
 
 #ifndef DLLS_H
 #define MFC_UTILITIES_EXPORTS
@@ -27,6 +27,6 @@ public:
 		: m_dateInString{ extract(stringIncludingDate) }
 	{}
 
-	date::sys_days asDate() const;
+	std::chrono::sys_days asDate() const;
 	std::string		asString() const { return m_dateInString;  }
 };

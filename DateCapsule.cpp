@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DateCapsule.h"
 #include <regex>
+#include <chrono>
 
 using namespace std;
 
@@ -24,7 +25,7 @@ std::string DateCapsule::extract(const std::string & stringIncludingDate) const
 	return dateInString;
 }
 
-date::sys_days DateCapsule::asDate() const
+std::chrono::sys_days DateCapsule::asDate() const
 {
 	return Util::to_date(m_dateInString);
 }

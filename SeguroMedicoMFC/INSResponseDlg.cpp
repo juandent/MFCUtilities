@@ -202,7 +202,7 @@ void INSResponseDlg::OnBnClickedApply()
 	// TODO: Add your control notification handler code here
 	auto ins_response = getCurrent<INSResponse>(m_id_insresponse);
 
-	date::sys_days date = GetDate(m_date_response );
+	std::chrono::sys_days date = GetDate(m_date_response );
 
 	constexpr bool eq = sizeof(long) == sizeof(int);
 	// date::sys_days submission_date = GetDate(m_date_submitted);

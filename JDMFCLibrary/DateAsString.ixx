@@ -1,6 +1,7 @@
 #include <string>
 #include <utility>
-#include <date/date.h>
+//#include <date/date.h>
+#include <chrono>
 #include <regex>
 #include <map>
 
@@ -22,7 +23,7 @@ namespace DateAsString
 	protected:
 		IDateExtractor() = default;
 	public:
-		virtual std::pair<bool, date::sys_days> convert(const std::string& asText) const = 0;
+		virtual std::pair<bool, std::chrono::sys_days> convert(const std::string& asText) const = 0;
 		virtual ~IDateExtractor() = default;
 	};
 
@@ -34,7 +35,7 @@ namespace DateAsString
 		CompleteDateExtractor(const std::string& expression, int dayIndex, int monthIndex, int yearIndex)
 			: m_regularExpression{ std::regex{ expression } }, m_dayIndex{ dayIndex }, m_monthIndex{ monthIndex }, m_yearIndex{ yearIndex }
 		{}
-		virtual std::pair<bool, date::sys_days> convert(const std::string& asText) const override;
+		virtual std::pair<bool, std::chrono::sys_days> convert(const std::string& asText) const override;
 	};
 
 #if 0
@@ -68,7 +69,7 @@ namespace DateAsString
 		IncompleteDateExtractor(const std::string& expression, int dayIndex, int monthIndex, unsigned statementMonth, int statementYear)
 			: m_regularExpression{ std::regex{ expression } }, m_dayIndex{ dayIndex }, m_monthIndex{ monthIndex }, m_statementMonth{ statementMonth }, m_statementYear{ statementYear }
 		{}
-		virtual std::pair<bool, date::sys_days> convert(const std::string& asText) const override;
+		virtual std::pair<bool, std::chrono::sys_days> convert(const std::string& asText) const override;
 	};
 
 	export bool isDateComplete(const std::string& asText);
@@ -86,7 +87,7 @@ namespace DateAsString
 		StringDateConverter(const std::string& asText, unsigned statementMonth, int statementYear)
 			: m_asText{ asText }, m_statementMonth{ statementMonth }, m_statementYear{ statementYear }
 		{}
-		std::pair<bool, date::sys_days> convert() const;
+		std::pair<bool, std::chrono::sys_days> convert() const;
 	};
 }
 

@@ -12,6 +12,7 @@
 // #include <sqlite_orm/sqlite_orm.h>
 #include <vector>
 #include <string>
+#include <string_view>
 #include <regex>
 #include <iostream>
 #include <iomanip>
@@ -24,9 +25,11 @@
 #include <unordered_set>
 #include <map>
 #include <functional>
+#define _HAS_CXX20	1
+#define _HAS_CXX17	1
 #include <chrono>
-#include <date/date.h>
-#include <date/tz.h>
+// #include <date/date.h>
+// #include <date/tz.h>
 #include <filesystem>
 #include <numeric>
 #include <algorithm>

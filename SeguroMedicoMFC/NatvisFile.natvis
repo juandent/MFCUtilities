@@ -26,4 +26,7 @@
   <Type Name="InvoiceDlg">
     <DisplayString>{{id = {m_id}, claim = {m_claim_id}}</DisplayString>
   </Type>
+  <Type Name="RadioButtonGroup">
+    <DisplayString>{{selected = {get_value()} }}</DisplayString>
+  </Type>
 </AutoVisualizer>

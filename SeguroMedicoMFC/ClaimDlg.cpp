@@ -245,8 +245,8 @@ void ClaimDlg::OnBnClickedApply()
 	std::optional<Doctor> doctor = m_doctorCB.current();
 	std::optional<Medication> medicina = m_medicationCB.current();
 
-	date::sys_days start_date = GetDate(m_start_date);
-	date::sys_days submission_date = GetDate(m_date_submitted);
+	std::chrono::sys_days start_date = GetDate(m_start_date);
+	std::chrono::sys_days submission_date = GetDate(m_date_submitted);
 
 	auto asprose_num_reclamo = GetText(m_asprose_claim_number);
 	auto asprose_caso_numero = GetText(m_asprose_case_number);

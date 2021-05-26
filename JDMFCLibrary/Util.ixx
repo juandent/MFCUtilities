@@ -2,7 +2,9 @@
 
 
 #include <debugapi.h>
-#include <date/date.h>
+#include <cassert>
+//#include <date/date.h>
+#include <chrono>
 #include <array>
 #include <string>
 #include <fstream>
@@ -84,9 +86,9 @@ namespace diag
 		::OutputDebugStringA(str.c_str());
 		endl();
 	}
-	export inline void display(date::sys_days pt)
+	export inline void display(std::chrono::sys_days pt)
 	{
-		date::year_month_day ymd{ pt };
+		std::chrono::year_month_day ymd{ pt };
 		std::ostringstream os;
 		os << ymd;
 		display(os.str());
@@ -285,15 +287,15 @@ export namespace Util
 	}
 
 
-	export inline std::string to_string(date::sys_days dp)
+	export inline std::string to_string(std::chrono::sys_days dp)
 	{
-		date::year_month_day ymd{ dp };
+		std::chrono::year_month_day ymd{ dp };
 		std::ostringstream os;
 		os << ymd;
 		return os.str();
 	}
 
-	export inline CString to_cstring(date::sys_days dp)
+	export inline CString to_cstring(std::chrono::sys_days dp)
 	{
 		auto str = to_string(dp);
 		return to_cstring(str);
@@ -407,9 +409,9 @@ export namespace Util
 		return Money{ val };
 	}
 
-	export inline COleDateTime to_ole_date_time(date::sys_days fecha)
+	export inline COleDateTime to_ole_date_time(std::chrono::sys_days fecha)
 	{
-		using namespace date;
+		using namespace std::chrono;
 
 		year_month_day ymd = fecha;
 		auto year_val = static_cast<int>(ymd.year());
@@ -420,9 +422,9 @@ export namespace Util
 		return rDateTime;
 	}
 
-	export inline date::sys_days to_sys_days(const COleDateTime& fecha)
+	export inline std::chrono::sys_days to_sys_days(const COleDateTime& fecha)
 	{
-		using namespace date;
+		using namespace std::chrono;
 
 		int yearVal = fecha.GetYear();
 		unsigned monthVal = fecha.GetMonth();
@@ -457,10 +459,10 @@ export namespace Util
 		}
 	}
 
-	export inline date::sys_days selected_criteria_to_date(const std::string& asText)
+	export inline std::chrono::sys_days selected_criteria_to_date(const std::string& asText)
 	{
 		using namespace std;
-		using namespace date;
+		using namespace std::chrono;
 
 		smatch m;
 
@@ -484,7 +486,7 @@ export namespace Util
 		return year_month_day{ year{0}, month{0}, day{0} };
 	}
 
-	export inline date::sys_days to_date(const std::string& asText, unsigned statementMonth = 0, int statementYear = 0)
+	export inline std::chrono::sys_days to_date(const std::string& asText, unsigned statementMonth = 0, int statementYear = 0)
 	{
 		DateAsString::StringDateConverter converter{ asText, statementMonth, statementYear };
 		auto ret = converter.convert();
@@ -518,27 +520,27 @@ export namespace Util
 		return file;
 	}
 
-	export inline CString weekDayCS(const date::sys_days dp)
+	export inline CString weekDayCS(const std::chrono::sys_days dp)
 	{
 		static std::array<CString, 7> days{ L"Sunday", L"Monday", L"Tuesday", L"Wednesday", L"Thursday", L"Friday", L"Saturday" };
-		date::year_month_weekday ymwd{ dp };
+		std::chrono::year_month_weekday ymwd{ dp };
 		auto wkday = ymwd.weekday();
-		int i = (wkday - date::Sunday).count();
+		int i = (wkday - std::chrono::Sunday).count();
 		//auto i = ymwd.weekday_indexed().weekday().operator unsigned int();
 		return days[i];
 	}
 
-	export inline const std::string& weekDay(const date::sys_days dp)
+	export inline const std::string& weekDay(const std::chrono::sys_days dp)
 	{
 		static std::array<std::string, 7> days{ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-		date::year_month_weekday ymwd{ dp };
+		std::chrono::year_month_weekday ymwd{ dp };
 		auto wkday = ymwd.weekday();
-		int i = (wkday - date::Sunday).count();
+		int i = (wkday - std::chrono::Sunday).count();
 		//auto i = ymwd.weekday_indexed().weekday().operator unsigned int();
 		return days[i];
 	}
 
-	export inline LPARAM weekDayAsData(const date::sys_days dp)
+	export inline LPARAM weekDayAsData(const std::chrono::sys_days dp)
 	{
 		auto& dayName = weekDay(dp);
 		return reinterpret_cast<LPARAM>(dayName.c_str());

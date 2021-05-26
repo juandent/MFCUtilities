@@ -8,7 +8,7 @@
 void Storage::initialize()
 {
 	// initialize tz library asynchronously
-	std::thread{ date::get_tzdb }.detach();
+	std::thread{ std::chrono::get_tzdb }.detach();
 
 	//Storage::empty_database();
 	//CategoryRepository repo;
@@ -102,7 +102,7 @@ void Storage_Impl::copy_old_to_new()
 void Storage::fill_db_with_test_data()
 {
 	using namespace sqlite_orm;
-	using namespace date;
+	using namespace std::chrono;
 	using namespace std;
 
 

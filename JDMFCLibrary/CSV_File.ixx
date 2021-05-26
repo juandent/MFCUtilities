@@ -5,7 +5,8 @@ module;
 #include <cassert>
 
 #include <FixedPoint/Money.h>
-#include <date/date.h>
+//#include <date/date.h>
+#include <chrono>
 
 
 export module CSV_File;
@@ -45,7 +46,7 @@ namespace csv
 		Row m_currentRow;
 
 		void addCol(const std::string& col);
-		void addCol(date::sys_days pt);
+		void addCol(std::chrono::sys_days pt);
 		void addCol(Money money);
 		void addEndl();
 
@@ -69,7 +70,7 @@ namespace csv
 		ConstantIterator cend() const { return m_matrix.cend(); }
 
 		std::string getString(const Cell_Position& pos) const;
-		date::sys_days getDate(const Cell_Position& pos) const;
+		std::chrono::sys_days getDate(const Cell_Position& pos) const;
 		Money getMoney(const Cell_Position& pos) const;
 		bool getBool(const Cell_Position& pas) const;
 
@@ -79,7 +80,7 @@ namespace csv
 		// StringMatrix		m_matrix;
 
 		CSV_File& operator<<(const std::string& col);
-		CSV_File& operator<<(date::sys_days pt);
+		CSV_File& operator<<(std::chrono::sys_days pt);
 		CSV_File& operator<<(Money money);
 
 

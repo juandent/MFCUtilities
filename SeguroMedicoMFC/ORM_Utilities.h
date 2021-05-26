@@ -122,17 +122,17 @@ struct IdManager
 };
 
 
-inline void SetDate(CDateTimeCtrl& ctrl, date::sys_days sysdate)
+inline void SetDate(CDateTimeCtrl& ctrl, std::chrono::sys_days sysdate)
 {
 	auto date = Util::to_ole_date_time(sysdate);
 	ctrl.SetTime(date);
 }
 
-inline date::sys_days GetDate(CDateTimeCtrl& ctrl)
+inline std::chrono::sys_days GetDate(CDateTimeCtrl& ctrl)
 {
 	COleDateTime rOleDateTime;
 	ctrl.GetTime(rOleDateTime);
-	date::sys_days date = Util::to_sys_days(rOleDateTime);
+	std::chrono::sys_days date = Util::to_sys_days(rOleDateTime);
 	return date;
 }
 

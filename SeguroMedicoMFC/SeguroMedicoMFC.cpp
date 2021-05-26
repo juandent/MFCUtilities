@@ -87,6 +87,20 @@ BOOL CSeguroMedicoMFCApp::InitInstance()
 	// Storage::upgrade_database();
 	// return false;
 	//Storage::fill_db_with_test_data();
+	std::cout << std::boolalpha;
+
+	constexpr auto mdl{ std::chrono::June / std::chrono::last };
+	std::cout << (mdl == std::chrono::month_day_last(std::chrono::month(6))) << ' ';
+
+	constexpr auto ymwdl{ std::chrono::year(2023) /
+						  std::chrono::December /
+						  std::chrono::Tuesday[std::chrono::last]
+	};
+	std::cout << (ymwdl == std::chrono::year_month_weekday_last(
+		std::chrono::year(2023),
+		std::chrono::month(12),
+		std::chrono::weekday_last(std::chrono::Tuesday))
+		) << '\n';
 
 	
 	// InitCommonControlsEx() is required on Windows XP if an application

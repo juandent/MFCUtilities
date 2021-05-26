@@ -1,11 +1,14 @@
 
 #include "stdafx.h"
+#include <cassert>
+
 
 #include <sstream>
 #include <fstream>
 #include <vector>
 #include <regex>
-#include <date/date.h>
+// #include <date/date.h>
+#include <chrono>
 
 // /******************************************************************************
 // CLASS exp10 -- template helper for computing powers of 10
@@ -25,6 +28,7 @@ module CSV_File;
 import Util;
 
 using namespace std;
+using namespace std::chrono;
 using namespace Util;
 
 namespace csv
@@ -137,8 +141,8 @@ namespace csv
 	{
 		return m_matrix[pos.getRow()][pos.getCol()];
 	}
-
-	date::sys_days CSV_File::getDate(const Cell_Position& pos) const
+	
+	std::chrono::sys_days CSV_File::getDate(const Cell_Position& pos) const
 	{
 		auto text = m_matrix[pos.getRow()][pos.getCol()];
 		return Util::to_date(text);
@@ -168,7 +172,7 @@ namespace csv
 		return *this;
 	}
 
-	CSV_File& CSV_File::operator<<(date::sys_days pt)
+	CSV_File& CSV_File::operator<<(std::chrono::sys_days pt)
 	{
 		addCol(pt);
 		return *this;
@@ -197,11 +201,11 @@ namespace csv
 		m_currentRow.push_back(col);
 	}
 
-	void CSV_File::addCol(date::sys_days pt)
+	void CSV_File::addCol(std::chrono::sys_days pt)
 	{
 #define USING_PLUS_FOR_DATE
 #ifdef USING_PLUS_FOR_DATE
-		date::year_month_day ymd{ pt };
+		year_month_day ymd{ pt };
 		ostringstream os;
 		// to enable correct importing into FileMaker Pro
 		os << ymd.year();

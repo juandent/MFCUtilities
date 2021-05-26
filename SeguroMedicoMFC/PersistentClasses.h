@@ -18,8 +18,8 @@ struct Claim
 	int fkey_patient;
 	int fkey_doctor;
 	int fkey_medication;					// for chronic meds
-	date::sys_days start_date;
-	date::sys_days submission_date;
+	std::chrono::sys_days start_date;
+	std::chrono::sys_days submission_date;
 	std::string asprose_claim_number;				// Claim: 85481
 	std::string asprose_case_number;		// Case : 21INSENE0085
 	double asprose_amount_presented;		// in colones
@@ -169,7 +169,7 @@ struct INSResponse
 	double total_a_pagar;			// CRC 142,134.87
 	std::string comentarios;		// deducible acumulado en su totalidad
 	double tipo_cambio;				// 609.55
-	date::sys_days date_response;
+	std::chrono::sys_days date_response;
 
 	std::string simple_dump() const
 	{

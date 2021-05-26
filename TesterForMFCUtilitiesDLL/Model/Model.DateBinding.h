@@ -1,9 +1,16 @@
 #pragma once
 
+#define _HAS_CXX20 1
+#define _HAS_CXX17 1
+#include <chrono>
+#undef _HAS_CXX20
+#undef _HAS_CXX17
+
 #include <sqlite_orm/sqlite_orm.h>
-#include <date/date.h>
+// #include <date/date.h>
 #include <sstream>
 #include <regex>
+#include <format>
 
 /**
  *  This is a enum we want to map to our sqlite db.
@@ -17,9 +24,9 @@ enum class Gender {
 };
 
 //  also we need transform functions to make string from enum..
-inline std::string SysDaysToString(date::sys_days pt) {
+inline std::string SysDaysToString(std::chrono::sys_days pt) {
 #if 1
-	auto ret = date::format("%F", pt);
+	auto ret = std::format("%F", pt);
 	return ret;
 #else
 	date::year_month_day ymd{ pt };
@@ -34,7 +41,7 @@ inline std::string SysDaysToString(date::sys_days pt) {
 }
 
 
-constexpr auto null_sys_day = date::sys_days{ date::days{0} };
+constexpr auto null_sys_day = std::chrono::sys_days{ std::chrono::days{0} };
 
 
 /**
@@ -46,11 +53,13 @@ constexpr auto null_sys_day = date::sys_days{ date::days{0} };
  *  that's why I placed it separatedly. You can use any transformation type/form
  *  (for example BETTER_ENUM https://github.com/aantron/better-enums)
  */
-inline date::sys_days SysDaysFromString(const std::string &s) {
+inline std::chrono::sys_days SysDaysFromString(const std::string &s) {
 #if 1
+	using namespace std::literals;
+	
 	std::stringstream ss{ s };
-	date::sys_days tt;
-	ss >> date::parse("%F", tt);
+	std::chrono::sys_days tt;
+	ss >> std::chrono::parse("%F"s, tt);
 	if (!ss.fail())
 	{
 		return tt;
@@ -95,7 +104,7 @@ namespace sqlite_orm {
 	 *  or `INTEGER` (int/long/short etc) respectively.
 	 */
 	template<>
-	struct type_printer<date::sys_days> : public text_printer {};
+	struct type_printer<std::chrono::sys_days> : public text_printer {};
 
 	/**
 	 *  This is a binder class. It is used to bind c++ values to sqlite queries.
@@ -105,9 +114,9 @@ namespace sqlite_orm {
 	 *  More here https://www.sqlite.org/c3ref/bind_blob.html
 	 */
 	template<>
-	struct statement_binder<date::sys_days> {
+	struct statement_binder<std::chrono::sys_days> {
 
-		int bind(sqlite3_stmt *stmt, int index, const date::sys_days &value) {
+		int bind(sqlite3_stmt *stmt, int index, const std::chrono::sys_days &value) {
 			return statement_binder<std::string>().bind(stmt, index, SysDaysToString(value));
 			
 		}
@@ -118,8 +127,8 @@ namespace sqlite_orm {
 	 *  a string from mapped object.
 	 */
 	template<>
-	struct field_printer<date::sys_days> {
-		std::string operator()(const date::sys_days &t) const {
+	struct field_printer<std::chrono::sys_days> {
+		std::string operator()(const std::chrono::sys_days &t) const {
 			return SysDaysToString(t);
 		}
 	};
@@ -131,8 +140,8 @@ namespace sqlite_orm {
 	 *  functions which return a mapped type value.
 	 */
 	template<>
-	struct row_extractor<date::sys_days> {
-		date::sys_days extract(const char *row_value) {
+	struct row_extractor<std::chrono::sys_days> {
+		std::chrono::sys_days extract(const char *row_value) {
 			auto sd = SysDaysFromString(row_value);
 			if (sd != null_sys_day) {
 				return sd;
@@ -142,7 +151,7 @@ namespace sqlite_orm {
 			}
 		}
 
-		date::sys_days extract(sqlite3_stmt *stmt, int columnIndex) {
+		std::chrono::sys_days extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			return this->extract((const char*)str);
 		}

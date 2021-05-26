@@ -3,7 +3,8 @@
 #include <utility>
 #include <locale>
 #include <algorithm>
-#include <date/date.h>
+// #include <date/date.h>
+#include <chrono>
 #include <map>
 #include <regex>
 
@@ -12,6 +13,7 @@ import DateAsString;
 
 
 using namespace std;
+using namespace std::chrono;
 using namespace std::literals::string_literals;
 
 namespace DateAsString
@@ -41,9 +43,9 @@ namespace DateAsString
 	}
 
 	// CompleteDateExtractor...
-	std::pair<bool, date::sys_days> CompleteDateExtractor::convert(const std::string& asText) const
+	std::pair<bool, std::chrono::sys_days> CompleteDateExtractor::convert(const std::string& asText) const
 	{
-		using namespace date;
+		using namespace std::chrono;
 		std::smatch m;
 
 		bool ok = regex_search(asText, m, m_regularExpression);
@@ -82,9 +84,9 @@ namespace DateAsString
 
 	
 	// we try to see if month is alphabetic, and if not then it is converted to numeric
-	std::pair<bool, date::sys_days> IncompleteDateExtractor::convert(const std::string& asText) const
+	std::pair<bool, std::chrono::sys_days> IncompleteDateExtractor::convert(const std::string& asText) const
 	{
-		using namespace date;
+		using namespace std::chrono;
 		std::smatch m;
 
 		bool ok = regex_search(asText, m, m_regularExpression);
@@ -132,7 +134,7 @@ namespace DateAsString
 		{ "([[:alpha:]]+)[/-]([[:d:]]+)", {2,1} }																			// MONTH-dd or MONTH/dd
 	};
 
-	std::pair<bool, date::sys_days>  StringDateConverter::convert() const
+	std::pair<bool, std::chrono::sys_days>  StringDateConverter::convert() const
 	{
 		if (isDateComplete(m_asText))
 		{
@@ -158,7 +160,7 @@ namespace DateAsString
 				}
 			}
 		}
-		return make_pair(false, date::sys_days{});
+		return make_pair(false, std::chrono::sys_days{});
 		//throw logic_error("Cannot convert text to date");
 	}
 
