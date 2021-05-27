@@ -41,7 +41,7 @@
 #include <stdexcept>
 //#include "Utilities.h"
 //#include <JDGridCtrl.h>
-#include <FixedPoint/arithmetic_types.h>
+#include <..\FixedPoint/arithmetic_types.h>
 #include <any>
 #include <variant>
 #include <optional>
@@ -53,8 +53,8 @@
 #include "framework.h"
 
 #if 1
-#include <DLLs.h>
-#include <JDGridCtrl.h>
+#include  "..\DLLs.h"
+#include  "..\JDGridCtrl/JDGridCtrl.h"  
 // #include "Utilities.h"
 
 

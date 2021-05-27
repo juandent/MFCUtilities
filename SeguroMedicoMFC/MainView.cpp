@@ -5,13 +5,13 @@
 #include "SeguroMedicoMFC.h"
 #include "MainView.h"
 #include "Data.h"
-#include "GridDisplayer.h"
+#include "..\TesterForMFCUtilitiesDLL/GridDisplayer.h"
 #include <tuple>
 
 
 #include "ClaimDlg.h"
 #include "InvoiceDlg.h"
-#include "JoinedComboDisplayer.h"
+#include "..\ExpenseManagerSQLite/JoinedComboDisplayer.h"
 
 // MainView
 
@@ -63,7 +63,7 @@ BEGIN_MESSAGE_MAP(MainView, CFormView)
 	ON_BN_CLICKED(IDC_B_CLEAR_FILTERS, &MainView::OnBnClickedBClearFilters)
 	ON_BN_CLICKED(IDC_B_REFRESH, &MainView::OnBnClickedBRefresh)
 	ON_COMMAND(ID_FILE_PRINT, &MainView::OnFilePrint)
-	ON_BN_CLICKED(IDC_B_SELECT_REEMBOLSO, &MainView::OnBnClickedBSelectReembolso)
+	// ON_BN_CLICKED(IDC_B_SELECT_REEMBOLSO, &MainView::OnBnClickedBSelectReembolso)
 	ON_BN_CLICKED(IDC_B_CREAR_REEMBOLSO, &MainView::OnBnClickedBCrearReembolso)
 END_MESSAGE_MAP()
 

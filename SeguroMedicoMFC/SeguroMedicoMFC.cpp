@@ -87,6 +87,10 @@ BOOL CSeguroMedicoMFCApp::InitInstance()
 	// Storage::upgrade_database();
 	// return false;
 	//Storage::fill_db_with_test_data();
+
+	auto claim = Storage::getStorage().get<Claim>(1);
+	auto claims = Storage::getStorage().get_all<Claim>(order_by(&Claim::submission_date));
+	
 	std::cout << std::boolalpha;
 
 	constexpr auto mdl{ std::chrono::June / std::chrono::last };

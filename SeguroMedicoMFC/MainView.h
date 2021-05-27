@@ -1,9 +1,9 @@
 #pragma once
 
 #include "..\ExpenseManagerSQLite/IDisplayer.h"
-#include "GridDisplayer.h"
+#include "..\TesterForMFCUtilitiesDLL/GridDisplayer.h"
 #include "Data.h"
-#include "TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
 #include "BoxContents.h"
 
 // MainView form view

@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 #include "DoctorDlg.h"
 #include "InvoiceDlg.h"
-#include "JoinedGridDisplayer.h"
+#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
 #include "MedicationDlg.h"
 #include "PatientDlg.h"
 

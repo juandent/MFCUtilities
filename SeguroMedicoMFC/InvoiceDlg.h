@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BoxContents.h"
-#include "IDisplayer.h"
+#include "..\ExpenseManagerSQLite/IDisplayer.h"
 #include "RadioButtonGroup.h"
 
 

@@ -8,7 +8,7 @@
 #include "ClaimDlg.h"
 #include "INSResponseDlg.h"
 #include "INSResponseLineDlg.h"
-#include "JoinedGridDisplayer.h"
+#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
 
 
 // InvoiceDlg dialog
@@ -103,9 +103,9 @@ void InvoiceDlg::Refresh()
 {
 	auto inv = m_invoiceLB.current();
 	
-	m_claimCB.loadLBOrderByDesc(&Claim::start_date);
+	m_claimCB.loadLBOrderBy(&Claim::start_date);		// desc
 	m_invoiceLB.loadLBOrderBy(&Invoice::number);
-	m_responseCB.loadLBOrderByDesc(&INSResponse::total_a_pagar);
+	m_responseCB.loadLBOrderBy(&INSResponse::total_a_pagar);		// desc
 	if(inv)
 	{
 		m_invoiceLB.select(inv->id);

@@ -21,6 +21,9 @@
     <ClCompile Include="Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Data2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PersistentClasses.h">
@@ -28,6 +31,15 @@
     </ClInclude>
     <ClInclude Include="Data.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PersistableClasses2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Data2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DateBinding.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

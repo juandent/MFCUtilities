@@ -6,7 +6,7 @@
 #include "INSResponseDlg.h"
 #include "afxdialogex.h"
 #include "INSResponseLineDlg.h"
-#include "JoinedGridDisplayer.h"
+#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
 
 // INSResponseDlg dialog
 

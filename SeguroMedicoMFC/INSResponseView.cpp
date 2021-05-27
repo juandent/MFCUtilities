@@ -8,7 +8,7 @@
 #include "Data.h"
 #include "INSResponseDlg.h"
 
-#include "JoinedGridDisplayer.h"
+#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
 
 
 // INSResponseView
@@ -187,7 +187,20 @@ struct pagado : alias_tag {
 	}
 };
 
+struct suma_amount : alias_tag {
+	static const std::string& get() {
+		static const std::string res = "suma_amount";
+		return res;
+	}
+};
 
+struct suma_calculado : alias_tag
+{
+	static const std::string& get() {
+		static const std::string res = "suma_calculado";
+		return res;
+	}
+};
 
 
 template<typename T>
@@ -198,9 +211,9 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 		alias_column< als_j>(&INSResponse::id),
 		// alias_column<als_i>(&Invoice::description),
 
-		sum(alias_column<als_i>(&Invoice::amount)),
+		as<suma_amount>(sum(alias_column<als_i>(&Invoice::amount))),
 		// div(sum(mul(alias_column<als_k>(&INSResponseLine::total_rubro_factura), alias_column<als_j>(&INSResponse::tipo_cambio))), sum(alias_column<als_i>(&Invoice::amount))),
-		sum( mul(alias_column<als_k>(&INSResponseLine::total_rubro_factura), alias_column<als_j>(&INSResponse::tipo_cambio)))),
+		as<suma_calculado>(sum( mul(alias_column<als_k>(&INSResponseLine::total_rubro_factura), alias_column<als_j>(&INSResponse::tipo_cambio))))),
 		// alias_column<als_k>(&INSResponseLine::id)),
 
 		inner_join<als_k>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
