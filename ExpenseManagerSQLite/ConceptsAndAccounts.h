@@ -40,10 +40,11 @@ public:
 	virtual void AssertValid() const;
 #ifndef _WIN32_WCE
 	virtual void Dump(CDumpContext& dc) const;
-	void OnGridClick(NMHDR* pNotifyStruct, LRESULT*);
 #endif
 #endif
 
+void OnGridClick(NMHDR* pNotifyStruct, LRESULT*);
+	
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 

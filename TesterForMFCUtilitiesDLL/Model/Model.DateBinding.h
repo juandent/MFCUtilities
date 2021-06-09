@@ -38,8 +38,8 @@ inline std::string SysDaysToString(std::chrono::sys_days pt) {
 	return ""s;
 #elif 1
 	auto ret = date::format("%F", pt);
-	// auto r = std::chrono::format("%F", pt);
-	return ret;
+	auto r = std::format("{:%F}", pt);
+	return r;
 #else
 	date::year_month_day ymd{ pt };
 	std::ostringstream os;
