@@ -61,6 +61,7 @@ BEGIN_MESSAGE_MAP(INSResponseView, CFormView)
 	ON_BN_CLICKED(IDC_B_FILTER, &INSResponseView::OnBnClickedBFilter)
 	ON_BN_CLICKED(IDC_B_CLEAR_FILTERS, &INSResponseView::OnBnClickedBClearFilters)
 	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_VIEW_1, OnGrid1StartSelChange)
+	ON_BN_CLICKED(IDC_B_CREAR_INS_RESPONSE, &INSResponseView::OnBnClickedBCrearInsResponse)
 END_MESSAGE_MAP()
 
 
@@ -393,4 +394,13 @@ void INSResponseView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 	dlg.DoModal();
 	Refresh();
 	OnBnClickedBFilter();
+}
+
+
+void INSResponseView::OnBnClickedBCrearInsResponse()
+{
+	// TODO: Add your control notification handler code here
+	INSResponseDlg dlg;
+	dlg.DoModal();
+	Refresh();
 }

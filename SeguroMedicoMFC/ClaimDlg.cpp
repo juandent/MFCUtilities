@@ -384,8 +384,8 @@ void ClaimDlg::OnLbnSelchangeLClaimList()
 		sum(alias_column<als_i>(&Invoice::amount))),
 		where(c(alias_column<als_i>(&Invoice::fkey_claim)) == claim->id));
 
-	auto&& line = sum_results[0];
-	auto&& pc = std::get<0>(line);
+	auto& line = sum_results[0];
+	auto& pc = std::get<0>(line);
 	if (pc)
 	{
 		SetAmount(m_total_claim_amount, *pc);

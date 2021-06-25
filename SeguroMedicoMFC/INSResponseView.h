@@ -70,6 +70,8 @@ private:
 	CButton m_filter_by_dates;
 	CEdit m_insresponse_amount;
 	CEdit m_num_factura;
+public:
+	afx_msg void OnBnClickedBCrearInsResponse();
 };
 
 

@@ -7,7 +7,7 @@
 #undef _HAS_CXX17
 
 #include <sqlite_orm/sqlite_orm.h>
-#include <date/date.h>
+// #include <date/date.h>
 #include <sstream>
 #include <regex>
 #include <format>
@@ -37,7 +37,7 @@ inline std::string SysDaysToString(std::chrono::sys_days pt) {
 	}
 	return ""s;
 #elif 1
-	auto ret = date::format("%F", pt);
+	// auto ret = date::format("%F", pt);
 	auto r = std::format("{:%F}", pt);
 	return r;
 #else

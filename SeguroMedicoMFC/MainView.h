@@ -76,6 +76,7 @@ public:
 	afx_msg void OnBnClickedBCrearReembolso();
 private:
 	CEdit m_invoice_description;
+	CEdit m_claim_amount_less_than;
 };
 
 

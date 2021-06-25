@@ -53,6 +53,7 @@ void MainView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_C_CLAIM_IDS, m_list_claim_ids);
 	DDX_Control(pDX, IDC_E_NUM_FACTURA, m_num_Factura);
 	DDX_Control(pDX, IDC_E_DESC, m_invoice_description);
+	DDX_Control(pDX, IDC_E_CLAIM_AMOUNT_LESS_THAN, m_claim_amount_less_than);
 }
 
 BEGIN_MESSAGE_MAP(MainView, CFormView)
@@ -408,6 +409,7 @@ auto MainView::GetWhereStatement()
 	int paciente_id = paciente ? paciente->id : -1;
 	
 	auto claim_amount_lower_bound = GetAmount(m_claim_amount);
+	auto claim_amount_upper_bound = GetAmount(m_claim_amount_less_than);
 
 	bool filter_dates = m_filter_by_dates.GetCheck();
 
@@ -420,6 +422,7 @@ auto MainView::GetWhereStatement()
 		&& (not doctor.has_value() or (c(alias_column<als_c>(&Claim::fkey_doctor)) == doctor_id))
 		&& (not paciente.has_value() or (c(alias_column<als_c>(&Claim::fkey_patient)) == paciente_id))
 		&& (not claim_amount_lower_bound > 0 or (c(alias_column<als_c>(&Claim::amount)) >= claim_amount_lower_bound))
+		&& (not claim_amount_upper_bound > 0 or (c(alias_column<als_c>(&Claim::amount)) <= claim_amount_upper_bound))
 		&& (not claim.has_value() or (c(alias_column<als_c>(&Claim::id)) == claim_id))
 		&& factura_where
 		&& desc_where;
@@ -479,6 +482,7 @@ void MainView::OnBnClickedBClearFilters()
 	m_pacientesCB.select(std::nullopt);
 	m_filter_by_dates.SetCheck(0);
 	SetAmount(m_claim_amount, 0);
+	SetAmount(m_claim_amount_less_than, 0.0);
 	SetText(m_num_Factura, "%"s);
 	SetText(m_invoice_description, "%"s);
 	OnBnClickedBFilter();

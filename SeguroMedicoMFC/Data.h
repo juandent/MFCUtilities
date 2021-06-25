@@ -32,7 +32,8 @@ private:
 	static void copy_old_to_new();
 
 	friend class Storage;
-
+	
+	static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
 };
 
 
@@ -44,7 +45,7 @@ inline 	auto& Storage_Impl::get_storage()
 
 	static int flag = 0;
 
-	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
+	// constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
 
 
 	static auto storage =
@@ -340,12 +341,13 @@ class Storage
 public:
 	using Storage_t = decltype(Storage_Impl::get_storage());
 
-	Storage() = delete;
+	Storage();
 	static void initialize();
 	static Storage_t& getStorage() { return Storage_Impl::get_storage(); }
 	static void fill_db_with_test_data();
 	static void empty_database();
 	static void upgrade_database();
+	static void backup_db();
 };
 
 //inline Storage::Storage_t& storage = Storage::getStorage();

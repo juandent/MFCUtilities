@@ -209,6 +209,8 @@ BOOL CSeguroMedicoMFCApp::InitInstance()
 int CSeguroMedicoMFCApp::ExitInstance()
 {
 	//TODO: handle additional resources you may have added
+	Storage::backup_db();
+	
 	AfxOleTerm(FALSE);
 
 	return CWinAppEx::ExitInstance();

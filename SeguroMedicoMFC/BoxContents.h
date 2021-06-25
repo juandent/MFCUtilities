@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include "RecordLinks.h"
 #include "RefIntegrity.h"
+#include <cassert>
 
 using namespace sqlite_orm;
 

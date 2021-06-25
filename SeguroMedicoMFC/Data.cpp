@@ -99,6 +99,18 @@ void Storage_Impl::copy_old_to_new()
 
 }
 
+void Storage::backup_db()
+{
+	namespace fs = std::filesystem;
+
+	auto path_to_db_name = fs::path(Storage_Impl::db_name);
+	auto stem = path_to_db_name.stem().string();
+	auto backup_stem = stem + "_backup1.sqlite";
+	auto backup_full_path = path_to_db_name.parent_path().append(backup_stem).string();
+	getStorage().backup_to(backup_full_path);
+}
+
+
 void Storage::fill_db_with_test_data()
 {
 	using namespace sqlite_orm;
@@ -482,6 +494,7 @@ double Claim::get_total_amount()
 	}
 	return 0.0;
 }
+
 
 std::string Claim::dump() const
 {

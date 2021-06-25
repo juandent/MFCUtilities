@@ -331,6 +331,37 @@ export namespace Util
 		return CString{ tmp.c_str() };
 	}
 
+
+	export inline std::string as_string(const CString& s)
+	{
+		std::string ss = from_cstring(s);
+		if (ss.empty()) ss = "0";
+		return ss;
+	}
+
+	export inline
+	int to_int(const CString& s)
+	{
+		auto ss = as_string(s);
+		return std::stoi(ss);
+	}
+
+	export inline
+		long to_long(const CString& s)
+	{
+		auto ss = as_string(s);
+		return std::stol(ss);
+	}
+
+	export inline
+		double to_double(const CString& s)
+	{
+		auto ss = as_string(s);
+		return std::stod(ss);
+	}
+
+
+
 	export template<typename Element>
 	struct get_quote
 	{
