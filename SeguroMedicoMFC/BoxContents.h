@@ -125,7 +125,7 @@ public:
 			m_box.SetCurSel(npos);
 			return record;
 		}
-		int index = find_in_listbox(pk);
+		int index = find_index_in_listbox(pk);
 		if (index != npos)
 		{
 			m_box.SetCurSel(index);
@@ -153,12 +153,18 @@ public:
 		return record.*keyCol;
 	}
 
+	int get_pk(std::optional<Table>& record)
+	{
+		return record ? record.*keyCol : -1;
+	}
+
 	// record MUST not exist in listbox!
 	int insert_into_listbox(Table& record)
 	{
-		assert(get_pk(record) != npos);
+		int index = find_in_listbox(record);
+		if (index != npos)	return index;	// exists already
 		auto displayStr = asString(record);
-		auto index = m_box.AddString(displayStr);
+		index = m_box.AddString(displayStr);
 		m_box.SetItemData(index, get_pk(record));
 		m_box.SetCurSel(index);
 		return index;
@@ -179,17 +185,20 @@ public:
 
 	void delete_from_box(Table& record)
 	{
-
+		int index = find_in_listbox(record);
+		if (index == npos)	return;	// not present
+		throw std::logic_error("incomplete implementation");
 	}
 
 	int find_in_listbox(Table& record)
 	{
 		const int pk = record.*keyCol;
-		return find_in_listbox(pk);
+		return find_index_in_listbox(pk);
 	}
 	template<typename T>
-	void moveVectorIntoBox( const T& vec)
+	void moveVectorIntoBox( T& vec)
 	{
+		m_box.ResetContent();
 		for (auto& record : vec)
 		{
 			auto displayStr = asString(record);
@@ -205,8 +214,8 @@ public:
 		m_box.ResetContent();
 		auto vec = refIntManager.getAll();
 
-		// moveVectorIntoBox(vec);
-#if 1		
+		moveVectorIntoBox(vec);
+#if 0		
 		for (auto& record : vec)
 		{
 			auto displayStr = asString(record);
@@ -224,8 +233,8 @@ public:
 		m_box.ResetContent();
 
 		auto vec = refIntManager.getAll(clause);
-		// moveVectorIntoBox(vec);
-#if 1
+		moveVectorIntoBox(vec);
+#if 0
 		for (auto& record : vec)
 		{
 			auto displayStr = asString(record);
@@ -243,8 +252,8 @@ public:
 		m_box.ResetContent();
 
 		auto vec = refIntManager.getAllOrderBy(clause);
-		// moveVectorIntoBox(vec);
-#if 1
+		moveVectorIntoBox(vec);
+#if 0
 		for (auto& record : vec)
 		{
 			auto displayStr = asString(record);
@@ -261,8 +270,8 @@ public:
 	{
 		m_box.ResetContent();
 		auto vec = refIntManager.getAllOrderByDesc(clause);
-		// moveVectorIntoBox(vec);
-#if 1
+		moveVectorIntoBox(vec);
+#if 0
 		for (auto& record : vec)
 		{
 			auto displayStr = asString(record);
@@ -276,7 +285,7 @@ public:
 
 	constexpr static const int npos = -1;
 private:
-	int find_in_listbox(const int pk)
+	int find_index_in_listbox(const int pk)
 	{
 		int index = m_box.GetCount();
 		while (index >= 0)

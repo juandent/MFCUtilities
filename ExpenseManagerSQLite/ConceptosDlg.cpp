@@ -50,6 +50,7 @@ BEGIN_MESSAGE_MAP(ConceptosDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_UPDATE_CONCEPTO, &ConceptosDlg::OnBnClickedBUpdateConcepto)
 	ON_LBN_SELCHANGE(IDC_L_CONCEPTOS, &ConceptosDlg::OnLbnSelchangeLConceptos)
 	ON_BN_CLICKED(IDC_B_APLICAR_CONCEPTO, &ConceptosDlg::OnBnClickedBAplicarConcepto)
+	ON_BN_CLICKED(IDC_C_DESCONOCIDA, &ConceptosDlg::OnBnClickedCDesconocida)
 END_MESSAGE_MAP()
 
 
@@ -61,7 +62,7 @@ BOOL ConceptosDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  Add extra initialization here
-	m_conceptosLB.loadLB();
+	m_conceptosLB.loadLBOrderBy(&Concepto::name);
 	// m_accountsCB.loadLB();
 	// m_listAccounts.GetExStyle()
 	m_accountsCB.loadLBOrderBy(&Account::number);
@@ -303,8 +304,25 @@ void ConceptosDlg::OnBnClickedBAplicarConcepto()
 		concepto->fkey_account = cuenta->id_account;
 		m_conceptosLB.update(*concepto);
 	}
-	m_conceptosLB.loadLB();
+	m_conceptosLB.loadLBOrderBy (&Concepto::name);
 	m_concepto = concepto;
 
 	setIdFromRecord<Concepto>(m_id, concepto->id_concepto);
+}
+
+
+void ConceptosDlg::OnBnClickedCDesconocida()
+{
+	// TODO: Add your control notification handler code here
+
+	auto& storage = Storage::getStorage();
+	auto rows = storage.get_all<Account>(where(like (&Account::number, "%Desconocida%")));
+	if( rows.size() ==0)
+	{
+		return;
+	}
+
+	auto account = rows[0];
+	m_accountsCB.select(account.id_account);
+	OnBnClickedBAplicarConcepto();
 }

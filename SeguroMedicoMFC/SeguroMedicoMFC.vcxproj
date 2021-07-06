@@ -310,6 +310,7 @@ copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utili
     <Image Include="res\userimages.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="persistentclasses.cd" />
     <None Include="res\SeguroMedicoMFC.rc2" />
   </ItemGroup>
   <ItemGroup>

@@ -563,7 +563,7 @@ void TransaccionDlg::OnBnClickedBBorrar()
 	// ask to be sure!
 	if (!has_links)
 	{
-		int index = m_transaccionLB.find_in_listbox(*trans);
+		int index = m_transaccionLB.find_index_in_listbox(*trans);
 		m_transaccionLB.SetCurSel(index);
 		m_transaccionLB.delete_current_sel();
 		m_id.SetWindowTextW(L"");

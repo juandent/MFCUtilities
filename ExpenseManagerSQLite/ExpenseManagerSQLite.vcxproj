@@ -195,6 +195,10 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\x64\Release\*.exe"  "C:\Users\juan_\OneDrive\C++\Applications\ExpenseManagerSQLite\*.*"
+copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\x64\Release\*.dll"  "C:\Users\juan_\OneDrive\C++\Applications\ExpenseManagerSQLite\*.*"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\Source\Repos\TransformDownloadedStatements\ExpenseManagerMFC\Data.h" />

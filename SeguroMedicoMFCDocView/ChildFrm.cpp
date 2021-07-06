@@ -55,3 +55,23 @@ void CChildFrame::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 // CChildFrame message handlers
+
+
+BOOL CChildFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
+{
+#undef max
+	auto m = std::numeric_limits<unsigned int>::max();
+	
+	// TODO: Add your specialized code here and/or call the base class
+	if( nID == 10'000'000 || nCode == BN_CLICKED)
+	{
+		if (nID == 10'000'000)
+		{
+			auto msg = reinterpret_cast<wchar_t*>(pExtra);
+			CString cs{ msg };
+			MessageBoxW(cs);
+		}
+	}
+
+	return CMDIChildWndEx::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
+}

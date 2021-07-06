@@ -94,7 +94,7 @@
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_HAS_CXX17=1;_HAS_CXX20=1;_HAS_TR1_NAMESPACE=0;SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_13_may_2021\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_29_june_2021\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -196,6 +196,7 @@
     <ClInclude Include="Collection.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="DateBinding.h" />
+    <ClInclude Include="DlgData.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="INSResponseDoc.h" />
@@ -221,6 +222,9 @@
     <ClCompile Include="ClaimsCollection.cpp" />
     <ClCompile Include="ClaimView.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="DlgData.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="INSResponseDoc.cpp" />
     <ClCompile Include="MainFrm.cpp" />

@@ -104,6 +104,8 @@ public:
 		return storage.get_all<Table>(order_by(clause).desc());
 	}
 
+	
+
 	template<typename WhereClause> //, typename ...Cols>
 	std::optional<Table> exists(WhereClause& clause) //, Cols&& ... cols)
 	{

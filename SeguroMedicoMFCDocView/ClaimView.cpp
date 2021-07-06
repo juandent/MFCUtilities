@@ -27,7 +27,6 @@ m_medicationsCB(m_medicamentos, [](Medication& med)
 		return Util::to_cstring(med.simple_dump());
 })
 
-, m_claim_id(_T(""))
 , m_asprose_claim_number(_T(""))
 , m_asprose_case_number(_T(""))
 , m_amount_presented(_T(""))
@@ -35,6 +34,12 @@ m_medicationsCB(m_medicamentos, [](Medication& med)
 , m_ins_claim_number(_T(""))
 , m_total_claim_amount(_T(""))
 , m_comments(_T(""))
+, m_ole_date_time(COleDateTime::GetCurrentTime())
+, m_patient_chosen(_T(""))
+, m_ack_radio(0)
+, m_id_claim(0)
+, m_claim_id(0)
+, m_sent(false)
 {
 
 }
@@ -51,65 +56,75 @@ ClaimDoc* ClaimView::GetDocument()
 
 void ClaimView::DoDataExchange(CDataExchange* pDX)
 {
-	CFormView::DoDataExchange(pDX);
-	//  DDX_Control(pDX, IDC_E_ID_CLAIM, m_id_claim);
-	DDX_Control(pDX, IDC_C_PATIENTS, m_patients);
-	DDX_Control(pDX, IDC_CLAIMS_GRID, m_grid1);
-	DDX_Control(pDX, IDC_START_DATE, m_start_date);
-	DDX_Control(pDX, IDC_C_DOCTORES, m_doctors);
-	DDX_Control(pDX, IDC_C_MEDICAMENTOS, m_medicamentos);
-	DDX_Text(pDX, IDC_E_ID_CLAIM, m_claim_id);
-	DDX_Control(pDX, IDC_FECHA_ENTREGADO, m_submitted_date);
-	DDX_Text(pDX, IDC_E_ASPROSE_CLAIM_NUMBER, m_asprose_claim_number);
+	using namespace std::chrono;
+	using namespace std::chrono_literals;
 
-	DDX_Text(pDX, IDC_E_ASPROSE_CASE_NUMBER2, m_asprose_case_number);
-	DDX_Text(pDX, IDC_E_ASPROSE_AMOUNT_PRESENTED, m_amount_presented);
-	DDX_Control(pDX, IDC_R_NONE, m_acknowledgement);
-	DDX_Text(pDX, IDC_E_OTHER_SYSTEM_ID, m_other_system_id);
-	DDX_Text(pDX, IDC_E_INS_CLAIM_NUMBER, m_ins_claim_number);
-	DDX_Control(pDX, IDC_L_CLAIM_LIST, m_claims);
-	DDX_Text(pDX, IDC_E_TOTAL_CLAIM_AMOUNT, m_total_claim_amount);
-	DDX_Text(pDX, IDC_E_COMMENT, m_comments);
+	// year_month_day ymd{ static_cast<year>(2021), static_cast<month>(8), static_cast<day>(31) };
+	year_month_day ymd{ 2021y / 8 / 31d };
+	m_std_date = ymd;
 
+	{
+		year_month_day ymd{ static_cast<year>(2021), static_cast<month>(9), static_cast<day>(6) };
+		m_submission_date = ymd;
+	}
+	m_asprose_case_number_s = "ASP4500";
 
-	
+	m_patient_chosen = "Juan Dent Herrera";
+
+	// static int index = 0;
 	auto pDoc = GetDocument();
-	Claim* claim = pDoc->get_claim();
+	m_claim = pDoc->get_claim();
+	int id;
 
+	CFormView::DoDataExchange(pDX);
+
+	// auto pDoc = GetDocument();
+	// m_claim = pDoc->get_claim();
+
+	// from controls to data members
 	if (pDX->m_bSaveAndValidate)
 	{
+		// auto patient = m_patientsCB.get_by_index(index);
 		auto patient = m_patientsCB.current();
 		pDoc->set_patient(patient);
 		auto doctor = m_doctorsCB.current();
 		pDoc->set_doctor(doctor);
 		auto med = m_medicationsCB.current();
 		pDoc->set_medication(med);
-		
-		auto sdate = GetDate(m_start_date);
-		claim->start_date = sdate;
-		
-		auto sub_date = GetDate(m_submitted_date);
-		claim->submission_date = sub_date;
-		auto id = to_int(m_claim_id);
-		claim->id = id;
-		claim->amount = to_double(m_total_claim_amount);
-		claim->
 
-		
-		
-		pDoc->changes_applied();
+		// auto sdate = GetDate(m_start_date);
+		// claim->start_date = sdate;
+		//
+		// auto sub_date = GetDate(m_submitted_date);
+		// claim->submission_date = sub_date;
+		// auto id = to_int(m_claim_id);
+		// claim->id = id;
+		// claim->amount = to_double(m_total_claim_amount);
+		// // claim->
+
+		if (m_claim_id == -1)
+		{
+			storage.insert(*m_claim);
+		}
+		else
+		{
+			storage.update(*m_claim);
+		}
+		// pDoc->changes_applied();
 	}
 	else
 	{
 		auto pt = pDoc->get_patient();
 		m_patientsCB.select(pt);
 
-		m_claim_id = to_cstr(pDoc->get_id());
-		SetDate(m_start_date, pDoc->get_start_date());
-		SetDate(m_submitted_date, pDoc->get_submission_date());
+		// m_claim_id = to_cstr(pDoc->get_id());
+		// SetDate(m_start_date, pDoc->get_start_date());
+		// SetDate(m_submitted_date, pDoc->get_submission_date());
 	}
 
-
+	DDX_Control(pDX, IDC_C_PATIENTS, m_patients);
+	DDX_DateTimeCtrl(pDX, IDC_START_DATE, m_start_date);
+	DDX_Check(pDX, IDC_C_SENT, m_sent);
 }
 
 BEGIN_MESSAGE_MAP(ClaimView, CFormView)
@@ -156,6 +171,8 @@ void ClaimView::OnBnClickedApply()
 void ClaimView::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
+
+	m_claim = GetDocument()->m_claim;
 
 	m_patientsCB.loadLB();
 	m_medicationsCB.loadLB();

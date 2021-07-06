@@ -13,6 +13,16 @@
 
 struct Claim
 {
+	int get_id() const
+	{
+		return id;
+	}
+
+	void set_id(int id)
+	{
+		this->id = id;
+	}
+
 	int id;
 	int fkey_patient;
 	int fkey_doctor;
@@ -31,6 +41,37 @@ struct Claim
 
 struct Patient
 {
+	int get_id() const
+	{
+		return id;
+	}
+
+	void set_id(int id)
+	{
+		this->id = id;
+	}
+
+	std::string get_first_name() const
+	{
+		return first_name;
+	}
+
+	void set_first_name(const std::string& first_name)
+	{
+		this->first_name = first_name;
+	}
+
+	std::string get_last_name() const
+	{
+		return last_name;
+	}
+
+	void set_last_name(const std::string& last_name)
+	{
+		this->last_name = last_name;
+	}
+
+private:
 	int id;
 	std::string first_name;
 	std::string last_name;
@@ -75,7 +116,7 @@ struct Invoice
 
 class Storage_Impl
 {
-private:
+public:
 	Storage_Impl() = delete;	// prohibit instantiation
 	static auto& get_storage();
 
@@ -92,13 +133,13 @@ inline 	auto& Storage_Impl::get_storage()
 
 	static int flag = 0;
 
-	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
+	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\Experiments_SeguroMedicoMFC.sqlite" };
 
 
 	static auto storage =
 		make_storage("",
 			make_table("Claims",
-				make_column("id_claim", &Claim::id, autoincrement(), primary_key()),
+				make_column("id_claim", &Claim::set_id, &Claim::get_id, autoincrement(), primary_key()),
 				make_column("fkey_patient", &Claim::fkey_patient),
 				make_column("fkey_doctor", &Claim::fkey_doctor),
 				make_column("fkey_medication", &Claim::fkey_medication),
@@ -113,12 +154,12 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("amount", &Claim::amount),
 				foreign_key(&Claim::fkey_doctor).references(&Doctor::id),
 				foreign_key(&Claim::fkey_medication).references(&Medication::id),
-				foreign_key(&Claim::fkey_patient).references(&Patient::id))
+				foreign_key(&Claim::fkey_patient).references(&Patient::get_id))
 			,
 			make_table("Patients",
-				make_column("id_patient", &Patient::id, autoincrement(), primary_key()),
-				make_column("first_name", &Patient::first_name, collate_nocase()),
-				make_column("last_name", &Patient::last_name, collate_nocase())),
+				make_column("id_patient", &Patient::set_id, &Patient::get_id, autoincrement(), primary_key()),
+				make_column("first_name", &Patient::set_first_name, &Patient::get_first_name, collate_nocase()),
+				make_column("last_name", &Patient::set_last_name, &Patient::get_last_name, collate_nocase())),
 			make_table("Doctors",
 				make_column("id_doctor", &Doctor::id, autoincrement(), primary_key()),
 				make_column("first_name", &Doctor::first_name, collate_nocase()),
@@ -159,6 +200,15 @@ inline 	auto& Storage_Impl::get_storage()
 
 int main()
 {
+	Patient p;
+	p.set_first_name("Juan");
+	p.set_last_name("Dent");
+	
+	p.set_id(Storage_Impl::get_storage().insert(p));
+
+	Patient pt = Storage_Impl::get_storage().get<Patient>(p.get_id());
+	
+	
     std::cout << "Hello World!\n";
 }
 

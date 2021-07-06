@@ -56,4 +56,6 @@ public:
 	afx_msg void OnBnClickedBAplicarConcepto();
 private:
 	CEdit m_id;
+public:
+	afx_msg void OnBnClickedCDesconocida();
 };

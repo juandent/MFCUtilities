@@ -38,6 +38,8 @@ struct Claim
 	int status;								// sent to asprose (true or false)
 #endif
 
+	std::vector<std::string> headers{ "ID", "FKEY_PATIENT", "FKEY_DOCTOR", "FKEY_MEDICATION", "START_DATE", "SUBMISSION_DATE", "ASPROSE_CLAIM_NUMBER", "", "", "", "", "", "", "", "" };
+	
 	std::string simple_dump() const
 	{
 		std::string str = std::to_string(id) + " - "s + Util::to_string(start_date) + " - "s + Util::to_string(submission_date) + " " + std::to_string(fkey_patient);
@@ -73,46 +75,9 @@ struct Claim
 	{
 	}
 
-	Claim(const Claim& other)
-		: id(other.id),
-		  fkey_patient(other.fkey_patient),
-		  fkey_doctor(other.fkey_doctor),
-		  fkey_medication(other.fkey_medication),
-		  start_date(other.start_date),
-		  submission_date(other.submission_date),
-		  asprose_claim_number(other.asprose_claim_number),
-		  asprose_case_number(other.asprose_case_number),
-		  asprose_amount_presented(other.asprose_amount_presented),
-		  ins_claim_number(other.ins_claim_number),
-		  asprose_acknowledgement_type(other.asprose_acknowledgement_type),
-		  comment(other.comment),
-		  amount(other.amount),
-		  other_system_id(other.other_system_id),
-		  status(other.status)
-	{
-	}
+	Claim(const Claim& other) = default;
 
-	Claim& operator=(const Claim& other)
-	{
-		if (this == &other)
-			return *this;
-		id = other.id;
-		fkey_patient = other.fkey_patient;
-		fkey_doctor = other.fkey_doctor;
-		fkey_medication = other.fkey_medication;
-		start_date = other.start_date;
-		submission_date = other.submission_date;
-		asprose_claim_number = other.asprose_claim_number;
-		asprose_case_number = other.asprose_case_number;
-		asprose_amount_presented = other.asprose_amount_presented;
-		ins_claim_number = other.ins_claim_number;
-		asprose_acknowledgement_type = other.asprose_acknowledgement_type;
-		comment = other.comment;
-		amount = other.amount;
-		other_system_id = other.other_system_id;
-		status = other.status;
-		return *this;
-	}
+	Claim& operator=(const Claim& other) = default;
 };
 
 

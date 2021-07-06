@@ -34,33 +34,27 @@ protected:
 	DECLARE_MESSAGE_MAP()
 private:
 //	CEdit m_id_claim;
-	CComboBox m_patients;
+//	CComboBox m_patients;
 	virtual void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/);
 public:
 	afx_msg void OnBnClickedApply();
 private:
-	CJDGridCtrl m_grid1;
+//	CJDGridCtrl m_grid1;
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnCbnSelchangeCPatients();
-private:
-	CDateTimeCtrl m_start_date;
+
 public:
 	afx_msg void OnDtnDatetimechangeStartDate(NMHDR* pNMHDR, LRESULT* pResult);
 private:
-	CComboBox m_doctors;
-	CComboBox m_medicamentos;
-	CString m_claim_id;
-	CDateTimeCtrl m_submitted_date;
-	CString m_asprose_claim_number;
-	CString m_asprose_case_number;
-	CString m_amount_presented;
-	CButton m_acknowledgement;
-	CString m_other_system_id;
-	CString m_ins_claim_number;
-	CListBox m_claims;
-	CString m_total_claim_amount;
-	CString m_comments;
+//	CComboBox m_doctors;
+//	CComboBox m_medicamentos;
+//	CListBox m_claims;
+
+	Claim* m_claim;
+	CComboBox m_patients;
+	std::chrono::sys_days m_start_date;
+	int m_sent;
 };
 
 

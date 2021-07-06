@@ -32,4 +32,6 @@ public:
 // Generated message map functions
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
 };

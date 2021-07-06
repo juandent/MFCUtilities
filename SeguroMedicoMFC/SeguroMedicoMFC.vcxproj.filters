@@ -299,6 +299,7 @@
     <None Include="res\SeguroMedicoMFC.rc2">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="persistentclasses.cd" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="NatvisFile.natvis" />

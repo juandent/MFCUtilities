@@ -123,7 +123,7 @@ public:
 			m_box.SetCurSel(npos);
 			return record;
 		}
-		int index = find_in_listbox(pk);
+		int index = find_index_in_listbox(pk);
 		if( index != npos )
 		{
 			m_box.SetCurSel(index);
@@ -183,7 +183,7 @@ public:
 	int find_in_listbox(Table& record)
 	{
 		const int pk = record.*keyCol;
-		return find_in_listbox(pk);
+		return find_index_in_listbox(pk);
 	}
 	void loadLB()
 	{
@@ -235,7 +235,7 @@ public:
 	
 	constexpr static const int npos = -1;
 private:
-	int find_in_listbox(const int pk)
+	int find_index_in_listbox(const int pk)
 	{
 		int index = m_box.GetCount();
 		while ( index >= 0)

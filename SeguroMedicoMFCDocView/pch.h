@@ -22,4 +22,6 @@
 #include  "..\DLLs.h"
 #include  "..\JDGridCtrl/JDGridCtrl.h"  
 #include "BoxContents_v2.h"
+#include "DlgData.h"
+
 #endif //PCH_H

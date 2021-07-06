@@ -334,6 +334,11 @@ public:
 	static void fill_db_with_test_data();
 	static void empty_database();
 	static void upgrade_database();
+	static void report_error( const CString& msg, const CString& title = L"Error")
+	{
+		HWND active = GetActiveWindow();
+		MessageBoxW(active, msg, title, MB_ICONERROR);
+	}
 };
 
 inline Storage::Storage_t& storage = Storage::getStorage();

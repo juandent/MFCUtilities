@@ -7,6 +7,10 @@
 class ClaimDoc : public CDocument
 {
 	DECLARE_DYNCREATE(ClaimDoc)
+	friend class ClaimView;
+	
+	int m_claim_id;
+	std::vector<std::string> m_claim_invoices_headers;
 	Claim m_claim;
 	std::vector<Invoice> m_claim_invoices;
 public:

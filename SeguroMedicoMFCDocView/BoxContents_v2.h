@@ -91,6 +91,16 @@ public:
 		}
 		return record;
 	}
+	std::optional<Table> get_by_index(int index)
+	{
+		std::optional<Table> record;
+		if (index != npos)
+		{
+			auto id = static_cast<unsigned long long>(m_box.GetItemData(index));
+			record = refIntManager.get(id);
+		}
+		return record;
+	}
 	int GetCurSel() const
 	{
 		return m_box.GetCurSel();
@@ -124,7 +134,7 @@ public:
 			m_box.SetCurSel(npos);
 			return record;
 		}
-		int index = find_in_listbox(pk);
+		int index = find_index_in_listbox(pk);
 		if (index != npos)
 		{
 			m_box.SetCurSel(index);
@@ -197,7 +207,7 @@ public:
 	int find_in_listbox(Table& record)
 	{
 		const int pk = record.*keyCol;
-		return find_in_listbox(pk);
+		return find_index_in_listbox(pk);
 	}
 	template<typename T>
 	void moveVectorIntoBox(const T& vec)
@@ -288,7 +298,7 @@ public:
 
 	constexpr static const int npos = -1;
 private:
-	int find_in_listbox(const int pk)
+	int find_index_in_listbox(const int pk)
 	{
 		int index = m_box.GetCount();
 		while (index >= 0)

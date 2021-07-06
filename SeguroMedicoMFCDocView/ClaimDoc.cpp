@@ -55,20 +55,49 @@ void ClaimDoc::Dump(CDumpContext& dc) const
 #ifndef _WIN32_WCE
 // ClaimDoc serialization
 
+using als_c = alias_c<Claim>;
+using als_p = alias_p<Patient>;
+using als_d = alias_d<Doctor>;
+using als_s = alias_s<Specialty>;
+using als_m = alias_m<Medication>;
+using als_i = alias_i<Invoice>;
+using als_j = alias_j<INSResponse>;
+using als_k = alias_k<INSResponseLine>;
+using als_l = alias_l<Claim>;
+using als_q = alias_q<Invoice>;
+
+
 void ClaimDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
 		// TODO: add storing code here
+		if (m_claim.id == -1)
+		{
+			storage.insert(m_claim);
+		}
+		else
+		{
+			storage.replace(m_claim);
+		}
+		for( auto& rec : m_claim_invoices)
+		{
+			rec.fkey_claim = m_claim.id;
+			storage.replace(rec);
+		}
 	}
 	else
 	{
 		// TODO: add loading code here
+		if (m_claim_id == -1)	return;
+		
+		m_claim = storage.get<Claim>(m_claim_id);
+		m_claim_invoices = storage.get_all<Invoice>(where(c(alias_column<als_i>(&Invoice::fkey_claim)) == m_claim.id));
+		auto name = storage.column_name(&Invoice::fkey_INSResponse);
+		
+		m_claim_invoices_headers = { "A","B", "C","D", "E", "F", "G" };
+		
 	}
-#if TEST
-	m_claim = storage.get<Claim>(1);
-	auto inv = get_invoices(&Invoice::id, &Invoice::description);
-#endif
 }
 #endif
 
@@ -98,10 +127,13 @@ void ClaimDoc::set_doctor(const std::optional<Doctor>& doc)
 
 void ClaimDoc::set_patient(const std::optional<Patient>& patient)
 {
-	if (!patient)	return;
+	if (!patient)
+	{
+		Storage::report_error(L"Paciente no escogido");
+		return;
+	}
 	m_claim.fkey_patient = patient->id;
 	SetModifiedFlag(true);
-	UpdateAllViews(nullptr);
 }
 
 void ClaimDoc::set_medication(const std::optional<Medication>& medication)
@@ -109,13 +141,16 @@ void ClaimDoc::set_medication(const std::optional<Medication>& medication)
 	if (!medication) return;
 	m_claim.fkey_medication = medication->id;
 	SetModifiedFlag(true);
-	UpdateAllViews(nullptr);
 }
 
 // ClaimDoc commands
 void ClaimDoc::add_invoice(Invoice& invoice)
 {
-	assert(m_claim.id >= 0);
+	if (m_claim.id < 0)
+	{
+		Storage::report_error(L"Claim debe estar almacenado para agregarle facturas");
+		return;
+	}
 	
 	auto res = std::find_if(m_claim_invoices.cbegin(), m_claim_invoices.cend(), [&invoice](const Invoice& inv)
 		{
