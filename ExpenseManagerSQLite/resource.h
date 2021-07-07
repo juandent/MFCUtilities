@@ -220,6 +220,8 @@
 #define IDC_B_ACCELERATE                1106
 #define IDC_B_ACCELERATE2               1107
 #define IDC_B_DECELERATE                1107
+#define IDC_CHECK1                      1107
+#define IDC_C_DESCONOCIDA               1107
 #define ID_Menu                         32771
 #define ID_FILE_CUENTADIALOG            32772
 #define ID_FILE_TRANSACCIONDIALOG       32773
@@ -241,7 +243,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        322
 #define _APS_NEXT_COMMAND_VALUE         32785
-#define _APS_NEXT_CONTROL_VALUE         1107
+#define _APS_NEXT_CONTROL_VALUE         1108
 #define _APS_NEXT_SYMED_VALUE           323
 #endif
 #endif
