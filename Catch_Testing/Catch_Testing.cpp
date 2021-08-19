@@ -3,10 +3,27 @@
 
 #include <iostream>
 #include <catch2/catch.hpp>
+#include <chrono>
+#include <sstream>
 //#include <catch2/catch_reporter_automake.hpp>
 //#include <catch2/catch_reporter_sonarqube.hpp>
 // #include <catch2/catch_reporter_tap.hpp>
 // #include <catch2/catch_reporter_teamcity.hpp>
+
+
+
+
+void display(std::chrono::sys_days pt)
+{
+	using namespace std::chrono;
+
+	const std::chrono::year_month_day ymd{ pt };
+	std::ostringstream os;
+	os << ymd;
+	auto s = os.str();
+}
+
+
 
 
 TEST_CASE("Learning Catch")
@@ -20,7 +37,7 @@ TEST_CASE("Learning Catch")
 		REQUIRE(++i == 8);
 		std::cout << "Hola"<< std::endl;
 	}
-	
+
 }
 
 #if 0

@@ -1,6 +1,7 @@
 #pragma once
 
-import Util;
+// import Util;
+#include "..\JDMFCLibrary/Util.h"
 
 enum class Operation { doUpdate = 1, doInsert = 2 };
 

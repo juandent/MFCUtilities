@@ -33,13 +33,13 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 private:
-//	CEdit m_id_claim;
-//	CComboBox m_patients;
+	CEdit m_id_claim;
+	CComboBox m_patients;
 	virtual void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/);
 public:
 	afx_msg void OnBnClickedApply();
 private:
-//	CJDGridCtrl m_grid1;
+	CJDGridCtrl m_grid1;
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnCbnSelchangeCPatients();
@@ -47,12 +47,12 @@ public:
 public:
 	afx_msg void OnDtnDatetimechangeStartDate(NMHDR* pNMHDR, LRESULT* pResult);
 private:
-//	CComboBox m_doctors;
-//	CComboBox m_medicamentos;
-//	CListBox m_claims;
+	CComboBox m_doctors;
+	CComboBox m_medicamentos;
+	CListBox m_claims;
 
 	Claim* m_claim;
-	CComboBox m_patients;
+	// CComboBox m_patients;
 	std::chrono::sys_days m_start_date;
 	int m_sent;
 };

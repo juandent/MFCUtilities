@@ -1,18 +1,17 @@
-module;
+#pragma once
+
 
 #include <string>
 #include <utility>
-//#include <date/date.h>
 #include <chrono>
 #include <regex>
 #include <map>
 
-export module DateAsString;
 
 
-export namespace DateAsString
+namespace DateAsString
 {
-	export class MonthNames
+	 class MonthNames
 	{
 		static std::array<std::string, 12> s_monthNames;
 	public:
@@ -20,7 +19,7 @@ export namespace DateAsString
 		static std::pair<bool, unsigned> getMonthNumber(const std::string& name);
 	};
 
-	export class IDateExtractor
+	 class IDateExtractor
 	{
 	protected:
 		IDateExtractor() = default;
@@ -29,7 +28,7 @@ export namespace DateAsString
 		virtual ~IDateExtractor() = default;
 	};
 
-	export class CompleteDateExtractor : public IDateExtractor
+	 class CompleteDateExtractor : public IDateExtractor
 	{
 		const std::regex m_regularExpression;
 		const int  m_dayIndex, m_monthIndex, m_yearIndex;
@@ -41,7 +40,7 @@ export namespace DateAsString
 	};
 
 #if 0
-	export inline int yearFromLineMonthAndStatement(unsigned lineMonth, unsigned statementMonth, unsigned statementYear)
+	 inline int yearFromLineMonthAndStatement(unsigned lineMonth, unsigned statementMonth, unsigned statementYear)
 	{
 		if (lineMonth == statementMonth)
 		{
@@ -59,7 +58,7 @@ export namespace DateAsString
 #endif
 
 	// text lacks year!! must calculate from Statement date!
-	export class IncompleteDateExtractor : public IDateExtractor
+	 class IncompleteDateExtractor : public IDateExtractor
 	{
 		const std::regex m_regularExpression;
 		const int  m_dayIndex, m_monthIndex;
@@ -74,10 +73,10 @@ export namespace DateAsString
 		virtual std::pair<bool, std::chrono::sys_days> convert(const std::string& asText) const override;
 	};
 
-	export bool isDateComplete(const std::string& asText);
+	 bool isDateComplete(const std::string& asText);
 
 
-	export class StringDateConverter
+	 class StringDateConverter
 	{
 		const std::string	m_asText;
 		const unsigned		m_statementMonth;

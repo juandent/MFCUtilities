@@ -1,6 +1,7 @@
 ﻿#pragma once
 
-import Util;
+//import Util;
+#include "JDMFCLibrary/Util.h"
 
 template<typename T>
 class GridDisplayer

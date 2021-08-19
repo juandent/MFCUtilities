@@ -1,4 +1,4 @@
-module;
+#pragma once
 
 
 #include <debugapi.h>
@@ -24,16 +24,29 @@ module;
 #include <FixedPoint/arithmetic_types.cpp>
 #include <GridCellBase.h>
 #include <sstream>
+#include <DateAsString.h>
 
 
 
-export module Util;
+//  module Util;
 
-/*export*/ import DateAsString;
+// /**/ import DateAsString;
 
 namespace fs = std::filesystem;
 
 //class CGridCellBase;
+// namespace Util
+// {
+// 	inline void to_stream(std::ostringstream& os, std::chrono::year_month_day ymd)
+// 	{
+// 		os << ymd;
+// 		// os << static_cast<int>(ymd.year());
+// 		// os << "-";
+// 		// os << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.month());
+// 		// os << "-";
+// 		// os << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.day());
+// 	}
+// }
 
 // Sample diagnostics class:
 namespace diag
@@ -43,8 +56,8 @@ namespace diag
 
 #define OUTPUT_TO_IMMEDIATE_WINDOW
 #ifdef OUTPUT_TO_IMMEDIATE_WINDOW
-	export template<size_t Size>
-	inline void display(const std::array<char, Size>& buffer)
+	 template<size_t Size>
+		inline void display(const std::array<char, Size>& buffer)
 	{
 		std::string str;
 		for (auto el : buffer)
@@ -56,27 +69,27 @@ namespace diag
 		str += "\n\0";
 		::OutputDebugStringA(str.c_str());
 	}
-	export inline void endl()
+	 inline void endl()
 	{
 		::OutputDebugStringA("\n");
 	}
-	export inline void display(const std::wstring& str)
+	 inline void display(const std::wstring& str)
 	{
 		::OutputDebugStringW(str.c_str());
 		endl();
 	}
-	export inline void display(const std::string& str)
+	 inline void display(const std::string& str)
 	{
 		::OutputDebugStringA(str.c_str());
 		endl();
 	}
-	export inline void display(std::ifstream& in)
+	 inline void display(std::ifstream& in)
 	{
 		std::string str = "not_good == ";
 		str += (!in.good()) ? "true" : "false";
 		display(str);
 	}
-	export inline void display(const std::vector<char>& buffer)
+	 inline void display(const std::vector<char>& buffer)
 	{
 		std::string str;
 		for (auto el : buffer)
@@ -89,35 +102,45 @@ namespace diag
 		::OutputDebugStringA(str.c_str());
 		endl();
 	}
-	export inline void display(std::chrono::sys_days pt)
+
+
+	 inline void display(std::chrono::sys_days pt)
 	{
 		using namespace std::chrono;
+		using std::chrono::operator<<;
 
 		const std::chrono::year_month_day ymd{ pt };
 		std::ostringstream os;
+		// Util::to_stream(os, ymd);
 		os << ymd;
+		// os << static_cast<int>(ymd.year());
+		// os << "-";
+		// os << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.month());
+		// os << "-";
+		// os << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.day());
+
 		display(os.str());
 	}
 
 #else
-	export template<size_t Size>
-	inline void display(const std::array<char, Size>& buffer)
+	 template<size_t Size>
+		inline void display(const std::array<char, Size>& buffer)
 	{}
-	export template<typename T>
-	export inline void display(const T&) {}
-	export inline void display(const std::vector<char>& buffer) {}
-	export inline void display(const std::string& str) {}
-	export inline void endl() {}
+	 template<typename T>
+		 inline void display(const T&) {}
+	 inline void display(const std::vector<char>& buffer) {}
+	 inline void display(const std::string& str) {}
+	 inline void endl() {}
 #endif
 }
 
-export namespace Util
+ namespace Util
 {
-	export using Money = fixed_decimal<2, long long>;
+	 using Money = fixed_decimal<2, long long>;
 
-	//export Money;
+	// Money;
 
-	export class Colones : public Money
+	 class Colones : public Money
 	{
 		unsigned m_width = 13;
 	public:
@@ -132,7 +155,7 @@ export namespace Util
 	};
 
 	// MFC_UTILITIES_API
-	export class Dolares : public Money
+	 class Dolares : public Money
 	{
 		unsigned m_width = 13;
 	public:
@@ -147,7 +170,7 @@ export namespace Util
 	};
 
 	// using pointers
-	export template <typename T, typename U, typename X = std::remove_pointer<T>::type, typename Y = std::remove_pointer<U>::type,
+	 template <typename T, typename U, typename X = std::remove_pointer<T>::type, typename Y = std::remove_pointer<U>::type,
 		typename A = std::enable_if< std::is_base_of<Y, X>::value>::type,
 		typename B = std::enable_if<std::is_pointer<T>::value>::type,
 		typename C = std::enable_if<std::is_pointer<U>::value>::type
@@ -158,7 +181,7 @@ export namespace Util
 		return static_cast<T>(p);
 	}
 	// using references
-	export template <typename T, typename U, typename X = std::remove_reference<T>::type, typename Y = std::remove_reference<U>::type,
+	 template <typename T, typename U, typename X = std::remove_reference<T>::type, typename Y = std::remove_reference<U>::type,
 		typename A = std::enable_if< std::is_base_of<Y, X>::value>::type>
 		T& polymorphic_cast(U& p)
 	{
@@ -167,7 +190,7 @@ export namespace Util
 	}
 
 	// convert string to uppercase
-	export inline std::string touppercase(const std::string& name)
+	 inline std::string touppercase(const std::string& name)
 	{
 		// pass 'name' to upper case
 		std::string upper_name{ name };
@@ -178,7 +201,7 @@ export namespace Util
 	}
 
 	// convert string to lowercase
-	export inline std::string tolowercase(const std::string& name)
+	 inline std::string tolowercase(const std::string& name)
 	{
 		// pass 'name' to upper case
 		std::string lower_name{ name };
@@ -190,7 +213,7 @@ export namespace Util
 
 
 	// convert string to wstring
-	export inline std::wstring to_wstring(const std::string& str, const std::locale& loc = std::locale{})
+	 inline std::wstring to_wstring(const std::string& str, const std::locale& loc = std::locale{})
 	{
 		std::vector<wchar_t> buf(str.size());
 		std::use_facet<std::ctype<wchar_t>>(loc).widen(str.data(), str.data() + str.size(), buf.data());
@@ -199,7 +222,7 @@ export namespace Util
 	}
 
 	// convert wstring to string
-	export inline std::string to_string(const std::wstring& str, const std::locale& loc = std::locale{})
+	 inline std::string to_string(const std::wstring& str, const std::locale& loc = std::locale{})
 	{
 		std::vector<char> buf(str.size());
 		std::use_facet<std::ctype<wchar_t>>(loc).narrow(str.data(), str.data() + str.size(), '?', buf.data());
@@ -207,66 +230,66 @@ export namespace Util
 		return std::string(buf.data(), buf.size());
 	}
 
-	export inline CString to_cstring(std::string msg)
+	 inline CString to_cstring(std::string msg)
 	{
 		std::wstring message = to_wstring(msg);
 		CString msg_as_cstring{ message.c_str() };
 		return msg_as_cstring;
 	}
 
-	export CString to_cstring(double d)
+	inline CString to_cstring(double d)
 	{
 		auto d_str = std::to_string(d);
 		return to_cstring(d_str);
 	}
 
-	export CString to_cstring(double&& d)
+	inline CString to_cstring(double&& d)
 	{
 		auto d_str = std::to_string(d);
 		return to_cstring(d_str);
 	}
 
-	export CString to_cstring(long d)
+	inline CString to_cstring(long d)
 	{
 		auto d_str = std::to_string(d);
 		return to_cstring(d_str);
 	}
 
-	export CString to_cstring(long long d)
+	inline CString to_cstring(long long d)
 	{
 		auto d_str = std::to_string(d);
 		return to_cstring(d_str);
 	}
 
-	export CString to_cstring(std::size_t d)
+	inline CString to_cstring(std::size_t d)
 	{
 		auto d_str = std::to_string(d);
 		return to_cstring(d_str);
 	}
-	
-	export CString to_cstring(int d)
+
+	inline  CString to_cstring(int d)
 	{
 		auto d_str = std::to_string(d);
 		return to_cstring(d_str);
 	}
 #if 1
-	export template<typename T> requires std::is_integral<T>::value || std::is_floating_point<T>::value
-		CString to_cstring(T&& t)
+	 template<typename T> requires std::is_integral<T>::value || std::is_floating_point<T>::value
+		CString to_cstring(T && t)
 	{
 		auto d_str = std::to_string(std::forward<T>(t));
 		return to_cstring(d_str);
 	}
 #endif
 
-	export template<typename...Args>
+	 template<typename...Args>
 		CString to_cstring(std::tuple<Args...> tuple)
 	{
 		auto str = std::get<0>(tuple);
 		return to_cstring(str);
 	}
 
-	export template<typename T>
-	CString to_cstring(std::unique_ptr<T>&& d)
+	 template<typename T>
+		CString to_cstring(std::unique_ptr<T>&& d)
 	{
 		auto p = d.get();
 
@@ -278,8 +301,8 @@ export namespace Util
 		return L"";
 	}
 
-	export template<typename T>
-	CString unique_ptr_to_cstring(std::unique_ptr<T>&& d)
+	 template<typename T>
+		CString unique_ptr_to_cstring(std::unique_ptr<T>&& d)
 	{
 
 		auto p = d.get();
@@ -292,73 +315,83 @@ export namespace Util
 	}
 
 
-	export inline std::string to_string(std::chrono::sys_days dp)
+	 inline std::string to_string(std::chrono::sys_days dp)
 	{
+		 using namespace std::chrono;
+
 		std::chrono::year_month_day ymd{ dp };
 		std::ostringstream os;
+		// to_stream(os, ymd);
+
 		os << ymd;
+		// os << static_cast<int>(ymd.year());
+		// os << "-";
+		// os << static_cast<unsigned>(ymd.month());
+		// os << "-";
+		// os << static_cast<unsigned>(ymd.day());
+
 		return os.str();
 	}
 
-	export inline CString to_cstring(std::chrono::sys_days dp)
+	 inline CString to_cstring(std::chrono::sys_days dp)
 	{
 		auto str = to_string(dp);
 		return to_cstring(str);
 	}
 
-	export inline std::string from_cstring(const CString& msg)
+	 inline std::string from_cstring(const CString& msg)
 	{
 		auto m = static_cast<LPCTSTR>(msg);
 		auto str = to_string(m);
 		return str;
 	}
 
-	export template<typename T> requires std::is_integral_v<T>
-	inline CString to_cstring(T val)
+	 template<typename T> requires std::is_integral_v<T>
+		inline CString to_cstring(T val)
 	{
 		std::string str = std::to_string(val);
 		return to_cstring(str);
 	}
-	export inline CString to_cstring(bool val)
+	 inline CString to_cstring(bool val)
 	{
 		return CString{ val ? L"True" : L"False" };
 	}
 
-	export inline CString to_cstring(Colones amount)
+	 inline CString to_cstring(Colones amount)
 	{
 		std::wstring tmp = static_cast<std::wstring>(amount);
 		return CString{ tmp.c_str() };
 	}
 
-	export inline CString to_cstring(Dolares amount)
+	 inline CString to_cstring(Dolares amount)
 	{
 		std::wstring tmp = amount;
 		return CString{ tmp.c_str() };
 	}
 
 
-	export inline std::string as_string(const CString& s)
+	 inline std::string as_string(const CString& s)
 	{
 		std::string ss = from_cstring(s);
 		if (ss.empty()) ss = "0";
 		return ss;
 	}
 
-	export inline
-	int to_int(const CString& s)
+	 inline
+		int to_int(const CString& s)
 	{
 		auto ss = as_string(s);
 		return std::stoi(ss);
 	}
 
-	export inline
+	 inline
 		long to_long(const CString& s)
 	{
 		auto ss = as_string(s);
 		return std::stol(ss);
 	}
 
-	export inline
+	 inline
 		double to_double(const CString& s)
 	{
 		auto ss = as_string(s);
@@ -367,16 +400,16 @@ export namespace Util
 
 
 
-	export template<typename Element>
-	struct get_quote
+	 template<typename Element>
+		struct get_quote
 	{
 		static constexpr void const* chars[2] = { "\"", L"\"" };
 		static constexpr Element const* quote_char = reinterpret_cast<Element const*>(chars[sizeof(Element) - 1]);
 	};
 
 
-	export template<typename Element >
-	inline std::basic_string<Element> quote(const std::basic_string<Element>& str)
+	 template<typename Element >
+		inline std::basic_string<Element> quote(const std::basic_string<Element>& str)
 	{
 		constexpr Element const* quoted_char = get_quote<Element>::quote_char;
 
@@ -386,47 +419,47 @@ export namespace Util
 		return quoted;
 	}
 
-	export struct SingletonsInitializer
+	 struct SingletonsInitializer
 	{
 		SingletonsInitializer();
 		~SingletonsInitializer();
 	};
 
-	// jd how does it work? - removed the export
+	// jd how does it work? - removed the 
 	extern SingletonsInitializer initializer;
 
-	export CString local_to_cstring(Money money, int width = 13);
+	 CString local_to_cstring(Money money, int width = 13);
 
-	export CString dollars_to_cstring(Money money, int width = 13);
+	 CString dollars_to_cstring(Money money, int width = 13);
 
-	export CString number_to_cstring(Money money, int width = 13);
+	 CString number_to_cstring(Money money, int width = 13);
 
-	export std::string to_string(Colones money, int width = 13);
+	 std::string to_string(Colones money, int width = 13);
 
-	export std::wstring to_wstring(Colones money, int width = 13);
+	 std::wstring to_wstring(Colones money, int width = 13);
 
-	export std::string to_string(Dolares money, int width = 13);
+	 std::string to_string(Dolares money, int width = 13);
 
-	export std::wstring to_wstring(Dolares money, int width = 13);
+	 std::wstring to_wstring(Dolares money, int width = 13);
 
-	export struct Str
+	 struct Str
 	{
 		static Money from_local_cstring(const CString& s);
 
 		static Money from_dollars_cstring(const CString& s);
 	};
 #if 0
-	export Money from_local_cstring(const CString& s);
+	 Money from_local_cstring(const CString& s);
 
-	export Money from_dollars_cstring(const CString& s);
+	 Money from_dollars_cstring(const CString& s);
 #endif
-	export inline Money to_money(const std::string& s)
+	 inline Money to_money(const std::string& s)
 	{
 		auto val = stold(s);
 		return Money{ val };
 	}
 
-	export inline long double strip_to_long_double(std::string moneyAsString)
+	 inline long double strip_to_long_double(std::string moneyAsString)
 	{
 		std::string stripped;
 		for (auto& c : moneyAsString)
@@ -439,13 +472,13 @@ export namespace Util
 		return stold(stripped);
 	}
 
-	export inline Money strip_to_money(std::string moneyAsString)
+	 inline Money strip_to_money(std::string moneyAsString)
 	{
 		auto val = strip_to_long_double(moneyAsString);
 		return Money{ val };
 	}
 
-	export inline COleDateTime to_ole_date_time(std::chrono::sys_days fecha)
+	 inline COleDateTime to_ole_date_time(std::chrono::sys_days fecha)
 	{
 		using namespace std::chrono;
 
@@ -458,7 +491,7 @@ export namespace Util
 		return rDateTime;
 	}
 
-	export inline std::chrono::sys_days to_sys_days(const COleDateTime& fecha)
+	 inline std::chrono::sys_days to_sys_days(const COleDateTime& fecha)
 	{
 		using namespace std::chrono;
 
@@ -471,13 +504,13 @@ export namespace Util
 		return date;
 	}
 
-	export inline std::string convert(const CString& str)
+	 inline std::string convert(const CString& str)
 	{
 		std::wstring s{ str };
 		return to_string(s);
 	}
 
-	export inline unsigned lineYear(int lineMonth, unsigned statementMonth, unsigned statementYear)
+	 inline unsigned lineYear(int lineMonth, unsigned statementMonth, unsigned statementYear)
 	{
 		assert(statementYear != 0);
 
@@ -495,7 +528,7 @@ export namespace Util
 		}
 	}
 
-	export inline std::chrono::sys_days selected_criteria_to_date(const std::string& asText)
+	 inline std::chrono::sys_days selected_criteria_to_date(const std::string& asText)
 	{
 		using namespace std;
 		using namespace std::chrono;
@@ -522,7 +555,7 @@ export namespace Util
 		return year_month_day{ year{0}, month{0}, day{0} };
 	}
 
-	export inline std::chrono::sys_days to_date(const std::string& asText, unsigned statementMonth = 0, int statementYear = 0)
+	 inline std::chrono::sys_days to_date(const std::string& asText, unsigned statementMonth = 0, int statementYear = 0)
 	{
 		DateAsString::StringDateConverter converter{ asText, statementMonth, statementYear };
 		auto ret = converter.convert();
@@ -533,14 +566,14 @@ export namespace Util
 		return ret.second;
 	}
 
-	export inline bool is_date(const std::string& asText)
+	 inline bool is_date(const std::string& asText)
 	{
 		DateAsString::StringDateConverter converter{ asText, 0, 0 };
 		auto ret = converter.convert();
 		return ret.first;
 	}
 
-	export inline std::string remove_extension(const std::string& fileName)
+	 inline std::string remove_extension(const std::string& fileName)
 	{
 		//namespace fs = std::filesystem;
 
@@ -556,7 +589,7 @@ export namespace Util
 		return file;
 	}
 
-	export inline CString weekDayCS(const std::chrono::sys_days dp)
+	 inline CString weekDayCS(const std::chrono::sys_days dp)
 	{
 		static std::array<CString, 7> days{ L"Sunday", L"Monday", L"Tuesday", L"Wednesday", L"Thursday", L"Friday", L"Saturday" };
 		std::chrono::year_month_weekday ymwd{ dp };
@@ -566,7 +599,7 @@ export namespace Util
 		return days[i];
 	}
 
-	export inline const std::string& weekDay(const std::chrono::sys_days dp)
+	 inline const std::string& weekDay(const std::chrono::sys_days dp)
 	{
 		static std::array<std::string, 7> days{ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 		std::chrono::year_month_weekday ymwd{ dp };
@@ -576,18 +609,18 @@ export namespace Util
 		return days[i];
 	}
 
-	export inline LPARAM weekDayAsData(const std::chrono::sys_days dp)
+	 inline LPARAM weekDayAsData(const std::chrono::sys_days dp)
 	{
 		auto& dayName = weekDay(dp);
 		return reinterpret_cast<LPARAM>(dayName.c_str());
 	}
 
-	export inline LPARAM stringAsData(const std::string& str)
+	 inline LPARAM stringAsData(const std::string& str)
 	{
 		return reinterpret_cast<LPARAM>(str.c_str());
 	}
 
-	export template<typename T> requires std::is_base_of<std::exception, T>::value
+	 template<typename T> requires std::is_base_of<std::exception, T>::value
 		std::string ProcessCodeException(const T& e)
 	{
 		using namespace std;
@@ -601,7 +634,7 @@ export namespace Util
 		return os.str();
 	}
 
-	export struct Comparison
+	 struct Comparison
 	{
 		static std::locale loc;
 		static std::ostringstream os;
@@ -625,7 +658,7 @@ export namespace Util
 
 
 	// for map or multimap insertion or updating: (Effective STL, pg 110 by Scott Meyers)
-	export template< typename MapType,
+	 template< typename MapType,
 		typename KeyArgType,
 		typename ValueArgType>
 		auto efficientAddOrUpdate(MapType& m, const KeyArgType& k, const ValueArgType& v)
@@ -644,7 +677,7 @@ export namespace Util
 		}
 	}
 	// utility for when pointers, iterators or smart pointers are stored in associative containers (Effective STL, pg 91, Scott Meyers)
-	export struct DereferenceLess
+	 struct DereferenceLess
 	{
 		template<typename PtrType>
 		bool operator()(PtrType pT1, PtrType pT2) const
@@ -653,8 +686,8 @@ export namespace Util
 		}
 	};
 
-	export using MoneyPair = std::pair<Money, Money>;
-	export inline MoneyPair& operator+=(MoneyPair& lhs, MoneyPair rhs)
+	 using MoneyPair = std::pair<Money, Money>;
+	 inline MoneyPair& operator+=(MoneyPair& lhs, MoneyPair rhs)
 	{
 		lhs.first += rhs.first;
 		lhs.second += rhs.second;
@@ -664,8 +697,4 @@ export namespace Util
 }
 
 //module :private;
-
-
-
-
 

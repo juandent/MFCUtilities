@@ -1,6 +1,4 @@
 
-
-
 #include <locale>
 
 
@@ -16,10 +14,12 @@
 #include <FixedPoint/arithmetic_types.h>
 #include "GridCellBase.h"
 
+#include "Util.h"
 
-class CGridCellBase;
 
-import Util;
+//class CGridCellBase;
+
+// import Util;
 
 
 using namespace std;

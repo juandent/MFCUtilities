@@ -6,10 +6,12 @@
 #include <FixedPoint/arithmetic_types.h>
 
 #include "MessageDialog.h"
+
+#include "Util.h"
 #include "JDMFCLibrary/Resource.h"
 
 
-import Util;
+// import Util;
 
 // CMessageDialog dialog
 

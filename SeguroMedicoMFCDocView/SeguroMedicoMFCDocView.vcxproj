@@ -29,14 +29,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -51,7 +51,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -194,8 +194,11 @@
     <ClInclude Include="ClaimView.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="Collection.h" />
+    <ClInclude Include="Context.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="DateBinding.h" />
+    <ClInclude Include="DbContext.h" />
+    <ClInclude Include="DbSet.h" />
     <ClInclude Include="DlgData.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
@@ -222,6 +225,9 @@
     <ClCompile Include="ClaimsCollection.cpp" />
     <ClCompile Include="ClaimView.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="Context.cpp" />
+    <ClCompile Include="DbContext.cpp" />
+    <ClCompile Include="DbSet.cpp" />
     <ClCompile Include="DlgData.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>

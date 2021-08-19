@@ -116,7 +116,8 @@ inline 	auto& Storage_Impl::get_storage()
 	if (flag == 0)
 	{
 		flag = 1;
-		storage.sync_schema(true);
+		const auto& map = storage.sync_schema(true);
+		int i = 0;
 	}
 
 	return storage;
@@ -316,7 +317,8 @@ inline auto& Storage_Impl::get_new_storage()
 	if (flag == 0)
 	{
 		flag = 1;
-		storage.sync_schema(true);
+		const auto& map = storage.sync_schema(true);
+		int i = 0;
 	}
 
 	return storage;

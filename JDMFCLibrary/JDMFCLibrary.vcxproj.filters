@@ -112,6 +112,15 @@
     <ClInclude Include="..\DLLs.h">
       <Filter>DLL Support</Filter>
     </ClInclude>
+    <ClInclude Include="DateAsString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSV_File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="JDMFCLibrary.rc">

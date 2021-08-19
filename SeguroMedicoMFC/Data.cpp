@@ -104,7 +104,7 @@ void Storage::backup_db()
 	namespace fs = std::filesystem;
 
 	auto path_to_db_name = fs::path(Storage_Impl::db_name);
-	auto stem = path_to_db_name.stem().string();
+	auto stem = path_to_db_name.stem().string(); 
 	auto backup_stem = stem + "_backup1.sqlite";
 	auto backup_full_path = path_to_db_name.parent_path().append(backup_stem).string();
 	getStorage().backup_to(backup_full_path);

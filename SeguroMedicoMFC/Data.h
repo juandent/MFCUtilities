@@ -8,7 +8,8 @@
 // #include <date/date.h>
 
 
-import Util;
+// import Util;
+#include "..\JDMFCLibrary/Util.h"
 
 // #include "../FixedPoint/Money.h"
 #if 1

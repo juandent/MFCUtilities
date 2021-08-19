@@ -26,7 +26,7 @@ m_medicationsCB(m_medicamentos, [](Medication& med)
 {
 		return Util::to_cstring(med.simple_dump());
 })
-
+#if 0
 , m_asprose_claim_number(_T(""))
 , m_asprose_case_number(_T(""))
 , m_amount_presented(_T(""))
@@ -40,6 +40,7 @@ m_medicationsCB(m_medicamentos, [](Medication& med)
 , m_id_claim(0)
 , m_claim_id(0)
 , m_sent(false)
+#endif
 {
 
 }
@@ -56,20 +57,28 @@ ClaimDoc* ClaimView::GetDocument()
 
 void ClaimView::DoDataExchange(CDataExchange* pDX)
 {
+	DDX_Control(pDX, IDC_C_PATIENTS, m_patients);
+	DDX_DateTimeCtrl(pDX, IDC_START_DATE, m_start_date);
+	DDX_Check(pDX, IDC_C_SENT, m_sent);
+
+	DDX_Control(pDX, IDC_C_DOCTORES, m_doctors);
+	DDX_Control(pDX, IDC_C_MEDICAMENTOS, m_medicamentos);
+	DDX_Control(pDX, IDC_L_CLAIM_LIST, m_claims);
+	
 	using namespace std::chrono;
 	using namespace std::chrono_literals;
 
 	// year_month_day ymd{ static_cast<year>(2021), static_cast<month>(8), static_cast<day>(31) };
 	year_month_day ymd{ 2021y / 8 / 31d };
-	m_std_date = ymd;
+	// m_std_date = ymd;
 
 	{
 		year_month_day ymd{ static_cast<year>(2021), static_cast<month>(9), static_cast<day>(6) };
-		m_submission_date = ymd;
+		// m_submission_date = ymd;
 	}
-	m_asprose_case_number_s = "ASP4500";
+	// m_asprose_case_number_s = "ASP4500";
 
-	m_patient_chosen = "Juan Dent Herrera";
+	// m_patient_chosen = "Juan Dent Herrera";
 
 	// static int index = 0;
 	auto pDoc = GetDocument();
@@ -102,29 +111,27 @@ void ClaimView::DoDataExchange(CDataExchange* pDX)
 		// claim->amount = to_double(m_total_claim_amount);
 		// // claim->
 
-		if (m_claim_id == -1)
+		// if (m_claim_id == -1)
 		{
-			storage.insert(*m_claim);
+			// storage.insert(*m_claim);
 		}
-		else
+		// else
 		{
-			storage.update(*m_claim);
+			// storage.update(*m_claim);
 		}
 		// pDoc->changes_applied();
 	}
 	else
 	{
 		auto pt = pDoc->get_patient();
-		m_patientsCB.select(pt);
+		int id = pt ? pt->id : -1;
+		m_patientsCB.select( id );
 
 		// m_claim_id = to_cstr(pDoc->get_id());
 		// SetDate(m_start_date, pDoc->get_start_date());
 		// SetDate(m_submitted_date, pDoc->get_submission_date());
 	}
 
-	DDX_Control(pDX, IDC_C_PATIENTS, m_patients);
-	DDX_DateTimeCtrl(pDX, IDC_START_DATE, m_start_date);
-	DDX_Check(pDX, IDC_C_SENT, m_sent);
 }
 
 BEGIN_MESSAGE_MAP(ClaimView, CFormView)
@@ -164,6 +171,11 @@ void ClaimView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 void ClaimView::OnBnClickedApply()
 {
 	// TODO: Add your control notification handler code here
+	auto& storage = Storage::getStorage();
+
+	bool exists = storage.table_exists("Claims");
+
+	
 	UpdateData(1);
 }
 
@@ -172,7 +184,7 @@ void ClaimView::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
 
-	m_claim = GetDocument()->m_claim;
+	m_claim = &GetDocument()->m_claim;
 
 	m_patientsCB.loadLB();
 	m_medicationsCB.loadLB();

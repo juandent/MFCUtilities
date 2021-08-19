@@ -1,3 +1,4 @@
+// module;
 
 #include "stdafx.h"
 #include <cassert>
@@ -7,7 +8,6 @@
 #include <fstream>
 #include <vector>
 #include <regex>
-// #include <date/date.h>
 #include <chrono>
 
 // /******************************************************************************
@@ -22,10 +22,12 @@
 // template <>      struct exp10<0> { enum { value = 1 }; };
 
 #include <FixedPoint/arithmetic_types.h>
+#include "Util.h"
+#include "CSV_File.h"
 
-module CSV_File;
+// module CSV_File;
 
-import Util;
+// import Util;
 
 using namespace std;
 using namespace std::chrono;
@@ -208,11 +210,11 @@ namespace csv
 		year_month_day ymd{ pt };
 		ostringstream os;
 		// to enable correct importing into FileMaker Pro
-		os << ymd.year();
+		os << static_cast<int>(ymd.year());
 		os << "+";
 		os << static_cast<unsigned>(ymd.month());
 		os << "+";
-		os << ymd.day();
+		os << static_cast<unsigned>(ymd.day());
 		//os << ymd;
 		addCol(os.str());
 #else	// dd/mm/yyyy
