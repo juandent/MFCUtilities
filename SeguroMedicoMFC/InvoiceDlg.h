@@ -68,4 +68,5 @@ private:
 	CJDGridCtrl m_grid_response_lines;
 public:
 	afx_msg void OnBnClickedRConsulta();
+	afx_msg void OnBnClickedBInsResponseNew();
 };

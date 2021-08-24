@@ -67,6 +67,7 @@ BEGIN_MESSAGE_MAP(InvoiceDlg, CDialog)
 	ON_BN_CLICKED(ID_B_RECLAMOS, &InvoiceDlg::OnBnClickedBReclamos)
 	ON_BN_CLICKED(ID_B_INS_RESPONSE, &InvoiceDlg::OnBnClickedBInsResponse)
 	ON_BN_CLICKED(IDC_R_CONSULTA, &InvoiceDlg::OnBnClickedRConsulta)
+	ON_BN_CLICKED(ID_B_INS_RESPONSE_NEW, &InvoiceDlg::OnBnClickedBInsResponseNew)
 END_MESSAGE_MAP()
 
 
@@ -104,8 +105,8 @@ void InvoiceDlg::Refresh()
 	auto inv = m_invoiceLB.current();
 	
 	m_claimCB.loadLBOrderBy(&Claim::start_date);		// desc
-	m_invoiceLB.loadLBOrderBy(&Invoice::number);
-	m_responseCB.loadLBOrderBy(&INSResponse::total_a_pagar);		// desc
+	m_invoiceLB.loadLBOrderByDesc(&Invoice::id);
+	m_responseCB.loadLBOrderByDesc(&INSResponse::date_response);		// desc
 	if(inv)
 	{
 		m_invoiceLB.select(inv->id);
@@ -274,7 +275,7 @@ void InvoiceDlg::OnBnClickedApply()
 	claim->get_total_amount();
 	Storage::getStorage().replace(*claim);
 	// SetAmount(m_monto, claim->amount);
-	m_invoiceLB.loadLBOrderBy(&Invoice::number);
+	m_invoiceLB.loadLBOrderByDesc(&Invoice::id);
 	m_invoice = invoice;
 	setIdFromRecord<Invoice>(m_id_invoice, m_invoice->id);
 }
@@ -372,4 +373,15 @@ void InvoiceDlg::OnBnClickedRConsulta()
 	{
 		SetText(m_descripcion, "Consulta"s);
 	}
+}
+
+
+void InvoiceDlg::OnBnClickedBInsResponseNew()
+{
+	// TODO: Add your control notification handler code here
+	INSResponseDlg dlg;
+	// auto resp = m_responseCB.current();
+	dlg.m_id = -1;
+	dlg.DoModal();
+	Refresh();
 }

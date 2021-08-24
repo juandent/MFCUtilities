@@ -35,18 +35,18 @@
 namespace fs = std::filesystem;
 
 //class CGridCellBase;
-// namespace Util
-// {
-// 	inline void to_stream(std::ostringstream& os, std::chrono::year_month_day ymd)
-// 	{
-// 		os << ymd;
-// 		// os << static_cast<int>(ymd.year());
-// 		// os << "-";
-// 		// os << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.month());
-// 		// os << "-";
-// 		// os << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.day());
-// 	}
-// }
+namespace Util
+{
+	inline void to_stream(std::ostringstream& os, std::chrono::year_month_day ymd)
+	{
+		// os << ymd;
+		os << static_cast<int>(ymd.year());
+		os << "-";
+		os << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.month());
+		os << "-";
+		os << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.day());
+	}
+}
 
 // Sample diagnostics class:
 namespace diag
@@ -111,8 +111,8 @@ namespace diag
 
 		const std::chrono::year_month_day ymd{ pt };
 		std::ostringstream os;
-		// Util::to_stream(os, ymd);
-		os << ymd;
+		Util::to_stream(os, ymd);
+		// os << ymd;
 		// os << static_cast<int>(ymd.year());
 		// os << "-";
 		// os << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.month());
@@ -321,9 +321,9 @@ namespace diag
 
 		std::chrono::year_month_day ymd{ dp };
 		std::ostringstream os;
-		// to_stream(os, ymd);
+		to_stream(os, ymd);
 
-		os << ymd;
+		// os << ymd;
 		// os << static_cast<int>(ymd.year());
 		// os << "-";
 		// os << static_cast<unsigned>(ymd.month());

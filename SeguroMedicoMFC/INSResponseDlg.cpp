@@ -100,6 +100,10 @@ BOOL INSResponseDlg::OnInitDialog()
 	{
 		m_list_insresponsesLB.select(m_id);
 	}
+	else
+	{
+		this->OnBnClickedNuevo();
+	}
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE

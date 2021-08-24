@@ -98,7 +98,7 @@ BOOL INSResponseLineDlg::OnInitDialog()
 
 void INSResponseLineDlg::Refresh()
 {
-	m_INSResponseLinesLB.loadLBOrderBy(&INSResponseLine::monto_cubierto);
+	m_INSResponseLinesLB.loadLBOrderByDesc(&INSResponseLine::id);
 	m_ins_responseCB.loadLBOrderBy(&INSResponse::total_a_pagar);
 	m_invoicesCB.loadLBOrderBy(&Invoice::amount);
 }
@@ -174,7 +174,7 @@ void INSResponseLineDlg::OnBnClickedApply()
 		ins_response_line->total_rubro_factura = total_a_pagar;
 		m_INSResponseLinesLB.update(*ins_response_line);
 	}
-	m_INSResponseLinesLB.loadLBOrderBy(&INSResponseLine::fkey_INSResponse);
+	m_INSResponseLinesLB.loadLBOrderByDesc(&INSResponseLine::id);
 	m_INSResponseLine= ins_response_line;
 	setIdFromRecord<INSResponseLine>(m_id_response_line, ins_response_line->id);
 }
