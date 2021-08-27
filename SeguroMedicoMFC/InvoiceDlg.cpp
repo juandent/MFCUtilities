@@ -106,7 +106,7 @@ void InvoiceDlg::Refresh()
 	
 	m_claimCB.loadLBOrderBy(&Claim::start_date);		// desc
 	m_invoiceLB.loadLBOrderByDesc(&Invoice::id);
-	m_responseCB.loadLBOrderByDesc(&INSResponse::date_response);		// desc
+	m_responseCB.loadLBOrderByDesc(&INSResponse::id);		// desc
 	if(inv)
 	{
 		m_invoiceLB.select(inv->id);

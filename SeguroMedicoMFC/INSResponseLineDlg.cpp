@@ -99,7 +99,7 @@ BOOL INSResponseLineDlg::OnInitDialog()
 void INSResponseLineDlg::Refresh()
 {
 	m_INSResponseLinesLB.loadLBOrderByDesc(&INSResponseLine::id);
-	m_ins_responseCB.loadLBOrderBy(&INSResponse::total_a_pagar);
+	m_ins_responseCB.loadLBOrderByDesc(&INSResponse::id);
 	m_invoicesCB.loadLBOrderBy(&Invoice::amount);
 }
 
