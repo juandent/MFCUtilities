@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28729.10
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JDMFCLibrary", "JDMFCLibrary\JDMFCLibrary.vcxproj", "{D7A93589-B456-43EF-9C10-E68BF433C68F}"
 EndProject
@@ -32,6 +32,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Google-Test", "Google-Test\Google-Test.vcxproj", "{310944C7-ED7A-438E-A442-80C50E2750FC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JDMFCLibraryModules", "JDMFCLibraryModules\JDMFCLibraryModules.vcxproj", "{C964146A-C6CF-49A0-8BD9-A97512E8123C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Passwords", "Passwords\Passwords.vcxproj", "{B901D158-DFCB-473B-8CF4-83403A40D1C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -223,6 +225,18 @@ Global
 		{C964146A-C6CF-49A0-8BD9-A97512E8123C}.Release|x64.Build.0 = Release|x64
 		{C964146A-C6CF-49A0-8BD9-A97512E8123C}.Release|x86.ActiveCfg = Release|Win32
 		{C964146A-C6CF-49A0-8BD9-A97512E8123C}.Release|x86.Build.0 = Release|Win32
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Debug|x64.ActiveCfg = Debug|x64
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Debug|x64.Build.0 = Debug|x64
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Debug|x86.ActiveCfg = Debug|Win32
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Debug|x86.Build.0 = Debug|Win32
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Release Unicode|x64.ActiveCfg = Release|x64
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Release Unicode|x64.Build.0 = Release|x64
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Release Unicode|x86.ActiveCfg = Release|Win32
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Release Unicode|x86.Build.0 = Release|Win32
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Release|x64.ActiveCfg = Release|x64
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Release|x64.Build.0 = Release|x64
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Release|x86.ActiveCfg = Release|Win32
+		{B901D158-DFCB-473B-8CF4-83403A40D1C9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

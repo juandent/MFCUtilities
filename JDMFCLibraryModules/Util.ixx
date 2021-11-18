@@ -687,6 +687,25 @@ export namespace Util
 		return lhs;
 	}
 
+	export template< typename CharT>
+		class Buffer
+	{
+		CString m_bufferImpl;
+		CharT* m_pointerToBuffer;
+	public:
+		Buffer(int num_bytes)
+		{
+			m_pointerToBuffer = m_bufferImpl.GetBuffer(num_bytes);
+		}
+		~Buffer()
+		{
+			m_bufferImpl.ReleaseBuffer();
+		}
+		operator CharT* () const noexcept
+		{
+			return m_pointerToBuffer;
+		}
+	};
 }
 
 //module :private;

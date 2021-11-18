@@ -1,4 +1,5 @@
 // module;
+//module CSV_File;
 
 #include "pch.h"
 #include <cassert>
@@ -25,10 +26,11 @@
 // #include "Util.h"
 // #include "CSV_File.h"
 
-// module CSV_File;
+//module CSV_File;
+import CSV_File;
 
 import Util;
-module CSV_File;
+//module CSV_File;
 
 using namespace std;
 using namespace std::chrono;
