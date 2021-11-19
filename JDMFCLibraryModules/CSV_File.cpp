@@ -153,6 +153,32 @@ namespace csv
 		return Util::to_date(text);
 	}
 
+	std::chrono::sys_days CSV_File::getUSDate(const Cell_Position& pos) const
+	{
+		std::string text = m_matrix[pos.getRow()][pos.getCol()];
+		std::string inverted_text;
+
+//		std::regex reg{ "(\d+)/(\d+)/(\d+)" };
+
+		std::regex reg{ "([[:d:]]{1,2})[-/]([[:d:]]{1,2})[-/]([[:d:]]{2,4})" };
+
+
+		std::smatch m;
+		if (std::regex_search(text, m, reg))
+		{
+			auto month = m[1].str();
+			auto day = m[2].str();
+			auto year = m[3].str();
+			inverted_text = day + "/" + month + "/" + year;
+		}
+		else
+		{
+			throw std::exception{ "Error inviertendo fecha" };
+		}
+
+		return Util::to_date(inverted_text);
+	}
+
 	Money CSV_File::getMoney(const Cell_Position& pos) const
 	{
 		auto text = m_matrix[pos.getRow()][pos.getCol()];

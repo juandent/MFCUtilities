@@ -2,6 +2,7 @@
 // Microsoft Visual C++ generated include file.
 // Used by Passwords.rc
 //
+#define ID_APPLY                        3
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_POPUP_EDIT                  119
@@ -85,17 +86,33 @@
 #define IDS_EXPLORER                    305
 #define IDS_EDIT_MENU                   306
 #define IDD_LocationPasswordsView       310
+#define IDD_LocationDlg                 311
+#define IDD_PasswordDlg                 312
 #define IDC_GRID_LOCATIONS              1000
-#define IDC_GRID_LOCATIONS2             1001
 #define IDC_GRID_PASSWORDS              1001
+#define IDC_E_LOCATION_ID               1001
+#define IDC_E_LOCATION_URL              1002
+#define IDC_E_LOCATION_EMAIL            1003
+#define IDC_E_LOCATION_NAME             1004
+#define IDC_LIST_LOCATIONS              1005
+#define IDC_B_LOCATION_DLG              1006
+#define ID_ERASE                        1007
+#define IDC_B_PASSWORD_DLG              1007
+#define ID_NEW                          1008
+#define IDC_E_PASSWORD_ID               1009
+#define IDC_E_PASSWORD                  1010
+#define IDC_DATETIME_PICKER             1011
+#define IDC_CB_LOCATION_NAMES           1012
+#define IDC_LIST1                       1013
+#define IDC_L_PASSWORDS                 1013
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        311
+#define _APS_NEXT_RESOURCE_VALUE        313
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1001
-#define _APS_NEXT_SYMED_VALUE           311
+#define _APS_NEXT_CONTROL_VALUE         1014
+#define _APS_NEXT_SYMED_VALUE           313
 #endif
 #endif

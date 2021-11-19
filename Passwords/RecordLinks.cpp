@@ -39,7 +39,7 @@ bool RecordLinks::foreignKeysExist(const Location& location)
 {
 	using namespace sqlite_orm;
 
-	return false;
+	return true;
 }
 
 

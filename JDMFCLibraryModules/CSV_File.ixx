@@ -74,6 +74,7 @@ namespace csv
 
 		std::string getString(const Cell_Position& pos) const;
 		std::chrono::sys_days getDate(const Cell_Position& pos) const;
+		std::chrono::sys_days getUSDate(const Cell_Position& pos) const;
 		Money getMoney(const Cell_Position& pos) const;
 		bool getBool(const Cell_Position& pas) const;
 

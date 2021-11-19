@@ -11,6 +11,7 @@ void Storage::initialize()
 	std::thread{ std::chrono::get_tzdb }.detach();
 
 	//fill_db_with_test_data();
+//	empty_database();
 }
 
 void Storage::upgrade_database()
@@ -93,7 +94,16 @@ void Storage::fill_db_with_test_data()
 
 void Storage::empty_database()
 {
+	using namespace sqlite_orm;
+	using namespace std::chrono;
+	using namespace std;
 
+
+	auto& storage = Storage::getStorage();
+
+	// order is vital!
+	storage.remove_all<Password>();
+	storage.remove_all<Location>();
 }
 
 ////////////////////////////////////////

@@ -4,6 +4,7 @@
 #include "pch.h"
 #include "Passwords.h"
 #include "LocationPasswordsView.h"
+#include "LocationDlg.h"
 
 import Util;
 
@@ -30,6 +31,8 @@ void LocationPasswordsView::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(LocationPasswordsView, CFormView)
 	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_LOCATIONS, OnGrid1StartSelChange)
+	ON_BN_CLICKED(IDC_B_LOCATION_DLG, &LocationPasswordsView::OnBnClickedBLocationDlg)
+	ON_BN_CLICKED(IDC_B_PASSWORD_DLG, &LocationPasswordsView::OnBnClickedBPasswordDlg)
 END_MESSAGE_MAP()
 
 
@@ -61,7 +64,7 @@ void LocationPasswordsView::InitializeGridLocations(const T& t)
 
 		where(t),
 
-		order_by(alias_column<als_l>(&Location::name)).asc());
+		order_by(alias_column<als_l>(&Location::name)).asc().collate_nocase());
 
 
 
@@ -100,12 +103,21 @@ void LocationPasswordsView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*
 	auto location_id_s = Util::to_string(location_id_cs.GetBuffer());
 	auto location_id = std::stoi(location_id_s);
 
+	auto passwordWhere = getPasswordWhereClauseAlias(location_id);
+
+	InitializeGridPasswords(passwordWhere);
+}
+
+#if 0
+void LocationPasswordsView::InitializeGridPasswords(int location_id)
+{
 	using namespace sqlite_orm;
 
 	auto passwordWhere = (c(alias_column<als_p>(&Password::fkey_location)) == location_id);
 
 	InitializeGridPasswords(passwordWhere);
 }
+#endif
 
 template<typename T>
 void LocationPasswordsView::InitializeGridPasswords(const T& t)
@@ -132,5 +144,29 @@ void LocationPasswordsView::InitializeGridPasswords(const T& t)
 
 	m_displayer_passwords.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<>, IntegerList<>>(m_GridPasswords, std::move(otherlines), std::move(headers)));
 	m_displayer_passwords->display();
+
+}
+
+
+void LocationPasswordsView::OnBnClickedBLocationDlg()
+{
+	// TODO: Add your control notification handler code here
+	LocationDlg dlg{};
+	if (dlg.DoModal() == 1)
+	{
+		this->InitializeGridLocations(true);
+	}
+}
+
+#include "PasswordDlg.h"
+
+void LocationPasswordsView::OnBnClickedBPasswordDlg()
+{
+	// TODO: Add your control notification handler code here
+	PasswordDlg dlg{};
+	if (dlg.DoModal() == 1)
+	{
+		this->InitializeGridPasswords(false);
+	}
 
 }

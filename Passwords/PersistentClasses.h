@@ -57,3 +57,19 @@ using namespace sqlite_orm;
 
 using als_l = alias_l<Location>;
 using als_p = alias_p<Password>;
+
+
+
+inline auto getPasswordWhereClauseAlias(int location_id)
+{
+	using namespace sqlite_orm;
+	auto passwordWhere = (c(alias_column<als_p>(&Password::fkey_location)) == location_id);
+	return passwordWhere;
+}
+
+inline auto getPasswordWhereClauseNoAlias(int location_id)
+{
+	using namespace sqlite_orm;
+	auto passwordWhere = (c(&Password::fkey_location) == location_id);
+	return passwordWhere;
+}

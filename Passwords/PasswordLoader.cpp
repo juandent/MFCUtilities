@@ -10,7 +10,7 @@ void PasswordLoader::Load()
 	for (auto i = 0ull; i < m_csvFile.getRowCount(); ++i)
 	{
 		auto location = m_csvFile.getString({ i,0 });
-		auto date = m_csvFile.getDate({ i,1 });
+		auto date = m_csvFile.getUSDate({ i,1 });
 		auto password = m_csvFile.getString({ i,2 });
 
 
@@ -44,7 +44,6 @@ int PasswordLoader::getLocationId(std::string locationName)
 
 void PasswordLoader::createIfNotExist(std::string password, std::chrono::sys_days date, int location_id)
 {
-//	auto otherlines = Storage::getStorage().select(columns(alias_column<als_p>(&Password::id)), where(c(alias_column<als_p>(&Password::fkey_location)) == location_id) and c(alias_column<als_p>(&Password::password)) == password);
 
 	auto otherlines = Storage::getStorage().select(columns(alias_column<als_p>(&Password::id)), where((c(alias_column<als_p>(&Password::fkey_location)) == location_id) and c(alias_column<als_p>(&Password::password)) == password));
 

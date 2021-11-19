@@ -281,6 +281,26 @@ public:
 #endif
 	}
 
+	template<typename orderByClause, typename whereClause>
+	void loadLBOrderByWhere(orderByClause clause, whereClause where_clause)
+	{
+		m_box.ResetContent();
+
+		auto vec = refIntManager.getAllOrderByWhere(clause, where_clause);
+		moveVectorIntoBox(vec);
+	}
+
+	template<typename orderByClause, typename whereClause>
+	void loadLBOrderByDescWhere(orderByClause clause, whereClause where_clause)
+	{
+		m_box.ResetContent();
+
+		auto vec = refIntManager.getAllOrderByDescWhere(clause, where_clause);
+		moveVectorIntoBox(vec);
+	}
+
+	
+
 	constexpr static const int npos = -1;
 private:
 	int find_index_in_listbox(const int pk)

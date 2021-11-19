@@ -93,14 +93,28 @@ public:
 	std::vector<Table> getAllOrderBy(orderByClause clause)
 	{
 		using namespace sqlite_orm;
-		return storage.get_all<Table>(order_by(clause));
+		return storage.get_all<Table>(order_by(clause).asc().collate_nocase());
+	}
+
+	template<typename orderByClause, typename whereClause>
+	std::vector<Table> getAllOrderByWhere(orderByClause clause, whereClause where_clause)
+	{
+		using namespace sqlite_orm;
+		return storage.get_all<Table>(where(where_clause), order_by(clause).asc().collate_nocase());
+	}
+
+	template<typename orderByClause, typename whereClause>
+	std::vector<Table> getAllOrderByDescWhere(orderByClause clause, whereClause where_clause)
+	{
+		using namespace sqlite_orm;
+		return storage.get_all<Table>(where(where_clause), order_by(clause).desc().collate_nocase());
 	}
 
 	template<typename orderByClause>
 	std::vector<Table> getAllOrderByDesc(orderByClause clause)
 	{
 		using namespace sqlite_orm;
-		return storage.get_all<Table>(order_by(clause).desc());
+		return storage.get_all<Table>(order_by(clause).desc().collate_nocase());
 	}
 
 

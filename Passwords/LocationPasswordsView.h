@@ -48,6 +48,8 @@ public:
 	void InitializeGridPasswords(const T& t);
 
 	virtual void OnInitialUpdate();
+	afx_msg void OnBnClickedBLocationDlg();
+	afx_msg void OnBnClickedBPasswordDlg();
 };
 
 
