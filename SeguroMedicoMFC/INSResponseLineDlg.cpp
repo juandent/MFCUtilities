@@ -69,6 +69,7 @@ BEGIN_MESSAGE_MAP(INSResponseLineDlg, CDialog)
 	ON_BN_CLICKED(ID_CALCULATE, &INSResponseLineDlg::OnBnClickedCalculate)
 	ON_BN_CLICKED(IDC_B_INS_RESPONSES, &INSResponseLineDlg::OnBnClickedBInsResponses)
 	ON_BN_CLICKED(IDC_B_INVOICES, &INSResponseLineDlg::OnBnClickedBInvoices)
+	ON_BN_CLICKED(IDC_B_BRING_FROM_INSRESPONSE, &INSResponseLineDlg::OnBnClickedBBringFromInsresponse)
 END_MESSAGE_MAP()
 
 
@@ -266,7 +267,29 @@ void INSResponseLineDlg::OnLbnSelchangeLInsresponseline()
 	// TODO: Add your control notification handler code here
 	m_INSResponseLine = m_INSResponseLinesLB.current();
 	if (!m_INSResponseLine)  return;
-	
+
+	UpdateDlgControls();
+#if 0
+	m_ins_responseCB.select(m_INSResponseLine->fkey_INSResponse);
+	m_ins_response = m_ins_responseCB.current();
+	m_invoicesCB.select(m_INSResponseLine->fkey_factura);
+	m_invoice = m_invoicesCB.current();
+	SetAmount(m_id_response_line, m_INSResponseLine->id);
+	SetAmount(m_monto_cubierto, m_INSResponseLine->monto_cubierto);
+	SetAmount(m_deducciones, m_INSResponseLine->deducciones);
+	SetAmount(m_copago, m_INSResponseLine->copago);
+	SetAmount(m_coaseguros, m_INSResponseLine->coaseguros);
+	SetAmount(m_deducible_anual, m_INSResponseLine->deducible_anual);
+	SetAmount(m_total_pagar, m_INSResponseLine->total_rubro_factura);
+	SetAmount(m_monto_factura, m_invoice->amount);
+	SetAmount(m_monto_cubierto_p100, m_INSResponseLine->porcentaje_de_monto_cubierto);
+	SetAmount(m_factura_cubierta_p100, m_INSResponseLine->porcentaje_de_factura_cubierto);
+	SetAmount(m_tipo_cambio, m_ins_response->tipo_cambio);
+#endif
+}
+
+void INSResponseLineDlg::UpdateDlgControls()
+{
 	m_ins_responseCB.select(m_INSResponseLine->fkey_INSResponse);
 	m_ins_response = m_ins_responseCB.current();
 	m_invoicesCB.select(m_INSResponseLine->fkey_factura);
@@ -283,7 +306,6 @@ void INSResponseLineDlg::OnLbnSelchangeLInsresponseline()
 	SetAmount(m_factura_cubierta_p100, m_INSResponseLine->porcentaje_de_factura_cubierto);
 	SetAmount(m_tipo_cambio, m_ins_response->tipo_cambio);
 }
-
 
 void INSResponseLineDlg::OnBnClickedCalculate()
 {
@@ -339,4 +361,24 @@ void INSResponseLineDlg::OnBnClickedBInvoices()
 	InvoiceDlg dlg;
 	dlg.DoModal();
 	Refresh();
+}
+
+
+void INSResponseLineDlg::OnBnClickedBBringFromInsresponse()
+{
+	// TODO: Add your control notification handler code here
+	if (!m_ins_response /* || !m_INSResponseLine*/ )	return;
+
+	m_INSResponseLine->monto_cubierto = m_ins_response->total_bruto;
+	m_INSResponseLine->coaseguros = m_ins_response->coaseguros;
+	m_INSResponseLine->copago = m_ins_response->copagos;
+	m_INSResponseLine->deducciones = m_ins_response->otras_deducciones;
+	m_INSResponseLine->deducible_anual = m_ins_response->deducible_anual;
+	m_INSResponseLine->fkey_INSResponse = m_ins_responseCB.current()->id; // m_ins_response->id;
+	//m_INSResponseLine->id = -1;
+	m_INSResponseLine->fkey_factura = m_invoicesCB.current()->id;
+	// m_INSResponseLine->porcentaje_de_factura_cubierto =
+	// m_INSResponseLine->porcentaje_de_monto_cubierto =
+	// m_INSResponseLine->total_rubro_factura =
+	UpdateDlgControls();
 }

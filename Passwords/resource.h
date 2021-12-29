@@ -3,6 +3,8 @@
 // Used by Passwords.rc
 //
 #define ID_APPLY                        3
+#define ID_GRABAR                       3
+#define ID_NUEVO                        4
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_POPUP_EDIT                  119
@@ -103,8 +105,9 @@
 #define IDC_E_PASSWORD                  1010
 #define IDC_DATETIME_PICKER             1011
 #define IDC_CB_LOCATION_NAMES           1012
-#define IDC_LIST1                       1013
 #define IDC_L_PASSWORDS                 1013
+#define ID_CERRAR                       1014
+#define ID_BORRAR                       1015
 
 // Next default values for new objects
 // 
@@ -112,7 +115,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        313
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1014
+#define _APS_NEXT_CONTROL_VALUE         1016
 #define _APS_NEXT_SYMED_VALUE           313
 #endif
 #endif

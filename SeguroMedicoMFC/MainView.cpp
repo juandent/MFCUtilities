@@ -54,9 +54,12 @@ void MainView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_E_NUM_FACTURA, m_num_Factura);
 	DDX_Control(pDX, IDC_E_DESC, m_invoice_description);
 	DDX_Control(pDX, IDC_E_CLAIM_AMOUNT_LESS_THAN, m_claim_amount_less_than);
+	DDX_Control(pDX, IDC_GRID_3, m_pendingInvoicesGrid);
+	DDX_Control(pDX, IDC_E_NUM_FACTURA_PENDIENTE, m_num_factura_pendiente);
 }
 
 BEGIN_MESSAGE_MAP(MainView, CFormView)
+	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_3, OnGrid3StartSelChange)
 	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_2, OnGrid2StartSelChange)
 	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_1, OnGrid1StartSelChange)
 	ON_BN_CLICKED(IDC_B_FILTER, &MainView::OnBnClickedBFilter)
@@ -66,6 +69,8 @@ BEGIN_MESSAGE_MAP(MainView, CFormView)
 	ON_COMMAND(ID_FILE_PRINT, &MainView::OnFilePrint)
 	// ON_BN_CLICKED(IDC_B_SELECT_REEMBOLSO, &MainView::OnBnClickedBSelectReembolso)
 	ON_BN_CLICKED(IDC_B_CREAR_REEMBOLSO, &MainView::OnBnClickedBCrearReembolso)
+	ON_BN_CLICKED(IDC_B_FILTER_3, &MainView::OnBnClickedBFilter3)
+	ON_BN_CLICKED(IDC_B_CLEAR_FILTERS_3, &MainView::OnBnClickedBClearFilters3)
 END_MESSAGE_MAP()
 
 
@@ -112,6 +117,7 @@ void MainView::Refresh()
 	m_pacientesCB.loadLBOrderBy(&Patient::last_name);
 
 	OnBnClickedBClearFilters();
+
 	
 	// OnBnClickedBFilter();
 	// OnBnClickedBFilterInsresponses();
@@ -383,6 +389,48 @@ void MainView::InitializeGridINSResponses(const T& t)
 	m_displayer_responses->display();
 }
 
+template <class T>
+void MainView::InitializeGridPendingInvoices(const T& t)
+{
+	int id;
+	int fkey_claim;
+	std::string number;
+	double amount;
+	int type;
+	std::string description;
+	std::optional<int> fkey_INSResponse;
+
+	// auto where_clause = (is_null(alias_column<als_i>(&Invoice::fkey_INSResponse)));
+	auto where_clause = t and c(alias_column<als_i>(&Invoice::fkey_INSResponse)) == 1;
+
+
+
+	auto otherlines = Storage::getStorage().select(columns(
+		alias_column<als_c>(&Claim::id),
+		alias_column<als_c>(&Claim::amount),
+		alias_column<als_c>(&Claim::start_date),
+		alias_column<als_i>(&Invoice::id),
+		alias_column<als_i>(&Invoice::number),
+		alias_column<als_i>(&Invoice::amount),
+		alias_column<als_i>(&Invoice::type),
+		substr(alias_column<als_i>(&Invoice::description), 0, 100),
+		alias_column<als_i>(&Invoice::fkey_INSResponse)),
+
+		// alias_column<als_m>(&Medication::id)),
+
+		inner_join<als_c>(on(c(alias_column<als_c>(&Claim::id)) == alias_column<als_i>(&Invoice::fkey_claim))),
+		// inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+		// inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
+		where( where_clause),
+		// order_by(alias_column<als_c>(&Claim::start_date)).desc());
+		multi_order_by(order_by(alias_column<als_c>(&Claim::id)), order_by(alias_column<als_i>(&Invoice::number))));
+		// order_by(alias_column<als_c>(&Claim::id)));
+
+	std::vector<std::string> headers{ "REENBOLSO ID", "MONTO REEMBOLSO", "FECHA REEMBOLSO", "FACT ID", "FACT NUM", "FACT MONTO", "FACT TIPO", "FACT DESCR", "INS RESP ID"};
+	m_displayer_pending_invoices.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<2,6>, IntegerList<0>>(m_pendingInvoicesGrid, std::move(otherlines), std::move(headers)));
+	m_displayer_pending_invoices->display();
+
+}
 
 
 auto MainView::GetWhereStatement()
@@ -463,6 +511,7 @@ void MainView::OnBnClickedBFilter()
 	auto whereStatement = GetWhereStatement();
 	InitializeGridClaims(whereStatement);
 	InitializeGridINSResponses(whereStatement);
+	InitializeGridPendingInvoices(true);
 }
 
 
@@ -516,6 +565,25 @@ void MainView::OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
 	if (row < 1) return;
 
 	auto invoice_id_cs = m_grid_2.GetItemText(row, 3);
+	auto invoice_id_s = Util::to_string(invoice_id_cs.GetBuffer());
+	auto invoice_id = std::stoi(invoice_id_s);
+
+	InvoiceDlg dlg;
+	dlg.m_id = invoice_id;
+	dlg.DoModal();
+	//Refresh();
+
+}
+
+void MainView::OnGrid3StartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
+{
+	NM_GRIDVIEW* pItem = (NM_GRIDVIEW*)pNotifyStruct;
+	auto row = pItem->iRow;
+	auto col = pItem->iColumn;
+
+	if (row < 1) return;
+
+	auto invoice_id_cs = m_pendingInvoicesGrid.GetItemText(row, 4);
 	auto invoice_id_s = Util::to_string(invoice_id_cs.GetBuffer());
 	auto invoice_id = std::stoi(invoice_id_s);
 
@@ -589,4 +657,25 @@ void MainView::OnBnClickedBCrearReembolso()
 	ClaimDlg dlg;
 	dlg.DoModal();
 	Refresh();
+}
+
+
+void MainView::OnBnClickedBFilter3()
+{
+	// TODO: Add your control notification handler code here
+	auto num_factura = GetText(m_num_factura_pendiente);
+	if (num_factura.empty())	num_factura = "%";
+	auto factura_where = like(alias_column<als_i>(&Invoice::number), num_factura);
+
+	InitializeGridPendingInvoices(factura_where);
+
+}
+
+
+void MainView::OnBnClickedBClearFilters3()
+{
+	// TODO: Add your control notification handler code here
+	SetText(m_num_factura_pendiente, "%"s);
+	//
+	OnBnClickedBFilter3();
 }

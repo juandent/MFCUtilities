@@ -21,7 +21,8 @@
 #include <afxext.h>         // MFC extensions
 #include <afxole.h>         // MFC OLE classes
 
-#include <FixedPoint/arithmetic_types.cpp>
+// #include <FixedPoint/arithmetic_types.cpp>
+#include <FixedPoint/arithmetic_types.h>
 #include <GridCellBase.h>
 #include <sstream>
 #include <DateAsString.h>

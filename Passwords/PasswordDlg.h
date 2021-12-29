@@ -33,4 +33,14 @@ private:
 	CListBox m_password_list;
 public:
 	afx_msg void OnCbnSelchangeCbLocationNames();
+private:
+	CEdit m_id;
+	CEdit m_password;
+	CDateTimeCtrl m_beginning_date;
+public:
+	afx_msg void OnBnClickedGrabar();
+	afx_msg void OnLbnSelchangeLPasswords();
+	afx_msg void OnBnClickedBorrar();
+	afx_msg void OnBnClickedNuevo();
+	afx_msg void OnBnClickedCerrar();
 };

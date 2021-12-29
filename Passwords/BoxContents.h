@@ -64,6 +64,12 @@ public:
 		return refIntManager.insert(cols...);
 	}
 
+	void ResetContent()
+	{
+		m_box.ResetContent();
+		m_box.SetCurSel(-1);
+	}
+
 	//template<int Table::*pKey>
 	void update(const Table& record)
 	{

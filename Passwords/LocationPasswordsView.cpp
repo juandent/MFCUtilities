@@ -155,6 +155,7 @@ void LocationPasswordsView::OnBnClickedBLocationDlg()
 	if (dlg.DoModal() == 1)
 	{
 		this->InitializeGridLocations(true);
+		this->InitializeGridPasswords(false);
 	}
 }
 
@@ -166,7 +167,22 @@ void LocationPasswordsView::OnBnClickedBPasswordDlg()
 	PasswordDlg dlg{};
 	if (dlg.DoModal() == 1)
 	{
-		this->InitializeGridPasswords(false);
-	}
+		if (m_GridLocations.GetSelectedCount())
+		{
 
+			auto cell_range = m_GridLocations.GetSelectedCellRange();
+
+			auto row = cell_range.GetMinRow();
+			auto location_id_cs = m_GridLocations.GetItemText(row, 1);
+			auto location_id_s = Util::to_string(location_id_cs.GetBuffer()); 
+			auto location_id = std::stoi(location_id_s);
+			auto passwordWhere = getPasswordWhereClauseAlias(location_id);
+
+			this->InitializeGridPasswords(passwordWhere);
+		}
+		else
+		{
+			this->InitializeGridPasswords(false);
+		}
+	}
 }

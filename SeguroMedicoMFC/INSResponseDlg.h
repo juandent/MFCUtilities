@@ -11,7 +11,7 @@ class INSResponseDlg : public CDialog
 
 	BoxContents<INSResponse, &INSResponse::id> m_list_insresponsesLB;
 
-	std::optional<INSResponse> m_ins_response;
+	
 
 	void Refresh();
 	template <class T>
@@ -21,6 +21,8 @@ class INSResponseDlg : public CDialog
 
 
 public:
+	std::optional<INSResponse> m_ins_response;
+
 	INSResponseDlg(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~INSResponseDlg();
 

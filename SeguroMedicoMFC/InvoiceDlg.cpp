@@ -384,4 +384,8 @@ void InvoiceDlg::OnBnClickedBInsResponseNew()
 	dlg.m_id = -1;
 	dlg.DoModal();
 	Refresh();
+	if (dlg.m_ins_response)
+	{
+		m_responseCB.select(dlg.m_ins_response->id);
+	}
 }

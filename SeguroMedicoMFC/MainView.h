@@ -42,12 +42,14 @@ public:
 	void Refresh();
 	template <class T> void InitializeGridClaims(const T &t);
 	template <class T> void InitializeGridINSResponses(const T& t);
+	template <class T> void InitializeGridPendingInvoices(const T& t);
 	auto GetWhereStatement();
 private:
 	CJDGridCtrl m_grid_1;
 	std::unique_ptr<GridDisplayer<Patient>> m_displayer_patients;
 	std::unique_ptr<IDisplayer> m_displayer_claims;
 	std::unique_ptr<IDisplayer> m_displayer_responses;
+	std::unique_ptr<IDisplayer> m_displayer_pending_invoices;
 	std::unique_ptr<IDisplayer> m_displayer_claims_combobox;
 	CDateTimeCtrl m_start_date;
 	CDateTimeCtrl m_end_date;
@@ -67,16 +69,22 @@ public:
 	afx_msg void OnBnClickedBClearFilters();
 	afx_msg void OnBnClickedBRefresh();
 	afx_msg void OnFilePrint();
+	void OnGrid3StartSelChange(NMHDR* pNotifyStruct, LRESULT* );
 	void OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 	void OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 private:
 	CEdit m_num_Factura;
+	CEdit m_num_factura_pendiente;
 public:
 	afx_msg void OnBnClickedBSelectReembolso();
 	afx_msg void OnBnClickedBCrearReembolso();
 private:
 	CEdit m_invoice_description;
 	CEdit m_claim_amount_less_than;
+	CJDGridCtrl m_pendingInvoicesGrid;
+public:
+	afx_msg void OnBnClickedBFilter3();
+	afx_msg void OnBnClickedBClearFilters3();
 };
 
 

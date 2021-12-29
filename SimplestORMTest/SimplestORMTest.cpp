@@ -5,6 +5,7 @@
 #include <optional>
 #include <iostream>
 
+#define SQLITE_HAS_CODEC 1
 #include <sqlite_orm/sqlite_orm.h>
 
 // #include <catch2/catch.hpp>
@@ -137,7 +138,7 @@ inline 	auto& Storage_Impl::get_storage()
 
 
 	static auto storage =
-		make_storage("",
+		make_storage(db_name,
 			make_table("Claims",
 				make_column("id_claim", &Claim::set_id, &Claim::get_id, autoincrement(), primary_key()),
 				make_column("fkey_patient", &Claim::fkey_patient),
@@ -183,16 +184,25 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("id_medication", &Medication::id, autoincrement(), primary_key()),
 				make_column("name", &Medication::name, collate_nocase())));
 			
-
-		
-		
+	
 		
 	
 
 	if (flag == 0)
 	{
+		storage.on_open = [](sqlite3* db)
+		{
+			static const char* key = "another";
+			static int keylen = 7;
+
+			int rc = sqlite3_key(db, key, keylen);
+			if (rc != SQLITE_OK) {
+				std::cout << "Can't key database: " << sqlite3_errmsg(db) << "\n";
+			}
+		};
+
 		flag = 1;
-		storage.sync_schema(false);
+		storage.sync_schema(true);
 	}
 
 	return storage;
@@ -200,9 +210,11 @@ inline 	auto& Storage_Impl::get_storage()
 
 int main()
 {
+
 	Patient p;
 	p.set_first_name("Juan");
 	p.set_last_name("Dent");
+
 	
 	p.set_id(Storage_Impl::get_storage().insert(p));
 
