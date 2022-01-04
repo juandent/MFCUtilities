@@ -1,0 +1,88 @@
+#pragma once
+
+#include <sqlite_orm/sqlite_orm.h>
+
+
+import Util;
+
+
+
+using namespace std::string_literals;
+
+
+
+struct Fondo
+{
+	int id;
+	std::string abreviacion;
+	std::string nombre;
+	int tipo_cupon;
+
+	enum TipoCupon
+	{
+		mensual = 1, trimestral = 3
+	};
+
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + abreviacion + " - "s + nombre + " "s + std::to_string(tipo_cupon);
+		return str;
+	}
+};
+
+
+struct Inversion
+{
+	int id;
+	int num_participaciones;
+	std::chrono::sys_days beginning_date;
+	int fkey_fondo;
+
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(beginning_date) + " "s + std::to_string(num_participaciones);
+		return str;
+	}
+
+	int num_participaciones_en(int fondo, std::chrono::year_month_day fecha) const noexcept;
+};
+
+struct Rendimiento
+{
+	int id;
+	int fkey_fondo;
+	double rendimiento_unitario;
+	std::chrono::sys_days fecha;
+
+	double get_rendimiento_unitario(int fondo, std::chrono::year_month_day fecha) const noexcept;
+
+};
+
+/////////////////////////////////////////////////////////////////
+///
+///
+
+using namespace sqlite_orm;
+
+using als_i = alias_i<Inversion>;
+using als_r = alias_r<Rendimiento>;
+using als_f = alias_f<Fondo>;
+
+
+#if 0
+inline auto getPasswordWhereClauseAlias(int location_id)
+{
+	using namespace sqlite_orm;
+	auto passwordWhere = (c(alias_column<als_p>(&Password::fkey_location)) == location_id);
+	return passwordWhere;
+}
+
+inline auto getPasswordWhereClauseNoAlias(int location_id)
+{
+	using namespace sqlite_orm;
+	auto passwordWhere = (c(&Password::fkey_location) == location_id);
+	return passwordWhere;
+}
+#endif
+

@@ -1,0 +1,144 @@
+
+
+#include "pch.h"
+#include "Data.h"
+
+
+
+void Storage::initialize()
+{
+	// initialize tz library asynchronously
+	std::thread{ std::chrono::get_tzdb }.detach();
+
+	//fill_db_with_test_data();
+//	empty_database();
+}
+
+void Storage::upgrade_database()
+{
+	Storage_Impl::copy_old_to_new();
+}
+///////////////////////////////////
+/// Order for insert:
+///
+/// Location
+/// Password
+/// 
+/// 
+
+void Storage_Impl::copy_old_to_new()
+{
+	// starts full
+	auto old = get_old_storage();
+	// starts empty
+	auto fresh = get_new_storage();
+
+	auto fondos = old.get_all<Fondo>();
+	for (auto& record : fondos)
+	{
+		fresh.replace(record);
+	}
+
+	auto rendimientos = old.get_all<Rendimiento>();
+	for (auto& record : rendimientos)
+	{
+		fresh.replace(record);
+	}
+
+	auto inversiones = old.get_all<Inversion>();
+	for (auto& record : inversiones )
+	{
+		fresh.replace(record);
+	}
+
+
+}
+
+void Storage::backup_db()
+{
+	namespace fs = std::filesystem;
+
+	auto path_to_db_name = fs::path(Storage_Impl::db_name);
+	auto stem = path_to_db_name.stem().string();
+	auto backup_stem = stem + "_backup1.sqlite";
+	auto backup_full_path = path_to_db_name.parent_path().append(backup_stem).string();
+	getStorage().backup_to(backup_full_path);
+}
+
+
+void Storage::fill_db_with_test_data()
+{
+	using namespace sqlite_orm;
+	using namespace std::chrono;
+	using namespace std;
+
+
+	auto& storage = Storage::getStorage();
+
+
+	empty_database();
+
+	year_month_day ymd{ year{2021}, month{10}, day{13} };
+	sys_days tod = ymd;
+	sys_days daybefore = tod - days{ 1 };
+
+	Fondo fondo{ -1, "inm1", "FCI", 3 };
+	fondo.id = storage.insert(fondo);
+
+	Inversion inv{ -1, 100, daybefore, fondo.id };
+	inv.id = storage.insert(inv);
+
+	Rendimiento rend{ -1, fondo.id, 7.45, tod };
+	rend.id = storage.insert(rend);
+
+	void use();
+	use();
+
+#if 0
+	Location l{ -1, "Banco Nacional", "www.bncr.fi.cr", "juandent@mac.com" };
+	l.id = storage.insert(l);
+
+
+	Password p{ -1, "JDHM0650", tod, l.id };
+	p.id = storage.insert(p);
+
+	Password p2{ -1, "JDHM", daybefore, l.id };
+	p2.id = storage.insert(p2);
+
+
+	auto pass = l.getPassword(ymd);
+#endif
+}
+
+void Storage::empty_database()
+{
+	using namespace sqlite_orm;
+	using namespace std::chrono;
+	using namespace std;
+
+
+	auto& storage = Storage::getStorage();
+
+	// order is vital!
+	storage.remove_all<Rendimiento>();
+	storage.remove_all<Inversion>();
+	storage.remove_all<Fondo>();
+}
+
+////////////////////////////////////////
+///DB access
+///
+/// 
+int Inversion::num_participaciones_en(int fondo, std::chrono::year_month_day fecha) const noexcept
+{
+	using namespace std::chrono;
+
+	sys_days when = fecha;
+
+	auto inversiones = Storage::getStorage().get_all<Inversion>(where(c(&Inversion::beginning_date) <= when and (c( &Inversion::fkey_fondo ) == fondo) ), order_by(&Inversion::beginning_date).desc());
+
+	return inversiones[0].num_participaciones;
+
+}
+
+
