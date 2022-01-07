@@ -7,10 +7,13 @@
 #include "afxwinappex.h"
 #include "afxdialogex.h"
 #include "Investments.h"
+
+#include "CFondoDlg.h"
 #include "MainFrm.h"
 
 #include "ChildFrm.h"
 #include "Data.h"
+#include "InversionDlg.h"
 #include "InvestmentsDoc.h"
 #include "InvestmentsView.h"
 
@@ -28,6 +31,8 @@ BEGIN_MESSAGE_MAP(CInvestmentsApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
 	// Standard print setup command
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
+	ON_COMMAND(ID_FILE_FONDO, &CInvestmentsApp::OnFileFondo)
+	ON_COMMAND(ID_FILE_INVERSION, &CInvestmentsApp::OnFileInversion)
 END_MESSAGE_MAP()
 
 
@@ -230,3 +235,19 @@ void CInvestmentsApp::SaveCustomState()
 
 
 
+
+
+void CInvestmentsApp::OnFileFondo()
+{
+	// TODO: Add your command handler code here
+	CFondoDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CInvestmentsApp::OnFileInversion()
+{
+	// TODO: Add your command handler code here
+	InversionDlg dlg;
+	dlg.DoModal();
+}

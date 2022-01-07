@@ -1,10 +1,11 @@
 #pragma once
 
-#include "IDisplayer.h"
-#include "GridDisplayer.h"
+#include "..\ORM_Extensions/IDisplayer.h"
+#include "..\ORM_Extensions/GridDisplayer.h"
 #include "Data.h"
-#include "JoinedGridDisplayer.h"
-#include "BoxContents.h"
+#include "..\ORM_Extensions/JoinedGridDisplayer.h"
+
+#include "..\ORM_Extensions/BoxContents.h"
 
 
 

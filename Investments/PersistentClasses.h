@@ -45,7 +45,7 @@ struct Inversion
 		return str;
 	}
 
-	int num_participaciones_en(int fondo, std::chrono::year_month_day fecha) const noexcept;
+	static int num_participaciones_en(int fondo, std::chrono::year_month_day fecha) noexcept;
 };
 
 struct Rendimiento

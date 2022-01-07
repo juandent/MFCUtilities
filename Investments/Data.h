@@ -61,7 +61,7 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("num_participaciones", &Inversion::num_participaciones),
 				foreign_key(&Inversion::fkey_fondo).references(&Fondo::id)),
 			make_table("Rendimientos",
-				make_column("id_rendimiento", &Rendimiento::id),
+				make_column("id_rendimiento", &Rendimiento::id, autoincrement(), primary_key()),
 				make_column("fecha", &Rendimiento::fecha),
 				make_column("rend_unitario", &Rendimiento::rendimiento_unitario),
 				make_column("fkey_fondo", &Rendimiento::fkey_fondo),
@@ -105,7 +105,7 @@ inline auto& Storage_Impl::get_old_storage()
 				make_column("num_participaciones", &Inversion::num_participaciones),
 				foreign_key(&Inversion::fkey_fondo).references(&Fondo::id)),
 			make_table("Rendimientos",
-				make_column("id_rendimiento", &Rendimiento::id),
+				make_column("id_rendimiento", &Rendimiento::id, autoincrement(), primary_key()),
 				make_column("fecha", &Rendimiento::fecha),
 				make_column("rend_unitario", &Rendimiento::rendimiento_unitario),
 				make_column("fkey_fondo", &Rendimiento::fkey_fondo),
@@ -147,7 +147,7 @@ inline auto& Storage_Impl::get_new_storage()
 				make_column("num_participaciones", &Inversion::num_participaciones),
 				foreign_key(&Inversion::fkey_fondo).references(&Fondo::id)),
 			make_table("Rendimientos",
-				make_column("id_rendimiento", &Rendimiento::id),
+				make_column("id_rendimiento", &Rendimiento::id, autoincrement(), primary_key()),
 				make_column("fecha", &Rendimiento::fecha),
 				make_column("rend_unitario", &Rendimiento::rendimiento_unitario),
 				make_column("fkey_fondo", &Rendimiento::fkey_fondo),
@@ -179,5 +179,5 @@ public:
 
 //inline Storage::Storage_t& storage = Storage::getStorage();
 
-#include "ORM_Utilities.h"
+#include "..\ORM_Extensions/ORM_Utilities.h"
 

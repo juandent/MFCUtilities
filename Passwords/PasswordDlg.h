@@ -1,7 +1,7 @@
 #pragma once
 #include "afxdialogex.h"
 
-#include "BoxContents.h"
+#include "..\ORM_Extensions/BoxContents.h"
 #include "Data.h"
 
 // PasswordDlg dialog

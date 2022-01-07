@@ -66,6 +66,7 @@ void Storage::backup_db()
 }
 
 
+
 void Storage::fill_db_with_test_data()
 {
 	using namespace sqlite_orm;
@@ -82,7 +83,7 @@ void Storage::fill_db_with_test_data()
 	sys_days tod = ymd;
 	sys_days daybefore = tod - days{ 1 };
 
-	Fondo fondo{ -1, "inm1", "FCI", 3 };
+	Fondo fondo{ -1, "inm1", "FCI", Fondo::trimestral };
 	fondo.id = storage.insert(fondo);
 
 	Inversion inv{ -1, 100, daybefore, fondo.id };
@@ -90,24 +91,6 @@ void Storage::fill_db_with_test_data()
 
 	Rendimiento rend{ -1, fondo.id, 7.45, tod };
 	rend.id = storage.insert(rend);
-
-	void use();
-	use();
-
-#if 0
-	Location l{ -1, "Banco Nacional", "www.bncr.fi.cr", "juandent@mac.com" };
-	l.id = storage.insert(l);
-
-
-	Password p{ -1, "JDHM0650", tod, l.id };
-	p.id = storage.insert(p);
-
-	Password p2{ -1, "JDHM", daybefore, l.id };
-	p2.id = storage.insert(p2);
-
-
-	auto pass = l.getPassword(ymd);
-#endif
 }
 
 void Storage::empty_database()
@@ -129,7 +112,7 @@ void Storage::empty_database()
 ///DB access
 ///
 /// 
-int Inversion::num_participaciones_en(int fondo, std::chrono::year_month_day fecha) const noexcept
+int Inversion::num_participaciones_en(int fondo, std::chrono::year_month_day fecha) noexcept
 {
 	using namespace std::chrono;
 
