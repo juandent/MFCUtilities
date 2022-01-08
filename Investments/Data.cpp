@@ -115,12 +115,24 @@ void Storage::empty_database()
 int Inversion::num_participaciones_en(int fondo, std::chrono::year_month_day fecha) noexcept
 {
 	using namespace std::chrono;
+	using namespace sqlite_orm;
 
 	sys_days when = fecha;
 
-	auto inversiones = Storage::getStorage().get_all<Inversion>(where(c(&Inversion::beginning_date) <= when and (c( &Inversion::fkey_fondo ) == fondo) ), order_by(&Inversion::beginning_date).desc());
+	auto suma_participaciones = Storage::getStorage().select( sum(&Inversion::num_participaciones), where(c(&Inversion::beginning_date) <= when and (c(&Inversion::fkey_fondo) == fondo)), group_by(&Inversion::fkey_fondo));
 
-	return inversiones[0].num_participaciones;
+	if( suma_participaciones.empty())
+	{
+		return 0;
+	}
+
+	auto&& rec = suma_participaciones[0];
+	
+	auto* suma = rec.get();
+
+	auto sum_participaciones = static_cast<int>(* suma);
+
+	return sum_participaciones;
 
 }
 

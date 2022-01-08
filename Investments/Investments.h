@@ -37,6 +37,7 @@ public:
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnFileFondo();
 	afx_msg void OnFileInversion();
+	afx_msg void OnFileRendimiento();
 };
 
 extern CInvestmentsApp theApp;

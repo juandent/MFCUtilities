@@ -32,4 +32,6 @@ private:
 	CEdit m_num_participaciones;
 public:
 	afx_msg void OnBnClickedBCalculate();
+	void Refresh();
+	virtual BOOL OnInitDialog();
 };

@@ -55,7 +55,14 @@ struct Rendimiento
 	double rendimiento_unitario;
 	std::chrono::sys_days fecha;
 
-	double get_rendimiento_unitario(int fondo, std::chrono::year_month_day fecha) const noexcept;
+	std::string simple_dump() const
+	{
+		std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(fecha) + " "s + std::to_string(rendimiento_unitario);
+		return str;
+	}
+
+
+	static double get_rendimiento_unitario(int fondo, std::chrono::year_month_day fecha) noexcept;
 
 };
 

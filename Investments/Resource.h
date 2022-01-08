@@ -4,6 +4,7 @@
 //
 #define ID_B_CALCULATE                  2
 #define ID_APPLY                        3
+#define IDOK2                           4
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_POPUP_EDIT                  119
@@ -89,6 +90,7 @@
 #define IDD_CFondoDlg                   311
 #define IDD_InversionDlg                312
 #define IDD_QueryInversionesDlg         313
+#define IDD_RendimientoDlg              314
 #define IDC_RADIO1                      1000
 #define IDC_E_FONDO_ID                  1001
 #define IDC_E_FONDO_NAME                1002
@@ -103,16 +105,22 @@
 #define IDC_CB_FONDOS                   1011
 #define IDC_LIST_INVERSIONES            1012
 #define IDC_B_FONDOS                    1013
+#define IDC_B_QUERIES                   1014
+#define IDC_E_RENDIMIENTO_ID            1015
+#define IDC_E_RENDIMIENTO_UNITARIO      1016
+#define IDC_DT_FECHA_RENDIMIENTO        1017
+#define IDC_LIST_RENDIMIENTOS           1018
 #define ID_FILE_FONDO                   32771
 #define ID_FILE_INVERSION               32772
+#define ID_FILE_RENDIMIENTO             32773
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        314
-#define _APS_NEXT_COMMAND_VALUE         32773
-#define _APS_NEXT_CONTROL_VALUE         1014
-#define _APS_NEXT_SYMED_VALUE           314
+#define _APS_NEXT_RESOURCE_VALUE        315
+#define _APS_NEXT_COMMAND_VALUE         32774
+#define _APS_NEXT_CONTROL_VALUE         1019
+#define _APS_NEXT_SYMED_VALUE           315
 #endif
 #endif

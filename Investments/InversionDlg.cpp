@@ -7,6 +7,7 @@
 #include "InversionDlg.h"
 
 #include "CFondoDlg.h"
+#include "QueryInversionesDlg.h"
 
 import Util;
 
@@ -49,6 +50,7 @@ BEGIN_MESSAGE_MAP(InversionDlg, CDialog)
 	ON_BN_CLICKED(ID_NEW, &InversionDlg::OnBnClickedNew)
 	ON_BN_CLICKED(ID_ERASE, &InversionDlg::OnBnClickedErase)
 	ON_BN_CLICKED(IDC_B_FONDOS, &InversionDlg::OnBnClickedBFondos)
+	ON_BN_CLICKED(IDC_B_QUERIES, &InversionDlg::OnBnClickedBQueries)
 END_MESSAGE_MAP()
 
 
@@ -149,4 +151,13 @@ void InversionDlg::OnBnClickedBFondos()
 	CFondoDlg dlg;
 	dlg.DoModal();
 	Refresh();
+}
+
+
+void InversionDlg::OnBnClickedBQueries()
+{
+	// TODO: Add your control notification handler code here
+	QueryInversionesDlg dlg;
+	dlg.DoModal();
+
 }

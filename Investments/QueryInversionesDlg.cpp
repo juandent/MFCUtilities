@@ -55,5 +55,23 @@ void QueryInversionesDlg::OnBnClickedBCalculate()
 	}
 
 	int num_part = Inversion::num_participaciones_en(fondo->id, fecha);
+	SetAmount(m_num_participaciones, num_part);
 
+}
+
+
+BOOL QueryInversionesDlg::OnInitDialog()
+{
+	CDialog::OnInitDialog();
+
+	// TODO:  Add extra initialization here
+	Refresh();
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+void QueryInversionesDlg::Refresh()
+{
+	m_list_fondosCB.loadLBOrderBy(&Fondo::nombre);
 }

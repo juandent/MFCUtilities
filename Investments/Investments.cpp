@@ -16,6 +16,7 @@
 #include "InversionDlg.h"
 #include "InvestmentsDoc.h"
 #include "InvestmentsView.h"
+#include "RendimientoDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -33,6 +34,7 @@ BEGIN_MESSAGE_MAP(CInvestmentsApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
 	ON_COMMAND(ID_FILE_FONDO, &CInvestmentsApp::OnFileFondo)
 	ON_COMMAND(ID_FILE_INVERSION, &CInvestmentsApp::OnFileInversion)
+	ON_COMMAND(ID_FILE_RENDIMIENTO, &CInvestmentsApp::OnFileRendimiento)
 END_MESSAGE_MAP()
 
 
@@ -71,7 +73,7 @@ CInvestmentsApp theApp;
 BOOL CInvestmentsApp::InitInstance()
 {
 	Storage::initialize();
-	Storage::fill_db_with_test_data();
+	//Storage::fill_db_with_test_data();
 
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -249,5 +251,13 @@ void CInvestmentsApp::OnFileInversion()
 {
 	// TODO: Add your command handler code here
 	InversionDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CInvestmentsApp::OnFileRendimiento()
+{
+	// TODO: Add your command handler code here
+	RendimientoDlg dlg;
 	dlg.DoModal();
 }

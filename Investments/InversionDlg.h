@@ -42,4 +42,5 @@ public:
 	afx_msg void OnBnClickedNew();
 	afx_msg void OnBnClickedErase();
 	afx_msg void OnBnClickedBFondos();
+	afx_msg void OnBnClickedBQueries();
 };
