@@ -47,7 +47,8 @@
 #include "framework.h"
 
 #include  "..\DLLs.h"
-#include  "..\JDGridCtrl/JDGridCtrl.h"  
+#include  "..\JDGridCtrl/JDGridCtrl.h"
+#include "..\ORM_Extensions/HandleSystemError.h"
 
 
 #endif //PCH_H

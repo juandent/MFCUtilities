@@ -42,5 +42,8 @@
     <ClInclude Include="RadioButtonGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HandleSystemError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

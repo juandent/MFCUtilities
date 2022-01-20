@@ -72,26 +72,36 @@ void CFondoDlg::OnBnClickedApply()
 	// TODO: Add your control notification handler code here
 	m_fondo = getCurrent<Fondo>(m_fondo_id);
 
-	auto tipo = m_tipo_cupon.get_value();
-	auto abrev = GetText(m_fondo_abrev);
-	auto name = GetText(m_fondo_name);
+	int tipo;
+	m_tipo_cupon >> tipo;
 
-	if (!m_fondo)	// insert
+	std::string abrev, name;
+	m_fondo_abrev >> abrev;
+	m_fondo_name >> name;
+
+	try
 	{
-		m_fondo = m_list_all_fondosLB.insert(abrev, name, tipo);
-		m_list_all_fondosLB.insert_into_listbox(*m_fondo);
+		if (!m_fondo)	// insert
+		{
+			m_fondo = m_list_all_fondosLB.insert(abrev, name, tipo);
+			m_list_all_fondosLB.insert_into_listbox(*m_fondo);
 
+		}
+		else
+		{
+			m_fondo->abreviacion = abrev;
+			m_fondo->nombre = name;
+			m_fondo->tipo_cupon = tipo;
+			m_list_all_fondosLB.update(*m_fondo);
+		}
+
+		setIdFromRecord<Fondo>(m_fondo_id, m_fondo->id);
+		Refresh();
 	}
-	else
+	catch (std::exception& exc)
 	{
-		m_fondo->abreviacion = abrev;
-		m_fondo->nombre = name;
-		m_fondo->tipo_cupon = tipo;
-		m_list_all_fondosLB.update(*m_fondo);
+		handleApply(exc);
 	}
-
-	setIdFromRecord<Fondo>(m_fondo_id, m_fondo->id);
-	Refresh();
 }
 
 
@@ -100,29 +110,36 @@ void CFondoDlg::OnSelchangeListFondos()
 	// TODO: Add your control notification handler code here
 	m_fondo = m_list_all_fondosLB.current();
 	if (!m_fondo)	return;
-	SetText(m_fondo_id, m_fondo->id);
-	m_tipo_cupon.set_value(m_fondo->tipo_cupon);
-	SetText(m_fondo_abrev, m_fondo->abreviacion);
-	SetText(m_fondo_name, m_fondo->nombre);
+
+	m_fondo_id << m_fondo->id;
+	m_tipo_cupon << m_fondo->tipo_cupon;
+	m_fondo_abrev << m_fondo->abreviacion;
+	m_fondo_name << m_fondo->nombre;
 }
 
 
 void CFondoDlg::OnBnClickedNew()
 {
 	// TODO: Add your control notification handler code here
-	SetText(m_fondo_id, ""s);
-	m_tipo_cupon.set_value(Fondo::trimestral);
-	SetText(m_fondo_abrev, ""s);
-	SetText(m_fondo_name, ""s);
+
+	m_fondo_id << ""s;
+	m_tipo_cupon << Fondo::trimestral;
+	m_fondo_abrev << ""s;
+	m_fondo_name << ""s;
 	m_fondo = std::nullopt;
 }
 
 
 void CFondoDlg::OnBnClickedErase()
 {
-	// TODO: Add your control notification handler code here
-	if (m_list_all_fondosLB.delete_current_sel())
+	try
 	{
+		// TODO: Add your control notification handler code here
+		m_list_all_fondosLB.delete_current_sel();
 		OnBnClickedNew();
+	}
+	catch(std::exception& exc)
+	{
+		handleErase(exc);
 	}
 }

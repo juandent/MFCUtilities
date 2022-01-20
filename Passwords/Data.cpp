@@ -90,6 +90,8 @@ void Storage::fill_db_with_test_data()
 
 	auto pass = l.getPassword(ymd);
 
+	//storage.has_dependent_rows(p);
+
 }
 
 void Storage::empty_database()

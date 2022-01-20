@@ -32,6 +32,8 @@ void QueryInversionesDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_DT_FECHA_INVERSION, m_fecha_calculo);
 	DDX_Control(pDX, IDC_CB_FONDOS, m_lista_fondos);
 	DDX_Control(pDX, IDC_E_INVERSION_NUM_PARTICIPACIONES, m_num_participaciones);
+	DDX_Control(pDX, IDC_E_RENDIMIENTO_PARTICIPACIONES, m_rendimiento_participaciones);
+	DDX_Control(pDX, IDC_E_RENDIMIENTO_UNITARIO, m_rendimiento_unitario);
 }
 
 
@@ -57,6 +59,12 @@ void QueryInversionesDlg::OnBnClickedBCalculate()
 	int num_part = Inversion::num_participaciones_en(fondo->id, fecha);
 	SetAmount(m_num_participaciones, num_part);
 
+
+	auto rend_unit = Rendimiento::get_rendimiento_unitario(fondo->id, fecha);
+	SetAmount(m_rendimiento_unitario, rend_unit);
+
+	auto rendimiento = rend_unit * num_part;
+	SetAmount(m_rendimiento_participaciones, rendimiento);
 }
 
 

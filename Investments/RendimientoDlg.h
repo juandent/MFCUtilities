@@ -40,4 +40,7 @@ private:
 public:
 	afx_msg void OnBnClickedApply();
 	afx_msg void OnLbnSelchangeListRendimientos();
+	afx_msg void OnBnClickedBQueries();
+	afx_msg void OnBnClickedErase();
+	afx_msg void OnBnClickedNew();
 };

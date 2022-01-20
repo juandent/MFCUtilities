@@ -3,16 +3,6 @@
 #include "RecordLinks.h"
 #include "Data_Tier.h"
 
-#if 0
-template<typename Table>
-struct RefIntegrity 
-{
-	bool canDelete()
-	{
-		return ! RecordLinks::has_links( static_cast<Table&>(*this));
-	}
-};
-#endif
 
 template<typename Table, int Table::* keyCol>
 struct RefIntegrityManager

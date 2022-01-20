@@ -4,7 +4,6 @@
 #include "Data.h"
 
 
-
 void Storage::initialize()
 {
 	// initialize tz library asynchronously
@@ -76,21 +75,42 @@ void Storage::fill_db_with_test_data()
 
 	auto& storage = Storage::getStorage();
 
+	storage.begin_transaction();
 
-	empty_database();
+	//empty_database();
 
 	year_month_day ymd{ year{2021}, month{10}, day{13} };
-	sys_days tod = ymd;
+
+	const auto today = Today(); // sys_days{ floor<days>(system_clock::now()) };
+
+	sys_days tod = today;
 	sys_days daybefore = tod - days{ 1 };
 
-	Fondo fondo{ -1, "inm1", "FCI", Fondo::trimestral };
-	fondo.id = storage.insert(fondo);
-
-	Inversion inv{ -1, 100, daybefore, fondo.id };
-	inv.id = storage.insert(inv);
-
-	Rendimiento rend{ -1, fondo.id, 7.45, tod };
-	rend.id = storage.insert(rend);
+	// Fondo fondo{ -1, "inm1", "FCI", Fondo::trimestral };
+	// fondo.id = storage.insert(fondo);
+	//
+	// Inversion inv{ -1, 100, daybefore, fondo.id };
+	// inv.id = storage.insert(inv);
+	std::string name = storage.tablename<Fondo>();
+	try
+	{
+		Rendimiento rend{ -1, 1000, 7.45, tod };
+		rend.id = storage.insert(rend);
+	}
+	catch(const std::system_error& exc)
+	{
+		auto code = handle(exc);
+		if( code == std::error_code(SQLITE_CONSTRAINT, get_sqlite_error_category()))
+		{
+			//MessageBoxA();
+		}
+	}
+	catch(std::exception& exc)
+	{
+		
+	}
+	//storage.has_dependent_rows(rend);
+	storage.rollback();
 }
 
 void Storage::empty_database()
@@ -136,4 +156,25 @@ int Inversion::num_participaciones_en(int fondo, std::chrono::year_month_day fec
 
 }
 
+
+double Rendimiento::get_rendimiento_unitario(int fondo, std::chrono::year_month_day fecha) noexcept
+{
+	using namespace std::chrono;
+	using namespace sqlite_orm;
+
+	sys_days when = fecha;
+
+	// auto rendimientos = Storage::getStorage().select( columns( &Rendimiento::rendimiento_unitario, &Rendimiento::fkey_fondo) , where(c(&Rendimiento::fecha) <= when ), order_by(&Rendimiento::fecha).desc());
+
+
+
+	auto rendimientos = Storage::getStorage().get_all<Rendimiento>(where(c(&Rendimiento::fecha) <= when and (c(&Rendimiento::fkey_fondo) == fondo)), order_by(&Rendimiento::fecha).desc());
+
+	if( rendimientos.empty())
+	{
+		return 0.0;
+	}
+
+	return rendimientos[0].rendimiento_unitario;
+}
 

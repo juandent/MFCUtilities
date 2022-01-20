@@ -87,24 +87,39 @@ void InversionDlg::OnBnClickedApply()
 		return;
 	}
 
-	auto num_part = GetInteger(m_num_participaciones);
-	std::chrono::sys_days fecha = GetDate(m_fecha_inversion);
-
-	if (!m_inversion)	// insert
+	int num_part;
+	m_num_participaciones >> num_part;
+	if(num_part == 0)
 	{
-		m_inversion = m_list_inversionesLB.insert(num_part, fecha, fondo->id);
-		m_list_inversionesLB.insert_into_listbox(*m_inversion);
-	}
-	else				// update
-	{
-		m_inversion->num_participaciones = num_part;
-		m_inversion->beginning_date = fecha;
-		m_inversion->fkey_fondo = fondo->id;
-		m_list_inversionesLB.update(*m_inversion);
+		MessageBoxW(L"Numero de participaciones no puede ser 0");
+		return;
 	}
 
-	setIdFromRecord<Inversion>(m_inversion_id, m_inversion->id);
-	Refresh();
+	std::chrono::sys_days fecha;
+	m_fecha_inversion >> fecha;
+
+	try
+	{
+		if (!m_inversion)	// insert
+		{
+			m_inversion = m_list_inversionesLB.insert(num_part, fecha, fondo->id);
+			m_list_inversionesLB.insert_into_listbox(*m_inversion);
+		}
+		else				// update
+		{
+			m_inversion->num_participaciones = num_part;
+			m_inversion->beginning_date = fecha;
+			m_inversion->fkey_fondo = fondo->id;
+			m_list_inversionesLB.update(*m_inversion);
+		}
+
+		setIdFromRecord<Inversion>(m_inversion_id, m_inversion->id);
+		Refresh();
+	}
+	catch (std::exception& exc)
+	{
+		handleApply(exc);
+	}
 }
 
 
@@ -127,7 +142,7 @@ void InversionDlg::OnBnClickedNew()
 	m_list_fondosCB.select(-1);
 
 	using namespace std::chrono;
-	const auto today = sys_days{ floor<days>(system_clock::now()) };
+	const auto today = Today(); // sys_days{ floor<days>(system_clock::now()) };
 
 	SetDate(m_fecha_inversion, today );
 	SetAmount(m_num_participaciones, 0);
@@ -138,9 +153,16 @@ void InversionDlg::OnBnClickedNew()
 void InversionDlg::OnBnClickedErase()
 {
 	// TODO: Add your control notification handler code here
-	if( m_list_inversionesLB.delete_current_sel())
+	try
 	{
-		OnBnClickedNew();
+		if (m_list_inversionesLB.delete_current_sel())
+		{
+			OnBnClickedNew();
+		}
+	}
+	catch(std::exception& exp)
+	{
+		handleErase(exp);
 	}
 }
 

@@ -43,6 +43,12 @@ void SetText(CEdit& edit_box, Data data)
 	edit_box.SetWindowTextW(Util::to_cstring(data));
 }
 
+template<typename Data>
+void operator<<( CEdit& edit_box, Data data)
+{
+	SetText(edit_box, data);
+}
+
 inline void NullText(CEdit& edit_box)
 {
 	edit_box.SetWindowTextW(L"");
@@ -137,6 +143,16 @@ inline std::chrono::sys_days GetDate(CDateTimeCtrl& ctrl)
 	return date;
 }
 
+inline void operator>>(CDateTimeCtrl& ctrl, std::chrono::sys_days& date)
+{
+	date = GetDate(ctrl);
+}
+
+inline void operator<<(CDateTimeCtrl& ctrl, std::chrono::sys_days date)
+{
+	SetDate(ctrl, date);
+}
+
 inline std::string GetText(CEdit& ctrl)
 {
 	CString str;
@@ -176,3 +192,30 @@ inline long long GetLongLong(CEdit& ctrl)
 	return std::stoll(str);
 }
 
+inline void operator>>(CEdit& ctrl, std::string& s)
+{
+	s = GetText(ctrl);
+}
+inline void operator>>(CEdit& ctrl, double& d)
+{
+	d = GetAmount(ctrl);
+}
+inline void operator>>(CEdit& ctrl, int& i)
+{
+	i = GetInteger(ctrl);
+}
+inline void operator>>(CEdit& ctrl, long& l)
+{
+	l = GetLong(ctrl);
+}
+
+inline void operator>>(CEdit& ctrl, long long& l)
+{
+	l = GetLongLong(ctrl);
+}
+
+inline std::chrono::sys_days Today()
+{
+	const auto today = std::chrono::sys_days{ floor<std::chrono::days>(std::chrono::system_clock::now()) };
+	return today;
+}

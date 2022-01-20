@@ -20,7 +20,7 @@ struct TableKey
 	{
 		tableData = record;
 	}
-	static constexpr int getKeyValue()
+	static int getKeyValue()
 	{
 		if (tableData == nullptr) throw std::exception{ "tableData is null" };
 		return tableData->*Key;
@@ -39,9 +39,23 @@ struct TableDef
 	static bool has_links(const typename Target::Table& targetRec)
 	{
 		Target::setRecord(&targetRec);
+		auto pk = Target::getKeyValue();
+		if( pk == -1)
+		{
+			std::ostringstream ss;
+			ss << "Registro de " << Storage::getStorage().tablename<Fondo>() << " no está almacenado";
+			throw std::exception(ss.str().c_str());
+		}
+
 		constexpr size_t size = std::tuple_size_v<decltype(reference_list)>;
 
 		bool has = has_links<size>();
+		if(has)
+		{
+			std::ostringstream ss;
+			ss << "Registro de " << Storage::getStorage().tablename<Fondo>() << " tiene dependientes";
+			throw std::exception(ss.str().c_str());
+		}
 		return has;
 	}
 private:
@@ -94,7 +108,6 @@ struct TableConnection
 
 
 // T and Conns are TableConnection instances
-
 template <typename T, typename ...Conns>
 struct TableConnections
 {
@@ -104,7 +117,15 @@ struct TableConnections
 	static bool foreignKeysExist(const DependentTable& dep)
 	{
 		constexpr size_t size = std::tuple_size_v<decltype(connections_list)>;
-		return foreignKeyExists<size>(dep);
+		bool exists = foreignKeyExists<size>(dep);
+
+		if( ! exists)
+		{
+			std::ostringstream ss;
+			ss << "Registro de " << Storage::getStorage().tablename<DependentTable>() << " contiene dangling FKs";
+			throw std::exception(ss.str().c_str());
+		}
+		return exists;
 	}
 private:
 	template<size_t index>

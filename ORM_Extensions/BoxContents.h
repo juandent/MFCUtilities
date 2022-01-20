@@ -54,6 +54,7 @@ private:
 
 
 	RefIntegrityManager<Table, keyCol> refIntManager;
+	Accessor<Table, keyCol> accessor;
 
 public:
 
@@ -91,8 +92,6 @@ public:
 		if (cur_sel != npos)
 		{
 			auto id = static_cast<unsigned long long>(m_box.GetItemData(cur_sel));
-			// DWORD_PTR
-			// record = storage.get<Table>(id);
 			record = refIntManager.get(id);
 		}
 		return record;
@@ -178,7 +177,11 @@ public:
 	bool delete_current_sel()
 	{
 		auto current = this->current();
-		if (!current) return false;
+		// if (!current) return false;
+		if (!current)
+		{
+			throw std::exception("No hay registro seleccionado");
+		}
 		if (refIntManager.remove(*current))
 		{
 			int cur_sel = m_box.GetCurSel();
@@ -217,7 +220,7 @@ public:
 	void loadLB()
 	{
 		m_box.ResetContent();
-		auto vec = refIntManager.getAll();
+		auto vec = accessor.getAll();
 
 		moveVectorIntoBox(vec);
 #if 0		
@@ -237,18 +240,8 @@ public:
 	{
 		m_box.ResetContent();
 
-		auto vec = refIntManager.getAll(clause);
+		auto vec = accessor.getAll(clause);
 		moveVectorIntoBox(vec);
-#if 0
-		for (auto& record : vec)
-		{
-			auto displayStr = asString(record);
-			int index = m_box.AddString(displayStr);
-			m_box.SetItemData(index, record.*keyCol);
-			// SetCurSel(index);
-		}
-		SetCurSel(-1);
-#endif
 	}
 
 	template<typename orderByClause>
@@ -256,36 +249,16 @@ public:
 	{
 		m_box.ResetContent();
 
-		auto vec = refIntManager.getAllOrderBy(clause);
+		auto vec = accessor.getAllOrderBy(clause);
 		moveVectorIntoBox(vec);
-#if 0
-		for (auto& record : vec)
-		{
-			auto displayStr = asString(record);
-			int index = m_box.AddString(displayStr);
-			m_box.SetItemData(index, record.*keyCol);
-			// SetCurSel(index);
-		}
-		SetCurSel(-1);
-#endif
 	}
 
 	template<typename orderByClause>
 	void loadLBOrderByDesc(orderByClause clause)
 	{
 		m_box.ResetContent();
-		auto vec = refIntManager.getAllOrderByDesc(clause);
+		auto vec = accessor.getAllOrderByDesc(clause);
 		moveVectorIntoBox(vec);
-#if 0
-		for (auto& record : vec)
-		{
-			auto displayStr = asString(record);
-			int index = m_box.AddString(displayStr);
-			m_box.SetItemData(index, record.*keyCol);
-			// SetCurSel(index);
-		}
-		SetCurSel(-1);
-#endif
 	}
 
 	template<typename orderByClause, typename whereClause>
@@ -293,7 +266,7 @@ public:
 	{
 		m_box.ResetContent();
 
-		auto vec = refIntManager.getAllOrderByWhere(clause, where_clause);
+		auto vec = accessor.getAllOrderByWhere(clause, where_clause);
 		moveVectorIntoBox(vec);
 	}
 
@@ -302,7 +275,7 @@ public:
 	{
 		m_box.ResetContent();
 
-		auto vec = refIntManager.getAllOrderByDescWhere(clause, where_clause);
+		auto vec = accessor.getAllOrderByDescWhere(clause, where_clause);
 		moveVectorIntoBox(vec);
 	}
 

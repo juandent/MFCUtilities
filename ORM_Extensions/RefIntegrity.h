@@ -8,10 +8,12 @@ struct RefIntegrityManager
 {
 private:
 	Storage::Storage_t& storage;
-
-	bool canDelete(Table const& record)
+	bool canDelete(Table const& record)	// may throw std::exception
 	{
-		if (record.*keyCol == -1) return false;
+		// if (record.*keyCol == -1)
+		// {
+		// 	throw std::exception{ "Primary key not set" };
+		// }
 		return !RecordLinks::has_links(record);
 	}
 	bool canInsertUpdate(Table const& record)
@@ -50,7 +52,7 @@ public:
 	}
 	void update(const Table& record)
 	{
-		if (record.*keyCol == -1)	return;	// not persisted yet!
+		// if (record.*keyCol == -1)	return;	// not persisted yet!
 
 		if (canInsertUpdate(record))
 		{
@@ -61,22 +63,49 @@ public:
 	Table get(unsigned long long id)
 	{
 		Table record;
-		record = storage.get<Table>(id);
+		try
+		{
+			record = storage.get<Table>(id);
+		}
+		catch (std::exception& exp)
+		{
+			// handle(exp, false);
+			std::ostringstream ss;
+			ss << "PK = " << id << " no existe en tabla " << storage.tablename<Table>();
+			throw std::exception(ss.str().c_str());
+			//			MessageBoxA(AfxGetMainWnd()->GetSafeHwnd(), ss.str().c_str(), "Falla en lectura", MB_OK);
+		}
 		return record;
 	}
 
 	bool remove(Table& record)
 	{
-		if (!canDelete(record)) 	return false;
+		// try
+		// {
+		canDelete(record);
 
 		storage.remove<Table>(get_pk(record));
 		return true;
+		// }
+		// catch(std::exception& exp)
+		// {
+		// 	MessageBoxA(AfxGetMainWnd()->GetSafeHwnd(), exp.what(), "Falla en borrado", MB_OK);
+		// }
 	}
 
 	int get_pk(Table& record)
 	{
 		return record.*keyCol;
 	}
+};
+
+template<typename Table, int Table::* keyCol >
+struct Accessor
+{
+private:
+	Storage::Storage_t& storage;
+public:
+	Accessor() : storage{ Storage::getStorage() } {}
 
 	std::vector<Table> getAll()
 	{

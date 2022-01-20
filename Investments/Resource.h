@@ -4,7 +4,6 @@
 //
 #define ID_B_CALCULATE                  2
 #define ID_APPLY                        3
-#define IDOK2                           4
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_POPUP_EDIT                  119
@@ -104,6 +103,7 @@
 #define IDC_DT_FECHA_INVERSION          1010
 #define IDC_CB_FONDOS                   1011
 #define IDC_LIST_INVERSIONES            1012
+#define IDC_E_RENDIMIENTO_PARTICIPACIONES 1012
 #define IDC_B_FONDOS                    1013
 #define IDC_B_QUERIES                   1014
 #define IDC_E_RENDIMIENTO_ID            1015

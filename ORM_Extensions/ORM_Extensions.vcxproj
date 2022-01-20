@@ -142,6 +142,7 @@
     <ClInclude Include="BoxContents.h" />
     <ClInclude Include="Connections.h" />
     <ClInclude Include="GridDisplayer.h" />
+    <ClInclude Include="HandleSystemError.h" />
     <ClInclude Include="IDisplayer.h" />
     <ClInclude Include="JoinedGridDisplayer.h" />
     <ClInclude Include="ORM_Extensions.h" />

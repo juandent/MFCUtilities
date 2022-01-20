@@ -6,6 +6,8 @@
 #include "afxdialogex.h"
 #include "RendimientoDlg.h"
 
+#include "QueryInversionesDlg.h"
+
 
 // RendimientoDlg dialog
 
@@ -43,6 +45,9 @@ void RendimientoDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(RendimientoDlg, CDialog)
 	ON_BN_CLICKED(ID_APPLY, &RendimientoDlg::OnBnClickedApply)
 	ON_LBN_SELCHANGE(IDC_LIST_RENDIMIENTOS, &RendimientoDlg::OnLbnSelchangeListRendimientos)
+	ON_BN_CLICKED(IDC_B_QUERIES, &RendimientoDlg::OnBnClickedBQueries)
+	ON_BN_CLICKED(ID_ERASE, &RendimientoDlg::OnBnClickedErase)
+	ON_BN_CLICKED(ID_NEW, &RendimientoDlg::OnBnClickedNew)
 END_MESSAGE_MAP()
 
 
@@ -82,21 +87,28 @@ void RendimientoDlg::OnBnClickedApply()
 	auto rend_unit = GetAmount(m_rendimiento_unitario);
 	std::chrono::sys_days fecha = GetDate(m_fecha_rendimiento);
 
-	if (!m_rendimiento)	// insert
+	try
 	{
-		m_rendimiento = m_list_rendimientosLB.insert(fondo->id, rend_unit, fecha);
-		m_list_rendimientosLB.insert_into_listbox(*m_rendimiento);
-	}
-	else				// update
-	{
-		m_rendimiento->fecha = fecha;
-		m_rendimiento->fecha = fecha;
-		m_rendimiento->fkey_fondo = fondo->id;
-		m_list_rendimientosLB.update(*m_rendimiento);
-	}
+		if (!m_rendimiento)	// insert
+		{
+			m_rendimiento = m_list_rendimientosLB.insert(fondo->id, rend_unit, fecha);
+			m_list_rendimientosLB.insert_into_listbox(*m_rendimiento);
+		}
+		else				// update
+		{
+			m_rendimiento->rendimiento_unitario = rend_unit;
+			m_rendimiento->fecha = fecha;
+			m_rendimiento->fkey_fondo = fondo->id;
+			m_list_rendimientosLB.update(*m_rendimiento);
+		}
 
-	setIdFromRecord<Rendimiento>(m_rendimiento_id, m_rendimiento->id);
-	Refresh();
+		setIdFromRecord<Rendimiento>(m_rendimiento_id, m_rendimiento->id);
+		Refresh();
+	}
+	catch( std::exception& exc)
+	{
+		handleApply(exc);
+	}
 }
 
 
@@ -111,4 +123,43 @@ void RendimientoDlg::OnLbnSelchangeListRendimientos()
 	m_list_fondosCB.select(m_rendimiento->fkey_fondo);
 	SetDate(m_fecha_rendimiento, m_rendimiento->fecha);
 	SetAmount(m_rendimiento_unitario, m_rendimiento->rendimiento_unitario);
+}
+
+
+void RendimientoDlg::OnBnClickedBQueries()
+{
+	// TODO: Add your control notification handler code here
+	QueryInversionesDlg dlg;
+	dlg.DoModal();
+}
+
+
+void RendimientoDlg::OnBnClickedErase()
+{
+	// TODO: Add your control notification handler code here
+	try
+	{
+		m_list_rendimientosLB.delete_current_sel();
+		OnBnClickedNew();
+	}
+	catch(std::exception& exc)
+	{
+		handleErase(exc);
+	}
+}
+
+
+
+void RendimientoDlg::OnBnClickedNew()
+{
+	// TODO: Add your control notification handler code here
+	using namespace std::chrono;
+	const auto today = sys_days{ floor<days>(system_clock::now()) };
+
+	m_rendimiento = std::nullopt;
+	m_list_rendimientosLB.select(-1);
+	SetText(m_rendimiento_id, ""s);
+	m_list_fondosCB.select(-1);
+	SetDate(m_fecha_rendimiento, today);
+	SetAmount(m_rendimiento_unitario, 0.0);
 }

@@ -34,4 +34,7 @@ public:
 	afx_msg void OnBnClickedBCalculate();
 	void Refresh();
 	virtual BOOL OnInitDialog();
+private:
+	CEdit m_rendimiento_participaciones;
+	CEdit m_rendimiento_unitario;
 };

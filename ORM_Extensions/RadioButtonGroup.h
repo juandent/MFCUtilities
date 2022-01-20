@@ -35,5 +35,15 @@ public:
 			m_radios[idx]->SetCheck(value == idx_select);
 		}
 	}
+	RadioButtonGroup& operator<<(int idx_select)
+	{
+		set_value(idx_select);
+		return *this;
+	}
+	RadioButtonGroup& operator>>(int& value)
+	{
+		value = get_value();
+		return *this;
+	}
 };
 
