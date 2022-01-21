@@ -17,19 +17,10 @@ struct Posting
 private:
 	Posting() = default;
 	std::unordered_set<HWND> m_postingWindows;
-public:
-
-	static Posting& get()
-	{
-		static Posting posting;
-		return posting;
-	}
-
 	void AddWindow(HWND hwnd)
 	{
 		m_postingWindows.insert(hwnd);
 	}
-
 	bool exists(LPARAM lParam)
 	{
 		HWND hwnd = reinterpret_cast<HWND>(lParam);
@@ -41,6 +32,41 @@ public:
 		}
 		return false;
 	}
+public:
+
+	static constexpr int WindowProcNotHandled = 1;
+
+	static Posting& get()
+	{
+		static Posting posting;
+		return posting;
+	}
+
+	template<typename Box>
+	void PostSelChangeNotification(Box& box)
+	{
+		AddWindow(box.m_hWnd);
+		box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)box.m_hWnd);
+	}
+
+	LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+	{
+		if (message == WM_COMMAND)
+		{
+			auto loword = LOWORD(wParam);
+			auto hiword = HIWORD(wParam);
+
+			if ( hiword == LBN_SELCHANGE)
+			{
+				if (Posting::get().exists(lParam))		// this window already responded to initial LBN_SELCHANGE
+				{
+					return 0;
+				}
+			}
+		}
+		return WindowProcNotHandled;
+	}
+
 };
 
 
@@ -50,7 +76,8 @@ class BoxContents
 private:
 
 	BoxType& m_box;
-	CString(*asString)(Table& record);
+	// CString(*asString)(Table& record);
+	TableStringizer<Table> asString;
 
 
 	RefIntegrityManager<Table, keyCol> refIntManager;
@@ -133,11 +160,10 @@ public:
 		if (index != npos)
 		{
 			m_box.SetCurSel(index);
-			// record = storage.get<Table>(pk);
 			record = refIntManager.get(pk);
-			// Posting::PostingWindow = m_box.m_hWnd;
-			Posting::get().AddWindow(m_box.m_hWnd);
-			m_box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_box.m_hWnd);
+			
+			Posting::get().PostSelChangeNotification(m_box);
+			// m_box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_box.m_hWnd);
 		}
 		return record;
 	}
@@ -145,11 +171,6 @@ public:
 	void remove(Table& record)
 	{
 		refIntManager.remove(record);
-		// assert(record.*keyCol > -1);
-		// if (!RefIntegrity::canDelete(*current))
-		// 	return;
-		//
-		// storage.remove<Table>(get_pk(record));
 	}
 
 	int get_pk(Table& record)
@@ -162,7 +183,7 @@ public:
 		return record ? record.*keyCol : -1;
 	}
 
-	// record MUST not exist in listbox!
+	// will check if record exists in listbox and do nothing if so
 	int insert_into_listbox(Table& record)
 	{
 		int index = find_in_listbox(record);
@@ -191,11 +212,15 @@ public:
 		return false;
 	}
 
-	void delete_from_box(Table& record)
+	bool delete_from_box(Table& record)
 	{
 		int index = find_in_listbox(record);
-		if (index == npos)	return;	// not present
-		throw std::logic_error("incomplete implementation");
+		if (index != npos)
+		{
+			m_box.DeleteString(index);
+			return true;
+		}
+		return false;
 	}
 
 	int find_in_listbox(Table& record)
@@ -223,17 +248,6 @@ public:
 		auto vec = accessor.getAll();
 
 		moveVectorIntoBox(vec);
-#if 0		
-		for (auto& record : vec)
-		{
-			auto displayStr = asString(record);
-			int index = m_box.AddString(displayStr);
-			m_box.SetItemData(index, record.*keyCol);
-			// SetCurSel(index);
-		}
-		// ???
-		SetCurSel(-1);
-#endif
 	}
 	template<typename whereClause>
 	void loadLB(whereClause clause)

@@ -24,11 +24,18 @@ public:
 		return posting;
 	}
 
+	template<typename Box>
+	void PostSelChangeNotification(Box& box)
+	{
+		AddWindow(box.m_hWnd);
+		box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)box.m_hWnd);
+	}
+private:
 	void AddWindow(HWND hwnd)
 	{
 		m_postingWindows.insert(hwnd);
 	}
-
+public:
 	bool exists(LPARAM lParam)
 	{
 		HWND hwnd = reinterpret_cast<HWND>(lParam);

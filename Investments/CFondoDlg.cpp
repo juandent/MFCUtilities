@@ -79,6 +79,12 @@ void CFondoDlg::OnBnClickedApply()
 	m_fondo_abrev >> abrev;
 	m_fondo_name >> name;
 
+	if(name.empty() || abrev.empty())
+	{
+		MessageBoxW(L"Nombre o abreviacion no pueden quedar vacios");
+		return;
+	}
+
 	try
 	{
 		if (!m_fondo)	// insert
@@ -127,6 +133,7 @@ void CFondoDlg::OnBnClickedNew()
 	m_fondo_abrev << ""s;
 	m_fondo_name << ""s;
 	m_fondo = std::nullopt;
+	m_list_all_fondosLB.select(-1);
 }
 
 
@@ -142,4 +149,14 @@ void CFondoDlg::OnBnClickedErase()
 	{
 		handleErase(exc);
 	}
+}
+
+
+LRESULT CFondoDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	// TODO: Add your specialized code here and/or call the base class
+	auto ret = Posting::get().WindowProc(message, wParam, lParam);
+	if (ret != 0)
+		return CDialog::WindowProc(message, wParam, lParam);
+	return ret;
 }

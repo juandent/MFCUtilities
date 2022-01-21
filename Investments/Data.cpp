@@ -131,7 +131,44 @@ void Storage::empty_database()
 ////////////////////////////////////////
 ///DB access
 ///
-/// 
+///
+
+int Fondo::num_participaciones_al(std::chrono::sys_days fecha) noexcept
+{
+	using namespace std::chrono;
+	using namespace sqlite_orm;
+
+	sys_days when = fecha;
+
+	auto suma_participaciones = Storage::getStorage().select(sum(&Inversion::num_participaciones), where(c(&Inversion::beginning_date) <= when and (c(&Inversion::fkey_fondo) == this->id)), group_by(&Inversion::fkey_fondo));
+
+	if (suma_participaciones.empty()) 	{ return 0; }
+
+	auto suma = *std::move(suma_participaciones[0]);
+	auto sum_participaciones = static_cast<int>(suma);
+
+	return sum_participaciones;
+}
+
+double Fondo::get_rendimiento_unitario_al(std::chrono::year_month_day fecha) noexcept
+{
+	using namespace std::chrono;
+	using namespace sqlite_orm;
+
+	sys_days when = fecha;
+
+	auto rendimientos = Storage::getStorage().get_all<Rendimiento>(where(c(&Rendimiento::fecha) <= when and (c(&Rendimiento::fkey_fondo) == this->id)), order_by(&Rendimiento::fecha).desc());
+
+	if (rendimientos.empty())
+	{
+		return 0.0;
+	}
+
+	return rendimientos[0].rendimiento_unitario;
+}
+
+#if 0
+
 int Inversion::num_participaciones_en(int fondo, std::chrono::year_month_day fecha) noexcept
 {
 	using namespace std::chrono;
@@ -177,4 +214,4 @@ double Rendimiento::get_rendimiento_unitario(int fondo, std::chrono::year_month_
 
 	return rendimientos[0].rendimiento_unitario;
 }
-
+#endif 

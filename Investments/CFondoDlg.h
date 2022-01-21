@@ -42,4 +42,5 @@ public:
 	afx_msg void OnSelchangeListFondos();
 	afx_msg void OnBnClickedNew();
 	afx_msg void OnBnClickedErase();
+	virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
 };

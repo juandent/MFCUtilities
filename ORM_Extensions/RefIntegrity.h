@@ -8,17 +8,13 @@ struct RefIntegrityManager
 {
 private:
 	Storage::Storage_t& storage;
-	bool canDelete(Table const& record)	// may throw std::exception
+	void throwIfcannotDelete(Table const& record)	// may throw std::exception
 	{
-		// if (record.*keyCol == -1)
-		// {
-		// 	throw std::exception{ "Primary key not set" };
-		// }
-		return !RecordLinks::has_links(record);
+		!RecordLinks::has_links(record);
 	}
-	bool canInsertUpdate(Table const& record)
+	void throwIfcannotInsertUpdate(Table const& record)
 	{
-		return RecordLinks::foreignKeysExist(record);
+		RecordLinks::foreignKeysExist(record);
 	}
 
 	///
@@ -43,21 +39,16 @@ public:
 	std::optional<Table> insert(Cols&&... cols)
 	{
 		Table record{ -1, cols... };
-		if (!canInsertUpdate(record))
-		{
-			return std::nullopt;
-		}
+
+		throwIfcannotInsertUpdate(record);
 		record.*keyCol = storage.insert(record);
 		return record;
 	}
 	void update(const Table& record)
 	{
 		// if (record.*keyCol == -1)	return;	// not persisted yet!
-
-		if (canInsertUpdate(record))
-		{
-			storage.update(record);
-		}
+		throwIfcannotInsertUpdate(record);
+		storage.update(record);
 	}
 
 	Table get(unsigned long long id)
@@ -80,9 +71,7 @@ public:
 
 	bool remove(Table& record)
 	{
-		// try
-		// {
-		canDelete(record);
+		throwIfcannotDelete(record);
 
 		storage.remove<Table>(get_pk(record));
 		return true;

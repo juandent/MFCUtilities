@@ -29,6 +29,9 @@ struct Fondo
 		std::string str = std::to_string(id) + " - "s + abreviacion + " - "s + nombre + " "s + std::to_string(tipo_cupon);
 		return str;
 	}
+
+	int num_participaciones_al(std::chrono::sys_days fecha) noexcept;
+	double get_rendimiento_unitario_al(std::chrono::year_month_day fecha) noexcept;
 };
 
 
@@ -45,7 +48,7 @@ struct Inversion
 		return str;
 	}
 
-	static int num_participaciones_en(int fondo, std::chrono::year_month_day fecha) noexcept;
+	// static int num_participaciones_en(int fondo, std::chrono::year_month_day fecha) noexcept;
 };
 
 struct Rendimiento
@@ -62,7 +65,7 @@ struct Rendimiento
 	}
 
 
-	static double get_rendimiento_unitario(int fondo, std::chrono::year_month_day fecha) noexcept;
+	// static double get_rendimiento_unitario(int fondo, std::chrono::year_month_day fecha) noexcept;
 
 };
 

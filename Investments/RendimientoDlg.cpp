@@ -163,3 +163,13 @@ void RendimientoDlg::OnBnClickedNew()
 	SetDate(m_fecha_rendimiento, today);
 	SetAmount(m_rendimiento_unitario, 0.0);
 }
+
+
+LRESULT RendimientoDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	// TODO: Add your specialized code here and/or call the base class
+	auto ret = Posting::get().WindowProc(message, wParam, lParam);
+	if (ret != 0)
+		return CDialog::WindowProc(message, wParam, lParam);
+	return ret;
+}

@@ -38,6 +38,7 @@ public:
 	afx_msg void OnFileFondo();
 	afx_msg void OnFileInversion();
 	afx_msg void OnFileRendimiento();
+	afx_msg void OnFileRendimientostabla();
 };
 
 extern CInvestmentsApp theApp;

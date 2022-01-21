@@ -97,13 +97,6 @@ private:
 	template<int Col, typename FieldType, typename T>
 	static CString FormatCol(T& value, CJDGridCtrl& grid)
 	{
-#if 0
-		FieldType* pT = nullptr;
-		if constexpr (std::is_same_v<std::remove_const_t<FieldType>, bool>)
-		{
-			int i = 0;
-		}
-#endif
 		CString cs;
 		if constexpr ((std::is_integral_v<FieldType> || std::is_floating_point_v<FieldType>) && !std::is_same_v<std::remove_const_t<FieldType>, bool>)
 		{
@@ -136,17 +129,13 @@ private:
 	{
 		static void Apply(int row, const Container& z, CJDGridCtrl& grid)
 		{
-			// auto value = std::get<Col>(z[row]);
-			// auto&& value = extractValue(std::get<Col>(z[row]));
 			CString cs;
 
 			using FieldType = std::remove_reference_t<decltype(std::get<Col>(z[row]))>;
 			FieldType* pT = nullptr;
 			if constexpr (std::is_same_v<FieldType, const std::unique_ptr<double>>)
 			{
-				// auto&& value = std::move(std::get<Col>(z[row]));
 				auto&& value = extractValue(std::move(std::get<Col>(z[row])));
-				// cs = format(value);
 				cs = FormatCol<Col, double>(value, grid);
 			}
 			else

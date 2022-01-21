@@ -48,23 +48,23 @@ END_MESSAGE_MAP()
 void QueryInversionesDlg::OnBnClickedBCalculate()
 {
 	// TODO: Add your control notification handler code here
-	auto fecha = GetDate(m_fecha_calculo);
 	auto fondo = m_list_fondosCB.current();
 	if(!fondo)
 	{
-		MessageBoxW(L"Fondo no escogido!");
-		return;
+		MessageBoxW(L"Fondo no escogido!");		return;
 	}
 
-	int num_part = Inversion::num_participaciones_en(fondo->id, fecha);
-	SetAmount(m_num_participaciones, num_part);
+	std::chrono::sys_days fecha;
+	m_fecha_calculo >> fecha;
 
-
-	auto rend_unit = Rendimiento::get_rendimiento_unitario(fondo->id, fecha);
-	SetAmount(m_rendimiento_unitario, rend_unit);
+	int num_part = fondo->num_participaciones_al(fecha);
+	m_num_participaciones << num_part;
+	
+	auto rend_unit = fondo->get_rendimiento_unitario_al(fecha);
+	m_rendimiento_unitario << rend_unit;
 
 	auto rendimiento = rend_unit * num_part;
-	SetAmount(m_rendimiento_participaciones, rendimiento);
+	m_rendimiento_participaciones << rendimiento;
 }
 
 

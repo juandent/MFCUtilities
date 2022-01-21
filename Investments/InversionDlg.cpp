@@ -155,10 +155,8 @@ void InversionDlg::OnBnClickedErase()
 	// TODO: Add your control notification handler code here
 	try
 	{
-		if (m_list_inversionesLB.delete_current_sel())
-		{
-			OnBnClickedNew();
-		}
+		m_list_inversionesLB.delete_current_sel();
+		OnBnClickedNew();
 	}
 	catch(std::exception& exp)
 	{
@@ -182,4 +180,14 @@ void InversionDlg::OnBnClickedBQueries()
 	QueryInversionesDlg dlg;
 	dlg.DoModal();
 
+}
+
+
+LRESULT InversionDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	// TODO: Add your specialized code here and/or call the base class
+	auto ret = Posting::get().WindowProc(message, wParam, lParam);
+	if (ret != 0)
+		return CDialog::WindowProc(message, wParam, lParam);
+	return ret;
 }

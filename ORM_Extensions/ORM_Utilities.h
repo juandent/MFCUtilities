@@ -43,11 +43,13 @@ void SetText(CEdit& edit_box, Data data)
 	edit_box.SetWindowTextW(Util::to_cstring(data));
 }
 
+#if 0
 template<typename Data>
 void operator<<( CEdit& edit_box, Data data)
 {
 	SetText(edit_box, data);
 }
+#endif
 
 inline void NullText(CEdit& edit_box)
 {
@@ -101,13 +103,13 @@ inline void SetAmount(CEdit& edit_box, long long amount)
 	auto str = Util::to_cstring(amount);
 	edit_box.SetWindowTextW(str);
 }
-#endif
 
 inline void SetLongLong(CEdit& edit_box, long long amount)
 {
 	auto str = Util::to_cstring(amount);
 	edit_box.SetWindowTextW(str);
 }
+#endif
 
 
 template<typename Table, int Table::* key>
@@ -213,6 +215,20 @@ inline void operator>>(CEdit& ctrl, long long& l)
 {
 	l = GetLongLong(ctrl);
 }
+
+inline void operator<<(CEdit& ctrl, std::string s)
+{
+	SetText(ctrl, s);
+}
+
+template<typename T> requires std::is_arithmetic<T>::value
+inline void operator<<(CEdit& ctrl, T d)
+{
+	SetAmount(ctrl, d);
+}
+
+
+
 
 inline std::chrono::sys_days Today()
 {

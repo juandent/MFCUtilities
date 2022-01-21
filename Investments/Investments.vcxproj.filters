@@ -81,6 +81,9 @@
     <ClInclude Include="RendimientoDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RendimientosTableDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Investments.cpp">
@@ -132,6 +135,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RendimientoDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RendimientosTableDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
