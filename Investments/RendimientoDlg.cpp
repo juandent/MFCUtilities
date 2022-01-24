@@ -84,15 +84,21 @@ void RendimientoDlg::OnBnClickedApply()
 		return;
 	}
 
-	auto rend_unit = GetAmount(m_rendimiento_unitario);
-	std::chrono::sys_days fecha = GetDate(m_fecha_rendimiento);
+	double rend_unit;
+	m_rendimiento_unitario >> rend_unit;
+	if(rend_unit ==0.0)
+	{
+		MessageBoxW(L"Rendimiento no puede ser 0");
+		return;
+	}
+	std::chrono::sys_days fecha;
+	m_fecha_rendimiento >> fecha;
 
 	try
 	{
 		if (!m_rendimiento)	// insert
 		{
 			m_rendimiento = m_list_rendimientosLB.insert(fondo->id, rend_unit, fecha);
-			m_list_rendimientosLB.insert_into_listbox(*m_rendimiento);
 		}
 		else				// update
 		{
@@ -119,10 +125,10 @@ void RendimientoDlg::OnLbnSelchangeListRendimientos()
 	// TODO: Add your control notification handler code here
 	m_rendimiento = m_list_rendimientosLB.current();
 	if (!m_rendimiento)	return;
-	SetText(m_rendimiento_id, m_rendimiento->id);
+	m_rendimiento_id << m_rendimiento->id;
 	m_list_fondosCB.select(m_rendimiento->fkey_fondo);
-	SetDate(m_fecha_rendimiento, m_rendimiento->fecha);
-	SetAmount(m_rendimiento_unitario, m_rendimiento->rendimiento_unitario);
+	m_fecha_rendimiento << m_rendimiento->fecha;
+	m_rendimiento_unitario << m_rendimiento->rendimiento_unitario;
 }
 
 
@@ -154,14 +160,14 @@ void RendimientoDlg::OnBnClickedNew()
 {
 	// TODO: Add your control notification handler code here
 	using namespace std::chrono;
-	const auto today = sys_days{ floor<days>(system_clock::now()) };
+	const auto today = Today();
 
 	m_rendimiento = std::nullopt;
 	m_list_rendimientosLB.select(-1);
-	SetText(m_rendimiento_id, ""s);
+	m_rendimiento_id << ""s;
 	m_list_fondosCB.select(-1);
-	SetDate(m_fecha_rendimiento, today);
-	SetAmount(m_rendimiento_unitario, 0.0);
+	m_fecha_rendimiento << today;
+	m_rendimiento_unitario << 0.0;
 }
 
 

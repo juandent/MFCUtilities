@@ -168,7 +168,7 @@ void MainView::InitializeGridClaims(const T& t)
 		alias_column<als_c>(&Claim::start_date),
 		alias_column<als_c>(&Claim::submission_date),
 		alias_column<als_c>(&Claim::amount),
-		alias_column<als_c>(&Claim::asprose_claim_number),
+		alias_column<als_c>(&Claim::asprose_case_number),
 		alias_column<als_m>(&Medication::name),
 		// alias_column<als_i>(&Invoice::fkey_INSResponse),
 		select(greater_than(count<als_q>(), 0), from<als_q>(),

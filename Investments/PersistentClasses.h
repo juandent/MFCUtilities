@@ -69,11 +69,11 @@ struct Rendimiento
 
 };
 
-struct X
-{
-	int id;
-	int fkey_Rendimiento;
-};
+// struct X
+// {
+// 	int id;
+// 	int fkey_Rendimiento;
+// };
 
 /////////////////////////////////////////////////////////////////
 ///

@@ -2,6 +2,7 @@
 
 #include <exception>
 
+#include "Data.h"
 
 // Type: Fondo identified by: Fondo.id
 // is referenced by	: Rendimiento using Rendimiento::fkey_fondo

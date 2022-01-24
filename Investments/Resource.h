@@ -117,6 +117,7 @@
 #define IDC_DATETIME_FINAL              1023
 #define IDC_CK_FILTER_BY_DATES          1024
 #define IDC_B_FILTER_CLEAR              1025
+#define IDC_B_RENDIMIENTO               1027
 #define ID_FILE_FONDO                   32771
 #define ID_FILE_INVERSION               32772
 #define ID_FILE_RENDIMIENTO             32773
@@ -128,7 +129,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        316
 #define _APS_NEXT_COMMAND_VALUE         32775
-#define _APS_NEXT_CONTROL_VALUE         1025
+#define _APS_NEXT_CONTROL_VALUE         1028
 #define _APS_NEXT_SYMED_VALUE           316
 #endif
 #endif

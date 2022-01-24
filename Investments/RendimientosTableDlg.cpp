@@ -6,6 +6,8 @@
 #include "afxdialogex.h"
 #include "RendimientosTableDlg.h"
 
+#include "RendimientoDlg.h"
+
 
 // RendimientosTableDlg dialog
 
@@ -39,6 +41,7 @@ void RendimientosTableDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(RendimientosTableDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_FILTER, &RendimientosTableDlg::OnBnClickedBFilter)
 	ON_BN_CLICKED(IDC_B_FILTER_CLEAR, &RendimientosTableDlg::OnBnClickedBFilterClear)
+	ON_BN_CLICKED(IDC_B_RENDIMIENTO, &RendimientosTableDlg::OnBnClickedBRendimiento)
 END_MESSAGE_MAP()
 
 
@@ -93,7 +96,8 @@ void RendimientosTableDlg::OnBnClickedBFilter()
 
 	auto fondoWhere = (not fondo or (c(alias_column<als_f>(&Fondo::id)) == fondo_id));
 
-	auto filter_by_dates = m_filter_by_dates.GetCheck();
+	bool filter_by_dates;
+	m_filter_by_dates >> filter_by_dates;
 
 	std::chrono::sys_days start_date, finish_date;
 	m_fecha_inicio >> start_date;
@@ -113,6 +117,14 @@ void RendimientosTableDlg::OnBnClickedBFilterClear()
 {
 	// TODO: Add your control notification handler code here
 	m_fondosCB.select(-1);
-	m_filter_by_dates.SetCheck(0);
+	m_filter_by_dates << false;
 	OnBnClickedBFilter();
+}
+
+
+void RendimientosTableDlg::OnBnClickedBRendimiento()
+{
+	// TODO: Add your control notification handler code here
+	RendimientoDlg dlg;
+	dlg.DoModal();
 }

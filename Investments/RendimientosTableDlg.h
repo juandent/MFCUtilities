@@ -48,4 +48,5 @@ private:
 	CButton m_filter_by_dates;
 public:
 	afx_msg void OnBnClickedBFilterClear();
+	afx_msg void OnBnClickedBRendimiento();
 };

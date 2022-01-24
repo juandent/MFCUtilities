@@ -93,17 +93,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED;_HAS_CXX20=1;_HAS_CXX17=1</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_16_nov_2021\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_23_jan_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>sqlite3.lib;GridCtrlDll.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\vcpkg\installed\x64-windows\lib;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\x64\Release</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -149,7 +151,9 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_15_jan_2022\include;ignore C:\Components\sqlite_orm_dev_16_nov_2021\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_23_jan_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
+      <ShowIncludes>true</ShowIncludes>
+      <UseFullPaths>false</UseFullPaths>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -240,8 +244,9 @@
     </ClCompile>
     <ClCompile Include="PropertiesWnd.cpp" />
     <ClCompile Include="QueryInversionesDlg.cpp" />
-    <ClCompile Include="RecordLinks.cpp" />
-    <ClCompile Include="RendimientoDlg.cpp" />
+    <ClCompile Include="RendimientoDlg.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="RendimientosTableDlg.cpp" />
     <ClCompile Include="ViewTree.cpp" />
   </ItemGroup>

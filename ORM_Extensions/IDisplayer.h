@@ -67,7 +67,7 @@ struct IntegerList
 	{
 		using lista = IntegerList;
 
-		static bool found = Find<Value, lista, lista::Count - 1>::Check();
+		bool found = Find<Value, lista, lista::Count - 1>::Check();
 		return found;
 	}
 };

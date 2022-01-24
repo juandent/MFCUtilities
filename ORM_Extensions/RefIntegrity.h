@@ -6,7 +6,7 @@
 template<typename Table, int Table::* keyCol>
 struct RefIntegrityManager
 {
-private:
+public:
 	Storage::Storage_t& storage;
 	void throwIfcannotDelete(Table const& record)	// may throw std::exception
 	{
@@ -16,7 +16,7 @@ private:
 	{
 		RecordLinks::foreignKeysExist(record);
 	}
-
+private:
 	///
 	template<typename ...Cols>
 	Table do_insert(Cols&&... cols)
@@ -68,18 +68,13 @@ public:
 		}
 		return record;
 	}
-
+private:
 	bool remove(Table& record)
 	{
 		throwIfcannotDelete(record);
 
 		storage.remove<Table>(get_pk(record));
 		return true;
-		// }
-		// catch(std::exception& exp)
-		// {
-		// 	MessageBoxA(AfxGetMainWnd()->GetSafeHwnd(), exp.what(), "Falla en borrado", MB_OK);
-		// }
 	}
 
 	int get_pk(Table& record)
@@ -143,7 +138,6 @@ public:
 		using namespace sqlite_orm;
 
 		std::optional<Table> record;
-		// auto e = storage.select(columns(cols...), where(clause));
 		auto e = storage.select(columns(keyCol), where(clause));
 		if (e.size() > 0)
 		{

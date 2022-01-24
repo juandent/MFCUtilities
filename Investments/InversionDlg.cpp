@@ -103,7 +103,6 @@ void InversionDlg::OnBnClickedApply()
 		if (!m_inversion)	// insert
 		{
 			m_inversion = m_list_inversionesLB.insert(num_part, fecha, fondo->id);
-			m_list_inversionesLB.insert_into_listbox(*m_inversion);
 		}
 		else				// update
 		{

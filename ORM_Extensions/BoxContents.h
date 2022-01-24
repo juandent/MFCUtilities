@@ -76,21 +76,28 @@ class BoxContents
 private:
 
 	BoxType& m_box;
-	// CString(*asString)(Table& record);
 	TableStringizer<Table> asString;
 
 
 	RefIntegrityManager<Table, keyCol> refIntManager;
 	Accessor<Table, keyCol> accessor;
+	Storage::Storage_t& storage;
 
 public:
 
-	BoxContents(BoxType& listbox, TableStringizer<Table>  f) : m_box(listbox), asString(f) {}
+	BoxContents(BoxType& listbox, TableStringizer<Table>  f) : m_box(listbox), asString(f), storage(Storage::getStorage()) {}
 
 	template<typename ...Cols>
 	std::optional<Table> insert(Cols&&... cols)
 	{
-		return refIntManager.insert(cols...);
+		Table record{ -1, cols... };
+
+		refIntManager.throwIfcannotInsertUpdate(record);
+		record.*keyCol = storage.insert(record);
+		this->insert_into_listbox(record);
+		return record;
+
+		// return refIntManager.insert(cols...);
 	}
 
 	void ResetContent()
@@ -99,17 +106,28 @@ public:
 		m_box.SetCurSel(-1);
 	}
 
-	//template<int Table::*pKey>
 	void update(const Table& record)
 	{
-		refIntManager.update(record);
+		refIntManager.throwIfcannotInsertUpdate(record);
+		Storage::getStorage().update(record);
 	}
 
 	template<typename WhereClause>
 	std::optional<Table> exists(WhereClause& clause)
 	{
-		std::optional<Table> record = refIntManager.exists(clause);
+		using namespace sqlite_orm;
+
+		std::optional<Table> record;
+		auto e = storage.select(columns(keyCol), where(clause));
+		if (e.size() > 0)
+		{
+			auto id = std::get<0>(e[0]);
+			record = storage.get<Table>(id);
+		}
+
 		return record;
+		// std::optional<Table> record = refIntManager.exists(clause);
+		// return record;
 	}
 
 	std::optional<Table> current()
@@ -167,11 +185,12 @@ public:
 		}
 		return record;
 	}
-
+private:
 	void remove(Table& record)
 	{
 		refIntManager.remove(record);
 	}
+public:
 
 	int get_pk(Table& record)
 	{
@@ -197,19 +216,17 @@ public:
 
 	bool delete_current_sel()
 	{
+		using namespace sqlite_orm;
 		auto current = this->current();
-		// if (!current) return false;
 		if (!current)
 		{
 			throw std::exception("No hay registro seleccionado");
 		}
-		if (refIntManager.remove(*current))
-		{
-			int cur_sel = m_box.GetCurSel();
-			m_box.DeleteString(cur_sel);
-			return true;
-		}
-		return false;
+		refIntManager.throwIfcannotDelete(*current);
+		storage.remove<Table>(get_pk(*current));
+		int cur_sel = m_box.GetCurSel();
+		m_box.DeleteString(cur_sel);
+		return true;
 	}
 
 	bool delete_from_box(Table& record)

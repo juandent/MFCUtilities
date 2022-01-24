@@ -227,11 +227,31 @@ inline void operator<<(CEdit& ctrl, T d)
 	SetAmount(ctrl, d);
 }
 
+inline void operator<< (CButton& btn, bool check_status)
+{
+	btn.SetCheck(check_status);
+}
 
-
+inline void operator>> (CButton& btn, bool& check_status)
+{
+	check_status = btn.GetCheck();
+}
 
 inline std::chrono::sys_days Today()
 {
 	const auto today = std::chrono::sys_days{ floor<std::chrono::days>(std::chrono::system_clock::now()) };
 	return today;
 }
+
+template<typename ...Counts>
+static bool allNonZero(Counts ... counts) requires (std::is_same_v<Counts, int> && ...)
+{
+	return (counts && ...);
+}
+
+template<size_t N>
+static bool anyNonZero(int(&vec)[N])
+{
+	return std::any_of(std::begin(vec), std::end(vec), [](int i) { return i != 0; });
+}
+

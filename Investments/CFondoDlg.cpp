@@ -90,8 +90,6 @@ void CFondoDlg::OnBnClickedApply()
 		if (!m_fondo)	// insert
 		{
 			m_fondo = m_list_all_fondosLB.insert(abrev, name, tipo);
-			m_list_all_fondosLB.insert_into_listbox(*m_fondo);
-
 		}
 		else
 		{

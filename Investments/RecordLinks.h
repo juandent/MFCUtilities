@@ -1,33 +1,47 @@
 #pragma once
 #include "PersistentClasses.h"
+#include "..\ORM_Extensions/Connections.h"
 
 
-struct Fondo;
-struct Inversion;
-struct Rendimiento;
+// struct Fondo;
+// struct Inversion;
+// struct Rendimiento;
 
 
 class RecordLinks
 {
-	template<typename ...Counts>
-	static bool allNonZero(Counts ... counts) requires (std::is_same_v<Counts, int> && ...)
+	// Fondo structure
+	struct Fondos
 	{
-		return (counts && ...);
-	}
-#if 1
-	template<size_t N>
-	static bool anyNonZero(int(&vec)[N])
+		using FondoDef = TableKey<Fondo, &Fondo::id>;
+		using Dep1 = TableKey<Inversion, &Inversion::fkey_fondo>;
+		using Dep2 = TableKey<Rendimiento, &Rendimiento::fkey_fondo>;
+		using PKDependents = TableDef<FondoDef, Dep1, Dep2>;
+	};
+
+	// Rendimiento structure
+	struct Rendimientos
 	{
-		return std::any_of(std::begin(vec), std::end(vec), [](int i) { return i != 0; });
-	}
-#endif
+		using DepKey1 = TableKey<Rendimiento, &Rendimiento::fkey_fondo>;
+		using TargetKey1 = TableKey<Fondo, &Fondo::id>;
+		using Conn1 = TableConnection<DepKey1, TargetKey1>;
+		using FKConnections = TableConnections<Conn1>;
+	};
+
+	// Inversion structure
+	struct Inversiones
+	{
+		using DepKey1 = TableKey<Inversion, &Inversion::fkey_fondo>;
+		using TargetKey1 = Rendimientos::TargetKey1;
+		using Conn1 = TableConnection<DepKey1, TargetKey1>;
+		using FKConnections = TableConnections<Conn1>;
+	};
 public:
-	static bool has_links(const Fondo& fondo);
-	static bool has_links(const Inversion& inversion);
-	static bool has_links(const Rendimiento& rendimiento);
+	static bool has_links(const Fondo& fondo)  { return Fondos::PKDependents::has_links(fondo); }
+	static bool has_links(const Inversion& inversion) { return false; }
+	static bool has_links(const Rendimiento& rendimiento) { return false; }
 
-	static bool foreignKeysExist(const Fondo& fondo);
-	static bool foreignKeysExist(const Inversion& inversion);
-	static bool foreignKeysExist(const Rendimiento& rendimiento);
-
+	static bool foreignKeysExist(const Fondo& fondo) { return true; }
+	static bool foreignKeysExist(const Inversion& inversion) { return Inversiones::FKConnections::foreignKeysExist(inversion); }
+	static bool foreignKeysExist(const Rendimiento& rendimiento) { return Rendimientos::FKConnections::foreignKeysExist(rendimiento); }
 };
