@@ -133,7 +133,7 @@ void Storage::empty_database()
 ///
 ///
 
-int Fondo::num_participaciones_al(std::chrono::sys_days fecha) noexcept
+int Fondo::num_participaciones_al(std::chrono::sys_days fecha) const noexcept
 {
 	using namespace std::chrono;
 	using namespace sqlite_orm;
@@ -150,7 +150,7 @@ int Fondo::num_participaciones_al(std::chrono::sys_days fecha) noexcept
 	return sum_participaciones;
 }
 
-double Fondo::get_rendimiento_unitario_al(std::chrono::year_month_day fecha) noexcept
+double Fondo::get_rendimiento_unitario_al(std::chrono::year_month_day fecha) const noexcept
 {
 	using namespace std::chrono;
 	using namespace sqlite_orm;

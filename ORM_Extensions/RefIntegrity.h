@@ -51,7 +51,7 @@ public:
 		storage.update(record);
 	}
 
-	Table get(unsigned long long id)
+	Table get( long long id)
 	{
 		Table record;
 		try
@@ -64,7 +64,6 @@ public:
 			std::ostringstream ss;
 			ss << "PK = " << id << " no existe en tabla " << storage.tablename<Table>();
 			throw std::exception(ss.str().c_str());
-			//			MessageBoxA(AfxGetMainWnd()->GetSafeHwnd(), ss.str().c_str(), "Falla en lectura", MB_OK);
 		}
 		return record;
 	}

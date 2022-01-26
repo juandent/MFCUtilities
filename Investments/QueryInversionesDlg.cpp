@@ -14,7 +14,7 @@ IMPLEMENT_DYNAMIC(QueryInversionesDlg, CDialog)
 
 QueryInversionesDlg::QueryInversionesDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_QueryInversionesDlg, pParent),
-	m_list_fondosCB(m_lista_fondos, [](Fondo& fondo)
+	m_list_fondosCB(m_lista_fondos, [](const Fondo& fondo)
 	{
 			return Util::to_cstring(fondo.simple_dump());
 	})

@@ -15,7 +15,7 @@ IMPLEMENT_DYNAMIC(RendimientosTableDlg, CDialog)
 
 RendimientosTableDlg::RendimientosTableDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_RendimientosTableDlg, pParent),
-m_fondosCB(m_fondos_box, [](Fondo& fondo)
+m_fondosCB(m_fondos_box, [](const Fondo& fondo)
 {
 		return Util::to_cstring(fondo.simple_dump());
 })
@@ -90,7 +90,6 @@ void RendimientosTableDlg::InitializeGridRendimientos(const T& t)
 
 void RendimientosTableDlg::OnBnClickedBFilter()
 {
-	// TODO: Add your control notification handler code here
 	auto fondo = m_fondosCB.current();
 	auto fondo_id = fondo ? fondo->id : -1;
 

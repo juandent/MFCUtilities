@@ -15,11 +15,11 @@ IMPLEMENT_DYNAMIC(RendimientoDlg, CDialog)
 
 RendimientoDlg::RendimientoDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_RendimientoDlg, pParent),
-	m_list_rendimientosLB(m_list_rendimientos, [](Rendimiento& rend)
+	m_list_rendimientosLB(m_list_rendimientos, [](const Rendimiento& rend)
 	{
 			return Util::to_cstring(rend.simple_dump());
 	}),
-	m_list_fondosCB(m_list_fondos, [](Fondo& fondo)
+	m_list_fondosCB(m_list_fondos, [](const Fondo& fondo)
 	{
 			return Util::to_cstring(fondo.simple_dump());
 	})

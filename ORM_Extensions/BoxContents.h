@@ -10,12 +10,12 @@ using namespace sqlite_orm;
 
 
 template<typename Table>
-using TableStringizer = CString(*)(Table&);
+using TableStringizer = CString(*)(const Table&);
 
 struct Posting
 {
 private:
-	Posting() = default;
+	Posting() = default;	// singleton
 	std::unordered_set<HWND> m_postingWindows;
 	void AddWindow(HWND hwnd)
 	{
@@ -36,7 +36,7 @@ public:
 
 	static constexpr int WindowProcNotHandled = 1;
 
-	static Posting& get()
+	static Posting& get()	// access Posting only instance
 	{
 		static Posting posting;
 		return posting;
@@ -96,8 +96,6 @@ public:
 		record.*keyCol = storage.insert(record);
 		this->insert_into_listbox(record);
 		return record;
-
-		// return refIntManager.insert(cols...);
 	}
 
 	void ResetContent()
@@ -109,7 +107,7 @@ public:
 	void update(const Table& record)
 	{
 		refIntManager.throwIfcannotInsertUpdate(record);
-		Storage::getStorage().update(record);
+		storage.update(record);
 	}
 
 	template<typename WhereClause>
@@ -126,8 +124,6 @@ public:
 		}
 
 		return record;
-		// std::optional<Table> record = refIntManager.exists(clause);
-		// return record;
 	}
 
 	std::optional<Table> current()
@@ -136,7 +132,7 @@ public:
 		int cur_sel = m_box.GetCurSel();
 		if (cur_sel != npos)
 		{
-			auto id = static_cast<unsigned long long>(m_box.GetItemData(cur_sel));
+			auto id = static_cast<long long>(m_box.GetItemData(cur_sel));
 			record = refIntManager.get(id);
 		}
 		return record;
@@ -259,6 +255,7 @@ public:
 		// ???
 		SetCurSel(-1);
 	}
+	// Accesor methods
 	void loadLB()
 	{
 		m_box.ResetContent();

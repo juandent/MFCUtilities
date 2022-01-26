@@ -14,7 +14,7 @@ IMPLEMENT_DYNAMIC(CFondoDlg, CDialog)
 CFondoDlg::CFondoDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_CFondoDlg, pParent),
 	m_tipo_cupon({ &m_mensual, &m_trimestral }, {Fondo::mensual, Fondo::trimestral}),
-	m_list_all_fondosLB(m_list_fondos, [](Fondo& fondo)
+	m_list_all_fondosLB(m_list_fondos, [](const Fondo& fondo)
 		{
 			return Util::to_cstring(fondo.simple_dump());
 		})

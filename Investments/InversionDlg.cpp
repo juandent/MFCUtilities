@@ -17,11 +17,11 @@ IMPLEMENT_DYNAMIC(InversionDlg, CDialog)
 
 InversionDlg::InversionDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_InversionDlg, pParent),
-	m_list_inversionesLB(m_lista_inversiones, [](Inversion& inv)
+	m_list_inversionesLB(m_lista_inversiones, [](const Inversion& inv)
 	{
 			return Util::to_cstring(inv.simple_dump());
 	}),
-	m_list_fondosCB(m_lista_fondos, [](Fondo& fondo)
+	m_list_fondosCB(m_lista_fondos, [](const Fondo& fondo)
 	{
 			return Util::to_cstring(fondo.simple_dump());
 	})

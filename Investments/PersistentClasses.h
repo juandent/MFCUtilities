@@ -30,8 +30,8 @@ struct Fondo
 		return str;
 	}
 
-	int num_participaciones_al(std::chrono::sys_days fecha) noexcept;
-	double get_rendimiento_unitario_al(std::chrono::year_month_day fecha) noexcept;
+	int num_participaciones_al(std::chrono::sys_days fecha) const noexcept;
+	double get_rendimiento_unitario_al(std::chrono::year_month_day fecha) const noexcept;
 };
 
 

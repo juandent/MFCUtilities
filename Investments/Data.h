@@ -71,12 +71,6 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("rend_unitario", &Rendimiento::rendimiento_unitario),
 				make_column("fkey_fondo", &Rendimiento::fkey_fondo),
 				foreign_key(&Rendimiento::fkey_fondo).references(&Fondo::id)));
-	// // ,
-	// 		make_table("X",
-	// 			make_column("id_X", &X::id, autoincrement(), primary_key()),
-	// 			make_column("fkey_rendimiento", &X::fkey_Rendimiento),
-	// 			foreign_key(&X::fkey_Rendimiento).references(&Rendimiento::id))
-	// 		);
 
 
 	if (flag == 0)
@@ -84,9 +78,6 @@ inline 	auto& Storage_Impl::get_storage()
 		flag = 1;
 		storage.sync_schema(true);
 	}
-
-	//JDH
-	//storage.has_dependent_rows(x);	// compile error
 
 	return storage;
 }
