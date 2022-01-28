@@ -152,7 +152,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
       <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_23_jan_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
-      <ShowIncludes>true</ShowIncludes>
+      <ShowIncludes>false</ShowIncludes>
       <UseFullPaths>false</UseFullPaths>
     </ClCompile>
     <Link>
@@ -203,6 +203,7 @@
     <ClInclude Include="CFondoDlg.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
+    <ClInclude Include="CompositePersistentClasses.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="FondoDlg.h" />

@@ -10,30 +10,28 @@
 
 class RecordLinks
 {
+	// TableKeys
+	using FondoTable = TableKey<Fondo, &Fondo::id>;
+	using InversionTable = TableKey<Inversion, &Inversion::fkey_fondo>;
+	using RendimientoTable = TableKey<Rendimiento, &Rendimiento::fkey_fondo>;
+
 	// Fondo structure
 	struct Fondos
 	{
-		using FondoDef = TableKey<Fondo, &Fondo::id>;
-		using Dep1 = TableKey<Inversion, &Inversion::fkey_fondo>;
-		using Dep2 = TableKey<Rendimiento, &Rendimiento::fkey_fondo>;
-		using PKDependents = TableDef<FondoDef, Dep1, Dep2>;
+		using PKDependents = TableDef<FondoTable, InversionTable, RendimientoTable>;
 	};
 
 	// Rendimiento structure
 	struct Rendimientos
 	{
-		using DepKey1 = TableKey<Rendimiento, &Rendimiento::fkey_fondo>;
-		using TargetKey1 = TableKey<Fondo, &Fondo::id>;
-		using Conn1 = TableConnection<DepKey1, TargetKey1>;
+		using Conn1 = TableConnection<RendimientoTable, FondoTable>;
 		using FKConnections = TableConnections<Conn1>;
 	};
 
 	// Inversion structure
 	struct Inversiones
 	{
-		using DepKey1 = TableKey<Inversion, &Inversion::fkey_fondo>;
-		using TargetKey1 = Rendimientos::TargetKey1;
-		using Conn1 = TableConnection<DepKey1, TargetKey1>;
+		using Conn1 = TableConnection<InversionTable, FondoTable>;
 		using FKConnections = TableConnections<Conn1>;
 	};
 public:

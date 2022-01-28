@@ -54,6 +54,68 @@ inline 	auto& Storage_Impl::get_storage()
 
 	static auto storage =
 		make_storage(db_name,
+			make_trigger("validate_nombre_before_insert_fondos",
+				before()
+				.insert()
+				.on<Fondo>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Fondo::abreviacion),""),
+						then(raise_abort("Fondo abreviacion empty")))
+					.when(is_equal(length(new_(&Fondo::nombre)), 0),
+						then(raise_abort("Fondo nombre empty")))
+					.end()))
+				.end()),
+
+			make_trigger("validate_num_participaciones_before_insert_inversion",
+				before()
+				.insert()
+				.on<Inversion>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Inversion::num_participaciones), 0),
+						then(raise_abort("Numero de participaciones no puede ser 0")))
+					.end()))
+				.end()),
+			make_trigger("validate_rendimiento_unitario_before_insert_rendimiento",
+				before()
+				.insert()
+				.on<Rendimiento>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Rendimiento::rendimiento_unitario), 0.0),
+						then(raise_abort("Rendimiento unitario no puede ser 0")))
+					.end()))
+				.end()),
+			make_trigger("validate_nombre_before_update_fondos",
+				before()
+				.update()
+				.on<Fondo>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Fondo::abreviacion), ""),
+						then(raise_abort("Fondo abreviacion empty")))
+					.when(is_equal(length(new_(&Fondo::nombre)), 0),
+						then(raise_abort("Fondo nombre empty")))
+					.end()))
+				.end()),
+			make_trigger("validate_num_participaciones_before_update_inversion",
+				before()
+				.update()
+				.on<Inversion>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Inversion::num_participaciones), 0),
+						then(raise_abort("Numero de participaciones no puede ser 0")))
+					.end()))
+				.end()),
+			make_trigger("validate_rendimiento_unitario_before_update_rendimiento",
+				before()
+				.update()
+				.on<Rendimiento>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Rendimiento::rendimiento_unitario), 0.0),
+						then(raise_abort("Rendimiento unitario no puede ser 0")))
+					.end()))
+				.end()),
+
+
+
 			make_table("Fondos",
 				make_column("id_fondo", &Fondo::id, autoincrement(), primary_key()),
 				make_column("nombre", &Fondo::nombre),
@@ -180,6 +242,7 @@ public:
 	static void empty_database();
 	static void upgrade_database();
 	static void backup_db();
+	static void test_syntax();
 };
 
 //inline Storage::Storage_t& storage = Storage::getStorage();

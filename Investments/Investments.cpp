@@ -75,7 +75,7 @@ CInvestmentsApp theApp;
 BOOL CInvestmentsApp::InitInstance()
 {
 	Storage::initialize();
-	// Storage::fill_db_with_test_data();
+	Storage::test_syntax();
 
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable

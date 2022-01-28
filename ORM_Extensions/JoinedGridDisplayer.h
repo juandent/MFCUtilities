@@ -156,7 +156,7 @@ private:
 		{
 		}
 	};
-
+	
 
 	template<typename T>
 	static CString format(T&& t)

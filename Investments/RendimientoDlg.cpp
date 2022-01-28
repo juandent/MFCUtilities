@@ -86,11 +86,7 @@ void RendimientoDlg::OnBnClickedApply()
 
 	double rend_unit;
 	m_rendimiento_unitario >> rend_unit;
-	if(rend_unit ==0.0)
-	{
-		MessageBoxW(L"Rendimiento no puede ser 0");
-		return;
-	}
+
 	std::chrono::sys_days fecha;
 	m_fecha_rendimiento >> fecha;
 
@@ -114,6 +110,7 @@ void RendimientoDlg::OnBnClickedApply()
 	catch( std::exception& exc)
 	{
 		handleApply(exc);
+		OnLbnSelchangeListRendimientos();
 	}
 }
 

@@ -113,6 +113,144 @@ void Storage::fill_db_with_test_data()
 	storage.rollback();
 }
 
+void Storage::test_syntax()
+{
+	using namespace sqlite_orm;
+	using namespace std::chrono;
+	using namespace std;
+
+
+	auto& storage = Storage::getStorage();
+
+
+//  SELECT doctor_id
+//  FROM visits
+//  WHERE LENGTH(patient_name) > 8
+	auto selectStatement = storage.prepare(select(&Fondo::id, where(length(&Fondo::nombre) > 2)));
+	ostringstream ss;
+	ss << "selectStatement = " << selectStatement.sql() << endl;  //  prints "SELECT doctor_id FROM ..."
+	auto rows = storage.execute(selectStatement); //  rows is std::vector<decltype(Fondo::id)>
+
+	//  SELECT doctor_id
+//  FROM visits
+//  WHERE LENGTH(patient_name) > 3
+	get<0>(selectStatement) = 3;
+	auto rows2 = storage.execute(selectStatement);
+
+
+	auto allUsersList = storage.get_all<Fondo, std::list<Fondo>>(where(c(&Fondo::id) < 40));
+
+	ss.str("");
+	auto concatedUserIdWithDashes = storage.group_concat(&Fondo::id, "---");
+	ss << "concatedUserIdWithDashes = " << concatedUserIdWithDashes << endl;
+
+	ss.str("");
+	auto countImageUrl = storage.count(&Fondo::nombre);
+	ss << "countImageUrl = " << countImageUrl << endl;      //  countImageUrl = 5
+
+	ss.str("");
+	//  SELECT SUM(id) FROM users
+	if (auto sumId = storage.sum(&Fondo::id)) {    //  sumId is std::unique_ptr<int>
+		ss << "sumId = " << *sumId << endl;
+	}
+	else {
+		ss << "sumId is null" << endl;
+	}
+
+	ss.str("");
+	//  SELECT TOTAL(id) FROM users
+	auto totalId = storage.total(&Fondo::id);
+	ss << "totalId = " << totalId << endl;    //  totalId is double (always)
+
+	ss.str("");
+	//  SELECT * FROM users WHERE id < 43
+	auto idLesserThan43 = storage.get_all<Fondo, std::list<Fondo>>(where(c(&Fondo::id) < 43));
+	cout << "idLesserThan43 count = " << idLesserThan43.size() << endl;
+	for (auto& user : idLesserThan43) {
+		ss << storage.dump(user) << endl;
+	}
+
+	ss.str("");
+	// where
+	// In fact you can chain together any number of different conditions with any operator fromand, or and not.All conditions are templated so there is no runtime overhead.And this makes
+	auto cuteConditions = storage.get_all<Fondo>(where((c(&Fondo::nombre) == "CFI" or c(&Fondo::abreviacion) == "Alex") and c(&Fondo::id) == 43));  //  where (first_name = 'John' or first_name = 'Alex') and id = 4
+	ss << "cuteConditions count = " << cuteConditions.size() << endl; //  cuteConditions count = 1
+	cuteConditions = storage.get_all<Fondo>(where(c(&Fondo::nombre) == "John" or (c(&Fondo::abreviacion) == "Alex" and c(&Fondo::id) == 44)));   //  where first_name = 'John' or (first_name = 'Alex' and id = 4)
+	ss << "cuteConditions count = " << cuteConditions.size() << endl; //  cuteConditions count = 2
+
+
+	ss.str("");
+	//  SELECT * FROM users WHERE last_name IN ("Doe", "White")
+	auto doesAndWhites = storage.get_all<Fondo>(where(in(&Fondo::nombre, { "FCI", "White" })));
+	ss << "doesAndWhites count = " << doesAndWhites.size() << endl;
+	for (auto& user : doesAndWhites) {
+		ss << storage.dump(user) << endl;
+	}
+
+
+	vector<int> ids{ 43,44,45 };
+	auto doesinVector = storage.get_all<Fondo>(where(in(&Fondo::nombre, ids)));
+	ss << "doesinVector count = " << doesinVector.size() << endl;
+	for (auto& user : doesinVector) {
+		ss << storage.dump(user) << endl;
+	}
+
+	ss.str("");
+
+	//  SELECT * FROM users WHERE id BETWEEN 66 AND 68
+	auto betweenId = storage.get_all<Fondo>(where(between(&Fondo::id, 66, 68)));
+	cout << "betweenId = " << betweenId.size() << endl;
+	for (auto& user : betweenId) {
+		cout << storage.dump(user) << endl;
+	}
+
+	ss.str("");
+	//  SELECT * FROM users WHERE last_name LIKE 'D%'
+	auto whereNameLike = storage.get_all<Fondo>(where(like(&Fondo::nombre, "F%")));
+	ss << "whereNameLike = " << whereNameLike.size() << endl;
+	for (auto& user : whereNameLike) {
+		ss << storage.dump(user) << endl;
+	}
+
+	// Also you can use remove_all function to perform DELETE FROM ... WHERE query with the same type of conditions.
+	storage.transaction([&storage]()->bool
+		{
+			storage.remove_all<Fondo>(where(c(&Fondo::id) < 30));
+			return false;
+		});
+
+	ss.str("");
+	//  SELECT last_name FROM users WHERE id < 300
+	auto allLastNames = storage.select(&Fondo::nombre, where(c(&Fondo::id) < 300));
+	ss << "allLastNames count = " << allLastNames.size() << endl; //  allLastNames is std::vector<std::string>
+	for (auto& lastName : allLastNames) {
+		ss << lastName << " ";
+	}
+	ss << endl;
+
+	ss.str("");
+	//  SELECT id FROM users WHERE image_url IS NULL
+	auto idsWithoutUrls = storage.select(&Fondo::id, where(is_null(&Fondo::abreviacion)));
+	for (auto id : idsWithoutUrls) {
+		ss << "id without image url " << id << endl;
+	}
+
+	ss.str("");
+	//  SELECT id FROM users WHERE image_url IS NOT NULL
+	auto idsWithUrl = storage.select(&Fondo::id, where(is_not_null(&Fondo::abreviacion)));
+	for (auto id : idsWithUrl) {
+		ss << "id with image url " << id << endl;
+	}
+
+	//  `SELECT * FROM users WHERE id > 250 ORDER BY id LIMIT 2, 4`
+	auto limited5comma10 = storage.get_all<Fondo>(where(c(&Fondo::id) < 250),
+		order_by(&Fondo::id),
+		limit(2, 4));	// offset 2, limit 4
+
+	auto crossed = storage.select(columns(&Fondo::id, &Fondo::nombre, &Inversion::fkey_fondo, &Inversion::num_participaciones),
+		cross_join<Inversion>());
+}
+
 void Storage::empty_database()
 {
 	using namespace sqlite_orm;

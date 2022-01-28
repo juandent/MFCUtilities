@@ -89,11 +89,6 @@ void InversionDlg::OnBnClickedApply()
 
 	int num_part;
 	m_num_participaciones >> num_part;
-	if(num_part == 0)
-	{
-		MessageBoxW(L"Numero de participaciones no puede ser 0");
-		return;
-	}
 
 	std::chrono::sys_days fecha;
 	m_fecha_inversion >> fecha;
@@ -118,6 +113,7 @@ void InversionDlg::OnBnClickedApply()
 	catch (std::exception& exc)
 	{
 		handleApply(exc);
+		OnLbnSelchangeListInversiones();
 	}
 }
 

@@ -41,6 +41,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ORM_Extensions", "ORM_Exten
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ORM_ExtensionsModules", "ORM_ExtensionsModules\ORM_ExtensionsModules.vcxproj", "{40F8B8AC-EA37-4D92-A399-B2A8AFFD0EDD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqlite_orm_examples", "sqlite_orm_examples\sqlite_orm_examples.vcxproj", "{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -279,6 +281,18 @@ Global
 		{40F8B8AC-EA37-4D92-A399-B2A8AFFD0EDD}.Release|x64.Build.0 = Release|x64
 		{40F8B8AC-EA37-4D92-A399-B2A8AFFD0EDD}.Release|x86.ActiveCfg = Release|Win32
 		{40F8B8AC-EA37-4D92-A399-B2A8AFFD0EDD}.Release|x86.Build.0 = Release|Win32
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Debug|x64.ActiveCfg = Debug|x64
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Debug|x64.Build.0 = Debug|x64
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Debug|x86.ActiveCfg = Debug|Win32
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Debug|x86.Build.0 = Debug|Win32
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Release Unicode|x64.ActiveCfg = Release|x64
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Release Unicode|x64.Build.0 = Release|x64
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Release Unicode|x86.ActiveCfg = Release|Win32
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Release Unicode|x86.Build.0 = Release|Win32
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Release|x64.ActiveCfg = Release|x64
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Release|x64.Build.0 = Release|x64
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Release|x86.ActiveCfg = Release|Win32
+		{1BFBC2CA-CF0C-4505-8405-14B3DC9AB07E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

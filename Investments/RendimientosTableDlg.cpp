@@ -64,11 +64,12 @@ void RendimientosTableDlg::Refresh()
 {
 	OnBnClickedBFilter();
 }
+#include "CompositePersistentClasses.h"
 
 template <typename T>
 void RendimientosTableDlg::InitializeGridRendimientos(const T& t)
 {
-	auto otherlines = Storage::getStorage().select(columns(
+	auto rows = Storage::getStorage().select(columns(
 		alias_column<als_r>(&Rendimiento::id),
 		alias_column<als_f>(&Fondo::nombre),
 		alias_column<als_r>(&Rendimiento::fecha),
@@ -79,11 +80,21 @@ void RendimientosTableDlg::InitializeGridRendimientos(const T& t)
 		where(t),
 		multi_order_by(order_by(alias_column<als_r>(&Rendimiento::fkey_fondo)), order_by(alias_column<als_r>(&Rendimiento::fecha)).desc()));
 
-
-
+#define JDH
+#ifdef JDH
+	auto row = rows[0];
+	auto guard = Storage::getStorage().transaction_guard();
+	RendimientoComposite comp(std::get<0>(row));
+	auto id = comp.get_id();
+	comp.set_rendimiento_unitario(2.2);
+	decltype(row)* p;
+	auto col0 = std::get<0>(row);
+	auto col1 = std::get<1>(row);
+	guard.rollback();
+#endif
 	std::vector<std::string> headers{ "ID RENDIMIENTO", "FONDO ", "FECHA", "REND UNITARIO"};
 
-	m_rendimientos_displayer.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<>, IntegerList<4>>(m_rendimientos_grid, std::move(otherlines), std::move(headers)));
+	m_rendimientos_displayer.reset(new JoinedGridDisplayer<decltype(rows[0]), IntegerList<>, IntegerList<4>>(m_rendimientos_grid, std::move(rows), std::move(headers)));
 	m_rendimientos_displayer->display();
 }
 

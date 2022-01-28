@@ -79,11 +79,6 @@ void CFondoDlg::OnBnClickedApply()
 	m_fondo_abrev >> abrev;
 	m_fondo_name >> name;
 
-	if(name.empty() || abrev.empty())
-	{
-		MessageBoxW(L"Nombre o abreviacion no pueden quedar vacios");
-		return;
-	}
 
 	try
 	{
@@ -105,6 +100,7 @@ void CFondoDlg::OnBnClickedApply()
 	catch (std::exception& exc)
 	{
 		handleApply(exc);
+		OnSelchangeListFondos();
 	}
 }
 
