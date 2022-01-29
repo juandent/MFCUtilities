@@ -177,7 +177,6 @@ public:
 			record = refIntManager.get(pk);
 			
 			Posting::get().PostSelChangeNotification(m_box);
-			// m_box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_box.m_hWnd);
 		}
 		return record;
 	}

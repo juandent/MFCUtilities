@@ -45,5 +45,8 @@
     <ClInclude Include="HandleSystemError.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DateBinding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

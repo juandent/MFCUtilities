@@ -3,9 +3,8 @@
 #undef max
 
 #include <sqlite_orm/sqlite_orm.h>
-// #include <catch2/catch.hpp>
 #include <chrono>
-// #include <date/date.h>
+
 
 
 import Util;
@@ -13,7 +12,8 @@ import Util;
 
 // #include "../FixedPoint/Money.h"
 #if 1
-#include "..\TesterForMFCUtilitiesDLL/Model/Model.DateBinding.h"
+// #include "..\TesterForMFCUtilitiesDLL/Model/Model.DateBinding.h"
+#include "..\ORM_Extensions/DateBinding.h"
 #else
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.Colones.Binding.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.CoinBinding.h"

@@ -18,5 +18,8 @@
     <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_23_jan_2022\examples\triggers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_23_jan_2022\examples\blob_binding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

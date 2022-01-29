@@ -1,6 +1,6 @@
 #pragma once
 #include "PersistentClasses.h"
-
+#include "..\ORM_Extensions/Connections.h"
 
 struct Location;
 struct Password;
@@ -8,11 +8,22 @@ struct Password;
 
 class RecordLinks
 {
-	// template<typename T, T ...Counts>
-	// static bool allNonZero(T...counts)
-	// {
-	// 	bool all_none_zero = (counts && ...);
-	// }
+	// TableKeys
+	using LocationTable = TableKey<Location, &Location::id>;
+	using PasswordTable = TableKey<Password, &Password::fkey_location>;
+
+	struct Locations
+	{
+		using PKDependents = TableDef<LocationTable, PasswordTable>;
+	};
+	struct Passwords
+	{
+		using Conn1 = TableConnection<PasswordTable, LocationTable>;
+		using FKConnections = TableConnections<Conn1>;
+	};
+
+
+
 	template<typename ...Counts>
 	static bool allNonZero(Counts ... counts) requires (std::is_same_v<Counts, int> && ...)
 	{

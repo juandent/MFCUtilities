@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="BoxContents.h" />
     <ClInclude Include="Connections.h" />
+    <ClInclude Include="DateBinding.h" />
     <ClInclude Include="GridDisplayer.h" />
     <ClInclude Include="HandleSystemError.h" />
     <ClInclude Include="IDisplayer.h" />
