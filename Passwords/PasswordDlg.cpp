@@ -5,6 +5,7 @@
 #include "Passwords.h"
 #include "afxdialogex.h"
 #include "PasswordDlg.h"
+#include "..\ORM_Extensions/HandleSystemError.h"
 
 
 // PasswordDlg dialog
@@ -13,11 +14,11 @@ IMPLEMENT_DYNAMIC(PasswordDlg, CDialog)
 
 PasswordDlg::PasswordDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_PasswordDlg, pParent),
-	m_password_listLB(  m_password_list, [](Password& password)
+	m_password_listLB(  m_password_list, [](const Password& password)
 		{
 			return Util::to_cstring(password.password);
 		}),
-	m_location_namesCB( m_location_names, [](Location& location)
+	m_location_namesCB( m_location_names, [](const Location& location)
 		{
 			return Util::to_cstring(location.simple_dump());
 		})
@@ -93,19 +94,17 @@ void PasswordDlg::OnBnClickedGrabar()
 		return;
 	}
 
-	auto name = GetText(m_password);
-	auto date = GetDate(m_beginning_date);
-	auto id = GetLongLong(m_id);
+	std::string name;
+	m_password >> name;
+	// = GetText(m_password);
+	std::chrono::sys_days date;
+	// = GetDate(m_beginning_date);
+	m_beginning_date >> date;
+
+	int id;
+	// = GetLongLong(m_id);
+	m_id >> id;
 	auto fkey_location = location->id;
-
-#if 0
-	auto num_caso = GetLongLong(m_no_caso);
-	auto deducciones = GetAmount(m_deducciones);
-	auto total_neto = GetDolares(m_neto).getAsLongDouble();
-	auto comentarios = GetText(m_comentarios);
-#endif
-
-//	auto count = Storage::getStorage().count<Location>(where(is_equal(&Location::id, liquidacion)));
 
 	if (name.empty())
 	{
@@ -113,26 +112,30 @@ void PasswordDlg::OnBnClickedGrabar()
 		return;
 	}
 
-	if (!password)	// insert
+	try
 	{
-		password = m_password_listLB.insert(name, date,fkey_location );
-		m_password_listLB.insert_into_listbox(*password);
+		if (!password)	// insert
+		{
+			password = m_password_listLB.insert(name, date, fkey_location);
+			m_password_listLB.insert_into_listbox(*password);
+		}
+		else                // update
+		{
+			password->begining_date = date;
+			password->fkey_location = fkey_location;
+			password->password = name;
+			m_password_listLB.update(*password);
+		}
+		auto where_clause = getPasswordWhereClauseNoAlias(location->id);
+
+		m_password_listLB.loadLBOrderByDescWhere(&Password::begining_date, where_clause);
+		setIdFromRecord<Password>(m_id, password->id);
 	}
-	else                // update
+	catch (std::exception& exc)
 	{
-		password->begining_date= date;
-		password->fkey_location = fkey_location;
-		password->password= name;
-		m_password_listLB.update(*password);
+		handleApply(exc);
+		OnLbnSelchangeLPasswords();
 	}
-	auto where_clause = getPasswordWhereClauseNoAlias(location->id);
-
-	m_password_listLB.loadLBOrderByDescWhere(&Password::begining_date, where_clause);
-
-//	m_password_listLB.loadLBOrderBy(&Location::name);
-	//	m_ins_response = ins_response;
-	setIdFromRecord<Password>(m_id, password->id);
-
 }
 
 
@@ -144,9 +147,11 @@ void PasswordDlg::OnLbnSelchangeLPasswords()
 	if (!password)	return;
 
 
-	SetLongLong(m_id, password->id);
-	SetText(m_password, password->password);
-	SetDate(m_beginning_date, password->begining_date);
+	m_id << password->id;
+	// SetText(m_password, password->password);
+	m_password << password->password;
+	// SetDate(m_beginning_date, password->begining_date);
+	m_beginning_date << password->begining_date;
 
 	this->m_location_namesCB.select(password->fkey_location);
 	m_password_listLB.select(password->id);
@@ -156,7 +161,9 @@ void PasswordDlg::OnLbnSelchangeLPasswords()
 void PasswordDlg::OnBnClickedBorrar()
 {
 	// TODO: Add your control notification handler code here
-	auto id = GetLongLong(m_id);
+	int id;
+	// = GetLongLong(m_id);
+	m_id >> id;
 	m_password_listLB.select(id);
 	if (m_password_listLB.delete_current_sel())
 	{
@@ -173,9 +180,10 @@ void PasswordDlg::OnBnClickedNuevo()
 	m_password_listLB.select(-1);
 	//m_password_listLB.ResetContent();
 
-	SetText(m_id, ""s);
-	SetText(m_password, ""s);
-
+	// SetText(m_id, ""s);
+	m_id << ""s;
+	// SetText(m_password, ""s);
+	m_password << ""s;
 	//this->m_location_namesCB.select(-1);
 }
 

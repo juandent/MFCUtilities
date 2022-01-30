@@ -13,7 +13,8 @@ import Util;
 
 // #include "../FixedPoint/Money.h"
 #if 1
-#include "..\TesterForMFCUtilitiesDLL/Model/Model.DateBinding.h"
+// #include "..\TesterForMFCUtilitiesDLL/Model/Model.DateBinding.h"
+#include "..\ORM_Extensions/DateBinding.h"
 #else
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.Colones.Binding.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.CoinBinding.h"
@@ -166,7 +167,7 @@ public:
 
 //inline Storage::Storage_t& storage = Storage::getStorage();
 
-#include "ORM_Utilities.h"
+#include "..\ORM_Extensions/ORM_Utilities.h"
 
 #if 0
 

@@ -13,7 +13,7 @@ IMPLEMENT_DYNAMIC(LocationDlg, CDialog)
 
 LocationDlg::LocationDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_LocationDlg, pParent),
-	m_list_all_locationsLB(m_list_locations, [](Location& location)
+	m_list_all_locationsLB(m_list_locations, [](const Location& location)
 		{
 			return Util::to_cstring(location.simple_dump());
 		})
