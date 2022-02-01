@@ -6,12 +6,32 @@
 
 #include "Typelist.h"
 
+
+
+template <typename T, int T::* K> 			requires (is_persistent<T>::value)
+struct TableKey;
+
+template<typename T>
+struct is_tableKey
+{
+	static constexpr bool value = false;
+};
+
+template<typename persistence_class, int persistence_class::* key>    requires (is_persistent<persistence_class>::value )
+struct is_tableKey<TableKey<persistence_class, key>>
+{
+	static constexpr bool value = true;
+};
+
+
+
 // Type: Fondo identified by: Fondo.id
 // is referenced by	: Rendimiento using Rendimiento::fkey_fondo
 //					: Inversion using Inversion::fkey_fondo
 // 
-
-template <typename T, int T::* K>
+// T is a persistent class
+// K is its primary key
+template <typename T, int T::* K>			requires (is_persistent<T>::value)
 struct TableKey
 {
 	using Table = T;
@@ -32,8 +52,10 @@ private:
 	inline static const Table* tableData = nullptr;
 };
 
-template <typename DepPair, typename TargetPair>
-struct TableConnection;
+
+#if 0
+// template <typename DepPair, typename TargetPair>
+// struct TableConnection;
 
 template<typename T, typename Tuple>
 struct TypeInTuple
@@ -60,20 +82,16 @@ private:
 	}
 
 };
+#endif
 
 // T and RefBy are TableKeys
 // Target is special, has primary key
-template <typename T, typename ...RefBy>
+template <typename T, typename ...RefBy>   requires ( is_tableKey<T>::value && (is_tableKey<RefBy>::value && ...))
 struct TableDef
 {
+public:
 	using Target = T;
 	static std::tuple<RefBy...> reference_list;
-
-	template<typename U>     requires (TypeInTuple<U,decltype(reference_list)>::exists())	          // U must be in reference_list
-	struct connection
-	{
-		using type = TableConnection<U, T>;
-	};
 
 	static bool has_links(const typename Target::Table& targetRec)
 	{
@@ -82,7 +100,7 @@ struct TableDef
 		if( pk == -1)
 		{
 			std::ostringstream ss;
-			ss << "Registro de " << Storage::getStorage().tablename<Target::Table>() << " no está almacenado";
+			ss << "Registro de " << Storage::getStorage().tablename<typename Target::Table>() << " no está almacenado";
 			throw std::exception(ss.str().c_str());
 		}
 
@@ -92,7 +110,7 @@ struct TableDef
 		if(has)
 		{
 			std::ostringstream ss;
-			ss << "Registro de " << Storage::getStorage().tablename<Target::Table>() << " tiene dependientes";
+			ss << "Registro de " << Storage::getStorage().tablename<typename Target::Table>() << " tiene dependientes";
 			throw std::exception(ss.str().c_str());
 		}
 		return has;
@@ -124,7 +142,7 @@ private:
 // Tuple is a std::tuple<TableKeys>
 //  
 
-template<typename T, typename Tuple>
+template<typename T, typename Tuple>   requires (is_tableKey<T>::value)
 struct TableKeyInTuple
 {
 	using tableKey = T;
@@ -142,8 +160,6 @@ private:
 	constexpr static int find()
 	{
 		using V = std::tuple_element_t < N-1, Tuple>;
-		V* pV;
-		T* pT;
 		bool match = std::is_same_v<T, V>;
 		if (match)
 			return N-1;
@@ -157,86 +173,47 @@ private:
 	}
 };
 
-
-
-// T is a TableKey, also known as T::Target or tableKey
-// tblDefs are TableDef types
-//		tblDefs[x]::reference_list is list of TableKeys
-// we are going to search TableKey T in each tblDefs[x]::reference_list
-//	for each found we will create a TableConnection<T, tblDefs[x]::Target>
-//	we add such connection to TableConnections list by appending
-
-template<typename T, typename...tblDefs >
-struct FKDependents
+#if 0
+template<typename list>
+struct List
 {
-	inline static std::array<int, sizeof...(tblDefs)> m_positions;
-	using tableKey = T;
-	static std::tuple<tblDefs...> tblDefs_list;
-
-	static constexpr int findInTblDefs_list()
-	{
-		static constexpr int size = std::tuple_size_v<decltype(tblDefs_list)>;
-		tableKey* pT;
-		return find<size>();
-	}
-
-	using Collection = Loki::Typelist<Loki::NullType, Loki::NullType>;
-
-	static constexpr  int collection_size()
-	{
-		static constexpr int array_size = std::tuple_size_v<decltype(tblDefs_list)>;
-		int count = check_array<array_size>();
-		return count;
-	}
-
-private:
-	template<int N>
-	static constexpr int find()
-	{
-		// pick one TableDef
-		using tableDef = std::tuple_element_t<N-1, decltype(tblDefs_list)>;
-		using tableKeys = decltype(tableDef::reference_list);
-
-		const int n = N-1;
-		tableDef* pTD;
-		tableKeys* pTKs;
-
-		int index = TableKeyInTuple < tableKey, tableKeys>::index();
-		if( index != -1)
-		{
-			// create pair
-			// (tableDef::Target, tableKey)
-			typename tableDef::Target* pTDT;
-			tableKey* pTK;
-
-			// append pair to type collection
-			int i = 0;
-		}
-
-		m_positions[N-1] = index;
-		return find<N - 1>();
-	}
-	template<>
-	static constexpr int find<0>()
-	{
-		return collection_size();
-		// static constexpr int array_size = std::tuple_size_v<decltype(tblDefs_list)>;
-		// int count = check_array<array_size>();
-		// return count;
-	}
-
-	template<int N>
-	static constexpr int check_array()
-	{
-		int count = m_positions[N - 1] != -1 ? 1 : 0;
-		return count + check_array<N - 1>();
-	}
-	template<>
-	static constexpr int check_array<0>()
-	{
-		return 0;
-	}
+	using type = list;
 };
+
+template<typename list, typename T>
+struct ListAppend : List<list>
+{
+	using Result = typename Loki::TL::Append<list, T>::Result;
+};
+
+template<typename List, typename T>
+struct IncreasingCollection
+{
+	using type = typename Loki::TL::Append<List, T>::Result;
+
+};
+
+struct IncCollectionImpl
+{
+	using Collection = typename Loki::Typelist < Loki::NullType, Loki::NullType >;
+	using list = IncreasingCollection::impl<Collection, int>::list;
+	using list2 = IncreasingCollection::impl<list, double>::list;
+};
+#endif
+
+template<typename Col, typename T, int N>
+struct static_if
+{
+	using type = typename Loki::TL::Append<Col, T>::Result;
+};
+
+template<typename Col, typename T>
+struct static_if<Col, T, -1>
+{
+	using type = Col;
+};
+
+
 
 #endif
 
@@ -248,7 +225,7 @@ private:
 //		TargetPair::Table = Fondo
 //		TargetPair::Key = &Fondo.id
 
-template <typename DepPair, typename TargetPair>
+template <typename DepPair, typename TargetPair>   requires (is_tableKey<DepPair>::value && is_tableKey<TargetPair>::value)
 struct TableConnection
 {
 	using Dependent = DepPair;
@@ -267,6 +244,100 @@ struct TableConnection
 };
 
 
+// List of TableConnection instances
+template <typename List>
+struct TableConnectionList
+{
+	using typeAt0 = typename Loki::TL::TypeAt<List, 0>::Result;
+	using DependentTable = typename typeAt0::Dependent::Table;
+
+	static bool foreignKeysExist(const DependentTable& dep)
+	{
+		constexpr size_t size = Loki::TL::Length<List>::value;
+		bool exists = foreignKeyExists<size>(dep);
+
+		if (!exists)
+		{
+			std::ostringstream ss;
+			ss << "Registro de " << Storage::getStorage().tablename<DependentTable>() << " contiene dangling FKs";
+			throw std::exception(ss.str().c_str());
+		}
+		return exists;
+	}
+private:
+	template<size_t index>
+	static bool foreignKeyExists(const DependentTable& dep)
+	{
+		// is a TableConnection
+		using Connection = typename Loki::TL::TypeAt<List, index - 1>::Result;
+		bool exists = Connection::foreignKeyExists(dep);
+
+		return exists && foreignKeyExists<index - 1>(dep);
+	}
+	template<>
+	static bool foreignKeyExists<0>(const DependentTable& dep)
+	{
+		return true;
+	}
+};
+
+template<>
+struct TableConnectionList<Loki::NullType>
+{
+	static bool foreignKeysExist(...)
+	{
+		return true;
+	}
+};
+// T is a TableKey, also known as T::Target or tableKey
+// tblDefs are TableDef types
+//		tblDefs[x]::reference_list is list of TableKeys
+// we are going to search TableKey T in each tblDefs[x]::reference_list
+//	for each found we will create a TableConnection<T, tblDefs[x]::Target>
+//	we add such connection to TableConnections list by appending
+
+template<typename T, typename...tblDefs >
+struct FKDependents
+{
+	// inline static std::array<int, sizeof...(tblDefs)> m_positions;
+	using tableKey = T;
+	static std::tuple<tblDefs...> tblDefs_list;
+private:
+	template<typename Col>
+	struct build
+	{
+		template <typename Col, int N>
+		struct append
+		{
+		private:
+			using tableDef = std::tuple_element_t<N - 1, decltype(tblDefs_list)>;
+			using tableKeys = decltype(tableDef::reference_list);
+			static constexpr int index = TableKeyInTuple < tableKey, tableKeys>::index();
+			using typeToAdd = TableConnection<tableKey, typename tableDef::Target>;
+			using newCol = static_if<Col, typeToAdd, index>::type;
+		public:
+			using result = typename append<newCol, N - 1>::result;
+		};
+		template<typename Col>
+		struct append<Col, 0>
+		{
+			using result = Col;
+		};
+		static constexpr int size = std::tuple_size_v<decltype(tblDefs_list)>;
+		using result = typename append<Col, size>::result;
+
+	};
+public:
+	struct construct
+	{
+	private:
+		using res = typename build<Loki::NullType>::result;
+	public:
+		using result = TableConnectionList<res>;
+	};
+};
+
+#if 0
 // T and Conns are TableConnection instances
 template <typename T, typename ...Conns>
 struct TableConnections
@@ -303,3 +374,4 @@ private:
 		return true;
 	}
 };
+#endif

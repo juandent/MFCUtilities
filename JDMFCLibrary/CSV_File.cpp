@@ -52,17 +52,19 @@ namespace csv
 			throw ios_base::failure{ os.str() };
 		}
 
-		char buffer[100'000];
+		// char buffer[100'000];
 
 		int rowNumber = 0;
 		m_matrix.resize(0);
 		in.seekg(ios::beg);
-		in.getline(buffer, sizeof buffer);
+		string strBuffer;
+		std::getline(in, strBuffer);
+		// in.getline(buffer, sizeof buffer);
 
 		while (in.good())
 		{
 			vector<string> columns;
-			string strBuffer{ buffer };
+			// string strBuffer{ buffer };
 			diag::display(strBuffer);
 
 
@@ -98,7 +100,8 @@ namespace csv
 
 			m_matrix.push_back(columns);
 			// read next line
-			in.getline(buffer, sizeof buffer);
+			// in.getline(buffer, sizeof buffer);
+			std::getline(in, strBuffer);
 			rowNumber++;
 		}
 	}
