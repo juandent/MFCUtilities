@@ -25,9 +25,10 @@ struct is_tableKey<TableKey<persistence_class, key>>
 
 
 
-// Type: Fondo identified by: Fondo.id
-// is referenced by	: Rendimiento using Rendimiento::fkey_fondo
-//					: Inversion using Inversion::fkey_fondo
+// Examples:
+//	Fondo with PK id
+//  Rendimiento with FK fkey_fondo
+//	Inversion with FK fkey_fondo
 // 
 // T is a persistent class
 // K is its primary key
@@ -86,8 +87,9 @@ private:
 
 // T and RefBy are TableKeys
 // Target is special, has primary key
+// The TableKeys in RefBy have foreign keys
 template <typename T, typename ...RefBy>   requires ( is_tableKey<T>::value && (is_tableKey<RefBy>::value && ...))
-struct TableDef
+struct PKDependencies
 {
 public:
 	using Target = T;
@@ -103,9 +105,7 @@ public:
 			ss << "Registro de " << Storage::getStorage().tablename<typename Target::Table>() << " no está almacenado";
 			throw std::exception(ss.str().c_str());
 		}
-
 		constexpr size_t size = std::tuple_size_v<decltype(reference_list)>;
-
 		bool has = has_links<size>();
 		if(has)
 		{
@@ -130,11 +130,7 @@ private:
 		return has || has_links<index - 1>();
 	}
 	template<>
-	static bool has_links<0>()
-	{
-		return false;
-	}
-
+	static bool has_links<0>()  { return false; }
 };
 
 #if 1
@@ -290,16 +286,18 @@ struct TableConnectionList<Loki::NullType>
 	}
 };
 // T is a TableKey, also known as T::Target or tableKey
-// tblDefs are TableDef types
+// tblDefs are PKDependencies types
 //		tblDefs[x]::reference_list is list of TableKeys
 // we are going to search TableKey T in each tblDefs[x]::reference_list
 //	for each found we will create a TableConnection<T, tblDefs[x]::Target>
 //	we add such connection to TableConnections list by appending
+//	(see struct append inside struct build and see how the list is "exported"
+//	in struct construct: see how construct triggers the building of the list
+//	and reports its final stage)
 
 template<typename T, typename...tblDefs >
-struct FKDependents
+struct FKDependencies
 {
-	// inline static std::array<int, sizeof...(tblDefs)> m_positions;
 	using tableKey = T;
 	static std::tuple<tblDefs...> tblDefs_list;
 private:

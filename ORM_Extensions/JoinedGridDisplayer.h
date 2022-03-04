@@ -13,6 +13,7 @@ inline double& extractValue(const std::unique_ptr<double>& val)
 	}
 	return null_value;
 }
+#if 0
 template<typename T> requires (!std::is_same_v<T, std::unique_ptr<double>&>)
 inline static T& extractValue(T& t)
 {
@@ -21,10 +22,19 @@ inline static T& extractValue(T& t)
 		return *t;
 	return null_value;
 }
+#endif
 template<typename T>
 inline static T& extractValue(std::optional<T>& opt)
 {
-	return *opt;
+	if(opt)
+		return *opt;
+	return T{};
+}
+
+template<typename T>
+inline static T& extractValue(T& val)
+{
+	return val;
 }
 
 
@@ -141,6 +151,7 @@ private:
 			else
 			{
 				auto&& value = std::get<Col>(z[row]);
+				// auto val = extractValue(value);	// JDH
 
 				cs = FormatCol<Col, FieldType>(value, grid);
 			}
@@ -167,6 +178,16 @@ private:
 
 	template<typename T>
 	static CString format(const std::shared_ptr<T>& t)
+	{
+		if (t)
+		{
+			return Util::to_cstring(*t);
+		}
+		return L"";
+	}
+
+	template<typename T>
+	static CString format(const std::optional<T>& t)
 	{
 		if (t)
 		{

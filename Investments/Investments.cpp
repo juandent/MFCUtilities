@@ -13,6 +13,7 @@
 
 #include "ChildFrm.h"
 #include "Data.h"
+#include "GenericGrid.h"
 #include "InversionDlg.h"
 #include "InvestmentsDoc.h"
 #include "InvestmentsView.h"
@@ -37,6 +38,7 @@ BEGIN_MESSAGE_MAP(CInvestmentsApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_INVERSION, &CInvestmentsApp::OnFileInversion)
 	ON_COMMAND(ID_FILE_RENDIMIENTO, &CInvestmentsApp::OnFileRendimiento)
 	ON_COMMAND(ID_FILE_RENDIMIENTOSTABLA, &CInvestmentsApp::OnFileRendimientostabla)
+	ON_COMMAND(ID_FILE_GENERICGRID, &CInvestmentsApp::OnFileGenericgrid)
 END_MESSAGE_MAP()
 
 
@@ -271,4 +273,12 @@ void CInvestmentsApp::OnFileRendimientostabla()
 	RendimientosTableDlg dlg;
 	dlg.DoModal();
 
+}
+
+
+void CInvestmentsApp::OnFileGenericgrid()
+{
+	// TODO: Add your command handler code here
+	GenericGrid dlg;
+	dlg.DoModal();
 }

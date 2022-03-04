@@ -11,22 +11,21 @@
 class RecordLinks
 {
 	// TableKeys
-	using FondoTable = TableKey<Fondo, &Fondo::id>;
-	using InversionTable = TableKey<Inversion, &Inversion::fkey_fondo>;
-	using RendimientoTable = TableKey<Rendimiento, &Rendimiento::fkey_fondo>;
+	using FondoPK = TableKey<Fondo, &Fondo::id>;
+	using InversionFondoFK = TableKey<Inversion, &Inversion::fkey_fondo>;
+	using RendimientoFondoFK = TableKey<Rendimiento, &Rendimiento::fkey_fondo>;
 
 	// Fondo structure
 	struct Fondos
 	{
-		using PKDependents = TableDef<FondoTable, InversionTable, RendimientoTable>;
-		// using FKConnections = typename FKDependents<FondoTable, Fondos::PKDependents>::construct::result;
+		using PKDependents = PKDependencies<FondoPK, InversionFondoFK, RendimientoFondoFK>;
 	};
 
 	// Rendimiento structure
 	struct Rendimientos
 	{
 #if 1
-		using FKConnections = typename FKDependents<RendimientoTable, Fondos::PKDependents>::construct::result;
+		using FKDependents = typename FKDependencies<RendimientoFondoFK, Fondos::PKDependents>::construct::result;
 #else
 		using Conn1 = TableConnection<RendimientoTable, FondoTable>;
 		using FKConnections = TableConnections<Conn1>;
@@ -58,7 +57,7 @@ class RecordLinks
 	// Inversion structure
 	struct Inversiones
 	{
-		using FKConnections = typename FKDependents<InversionTable, Fondos::PKDependents>::construct::result;
+		using FKDependents = typename FKDependencies<InversionFondoFK, Fondos::PKDependents>::construct::result;
 	};
 public:
 	static bool has_links(const Fondo& fondo)
@@ -69,6 +68,6 @@ public:
 	static bool has_links(const Rendimiento& rendimiento) { return false; }
 
 	static bool foreignKeysExist(const Fondo& fondo) { return true; }
-	static bool foreignKeysExist(const Inversion& inversion) { return Inversiones::FKConnections::foreignKeysExist(inversion); }
-	static bool foreignKeysExist(const Rendimiento& rendimiento) { return Rendimientos::FKConnections::foreignKeysExist(rendimiento); }
+	static bool foreignKeysExist(const Inversion& inversion) { return Inversiones::FKDependents::foreignKeysExist(inversion); }
+	static bool foreignKeysExist(const Rendimiento& rendimiento) { return Rendimientos::FKDependents::foreignKeysExist(rendimiento); }
 };

@@ -87,6 +87,9 @@
     <ClInclude Include="CompositePersistentClasses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GenericGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Investments.cpp">
@@ -138,6 +141,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RendimientosTableDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
