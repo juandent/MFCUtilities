@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\filesystem"><violation beginline="1331" endline="1331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1153" endline="1153" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\string"><violation beginline="548" endline="548" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="298" endline="298" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="174" endline="174" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="174" endline="174" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="174" endline="174" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="298" endline="298" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="298" endline="298" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\xlocale"><violation beginline="2607" endline="2607" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2618" endline="2618" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\date\date.h"><violation beginline="685" endline="685" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="685" endline="685" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\fixedpoint\arithmetic_types.h"><violation beginline="70" endline="70" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="90" endline="90" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="112" endline="112" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="132" endline="132" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="331" endline="331" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="361" endline="361" rule="Rule6-3-1" ruleset="Statements">
+</violation><violation beginline="361" endline="361" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="423" endline="423" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="422" endline="422" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="423" endline="423" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="423" endline="423" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="423" endline="423" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="422" endline="422" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="422" endline="422" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="423" endline="423" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="423" endline="423" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="423" endline="423" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="423" endline="423" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="422" endline="422" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="449" endline="449" rule="Rule6-3-1" ruleset="Statements">
+</violation><violation beginline="449" endline="449" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="287" endline="287" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="287" endline="287" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="287" endline="287" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="287" endline="287" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\fixedpoint\money.h"><violation beginline="27" endline="27" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="41" endline="41" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\stringdateconverter.h"><violation beginline="39" endline="39" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="58" endline="58" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="67" endline="67" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="97" endline="97" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="97" endline="97" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\utilities.h"><violation beginline="109" endline="109" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="109" endline="109" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="117" endline="117" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="117" endline="117" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="129" endline="129" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="140" endline="140" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="146" endline="146" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="170" endline="170" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="163" endline="163" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="155" endline="155" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="163" endline="163" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="155" endline="155" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="310" endline="310" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="310" endline="310" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="318" endline="318" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="328" endline="328" rule="Rule7-3-4" ruleset="Declarations">
+</violation><violation beginline="329" endline="329" rule="Rule7-3-4" ruleset="Declarations">
+</violation><violation beginline="350" endline="350" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="155" endline="155" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="397" endline="397" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="423" endline="423" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="449" endline="449" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="457" endline="457" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="283" endline="283" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="285" endline="285" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="287" endline="287" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="289" endline="289" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

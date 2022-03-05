@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxdd_.h"><violation beginline="71" endline="71" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxwin.h"><violation beginline="3325" endline="3325" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2919" endline="2919" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="3369" endline="3369" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\gridctrl.h"><violation beginline="208" endline="208" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="207" endline="207" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="323" endline="323" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="210" endline="210" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="209" endline="209" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\ownersdialog.cpp"><violation beginline="12" endline="12" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="12" endline="12" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="12" endline="12" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="12" endline="12" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="20" endline="20" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="24" endline="24" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="31" endline="31" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="32" endline="32" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="38" endline="38" rule="Rule10-3-2" ruleset="Classes">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\ownersdialog.h"><violation beginline="22" endline="22" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

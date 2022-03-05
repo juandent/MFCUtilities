@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afx.h"><violation beginline="1680" endline="1680" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="605" endline="605" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="325" endline="325" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="573" endline="573" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="605" endline="605" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="311" endline="311" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxbasepane.h"><violation beginline="145" endline="145" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="120" endline="120" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="145" endline="145" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="120" endline="120" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="250" endline="250" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="182" endline="182" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxcmn.h"><violation beginline="719" endline="719" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="814" endline="814" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="933" endline="933" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="933" endline="933" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="923" endline="923" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="933" endline="933" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="952" endline="952" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="939" endline="939" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="743" endline="743" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxcommandmanager.h"><violation beginline="44" endline="44" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="28" endline="28" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="44" endline="44" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="28" endline="28" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxdockablepane.h"><violation beginline="213" endline="213" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="221" endline="221" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="72" endline="72" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="222" endline="222" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxmdiframewndex.h"><violation beginline="58" endline="58" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="248" endline="248" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxpopupmenu.h"><violation beginline="395" endline="395" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxpropertygridctrl.h"><violation beginline="399" endline="399" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="421" endline="421" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxtoolbar.h"><violation beginline="428" endline="428" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="428" endline="428" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="428" endline="428" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="258" endline="258" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="91" endline="91" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="127" endline="127" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="376" endline="376" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="140" endline="140" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="238" endline="238" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="461" endline="461" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="238" endline="238" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="450" endline="450" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="126" endline="126" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxtoolbarbutton.h"><violation beginline="158" endline="158" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="158" endline="158" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxtoolbarimages.h"><violation beginline="131" endline="131" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="139" endline="139" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxtoolbarmenubutton.h"><violation beginline="61" endline="61" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="40" endline="40" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="110" endline="110" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxwin.h"><violation beginline="2200" endline="2200" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2200" endline="2200" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2200" endline="2200" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2201" endline="2201" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1146" endline="1146" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1152" endline="1152" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1188" endline="1188" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2360" endline="2360" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2439" endline="2439" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1146" endline="1146" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1188" endline="1188" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="4963" endline="4963" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="4963" endline="4963" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2586" endline="2586" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2194" endline="2194" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2352" endline="2352" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2347" endline="2347" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2378" endline="2378" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2374" endline="2374" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1904" endline="1904" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="6547" endline="6547" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="6547" endline="6547" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2351" endline="2351" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2361" endline="2361" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="966" endline="966" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2439" endline="2439" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1089" endline="1089" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="459" endline="459" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="471" endline="471" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1065" endline="1065" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="1093" endline="1093" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\atltrace.h"><violation beginline="459" endline="459" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="459" endline="459" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\atltypes.h"><violation beginline="180" endline="180" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="180" endline="180" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="180" endline="180" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="180" endline="180" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\winuser.h"><violation beginline="9365" endline="9365" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="9365" endline="9365" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\classview.cpp"><violation beginline="10" endline="10" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="35" endline="35" rule="Rule18-4-1" ruleset="Library">
+</violation><violation beginline="35" endline="35" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="35" endline="35" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="46" endline="46" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="50" endline="50" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="82" endline="82" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="197" endline="197" rule="Rule18-4-1" ruleset="Library">
+</violation><violation beginline="200" endline="200" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="207" endline="207" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="223" endline="223" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="306" endline="306" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="306" endline="306" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="306" endline="306" rule="Rule5-18-1" ruleset="Statements">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\classview.h"><violation beginline="8" endline="8" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="24" endline="24" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="54" endline="54" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="25" endline="25" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="33" endline="33" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="24" endline="24" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\fileview.h"><violation beginline="9" endline="9" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="25" endline="25" rule="Rule10-3-2" ruleset="Classes">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\propertieswnd.h"><violation beginline="7" endline="7" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="24" endline="24" rule="Rule10-3-2" ruleset="Classes">
+</violation></file></cppdepend-plugin>

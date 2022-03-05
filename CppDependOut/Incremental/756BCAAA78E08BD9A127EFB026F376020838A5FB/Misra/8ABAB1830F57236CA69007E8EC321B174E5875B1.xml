@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\gridcellnumeric.cpp"><violation beginline="37" endline="37" rule="Rule10-3-2" ruleset="Classes">
+</violation></file></cppdepend-plugin>

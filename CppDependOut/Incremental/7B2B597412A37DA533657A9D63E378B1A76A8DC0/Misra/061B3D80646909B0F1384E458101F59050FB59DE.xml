@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\string"><violation beginline="650" endline="650" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\controllers\controller.interfaces.h"><violation beginline="9" endline="9" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="10" endline="10" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\model\model.orm.definitions.h"><violation beginline="192" endline="192" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\repositories\categoryrepository.cpp"><violation beginline="10" endline="10" rule="Rule7-3-4" ruleset="Declarations">
+</violation><violation beginline="11" endline="11" rule="Rule7-3-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

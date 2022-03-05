@@ -1,0 +1,1970 @@
+<Externals>
+<cr access="none" depth="0" pod="true" kind="struct" name="HMENU__" id="5dcdfe14c74d4838d7879f540f5cb3fd_78296f1e75f19b646c8167a55da27936" file="8" linestart="90" lineend="90"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagRECT" id="5dcdfe14c74d4838d7879f540f5cb3fd_25ee654fc4d784a3297c9294d415801a" file="8" linestart="154" lineend="160">
+<fl name="left" id="5dcdfe14c74d4838d7879f540f5cb3fd_68763ea24d656ab6c4c6088ea2589e6f" file="8" linestart="156" lineend="156" isLiteral="true" access="public" proto="LONG">
+<Tdef>
+<bt name="long"/>
+</Tdef>
+</fl>
+<fl name="top" id="5dcdfe14c74d4838d7879f540f5cb3fd_5f4e52ba5259de9ed0e5f971be56b24f" file="8" linestart="157" lineend="157" isLiteral="true" access="public" proto="LONG">
+<Tdef>
+<bt name="long"/>
+</Tdef>
+</fl>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagPOINT" id="5dcdfe14c74d4838d7879f540f5cb3fd_b1f566919980e6677cca1e90cfed007f" file="8" linestart="174" lineend="178">
+<fl name="x" id="5dcdfe14c74d4838d7879f540f5cb3fd_d6d4c148dfc2fc2889290774ffa4234a" file="8" linestart="176" lineend="176" isLiteral="true" access="public" proto="LONG">
+<Tdef>
+<bt name="long"/>
+</Tdef>
+</fl>
+<fl name="y" id="5dcdfe14c74d4838d7879f540f5cb3fd_dc50d8dafb0e47045a08ce00c6191e24" file="8" linestart="177" lineend="177" isLiteral="true" access="public" proto="LONG">
+<Tdef>
+<bt name="long"/>
+</Tdef>
+</fl>
+<c name="tagPOINT" id="5dcdfe14c74d4838d7879f540f5cb3fd_11f68ebcf871c694329532387014bdcf" file="8" linestart="174" lineend="174" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="tagPOINT &amp;&amp;" isRef="true" isLiteral="true" access2="none">
+<rrf>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_b1f566919980e6677cca1e90cfed007f"/>
+</rt>
+</rrf>
+</p>
+</c>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagSIZE" id="5dcdfe14c74d4838d7879f540f5cb3fd_b3268da2968003e5ef222c4766d9e256" file="8" linestart="186" lineend="190">
+<fl name="cy" id="5dcdfe14c74d4838d7879f540f5cb3fd_51a071974fcedeb3e8ef79a8ff9410f6" file="8" linestart="189" lineend="189" isLiteral="true" access="public" proto="LONG">
+<Tdef>
+<bt name="long"/>
+</Tdef>
+</fl>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagBITMAP" id="eea1600428b8c0389267c143023b75b5_c1595384f4a4d0a7ee36b5cdf745e6a6" file="9" linestart="601" lineend="610">
+<fl name="bmHeight" id="eea1600428b8c0389267c143023b75b5_129a0a6ffcc97555fea7b8e82dc9ed3d" file="9" linestart="605" lineend="605" isLiteral="true" access="public" proto="LONG">
+<Tdef>
+<bt name="long"/>
+</Tdef>
+</fl>
+<c name="tagBITMAP" id="eea1600428b8c0389267c143023b75b5_28f2ec0b1f4a92046d1817cea77fb400" file="9" linestart="601" lineend="601" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagMSG" id="a7d1a534e55e1099364c05856f97493b_dd1b319b60c8dc6a5f334882448fb71c" file="10" linestart="1849" lineend="1859"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagCREATESTRUCTW" id="a7d1a534e55e1099364c05856f97493b_0969b43bb36868d02836ec6010999874" file="10" linestart="3176" lineend="3189" previous="a7d1a534e55e1099364c05856f97493b_0969b43bb36868d02836ec6010999874"/>
+<cr access="none" kind="struct" name="_TREEITEM" id="a8a453695fae7f532315472b1325f23e_674623d89203ec66676a8ce26beb9797" file="11" linestart="4834" lineend="4834"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="AFX_MSGMAP_ENTRY" id="6570f3a0862649ad18d4fd7d746ae1b2_0105a5320b0c7203d6e955f483769898" file="12" linestart="2129" lineend="2137" previous="6570f3a0862649ad18d4fd7d746ae1b2_0105a5320b0c7203d6e955f483769898"/>
+<cr access="none" depth="2" kind="class" name="CWnd" id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" file="12" linestart="2181" lineend="3292" previous="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f"/>
+</rt>
+</base>
+<m name="GetSafeHwnd" id="6570f3a0862649ad18d4fd7d746ae1b2_8290648ffe38b2e2ae6090db342ea62d" file="12" linestart="2194" lineend="2194" access="public">
+<fpt cc="x86_thiscall" const="true" proto="HWND">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</fpt>
+</m>
+<m name="GetOwner" id="6570f3a0862649ad18d4fd7d746ae1b2_d97a0386b1915514a49656b8221c9f97" file="12" linestart="2200" lineend="2200" access="public">
+<fpt cc="x86_thiscall" const="true" proto="CWnd *">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</fpt>
+</m>
+<m name="SetOwner" id="6570f3a0862649ad18d4fd7d746ae1b2_12ce1738343f0d7601e5dcde16d44618" file="12" linestart="2201" lineend="2201" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pOwnerWnd" proto="CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</p>
+</m>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" access="public" name="AdjustType" id="6570f3a0862649ad18d4fd7d746ae1b2_1360de6429278c401b3ac8ff53263c85" file="12" linestart="2274" lineend="2274">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<m name="SetWindowPos" id="6570f3a0862649ad18d4fd7d746ae1b2_b5a304c75e882d93631d5859565969fa" file="12" linestart="2347" lineend="2348" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="pWndInsertAfter" proto="const CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</QualType>
+</pt>
+</p>
+<p name="x" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="y" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="cx" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="cy" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="nFlags" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<m name="GetWindowRect" id="6570f3a0862649ad18d4fd7d746ae1b2_780a03769038295c4596020871f9414f" file="12" linestart="2351" lineend="2351" access="public">
+<fpt cc="x86_thiscall" const="true" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="lpRect" proto="LPRECT" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_25ee654fc4d784a3297c9294d415801a"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+</m>
+<m name="GetClientRect" id="6570f3a0862649ad18d4fd7d746ae1b2_e6a1308e768aa5eb1bf5cb35d410fdce" file="12" linestart="2352" lineend="2352" access="public">
+<fpt cc="x86_thiscall" const="true" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="lpRect" proto="LPRECT" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_25ee654fc4d784a3297c9294d415801a"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+</m>
+<m name="ScreenToClient" id="6570f3a0862649ad18d4fd7d746ae1b2_43aaa360293f773e9e491f01580e3e70" file="12" linestart="2360" lineend="2360" access="public">
+<fpt cc="x86_thiscall" const="true" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="lpPoint" proto="LPPOINT" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_b1f566919980e6677cca1e90cfed007f"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+</m>
+<m name="ScreenToClient" id="6570f3a0862649ad18d4fd7d746ae1b2_1b438e1f86f8ebbbb94a4ac01ebc5f0c" file="12" linestart="2361" lineend="2361" access="public">
+<fpt cc="x86_thiscall" const="true" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="lpRect" proto="LPRECT" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_25ee654fc4d784a3297c9294d415801a"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+</m>
+<m name="UpdateWindow" id="6570f3a0862649ad18d4fd7d746ae1b2_5c248ea5e84758dbbbfced276ca6108f" file="12" linestart="2374" lineend="2374" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</m>
+<m name="Invalidate" id="6570f3a0862649ad18d4fd7d746ae1b2_7e5c62d66d083a8784b76874249bb438" file="12" linestart="2378" lineend="2378" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="bErase" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+<m name="SetFocus" id="6570f3a0862649ad18d4fd7d746ae1b2_16aab1ff9e504f1ed08fcb3839198e8d" file="12" linestart="2439" lineend="2439" access="public">
+<fpt cc="x86_thiscall" proto="CWnd *">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</fpt>
+</m>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" access="public" name="RepositionFlags" id="6570f3a0862649ad18d4fd7d746ae1b2_4d42dc68a40ede15a1f7fedd03ae9e2e" file="12" linestart="2579" lineend="2580">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<m name="UpdateDialogControls" id="6570f3a0862649ad18d4fd7d746ae1b2_25006d6b5389b3da360e2f3c1f3af5ff" file="12" linestart="2586" lineend="2586" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pTarget" proto="CCmdTarget *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f"/>
+</rt>
+</pt>
+</p>
+<p name="bDisableIfNoHndler" proto="BOOL" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+</cr>
+<cr access="none" depth="3" kind="class" name="CListBox" id="6570f3a0862649ad18d4fd7d746ae1b2_7f5834cecf986fab8c9c85a7a960ee6e" file="12" linestart="3557" lineend="3641" previous="6570f3a0862649ad18d4fd7d746ae1b2_7f5834cecf986fab8c9c85a7a960ee6e">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="3" kind="class" name="CComboBox" id="6570f3a0862649ad18d4fd7d746ae1b2_087a08f7c789fdb69a4f24140f5a23cc" file="12" linestart="3718" lineend="3816" previous="6570f3a0862649ad18d4fd7d746ae1b2_087a08f7c789fdb69a4f24140f5a23cc">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="3" kind="class" name="CFrameWnd" id="6570f3a0862649ad18d4fd7d746ae1b2_43e73f56cd03b613a5535989325a2b86" file="12" linestart="4068" lineend="4362" previous="6570f3a0862649ad18d4fd7d746ae1b2_43e73f56cd03b613a5535989325a2b86">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</base>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_43e73f56cd03b613a5535989325a2b86" access="public" name="BorderCmd" id="6570f3a0862649ad18d4fd7d746ae1b2_2968a46c2cf1edacd2e30c26bae30ffd" file="12" linestart="4200" lineend="4201">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_43e73f56cd03b613a5535989325a2b86" access="public" name="IdleFlags" id="6570f3a0862649ad18d4fd7d746ae1b2_999a00c23c4237ae689f984faf742e78" file="12" linestart="4280" lineend="4281">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+</cr>
+<cr access="none" depth="4" kind="class" name="CMDIFrameWnd" id="6570f3a0862649ad18d4fd7d746ae1b2_711f07455ef45d239fb622a4af2472fe" file="12" linestart="4367" lineend="4435" previous="6570f3a0862649ad18d4fd7d746ae1b2_711f07455ef45d239fb622a4af2472fe">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_43e73f56cd03b613a5535989325a2b86"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="0" kind="struct" name="CCreateContext" id="32b82226df1cf69fbebe4de19cbac871_11b9eaf2e46553c53d8eec7278c77481" file="13" linestart="1153" lineend="1169" previous="32b82226df1cf69fbebe4de19cbac871_11b9eaf2e46553c53d8eec7278c77481"/>
+<cr access="none" depth="3" kind="class" name="CTreeCtrl" id="76ed0a4e7f3cc371714e987e06b36f49_1499d8e50c37840cd245d1c62d52a504" file="14" linestart="709" lineend="985" previous="76ed0a4e7f3cc371714e987e06b36f49_1499d8e50c37840cd245d1c62d52a504">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</base>
+<m name="Create" id="76ed0a4e7f3cc371714e987e06b36f49_c532e2801661b027b7168c69a63f4934" file="14" linestart="719" lineend="719" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="dwStyle" proto="DWORD" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned long"/>
+</Tdef>
+</p>
+<p name="rect" proto="const RECT &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<Tdef>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_25ee654fc4d784a3297c9294d415801a"/>
+</rt>
+</ety>
+</Tdef>
+</QualType>
+</lrf>
+</p>
+<p name="pParentWnd" proto="CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</p>
+<p name="nID" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<m name="SetImageList" id="76ed0a4e7f3cc371714e987e06b36f49_42fc60cbee995a78c49e2c791fc1deda" file="14" linestart="743" lineend="743" access="public">
+<fpt cc="x86_thiscall" proto="CImageList *">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_02ec3aea85e07c99b2f81c942a8a2498"/>
+</rt>
+</pt>
+</fpt>
+<p name="pImageList" proto="CImageList *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_02ec3aea85e07c99b2f81c942a8a2498"/>
+</rt>
+</pt>
+</p>
+<p name="nImageList" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="SetItemState" id="76ed0a4e7f3cc371714e987e06b36f49_578a3adc5f19afdd274dbd3a058ec253" file="14" linestart="814" lineend="814" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="hItem" proto="HTREEITEM" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="a8a453695fae7f532315472b1325f23e_674623d89203ec66676a8ce26beb9797"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+<p name="nState" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="nStateMask" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<m name="InsertItem" id="76ed0a4e7f3cc371714e987e06b36f49_8456ba73ba262e453f2db2e326a38a21" file="14" linestart="923" lineend="924" access="public">
+<fpt cc="x86_thiscall" proto="HTREEITEM">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="a8a453695fae7f532315472b1325f23e_674623d89203ec66676a8ce26beb9797"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</fpt>
+<p name="lpszItem" proto="LPCTSTR" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<bt name="wchar_t"/>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</Tdef>
+</p>
+<p name="nImage" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="nSelectedImage" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="hParent" proto="HTREEITEM" isPtr="true" isLiteral="true" init="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="a8a453695fae7f532315472b1325f23e_674623d89203ec66676a8ce26beb9797"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+<p name="hInsertAfter" proto="HTREEITEM" isPtr="true" isLiteral="true" init="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="a8a453695fae7f532315472b1325f23e_674623d89203ec66676a8ce26beb9797"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+</m>
+<m name="Expand" id="76ed0a4e7f3cc371714e987e06b36f49_f0730c0d634e38cb120d5bd2aea93f29" file="14" linestart="933" lineend="933" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="hItem" proto="HTREEITEM" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="a8a453695fae7f532315472b1325f23e_674623d89203ec66676a8ce26beb9797"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+<p name="nCode" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<m name="SelectItem" id="76ed0a4e7f3cc371714e987e06b36f49_21a50f5512cf45795f7af9dd42662b41" file="14" linestart="939" lineend="939" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="hItem" proto="HTREEITEM" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="a8a453695fae7f532315472b1325f23e_674623d89203ec66676a8ce26beb9797"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+</m>
+<m name="HitTest" id="76ed0a4e7f3cc371714e987e06b36f49_1029957291b1f9bf71d13c9dbeb6ba1c" file="14" linestart="952" lineend="952" access="public">
+<fpt cc="x86_thiscall" const="true" proto="HTREEITEM">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="a8a453695fae7f532315472b1325f23e_674623d89203ec66676a8ce26beb9797"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</fpt>
+<p name="pt" proto="CPoint" access2="none">
+<rt>
+<cr id="83646393f74f232a3bcc7497d0058762_3313f7ddc49f6d502f29ccc41d646a29"/>
+</rt>
+</p>
+<p name="pFlags" proto="UINT *" isPtr="true" isLiteral="true" init="true" access2="none">
+<pt>
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</pt>
+</p>
+</m>
+</cr>
+<cr namespace="ATL" access="none" depth="0" kind="class" name="CTraceFileAndLineInfo" id="c246492cb2419b23a9550099df77c67a_5aacc0bc07a6ae5a7599f45b727dea0f" file="15" linestart="404" lineend="476">
+<c name="CTraceFileAndLineInfo" id="c246492cb2419b23a9550099df77c67a_d4870e2c8892e96764e7478817282c2d" file="15" linestart="407" lineend="412" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pszFileName" proto="const char *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<bt name="char"/>
+</QualType>
+</pt>
+</p>
+<p name="nLineNo" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<initlist id="c246492cb2419b23a9550099df77c67a_95cec11a2ba1323e7d957da85865e1a4"/>
+<initlist id="c246492cb2419b23a9550099df77c67a_bf5104d02d4bc912ab748f03ffae6fb8"/>
+</c>
+<m name="operator()" id="c246492cb2419b23a9550099df77c67a_8862665188efe4ad5790bfc67e2ab8f6" file="15" linestart="459" lineend="467" variadic="true" operator="true" access="public" hasbody="true" isdef="true">
+<Attributed/>
+<p name="pszFmt" proto="const wchar_t *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<bt name="wchar_t"/>
+</QualType>
+</pt>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" kind="struct" name="AFX_CLASSINIT" id="b51b67289ce36e487ca03ddebdbacddb_355dd1fc3d69f2faa490b0b210b34442" file="16" linestart="452" lineend="453">
+<c name="AFX_CLASSINIT" id="b51b67289ce36e487ca03ddebdbacddb_0391d9d93bc03a92c35e7ceb9e0078da" file="16" linestart="453" lineend="453" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pNewClass" proto="CRuntimeClass *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065"/>
+</rt>
+</pt>
+</p>
+</c>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="CRuntimeClass" id="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065" file="16" linestart="455" lineend="485" previous="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065"/>
+<cr access="none" depth="0" kind="class" name="CObject" id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54" file="16" linestart="541" lineend="591" previous="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54">
+<m name="IsKindOf" id="b51b67289ce36e487ca03ddebdbacddb_7e59f8a41005c7ceb23123c4ff2a65f1" file="16" linestart="573" lineend="573" access="public">
+<fpt cc="x86_thiscall" const="true" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="pClass" proto="const CRuntimeClass *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065"/>
+</rt>
+</QualType>
+</pt>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" kind="class" name="CArchive" id="b51b67289ce36e487ca03ddebdbacddb_72e13cf539c0b65a369db6b2afc688b7" file="16" linestart="1581" lineend="1738" previous="b51b67289ce36e487ca03ddebdbacddb_72e13cf539c0b65a369db6b2afc688b7">
+<e parent="b51b67289ce36e487ca03ddebdbacddb_72e13cf539c0b65a369db6b2afc688b7" access="protected" name="SchemaMapReservedRefs" id="b51b67289ce36e487ca03ddebdbacddb_30de6833f8fd7609af7364a1dd748b77" file="16" linestart="1584" lineend="1584">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="b51b67289ce36e487ca03ddebdbacddb_72e13cf539c0b65a369db6b2afc688b7" access="protected" name="LoadArrayObjType" id="b51b67289ce36e487ca03ddebdbacddb_f843f9665db4556894ebb29acacbd046" file="16" linestart="1585" lineend="1585">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="b51b67289ce36e487ca03ddebdbacddb_72e13cf539c0b65a369db6b2afc688b7" access="public" name="Mode" id="b51b67289ce36e487ca03ddebdbacddb_ed18a752f5b275501fd25ef5ad4a7c7e" file="16" linestart="1588" lineend="1588">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<m name="ReadObject" id="b51b67289ce36e487ca03ddebdbacddb_90990c43fc61899a484691deb7ad4198" file="16" linestart="1680" lineend="1680" access="public">
+<fpt cc="x86_thiscall" proto="CObject *">
+<pt>
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</pt>
+</fpt>
+<p name="pClass" proto="const CRuntimeClass *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065"/>
+</rt>
+</QualType>
+</pt>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" kind="class" name="CDumpContext" id="b51b67289ce36e487ca03ddebdbacddb_b840f3b375681d9e22f934f115e15ff4" file="16" linestart="1758" lineend="1832" previous="b51b67289ce36e487ca03ddebdbacddb_b840f3b375681d9e22f934f115e15ff4"/>
+<cr access="none" depth="1" kind="class" name="CPoint" id="83646393f74f232a3bcc7497d0058762_3313f7ddc49f6d502f29ccc41d646a29" file="17" linestart="74" lineend="125" previous="83646393f74f232a3bcc7497d0058762_3313f7ddc49f6d502f29ccc41d646a29">
+<base access="public">
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_b1f566919980e6677cca1e90cfed007f"/>
+</rt>
+</base>
+<c name="CPoint" id="83646393f74f232a3bcc7497d0058762_541e73a0e5c4c704f19e25fc42f7da2e" file="17" linestart="83" lineend="85" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<p name="initX" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="initY" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</c>
+<m name="operator!=" id="83646393f74f232a3bcc7497d0058762_1e20256c2666feff27c44e8ee398b217" file="17" linestart="107" lineend="107" operator="true" access="public" hasbody="true">
+<fpt cc="x86_thiscall" const="true" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<p name="point" proto="POINT" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_b1f566919980e6677cca1e90cfed007f"/>
+</rt>
+</ety>
+</Tdef>
+</p>
+</m>
+<c name="CPoint" id="83646393f74f232a3bcc7497d0058762_f62c3b80a55133c6dbb320ce3bd3853a" file="17" linestart="74" lineend="74" copyconst="true" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="const CPoint &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="83646393f74f232a3bcc7497d0058762_3313f7ddc49f6d502f29ccc41d646a29"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</c>
+</cr>
+<cr access="none" depth="1" kind="class" name="CRect" id="83646393f74f232a3bcc7497d0058762_811db12c8da0b73c3123e68821b81a63" file="17" linestart="130" lineend="297" previous="83646393f74f232a3bcc7497d0058762_811db12c8da0b73c3123e68821b81a63">
+<base access="public">
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_25ee654fc4d784a3297c9294d415801a"/>
+</rt>
+</base>
+<c name="CRect" id="83646393f74f232a3bcc7497d0058762_04b8d185f7fb118b8e816a3613363829" file="17" linestart="136" lineend="136" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</c>
+<m name="Width" id="83646393f74f232a3bcc7497d0058762_061e343b0a89a5fb239de907d6fa2b16" file="17" linestart="160" lineend="160" access="public" hasbody="true">
+<fpt cc="x86_thiscall" const="true" proto="int">
+<bt name="int"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</m>
+<m name="Height" id="83646393f74f232a3bcc7497d0058762_5fe4dfde6063e7bdc360fee4f450ca17" file="17" linestart="162" lineend="162" access="public" hasbody="true">
+<fpt cc="x86_thiscall" const="true" proto="int">
+<bt name="int"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</m>
+<cv name="operator LPRECT" id="83646393f74f232a3bcc7497d0058762_cc8232fbb4c703dfde2454a3a1483d83" file="17" linestart="180" lineend="180" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="LPRECT">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_25ee654fc4d784a3297c9294d415801a"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</cv>
+<m name="SetRectEmpty" id="83646393f74f232a3bcc7497d0058762_a22dfae6a7c47efdf62ebab5f70844a3" file="17" linestart="202" lineend="202" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</m>
+<m name="InflateRect" id="83646393f74f232a3bcc7497d0058762_2dc87b478412cea62accac9fb3418b72" file="17" linestart="211" lineend="213" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<p name="x" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="y" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+</cr>
+<cr access="none" depth="2" kind="class" name="CFont" id="6570f3a0862649ad18d4fd7d746ae1b2_b0075137739bf109ffeb57740cdc654b" file="12" linestart="418" lineend="446" previous="6570f3a0862649ad18d4fd7d746ae1b2_b0075137739bf109ffeb57740cdc654b">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_8083dbf989463f3c442274c501732b23"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="2" kind="class" name="CBitmap" id="6570f3a0862649ad18d4fd7d746ae1b2_aca497facb3a7bcbbbe0c3dc4352b855" file="12" linestart="448" lineend="485" previous="6570f3a0862649ad18d4fd7d746ae1b2_aca497facb3a7bcbbbe0c3dc4352b855">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_8083dbf989463f3c442274c501732b23"/>
+</rt>
+</base>
+<c name="CBitmap" id="6570f3a0862649ad18d4fd7d746ae1b2_1135add4db1ddf7c514dc25bd642b7e7" file="12" linestart="456" lineend="456" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<m name="LoadBitmapW" id="6570f3a0862649ad18d4fd7d746ae1b2_7c41b04e8eab3401df99e9244787859d" file="12" linestart="459" lineend="459" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="nIDResource" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<m name="GetBitmap" id="6570f3a0862649ad18d4fd7d746ae1b2_7abc432bd7eec7a3d47239456ae71579" file="12" linestart="471" lineend="471" access="public">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+<p name="pBitMap" proto="BITMAP *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<Tdef>
+<ety>
+<rt>
+<cr id="eea1600428b8c0389267c143023b75b5_c1595384f4a4d0a7ee36b5cdf745e6a6"/>
+</rt>
+</ety>
+</Tdef>
+</pt>
+</p>
+</m>
+</cr>
+<cr access="none" depth="1" kind="class" name="CDC" id="6570f3a0862649ad18d4fd7d746ae1b2_6d2c85bc74d48152ae931ba4af945ebb" file="12" linestart="560" lineend="985" previous="6570f3a0862649ad18d4fd7d746ae1b2_6d2c85bc74d48152ae931ba4af945ebb">
+<base access="public">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</base>
+<m name="Draw3dRect" id="6570f3a0862649ad18d4fd7d746ae1b2_f6facf7d744a9e6ff2f684d0231330cf" file="12" linestart="966" lineend="966" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="lpRect" proto="LPCRECT" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_25ee654fc4d784a3297c9294d415801a"/>
+</rt>
+</ety>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</p>
+<p name="clrTopLeft" proto="COLORREF" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<Tdef>
+<bt name="unsigned long"/>
+</Tdef>
+</Tdef>
+</p>
+<p name="clrBottomRight" proto="COLORREF" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<Tdef>
+<bt name="unsigned long"/>
+</Tdef>
+</Tdef>
+</p>
+</m>
+</cr>
+<cr access="none" depth="2" kind="class" name="CPaintDC" id="6570f3a0862649ad18d4fd7d746ae1b2_bb324fe90d506b8083b34b61847f3a9b" file="12" linestart="990" lineend="1011" previous="6570f3a0862649ad18d4fd7d746ae1b2_bb324fe90d506b8083b34b61847f3a9b">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_6d2c85bc74d48152ae931ba4af945ebb"/>
+</rt>
+</base>
+<c name="CPaintDC" id="6570f3a0862649ad18d4fd7d746ae1b2_0a6425f19b2f33ad2155ef3aa2a1c5e4" file="12" linestart="996" lineend="996" explicit="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pWnd" proto="CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</p>
+</c>
+</cr>
+<cr access="none" depth="1" kind="class" name="CImageList" id="6570f3a0862649ad18d4fd7d746ae1b2_02ec3aea85e07c99b2f81c942a8a2498" file="12" linestart="1058" lineend="1130" previous="6570f3a0862649ad18d4fd7d746ae1b2_02ec3aea85e07c99b2f81c942a8a2498">
+<base access="public">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</base>
+<m name="Create" id="6570f3a0862649ad18d4fd7d746ae1b2_4e2e051f6f14bbe70331ef1971b853f6" file="12" linestart="1065" lineend="1065" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="cx" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="cy" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="nFlags" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="nInitial" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="nGrow" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="DeleteImageList" id="6570f3a0862649ad18d4fd7d746ae1b2_f97699eafd22eecb7523c232e9125d30" file="12" linestart="1089" lineend="1089" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+</m>
+<m name="Add" id="6570f3a0862649ad18d4fd7d746ae1b2_505729fdef78c0d7aea83378c59bd6dd" file="12" linestart="1093" lineend="1093" access="public">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+<p name="pbmImage" proto="CBitmap *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_aca497facb3a7bcbbbe0c3dc4352b855"/>
+</rt>
+</pt>
+</p>
+<p name="crMask" proto="COLORREF" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<Tdef>
+<bt name="unsigned long"/>
+</Tdef>
+</Tdef>
+</p>
+</m>
+</cr>
+<cr access="none" depth="1" kind="class" name="CMenu" id="6570f3a0862649ad18d4fd7d746ae1b2_57d11b4ceacbc16d78c07e2779620bf0" file="12" linestart="1135" lineend="1222" previous="6570f3a0862649ad18d4fd7d746ae1b2_57d11b4ceacbc16d78c07e2779620bf0">
+<base access="public">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</base>
+<c name="CMenu" id="6570f3a0862649ad18d4fd7d746ae1b2_dfbb7ee0dbde1fdf50926ada0fefe779" file="12" linestart="1141" lineend="1141" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<m name="LoadMenuW" id="6570f3a0862649ad18d4fd7d746ae1b2_5fd70743dcd8cd6b51a7bde8fe4af3aa" file="12" linestart="1146" lineend="1146" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="nIDResource" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<fl name="m_hMenu" id="6570f3a0862649ad18d4fd7d746ae1b2_f54dd474a7c0358df1793fa28e59fe14" file="12" linestart="1151" lineend="1151" isPtr="true" isLiteral="true" access="public" proto="HMENU">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_78296f1e75f19b646c8167a55da27936"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</fl>
+<m name="GetSafeHmenu" id="6570f3a0862649ad18d4fd7d746ae1b2_91b84350644715f1b92710e707bce283" file="12" linestart="1152" lineend="1152" access="public">
+<fpt cc="x86_thiscall" const="true" proto="HMENU">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_78296f1e75f19b646c8167a55da27936"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</fpt>
+</m>
+<m name="GetSubMenu" id="6570f3a0862649ad18d4fd7d746ae1b2_6d788b39360df35c7fb783657210491a" file="12" linestart="1188" lineend="1188" access="public">
+<fpt cc="x86_thiscall" const="true" proto="CMenu *">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_57d11b4ceacbc16d78c07e2779620bf0"/>
+</rt>
+</pt>
+</fpt>
+<p name="nPos" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="AFX_MSGMAP" id="6570f3a0862649ad18d4fd7d746ae1b2_3aefbe810673d879169b4c3b36a63767" file="12" linestart="1229" lineend="1233"/>
+<cr access="none" depth="1" kind="class" name="CCmdTarget" id="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f" file="12" linestart="1713" lineend="1885" previous="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f">
+<base access="public">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="0" kind="class" name="CCmdUI" id="6570f3a0862649ad18d4fd7d746ae1b2_2387eb6e831805923f8286c61edc289d" file="12" linestart="1887" lineend="1921" previous="6570f3a0862649ad18d4fd7d746ae1b2_2387eb6e831805923f8286c61edc289d">
+<fl name="m_nID" id="6570f3a0862649ad18d4fd7d746ae1b2_8b128b6b3ec05351ed747ed76d8456ee" file="12" linestart="1891" lineend="1891" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<m name="SetCheck" id="6570f3a0862649ad18d4fd7d746ae1b2_d2dd80eb4089f5a1078f1ddf40ae23f4" file="12" linestart="1904" lineend="1904" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="nCheck" proto="int" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagAFXDrawState" id="9e7824dba56660f58a07ad688beb19fb_041d751788656a272ceebe0ba68279b7" file="18" linestart="32" lineend="37">
+<c name="tagAFXDrawState" id="9e7824dba56660f58a07ad688beb19fb_9f8ad35bcf4f58e1838a48094b0d4715" file="18" linestart="32" lineend="32" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+</cr>
+<cr access="none" depth="1" kind="class" name="CMFCToolBarImages" id="9e7824dba56660f58a07ad688beb19fb_ec18b6829a6a290120abb4f85b0bc599" file="18" linestart="40" lineend="320">
+<base access="public">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</base>
+<e parent="9e7824dba56660f58a07ad688beb19fb_ec18b6829a6a290120abb4f85b0bc599" access="public" name="ImageAlignHorz" id="9e7824dba56660f58a07ad688beb19fb_14f36d439c9442b3bee7b6152e91b524" file="18" linestart="57" lineend="63">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="9e7824dba56660f58a07ad688beb19fb_ec18b6829a6a290120abb4f85b0bc599" access="public" name="ImageAlignVert" id="9e7824dba56660f58a07ad688beb19fb_689e29afbf5c82792d240ed59abc0bbb" file="18" linestart="65" lineend="71">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<m name="PrepareDrawImage" id="9e7824dba56660f58a07ad688beb19fb_84e5d8b37d576ef664d6de48166ff621" file="18" linestart="131" lineend="131" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="ds" proto="CAfxDrawState &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<Tdef>
+<ety>
+<rt>
+<cr id="9e7824dba56660f58a07ad688beb19fb_041d751788656a272ceebe0ba68279b7"/>
+</rt>
+</ety>
+</Tdef>
+</lrf>
+</p>
+<p name="sizeImageDest" proto="CSize" init="true" access2="none">
+<rt>
+<cr id="83646393f74f232a3bcc7497d0058762_8cbf19e1721abe15db19a350da8eb8e1"/>
+</rt>
+</p>
+<p name="bFadeInactive" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+<m name="EndDrawImage" id="9e7824dba56660f58a07ad688beb19fb_e75da1f592072308baf82e13bea01479" file="18" linestart="139" lineend="139" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="ds" proto="CAfxDrawState &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<Tdef>
+<ety>
+<rt>
+<cr id="9e7824dba56660f58a07ad688beb19fb_041d751788656a272ceebe0ba68279b7"/>
+</rt>
+</ety>
+</Tdef>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="1" kind="class" name="CMFCToolBarButton" id="8773127b775b2a5d69c052dc197ef912_ce48cf5d6415e410422d565ab199aace" file="19" linestart="34" lineend="234">
+<base access="public">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</base>
+<m name="SetImage" id="8773127b775b2a5d69c052dc197ef912_331cd4d279f48c3285ad6a667cde95c3" file="19" linestart="158" lineend="158" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="iImage" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<fl name="m_bText" id="8773127b775b2a5d69c052dc197ef912_52ccbf133c7166a1413f68ca99d2c213" file="19" linestart="191" lineend="191" isLiteral="true" access="public" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fl>
+<fl name="m_bImage" id="8773127b775b2a5d69c052dc197ef912_c989c0d9cf35e486ff28f0b7ef1e5fa6" file="19" linestart="192" lineend="192" isLiteral="true" access="public" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fl>
+</cr>
+<cr access="none" depth="0" kind="class" name="CCommandManager" id="aa6151db7acb7e8d362bd6593d2e3899_3b47c57b11e80b63db7eca69302a5720" file="20" linestart="31" lineend="73" previous="aa6151db7acb7e8d362bd6593d2e3899_3b47c57b11e80b63db7eca69302a5720">
+<m name="GetCmdImage" id="aa6151db7acb7e8d362bd6593d2e3899_920f64606146e8ba9cbe6abcb59fa39c" file="20" linestart="44" lineend="44" access="public">
+<fpt cc="x86_thiscall" const="true" proto="int">
+<bt name="int"/>
+</fpt>
+<p name="uiCmd" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="bUserImage" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+</cr>
+<cr access="none" depth="3" kind="class" name="CBasePane" id="530b272a43fa0bf101586a733e911984_62292a3f30b3a84058a289ed7a5af09c" file="21" linestart="73" lineend="310" previous="fe7e4a41bb10b2644642b61c551a339e_62292a3f30b3a84058a289ed7a5af09c">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</base>
+<m name="GetPaneStyle" id="530b272a43fa0bf101586a733e911984_a3724b02349bdf171749641fc1076320" file="21" linestart="120" lineend="120" virtual="true" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" const="true" proto="DWORD">
+<Tdef>
+<bt name="unsigned long"/>
+</Tdef>
+</fpt>
+</m>
+<m name="SetPaneStyle" id="530b272a43fa0bf101586a733e911984_c3227474c1f38b4d897d7b253b6809a5" file="21" linestart="145" lineend="145" virtual="true" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="dwNewStyle" proto="DWORD" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned long"/>
+</Tdef>
+</p>
+</m>
+<m name="SetWindowPos" id="530b272a43fa0bf101586a733e911984_0440ac6ed817ae08364de87ac7457971" file="21" linestart="182" lineend="182" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="HDWP">
+<Tdef>
+<Tdef>
+<pt>
+<bt name="void"/>
+</pt>
+</Tdef>
+</Tdef>
+</fpt>
+<p name="pWndInsertAfter" proto="const CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</QualType>
+</pt>
+</p>
+<p name="x" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="y" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="cx" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="cy" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="nFlags" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="hdwp" proto="HDWP" isPtr="true" isLiteral="true" init="true" access2="none">
+<Tdef>
+<Tdef>
+<pt>
+<bt name="void"/>
+</pt>
+</Tdef>
+</Tdef>
+</p>
+</m>
+<m name="OnSize" id="530b272a43fa0bf101586a733e911984_aecb4fe22661fc97c807b5420fd0d103" file="21" linestart="250" lineend="250" access="protected">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="nType" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="cx" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="cy" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+</cr>
+<cr access="none" depth="4" kind="class" name="CPane" id="276f7971c5c65f65ba3238646a129a7c_23eca5ab2512a623a8e89a4fb8e0042a" file="22" linestart="58" lineend="275" previous="efc7b2184573ceaea7ad2aa8f8fb08bb_23eca5ab2512a623a8e89a4fb8e0042a">
+<base access="public">
+<rt>
+<cr id="530b272a43fa0bf101586a733e911984_62292a3f30b3a84058a289ed7a5af09c"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="5" kind="class" name="CMFCBaseToolBar" id="5db9f3be46e9204897563696e0db7f04_2274322b9c59fc9309ffce240a32f65b" file="23" linestart="27" lineend="64" previous="fe7e4a41bb10b2644642b61c551a339e_2274322b9c59fc9309ffce240a32f65b">
+<base access="public">
+<rt>
+<cr id="276f7971c5c65f65ba3238646a129a7c_23eca5ab2512a623a8e89a4fb8e0042a"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="6" kind="class" name="CMFCToolBar" id="b71f8eb40b1ef0794e650ade5174d557_286a5e93b8bf9a9037115e4d7f7ef48b" file="24" linestart="75" lineend="753" previous="fe7e4a41bb10b2644642b61c551a339e_286a5e93b8bf9a9037115e4d7f7ef48b">
+<base access="public">
+<rt>
+<cr id="5db9f3be46e9204897563696e0db7f04_2274322b9c59fc9309ffce240a32f65b"/>
+</rt>
+</base>
+<c name="CMFCToolBar" id="b71f8eb40b1ef0794e650ade5174d557_18cb2781a1a4b8f6eeebc00f82dce47d" file="24" linestart="90" lineend="90" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<m name="Create" id="b71f8eb40b1ef0794e650ade5174d557_57f8b6369ddb82d9192d4260b79e6a41" file="24" linestart="91" lineend="91" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="pParentWnd" proto="CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</p>
+<p name="dwStyle" proto="DWORD" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned long"/>
+</Tdef>
+</p>
+<p name="nID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<m name="LoadBitmapW" id="b71f8eb40b1ef0794e650ade5174d557_eb60f90c1bf062d8dba6f0720c7e1cd2" file="24" linestart="126" lineend="126" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="uiResID" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="uiColdResID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="uiMenuResID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="bLocked" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+<p name="uiDisabledResID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="uiMenuDisabledResID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<m name="LoadToolBar" id="b71f8eb40b1ef0794e650ade5174d557_63909aa7065e4ec71de3de7e8014d653" file="24" linestart="127" lineend="128" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="uiResID" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="uiColdResID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="uiMenuResID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="bLocked" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+<p name="uiDisabledResID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="uiMenuDisabledResID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="uiHotResID" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</m>
+<m name="ReplaceButton" id="b71f8eb40b1ef0794e650ade5174d557_e64f15e8b4998dd655938c16ceb95077" file="24" linestart="140" lineend="140" access="public">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+<p name="uiCmd" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="button" proto="const CMFCToolBarButton &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="8773127b775b2a5d69c052dc197ef912_ce48cf5d6415e410422d565ab199aace"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+<p name="bAll" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+<m name="GetButton" id="b71f8eb40b1ef0794e650ade5174d557_46cdefc1bfaa5a4972be9dd9e5842467" file="24" linestart="238" lineend="238" access="public">
+<fpt cc="x86_thiscall" const="true" proto="CMFCToolBarButton *">
+<pt>
+<rt>
+<cr id="8773127b775b2a5d69c052dc197ef912_ce48cf5d6415e410422d565ab199aace"/>
+</rt>
+</pt>
+</fpt>
+<p name="iIndex" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="GetImages" id="b71f8eb40b1ef0794e650ade5174d557_827540af30c7ea08bf792a93be67059f" file="24" linestart="258" lineend="258" access="public" storage="static" hasbody="true" isdef="true">
+<Attributed/>
+</m>
+<m name="SetRouteCommandsViaFrame" id="b71f8eb40b1ef0794e650ade5174d557_ddc548b5e8b9ce32087f81a37b93b54f" file="24" linestart="376" lineend="376" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="bValue" proto="BOOL" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+<m name="OnUpdateCmdUI" id="b71f8eb40b1ef0794e650ade5174d557_5979ac3145d10a178104a12e28f8bec6" file="24" linestart="428" lineend="428" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pTarget" proto="CFrameWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_43e73f56cd03b613a5535989325a2b86"/>
+</rt>
+</pt>
+</p>
+<p name="bDisableIfNoHndler" proto="BOOL" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+<m name="CleanUpLockedImages" id="b71f8eb40b1ef0794e650ade5174d557_fb58d37d166539e2ae90167e7cdc1352" file="24" linestart="450" lineend="450" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</m>
+<m name="CalcFixedLayout" id="b71f8eb40b1ef0794e650ade5174d557_b3a0b56ff51587affec8d7f4044c6d28" file="24" linestart="461" lineend="461" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="CSize">
+<rt>
+<cr id="83646393f74f232a3bcc7497d0058762_8cbf19e1721abe15db19a350da8eb8e1"/>
+</rt>
+</fpt>
+<p name="bStretch" proto="BOOL" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+<p name="bHorz" proto="BOOL" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+</cr>
+<cr access="none" depth="5" kind="class" name="CMFCStatusBar" id="f29c17a99edbfa17dccdff719890b396_a01bafb9ea3210901997aa2c9e8cd4e8" file="25" linestart="79" lineend="188" previous="fe7e4a41bb10b2644642b61c551a339e_a01bafb9ea3210901997aa2c9e8cd4e8">
+<base access="public">
+<rt>
+<cr id="276f7971c5c65f65ba3238646a129a7c_23eca5ab2512a623a8e89a4fb8e0042a"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="7" kind="class" name="CMFCMenuBar" id="bcdef3906f04aaac7cc2ff37b7e076aa_4b5080162b1d87682243ae7f82f4cee1" file="26" linestart="33" lineend="189">
+<base access="public">
+<rt>
+<cr id="b71f8eb40b1ef0794e650ade5174d557_286a5e93b8bf9a9037115e4d7f7ef48b"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="5" kind="class" name="CDockablePane" id="2d58245c7ad48de936654d5877165708_3b62c33a5926ffd2afffcd2722539069" file="27" linestart="54" lineend="312" previous="2d58245c7ad48de936654d5877165708_3b62c33a5926ffd2afffcd2722539069">
+<base access="public">
+<rt>
+<cr id="276f7971c5c65f65ba3238646a129a7c_23eca5ab2512a623a8e89a4fb8e0042a"/>
+</rt>
+</base>
+<c name="CDockablePane" id="2d58245c7ad48de936654d5877165708_0cce038caa9b88b3b3c227a7a473cad4" file="27" linestart="65" lineend="65" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<m name="PreTranslateMessage" id="2d58245c7ad48de936654d5877165708_44195c279c41687cf3e7a3e17f819f30" file="27" linestart="72" lineend="72" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="pMsg" proto="MSG *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<Tdef>
+<ety>
+<rt>
+<cr id="a7d1a534e55e1099364c05856f97493b_dd1b319b60c8dc6a5f334882448fb71c"/>
+</rt>
+</ety>
+</Tdef>
+</pt>
+</p>
+</m>
+<m name="OnCreate" id="2d58245c7ad48de936654d5877165708_ac65acc0f35c7376c2aed2b319f62761" file="27" linestart="213" lineend="213" access="protected">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+<p name="lpCreateStruct" proto="LPCREATESTRUCT" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="a7d1a534e55e1099364c05856f97493b_0969b43bb36868d02836ec6010999874"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</Tdef>
+</p>
+</m>
+<m name="OnContextMenu" id="2d58245c7ad48de936654d5877165708_58d45bf63d88ba1460cf77aad093f9dd" file="27" linestart="221" lineend="221" access="protected">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pWnd" proto="CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</p>
+<p name="point" proto="CPoint" access2="none">
+<rt>
+<cr id="83646393f74f232a3bcc7497d0058762_3313f7ddc49f6d502f29ccc41d646a29"/>
+</rt>
+</p>
+</m>
+<m name="OnSetFocus" id="2d58245c7ad48de936654d5877165708_8d7c5afc5b8948ac22c95b3dc5ba6e7f" file="27" linestart="222" lineend="222" access="protected">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pOldWnd" proto="CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</p>
+</m>
+<m name="GetThisMessageMap" id="2d58245c7ad48de936654d5877165708_fb00d2d8b161b34c00e63e6bd1d27808" file="27" linestart="228" lineend="228" access="protected" storage="static">
+<Attributed/>
+</m>
+</cr>
+<cr access="none" depth="4" kind="class" name="CMFCTabCtrl" id="a9d39d719019f5ca603718ce2b797cd5_9cdd06b5f5b5a8900b843f695eafcac3" file="28" linestart="53" lineend="314" previous="530b272a43fa0bf101586a733e911984_9cdd06b5f5b5a8900b843f695eafcac3">
+<base access="public">
+<rt>
+<cr id="9e9c77f23b7298f964e24e53823cd096_63fba463282bde579e30f4df3db75cf2"/>
+</rt>
+</base>
+<e parent="a9d39d719019f5ca603718ce2b797cd5_9cdd06b5f5b5a8900b843f695eafcac3" access="public" name="Style" id="a9d39d719019f5ca603718ce2b797cd5_93e5db422c29304330557e430f270517" file="28" linestart="63" lineend="73">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="a9d39d719019f5ca603718ce2b797cd5_9cdd06b5f5b5a8900b843f695eafcac3" access="public" name="ResizeMode" id="a9d39d719019f5ca603718ce2b797cd5_a6801d65c823d7b645770f4219255649" file="28" linestart="75" lineend="80">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+</cr>
+<cr access="none" depth="5" kind="class" name="CMFCPopupMenu" id="dde9e1de6dfc6b0aeabe59f92d393005_190b757464c22caf6cc5748df5322ad1" file="29" linestart="34" lineend="434" previous="62ce0901c86142274858f7f75740ac46_190b757464c22caf6cc5748df5322ad1">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_b81fb40ccc467d0543debffbbb9e17df"/>
+</rt>
+</base>
+<c name="CMFCPopupMenu" id="dde9e1de6dfc6b0aeabe59f92d393005_3ca167c586c77ad22898c5302fa5b488" file="29" linestart="55" lineend="55" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<e parent="dde9e1de6dfc6b0aeabe59f92d393005_190b757464c22caf6cc5748df5322ad1" access="public" name="ANIMATION_TYPE" id="dde9e1de6dfc6b0aeabe59f92d393005_b90893747c38bca62117a26091bd4a8d" file="29" linestart="63" lineend="70">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="dde9e1de6dfc6b0aeabe59f92d393005_190b757464c22caf6cc5748df5322ad1" access="public" name="MENUAREA_TYPE" id="dde9e1de6dfc6b0aeabe59f92d393005_6f0d348730a849e291e7e9f5549c736a" file="29" linestart="72" lineend="80">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="dde9e1de6dfc6b0aeabe59f92d393005_190b757464c22caf6cc5748df5322ad1" access="public" name="DROP_DIRECTION" id="dde9e1de6dfc6b0aeabe59f92d393005_d3150d3a764cadb3c9a0a7d83679140e" file="29" linestart="82" lineend="89">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="dde9e1de6dfc6b0aeabe59f92d393005_190b757464c22caf6cc5748df5322ad1" access="public" name="LOGO_LOCATION" id="dde9e1de6dfc6b0aeabe59f92d393005_ddb0eeee897ea33b269d18e07b679c10" file="29" linestart="91" lineend="97">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="dde9e1de6dfc6b0aeabe59f92d393005_190b757464c22caf6cc5748df5322ad1" access="public" name="QUICK_CUSTOMIZE_TYPE" id="dde9e1de6dfc6b0aeabe59f92d393005_3aabb4a57e78850ea3970becb573fbc3" file="29" linestart="99" lineend="104">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="dde9e1de6dfc6b0aeabe59f92d393005_190b757464c22caf6cc5748df5322ad1" access="public" name="MENU_RESIZE_TYPE" id="dde9e1de6dfc6b0aeabe59f92d393005_050ef031e06090f8e9b8188534de7939" file="29" linestart="106" lineend="112">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<m name="Create" id="dde9e1de6dfc6b0aeabe59f92d393005_d7fa5b695e9da7e4ffbbb297eacea332" file="29" linestart="395" lineend="395" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="pWndParent" proto="CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</p>
+<p name="x" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="y" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="hMenu" proto="HMENU" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_78296f1e75f19b646c8167a55da27936"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+<p name="bLocked" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+<p name="bOwnMessage" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+</cr>
+<cr access="none" depth="2" kind="class" name="CMFCToolBarMenuButton" id="aa8604b69812673e39f291a2a1de70d3_9fd52aedf1666f6799a3bb54ee799c72" file="30" linestart="31" lineend="149" previous="dde9e1de6dfc6b0aeabe59f92d393005_9fd52aedf1666f6799a3bb54ee799c72">
+<base access="public">
+<rt>
+<cr id="8773127b775b2a5d69c052dc197ef912_ce48cf5d6415e410422d565ab199aace"/>
+</rt>
+</base>
+<m name="GetThisClass" id="aa8604b69812673e39f291a2a1de70d3_650b1f7c8474f317901daa54d6a4e4d9" file="30" linestart="40" lineend="40" access="public" storage="static">
+<Attributed/>
+</m>
+<c name="CMFCToolBarMenuButton" id="aa8604b69812673e39f291a2a1de70d3_db4402ca4d9852a95dec3575361befe5" file="30" linestart="45" lineend="45" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="uiID" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="hMenu" proto="HMENU" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_78296f1e75f19b646c8167a55da27936"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+<p name="iImage" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="lpszText" proto="LPCTSTR" isPtr="true" isLiteral="true" init="true" access2="none">
+<Tdef>
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<bt name="wchar_t"/>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</Tdef>
+</p>
+<p name="bUserButton" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</c>
+<m name="OnDraw" id="aa8604b69812673e39f291a2a1de70d3_24f55af4d391cabaa315111e3674e17c" file="30" linestart="61" lineend="62" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pDC" proto="CDC *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_6d2c85bc74d48152ae931ba4af945ebb"/>
+</rt>
+</pt>
+</p>
+<p name="rect" proto="const CRect &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="83646393f74f232a3bcc7497d0058762_811db12c8da0b73c3123e68821b81a63"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+<p name="pImages" proto="CMFCToolBarImages *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="9e7824dba56660f58a07ad688beb19fb_ec18b6829a6a290120abb4f85b0bc599"/>
+</rt>
+</pt>
+</p>
+<p name="bHorz" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+<p name="bCustomizeMode" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+<p name="bHighlight" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+<p name="bDrawBorder" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+<p name="bGrayDisabledButtons" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+<m name="SetMessageWnd" id="aa8604b69812673e39f291a2a1de70d3_743614b224b50cae29593950c1fe2c79" file="30" linestart="110" lineend="110" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pWndMessage" proto="CWnd *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</p>
+</m>
+</cr>
+<cr access="none" depth="5" kind="class" name="CMDIFrameWndEx" id="843d68fcb3698e54c544076df56b0eab_5de0f4643ce62fc0ec5160b5f5060e54" file="31" linestart="43" lineend="324" previous="7f5d383b4551dfd91dcb7aadb11d2470_5de0f4643ce62fc0ec5160b5f5060e54">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_711f07455ef45d239fb622a4af2472fe"/>
+</rt>
+</base>
+<m name="GetThisClass" id="843d68fcb3698e54c544076df56b0eab_d949a5b2c1e0aac57adecde010b810be" file="31" linestart="58" lineend="58" access="public" storage="static">
+<Attributed/>
+</m>
+<m name="OnShowPopupMenu" id="843d68fcb3698e54c544076df56b0eab_7170084d1aaa8fc11d0c0b957a82215f" file="31" linestart="248" lineend="248" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="" proto="CMFCPopupMenu *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="dde9e1de6dfc6b0aeabe59f92d393005_190b757464c22caf6cc5748df5322ad1"/>
+</rt>
+</pt>
+</p>
+</m>
+</cr>
+<cr access="none" depth="3" kind="class" name="CMFCPropertyGridCtrl" id="c382eb411ba1d8175339aadfc3d39644_cc6de3732ac3ce6fb5f1021bb468fbd8" file="32" linestart="373" lineend="657" previous="3665e138ff568bc248b6943c2a5398af_cc6de3732ac3ce6fb5f1021bb468fbd8">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</base>
+<m name="SetVSDotNetLook" id="c382eb411ba1d8175339aadfc3d39644_617de7fb128b70a27b0d7d184ba4f7b1" file="32" linestart="399" lineend="399" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="bSet" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+<m name="SetGroupNameFullWidth" id="c382eb411ba1d8175339aadfc3d39644_d6ceee565bb7c8e83e047934d3397c94" file="32" linestart="421" lineend="421" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="bGroupNameFullWidth" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+<p name="bRedraw" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+</cr>
+<cr access="none" depth="4" kind="class" name="CViewTree" id="88fd7b266250896560e7006cced8537c_e8964deca11117e3503a5cae96f9b4cc" file="3" linestart="9" lineend="25">
+<base access="public">
+<rt>
+<cr id="76ed0a4e7f3cc371714e987e06b36f49_1499d8e50c37840cd245d1c62d52a504"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="7" kind="class" name="CFileViewToolBar" id="f5c74423ea84874f623808397bb09fea_09dd2b72980947ca0f6421f346de55c1" file="4" linestart="9" lineend="17">
+<base access="public">
+<rt>
+<cr id="b71f8eb40b1ef0794e650ade5174d557_286a5e93b8bf9a9037115e4d7f7ef48b"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="6" kind="class" name="CFileView" id="f5c74423ea84874f623808397bb09fea_f26fc056b3147e02ce9e15f535886c5e" file="4" linestart="19" lineend="57">
+<base access="public">
+<rt>
+<cr id="2d58245c7ad48de936654d5877165708_3b62c33a5926ffd2afffcd2722539069"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="4" kind="class" name="COutputList" id="5a74de0097445e57ab3566e3d17b328d_c59a620fbe0d3ecca8c92ce023d4abb5" file="5" linestart="10" lineend="27">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_7f5834cecf986fab8c9c85a7a960ee6e"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="6" kind="class" name="COutputWnd" id="5a74de0097445e57ab3566e3d17b328d_6020fa744c91b8f68888848582f32e0f" file="5" linestart="29" lineend="61">
+<base access="public">
+<rt>
+<cr id="2d58245c7ad48de936654d5877165708_3b62c33a5926ffd2afffcd2722539069"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="7" kind="class" name="CPropertiesToolBar" id="7b1bb74aa032443dfbaf794c51f2e18e_bf8e956987734925f69febe898e49654" file="6" linestart="7" lineend="16">
+<base access="public">
+<rt>
+<cr id="b71f8eb40b1ef0794e650ade5174d557_286a5e93b8bf9a9037115e4d7f7ef48b"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="6" kind="class" name="CPropertiesWnd" id="7b1bb74aa032443dfbaf794c51f2e18e_c529be7c756ed380412dc31fa9018b5e" file="6" linestart="18" lineend="64">
+<base access="public">
+<rt>
+<cr id="2d58245c7ad48de936654d5877165708_3b62c33a5926ffd2afffcd2722539069"/>
+</rt>
+</base>
+<fl name="m_wndPropList" id="7b1bb74aa032443dfbaf794c51f2e18e_9d6b02e1432520b8a83974a1fdd3e7a2" file="6" linestart="38" lineend="38" access="protected" proto="CMFCPropertyGridCtrl">
+<rt>
+<cr id="c382eb411ba1d8175339aadfc3d39644_cc6de3732ac3ce6fb5f1021bb468fbd8"/>
+</rt>
+</fl>
+</cr>
+<cr access="none" depth="6" kind="class" name="CMainFrame" id="d8e3da268f563aad8cb530660a3bc56a_b3bd5c35c55185ac28f603c0ceee24bf" file="7" linestart="14" lineend="62">
+<base access="public">
+<rt>
+<cr id="843d68fcb3698e54c544076df56b0eab_5de0f4643ce62fc0ec5160b5f5060e54"/>
+</rt>
+</base>
+</cr>
+<cr namespace="Controller" access="none" depth="5" kind="class" name="CTesterForMFCUtilitiesDLLApp" id="bc03de0f91e624122e0dfc75a488ae95_64946c234878eb518a61caf0eb69a2d5" file="33" linestart="19" lineend="47">
+<base access="public">
+<rt>
+<cr id="d69e86c94a57d882297315774a2db437_463835e346bad938610a31779ed324f1"/>
+</rt>
+</base>
+<fl name="m_bHiColorIcons" id="bc03de0f91e624122e0dfc75a488ae95_a1b84e3216432e1a86d618132b511489" file="33" linestart="32" lineend="32" isLiteral="true" access="public" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fl>
+</cr>
+<f name="__debugbreak" id="04f3f1cbe9cd67bcb1f6c1615c07577f_09b7f414b2a283fb5618aec2725950a0" file="34" linestart="169" lineend="169" extC="true" implicit="true" access="none" storage="extern">
+<fpt cc="cdecl" proto="void">
+<bt name="void"/>
+</fpt>
+</f>
+<f name="GetSysColor" id="a7d1a534e55e1099364c05856f97493b_efac422df63c213acf0906a015d3cb51" file="10" linestart="9365" lineend="9369" extC="true" imported="true" access="none">
+<Attributed/>
+<p name="nIndex" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</f>
+<f name="AfxAssertFailedLine" id="b51b67289ce36e487ca03ddebdbacddb_58f26dd8be3e0f31d132fd31ee5a1661" file="16" linestart="311" lineend="321" access="none" inline="true" hasbody="true" isdef="true">
+<Attributed/>
+<p name="lpszFileName" proto="LPCSTR" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<bt name="char"/>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</p>
+<p name="nLine" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</f>
+<f name="AfxAssertValidObject" id="b51b67289ce36e487ca03ddebdbacddb_90fd2107895d7cdbc93c055fab1e109f" file="16" linestart="325" lineend="326" access="none">
+<Attributed/>
+<p name="pOb" proto="const CObject *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</QualType>
+</pt>
+</p>
+<p name="lpszFileName" proto="LPCSTR" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<bt name="char"/>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</p>
+<p name="nLine" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</f>
+<f name="AfxGetMainWnd" id="6570f3a0862649ad18d4fd7d746ae1b2_f69ed31b2fdfcb2def06b0ee7bdc1530" file="12" linestart="4963" lineend="4963" access="none">
+<Attributed/>
+</f>
+<f name="AfxMessageBox" id="6570f3a0862649ad18d4fd7d746ae1b2_df91e787d37253b2cc127560317c60ed" file="12" linestart="6547" lineend="6548" access="none">
+<Attributed/>
+<p name="lpszText" proto="LPCTSTR" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<bt name="wchar_t"/>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</Tdef>
+</p>
+<p name="nType" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="nIDHelp" proto="UINT" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</f>
+<f name="AfxDynamicDownCast" id="b51b67289ce36e487ca03ddebdbacddb_f819b8c24101e52e2dd19787532e27c0" file="16" linestart="605" lineend="605" access="none">
+<Attributed/>
+<p name="pClass" proto="CRuntimeClass *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065"/>
+</rt>
+</pt>
+</p>
+<p name="pObject" proto="CObject *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</pt>
+</p>
+</f>
+<f name="GetCmdMgr" id="aa6151db7acb7e8d362bd6593d2e3899_a31a6a993b6c11abc73f9974a45c5754" file="20" linestart="28" lineend="28" access="none">
+<Attributed/>
+</f>
+<v name="AFX_DEFAULT_TOOLBAR_STYLE" proto="const int" const="true" isLiteral="true" isPrimitive="true" id="276f7971c5c65f65ba3238646a129a7c_66ac99c9da71c179deb9a0c4528b2fca" file="22" linestart="52" lineend="52" storage="static" init="true" access2="none">
+<QualType const="true">
+<bt name="int"/>
+</QualType>
+</v>
+<v namespace="Controller" name="theApp" proto="Controller::CTesterForMFCUtilitiesDLLApp" id="bc03de0f91e624122e0dfc75a488ae95_c794763666904c2bb40b29bcfc600bca" file="33" linestart="49" lineend="49" storage="extern" access2="none">
+<rt>
+<cr id="bc03de0f91e624122e0dfc75a488ae95_64946c234878eb518a61caf0eb69a2d5"/>
+</rt>
+</v>
+</Externals>

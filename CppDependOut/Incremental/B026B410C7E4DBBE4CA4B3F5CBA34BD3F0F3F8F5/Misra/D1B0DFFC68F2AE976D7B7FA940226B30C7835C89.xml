@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\vcruntime_typeinfo.h"><violation beginline="91" endline="91" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="71" endline="71" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="71" endline="71" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="71" endline="71" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="91" endline="91" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="71" endline="71" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="71" endline="71" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\typeerasure\typeerasure.cpp"><violation beginline="18" endline="18" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="19" endline="19" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="28" endline="28" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="57" endline="57" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="22" endline="22" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="78" endline="78" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="84" endline="84" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="71" endline="71" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="71" endline="71" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

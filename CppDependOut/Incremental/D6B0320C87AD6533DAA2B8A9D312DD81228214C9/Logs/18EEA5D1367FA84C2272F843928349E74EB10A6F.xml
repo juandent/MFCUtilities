@@ -1,0 +1,4 @@
+<log>
+ <error level="warning" id="warn_pp_macro_hides_keyword" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary\JDMFCLibrary.cpp" line="7" col="9" msg="keyword is hidden by macro definition" />
+ <error level="warning" id="pp_macro_not_used" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary\JDMFCLibrary.cpp" line="7" col="9" msg="macro is not used" />
+</log>

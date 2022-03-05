@@ -1,0 +1,13 @@
+<log>
+ <error level="warning" id="warn_pp_macro_hides_keyword" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="11" col="9" msg="keyword is hidden by macro definition" />
+ <error level="warning" id="pp_disabled_macro_expansion" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="16" col="1" msg="disabled expansion of recursive macro" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="16" col="1" msg="zero as null pointer constant" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="16" col="1" msg="zero as null pointer constant" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="16" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_cast_qual" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="16" col="1" msg="cast from &apos;const CRuntimeClass *&apos; to &apos;CRuntimeClass *&apos; drops const qualifier" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="16" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_cast_qual" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="16" col="1" msg="cast from &apos;const CRuntimeClass *&apos; to &apos;CRuntimeClass *&apos; drops const qualifier" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="19" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="19" col="1" msg="zero as null pointer constant" />
+ <error level="warning" id="warn_cxx98_compat_noexcept_decl" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ChildFrm.cpp" line="23" col="28" msg="noexcept specifications are incompatible with C++98" />
+</log>

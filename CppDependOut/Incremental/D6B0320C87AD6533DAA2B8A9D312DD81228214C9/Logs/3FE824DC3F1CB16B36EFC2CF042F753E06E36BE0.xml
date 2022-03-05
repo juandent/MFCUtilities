@@ -1,0 +1,5 @@
+<log>
+ <error level="error" id="err_pp_file_not_found" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\DateCapsule.cpp" line="1" col="10" msg="&apos;stdafx.h&apos; file not found" />
+ <error level="warning" id="warn_cxx98_compat_generalized_initializer_lists" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\DateCapsule.cpp" line="12" col="11" msg="generalized initializer lists are incompatible with C++98" />
+ <error level="warning" id="warn_cxx98_compat_ctor_list_init" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\DateCapsule.cpp" line="12" col="11" msg="constructor call from initializer list is incompatible with C++98" />
+</log>

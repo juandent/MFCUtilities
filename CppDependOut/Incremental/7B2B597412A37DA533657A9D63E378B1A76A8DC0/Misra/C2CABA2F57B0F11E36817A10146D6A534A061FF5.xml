@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxwin.h"><violation beginline="2351" endline="2351" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2290" endline="2290" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2347" endline="2347" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\winuser.h"><violation beginline="7169" endline="7169" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\gridctrl.h"><violation beginline="208" endline="208" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="207" endline="207" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="209" endline="209" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="210" endline="210" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="323" endline="323" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="307" endline="307" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="370" endline="370" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="215" endline="215" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="214" endline="214" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="417" endline="417" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="214" endline="214" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="370" endline="370" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\joinedgriddisplayer.h"><violation beginline="42" endline="42" rule="Rule6-3-1" ruleset="Statements">
+</violation><violation beginline="48" endline="48" rule="Rule6-3-1" ruleset="Statements">
+</violation><violation beginline="92" endline="92" rule="Rule6-6-5" ruleset="Statements">
+</violation></file></cppdepend-plugin>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afx.h"><violation beginline="311" endline="311" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="311" endline="311" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="311" endline="311" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="311" endline="311" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="311" endline="311" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxole.h"><violation beginline="1802" endline="1802" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\atltrace.h"><violation beginline="459" endline="459" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="459" endline="459" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="459" endline="459" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\griddroptarget.cpp"><violation beginline="45" endline="45" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="49" endline="49" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="64" endline="64" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="68" endline="68" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="68" endline="68" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="68" endline="68" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="84" endline="84" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="90" endline="90" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="93" endline="93" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="98" endline="98" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="106" endline="106" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="111" endline="111" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="115" endline="115" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="115" endline="115" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="115" endline="115" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="123" endline="123" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="126" endline="126" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="126" endline="126" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="126" endline="126" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="132" endline="132" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="136" endline="136" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="136" endline="136" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="136" endline="136" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="144" endline="144" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="148" endline="148" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="148" endline="148" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="148" endline="148" rule="Rule5-18-1" ruleset="Statements">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\griddroptarget.h"><violation beginline="56" endline="56" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="57" endline="57" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="58" endline="58" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="59" endline="59" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="60" endline="60" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="74" endline="74" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

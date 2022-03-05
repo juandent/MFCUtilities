@@ -1,0 +1,153 @@
+<Externals>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagMSG" id="a7d1a534e55e1099364c05856f97493b_dd1b319b60c8dc6a5f334882448fb71c" file="3" linestart="1849" lineend="1859">
+<fl name="message" id="a7d1a534e55e1099364c05856f97493b_38fa6f4bd306f79cbaee805e2757716a" file="3" linestart="1851" lineend="1851" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagNMHDR" id="a7d1a534e55e1099364c05856f97493b_4defc6cae3aa0002c83a6fd24cebde79" file="3" linestart="3225" lineend="3230">
+<fl name="code" id="a7d1a534e55e1099364c05856f97493b_dc673898075b5f10f23b47da65def565" file="3" linestart="3229" lineend="3229" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+</cr>
+<cts Spec="&lt;wchar_t&gt;" namespace="ATL" access="none" depth="1" kind="class" name="ChTraitsCRT" id="5558f871bec542660b0071cf7fdc7659_60d719c932fb5c0e10636ea0f0f00266" file="4" linestart="539" lineend="956">
+<base access="public">
+<tss>
+<templatebase id="c126da973d66d9d61613da9e870b17b3_6678f1010439427113e7fc9f31760085"/>
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</tss>
+</base>
+</cts>
+<tm namespace="ATL" access="none" depth="1" kind="class" name="CStringT" id="5558f871bec542660b0071cf7fdc7659_778d7992badf7922c172a8c63f91e2f4" file="4" linestart="990" lineend="2686">
+<template_parameters>
+<ttp name="BaseType" id="5558f871bec542660b0071cf7fdc7659_eb383b87801eab4c1af74dca377415b6" depth="0" index="0" proto="type-parameter-0-0"/>
+<ttp name="StringTraits" id="5558f871bec542660b0071cf7fdc7659_e8c34d2fd0d3fe32ae5473f2b7ea1cfa" depth="0" index="1" proto="type-parameter-0-1"/>
+</template_parameters>
+<cr namespace="ATL" access="none" depth="1" kind="class" name="CStringT" id="5558f871bec542660b0071cf7fdc7659_15746a140131e119b93363d897ac5721" file="4" linestart="991" lineend="2686">
+<base access="public">
+<tss>
+<templatebase id="c126da973d66d9d61613da9e870b17b3_6d1d6d4b1ad2bce62118b01b5f5de446"/>
+<template_arguments>
+<ttp/>
+</template_arguments>
+</tss>
+</base>
+<cr access="public" kind="class" name="CStringT" id="5558f871bec542660b0071cf7fdc7659_189abf56bd7d57a97fb4e0d67f1bbb85" file="4" linestart="991" lineend="991"/>
+<c name="CStringT&lt;BaseType, StringTraits&gt;" id="5558f871bec542660b0071cf7fdc7659_90058219b0477675450a7b87f149cd56" file="4" linestart="1005" lineend="1008" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</c>
+<m name="operator+=" id="5558f871bec542660b0071cf7fdc7659_3baf232b458b42d350d374fc51abd7e9" file="4" linestart="1378" lineend="1383" operator="true" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="CStringT&lt;BaseType, StringTraits&gt; &amp;">
+<lrf>
+<InjectedClassName>
+<cr id="5558f871bec542660b0071cf7fdc7659_15746a140131e119b93363d897ac5721"/>
+</InjectedClassName>
+</lrf>
+</fpt>
+<p name="pszSrc" proto="PCXSTR" access2="none">
+<Tdef>
+<DependentName/>
+</Tdef>
+</p>
+</m>
+</cr>
+</tm>
+<tm access="none" depth="0" kind="class" name="StrTraitMFC_DLL" id="a5fee5cc9979464af3991f6c3e7c22fe_620ff64ede21caca621568b673e21ff9" file="5" linestart="56" lineend="69" previous="5558f871bec542660b0071cf7fdc7659_620ff64ede21caca621568b673e21ff9">
+<template_parameters>
+<ttp name="_CharType" id="a5fee5cc9979464af3991f6c3e7c22fe_27b03e95402652ecb3da3960a0f18b6c" depth="0" index="0" proto="type-parameter-0-0"/>
+<ttp name="StringIterator" id="a5fee5cc9979464af3991f6c3e7c22fe_55d883826e1c1e367a6ddd96871e722d" depth="0" index="1" proto="type-parameter-0-1"/>
+</template_parameters>
+<cr access="none" depth="0" kind="class" name="StrTraitMFC_DLL" id="a5fee5cc9979464af3991f6c3e7c22fe_620ff64ede21caca621568b673e21ff9" file="5" linestart="57" lineend="69" previous="5558f871bec542660b0071cf7fdc7659_620ff64ede21caca621568b673e21ff9">
+<base access="public">
+<ttp/>
+</base>
+<cr access="public" kind="class" name="StrTraitMFC_DLL" id="a5fee5cc9979464af3991f6c3e7c22fe_45452ddb217e5e89962689339de0a02e" file="5" linestart="57" lineend="57"/>
+</cr>
+</tm>
+<cr access="none" depth="1" kind="class" name="CSize" id="83646393f74f232a3bcc7497d0058762_8cbf19e1721abe15db19a350da8eb8e1" file="6" linestart="31" lineend="69" previous="83646393f74f232a3bcc7497d0058762_8cbf19e1721abe15db19a350da8eb8e1">
+<base access="public">
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_b3268da2968003e5ef222c4766d9e256"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="1" kind="class" name="CRect" id="83646393f74f232a3bcc7497d0058762_811db12c8da0b73c3123e68821b81a63" file="6" linestart="130" lineend="297" previous="83646393f74f232a3bcc7497d0058762_811db12c8da0b73c3123e68821b81a63">
+<base access="public">
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_25ee654fc4d784a3297c9294d415801a"/>
+</rt>
+</base>
+<c name="CRect" id="83646393f74f232a3bcc7497d0058762_04b8d185f7fb118b8e816a3613363829" file="6" linestart="136" lineend="136" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</c>
+</cr>
+<cr access="none" depth="2" kind="class" name="CFont" id="6570f3a0862649ad18d4fd7d746ae1b2_b0075137739bf109ffeb57740cdc654b" file="7" linestart="418" lineend="446" previous="6570f3a0862649ad18d4fd7d746ae1b2_b0075137739bf109ffeb57740cdc654b">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_8083dbf989463f3c442274c501732b23"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="2" kind="class" name="CWindowDC" id="6570f3a0862649ad18d4fd7d746ae1b2_c01b969921dec3ec206b1d55d2c5bca3" file="7" linestart="1034" lineend="1053" previous="6570f3a0862649ad18d4fd7d746ae1b2_c01b969921dec3ec206b1d55d2c5bca3">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_6d2c85bc74d48152ae931ba4af945ebb"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="AFX_MSGMAP" id="6570f3a0862649ad18d4fd7d746ae1b2_3aefbe810673d879169b4c3b36a63767" file="7" linestart="1229" lineend="1233"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="AFX_MSGMAP_ENTRY" id="6570f3a0862649ad18d4fd7d746ae1b2_0105a5320b0c7203d6e955f483769898" file="7" linestart="2129" lineend="2137" previous="6570f3a0862649ad18d4fd7d746ae1b2_0105a5320b0c7203d6e955f483769898"/>
+<cr access="none" depth="2" kind="class" name="CWnd" id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" file="7" linestart="2181" lineend="3292" previous="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f"/>
+</rt>
+</base>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" access="public" name="AdjustType" id="6570f3a0862649ad18d4fd7d746ae1b2_1360de6429278c401b3ac8ff53263c85" file="7" linestart="2274" lineend="2274">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" access="public" name="RepositionFlags" id="6570f3a0862649ad18d4fd7d746ae1b2_4d42dc68a40ede15a1f7fedd03ae9e2e" file="7" linestart="2579" lineend="2580">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<m name="GetThisMessageMap" id="6570f3a0862649ad18d4fd7d746ae1b2_c9dbced6befdb4ef674c902434c7c56d" file="7" linestart="3254" lineend="3254" access="protected" storage="static">
+<Attributed/>
+</m>
+</cr>
+<cr access="public" depth="0" pod="true" kind="struct" name="tagGV_DISPINFO" id="06b85c94ffd3f91b0fe4ec565d41ee6b_7b30647fde65b4ccf9d9802c2fd7c593" file="8" linestart="107" lineend="110">
+<fl name="hdr" id="06b85c94ffd3f91b0fe4ec565d41ee6b_ddd9ef88d4dcadad649062a64e18a0a6" file="8" linestart="108" lineend="108" isLiteral="true" access="public" proto="NMHDR">
+<Tdef>
+<ety>
+<rt>
+<cr id="a7d1a534e55e1099364c05856f97493b_4defc6cae3aa0002c83a6fd24cebde79"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<c name="tagGV_DISPINFO" id="06b85c94ffd3f91b0fe4ec565d41ee6b_4865c276ad062ee6298c962ae958aed6" file="8" linestart="107" lineend="107" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+</cr>
+</Externals>
