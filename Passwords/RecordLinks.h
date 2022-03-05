@@ -18,7 +18,8 @@ class RecordLinks
 	};
 	struct Passwords
 	{
-		using Conn1 = TableConnection<PasswordTable, LocationTable>;
+		// using Conn1 = TableConnection<PasswordTable, LocationTable>;
+		using Conn1 = Locations::PKDependents::connection <PasswordTable> ::type;
 		using FKConnections = TableConnections<Conn1>;
 	};
 
@@ -38,10 +39,10 @@ class RecordLinks
 	}
 #endif
 public:
-	static bool has_links(const Location& location);
-	static bool has_links(const Password& password);
+	static bool has_links(const Location& location) { return Locations::PKDependents::has_links(location); }
+	static bool has_links(const Password& password) { return false; }
 
-	static bool foreignKeysExist(const Location& location);
-	static bool foreignKeysExist(const Password& password);
+	static bool foreignKeysExist(const Location& location) { return true; }
+	static bool foreignKeysExist(const Password& password) { return Passwords::FKConnections::foreignKeysExist(password); }
 
 };

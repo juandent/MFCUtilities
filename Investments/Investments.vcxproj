@@ -151,7 +151,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_23_jan_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_10_feb_2022\include;original C:\Components\sqlite_orm_dev_23_jan_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
       <UseFullPaths>false</UseFullPaths>
     </ClCompile>
@@ -208,6 +208,7 @@
     <ClInclude Include="FileView.h" />
     <ClInclude Include="FondoDlg.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GenericGrid.h" />
     <ClInclude Include="InversionDlg.h" />
     <ClInclude Include="Investments.h" />
     <ClInclude Include="InvestmentsDoc.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="FileView.cpp" />
+    <ClCompile Include="GenericGrid.cpp" />
     <ClCompile Include="InversionDlg.cpp" />
     <ClCompile Include="Investments.cpp" />
     <ClCompile Include="InvestmentsDoc.cpp" />

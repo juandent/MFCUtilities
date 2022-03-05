@@ -5,8 +5,10 @@
 class RendimientoCompositeImpl
 {
 	friend class RendimientoComposite;
+	// Primary Key must exist!
 	inline	static auto query(int pk)
 	{
+		using namespace std::literals;
 		auto rows = Storage::getStorage().select(columns(
 			alias_column<als_r>(&Rendimiento::id),
 			alias_column<als_f>(&Fondo::nombre),
@@ -18,7 +20,13 @@ class RendimientoCompositeImpl
 			where(is_equal(alias_column<als_r>(&Rendimiento::id), pk)),
 			multi_order_by(order_by(alias_column<als_r>(&Rendimiento::fkey_fondo)), order_by(alias_column<als_r>(&Rendimiento::fecha)).desc()));
 
-		return rows;
+		if( rows.empty())
+		{
+			std::ostringstream ss;
+			ss << "Primary Key " << pk << " does not exist!";
+			throw std::exception{ ss.str().c_str()};
+		}
+		return rows[0];
 	}
 };
 
@@ -26,32 +34,20 @@ class RendimientoCompositeImpl
 
 class RendimientoComposite
 {
-	using result_set_type = decltype(RendimientoCompositeImpl::query(1));
-	result_set_type result_set;
-	using row_type = decltype(result_set[0]);
+	using row_type = decltype(RendimientoCompositeImpl::query(1));
+	row_type row;
+	const auto& clause() const noexcept	{ return is_equal(&Rendimiento::id, get_id());	}
 public:
-	RendimientoComposite(int pk) : result_set{ RendimientoCompositeImpl::query(pk) } {}
+	RendimientoComposite(int pk) : row{ RendimientoCompositeImpl::query(pk) }	{}
 
-	int get_id() const
-	{
-		return std::get<0>(result_set[0]);
-	}
-	std::string get_nombre_fondo() const
-	{
-		return std::get<1>(result_set[0]);
-	}
-	std::chrono::sys_days get_rendimiento_fecha() const
-	{
-		return std::get<2>(result_set[0]);
-	}
+	int get_id() const 	{	return std::get<0>(row); }
+	std::string get_nombre_fondo() const { 	return std::get<1>(row);}
+	std::chrono::sys_days get_rendimiento_fecha() const { return std::get<2>(row);}
 
-	double get_rendimiento_unitario() const
-	{
-		return std::get<3>(result_set[0]);
-	}
+	double get_rendimiento_unitario() const { return std::get<3>(row); }
 
 	void set_rendimiento_unitario(double rend)
 	{
-		Storage::getStorage().update_all(set(assign(&Rendimiento::rendimiento_unitario, rend)), where(is_equal(&Rendimiento::id, get_id())));
+		Storage::getStorage().update_all(set(assign(&Rendimiento::rendimiento_unitario, rend)), where(clause()));
 	}
 };

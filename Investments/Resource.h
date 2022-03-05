@@ -91,6 +91,7 @@
 #define IDD_QueryInversionesDlg         313
 #define IDD_RendimientoDlg              314
 #define IDD_RendimientosTableDlg        315
+#define IDD_GenericGrid                 316
 #define IDC_RADIO1                      1000
 #define IDC_E_FONDO_ID                  1001
 #define IDC_E_FONDO_NAME                1002
@@ -118,18 +119,20 @@
 #define IDC_CK_FILTER_BY_DATES          1024
 #define IDC_B_FILTER_CLEAR              1025
 #define IDC_B_RENDIMIENTO               1027
+#define IDC_GRID_GENERIC                1028
 #define ID_FILE_FONDO                   32771
 #define ID_FILE_INVERSION               32772
 #define ID_FILE_RENDIMIENTO             32773
 #define ID_FILE_RENDIMIENTOSTABLA       32774
+#define ID_FILE_GENERICGRID             32775
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        316
-#define _APS_NEXT_COMMAND_VALUE         32775
-#define _APS_NEXT_CONTROL_VALUE         1028
-#define _APS_NEXT_SYMED_VALUE           316
+#define _APS_NEXT_RESOURCE_VALUE        317
+#define _APS_NEXT_COMMAND_VALUE         32776
+#define _APS_NEXT_CONTROL_VALUE         1029
+#define _APS_NEXT_SYMED_VALUE           317
 #endif
 #endif

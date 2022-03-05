@@ -69,6 +69,33 @@ struct Rendimiento
 
 };
 
+// type traits:
+// list of persistent classes
+template<typename T>
+struct is_persistent
+{
+	static constexpr bool value = false;
+};
+
+template<>
+struct is_persistent<Fondo>
+{
+	static constexpr bool value = true;
+};
+
+template<>
+struct is_persistent<Rendimiento>
+{
+	static constexpr bool value = true;
+};
+
+template<>
+struct is_persistent<Inversion>
+{
+	static constexpr bool value = true;
+};
+
+
 // struct X
 // {
 // 	int id;

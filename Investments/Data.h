@@ -54,7 +54,7 @@ inline 	auto& Storage_Impl::get_storage()
 
 	static auto storage =
 		make_storage(db_name,
-			make_trigger("validate_nombre_before_insert_fondos",
+			make_trigger("validate_fields_before_insert_fondos",
 				before()
 				.insert()
 				.on<Fondo>()
@@ -84,7 +84,7 @@ inline 	auto& Storage_Impl::get_storage()
 						then(raise_abort("Rendimiento unitario no puede ser 0")))
 					.end()))
 				.end()),
-			make_trigger("validate_nombre_before_update_fondos",
+			make_trigger("validate_fields_before_update_fondos",
 				before()
 				.update()
 				.on<Fondo>()
@@ -138,7 +138,13 @@ inline 	auto& Storage_Impl::get_storage()
 	if (flag == 0)
 	{
 		flag = 1;
-		storage.sync_schema(true);
+		auto syncSchemaRes = storage.sync_schema(true);
+		ostringstream oss;
+		for (auto& p : syncSchemaRes) {
+			oss << p.first << " " << p.second << endl;
+		}
+		auto s = oss.str();
+		std::ignore = s;
 	}
 
 	return storage;
