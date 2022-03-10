@@ -4,7 +4,7 @@
 
 #include "Data.h"
 
-#include "Typelist.h"
+#include "Typelist.h"	// loki
 
 
 
@@ -23,6 +23,21 @@ struct is_tableKey<TableKey<persistence_class, key>>
 	static constexpr bool value = true;
 };
 
+template <typename T, typename ...RefBy>   requires (is_tableKey<T>::value && (is_tableKey<RefBy>::value && ...))
+struct PKDependencies;
+
+
+template<typename T>
+struct is_PKDependencies
+{
+	static constexpr bool value = false;
+};
+
+template<typename T, typename ...RefBy>
+struct is_PKDependencies<PKDependencies<T, RefBy...>>
+{
+	static constexpr bool value = true;
+};
 
 
 // Examples:
@@ -52,38 +67,6 @@ struct TableKey
 private:
 	inline static const Table* tableData = nullptr;
 };
-
-
-#if 0
-// template <typename DepPair, typename TargetPair>
-// struct TableConnection;
-
-template<typename T, typename Tuple>
-struct TypeInTuple
-{
-	constexpr static bool exists()
-	{
-		constexpr unsigned size = std::tuple_size<Tuple>::value;
-		bool match = matches<size>();
-		return match;
-	}
-
-private:
-	template<unsigned N>
-	constexpr static bool matches()
-	{
-		using V = std::tuple_element_t < N - 1, Tuple>;
-		bool match = std::is_same_v<T, V>;
-		return match || matches<N - 1>();
-	}
-	template<>
-	constexpr static bool matches<0>()
-	{
-		return false;
-	}
-
-};
-#endif
 
 // T and RefBy are TableKeys
 // Target is special, has primary key
@@ -133,7 +116,7 @@ private:
 	static bool has_links<0>()  { return false; }
 };
 
-#if 1
+
 // T is TableKey we are looking if present in Tuple
 // Tuple is a std::tuple<TableKeys>
 //  
@@ -169,33 +152,6 @@ private:
 	}
 };
 
-#if 0
-template<typename list>
-struct List
-{
-	using type = list;
-};
-
-template<typename list, typename T>
-struct ListAppend : List<list>
-{
-	using Result = typename Loki::TL::Append<list, T>::Result;
-};
-
-template<typename List, typename T>
-struct IncreasingCollection
-{
-	using type = typename Loki::TL::Append<List, T>::Result;
-
-};
-
-struct IncCollectionImpl
-{
-	using Collection = typename Loki::Typelist < Loki::NullType, Loki::NullType >;
-	using list = IncreasingCollection::impl<Collection, int>::list;
-	using list2 = IncreasingCollection::impl<list, double>::list;
-};
-#endif
 
 template<typename Col, typename T, int N>
 struct static_if
@@ -209,9 +165,6 @@ struct static_if<Col, T, -1>
 	using type = Col;
 };
 
-
-
-#endif
 
 // connection between 2 TableKey's:
 // Dependent pair
@@ -239,7 +192,10 @@ struct TableConnection
 	}
 };
 
-
+// TableConnection between 2 TableKey's:
+// Dependent pair = Dependent FK TableKey
+// Target pair = Target PK TableKey
+//
 // List of TableConnection instances
 template <typename List>
 struct TableConnectionList
@@ -285,17 +241,18 @@ struct TableConnectionList<Loki::NullType>
 		return true;
 	}
 };
+
 // T is a TableKey, also known as T::Target or tableKey
 // tblDefs are PKDependencies types
-//		tblDefs[x]::reference_list is list of TableKeys
-// we are going to search TableKey T in each tblDefs[x]::reference_list
+//		each element in tblDefs has a reference_list which is a list of FK TableKeys
+//  we are going to search TableKey T in each tblDefs[x]::reference_list
 //	for each found we will create a TableConnection<T, tblDefs[x]::Target>
 //	we add such connection to TableConnections list by appending
 //	(see struct append inside struct build and see how the list is "exported"
 //	in struct construct: see how construct triggers the building of the list
 //	and reports its final stage)
 
-template<typename T, typename...tblDefs >
+template<typename T, typename...tblDefs >	requires (is_tableKey<T>::value && (is_PKDependencies<tblDefs>::value && ... ))
 struct FKDependencies
 {
 	using tableKey = T;

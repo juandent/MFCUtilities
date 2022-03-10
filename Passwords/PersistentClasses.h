@@ -48,6 +48,23 @@ struct Password
 	}
 };
 
+template<typename T>
+struct is_persistent
+{
+	static constexpr bool value = false;
+};
+
+template<>
+struct is_persistent<Location>
+{
+	static constexpr bool value = true;
+};
+
+template<>
+struct is_persistent<Password>
+{
+	static constexpr bool value = true;
+};
 
 /////////////////////////////////////////////////////////////////
 ///

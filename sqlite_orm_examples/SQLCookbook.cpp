@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cassert>
 
+#if 0
 struct Employee
 {
 	int m_empno;
@@ -55,6 +56,9 @@ auto storage = make_storage("SQLCookbook.sqlite",
 		make_column("received", &EmpBonus::m_received),
 		make_column("type", &EmpBonus::m_type),
 		foreign_key(&EmpBonus::m_empno).references(&Employee::m_empno)));
+#else
+#include "SQLCookbook.h"
+#endif
 
 void SQL1_8();
 void SQL1_13();
@@ -130,6 +134,8 @@ int main()
 		std::ignore = s;
 	}
 
+	SQL3_1();
+
 	SQL1_8();
 	SQL1_13();
 	SQL2_5();
@@ -142,6 +148,7 @@ int main()
 	SQL3_6();
 }
 
+
 void SQL1_6()
 {
 	struct SalaryAlias : alias_tag {
@@ -153,7 +160,7 @@ void SQL1_6()
 
 
 	//    select * 
-//    from (select salary, comm as commmission 
+//    from (select salary, comm as commission 
 //          from emp)
 //    where salary< 5000
 	// storage.prepare(select(asterisk<Employee>(), from<Employee>()))
@@ -207,6 +214,7 @@ void SQL2_6()
 
 }
 
+
 void SQL3_1()
 {
 	struct NamesAlias : alias_tag {
@@ -220,13 +228,13 @@ void SQL3_1()
 	{
 		auto statement = storage.prepare(
 			select(union_all(
-				select(columns(as<NamesAlias>(&Department::m_deptname), &Department::m_deptno)),
+				select(columns(as<NamesAlias>(&Department::m_deptname), as_optional(&Department::m_deptno))),
 				select(union_all(
-					select(columns(quote("--------------------"), 0)),
-					select(columns(as<NamesAlias>(&Employee::m_ename), &Employee::m_depno)))))));
+					select(columns(quote("--------------------"), std::optional<int>())),
+					select(columns(as<NamesAlias>(&Employee::m_ename), as_optional(&Employee::m_depno))))))));
 			
 		auto sql = statement.expanded_sql();
-		auto rows = storage.execute(statement);
+		auto rows = storage.execute(statement);	// THIS HAS A BUG related to std::nullopt!
 	}
 	catch(std::exception& ex)
 	{
@@ -367,3 +375,4 @@ void SQL3_6()
 	}
 
 }
+
