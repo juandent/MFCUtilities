@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RecordLinks.h"
+// #include "RecordLinks.h"
 #include "Data.h"
 
 template<typename Table, int Table::* keyCol>
@@ -10,11 +10,11 @@ public:
 	Storage::Storage_t& storage;
 	void throwIfcannotDelete(Table const& record)	// may throw std::exception
 	{
-		!RecordLinks::has_links(record);
+		// !RecordLinks::has_links(record);
 	}
 	void throwIfcannotInsertUpdate(Table const& record)
 	{
-		RecordLinks::foreignKeysExist(record);
+		// RecordLinks::foreignKeysExist(record);
 	}
 private:
 	///

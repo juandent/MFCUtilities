@@ -151,7 +151,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_10_feb_2022\include;original C:\Components\sqlite_orm_dev_23_jan_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_3_march_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
       <UseFullPaths>false</UseFullPaths>
     </ClCompile>
@@ -219,7 +219,6 @@
     <ClInclude Include="PersistentClasses.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="QueryInversionesDlg.h" />
-    <ClInclude Include="RecordLinks.h" />
     <ClInclude Include="RendimientoDlg.h" />
     <ClInclude Include="RendimientosTableDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -287,6 +286,9 @@
     <None Include="res\Investments.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JDGridCtrl\GridCtrlDll\GridCtrlDll.vcxproj">
+      <Project>{8c3a1b23-55f5-4b5f-985f-073f2e1c1745}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\JDMFCLibraryModules\JDMFCLibraryModules.vcxproj">
       <Project>{c964146a-c6cf-49a0-8bd9-a97512e8123c}</Project>
     </ProjectReference>

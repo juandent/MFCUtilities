@@ -100,7 +100,173 @@ BOOL GenericGrid::OnInitDialog()
                   // EXCEPTION: OCX Property Pages should return FALSE
 }
 
+auto as_optional()
+{
+    using namespace sqlite_orm;
 
+    struct Employee
+    {
+        int m_empno;
+        std::string m_ename;
+        std::string m_job;
+        std::optional<int> m_mgr;
+        std::string m_hiredate;
+        double m_salary;
+        std::optional<double> m_commission;
+        int m_deptno;
+    };
+
+    struct Department
+    {
+        int m_deptno;
+        std::string m_deptname;
+        std::string m_loc;
+
+    };
+
+    struct EmpBonus
+    {
+        int m_id;
+        int m_empno;
+        std::string m_received;	// date
+        int m_type;
+    };
+
+    struct Artist
+    {
+        int m_id;
+        std::string m_name;
+    };
+
+    struct Album
+    {
+        int m_id;
+        int m_artist_id;
+    };
+
+    using namespace sqlite_orm;
+
+    auto storage = make_storage("SQLCookbook.sqlite",
+        make_table("Emp",
+            make_column("empno", &Employee::m_empno, primary_key(), autoincrement()),
+            make_column("ename", &Employee::m_ename),
+            make_column("job", &Employee::m_job),
+            make_column("mgr", &Employee::m_mgr),
+            make_column("hiredate", &Employee::m_hiredate),
+            make_column("salary", &Employee::m_salary),
+            make_column("comm", &Employee::m_commission),
+            make_column("deptno", &Employee::m_deptno),
+            foreign_key(&Employee::m_deptno).references(&Department::m_deptno)),
+        make_table("Dept",
+            make_column("deptno", &Department::m_deptno, primary_key(), autoincrement()),
+            make_column("deptname", &Department::m_deptname),
+            make_column("loc", &Department::m_loc)),
+        make_table("Emp_bonus",
+            make_column("id", &EmpBonus::m_id, primary_key(), autoincrement()),
+            make_column("empno", &EmpBonus::m_empno),
+            make_column("received", &EmpBonus::m_received),
+            make_column("type", &EmpBonus::m_type),
+            foreign_key(&EmpBonus::m_empno).references(&Employee::m_empno)),
+        make_table("Artists",
+            make_column("id", &Artist::m_id, primary_key(), autoincrement()),
+            make_column("name", &Artist::m_name)),
+        make_table("Albums",
+            make_column("id", &Album::m_id, primary_key(), autoincrement()),
+            make_column("artist_id", &Album::m_artist_id),
+            foreign_key(&Album::m_artist_id).references(&Artist::m_id)));
+
+
+
+
+	storage.sync_schema();
+
+	storage.remove_all<Album>();
+	storage.remove_all<Artist>();
+	storage.remove_all<EmpBonus>();
+	storage.remove_all<Employee>();
+	storage.remove_all<Department>();
+
+	std::vector<Artist> art =
+	{
+		Artist{1, "Elton John"},
+		Artist{2, "Prince"}
+	};
+
+	std::vector<Album> albums =
+	{
+		Album{1, 1}
+	};
+
+	std::vector<Employee> vec =
+	{
+		Employee{7369, "Smith", "Clerk", 7902, "17-DEC-1980",800,std::nullopt, 20},
+		Employee{7499, "Allen", "SalesMan", 7698, "20-FEB-1981", 1600, 300, 30},
+		Employee{7521,"Ward", "SalesMan", 7698,"22-feb-1981",1250,500, 30},
+		Employee{7566,"Jones", "Manager", 7839, "02-abr-1981",2975, std::nullopt,20},
+		Employee{7654,"Martin","SalesMan", 7698, "28-sep-1981", 1250,1400,30},
+		Employee{7698,"Blake", "Manager", 7839, "01-may-1981", 2850, std::nullopt, 30},
+		Employee{7782, "Clark", "Manager", 7839, "09-jun-1981", 2450, std::nullopt, 10},
+		Employee{7788, "Scott", "Analyst", 7566, "09-Dec-1982", 3000, std::nullopt, 20},
+		Employee{7839, "King", "President", std::nullopt, "17-nov-1981", 5000, std::nullopt,10},
+		Employee{7844,"Turner","SalesMan", 7698, "08-Sep-1981", 1500, 0, 30},
+		Employee{7876, "Adams", "Clerk", 7788, "12-JAN-1983", 1100, std::nullopt, 20},
+		Employee{7900,"James", "Clerk", 7698,"03-DEC-1981", 950, std::nullopt, 30},
+		Employee{7902,"Ford", "Analyst", 7566, "03-DEC-1981", 3000, std::nullopt, 20},
+		Employee{7934, "Miller", "Clerk", 7782,"23-JAN-1982", 1300, std::nullopt, 10}
+	};
+
+	std::vector<Department> des =
+	{
+		Department{10, "Accounting", "New York"},
+		Department{20, "Research", "Dallas"},
+		Department{30, "Sales", "Chicago"},
+		Department{40, "Operations", "Boston"}
+	};
+
+	std::vector<EmpBonus> bonuses =
+	{
+		EmpBonus{-1, 7369, "14-Mar-2005", 1},
+		EmpBonus{-1, 7900, "14-Mar-2005", 2},
+		EmpBonus{-1, 7788, "14-Mar-2005", 3}
+	};
+
+	try
+	{
+		storage.replace_range(art.begin(), art.end());
+		storage.replace_range(albums.begin(), albums.end());
+		storage.replace_range(des.begin(), des.end());
+		storage.replace_range(vec.begin(), vec.end());
+		storage.insert_range(bonuses.begin(), bonuses.end());
+	}
+	catch (std::exception& ex)
+	{
+		auto s = ex.what();
+		std::ignore = s;
+	}
+
+
+
+
+
+    struct NamesAlias : alias_tag {
+        static const std::string& get() {
+            static const std::string res = "ENAME_AND_DNAME";
+            return res;
+        }
+    };
+
+
+    auto statement = storage.prepare(
+        select(union_all(
+            select(columns(as<NamesAlias>(&Department::m_deptname), as_optional(&Department::m_deptno))),
+            select(union_all(
+                select(columns(quote("--------------------"), std::optional<int>())),
+                select(columns(as<NamesAlias>(&Employee::m_ename), as_optional(&Employee::m_deptno))))))));
+
+    auto sql = statement.expanded_sql();
+    static auto rows = storage.execute(statement);
+    return rows;
+}
 
 auto full_outer_join()
 {
@@ -174,10 +340,59 @@ void GenericGrid::InitializeGridRendimientos(const T& t)
 {
 // #define distinct
     // auto rows = storage.select(distinct(columns(&Employee::address, &Employee::name)), from<Employee>(), where(t));
-    auto rows = full_outer_join();
+    // auto rows = full_outer_join();
+    auto rows = as_optional();
 
-	std::vector<std::string> headers{ "TYPE", "COLOR", "TYPE", "COLOR" };
+    std::vector<std::string> headers{ "ENAME_AND_DNAME", "DEPTNO"}; // "TYPE", "COLOR", "TYPE", "COLOR"
+
 
 	m_grid_displayer.reset(new JoinedGridDisplayer<decltype(rows[0]), IntegerList<>, IntegerList<>>(m_generic_grid, std::move(rows), std::move(headers)));
 	m_grid_displayer->display();
+}
+
+
+void GenericGrid::PostNcDestroy()
+{
+    // TODO: Add your specialized code here and/or call the base class
+
+    CDialog::PostNcDestroy();
+    if (!m_is_modal)
+    {
+        AfxGetMainWnd()->SendMessage(WM_USER_DIALOG_DESTROYED, IDD_GenericGrid, 0);
+        delete this;
+    }
+}
+
+
+
+
+INT_PTR GenericGrid::DoModal()
+{
+    // TODO: Add your specialized code here and/or call the base class
+    m_is_modal = true;
+    return CDialog::DoModal();
+}
+
+bool GenericGrid::isModal() const noexcept
+{
+    return ! GetParent()->IsWindowEnabled();
+}
+
+void GenericGrid::OnOK()
+{
+    // TODO: Add your specialized code here and/or call the base class
+    if (m_is_modal)
+        CDialog::OnOK();
+    else
+        DestroyWindow();
+}
+
+
+void GenericGrid::OnCancel()
+{
+    // TODO: Add your specialized code here and/or call the base class
+    if (m_is_modal)
+        CDialog::OnCancel();
+    else
+        DestroyWindow();
 }

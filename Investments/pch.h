@@ -37,7 +37,7 @@
 #include <stdexcept>
 //#include "Utilities.h"
 //#include <JDGridCtrl.h>
-#include <..\FixedPoint/arithmetic_types.h>
+// #include <..\FixedPoint/arithmetic_types.h>
 #include <any>
 #include <variant>
 #include <optional>
@@ -50,5 +50,7 @@
 #include  "..\JDGridCtrl/JDGridCtrl.h"
 #include "..\ORM_Extensions/HandleSystemError.h"
 
+#define WM_USER_DIALOG_DESTROYED WM_USER + 0x101
+// import arithmetic_types;
 
 #endif //PCH_H

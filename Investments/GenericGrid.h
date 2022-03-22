@@ -14,7 +14,7 @@
 class GenericGrid : public CDialog
 {
 	DECLARE_DYNAMIC(GenericGrid)
-
+	bool m_is_modal = false;
 public:
 	GenericGrid(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~GenericGrid();
@@ -35,4 +35,11 @@ private:
 	std::unique_ptr<IDisplayer> m_grid_displayer;
 	template<typename T>
 	void InitializeGridRendimientos(const T& t);
+	virtual void PostNcDestroy();
+public:
+//	virtual BOOL Create(LPCTSTR lpszTemplateName, CWnd* pParentWnd = NULL);
+	virtual INT_PTR DoModal();
+	virtual void OnOK();
+	virtual void OnCancel();
+	bool isModal() const noexcept;
 };

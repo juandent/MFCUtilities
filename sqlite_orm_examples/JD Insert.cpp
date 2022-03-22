@@ -33,31 +33,46 @@ int main(int, char**) {
 
     storage.sync_schema();
     storage.remove_all<User>();
+    storage.remove_all<UserBackup>();
 
     UserBackup alex{
         -1,
-        "Juan",
-        {0x10, 0x20, 0x30, 0x40},
+        "Alex",
+        {0x10, 0x20, 0x30, 0x40}
+    };
+    UserBackup john{
+        -1,
+        "John",
+        {0x20, 0x50, 0x79}
     };
     storage.insert(alex);
-    storage.insert(alex);
+    storage.insert(john);
+
+    /*
+     * INSERT INTO users SELECT "user_backup"."id", "user_backup"."name", "user_backup"."hash" FROM 'user_backup'
+     *
+     */
 
     auto statement = storage.prepare(insert(into<User>(), select(columns(&UserBackup::id, &UserBackup::name, &UserBackup::hash))));
     auto sql = statement.expanded_sql();
 	storage.execute(statement);
     auto r = storage.select(last_insert_rowid());
+    auto users = storage.get_all<User>();
+    auto backup = storage.get_all<UserBackup>();
+    assert(users.size() == 2);
+    assert(backup.size() == 2);
 
     auto rows2 = storage.select(date("now"));
-    auto users = storage.get_all<User>();
+    
 
-    {
-        auto statement = storage.prepare(insert(into<User>(), select(columns(&UserBackup::id, &UserBackup::hash, &UserBackup::name))));
-        auto sql = statement.expanded_sql();
-        storage.execute(statement);
-        auto r = storage.select(last_insert_rowid());
-        auto users = storage.get_all<User>();
-
-    }
+    // {
+    //     auto statement = storage.prepare(insert(into<User>(), select(columns(&UserBackup::id, &UserBackup::hash, &UserBackup::name))));
+    //     auto sql = statement.expanded_sql();
+    //     storage.execute(statement);
+    //     auto r = storage.select(last_insert_rowid());
+    //     auto users = storage.get_all<User>();
+    //
+    // }
 
     std::ignore = users;
 }

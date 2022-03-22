@@ -236,12 +236,13 @@ inline void operator>> (CButton& btn, bool& check_status)
 {
 	check_status = btn.GetCheck();
 }
-
+#if 0	// now in DateBindings.h
 inline std::chrono::sys_days Today()
 {
 	const auto today = std::chrono::sys_days{ floor<std::chrono::days>(std::chrono::system_clock::now()) };
 	return today;
 }
+#endif
 
 template<typename ...Counts>
 static bool allNonZero(Counts ... counts) requires (std::is_same_v<Counts, int> && ...)

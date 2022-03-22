@@ -3,11 +3,15 @@
 #include "pch.h"
 #include "Data.h"
 
+// import fixed_point;
+
 
 void Storage::initialize()
 {
 	// initialize tz library asynchronously
 	std::thread{ std::chrono::get_tzdb }.detach();
+
+	
 
 	//fill_db_with_test_data();
 //	empty_database();
@@ -28,7 +32,7 @@ void Storage::upgrade_database()
 void Storage_Impl::copy_old_to_new()
 {
 	// starts full
-	auto old = get_old_storage();
+	auto old = get_storage();
 	// starts empty
 	auto fresh = get_new_storage();
 
@@ -38,9 +42,13 @@ void Storage_Impl::copy_old_to_new()
 		fresh.replace(record);
 	}
 
+	// X x{ -1,1000 };
+	// x.id = fresh.insert(x);
+
 	auto rendimientos = old.get_all<Rendimiento>();
 	for (auto& record : rendimientos)
 	{
+		// record.fkey_x = x.id;
 		fresh.replace(record);
 	}
 
@@ -271,6 +279,13 @@ void Storage::empty_database()
 ///
 ///
 
+
+std::string Fondo::simple_dump() const
+{
+	std::string str = std::to_string(id) + " - "s + abreviacion + " - "s + nombre + " "s + std::to_string(tipo_cupon);
+	return str;
+}
+
 int Fondo::num_participaciones_al(std::chrono::sys_days fecha) const noexcept
 {
 	using namespace std::chrono;
@@ -280,7 +295,7 @@ int Fondo::num_participaciones_al(std::chrono::sys_days fecha) const noexcept
 
 	auto suma_participaciones = Storage::getStorage().select(sum(&Inversion::num_participaciones), where(c(&Inversion::beginning_date) <= when and (c(&Inversion::fkey_fondo) == this->id)), group_by(&Inversion::fkey_fondo));
 
-	if (suma_participaciones.empty()) 	{ return 0; }
+	if (suma_participaciones.empty()) { return 0; }
 
 	auto suma = *std::move(suma_participaciones[0]);
 	auto sum_participaciones = static_cast<int>(suma);
@@ -305,51 +320,14 @@ double Fondo::get_rendimiento_unitario_al(std::chrono::year_month_day fecha) con
 	return rendimientos[0].rendimiento_unitario;
 }
 
-#if 0
-
-int Inversion::num_participaciones_en(int fondo, std::chrono::year_month_day fecha) noexcept
+std::string Inversion::simple_dump() const
 {
-	using namespace std::chrono;
-	using namespace sqlite_orm;
-
-	sys_days when = fecha;
-
-	auto suma_participaciones = Storage::getStorage().select( sum(&Inversion::num_participaciones), where(c(&Inversion::beginning_date) <= when and (c(&Inversion::fkey_fondo) == fondo)), group_by(&Inversion::fkey_fondo));
-
-	if( suma_participaciones.empty())
-	{
-		return 0;
-	}
-
-	auto&& rec = suma_participaciones[0];
-	
-	auto* suma = rec.get();
-
-	auto sum_participaciones = static_cast<int>(* suma);
-
-	return sum_participaciones;
-
+	std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(beginning_date) + " "s + std::to_string(num_participaciones);
+	return str;
 }
 
-
-double Rendimiento::get_rendimiento_unitario(int fondo, std::chrono::year_month_day fecha) noexcept
+std::string Rendimiento::simple_dump() const
 {
-	using namespace std::chrono;
-	using namespace sqlite_orm;
-
-	sys_days when = fecha;
-
-	// auto rendimientos = Storage::getStorage().select( columns( &Rendimiento::rendimiento_unitario, &Rendimiento::fkey_fondo) , where(c(&Rendimiento::fecha) <= when ), order_by(&Rendimiento::fecha).desc());
-
-
-
-	auto rendimientos = Storage::getStorage().get_all<Rendimiento>(where(c(&Rendimiento::fecha) <= when and (c(&Rendimiento::fkey_fondo) == fondo)), order_by(&Rendimiento::fecha).desc());
-
-	if( rendimientos.empty())
-	{
-		return 0.0;
-	}
-
-	return rendimientos[0].rendimiento_unitario;
+	std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(fecha) + " "s + std::to_string(rendimiento_unitario);
+	return str;
 }
-#endif 

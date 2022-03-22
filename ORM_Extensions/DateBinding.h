@@ -11,16 +11,16 @@
 #include <regex>
 #include <format>
 
+inline std::chrono::sys_days Today()
+{
+	const auto today = std::chrono::sys_days{ floor<std::chrono::days>(std::chrono::system_clock::now()) };
+	return today;
+}
+
 /**
- *  This is a enum we want to map to our sqlite db.
- *  First we have to decide what db type enum must have.
- *  Let's make it `TEXT`: Gender::Male will store as 'male' string
- *  and Gender::Female as 'female' string.
- */
-// enum class Gender {
-// 	Male,
-// 	Female,
-// };
+ *  This is the date we want to map to our sqlite db.
+  *  Let's make it `TEXT`
+  */
 
 //  also we need transform functions to make string from enum..
 inline std::string SysDaysToString(std::chrono::sys_days pt) {
@@ -33,9 +33,10 @@ constexpr auto null_sys_day = std::chrono::sys_days{ std::chrono::days{0} };
 
 
 /**
- *  and enum from string. This function has nullable result cause
- *  string can be neither `male` nor `female`. Of course we
- *  won't allow this to happed but as developers we must have
+ *  and sys_days from string. This function has nullable result cause
+ *  string can be neither `male` nor `female`. i have taken null_sys_day to
+ *  correspond to null. Don't know if should use std::optional as return case??
+ *  Of course we won't allow this to happen but as developers we must have
  *  a scenario for this case.
  *  These functions are just helpers. They will be called from several places
  *  that's why I placed it separatedly. You can use any transformation type/form
@@ -108,6 +109,11 @@ namespace sqlite_orm {
 	 */
 	template<>
 	struct row_extractor<std::chrono::sys_days> {
+		std::chrono::sys_days extract(sqlite3_value* row_value)
+		{
+			auto characters = reinterpret_cast<const char*>(sqlite3_value_text(row_value));
+			return extract(characters);
+		}
 		std::chrono::sys_days extract(const char* row_value) {
 			auto sd = SysDaysFromString(row_value);
 			if (sd != null_sys_day) {

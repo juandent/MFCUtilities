@@ -28,6 +28,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
 	ON_WM_SETTINGCHANGE()
+	ON_MESSAGE(WM_USER_DIALOG_DESTROYED, &CMainFrame::OnUserDialogDestroyed)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -427,4 +428,11 @@ void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 {
 	CMDIFrameWndEx::OnSettingChange(uFlags, lpszSection);
 	m_wndOutput.UpdateFonts();
+}
+
+
+afx_msg LRESULT CMainFrame::OnUserDialogDestroyed(WPARAM wParam, LPARAM lParam)
+{
+	theApp.OnUserDialogDestroyed(wParam);
+	return 0;
 }

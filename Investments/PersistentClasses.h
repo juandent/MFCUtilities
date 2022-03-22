@@ -24,11 +24,11 @@ struct Fondo
 	};
 
 
-	std::string simple_dump() const
-	{
-		std::string str = std::to_string(id) + " - "s + abreviacion + " - "s + nombre + " "s + std::to_string(tipo_cupon);
-		return str;
-	}
+	std::string simple_dump() const;
+	// {
+	// 	std::string str = std::to_string(id) + " - "s + abreviacion + " - "s + nombre + " "s + std::to_string(tipo_cupon);
+	// 	return str;
+	// }
 
 	int num_participaciones_al(std::chrono::sys_days fecha) const noexcept;
 	double get_rendimiento_unitario_al(std::chrono::year_month_day fecha) const noexcept;
@@ -42,13 +42,11 @@ struct Inversion
 	std::chrono::sys_days beginning_date;
 	int fkey_fondo;
 
-	std::string simple_dump() const
-	{
-		std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(beginning_date) + " "s + std::to_string(num_participaciones);
-		return str;
-	}
-
-	// static int num_participaciones_en(int fondo, std::chrono::year_month_day fecha) noexcept;
+	std::string simple_dump() const;
+	// {
+	// 	std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(beginning_date) + " "s + std::to_string(num_participaciones);
+	// 	return str;
+	// }
 };
 
 struct Rendimiento
@@ -58,16 +56,13 @@ struct Rendimiento
 	double rendimiento_unitario;
 	std::chrono::sys_days fecha;
 
-	std::string simple_dump() const
-	{
-		std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(fecha) + " "s + std::to_string(rendimiento_unitario);
-		return str;
-	}
-
-
-	// static double get_rendimiento_unitario(int fondo, std::chrono::year_month_day fecha) noexcept;
-
+	std::string simple_dump() const;
+	// {
+	// 	std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(fecha) + " "s + std::to_string(rendimiento_unitario);
+	// 	return str;
+	// }
 };
+
 
 // type traits:
 // list of persistent classes
@@ -94,6 +89,7 @@ struct is_persistent<Inversion>
 {
 	static constexpr bool value = true;
 };
+
 
 
 // struct X

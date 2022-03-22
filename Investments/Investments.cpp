@@ -20,6 +20,7 @@
 #include "RendimientoDlg.h"
 #include "RendimientosTableDlg.h"
 
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -77,7 +78,8 @@ CInvestmentsApp theApp;
 BOOL CInvestmentsApp::InitInstance()
 {
 	Storage::initialize();
-	Storage::test_syntax();
+	// Storage::test_syntax();
+	// Storage::upgrade_database();
 
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -279,6 +281,32 @@ void CInvestmentsApp::OnFileRendimientostabla()
 void CInvestmentsApp::OnFileGenericgrid()
 {
 	// TODO: Add your command handler code here
+#if 0
+	if(m_genericGrid != nullptr)
+	{
+		m_genericGrid->SetFocus();
+	}
+	else
+	{
+		m_genericGrid = new GenericGrid();
+		m_genericGrid->Create(IDD_GenericGrid);
+		bool ok = m_genericGrid->ShowWindow(SW_SHOW);
+	}
+#else
 	GenericGrid dlg;
 	dlg.DoModal();
+#endif
+}
+
+
+int CInvestmentsApp::OnUserDialogDestroyed(WPARAM wParam)
+{
+	// TODO: Add your implementation code here.
+	switch(wParam)
+	{
+	case IDD_GenericGrid:
+		m_genericGrid = nullptr;
+		break;
+	}
+	return 0;
 }

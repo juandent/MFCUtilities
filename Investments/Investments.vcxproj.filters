@@ -63,9 +63,6 @@
     <ClInclude Include="PersistentClasses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RecordLinks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FondoDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>

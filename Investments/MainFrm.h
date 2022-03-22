@@ -56,6 +56,7 @@ protected:
 
 	BOOL CreateDockingWindows();
 	void SetDockingWindowIcons(BOOL bHiColorIcons);
+	afx_msg LRESULT OnUserDialogDestroyed(WPARAM wParam, LPARAM lParam);
 };
 
 

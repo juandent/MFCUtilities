@@ -167,10 +167,10 @@ struct static_if<Col, T, -1>
 
 
 // connection between 2 TableKey's:
-// Dependent pair
+// Dependent pair FK TableKey
 //		DepPair::Table = Rendimiento
 //		DepPair::Key =   getKeyValue()
-// Target pair
+// Target pair PK TableKey
 //		TargetPair::Table = Fondo
 //		TargetPair::Key = &Fondo.id
 
@@ -205,6 +205,7 @@ struct TableConnectionList
 
 	static bool foreignKeysExist(const DependentTable& dep)
 	{
+		typeAt0* pT;
 		constexpr size_t size = Loki::TL::Length<List>::value;
 		bool exists = foreignKeyExists<size>(dep);
 
@@ -242,21 +243,22 @@ struct TableConnectionList<Loki::NullType>
 	}
 };
 
-// T is a TableKey, also known as T::Target or tableKey
-// tblDefs are PKDependencies types
-//		each element in tblDefs has a reference_list which is a list of FK TableKeys
-//  we are going to search TableKey T in each tblDefs[x]::reference_list
-//	for each found we will create a TableConnection<T, tblDefs[x]::Target>
+// T is a FK TableKey, also known as tableKey
+// pkDeps are PKDependencies types
+//		each element in pkDeps has a reference_list which is a list of FK TableKeys
+//  we are going to search TableKey T in each pkDeps[x]::reference_list
+//	for each found we will create a TableConnection<T, pkDeps[x]::Target>
+//	a pkDeps[x]::Target is a PK TableKey
 //	we add such connection to TableConnections list by appending
 //	(see struct append inside struct build and see how the list is "exported"
 //	in struct construct: see how construct triggers the building of the list
 //	and reports its final stage)
 
-template<typename T, typename...tblDefs >	requires (is_tableKey<T>::value && (is_PKDependencies<tblDefs>::value && ... ))
+template<typename T, typename...pkDeps >	requires (is_tableKey<T>::value && (is_PKDependencies<pkDeps>::value && ... ))
 struct FKDependencies
 {
 	using tableKey = T;
-	static std::tuple<tblDefs...> tblDefs_list;
+	static std::tuple<pkDeps...> pkDep_list;
 private:
 	template<typename Col>
 	struct build
@@ -265,10 +267,10 @@ private:
 		struct append
 		{
 		private:
-			using tableDef = std::tuple_element_t<N - 1, decltype(tblDefs_list)>;
-			using tableKeys = decltype(tableDef::reference_list);
+			using pkDep = std::tuple_element_t<N - 1, decltype(pkDep_list)>;
+			using tableKeys = decltype(pkDep::reference_list);
 			static constexpr int index = TableKeyInTuple < tableKey, tableKeys>::index();
-			using typeToAdd = TableConnection<tableKey, typename tableDef::Target>;
+			using typeToAdd = TableConnection<tableKey, typename pkDep::Target>;
 			using newCol = static_if<Col, typeToAdd, index>::type;
 		public:
 			using result = typename append<newCol, N - 1>::result;
@@ -278,7 +280,7 @@ private:
 		{
 			using result = Col;
 		};
-		static constexpr int size = std::tuple_size_v<decltype(tblDefs_list)>;
+		static constexpr int size = std::tuple_size_v<decltype(pkDep_list)>;
 		using result = typename append<Col, size>::result;
 
 	};

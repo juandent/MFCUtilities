@@ -13,7 +13,7 @@ struct Employee
 	std::string m_hiredate;
 	double m_salary;
 	std::optional<double> m_commission;
-	int m_depno;
+	int m_deptno;
 };
 
 struct Department
@@ -32,6 +32,18 @@ struct EmpBonus
 	int m_type;
 };
 
+struct Artist
+{
+	int m_id;
+	std::string m_name;
+};
+
+struct Album
+{
+	int m_id;
+	int m_artist_id;
+};
+
 using namespace sqlite_orm;
 
 auto storage = make_storage("SQLCookbook.sqlite",
@@ -43,8 +55,8 @@ auto storage = make_storage("SQLCookbook.sqlite",
 		make_column("hiredate", &Employee::m_hiredate),
 		make_column("salary", &Employee::m_salary),
 		make_column("comm", &Employee::m_commission),
-		make_column("depno", &Employee::m_depno),
-		foreign_key(&Employee::m_depno).references(&Department::m_deptno)),
+		make_column("deptno", &Employee::m_deptno),
+		foreign_key(&Employee::m_deptno).references(&Department::m_deptno)),
 	make_table("Dept",
 		make_column("deptno", &Department::m_deptno, primary_key(), autoincrement()),
 		make_column("deptname", &Department::m_deptname),
@@ -54,5 +66,12 @@ auto storage = make_storage("SQLCookbook.sqlite",
 		make_column("empno", &EmpBonus::m_empno),
 		make_column("received", &EmpBonus::m_received),
 		make_column("type", &EmpBonus::m_type),
-		foreign_key(&EmpBonus::m_empno).references(&Employee::m_empno)));
+		foreign_key(&EmpBonus::m_empno).references(&Employee::m_empno)),
+	make_table("Artists",
+		make_column("id", &Artist::m_id, primary_key(), autoincrement()),
+		make_column("name", &Artist::m_name)),
+	make_table("Albums",
+		make_column("id", &Album::m_id, primary_key(), autoincrement()),
+		make_column("artist_id", &Album::m_artist_id),
+		foreign_key(&Album::m_artist_id).references(&Artist::m_id)));
 

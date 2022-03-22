@@ -42,15 +42,121 @@ private:
 #endif
 };
 
-
-inline 	auto& Storage_Impl::get_storage()
+inline auto& Storage_Impl::get_new_storage()
 {
 	using namespace sqlite_orm;
 	using namespace std::chrono;
 	using namespace std;
 
 	static int flag = 0;
+	// this file will start empty
+	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Finances\\New.sqlite" };
 
+	constexpr int version = 3;
+
+	static auto storage =
+		make_storage(db_name,
+			make_trigger("validate_fields_before_insert_fondos",
+				before()
+				.insert()
+				.on<Fondo>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Fondo::abreviacion), ""),
+						then(raise_abort("Fondo abreviacion empty")))
+					.when(is_equal(length(new_(&Fondo::nombre)), 0),
+						then(raise_abort("Fondo nombre empty")))
+					.end()))
+				.end()),
+
+			make_trigger("validate_num_participaciones_before_insert_inversion",
+				before()
+				.insert()
+				.on<Inversion>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Inversion::num_participaciones), 0),
+						then(raise_abort("Numero de participaciones no puede ser 0")))
+					.end()))
+				.end()),
+			make_trigger("validate_rendimiento_unitario_before_insert_rendimiento",
+				before()
+				.insert()
+				.on<Rendimiento>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Rendimiento::rendimiento_unitario), 0.0),
+						then(raise_abort("Rendimiento unitario no puede ser 0")))
+					.end()))
+				.end()),
+			make_trigger("validate_fields_before_update_fondos",
+				before()
+				.update()
+				.on<Fondo>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Fondo::abreviacion), ""),
+						then(raise_abort("Fondo abreviacion empty")))
+					.when(is_equal(length(new_(&Fondo::nombre)), 0),
+						then(raise_abort("Fondo nombre empty")))
+					.end()))
+				.end()),
+			make_trigger("validate_num_participaciones_before_update_inversion",
+				before()
+				.update()
+				.on<Inversion>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Inversion::num_participaciones), 0),
+						then(raise_abort("Numero de participaciones no puede ser 0")))
+					.end()))
+				.end()),
+			make_trigger("validate_rendimiento_unitario_before_update_rendimiento",
+				before()
+				.update()
+				.on<Rendimiento>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Rendimiento::rendimiento_unitario), 0.0),
+						then(raise_abort("Rendimiento unitario no puede ser 0")))
+					.end()))
+				.end()),
+
+
+
+			make_table("Fondos",
+				make_column("id_fondo", &Fondo::id, autoincrement(), primary_key()),
+				make_column("nombre", &Fondo::nombre),
+				make_column("abrev", &Fondo::abreviacion),
+				make_column("tipo_cupon", &Fondo::tipo_cupon)),
+			make_table("Inversiones",
+				make_column("id_inversion", &Inversion::id, autoincrement(), primary_key()),
+				make_column("fkey_fondo", &Inversion::fkey_fondo),
+				make_column("begin_date", &Inversion::beginning_date),
+				make_column("num_participaciones", &Inversion::num_participaciones),
+				foreign_key(&Inversion::fkey_fondo).references(&Fondo::id)),
+			make_table("Rendimientos",
+				make_column("id_rendimiento", &Rendimiento::id, autoincrement(), primary_key()),
+				make_column("fecha", &Rendimiento::fecha),
+				make_column("rend_unitario", &Rendimiento::rendimiento_unitario),
+				make_column("fkey_fondo", &Rendimiento::fkey_fondo),
+				foreign_key(&Rendimiento::fkey_fondo).references(&Fondo::id)));
+
+	if (flag == 0)
+	{
+		flag = 1;
+		storage.sync_schema(true);
+	}
+
+	return storage;
+
+}
+
+
+
+inline 	auto& Storage_Impl::get_storage()
+{
+	// return get_new_storage();
+
+	using namespace sqlite_orm;
+	using namespace std::chrono;
+	using namespace std;
+
+	static int flag = 0;
 
 	static auto storage =
 		make_storage(db_name,
@@ -60,6 +166,118 @@ inline 	auto& Storage_Impl::get_storage()
 				.on<Fondo>()
 				.begin(select(case_<int>()
 					.when(is_equal(new_(&Fondo::abreviacion),""),
+						then(raise_abort("Fondo abreviacion empty")))
+					.when(is_equal(length(new_(&Fondo::nombre)), 0),
+						then(raise_abort("Fondo nombre empty")))
+					.end()))
+				.end()),
+
+			make_trigger("validate_num_participaciones_before_insert_inversion",
+				before()
+				.insert()
+				.on<Inversion>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Inversion::num_participaciones), 0),
+						then(raise_abort("Numero de participaciones no puede ser 0")))
+					.end()))
+				.end()),
+			make_trigger("validate_rendimiento_unitario_before_insert_rendimiento",
+				before()
+				.insert()
+				.on<Rendimiento>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Rendimiento::rendimiento_unitario), 0.0),
+						then(raise_abort("Rendimiento unitario no puede ser 0")))
+					.end()))
+				.end()),
+			make_trigger("validate_fields_before_update_fondos",
+				before()
+				.update()
+				.on<Fondo>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Fondo::abreviacion), ""),
+						then(raise_abort("Fondo abreviacion empty")))
+					.when(is_equal(length(new_(&Fondo::nombre)), 0),
+						then(raise_abort("Fondo nombre empty")))
+					.end()))
+				.end()),
+			make_trigger("validate_num_participaciones_before_update_inversion",
+				before()
+				.update()
+				.on<Inversion>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Inversion::num_participaciones), 0),
+						then(raise_abort("Numero de participaciones no puede ser 0")))
+					.end()))
+				.end()),
+			make_trigger("validate_rendimiento_unitario_before_update_rendimiento",
+				before()
+				.update()
+				.on<Rendimiento>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Rendimiento::rendimiento_unitario), 0.0),
+						then(raise_abort("Rendimiento unitario no puede ser 0")))
+					.end()))
+				.end()),
+
+
+
+			make_table("Fondos",
+				make_column("id_fondo", &Fondo::id, autoincrement(), primary_key()),
+				make_column("nombre", &Fondo::nombre),
+				make_column("abrev", &Fondo::abreviacion),
+				make_column("tipo_cupon", &Fondo::tipo_cupon)),
+			make_table("Inversiones",
+				make_column("id_inversion", &Inversion::id, autoincrement(), primary_key()),
+				make_column("fkey_fondo", &Inversion::fkey_fondo),
+				make_column("begin_date", &Inversion::beginning_date),
+				make_column("num_participaciones", &Inversion::num_participaciones),
+				foreign_key(&Inversion::fkey_fondo).references(&Fondo::id),
+				check(c(& Inversion::num_participaciones) > 0)),
+			make_table("Rendimientos",
+				make_column("id_rendimiento", &Rendimiento::id, autoincrement(), primary_key()),
+				make_column("fecha", &Rendimiento::fecha),
+				make_column("rend_unitario", &Rendimiento::rendimiento_unitario),
+				make_column("fkey_fondo", &Rendimiento::fkey_fondo),
+				foreign_key(&Rendimiento::fkey_fondo).references(&Fondo::id)));
+
+	if (flag == 0)
+	{
+		flag = 1;
+		auto syncSchemaRes = storage.sync_schema(true);
+		ostringstream oss;
+		for (auto& p : syncSchemaRes) {
+			oss << p.first << " " << p.second << endl;
+		}
+		auto s = oss.str();
+		std::ignore = s;
+	}
+
+	return storage;
+}
+
+
+inline auto& Storage_Impl::get_old_storage()
+{
+	using namespace sqlite_orm;
+	using namespace std::chrono;
+	using namespace std;
+
+	static int flag = 0;
+
+	constexpr int version = 2;
+
+	// this file will start full
+	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Finances\\old.sqlite" };
+
+	static auto storage =
+		make_storage(db_name,
+			make_trigger("validate_fields_before_insert_fondos",
+				before()
+				.insert()
+				.on<Fondo>()
+				.begin(select(case_<int>()
+					.when(is_equal(new_(&Fondo::abreviacion), ""),
 						then(raise_abort("Fondo abreviacion empty")))
 					.when(is_equal(length(new_(&Fondo::nombre)), 0),
 						then(raise_abort("Fondo nombre empty")))
@@ -138,102 +356,10 @@ inline 	auto& Storage_Impl::get_storage()
 	if (flag == 0)
 	{
 		flag = 1;
-		auto syncSchemaRes = storage.sync_schema(true);
-		ostringstream oss;
-		for (auto& p : syncSchemaRes) {
-			oss << p.first << " " << p.second << endl;
-		}
-		auto s = oss.str();
-		std::ignore = s;
-	}
-
-	return storage;
-}
-
-
-inline auto& Storage_Impl::get_old_storage()
-{
-	using namespace sqlite_orm;
-	using namespace std::chrono;
-	using namespace std;
-
-	static int flag = 0;
-
-	constexpr int version = 2;
-
-	// this file will start full
-	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Finances\\old.sqlite" };
-
-	static auto storage =
-		make_storage(db_name,
-			make_table("Fondos",
-				make_column("id_fondo", &Fondo::id, autoincrement(), primary_key()),
-				make_column("nombre", &Fondo::nombre),
-				make_column("abrev", &Fondo::abreviacion),
-				make_column("tipo_cupon", &Fondo::tipo_cupon)),
-			make_table("Inversiones",
-				make_column("id_inversion", &Inversion::id, autoincrement(), primary_key()),
-				make_column("fkey_fondo", &Inversion::fkey_fondo),
-				make_column("begin_date", &Inversion::beginning_date),
-				make_column("num_participaciones", &Inversion::num_participaciones),
-				foreign_key(&Inversion::fkey_fondo).references(&Fondo::id)),
-			make_table("Rendimientos",
-				make_column("id_rendimiento", &Rendimiento::id, autoincrement(), primary_key()),
-				make_column("fecha", &Rendimiento::fecha),
-				make_column("rend_unitario", &Rendimiento::rendimiento_unitario),
-				make_column("fkey_fondo", &Rendimiento::fkey_fondo),
-				foreign_key(&Rendimiento::fkey_fondo).references(&Fondo::id)));
-
-
-	if (flag == 0)
-	{
-		flag = 1;
 		storage.sync_schema(false);
 	}
 
 	return storage;
-}
-
-inline auto& Storage_Impl::get_new_storage()
-{
-	using namespace sqlite_orm;
-	using namespace std::chrono;
-	using namespace std;
-
-	static int flag = 0;
-	// this file will start empty
-	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Finances\\New.sqlite" };
-
-	constexpr int version = 3;
-
-	static auto storage =
-		make_storage(db_name,
-			make_table("Fondos",
-				make_column("id_fondo", &Fondo::id, autoincrement(), primary_key()),
-				make_column("nombre", &Fondo::nombre),
-				make_column("abrev", &Fondo::abreviacion),
-				make_column("tipo_cupon", &Fondo::tipo_cupon)),
-			make_table("Inversiones",
-				make_column("id_inversion", &Inversion::id, autoincrement(), primary_key()),
-				make_column("fkey_fondo", &Inversion::fkey_fondo),
-				make_column("begin_date", &Inversion::beginning_date),
-				make_column("num_participaciones", &Inversion::num_participaciones),
-				foreign_key(&Inversion::fkey_fondo).references(&Fondo::id)),
-			make_table("Rendimientos",
-				make_column("id_rendimiento", &Rendimiento::id, autoincrement(), primary_key()),
-				make_column("fecha", &Rendimiento::fecha),
-				make_column("rend_unitario", &Rendimiento::rendimiento_unitario),
-				make_column("fkey_fondo", &Rendimiento::fkey_fondo),
-				foreign_key(&Rendimiento::fkey_fondo).references(&Fondo::id)));
-
-	if (flag == 0)
-	{
-		flag = 1;
-		storage.sync_schema(true);
-	}
-
-	return storage;
-
 }
 
 class Storage

@@ -8,7 +8,7 @@
 #endif
 
 #include "resource.h"       // main symbols
-
+class GenericGrid;
 
 // CInvestmentsApp:
 // See Investments.cpp for the implementation of this class
@@ -16,6 +16,7 @@
 
 class CInvestmentsApp : public CWinAppEx
 {
+	GenericGrid* m_genericGrid = nullptr;
 public:
 	CInvestmentsApp() noexcept;
 
@@ -25,6 +26,7 @@ public:
 	virtual BOOL InitInstance();
 	virtual int ExitInstance();
 
+	int OnUserDialogDestroyed(WPARAM wParam);
 // Implementation
 	UINT  m_nAppLook;
 	BOOL  m_bHiColorIcons;
@@ -40,6 +42,7 @@ public:
 	afx_msg void OnFileRendimiento();
 	afx_msg void OnFileRendimientostabla();
 	afx_msg void OnFileGenericgrid();
+
 };
 
 extern CInvestmentsApp theApp;

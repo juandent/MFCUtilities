@@ -36,7 +36,7 @@ class RendimientoComposite
 {
 	using row_type = decltype(RendimientoCompositeImpl::query(1));
 	row_type row;
-	const auto& clause() const noexcept	{ return is_equal(&Rendimiento::id, get_id());	}
+	const auto clause() const noexcept	{ return is_equal(&Rendimiento::id, get_id());	}
 public:
 	RendimientoComposite(int pk) : row{ RendimientoCompositeImpl::query(pk) }	{}
 
