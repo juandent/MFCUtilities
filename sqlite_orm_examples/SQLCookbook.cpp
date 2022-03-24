@@ -21,6 +21,10 @@ void SQL3_5();
 void SQL3_6();
 void SQL3_9();
 void Except();
+void usingUpdate();
+void usingDelete();
+void usingObjectAPI();
+
 
 int main()
 {
@@ -99,7 +103,9 @@ int main()
 		std::ignore = s;
 	}
 
-
+	usingObjectAPI();
+	usingDelete();
+	usingUpdate();
 	SQL1_8();
 	SQL1_12();
 	SQL1_13();
@@ -225,6 +231,27 @@ void SQL2_6()
 	auto sql = statement.expanded_sql();
 	auto rows = storage.execute(statement);
 
+	{
+		auto expression = select(columns(&Employee::m_ename, &Employee::m_salary, &Employee::m_commission, &Employee::m_job),
+			order_by(case_<double>().when(is_equal(&Employee::m_job, "SalesMan"), then(&Employee::m_commission)).else_(&Employee::m_salary).end()).desc());
+		std::string sql = storage.dump(expression);
+		auto statement = storage.prepare(expression);
+		auto rows = storage.execute(statement);
+	}
+	{
+		try
+		{
+			auto expression = insert(into<Employee>(), columns(&Employee::m_ename, &Employee::m_salary, &Employee::m_commission, &Employee::m_job), values(std::make_tuple("Juan", 224000, 200, "Eng")));
+			std::string sql = storage.dump(expression);
+			auto statement = storage.prepare(expression);
+			storage.execute(statement);
+		}
+		catch(std::exception& ex)
+		{
+			std::string s = ex.what();
+			std::ignore = s;
+		}
+	}
 }
 
 
@@ -298,10 +325,10 @@ void SQL3_3()
 	{
 		auto statement = storage.prepare(select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno),
 			where(in(std::make_tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary),
-				select(intersect(
+				intersect(
 					select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary)),
 					select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), where(c(&Employee::m_job) == "Clerk")
-					)))))));
+					))))));
 		auto sql = statement.expanded_sql();
 		auto rows0 = storage.execute(statement);
 	}
@@ -320,10 +347,10 @@ void SQL3_3()
 	{
 		auto statement = storage.prepare(select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno),
 			where(c(std::make_tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary)).in(
-				select(intersect(
+				intersect(
 					select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary)),
 					select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), where(c(&Employee::m_job) == "Clerk")
-					)))))));
+					))))));
 		auto sql = statement.expanded_sql();
 		auto rows = storage.execute(statement);
 	}
@@ -523,3 +550,61 @@ and e.deptno =20
 
 
 }
+
+void usingUpdate()
+{
+	storage.update_all(set(c(&Employee::m_salary) = c(&Employee::m_salary) * 1.3), where(c(&Employee::m_job) == "Clerk"));
+	auto expression = update_all(set(c(&Employee::m_salary) = c(&Employee::m_salary) * 1.3), where(c(&Employee::m_job) == "Clerk"));
+	std::string sql = storage.dump(expression);
+	auto statement = storage.prepare(expression);
+	storage.execute(statement);
+
+	auto objects = storage.get_all<Employee>(where(c(&Employee::m_job) == "Clerk"));
+}
+
+void usingDelete()
+{
+	storage.remove_all<Employee>(where(c(&Employee::m_empno) == 5));
+	auto expression = remove_all<Employee>(where(c(&Employee::m_empno) == 6));
+	std::string sql = storage.dump(expression);
+	auto statement = storage.prepare(expression);
+	storage.execute(statement);
+}
+
+void usingObjectAPI()
+{
+	try
+	{
+		auto objects = storage.get_all<Employee>();		// SELECT * FROM EMP
+		auto employee = storage.get<Employee>(7499);	// SELECT * FROM EMP WHERE id = 7499
+
+		Employee emp{ -1, "JOSE", "ENG", std::nullopt, "17-DEC-1980", 32000, std::nullopt, 10 };
+		emp.m_empno = storage.insert(emp);
+		// INSERT INTO EMP ( 'ALL COLUMNS EXCEPT PRIMARY KEY COLUMNS' )
+		// VALUES (	'VALUES TAKEN FROM emp OBJECT')
+
+
+		emp.m_salary *= 1.3;
+		storage.update(emp);
+		//	UPDATE Emp
+		//	SET
+		//		column_name = emp.field_name	// for all columns except primary key columns
+		//		// ....
+		//	WHERE empno = emp.m_empno;
+
+		storage.remove<Employee>(emp.m_empno);
+		// DELETE FROM Emp WHERE empno = emp.m_empno
+
+		storage.remove_all<Employee>(where(c(&Employee::m_salary) < 1000));
+		// DELETE FROM Emp WHERE 'where clause'
+
+		storage.remove_all<Employee>();
+		// DELETE FROM Emp
+	}
+	catch(std::exception& ex)
+	{
+		auto s = ex.what();
+		std::ignore = s;
+	}
+}
+
