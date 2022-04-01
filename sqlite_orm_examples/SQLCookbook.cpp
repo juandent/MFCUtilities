@@ -30,16 +30,30 @@ int main()
 {
 	using namespace sqlite_orm;
 
-#define Tuples
-#ifdef Tuples
-	void useTuples();
-	useTuples();
-#endif
 
 
 	try
 	{
+#define Tuples
+#ifdef Tuples
+
+		constexpr size_t count = TableOrder::TableCount;
+		auto vec0 = TableOrder::drop_table<0>(storage);
+		auto vec1 = TableOrder::drop_table<1>(storage);
+		auto vec2 = TableOrder::drop_table<2>(storage);
+		auto vec3 = TableOrder::drop_table<3>(storage);
+		auto vec4 = TableOrder::drop_table<4>(storage);
+
+#endif
+
 		storage.sync_schema();
+
+		TableOrder::replace_table(storage, vec4);
+		TableOrder::replace_table(storage, vec3);
+		TableOrder::replace_table(storage, vec2);
+		TableOrder::replace_table(storage, vec1);
+		TableOrder::replace_table(storage, vec0);
+
 		storage.remove_all<Album>();
 		storage.remove_all<Artist>();
 		storage.remove_all<EmpBonus>();
