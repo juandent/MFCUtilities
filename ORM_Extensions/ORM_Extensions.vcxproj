@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="BoxContents.h" />
     <ClInclude Include="Connections.h" />
+    <ClInclude Include="Database.h" />
     <ClInclude Include="DateBinding.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GridDisplayer.h" />

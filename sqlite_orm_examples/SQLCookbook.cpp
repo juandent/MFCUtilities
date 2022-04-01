@@ -37,22 +37,31 @@ int main()
 #define Tuples
 #ifdef Tuples
 
-		constexpr size_t count = TableOrder::TableCount;
-		auto vec0 = TableOrder::drop_table<0>(storage);
-		auto vec1 = TableOrder::drop_table<1>(storage);
-		auto vec2 = TableOrder::drop_table<2>(storage);
-		auto vec3 = TableOrder::drop_table<3>(storage);
-		auto vec4 = TableOrder::drop_table<4>(storage);
+
+		SQLCookbookDb db;
+		auto count = db.getCountTables();
+		auto vec0 = db.drop_table<0>(storage);
+		auto vec1 = db.drop_table<1>(storage);
+		auto vec2 = db.drop_table<2>(storage);
+		auto vec3 = db.drop_table<3>(storage);
+		auto vec4 = db.drop_table<4>(storage);
+
+		// constexpr size_t count = TableOrder::TableCount;
+		// auto vec0 = TableOrder::drop_table<0>(storage);
+		// auto vec1 = TableOrder::drop_table<1>(storage);
+		// auto vec2 = TableOrder::drop_table<2>(storage);
+		// auto vec3 = TableOrder::drop_table<3>(storage);
+		// auto vec4 = TableOrder::drop_table<4>(storage);
 
 #endif
 
 		storage.sync_schema();
 
-		TableOrder::replace_table(storage, vec4);
-		TableOrder::replace_table(storage, vec3);
-		TableOrder::replace_table(storage, vec2);
-		TableOrder::replace_table(storage, vec1);
-		TableOrder::replace_table(storage, vec0);
+		db.replace_table(storage, vec4);
+		db.replace_table(storage, vec3);
+		db.replace_table(storage, vec2);
+		db.replace_table(storage, vec1);
+		db.replace_table(storage, vec0);
 
 		storage.remove_all<Album>();
 		storage.remove_all<Artist>();

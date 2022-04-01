@@ -4,7 +4,7 @@
 #include <optional>
 #include <string>
 
-#include "SQLCookbook.h"
+#include "..\ORM_Extensions/Database.h"
 
 struct Employee
 {
@@ -190,6 +190,7 @@ namespace errors
 }
 #endif
 
+#ifdef ORIGINAL_CODE
 namespace TableOrder
 {
 
@@ -290,7 +291,7 @@ namespace TableOrder
 
 	};
 }
-
+#endif
 // *1 - Department
 // * 2 - Employee
 // * 3 - EmpBonus
@@ -350,7 +351,7 @@ constexpr auto tail(std::tuple<Ts...> t)
 // *Employee->Department
 // * EmpBonus->Employee
 // * Album->Artist
-
+#if 0
 namespace TableOrder
 {
 	template<typename Tuple>
@@ -389,3 +390,60 @@ namespace TableOrder
 		storage.replace_range(vec.begin(), vec.end());
 	}
 }
+#endif
+
+#ifdef ORIGINAL_CODE
+template<typename ConcreteDatabase>
+struct Database
+{
+	Database()
+	{
+	}
+	auto getDropOrder() const noexcept
+	{
+		return static_cast<const ConcreteDatabase*>(this)->getDropOrderImpl();
+	}
+	auto getInsertOrder() const noexcept
+	{
+		auto dropOrder = getDropOrder();
+		return TableOrder::tuple_reverse<decltype(dropOrder)>::type();
+	}
+	template<size_t Pos, typename Storage>
+	auto drop_table(Storage storage)
+	{
+		auto drop_order = getDropOrder();
+		using Element = std::tuple_element_t<Pos, decltype(drop_order)>;
+		std::vector<Element> vec;
+		vec = storage.get_all<Element>();
+		storage.drop_table(storage.tablename<Element>());
+		return vec;
+	}
+	template<typename Storage, typename Vector>
+	void replace_table(Storage storage, const Vector& vec)
+	{
+		storage.replace_range(vec.begin(), vec.end());
+	}
+	size_t getCountTables() const noexcept
+	{
+		return static_cast<const ConcreteDatabase*>(this)->getCountTablesImpl();
+	}
+private:
+};
+#endif
+
+struct SQLCookbookDb : public Database<SQLCookbookDb>
+{
+	using ListOfTables = std::tuple<Artist, Department, Album, Employee, EmpBonus>;
+	auto getDropOrderImpl() const noexcept
+	{
+		auto newTuple = TableOrder::tuple_divide<Employee, Department, ListOfTables>::convert();
+		auto newerTuple = TableOrder::tuple_divide<EmpBonus, Employee, decltype(newTuple)>::convert();
+		auto newestTuple = TableOrder::tuple_divide<Album, Artist, decltype(newerTuple)>::convert();
+		return newestTuple;
+	}
+	size_t getCountTablesImpl() const noexcept
+	{
+		return std::tuple_size_v<ListOfTables>;
+	}
+};
+
