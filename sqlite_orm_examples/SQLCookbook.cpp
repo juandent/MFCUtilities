@@ -30,6 +30,13 @@ int main()
 {
 	using namespace sqlite_orm;
 
+#define Tuples
+#ifdef Tuples
+	void useTuples();
+	useTuples();
+#endif
+
+
 	try
 	{
 		storage.sync_schema();
@@ -84,9 +91,13 @@ int main()
 
 	std::vector<EmpBonus> bonuses =
 	{
-		EmpBonus{-1, 7369, "14-Mar-2005", 1},
-		EmpBonus{-1, 7900, "14-Mar-2005", 2},
-		EmpBonus{-1, 7788, "14-Mar-2005", 3}
+		// EmpBonus{-1, 7369, "14-Mar-2005", 1},
+		// EmpBonus{-1, 7900, "14-Mar-2005", 2},
+		// EmpBonus{-1, 7788, "14-Mar-2005", 3},
+		EmpBonus{-1, 7934, "17-Mar-2005", 1},
+		EmpBonus{-1, 7934, "15-Feb-2005", 2},
+		EmpBonus{-1, 7839, "15-Feb-2005", 3},
+		EmpBonus{-1, 7782, "15-Feb-2005", 1}
 	};
 
 	try
@@ -215,7 +226,7 @@ void SQL2_5()
 	}
 	{
 		auto statement = storage.prepare(select(columns(&Employee::m_ename, &Employee::m_salary, &Employee::m_commission),
-			order_by(1))); // DOES NOT WORK!
+			order_by(2))); // DOES NOT WORK!
 		auto sql = statement.expanded_sql();
 		auto rows = storage.execute(statement);
 
@@ -314,6 +325,12 @@ void SQL3_2()
 void SQL3_3()
 {
 #if 1
+	// select empno, ename, job, salary, depno from Emp
+	// 	where(ename, job, salary) in
+	// (select ename, job, salary from emp
+	// 	intersect
+	// 	select ename, job, salary from emp where job = "Clerk")
+
 	// storage.prepare(select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno)),
 	// 	where(in(std::tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary),
 	// 		select(intersect(
@@ -608,3 +625,62 @@ void usingObjectAPI()
 	}
 }
 
+void SQL3_9a()
+{
+	// select  deptno, sum(salary) as total_sal, sum(bonus) as total_bonus from(
+	// 	SELECT e.empno,
+	// 	e.ename,
+	// 	e.salary,
+	// 	e.deptno,
+	// 	sum(e.salary* case when eb.type = 1 then .1
+	// 		when eb.type = 2 then  .2
+	// 				   else .3
+	// 				   end) as bonus
+	// 	FROM Emp e, emp_bonus eb
+	// 	where e.empno = eb.empno
+	// 	and e.deptno = 10
+	// 		group by e.empno)	// group emp_bonus by employee id
+
+
+}
+
+void SQL3_9b()
+{
+	// select d.deptno, d.total_sal, sum(e.salary * case
+	// 	when eb.type = 1 then .1
+	// 	when eb.type = 2 then .2
+	// 										else .3
+	// 										end) as total_bonus
+	// 	from emp e, emp_bonus eb,
+	// 	(
+	// 	select deptno, sum(salary) as total_sal
+	// 	from emp
+	// 	where deptno = 10
+	// 		group by deptno
+	// 		) d
+	// 		where e.deptno = d.deptno
+	// 		and e.empno = eb.empno
+	// 			group by d.deptno, d.total_sal
+}
+
+void SQL3_8c()
+{
+	// select d.deptno, d.total_sal, sum(e.salary * case
+	// 	when eb.type = 1 then .1
+	// 	when eb.type = 2 then .2
+	// 										else .3
+	// 										end) as total_bonus
+	// 	from emp e, emp_bonus eb, dep_salary d
+	// 	where e.deptno = d.deptno
+	// 	and e.empno = eb.empno
+	// 		group by d.deptno, d.total_sal
+	//
+	//
+	// dep_salary view:
+	//
+	// 	select deptno, sum(salary) as total_sal
+	// 		from emp
+	// 	where deptno = 10
+	// 		group by deptno
+
+}
