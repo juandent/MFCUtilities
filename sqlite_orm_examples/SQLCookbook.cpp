@@ -34,64 +34,19 @@ int main()
 
 	try
 	{
-#define Tuples
-#ifdef Tuples
-		// bool fk_check = false;
-		//
-		// storage.on_open = [&fk_check](sqlite3* p) {
-		// 	if (!fk_check)
-		// 	{
-		// 		internal::perform_void_exec(p, "PRAGMA foreign_keys = 0");
-		// 	}
-		// 	else {
-		// 		internal::perform_void_exec(p, "PRAGMA foreign_keys = 1");
-		// 	}
-		// };
-		// update_schema us{ storage };
-
-		SQLCookbookDb db(storage);
+		SchemaManager sm(storage);
 
 
 
 
-		auto pair = db.find_duplicate<Employee, &Employee::m_ename>();
-		// if(pair.first)
-		// {
-		// 	// duplicates found
-		// 	auto x = *pair.second;
-		// 	std::ignore = x;
-		// }
-		db.add_check_constraint<Employee>();
-
-
-
-		// auto vec = db.drop_table<Department>();
-		// auto vec0 = db.drop_table<4>(storage);
-		// auto vec1 = db.drop_table<3>(storage);
-		// auto vec2 = db.drop_table<2>(storage);
-		// auto vec3 = db.drop_table<1>(storage);
-		// auto vec4 = db.drop_table<0>(storage);
-		
-
-		// constexpr size_t count = TableOrder::TableCount;
-		// auto vec0 = TableOrder::drop_table<0>(storage);
-		// auto vec1 = TableOrder::drop_table<1>(storage);
-		// auto vec2 = TableOrder::drop_table<2>(storage);
-		// auto vec3 = TableOrder::drop_table<3>(storage);
-		// auto vec4 = TableOrder::drop_table<4>(storage);
-
-#endif
-
-		// storage.sync_schema(true);
-
-		// db.replace_table(vec);
-		
-
-		// db.replace_table(storage, vec4);
-		// db.replace_table(storage, vec3);
-		// db.replace_table(storage, vec2);
-		// db.replace_table(storage, vec1);
-		// db.replace_table(storage, vec0);
+		auto pair = sm.find_duplicate_in_column<Employee, &Employee::m_ename>();
+		if(pair.first)
+		{
+			// duplicates found
+			auto x = *pair.second;
+			std::ignore = x;
+		}
+		sm.add_check_constraint<Employee>();
 
 		storage.remove_all<Album>();
 		storage.remove_all<Artist>();

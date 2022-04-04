@@ -5,7 +5,7 @@
 #include <string>
 
 #include "..\ORM_Extensions/SchemaManager.h"
-#include "..\ORM_Extensions/update_schema.h"
+
 
 struct Employee
 {
@@ -435,6 +435,7 @@ private:
 };
 #endif
 
+#if 0
 template<typename Storage>
 struct SQLCookbookDb : public SchemaManager<SQLCookbookDb<Storage>, Storage>
 {
@@ -456,3 +457,4 @@ struct SQLCookbookDb : public SchemaManager<SQLCookbookDb<Storage>, Storage>
 #endif
 };
 
+#endif
