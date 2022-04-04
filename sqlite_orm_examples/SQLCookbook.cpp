@@ -51,6 +51,18 @@ int main()
 
 		SQLCookbookDb db(storage);
 
+		auto comparer = [](const Employee& left, const Employee& right)
+		{return left.m_ename < right.m_ename; };
+		auto equality = [](const Employee& left, const Employee& right)
+		{return left.m_ename == right.m_ename; };
+
+		auto pair = db.find_duplicate<Employee>(comparer, equality);
+		if(pair.first)
+		{
+			// duplicates found
+			auto x = *pair.second;
+			std::ignore = x;
+		}
 		db.remove_unique_constraint<Employee>();
 
 
