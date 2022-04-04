@@ -39,14 +39,16 @@ int main()
 
 
 
+		sm.guarded_sync_schema();
+
 		auto pair = sm.find_duplicate_in_column<Employee, &Employee::m_ename>();
-		if(pair.first)
+		if (pair.first)
 		{
 			// duplicates found
 			auto x = *pair.second;
 			std::ignore = x;
 		}
-		sm.add_check_constraint<Employee>();
+
 
 		storage.remove_all<Album>();
 		storage.remove_all<Artist>();

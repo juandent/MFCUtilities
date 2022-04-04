@@ -1,22 +1,24 @@
 #pragma once
 
-#include "update_schema.h"
 
 template<typename Storage>
 struct SchemaManager
 {
 	Storage& storage;
-	update_schema<Storage> fk_controller;
 
-	SchemaManager(Storage& storage) : storage { storage}, fk_controller(storage)
+	SchemaManager(Storage& storage) : storage { storage}
 	{
+		storage.foreign_key(false);
+	}
+	~SchemaManager()
+	{
+		storage.foreign_key(true);
 	}
 private:
 	// this section will become private
 	template<typename Element>
 	auto load_drop()
 	{
-		assert(storage.foreign_key()== false);
 		std::vector<Element> vec;
 		bool exists = storage.table_exists(storage.tablename<Element>());
 		if (exists)
@@ -29,9 +31,9 @@ private:
 	template<typename Vector>
 	void replace(const Vector& vec)
 	{
-		assert(storage.foreign_key() == false);
 		storage.replace_range(vec.begin(), vec.end());
 	}
+public:
 	template<typename Element>
 	void load_drop_sync_replace()
 	{
