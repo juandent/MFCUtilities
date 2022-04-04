@@ -5,6 +5,7 @@
 #include <string>
 
 #include "..\ORM_Extensions/Database.h"
+#include "..\ORM_Extensions/update_schema.h"
 
 struct Employee
 {
@@ -23,7 +24,7 @@ struct Department
 	int m_deptno;
 	std::string m_deptname;
 	std::string m_loc;
-
+	std::optional<int> m_manager;
 };
 
 struct EmpBonus
@@ -62,7 +63,9 @@ auto storage = make_storage("SQLCookbook.sqlite",
 	make_table("Dept",
 		make_column("deptno", &Department::m_deptno, primary_key(), autoincrement()),
 		make_column("deptname", &Department::m_deptname),
-		make_column("loc", &Department::m_loc)),
+		make_column("loc", &Department::m_loc),
+		make_column("mgr", &Department::m_manager),
+		foreign_key(&Department::m_manager).references(&Employee::m_empno)),
 	make_table("Emp_bonus",
 		make_column("id", &EmpBonus::m_id, primary_key(), autoincrement()),
 		make_column("empno", &EmpBonus::m_empno),
@@ -431,8 +434,12 @@ private:
 };
 #endif
 
-struct SQLCookbookDb : public Database<SQLCookbookDb>
+template<typename Storage>
+struct SQLCookbookDb : public Database<SQLCookbookDb<Storage>, Storage>
 {
+	SQLCookbookDb(Storage& storage) : Database<SQLCookbookDb, Storage>(storage) {}
+
+#if 0
 	using ListOfTables = std::tuple<Artist, Department, Album, Employee, EmpBonus>;
 	auto getDropOrderImpl() const noexcept
 	{
@@ -445,5 +452,6 @@ struct SQLCookbookDb : public Database<SQLCookbookDb>
 	{
 		return std::tuple_size_v<ListOfTables>;
 	}
+#endif
 };
 

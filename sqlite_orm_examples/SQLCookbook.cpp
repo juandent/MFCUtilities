@@ -36,15 +36,32 @@ int main()
 	{
 #define Tuples
 #ifdef Tuples
+		// bool fk_check = false;
+		//
+		// storage.on_open = [&fk_check](sqlite3* p) {
+		// 	if (!fk_check)
+		// 	{
+		// 		internal::perform_void_exec(p, "PRAGMA foreign_keys = 0");
+		// 	}
+		// 	else {
+		// 		internal::perform_void_exec(p, "PRAGMA foreign_keys = 1");
+		// 	}
+		// };
+		// update_schema us{ storage };
+
+		SQLCookbookDb db(storage);
+
+		db.remove_unique_constraint<Employee>();
 
 
-		SQLCookbookDb db;
-		auto count = db.getCountTables();
-		auto vec0 = db.drop_table<0>(storage);
-		auto vec1 = db.drop_table<1>(storage);
-		auto vec2 = db.drop_table<2>(storage);
-		auto vec3 = db.drop_table<3>(storage);
-		auto vec4 = db.drop_table<4>(storage);
+
+		// auto vec = db.drop_table<Department>();
+		// auto vec0 = db.drop_table<4>(storage);
+		// auto vec1 = db.drop_table<3>(storage);
+		// auto vec2 = db.drop_table<2>(storage);
+		// auto vec3 = db.drop_table<1>(storage);
+		// auto vec4 = db.drop_table<0>(storage);
+		
 
 		// constexpr size_t count = TableOrder::TableCount;
 		// auto vec0 = TableOrder::drop_table<0>(storage);
@@ -55,13 +72,16 @@ int main()
 
 #endif
 
-		storage.sync_schema();
+		// storage.sync_schema(true);
 
-		db.replace_table(storage, vec4);
-		db.replace_table(storage, vec3);
-		db.replace_table(storage, vec2);
-		db.replace_table(storage, vec1);
-		db.replace_table(storage, vec0);
+		// db.replace_table(vec);
+		
+
+		// db.replace_table(storage, vec4);
+		// db.replace_table(storage, vec3);
+		// db.replace_table(storage, vec2);
+		// db.replace_table(storage, vec1);
+		// db.replace_table(storage, vec0);
 
 		storage.remove_all<Album>();
 		storage.remove_all<Artist>();
