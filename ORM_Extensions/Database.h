@@ -259,6 +259,16 @@ public:
 		load_drop_sync_replace<Element>();
 	}
 
+
+	// Verify uniqueness of column
+	template<typename Element, typename sort_lambda, typename equality_lambda>
+	auto find_duplicate(sort_lambda& sorter, equality_lambda& equality_pred )
+	{
+		auto vec = storage.get_all<Element>();
+		std::sort(vec.begin(), vec.end(), sorter);
+		auto it = std::adjacent_find(vec.begin(), vec.end(), equality_pred);
+		return std::make_pair(it != vec.end(), it);
+	}
 private:
 };
 
