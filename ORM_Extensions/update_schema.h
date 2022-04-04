@@ -21,12 +21,10 @@ struct update_schema
 	update_schema(Storage& storage) : storage{storage}
 	{
 		storage.foreign_key(false);
-		// storage.pragma.foreign_keys(false);
 	}
 	~update_schema()
 	{
 		storage.foreign_key(true);
-		// storage.pragma.foreign_keys(true);
 	}
 	
 };

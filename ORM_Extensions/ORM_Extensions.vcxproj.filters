@@ -57,7 +57,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Database.h">
+    <ClInclude Include="SchemaManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="update_schema.h">

@@ -4,7 +4,7 @@
 #include <optional>
 #include <string>
 
-#include "..\ORM_Extensions/Database.h"
+#include "..\ORM_Extensions/SchemaManager.h"
 #include "..\ORM_Extensions/update_schema.h"
 
 struct Employee
@@ -59,7 +59,8 @@ auto storage = make_storage("SQLCookbook.sqlite",
 		make_column("salary", &Employee::m_salary),
 		make_column("comm", &Employee::m_commission),
 		make_column("deptno", &Employee::m_deptno),
-		foreign_key(&Employee::m_deptno).references(&Department::m_deptno)),
+		foreign_key(&Employee::m_deptno).references(&Department::m_deptno),
+		check(c(&Employee::m_salary) > &Employee::m_commission)),
 	make_table("Dept",
 		make_column("deptno", &Department::m_deptno, primary_key(), autoincrement()),
 		make_column("deptname", &Department::m_deptname),
@@ -397,9 +398,9 @@ namespace TableOrder
 
 #ifdef ORIGINAL_CODE
 template<typename ConcreteDatabase>
-struct Database
+struct SchemaManager
 {
-	Database()
+	SchemaManager()
 	{
 	}
 	auto getDropOrder() const noexcept
@@ -435,9 +436,9 @@ private:
 #endif
 
 template<typename Storage>
-struct SQLCookbookDb : public Database<SQLCookbookDb<Storage>, Storage>
+struct SQLCookbookDb : public SchemaManager<SQLCookbookDb<Storage>, Storage>
 {
-	SQLCookbookDb(Storage& storage) : Database<SQLCookbookDb, Storage>(storage) {}
+	SQLCookbookDb(Storage& storage) : SchemaManager<SQLCookbookDb, Storage>(storage) {}
 
 #if 0
 	using ListOfTables = std::tuple<Artist, Department, Album, Employee, EmpBonus>;

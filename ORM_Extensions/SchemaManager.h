@@ -105,10 +105,12 @@ namespace TableOrder
 }
 
 template<typename ConcreteDatabase, typename Storage>
-struct Database
+struct SchemaManager
 {
 	Storage& storage;
-	Database(Storage& storage) : storage { storage}
+	update_schema<Storage> fk_controller;
+
+	SchemaManager(Storage& storage) : storage { storage}
 	{
 	}
 private:
@@ -260,7 +262,7 @@ public:
 	}
 
 
-	// Verify uniqueness of column
+	// Verify uniqueness general case
 	template<typename Element, typename sort_lambda, typename equality_lambda>
 	auto find_duplicate(sort_lambda& sorter, equality_lambda& equality_pred )
 	{
@@ -269,14 +271,68 @@ public:
 		auto it = std::adjacent_find(vec.begin(), vec.end(), equality_pred);
 		return std::make_pair(it != vec.end(), it);
 	}
+
+	// verify uniqueness column case
+	template<typename type, auto type::* key_col>
+	auto find_duplicate()
+	{
+		auto vec = storage.get_all<type>();
+		std::sort(vec.begin(), vec.end(), sort_order<type, key_col>());
+		auto it = std::adjacent_find(vec.begin(), vec.end(), sort_equal<type, key_col>());
+		return std::make_pair(it != vec.end(), it);
+	}
+
+	// Check constraints
+	template<typename Element>
+	void remove_check_constraint()		// change not recognized
+	{
+		load_drop_sync_replace<Element>();
+	}
+	template<typename Element>
+	void add_check_constraint()		// change not recognized
+	{
+		load_drop_sync_replace<Element>();
+	}
+
 private:
+	template<typename type, auto type::* key_col>
+	struct sort_order
+	{
+		bool operator()(const type& lhs, const type& rhs)
+		{
+			return lhs.*key_col < rhs.*key_col;
+		}
+	};
+
+	template<typename type, auto type::* key_col>
+	struct sort_equal
+	{
+		bool operator()(const type& lhs, const type& rhs)
+		{
+			return lhs.*key_col == rhs.*key_col;
+		}
+	};
+
+	// template<typename type, auto type::* key_col>
+	// bool sort_order(const type& left, const type& right)
+	// {
+	// 	return left.*key_col < right.*key_col;
+	// }
+	// template<typename type, typename field_type, field_type type::* key_col>
+	// bool sort_equal(const type& left, const type& right)
+	// {
+	// 	return left.*key_col == right.*key_col;
+	// }
+
 };
+
+
 
 /*
  *
  *
  *
- * struct SQLCookbookDb : public Database<SQLCookbookDb>
+ * struct SQLCookbookDb : public SchemaManager<SQLCookbookDb>
 {
 	using ListOfTables = std::tuple<Artist, Department, Album, Employee, EmpBonus>;
 	auto getDropOrderImpl() const noexcept
