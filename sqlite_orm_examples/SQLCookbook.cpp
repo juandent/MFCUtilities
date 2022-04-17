@@ -4,8 +4,8 @@
 #include <iostream>
 #include <cassert>
 
-#include "SQLCookbook.h"
-
+// #include "SQLCookbook.h"
+#include <sqlite_orm/SQLCookbook.h>
 
 void SQL1_8();
 void SQL1_12();
@@ -34,12 +34,10 @@ int main()
 
 	try
 	{
-		SchemaManager sm(storage);
+		SchemaManager sm(storage, temp_storage);
 
-
-
-
-		sm.guarded_sync_schema();
+		sm.load_drop_sync_replace<Employee>();
+		sm.load_drop_sync_replace<Employee>();
 
 		auto pair = sm.find_duplicate_in_column<Employee, &Employee::m_ename>();
 		if (pair.first)

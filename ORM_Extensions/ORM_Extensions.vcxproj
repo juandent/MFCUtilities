@@ -157,7 +157,6 @@
     <ClInclude Include="RefIntegrity.h" />
     <ClInclude Include="TableOrder.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="update_schema.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoxContents.ixx" />

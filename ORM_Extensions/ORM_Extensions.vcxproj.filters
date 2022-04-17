@@ -60,9 +60,6 @@
     <ClInclude Include="SchemaManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="update_schema.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TableOrder.h">
       <Filter>Header Files</Filter>
     </ClInclude>

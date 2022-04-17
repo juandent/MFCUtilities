@@ -150,6 +150,15 @@
     <ClCompile Include="SQLCookbook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\SQLCookbook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\Migration0to1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\SQLCookbook - Copy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\CMakeLists.txt">
@@ -158,6 +167,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SQLCookbook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\MigrationBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\ForeignKeyHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\SQLCookbook_v1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\SQLCookbookMigrator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\sqlite_orm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
