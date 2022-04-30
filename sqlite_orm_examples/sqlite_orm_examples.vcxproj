@@ -168,6 +168,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\dev\pragma.h" />
     <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\ForeignKeyHolder.h" />
     <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\MigrationBase.h" />
     <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\SQLCookbookMigrator.h" />
@@ -271,11 +272,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\juan_\OneDrive\Documents\sqlite_orm\include;original C:\Components\sqlite_orm_dev_3_march_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
-      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\juan_\OneDrive\Documents\sqlite_orm\not_single_header_include\;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\ORM_Extensions;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

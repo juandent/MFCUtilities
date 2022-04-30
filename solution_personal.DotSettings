@@ -1,0 +1,20 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1ad54794_002Dfdc8_002D4d1d_002Dac4e_002Dccd096b0d024/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Nothing /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3dd2c903_002D7a45_002D4775_002Dbdba_002D133696ae10eb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Learning Catch #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;Catch::C1B4F587-F003-493D-8EE3-EAA3E9C86335::.NETFramework,Version=v4.0::Learning Catch&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=73b7ea71_002D5682_002D48e3_002Dae31_002D85925f1027b1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestName" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;GTest::310944C7-ED7A-438E-A442-80C50E2750FC::.NETFramework,Version=v4.0::TestCaseName.TestName&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;GTest::341D089E-EB2A-4E4E-8D43-BB7A65048513::.NETFramework,Version=v4.0::TestCaseName.TestName&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d4ba20ab_002D6145_002D484c_002D808b_002D4d46b1942f36/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestName #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;GTest::341D089E-EB2A-4E4E-8D43-BB7A65048513::.NETFramework,Version=v4.0::TestCaseName.TestName&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

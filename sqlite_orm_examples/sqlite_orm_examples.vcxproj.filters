@@ -184,5 +184,8 @@
     <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\sqlite_orm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\dev\pragma.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

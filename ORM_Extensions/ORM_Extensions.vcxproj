@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="BoxContents.h" />
     <ClInclude Include="Connections.h" />
+    <ClInclude Include="DbUpdater.h" />
     <ClInclude Include="SchemaManager.h" />
     <ClInclude Include="DateBinding.h" />
     <ClInclude Include="framework.h" />

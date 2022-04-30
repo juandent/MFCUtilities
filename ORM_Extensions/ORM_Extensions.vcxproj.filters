@@ -63,6 +63,9 @@
     <ClInclude Include="TableOrder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DbUpdater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoxContents.ixx">
