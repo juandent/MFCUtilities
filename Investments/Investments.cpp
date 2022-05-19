@@ -49,6 +49,7 @@ CInvestmentsApp::CInvestmentsApp() noexcept
 {
 	m_bHiColorIcons = TRUE;
 
+	m_bLoadWindowPlacement = false;	// JDH for newer MFC -- workaround
 
 	m_nAppLook = 0;
 	// support Restart Manager

@@ -43,10 +43,6 @@ struct Inversion
 	int fkey_fondo;
 
 	std::string simple_dump() const;
-	// {
-	// 	std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(beginning_date) + " "s + std::to_string(num_participaciones);
-	// 	return str;
-	// }
 };
 
 struct Rendimiento
@@ -57,10 +53,6 @@ struct Rendimiento
 	std::chrono::sys_days fecha;
 
 	std::string simple_dump() const;
-	// {
-	// 	std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(fecha) + " "s + std::to_string(rendimiento_unitario);
-	// 	return str;
-	// }
 };
 
 

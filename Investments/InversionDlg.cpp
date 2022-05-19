@@ -123,10 +123,10 @@ void InversionDlg::OnLbnSelchangeListInversiones()
 	// TODO: Add your control notification handler code here
 	m_inversion = m_list_inversionesLB.current();
 	if (!m_inversion)	return;
-	SetText(m_inversion_id, m_inversion->id);
+	m_inversion_id << m_inversion->id;
 	m_list_fondosCB.select(m_inversion->fkey_fondo);
-	SetDate(m_fecha_inversion, m_inversion->beginning_date);
-	SetAmount(m_num_participaciones, m_inversion->num_participaciones);
+	m_fecha_inversion << m_inversion->beginning_date;
+	m_num_participaciones << m_inversion->num_participaciones;
 }
 
 
@@ -137,10 +137,10 @@ void InversionDlg::OnBnClickedNew()
 	m_list_fondosCB.select(-1);
 
 	using namespace std::chrono;
-	const auto today = Today(); // sys_days{ floor<days>(system_clock::now()) };
+	const auto today = Today();
 
-	SetDate(m_fecha_inversion, today );
-	SetAmount(m_num_participaciones, 0);
+	m_fecha_inversion << today;
+	m_num_participaciones << 0;
 	m_inversion = std::nullopt;
 }
 

@@ -282,8 +282,10 @@ void Storage::empty_database()
 
 std::string Fondo::simple_dump() const
 {
-	std::string str = std::to_string(id) + " - "s + abreviacion + " - "s + nombre + " "s + std::to_string(tipo_cupon);
-	return str;
+	// std::string str = std::to_string(id) + " - "s + abreviacion + " - "s + nombre + " "s + std::to_string(tipo_cupon);
+	std::ostringstream os;
+	os << id << " - " << abreviacion << " - " << nombre << " " << tipo_cupon;
+	return os.str();
 }
 
 int Fondo::num_participaciones_al(std::chrono::sys_days fecha) const noexcept
@@ -322,8 +324,10 @@ double Fondo::get_rendimiento_unitario_al(std::chrono::year_month_day fecha) con
 
 std::string Inversion::simple_dump() const
 {
-	std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(beginning_date) + " "s + std::to_string(num_participaciones);
-	return str;
+	// std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(beginning_date) + " "s + std::to_string(num_participaciones);
+	std::ostringstream os;
+	os << id << " - " << fkey_fondo << " " << beginning_date << " " << num_participaciones;
+	return os.str();
 }
 
 std::string Rendimiento::simple_dump() const
