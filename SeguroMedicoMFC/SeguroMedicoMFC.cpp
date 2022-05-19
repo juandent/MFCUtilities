@@ -57,6 +57,7 @@ CSeguroMedicoMFCApp::CSeguroMedicoMFCApp() noexcept
 {
 	m_bHiColorIcons = TRUE;
 
+	m_bLoadWindowPlacement = false;	// JDH for newer MFC
 	// support Restart Manager
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
 #ifdef _MANAGED
@@ -181,6 +182,8 @@ BOOL CSeguroMedicoMFCApp::InitInstance()
 
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;
+	// AfxSetResourceHandle(::AfxGetInstanceHandle());
+
 	if (!pMainFrame || !pMainFrame->LoadFrame(IDR_MAINFRAME))
 	{
 		delete pMainFrame;
@@ -262,6 +265,8 @@ void CSeguroMedicoMFCApp::OnAppAbout()
 
 void CSeguroMedicoMFCApp::PreLoadState()
 {
+	m_bLoadWindowPlacement = false;
+
 	BOOL bNameValid;
 	CString strName;
 	bNameValid = strName.LoadString(IDS_EDIT_MENU);

@@ -30,7 +30,7 @@ public:
 		AddWindow(box.m_hWnd);
 		box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)box.m_hWnd);
 	}
-private:
+// private:
 	void AddWindow(HWND hwnd)
 	{
 		m_postingWindows.insert(hwnd);

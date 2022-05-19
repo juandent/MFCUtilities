@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED;_HAS_CXX20=1;_HAS_CXX17=1</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_26_july_2021\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary;ignore ..\ExpenseManagerSQLite;ignore C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;ignore C:\Components\Catch2\_binary_\CMakeFiles\Export\include;ignore C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
       <EnableModules>true</EnableModules>
     </ClCompile>
@@ -314,6 +314,9 @@ copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utili
     <None Include="res\SeguroMedicoMFC.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JDGridCtrl\GridCtrlDll\GridCtrlDll.vcxproj">
+      <Project>{8c3a1b23-55f5-4b5f-985f-073f2e1c1745}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\JDMFCLibrary\JDMFCLibrary.vcxproj">
       <Project>{d7a93589-b456-43ef-9c10-e68bf433c68f}</Project>
     </ProjectReference>
