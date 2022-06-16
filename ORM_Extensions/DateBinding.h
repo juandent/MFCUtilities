@@ -1,5 +1,8 @@
 #pragma once
 
+
+#if defined(SQLITE_ORM_THREE_WAY_COMPARISON_SUPPORTED)
+
 // #define _HAS_CXX20 1
 // #define _HAS_CXX17 1
 #include <chrono>
@@ -84,7 +87,7 @@ namespace sqlite_orm {
 	template<>
 	struct statement_binder<std::chrono::sys_days> {
 
-		int bind(sqlite3_stmt* stmt, int index, const std::chrono::sys_days& value) {
+		int bind(sqlite3_stmt* stmt, int index, const std::chrono::sys_days& value) const {
 			return statement_binder<std::string>().bind(stmt, index, SysDaysToString(value));
 
 		}
@@ -104,17 +107,13 @@ namespace sqlite_orm {
 	/**
 	 *  This is a reverse operation: here we have to specify a way to transform string received from
 	 *  database to our sysdays object. Here we call `SysDaysFromString` and throw `std::runtime_error` if it returns
-	 *  null_sys_day. Every `row_extractor` specialization must have `extract(const char*)` and `extract(sqlite3_stmt *stmt, int columnIndex)`
+	 *  null_sys_day. Every `row_extractor` specialization must have `extract(const char*)`, `extract(sqlite3_stmt *stmt, int columnIndex)`
+	 *	and `extract(sqlite3_value* value)` 
 	 *  functions which return a mapped type value.
 	 */
 	template<>
 	struct row_extractor<std::chrono::sys_days> {
-		std::chrono::sys_days extract(sqlite3_value* row_value)
-		{
-			auto characters = reinterpret_cast<const char*>(sqlite3_value_text(row_value));
-			return extract(characters);
-		}
-		std::chrono::sys_days extract(const char* row_value) {
+		std::chrono::sys_days extract(const char* row_value) const {
 			auto sd = SysDaysFromString(row_value);
 			if (sd != null_sys_day) {
 				return sd;
@@ -124,10 +123,16 @@ namespace sqlite_orm {
 			}
 		}
 
-		std::chrono::sys_days extract(sqlite3_stmt* stmt, int columnIndex) {
+		std::chrono::sys_days extract(sqlite3_stmt* stmt, int columnIndex) const {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			return this->extract((const char*)str);
+		}
+		std::chrono::sys_days extract(sqlite3_value* row_value) const
+		{
+			auto characters = reinterpret_cast<const char*>(sqlite3_value_text(row_value));
+			return extract(characters);
 		}
 	};
 }
 
+#endif

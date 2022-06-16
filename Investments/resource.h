@@ -120,6 +120,7 @@
 #define IDC_B_FILTER_CLEAR              1025
 #define IDC_B_RENDIMIENTO               1027
 #define IDC_GRID_GENERIC                1028
+#define IDC_MONTHCALENDAR1              1029
 #define ID_FILE_FONDO                   32771
 #define ID_FILE_INVERSION               32772
 #define ID_FILE_RENDIMIENTO             32773
@@ -132,7 +133,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        317
 #define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         1029
+#define _APS_NEXT_CONTROL_VALUE         1030
 #define _APS_NEXT_SYMED_VALUE           318
 #endif
 #endif

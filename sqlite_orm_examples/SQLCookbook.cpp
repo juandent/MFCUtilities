@@ -5,7 +5,7 @@
 #include <cassert>
 
 // #include "SQLCookbook.h"
-#include <sqlite_orm/SQLCookbook.h>
+#include "SQLCookbook.h"
 
 void SQL1_8();
 void SQL1_12();
@@ -34,18 +34,45 @@ int main()
 
 	try
 	{
-		SchemaManager sm(storage, temp_storage);
+		// foreign_key_disable_checking fk_off(storage);
+		// storage.drop_table("Customer");
+		// storage.drop_table("Invoice");
+		// storage.drop_table("InvoiceLine");
+		storage.sync_schema(true);
 
-		sm.load_drop_sync_replace<Employee>();
-		sm.load_drop_sync_replace<Employee>();
+		Customer c{ 1, "Juan Dent" };
+		// storage.replace(c);
 
-		auto pair = sm.find_duplicate_in_column<Employee, &Employee::m_ename>();
-		if (pair.first)
-		{
-			// duplicates found
-			auto x = *pair.second;
-			std::ignore = x;
-		}
+		storage.replace(into<Customer>(), columns(&Customer::m_id, &Customer::name), values(std::make_tuple(1, "Juan")));
+		// Invoice i{ 1, Today(), c.m_id, 20000 };
+		// storage.insert(into<Invoice>(), columns(&Invoice::m_id, &Invoice::m_fkey_customer, &Invoice::total_amount),
+		// 	values(std::make_tuple(1, 1, 20000)));
+
+		storage.replace(into<Invoice>(), columns(&Invoice::m_id, &Invoice::m_fkey_customer, &Invoice::m_total_amount, &Invoice::date),
+			values(std::make_tuple(1, 1, 20000, Today())));
+
+		// storage.replace(i);
+		InvoiceLine il{ 1,1,23, 100, 0.10, 0.13 };
+		storage.replace(il);
+
+		auto inv_line = storage.get<InvoiceLine>(1);
+		Invoice inv = storage.get<Invoice>(1);
+		std::chrono::year_month_day  date = inv.date;
+
+		auto names = storage.select(distinct(columns(&Employee::m_deptno, &Employee::m_hiredate)));
+
+		// SchemaManager sm(storage, temp_storage);
+		//
+		// sm.load_drop_sync_replace<Employee>();
+		// sm.load_drop_sync_replace<Employee>();
+		//
+		// auto pair = sm.find_duplicate_in_column<Employee, &Employee::m_ename>();
+		// if (pair.first)
+		// {
+		// 	// duplicates found
+		// 	auto x = *pair.second;
+		// 	std::ignore = x;
+		// }
 
 
 		storage.remove_all<Album>();
@@ -77,7 +104,7 @@ int main()
 		Employee{7499, "Allen", "SalesMan", 7698, "20-FEB-1981", 1600, 300, 30},
 		Employee{7521,"Ward", "SalesMan", 7698,"22-feb-1981",1250,500, 30},
 		Employee{7566,"Jones", "Manager", 7839, "02-abr-1981",2975, std::nullopt,20},
-		Employee{7654,"Martin","SalesMan", 7698, "28-sep-1981", 1250,1400,30},
+		Employee{7654,"Martin","SalesMan", 7698, "28-sep-1981", 1250,140,30},
 		Employee{7698,"Blake", "Manager", 7839, "01-may-1981", 2850, std::nullopt, 30},
 		Employee{7782, "Clark", "Manager", 7839, "09-jun-1981", 2450, std::nullopt, 10},
 		Employee{7788, "Scott", "Analyst", 7566, "09-Dec-1982", 3000, std::nullopt, 20},
@@ -504,28 +531,28 @@ void SQL3_6()
 
 void SQL3_9()
 {
-// DYNAMIC FROM:
-/*
-select deptno, sum(salary) as total_sal, sum(bonus) as total_bonus from
-(
-select e.empno
-, e.ename
-, e.salary
-, e.deptno
-, b.type
-, e.salary *
-case 
-when b.type = 1 then .1
-when b.type = 2 then .2
-else .3
-end as bonus
+	// DYNAMIC FROM:
+	/*
+	select deptno, sum(salary) as total_sal, sum(bonus) as total_bonus from
+	(
+	select e.empno
+	, e.ename
+	, e.salary
+	, e.deptno
+	, b.type
+	, e.salary *
+	case
+	when b.type = 1 then .1
+	when b.type = 2 then .2
+	else .3
+	end as bonus
 
-from emp e, emp_bonus b
-where e.empno = b.empno
-and e.deptno =20
-)
-group by deptno
-*/
+	from emp e, emp_bonus b
+	where e.empno = b.empno
+	and e.deptno =20
+	)
+	group by deptno
+	*/
 
 
 	// INNER SELECT:
@@ -537,7 +564,7 @@ group by deptno
 , e.deptno
 , b.type
 , e.salary *
-case 
+case
 when b.type = 1 then .1
 when b.type = 2 then .2
 else .3
@@ -555,7 +582,26 @@ and e.deptno =20
 	};
 	using als_e = alias_e<Employee>;
 	using als_b = alias_b<EmpBonus>;
+        {
+            auto expression =
+                select(columns(alias_column<als_e>(&Employee::m_empno),
+                               alias_column<als_e>(&Employee::m_ename),
+                               alias_column<als_e>(&Employee::m_salary),
+                               alias_column<als_e>(&Employee::m_deptno),
+                               alias_column<als_b>(&EmpBonus::m_type),
+                               as<Bonus>(mul(alias_column<als_e>(&Employee::m_salary),
+                                             case_<double>()
+                                                 .when(c(alias_column<als_b>(&EmpBonus::m_type)) == 1, then(0.1))
+                                                 .when(c(alias_column<als_b>(&EmpBonus::m_type)) == 2, then(0.2))
+                                                 .else_(0.3)
+                                                 .end()))),
+                       where(c(alias_column<als_e>(&Employee::m_empno)) == alias_column<als_b>(&EmpBonus::m_empno) and
+                             c(alias_column<als_e>(&Employee::m_deptno)) == 20));
 
+            auto sql = storage.dump(expression);
+			auto statement = storage.prepare(expression);
+			auto rows = storage.execute(statement);
+        }
 
 	auto statement = storage.prepare(select(columns(
 		alias_column<als_e>(&Employee::m_empno),

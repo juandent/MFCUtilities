@@ -44,4 +44,5 @@ public:
 	afx_msg void OnBnClickedErase();
 	afx_msg void OnBnClickedNew();
 	virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
+	afx_msg void OnBnClickedBFondos();
 };

@@ -1,11 +1,14 @@
 #pragma once
 
+#include <chrono>
 #include <sqlite_orm/sqlite_orm.h>
 #include <optional>
 #include <string>
 
+#include "..\ORM_Extensions/DateBinding.h"
+
 // #include "..\ORM_Extensions/SchemaManager.h"
-#include <sqlite_orm/SchemaManager.h>
+// #include <sqlite_orm/SchemaManager.h>
 
 
 struct Employee
@@ -48,6 +51,28 @@ struct Album
 	int m_artist_id;
 };
 
+struct Customer {
+	int m_id;
+	std::string name;
+};
+
+struct Invoice {
+	int m_id;
+	std::chrono::sys_days date;
+	int m_fkey_customer;
+	double m_total_amount;
+};
+
+struct InvoiceLine {
+	int m_id;
+	int m_fkey_invoice;
+	double m_quantity;
+	double m_unit_price;
+	double m_discount_percent;
+	double m_taxes_percent;
+	double m_line_amount;	// m_quantity * m_unit_price * (1 + m_taxes_percent) * (1 - m_discount_percent)
+};
+
 using namespace sqlite_orm;
 
 auto storage = make_storage("SQLCookbook.sqlite",
@@ -80,7 +105,28 @@ auto storage = make_storage("SQLCookbook.sqlite",
 	make_table("Albums",
 		make_column("id", &Album::m_id, primary_key(), autoincrement()),
 		make_column("artist_id", &Album::m_artist_id),
-		foreign_key(&Album::m_artist_id).references(&Artist::m_id)));
+		foreign_key(&Album::m_artist_id).references(&Artist::m_id)),
+	make_table("Invoice",
+		make_column("id", &Invoice::m_id, primary_key(), autoincrement()),
+		make_column("date", &Invoice::date),     //, default_value(Today())),
+		make_column("fkey_customer", &Invoice::m_fkey_customer),
+		make_column("total_amount", &Invoice::m_total_amount),
+		foreign_key(&Invoice::m_fkey_customer).references(&Customer::m_id)),
+	make_table("Customer",
+		make_column("id", &Customer::m_id, primary_key(), autoincrement()),
+		make_column("name", &Customer::name, collate_nocase())),
+	make_table("InvoiceLine",
+		make_column("id", &InvoiceLine::m_id, primary_key(), autoincrement()),
+		make_column("fkey_invoice", &InvoiceLine::m_fkey_invoice),
+		make_column("quantity", &InvoiceLine::m_quantity),
+		make_column("unit_price", &InvoiceLine::m_unit_price),
+		make_column("discount_per100", &InvoiceLine::m_discount_percent),
+		make_column("taxes_per100", &InvoiceLine::m_taxes_percent),
+		make_column("line_amount",
+			&InvoiceLine::m_line_amount,
+			generated_always_as(c(&InvoiceLine::m_quantity) * c(&InvoiceLine::m_unit_price) * (1 + c(&InvoiceLine::m_taxes_percent))
+				* (1 - c(&InvoiceLine::m_discount_percent)))),
+		foreign_key(&InvoiceLine::m_fkey_invoice).references(&Invoice::m_id)));
 
 
 /*

@@ -282,9 +282,8 @@ void Storage::empty_database()
 
 std::string Fondo::simple_dump() const
 {
-	// std::string str = std::to_string(id) + " - "s + abreviacion + " - "s + nombre + " "s + std::to_string(tipo_cupon);
 	std::ostringstream os;
-	os << id << " - " << abreviacion << " - " << nombre << " " << tipo_cupon;
+	os << id << " - " << abreviacion << " - " << nombre;
 	return os.str();
 }
 
@@ -324,14 +323,29 @@ double Fondo::get_rendimiento_unitario_al(std::chrono::year_month_day fecha) con
 
 std::string Inversion::simple_dump() const
 {
-	// std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(beginning_date) + " "s + std::to_string(num_participaciones);
+	Fondo fondo = getFondo();
 	std::ostringstream os;
-	os << id << " - " << fkey_fondo << " " << beginning_date << " " << num_participaciones;
+	os << id << " - " << fkey_fondo << " " << fondo.nombre  << " " << beginning_date << " " << num_participaciones;
 	return os.str();
 }
 
+Fondo Inversion::getFondo() const
+{
+	auto fondo = Storage::getStorage().get<Fondo>(this->fkey_fondo);
+	return fondo;
+}
+
+
 std::string Rendimiento::simple_dump() const
 {
-	std::string str = std::to_string(id) + " - "s + std::to_string(fkey_fondo) + " "s + Util::to_string(fecha) + " "s + std::to_string(rendimiento_unitario);
-	return str;
+	Fondo fondo = getFondo();
+	std::ostringstream os;
+	os << id << " - " << fkey_fondo << " " << fondo.nombre << " " << fecha << " " << rendimiento_unitario;
+	return os.str();
+}
+
+Fondo Rendimiento::getFondo() const
+{
+	auto fondo = Storage::getStorage().get<Fondo>(this->fkey_fondo);
+	return fondo;
 }

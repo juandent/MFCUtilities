@@ -6,6 +6,7 @@
 #include "afxdialogex.h"
 #include "RendimientoDlg.h"
 
+#include "CFondoDlg.h"
 #include "QueryInversionesDlg.h"
 
 
@@ -48,6 +49,7 @@ BEGIN_MESSAGE_MAP(RendimientoDlg, CDialog)
 	ON_BN_CLICKED(IDC_B_QUERIES, &RendimientoDlg::OnBnClickedBQueries)
 	ON_BN_CLICKED(ID_ERASE, &RendimientoDlg::OnBnClickedErase)
 	ON_BN_CLICKED(ID_NEW, &RendimientoDlg::OnBnClickedNew)
+	ON_BN_CLICKED(IDC_B_FONDOS, &RendimientoDlg::OnBnClickedBFondos)
 END_MESSAGE_MAP()
 
 
@@ -175,4 +177,12 @@ LRESULT RendimientoDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 	if (ret != 0)
 		return CDialog::WindowProc(message, wParam, lParam);
 	return ret;
+}
+
+
+void RendimientoDlg::OnBnClickedBFondos()
+{
+	CFondoDlg dlg;
+	dlg.DoModal();
+	Refresh();
 }
