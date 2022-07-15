@@ -6,12 +6,14 @@ module;
 #include <string>
 #include <cassert>
 
-#include <FixedPoint/Money.h>
+//#include <FixedPoint/Money.h>
 //#include <date/date.h>
 #include <chrono>
 
 
 export module CSV_File;
+
+import fixed_point;
 
 
 namespace csv

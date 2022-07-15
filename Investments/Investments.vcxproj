@@ -291,8 +291,8 @@
     <ProjectReference Include="..\JDGridCtrl\GridCtrlDll\GridCtrlDll.vcxproj">
       <Project>{8c3a1b23-55f5-4b5f-985f-073f2e1c1745}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\JDMFCLibraryModules\JDMFCLibraryModules.vcxproj">
-      <Project>{c964146a-c6cf-49a0-8bd9-a97512e8123c}</Project>
+    <ProjectReference Include="..\JDMFCLibrary\JDMFCLibrary.vcxproj">
+      <Project>{d7a93589-b456-43ef-9c10-e68bf433c68f}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

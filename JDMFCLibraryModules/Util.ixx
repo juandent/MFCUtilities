@@ -5,7 +5,6 @@ module;
 
 #include <debugapi.h>
 #include <cassert>
-//#include <date/date.h>
 #include <chrono>
 #include <array>
 #include <string>
@@ -13,27 +12,26 @@ module;
 #include <vector>
 #include <regex>
 #include <filesystem>
+#include <locale>
 
 
 
+//#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
 
-#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
+//#include <afxwin.h>         // MFC core and standard components
+//#include <afxext.h>         // MFC extensions
+//#include <afxole.h>         // MFC OLE classes
 
-#include <afxwin.h>         // MFC core and standard components
-#include <afxext.h>         // MFC extensions
-#include <afxole.h>         // MFC OLE classes
-
-#include <FixedPoint/arithmetic_types.cpp>
+//#include <FixedPoint/arithmetic_types.cpp>
 #include <GridCellBase.h>
 #include <sstream>
 #include <format>
 
 
 export module Util;
+import fixed_point;
+import DateAsString;
 
-//#include "pch.h"
-
-//module;
 
 
 namespace std
@@ -51,7 +49,7 @@ namespace std
 
 
 
-/*export*/ import DateAsString;
+/*export*/ 
 
 namespace fs = std::filesystem;
 
@@ -139,9 +137,7 @@ namespace diag
 
 export namespace Util
 {
-	export using Money = fixed_decimal<2, long long>;
-
-	//export Money;
+	//export using Money = fixed_decimal<2, long long>;
 
 	export class Colones : public Money
 	{

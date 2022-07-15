@@ -5,6 +5,7 @@
 struct IDisplayer
 {
 	virtual void display() = 0;
+	virtual ~IDisplayer() = default;
 };
 
 namespace Util

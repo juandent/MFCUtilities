@@ -1,12 +1,12 @@
 module;
 
 //#include "pch.h"
-// #include <iostream>	//	needed for the operator<<() ostream inserters
+#include <iostream>	//	needed for the operator<<() ostream inserters
 //#include <..\FixedPoint/arithmetic_types.h>
 
-export module fixed_point;
+//import <iostream>;
 
-import <iostream>;
+export module fixed_point;
 
 export
 {
@@ -247,13 +247,13 @@ PARAMETERS
 	template <int N> struct exp10 { enum { value = 10 * exp10<N - 1>::value }; };
 	template <>      struct exp10<0> { enum { value = 1 }; };
 
-//# include <iostream>	//	needed for the operator<<() ostream inserters
+	//# include <iostream>	//	needed for the operator<<() ostream inserters
 
-	/******************************************************************************
-	CLASS rounding --  rounding integer template class
-	ARGUMENTS
-		T	--	underlying numerical representation type
-	******************************************************************************/
+		/******************************************************************************
+		CLASS rounding --  rounding integer template class
+		ARGUMENTS
+			T	--	underlying numerical representation type
+		******************************************************************************/
 	template <typename T = long> class rounding : public arithmetic_operator_helper<rounding<T> >
 	{
 		typedef typename policy_restrict_range<T> P;
@@ -502,7 +502,7 @@ TEMPORARY some options to consider for fixed point
 		return o;
 	}//	end operator<<
 #else
-	template <int N, typename T, template <class> typename P> std::ostream& operator<<(std::ostream& o, fixed_binary<N, T, P> n)
+	template <int N, typename T, template <class> class P> std::ostream& operator<<(std::ostream& o, fixed_binary<N, T, P> n)
 	{
 		int scale = exp10<(N > 3 ? 3 : N)>::value;
 		T f = fixed_binary<N, T, P>::P::rounded_division(absval(n.fraction()) * scale, n.scale());
@@ -527,5 +527,6 @@ TEMPORARY some options to consider for fixed point
 #endif
 
 	//int arithmetic_types_module_test(int test_no, std::ostream& os);
+	using Money = fixed_decimal<2, long long>;
 
 }

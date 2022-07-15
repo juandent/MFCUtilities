@@ -7,6 +7,8 @@
 // #include "SQLCookbook.h"
 #include "SQLCookbook.h"
 
+void Course_8();
+
 void SQL1_8();
 void SQL1_12();
 void SQL1_13();
@@ -29,21 +31,49 @@ void usingObjectAPI();
 int main()
 {
 	using namespace sqlite_orm;
+	using namespace std::literals;
 
-
-
+	auto guard = storage.transaction_guard();
 	try
 	{
 		// foreign_key_disable_checking fk_off(storage);
 		// storage.drop_table("Customer");
 		// storage.drop_table("Invoice");
 		// storage.drop_table("InvoiceLine");
+		// storage.drop_table("Orders");
+		// storage.drop_table("Customer");
+        if(storage.table_exists("Emp_bonus")) {
+            storage.remove_all<EmpBonus>();
+        }
+		if (storage.table_exists("InvoiceLine")) {
+			storage.remove_all<InvoiceLine>();
+			auto inv = storage.get_all<InvoiceLine>();
+		}
+
+		if (storage.table_exists("Invoice")) {
+			auto inv = storage.get_all<Invoice>();
+			storage.remove_all<Invoice>();
+			auto inv2 = storage.get_all<Invoice>();
+		}
+		if (storage.table_exists("Orders")) {
+			storage.remove_all<Order>();
+			// auto ords = storage.get_all<Order>();
+		}
+		if( storage.table_exists("Customer")) {
+			
+			auto expr = remove_all<Customer>();
+			auto sql = storage.dump(expr);
+			auto statement = storage.prepare(expr);
+			storage.execute(statement);
+			// auto cust2 = storage.get_all<Customer>();
+		}
 		storage.sync_schema(true);
 
+#if 0
 		Customer c{ 1, "Juan Dent" };
 		// storage.replace(c);
 
-		storage.replace(into<Customer>(), columns(&Customer::m_id, &Customer::name), values(std::make_tuple(1, "Juan")));
+		storage.replace(into<Customer>(), columns(&Customer::m_id, &Customer::m_name), values(std::make_tuple(1, "Juan")));
 		// Invoice i{ 1, Today(), c.m_id, 20000 };
 		// storage.insert(into<Invoice>(), columns(&Invoice::m_id, &Invoice::m_fkey_customer, &Invoice::total_amount),
 		// 	values(std::make_tuple(1, 1, 20000)));
@@ -73,17 +103,19 @@ int main()
 		// 	auto x = *pair.second;
 		// 	std::ignore = x;
 		// }
-
+#endif
 
 		storage.remove_all<Album>();
 		storage.remove_all<Artist>();
 		storage.remove_all<EmpBonus>();
 		storage.remove_all<Employee>();
 		storage.remove_all<Department>();
+		guard.commit();
 	}
 	catch(std::exception& ex)
 	{
 		auto s = ex.what();
+		guard.rollback();
 		std::ignore = s;
 	}
 
@@ -100,7 +132,7 @@ int main()
 
 	std::vector<Employee> vec =
 	{
-		Employee{7369, "Smith", "Clerk", 7902, "17-DEC-1980",800,std::nullopt, 20},
+		Employee{7369, "Smith", "Clerk", 7902, "17-DEC-1980",800,std::nullopt,std::nullopt},
 		Employee{7499, "Allen", "SalesMan", 7698, "20-FEB-1981", 1600, 300, 30},
 		Employee{7521,"Ward", "SalesMan", 7698,"22-feb-1981",1250,500, 30},
 		Employee{7566,"Jones", "Manager", 7839, "02-abr-1981",2975, std::nullopt,20},
@@ -118,10 +150,10 @@ int main()
 
 	std::vector<Department> des =
 	{
-		Department{10, "Accounting", "New York"},
-		Department{20, "Research", "Dallas"},
-		Department{30, "Sales", "Chicago"},
-		Department{40, "Operations", "Boston"}
+		Department{10, "Accounting", "New York", 7369},
+		Department{20, "Research", "Dallas", 7566},
+		Department{30, "Sales", "Chicago", 7782},
+		Department{40, "Operations", "Boston", 7900}
 	};
 
 	std::vector<EmpBonus> bonuses =
@@ -135,8 +167,29 @@ int main()
 		EmpBonus{-1, 7782, "15-Feb-2005", 1}
 	};
 
+	std::vector<Customer> custs = {
+			Customer{.m_id = 1, .m_name = "Erika Smith"s, .m_age = 21, .m_address = "Norway"s, .m_salary = 20000 },
+			Customer{.m_id = 2, .m_name = "Rajesh Tripathi"s, .m_age = 30, .m_address = "Dhanbad"s, .m_salary = 15000},
+			Customer{.m_id = 3, .m_name = "Sunu Verma"s, .m_age = 20, .m_address = "Dehradhun"s, .m_salary = 25000}
+	};
+
+	std::vector<Order> orders = {
+			Order{.m_id = 1, .m_fkey_customer = 1, .m_amount = 2000},
+			Order{.m_id = 2, .m_fkey_customer = 2, .m_amount = 3500},
+			Order{.m_id = 3, .m_fkey_customer = 2, .m_amount = 5000}
+	};
+
+	std::vector<Invoice> inv = {
+			Invoice{.m_id = 1, .date = today(),.m_fkey_customer = 1, .m_total_amount = 3000},
+			Invoice{.m_id=2, .date = today(), .m_fkey_customer = 2, .m_total_amount = 6000},
+			Invoice{.m_id=3, .date = today(), .m_fkey_customer = 3, .m_total_amount = 8000},
+	};
+
 	try
 	{
+		storage.replace_range(custs.begin(), custs.end());
+		storage.replace_range(inv.begin(), inv.end());
+		storage.replace_range(orders.begin(), orders.end());
 		storage.replace_range(art.begin(), art.end());
 		storage.replace_range(albums.begin(), albums.end());
 		storage.replace_range(des.begin(), des.end());
@@ -148,6 +201,10 @@ int main()
 		auto s = ex.what();
 		std::ignore = s;
 	}
+
+	auto cs = storage.get_all<Customer>();
+
+	Course_8();
 
 	usingObjectAPI();
 	usingDelete();
@@ -166,6 +223,513 @@ int main()
 	SQL3_6();
 	SQL3_9();
 	Except();
+}
+
+void Course_8() {
+	// 8
+    auto expression = select(asterisk<Employee>());
+	auto sql = storage.dump(expression);
+	auto statement = storage.prepare(expression);
+	auto rows = storage.execute(statement);
+	// 9
+	for (auto& employee : storage.iterate<Employee>()) {
+		std::cout << storage.dump(employee) << std::endl;
+	}
+	{
+		// 10
+		auto rows = storage.select(columns(&Employee::m_ename, &Employee::m_salary),
+			order_by(&Employee::m_ename).desc().collate_nocase());
+		auto objects = storage.get_all<Employee>(order_by(&Employee::m_ename).desc().collate_nocase());
+	}
+    // 11
+	{
+		auto rows = storage.select(columns(&Employee::m_ename, &Employee::m_salary), multi_order_by(
+			order_by(&Employee::m_salary).desc(),
+			order_by(&Employee::m_ename).asc()));
+
+		auto objects = storage.get_all<Employee>(multi_order_by(
+			order_by(&Employee::m_salary).desc(),
+			order_by(&Employee::m_ename).asc()));
+	}
+	// 12
+    {
+		bool order_by_salary_too = true;	// or false
+		auto orderBy = dynamic_order_by(storage);
+		orderBy.push_back(order_by(&Employee::m_ename).asc());
+		if (order_by_salary_too) {
+			orderBy.push_back(order_by(&Employee::m_salary).desc());
+		}
+		auto objects = storage.get_all<Employee>(orderBy);
+    }
+	// 13
+    {
+		SQL2_3();
+    }
+	// 13
+	{
+		auto expression = select(columns(&Employee::m_ename, &Employee::m_salary, &Employee::m_commission),
+			order_by(is_null(&Employee::m_commission)).asc());
+		auto sql = storage.dump(expression);
+		auto statement = storage.prepare(expression);
+		auto rows = storage.execute(statement);
+	}
+    // 14
+    {
+		SQL2_5();
+    }
+	// 15
+    {
+		SQL2_6();
+    }
+	// 16
+    {
+		auto dept_hiredates = storage.select(distinct(columns(&Employee::m_deptno, &Employee::m_hiredate)));
+    }
+	// 17
+    {
+		auto rows = storage.select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_hiredate, &Department::m_deptname),
+			where(is_equal(&Employee::m_deptno, &Department::m_deptno)));
+
+
+		auto rows2  = storage.select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_hiredate, &Department::m_deptname),
+			where(c(&Employee::m_deptno) == &Department::m_deptno));
+    }
+	// 18
+    {
+		auto objects = storage.get_all<Employee>(where(lesser_or_equal(&Employee::m_empno, 20000)
+			and (like(&Employee::m_ename, "T%") or glob(&Employee::m_ename, "*S"))));
+    }
+	// 19
+    {
+		auto rows = storage.select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_hiredate, &Department::m_deptname),
+			where(c(&Employee::m_deptno) == &Department::m_deptno), limit(4));
+		auto objects = storage.get_all<Employee>(limit(4));
+    }
+	// 20
+    {
+		auto rows = storage.select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_hiredate, &Department::m_deptname),
+			where(c(&Employee::m_deptno) == &Department::m_deptno), limit(4, offset(3)));
+		auto objects = storage.get_all<Employee>(limit(4, offset(3)));
+    }
+	// 21
+    {
+		auto rows = storage.select(columns(&Employee::m_ename, &Employee::m_salary), order_by(&Employee::m_salary).desc(),
+			limit(2, offset(1)));
+		auto objects = storage.get_all<Employee>(order_by(&Employee::m_salary).desc(), limit(2, offset(1)));
+    }
+	// 22
+    {
+		// SELECT DEPARTMENT_NAME FROM departments 
+        // WHERE DEPARTMENT_NUMBER
+        // BETWEEN 100 AND 200
+
+		auto rows = storage.select(&Department::m_deptname, where(between(&Department::m_deptno, 100, 200)));
+
+		{
+			// SELECT DEPARTMENT_NO FROM departments 
+			// WHERE DEPARTMENT_NAME 
+			// BETWEEN “D” AND “F” 
+			auto rows = storage.select(&Department::m_deptno, where(between(&Department::m_deptname, "D", "F")));
+			auto objects = storage.get_all<Department>(where(between(&Department::m_deptname, "D", "F")));
+		}
+    }
+	// 23
+    {
+		auto rows = storage.select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_deptno),
+			where(in(&Employee::m_deptno,
+				select(&Department::m_deptno, where(c(&Department::m_loc) == "Dallas")))));
+    }
+	// 24
+    {
+		// SELECT "Emp"."empno", "Emp"."ename", "Emp"."job", "Emp"."salary", "Emp"."deptno" FROM 'Emp’ 
+		// WHERE(("Emp"."ename", "Emp"."job", "Emp"."salary")
+		// IN(SELECT "Emp"."ename", "Emp"."job", "Emp"."salary" FROM 'Emp' WHERE(("Emp"."job" = "Clerk"))))
+
+		auto rows = storage.select(columns(
+			&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno),
+			where(in(std::make_tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary),
+				select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), where(c(&Employee::m_job) == "Clerk")))));
+
+		{
+			auto col_list = columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno);
+			auto tuple = std::make_tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary);
+			auto col_list1 = columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary);
+			auto condition = c(&Employee::m_job) == "Clerk";
+			using Table1 = Employee;
+			using Table2 = Employee;
+
+			auto rows = storage.select(col_list, from<Table1>(), where(in(tuple, select(col_list1, from<Table2>(), where(condition)))));
+		}
+
+    }
+	// 25
+    {
+		// SELECT m_ename, m_deptno 
+        // FROM employees 
+        // WHERE m_deptno IN (10,20,30)
+
+		std::vector<int> ids{ 10,20,30 };
+		auto rows = storage.select(columns(&Employee::m_ename, &Employee::m_deptno),
+			where(in(&Employee::m_deptno, ids)));
+		auto objects = storage.get_all<Employee>(where(in(&Employee::m_deptno, { 10,20,30 })));
+    }
+	// 26
+    {
+		// SELECT m_ename, m_deptno 
+		// FROM employees 
+		// WHERE m_deptno NOT IN (10,20,30)
+
+		std::vector<int> ids{ 10,20,30 };
+		auto rows = storage.select(columns(&Employee::m_ename, &Employee::m_deptno),
+			where(not_in(&Employee::m_deptno, ids)));
+		auto objects = storage.get_all<Employee>(where(not_in(&Employee::m_deptno, { 10,20,30 })));
+
+    }
+	// 27
+    {
+		auto whereCondition = where(like(&Employee::m_ename, "_S%")); 
+			auto users = storage.get_all<Employee>(whereCondition);
+		auto rows = storage.select(&Employee::m_salary, whereCondition);
+		auto rows1 = storage.select(like(&Employee::m_ename , "%S%a"));
+		auto rows2 = storage.select(like(&Employee::m_job, "^%a").escape("^"));
+
+    }
+	// 28
+    {
+		auto rows = storage.select(columns(&Employee::m_ename), where(glob(&Employee::m_ename, "[^A-J]*")));
+		auto employees = storage.get_all<Employee>(where(glob(&Employee::m_ename, "[^A-J]*")));
+    }
+	// 31
+    {
+		//  SELECT artists.m_id, albums.m_id FROM artists
+        //  LEFT JOIN albums ON albums.m_artist_id = artists.m_id
+        //  WHERE albums.m_id IS NULL;
+
+		auto rows = storage.select(columns(&Artist::m_id, &Album::m_id),
+			left_join<Album>(on(c(&Album::m_artist_id) == &Artist::m_id)),
+			where(is_null(&Album::m_id)));
+    }
+    // 32
+    {
+		// Transforming null values into real values
+        // SELECT COALESCE(comm,0), comm FROM EMP
+
+		auto expression = select(columns(coalesce<double>(&Employee::m_commission, 0), &Employee::m_commission));
+		auto sql = storage.dump(expression);
+		auto statement = storage.prepare(expression);
+		auto rows = storage.execute(statement);
+    }
+	// 35
+    {
+        // cross-join
+		// auto expression = select(asterisk<Employee>(), asterisk<Department>()); // cross_join<Department>()); // ) > ); // , cross_join<Department>());
+		{
+			auto expression = select(asterisk<Employee>(), cross_join<Department>()); // 
+			auto sql = storage.dump(expression);
+			auto statement = storage.prepare(expression);
+			auto rows = storage.execute(statement);
+			auto c7 = std::get<7>(rows[0]);
+		}
+		{
+			auto expression = select(object<Employee>(), cross_join<Department>()); //
+			auto sql = storage.dump(expression);
+			auto statement = storage.prepare(expression);
+			auto rows = storage.execute(statement);
+			// auto c7 = std::get<7>(rows[0]);
+		}
+
+#if 0
+		using als_c = alias_c<Customer>;
+		using als_d = alias_d<Order>;
+		auto rowsWithTableAliases = storage.select(columns(
+			alias_column<als_c>(&Customer::m_id),
+			alias_column<als_c>(&Customer::m_name),
+			alias_column<als_c>(&Customer::m_age),
+			alias_column<als_c>(&Customer::m_address)),
+			where(is_equal(alias_column<als_c>(&Employee::id), alias_column<als_d>(&Department::empId))));
+#endif
+		// 35 (without asterisk)
+		{
+			try
+			{
+				auto expression = select(columns(
+					&Customer::m_id,
+					&Customer::m_name,
+					&Customer::m_age,
+					&Customer::m_address,
+					&Customer::m_salary,
+					&Order::m_id,
+					&Order::m_fkey_customer,
+					&Order::m_amount), cross_join<Order>());
+
+				auto sql = storage.dump(expression);
+				auto statement = storage.prepare(expression);
+				auto rows = storage.execute(statement);
+
+			} catch(const std::exception& ex) {
+                    auto s = ex.what();
+                    std::ignore = s;
+            }
+		}
+		// 50
+		{
+			//  If you want to know the total amount of salary on each customer, then GROUP BY query would be as follows:
+//  SELECT NAME, SUM(SALARY)
+//  FROM COMPANY
+//  GROUP BY NAME;
+
+			auto totalSalaryPerName = storage.select(columns(&Employee::m_ename, sum(&Employee::m_salary)), group_by(&Employee::m_ename));
+
+		}
+		// 51
+		{
+			// SELECT (STRFTIME(“%Y”, "Invoices"."invoiceDate")) AS InvoiceYear,
+            // (COUNT("Invoices"."id")) AS InvoiceCount FROM 'Invoices' GROUP BY 
+            // InvoiceYear ORDER BY InvoiceYear DESC
+			struct InvoiceYearAlias : alias_tag {
+				static const std::string& get() {
+					static const std::string res = "INVOICE_YEAR"; return res;
+				}
+			};
+			struct InvoiceCountAlias : alias_tag {
+				static const std::string& get() {
+					static const std::string res = "INVOICE_COUNT"; return res;
+				}
+			};
+			auto expression = select(columns(as<InvoiceYearAlias>(strftime("%Y", &Invoice::date)), as<InvoiceCountAlias>(count(&Invoice::m_id))), 
+				group_by(get<InvoiceYearAlias>()), order_by(get<InvoiceYearAlias>()).desc());
+			auto sql = storage.dump(expression);
+			auto statement = storage.prepare(expression);
+			auto rows = storage.execute(statement);
+		}
+		// 52
+		{
+			//  SELECT M_ENAME, SUM(M_SALARY)
+            //  FROM COMPANY
+            //  WHERE M_ENAME is like "%l%"
+            //  GROUP BY M_ENAME
+            //  HAVING SUM(M_SALARY) > 10000
+			auto namesWithHigherSalaries = storage.select(columns(&Employee::m_ename, sum(&Employee::m_salary)),
+				where(like(&Employee::m_ename, "%l%")),
+				group_by(&Employee::m_ename).having(sum(&Employee::m_salary) > 10000));
+
+		}
+		// 54
+		{
+			//  SELECT EMP_ID, NAME, DEPT
+			//  FROM COMPANY
+			//  INNER JOIN DEPARTMENT
+			//  ON COMPANY.ID = DEPARTMENT.EMP_ID
+			//  UNION
+			//  SELECT EMP_ID, NAME, DEPT
+			//  FROM COMPANY
+			//  LEFT OUTER JOIN DEPARTMENT
+			//  ON COMPANY.ID = DEPARTMENT.EMP_ID;
+			{
+				auto rows1 = storage.select(columns(&Employee::m_ename, &Employee::m_empno, &Department::m_manager, &Department::m_deptname),
+					inner_join<Department>(on(is_equal(&Employee::m_empno, &Department::m_manager))), order_by(&Employee::m_ename));
+
+				auto rows2 = storage.select(columns(&Employee::m_ename, &Employee::m_empno, &Department::m_manager, &Department::m_deptname),
+					left_outer_join<Department>(on(is_equal(&Employee::m_deptno, &Department::m_deptno))), order_by(&Employee::m_ename));
+
+
+				auto expression = select(union_(select(columns(&Employee::m_ename, &Employee::m_empno, &Department::m_manager, &Department::m_deptname),
+					inner_join<Department>(on(is_equal(&Employee::m_empno, &Department::m_manager)))),
+					select(columns(&Employee::m_ename, &Employee::m_empno, &Department::m_manager, &Department::m_deptname),
+						left_outer_join<Department>(on(is_equal(&Employee::m_deptno, &Department::m_deptno))))), order_by(&Employee::m_ename));
+				auto sql = storage.dump(expression);
+				auto statement = storage.prepare(expression);
+				auto rows = storage.execute(statement);
+			}
+			{
+				auto rows1 = storage.select(columns(&Employee::m_ename, &Employee::m_empno, &Department::m_manager, &Department::m_deptname),
+					inner_join<Department>(on(is_equal(&Employee::m_empno, &Department::m_manager))), order_by(&Employee::m_ename));
+
+				auto rows2 = storage.select(columns(&Employee::m_ename, &Employee::m_empno, &Department::m_manager, &Department::m_deptname),
+					left_outer_join<Department>(on(is_equal(&Employee::m_deptno, &Department::m_deptno))), order_by(&Employee::m_ename));
+
+
+				auto expression = select(union_all(select(columns(&Employee::m_ename, &Employee::m_empno, &Department::m_manager, &Department::m_deptname),
+					inner_join<Department>(on(is_equal(&Employee::m_empno, &Department::m_manager)))),
+					select(columns(&Employee::m_ename, &Employee::m_empno, &Department::m_manager, &Department::m_deptname),
+						left_outer_join<Department>(on(is_equal(&Employee::m_deptno, &Department::m_deptno))))), order_by(&Employee::m_ename));
+				auto sql = storage.dump(expression);
+				auto statement = storage.prepare(expression);
+				auto rows = storage.execute(statement);
+
+			}
+			{
+				auto rows1 = storage.select(columns(&Customer::m_name, as_optional(&Order::m_id), as_optional(&Order::m_amount)), left_join<Order>(on(c(&Order::m_fkey_customer) == &Customer::m_id)));
+				auto rows2 = storage.select(columns(&Employee::m_ename, &Department::m_deptno, as_optional(&Employee::m_salary)), inner_join<Department>(on(c(&Employee::m_empno) == &Department::m_manager)));
+
+				auto expr1 = select(columns(&Customer::m_name, as_optional(&Order::m_id), as_optional(&Order::m_amount)), left_join<Order>(on(c(&Order::m_fkey_customer) == &Customer::m_id)));
+				auto expr2 = select(columns(&Employee::m_ename, &Department::m_deptno, as_optional(&Employee::m_salary)), inner_join<Department>(on(c(&Employee::m_empno) == &Department::m_manager)));
+
+				auto expr = select(union_(expr1, expr2));
+				auto sql = storage.dump(expr);
+				auto statement = storage.prepare(expr);
+				auto rows = storage.execute(statement);
+			}
+		
+
+		}
+    }
+	// 82
+    {
+		// SELECT "e"."empno", "e"."ename", "e"."hiredate", "d"."deptname" FROM "Dept" "d", "Emp" "e" WHERE (("e"."deptno" = "d"."mgr"))
+
+        using als_e = alias_e<Employee>;
+        using als_d = alias_d<Department>;
+
+        auto expression = select(columns(
+	        alias_column<als_e>(&Employee::m_empno),
+	        alias_column<als_e>(&Employee::m_ename),
+	        alias_column<als_e>(&Employee::m_hiredate),
+	        alias_column<als_d>(&Department::m_deptname)),
+	        where(is_equal(alias_column<als_e>(&Employee::m_deptno),
+		        alias_column<als_d>(&Department::m_manager))));
+		auto sql = storage.dump(expression);
+		auto statement = storage.prepare(expression);
+		auto rows = storage.execute(statement);
+        {
+			auto rows = storage.select(columns(
+				alias_column<als_e>(&Employee::m_empno),
+				alias_column<als_e>(&Employee::m_ename),
+				alias_column<als_e>(&Employee::m_hiredate),
+				alias_column<als_d>(&Department::m_deptname)),
+				where(is_equal(alias_column<als_e>(&Employee::m_deptno),
+					alias_column<als_d>(&Department::m_manager))));
+        }
+
+    }
+	// 83
+    {
+        struct EmployeeIdAlias : alias_tag {
+            static const std::string& get() {
+                static const std::string res = "EMPLOYEE_ID";
+                return res;
+            }
+        };
+
+        struct EmployeeNameAlias : alias_tag {
+            static const std::string& get() {
+                static const std::string res = "EMPLOYEE_NAME";
+                return res;
+            }
+        };
+
+		// SELECT "Emp"."empno" AS "EMPLOYEE_ID", "Emp"."ename" AS "EMPLOYEE_NAME", "Emp"."hiredate", "Dept"."deptname"
+		// FROM "Dept", "Emp" WHERE(("EMPLOYEE_ID" = "Dept"."mgr"))
+			
+		auto expression = select(columns(as<EmployeeIdAlias>(&Employee::m_empno),
+                                                            as<EmployeeNameAlias>(&Employee::m_ename),
+                                                            &Employee::m_hiredate,
+                                                            &Department::m_deptname),
+                                                    where(is_equal(get<EmployeeIdAlias>(), &Department::m_manager)));
+		auto sql = storage.dump(expression);
+		auto statement = storage.prepare(expression);
+		auto rows = storage.execute(statement);
+
+        {
+            auto rows = storage.select(columns(as<EmployeeIdAlias>(&Employee::m_empno),
+				as<EmployeeNameAlias>(&Employee::m_ename),
+				&Employee::m_hiredate,
+				&Department::m_deptname),
+				where(is_equal(get<EmployeeIdAlias>(), &Department::m_manager)));
+			std::ignore = rows;
+        }
+    }
+	// 84
+    {
+		struct EmployeeIdAlias : alias_tag {
+			static const std::string& get() {
+				static const std::string res = "EMPLOYEE_ID";
+				return res;
+			}
+		};
+
+		struct EmployeeNameAlias : alias_tag {
+			static const std::string& get() {
+				static const std::string res = "EMPLOYEE_NAME";
+				return res;
+			}
+		};
+
+		// SELECT "e"."empno" AS "EMPLOYEE_ID", "e"."ename" AS "EMPLOYEE_NAME", "e"."hiredate", "d"."deptname"
+		// FROM "Dept" "d", "Emp" "e" WHERE(("e"."empno" = "d"."mgr"))
+
+		using als_e = alias_e<Employee>;
+		using als_d = alias_d<Department>;
+
+        auto expression = select(columns(
+			as<EmployeeIdAlias>(alias_column<als_e>(&Employee::m_empno)),
+			as<EmployeeNameAlias>(alias_column<als_e>(&Employee::m_ename)),
+			alias_column<als_e>(&Employee::m_hiredate),
+			alias_column<als_d>(&Department::m_deptname)),
+			where(is_equal(alias_column<als_e>(&Employee::m_empno), alias_column<als_d>(&Department::m_manager))));
+		auto sql = storage.dump(expression);
+		auto statement = storage.prepare(expression);
+		auto rows = storage.execute(statement);
+
+
+		{
+			auto rowsWithBothTableAndColumnAliases = storage.select(columns(
+				as<EmployeeIdAlias>(alias_column<als_e>(&Employee::m_empno)),
+				as<EmployeeNameAlias>(alias_column<als_e>(&Employee::m_ename)),
+				alias_column<als_e>(&Employee::m_hiredate),
+				alias_column<als_d>(&Department::m_deptname)),
+				where(is_equal(alias_column<als_e>(&Employee::m_empno), alias_column<als_d>(&Department::m_manager))));
+
+		}
+    }
+	// 85
+    {
+		// //  SELECT ID, NAME, MARKS,
+  //       //      CASE
+  //       //      WHEN MARKS >=80 THEN 'A+'
+  //       //      WHEN MARKS >=70 THEN 'A'
+  //       //      WHEN MARKS >=60 THEN 'B'
+  //       //      WHEN MARKS >=50 THEN 'C'
+  //       //      ELSE 'Sorry!! Failed'
+  //       //      END as 'Grade'
+  //       //      FROM STUDENT;
+  //
+		// auto rows = storage.select(columns(
+		// 	&Student::id,
+		// 	&Student::name,
+		// 	&Student::marks,
+		// 	as<GradeAlias>(case_<std::string>()
+		// 		.when(greater_or_equal(&Student::marks, 95), then("A+"))
+		// 		.when(greater_or_equal(&Student::marks, 90), then("A"))
+		// 		.when(greater_or_equal(&Student::marks, 80), then("B"))
+		// 		.when(greater_or_equal(&Student::marks, 70), then("C"))
+		// 		.else_("Sorry!! Failed")
+		// 		.end())));
+
+    }
+	// 92
+    {
+		try {
+			// INSERT INTO "Customer" SELECT "Emp"."empno", "Emp"."ename", "Emp"."empno", "Emp"."job", "Emp"."salary" FROM "Emp"
+			auto expression = insert(into<Customer>(),
+				select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_empno, &Employee::m_job, &Employee::m_salary)));
+			auto sql = storage.dump(expression);
+			auto statement = storage.prepare(expression);
+			storage.execute(statement);
+			auto r = storage.select(last_insert_rowid());
+
+			{
+				storage.insert(into<Customer>(),
+					select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_empno, &Employee::m_job, &Employee::m_salary)));
+				auto r = storage.select(last_insert_rowid());
+			}
+		}
+		catch(const std::exception& ex) {
+			auto s = ex.what();
+			std::ignore = s;
+		}
+		// storage.get
+	}
 }
 
 void CreateView()
@@ -239,9 +803,14 @@ void SQL1_13()
 void SQL2_3()
 {
 	// SELECT ename, job from EMP order by substring(job, len(job)-1,2)
-	auto statement = storage.prepare(select(columns(&Employee::m_ename, &Employee::m_job), order_by(substr(&Employee::m_job, length(&Employee::m_job) - 1, 2))));
-	auto sql = statement.expanded_sql();
+	auto expression = select(columns(&Employee::m_ename, &Employee::m_job), order_by(substr(&Employee::m_job, length(&Employee::m_job) - 1, 2)));
+	auto sql = storage.dump(expression);
+	auto statement = storage.prepare(expression);
 	auto rows = storage.execute(statement);
+
+	// auto statement = storage.prepare(select(columns(&Employee::m_ename, &Employee::m_job), order_by(substr(&Employee::m_job, length(&Employee::m_job) - 1, 2))));
+	// auto sql = statement.expanded_sql();
+	// auto rows = storage.execute(statement);
 
 }
 
@@ -322,10 +891,10 @@ void SQL3_1()
 		 */
 		auto statement = storage.prepare(
 			select(union_all(
-				select(columns(as<NamesAlias>(&Department::m_deptname), as_optional(&Department::m_deptno))),
+				select(columns(as<NamesAlias>(&Department::m_deptname), &Department::m_deptno)),
 				select(union_all(
 					select(columns(quote("--------------------"), std::optional<int>())),
-					select(columns(as<NamesAlias>(&Employee::m_ename), as_optional(&Employee::m_deptno))))))));
+					select(columns(as<NamesAlias>(&Employee::m_ename), &Employee::m_deptno)))))));
 			
 		auto sql = statement.expanded_sql();
 		auto rows = storage.execute(statement);
@@ -356,6 +925,22 @@ void SQL3_2()
 	auto sql = statement.expanded_sql();
 	auto rows = storage.execute(statement);
 
+	{
+		try
+		{
+			auto expression = select(columns(&Employee::m_ename, &Department::m_loc, &Employee::m_deptno, &Department::m_deptno),
+				from<Employee>(),
+				natural_join<Department>());
+
+			auto sql = storage.dump(expression);
+			auto statement = storage.prepare(expression);
+			auto rows = storage.execute(statement);
+		}
+		catch(const std::exception& ex) {
+			auto s = ex.what();
+			std::ignore = s;
+		}
+	}
 }
 void SQL3_3()
 {
@@ -366,13 +951,6 @@ void SQL3_3()
 	// 	intersect
 	// 	select ename, job, salary from emp where job = "Clerk")
 
-	// storage.prepare(select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno)),
-	// 	where(in(std::tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary),
-	// 		select(intersect(
-	// 			select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary)),
-	// 			select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), where(c(&Employee::m_job) == "Clerk"))
-	// 			)))));
-	// THIS ONE DOES NOT RUN!
 	try
 	{
 		auto statement = storage.prepare(select(columns(&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno),
@@ -419,16 +997,28 @@ void SQL3_3()
 			// WHERE(("Emp"."ename", "Emp"."job", "Emp"."salary")
 			// IN(SELECT "Emp"."ename", "Emp"."job", "Emp"."salary" FROM 'Emp' WHERE(("Emp"."job" = "Clerk" ))))
 
-			auto statement = storage.prepare(select(columns(
+			auto expression = select(columns(
 				&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno),
-				where(in(std::make_tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), where(c(&Employee::m_job) == "Clerk"))))));
-			auto sql = statement.expanded_sql();
+				where(in(std::make_tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary),
+					select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), where(c(&Employee::m_job) == "Clerk")))));
+			auto sql = storage.dump(expression);
+			auto statement = storage.prepare(expression);
 			auto rows = storage.execute(statement);
+			
 			{
 				auto statement = storage.prepare(select(columns(
 					&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno),
-					where(c(std::make_tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary)).in(select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), where(c(&Employee::m_job) == "Clerk"))))));
+					where(in(std::make_tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary),
+						select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), where(c(&Employee::m_job) == "Clerk"))))));
 
+				auto sql = statement.expanded_sql();
+				auto rows = storage.execute(statement);
+				{
+					auto statement = storage.prepare(select(columns(
+						&Employee::m_empno, &Employee::m_ename, &Employee::m_job, &Employee::m_salary, &Employee::m_deptno),
+						where(c(std::make_tuple(&Employee::m_ename, &Employee::m_job, &Employee::m_salary)).in(select(columns(&Employee::m_ename, &Employee::m_job, &Employee::m_salary), where(c(&Employee::m_job) == "Clerk"))))));
+
+				}
 			}
 		}
 		catch(std::exception& ex)

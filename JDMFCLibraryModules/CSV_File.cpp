@@ -1,4 +1,4 @@
-// module;
+module;
 //module CSV_File;
 
 #include "pch.h"
@@ -22,13 +22,14 @@
 // template <int N> struct exp10 { enum { value = 10 * exp10<N - 1>::value }; };
 // template <>      struct exp10<0> { enum { value = 1 }; };
 
-#include <FixedPoint/arithmetic_types.h>
+// #include <FixedPoint/arithmetic_types.h>
 // #include "Util.h"
 // #include "CSV_File.h"
 
-//module CSV_File;
-import CSV_File;
+module CSV_File;
 
+//import CSV_File;
+import fixed_point;
 import Util;
 //module CSV_File;
 

@@ -57,7 +57,7 @@ CSeguroMedicoMFCApp::CSeguroMedicoMFCApp() noexcept
 {
 	m_bHiColorIcons = TRUE;
 
-	m_bLoadWindowPlacement = false;	// JDH for newer MFC
+	// m_bLoadWindowPlacement = false;	// JDH for newer MFC
 	// support Restart Manager
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
 #ifdef _MANAGED

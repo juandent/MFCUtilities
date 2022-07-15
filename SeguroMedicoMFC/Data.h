@@ -33,8 +33,12 @@ private:
 	static void copy_old_to_new();
 
 	friend class Storage;
+
+	// Real DB:
+	// static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
 	
-	static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
+	// Working DB:
+	static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC - Experiments.sqlite" };
 };
 
 

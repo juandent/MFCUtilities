@@ -89,9 +89,9 @@ void Storage::fill_db_with_test_data()
 
 	year_month_day ymd{ year{2021}, month{10}, day{13} };
 
-	const auto today = Today(); // sys_days{ floor<days>(system_clock::now()) };
+	const auto hoy = today(); // sys_days{ floor<days>(system_clock::now()) };
 
-	sys_days tod = today;
+	sys_days tod = hoy;
 	sys_days daybefore = tod - days{ 1 };
 
 	// Fondo fondo{ -1, "inm1", "FCI", Fondo::trimestral };

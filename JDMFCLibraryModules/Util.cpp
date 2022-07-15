@@ -1,18 +1,23 @@
+// module;
+
+
 #include "pch.h"
 
 #include <locale>
 
 
 
-#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
+// #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
 
-#include <afxwin.h>         // MFC core and standard components
-#include <afxext.h>         // MFC extensions
-#include <afxole.h>         // MFC OLE classes
+// #include <afxwin.h>         // MFC core and standard components
+// #include <afxext.h>         // MFC extensions
+// #include <afxole.h>         // MFC OLE classes
 #include <iomanip>
 #include <sstream>
 
-#include <FixedPoint/arithmetic_types.h>
+// #include <FixedPoint/arithmetic_types.h>
+#include "JDMFCLibrary/Util.h"
+
 #include "GridCellBase.h"
 
 // #include "Util.h"
@@ -20,19 +25,17 @@
 
 //class CGridCellBase;
 
-import Util;
+
 // module Util;
+
+// import Util;
+// import fixed_point;
 
 using namespace std;
 
 
 namespace Util
 {
-	void ff()
-	{
-		auto str = Util::to_cstring(56);
-	}
-
 	// to deal with unneeded positive sign!!
 	class costaRicaNumPunct : public moneypunct_byname<char>
 	{

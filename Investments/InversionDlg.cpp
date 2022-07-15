@@ -137,9 +137,9 @@ void InversionDlg::OnBnClickedNew()
 	m_list_fondosCB.select(-1);
 
 	using namespace std::chrono;
-	const auto today = Today();
+	const auto hoy = today();
 
-	m_fecha_inversion << today;
+	m_fecha_inversion << hoy;
 	m_num_participaciones << 0;
 	m_inversion = std::nullopt;
 }

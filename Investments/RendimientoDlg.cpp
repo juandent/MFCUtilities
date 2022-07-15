@@ -159,13 +159,13 @@ void RendimientoDlg::OnBnClickedNew()
 {
 	// TODO: Add your control notification handler code here
 	using namespace std::chrono;
-	const auto today = Today();
+	const auto hoy = today();
 
 	m_rendimiento = std::nullopt;
 	m_list_rendimientosLB.select(-1);
 	m_rendimiento_id << ""s;
 	m_list_fondosCB.select(-1);
-	m_fecha_rendimiento << today;
+	m_fecha_rendimiento << hoy;
 	m_rendimiento_unitario << 0.0;
 }
 
