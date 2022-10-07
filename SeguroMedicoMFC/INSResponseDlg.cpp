@@ -137,7 +137,15 @@ void INSResponseDlg::InitializeGrid(const T& t)
 	// 	inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
 	// 	where(t),
 	// 	order_by(alias_column<als_i>(&Invoice::fkey_claim)));
-
+	struct INSResponseLine_id : alias_tag {
+		static const std::string& get() {
+			static const std::string res = "INS Response Line";
+			return res;
+		}
+	};
+	auto statement = Storage::getStorage().prepare(select(columns(as<INSResponseLine_id>(&INSResponseLine::id),&INSResponseLine::fkey_factura)));
+	std::string colName{ statement.column_name(0) };
+	////// end  testing column_name
 	
 	auto otherlines = Storage::getStorage().select(columns(
 		alias_column<als_k>(&INSResponseLine::id),

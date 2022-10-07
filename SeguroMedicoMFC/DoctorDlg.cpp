@@ -109,7 +109,18 @@ void DoctorDlg::OnBnClickedAplicarDoctor()
 
 	auto name = Util::from_cstring(rNombre);
 	auto last_name = Util::from_cstring(rApellidos);
-
+#if 0
+	auto ret = setlocale(LC_ALL, "en-US");
+	auto id = GetThreadLocale();
+	CStringW nom;
+	m_first_name.GetWindowTextW(nom);
+	//int len = nom.length();
+	int len = nom.GetLength();
+	CStringW rr = L"Mu\x00F1oz";
+	MessageBoxW(nom, L"Nombre", MB_OK);
+	//CP_UTF8
+	//rNombre.ge
+#endif
 	if (!doctor)
 	{
 		auto whereClause = (c(&Doctor::first_name) == name.c_str() && c(&Doctor::last_name) == last_name.c_str());

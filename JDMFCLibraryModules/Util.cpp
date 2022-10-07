@@ -1,4 +1,4 @@
-// module;
+module;
 
 
 #include "pch.h"
@@ -16,7 +16,7 @@
 #include <sstream>
 
 // #include <FixedPoint/arithmetic_types.h>
-#include "JDMFCLibrary/Util.h"
+//#include "JDMFCLibrary/Util.h"
 
 #include "GridCellBase.h"
 
@@ -26,7 +26,7 @@
 //class CGridCellBase;
 
 
-// module Util;
+module Util;
 
 // import Util;
 // import fixed_point;

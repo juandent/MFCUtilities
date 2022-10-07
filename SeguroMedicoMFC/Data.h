@@ -35,10 +35,12 @@ private:
 	friend class Storage;
 
 	// Real DB:
-	// static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
-	
+#ifndef _DEBUG
+	static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
+#else
 	// Working DB:
 	static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC - Experiments.sqlite" };
+#endif
 };
 
 

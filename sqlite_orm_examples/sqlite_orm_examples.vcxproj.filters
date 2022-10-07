@@ -16,6 +16,9 @@
     <Filter Include="Support">
       <UniqueIdentifier>{0231eebc-2968-40d5-9310-d46e99dda7c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="For Tests">
+      <UniqueIdentifier>{da0604f7-6ccd-4cb3-8651-650a96661afd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\blob.cpp">
@@ -167,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="inheritance.cpp">
       <Filter>Support</Filter>
+    </ClCompile>
+    <ClCompile Include="add_remove_columns.cpp">
+      <Filter>For Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
