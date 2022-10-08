@@ -22,8 +22,10 @@
     <ClInclude Include="BarChart.h" />
     <ClInclude Include="BarChartCtrl.h" />
     <ClInclude Include="BarChartCtrlDlg.h" />
+    <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BarChart.cpp" />

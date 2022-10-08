@@ -244,22 +244,22 @@ void CBarChartCtrlDlg::OnCreate()
 		m_chart.SetAutoScale(FALSE);
 	}
 
-	m_chart.SetTitle("A test chart, displaying some dummy data...");
+	m_chart.SetTitle(L"A test chart, displaying some dummy data...");
 	m_chart.SetBKColor(RGB(255, 255, 240));
 	m_chart.ShowTooltip(TRUE);
 
-	m_chart.AddBar(1600.356,"Jan", RGB(255,255,0));
-	m_chart.AddBar(2841.5468,"Feb", RGB(255,0,0));
-	m_chart.AddBar(1045.3258,"Mar", RGB(100,100,200));
-	m_chart.AddBar(1502.215,"Apr", RGB(0,255,0));
-	m_chart.AddBar(1467,"MAY", RGB(255,255,255));
-	m_chart.AddBar(1678.354,"JUN", RGB(200,255,255));
-	m_chart.AddBar(1785.689,"JUL", RGB(255,240,40));
-	m_chart.AddBar(1283.099,"AUG", RGB(255,60,130));
-	m_chart.AddBar(1554.879,"SEP", RGB(255,255,200));
-	m_chart.AddBar(1400.10,"OCT", RGB(130,235,250));
-	m_chart.AddBar(1600.556,"NOV", RGB(100,150,200));
-	m_chart.AddBar(1900.3546,"DES", RGB(150,240,80), TRUE);
+	m_chart.AddBar(1600.356,L"Jan", RGB(255,255,0));
+	m_chart.AddBar(2841.5468,L"Feb", RGB(255,0,0));
+	m_chart.AddBar(1045.3258,L"Mar", RGB(100,100,200));
+	m_chart.AddBar(1502.215,L"Apr", RGB(0,255,0));
+	m_chart.AddBar(1467,L"MAY", RGB(255,255,255));
+	m_chart.AddBar(1678.354,L"JUN", RGB(200,255,255));
+	m_chart.AddBar(1785.689,L"JUL", RGB(255,240,40));
+	m_chart.AddBar(1283.099,L"AUG", RGB(255,60,130));
+	m_chart.AddBar(1554.879,L"SEP", RGB(255,255,200));
+	m_chart.AddBar(1400.10,L"OCT", RGB(130,235,250));
+	m_chart.AddBar(1600.556,L"NOV", RGB(100,150,200));
+	m_chart.AddBar(1900.3546,L"DEC", RGB(150,240,80), TRUE);
 }
 
 void CBarChartCtrlDlg::OnRandom() 
@@ -278,12 +278,12 @@ void CBarChartCtrlDlg::OnRandom()
 		m_chart.Reset();
 	}
 
-	m_chart.SetTitle("The same control using some random data and colors...");
+	m_chart.SetTitle(L"The same control using some random data and colors...");
 	m_chart.SetBKColor(RGB(240, 240, 240));
 
 	for (int i=0;i<15;i++) 
 	{
-		m_chart.AddBar(rand()%500,"Rand", RGB(rand()%255,rand()%255,rand()%255), FALSE);
+		m_chart.AddBar(rand()%500,L"Rand", RGB(rand()%255,rand()%255,rand()%255), FALSE);
 	}
 	m_chart.Refresh();
 }
@@ -415,7 +415,7 @@ void CBarChartCtrlDlg::OnReadFromDatabase()
 		m_chart.Reset();
 	}
 
-	m_chart.SetTitle("These data are result records of a call to a StoredProcedure");
+	m_chart.SetTitle(L"These data are result records of a call to a StoredProcedure");
 	m_chart.SetBKColor(RGB(255, 255, 240));
 
 	// CAUTION : JUST one of the ReadFromDatabase must be used, or there will be
@@ -435,8 +435,8 @@ void CBarChartCtrlDlg::OnReadFromDatabase()
 	// REMEMBER Stored procedure must return at least 2 parameteres. 
 	// First parameter MUST be a LABEL of type Text or char with maximum length of 50
 	// and second a double value
-	if (!m_chart.ReadFromDatabase("CHTst", "SpChartGetSale", "1, 12", 
-		RGB(0, 0, 0), "Admin", "hamed"))
+	if (!m_chart.ReadFromDatabase(L"CHTst", L"SpChartGetSale", L"1, 12", 
+		RGB(0, 0, 0), L"Admin", L"hamed"))
 	{
 		AfxMessageBox(m_chart.GetLastDatabaseErrMessage());
 	};
