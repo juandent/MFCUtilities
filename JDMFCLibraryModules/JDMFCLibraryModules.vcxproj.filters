@@ -53,5 +53,8 @@
     <ClCompile Include="arithmetic_types.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StringLib.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

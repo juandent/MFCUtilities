@@ -43,6 +43,7 @@ public:
 	afx_msg void OnFileInvoicedlg();
 	afx_msg void OnFileInsresponsedlg();
 	afx_msg void OnFileInsresponselinedlg();
+	afx_msg void OnFileDatecalculator();
 };
 
 extern CSeguroMedicoMFCApp theApp;

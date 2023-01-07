@@ -42,6 +42,7 @@ int main()
 		// storage.drop_table("InvoiceLine");
 		// storage.drop_table("Orders");
 		// storage.drop_table("Customer");
+#if 0
         if(storage.table_exists("Emp_bonus")) {
             storage.remove_all<EmpBonus>();
         }
@@ -67,6 +68,7 @@ int main()
 			storage.execute(statement);
 			// auto cust2 = storage.get_all<Customer>();
 		}
+#endif
 		storage.sync_schema(true);
 
 #if 0
@@ -150,10 +152,10 @@ int main()
 
 	std::vector<Department> des =
 	{
-		Department{10, "Accounting", "New York", 7369},
-		Department{20, "Research", "Dallas", 7566},
-		Department{30, "Sales", "Chicago", 7782},
-		Department{40, "Operations", "Boston", 7900}
+		Department{10, "Accounting", "New York",  std::nullopt}, // 7369 },
+		Department{20, "Research", "Dallas", std::nullopt}, //   7566 },
+		Department{30, "Sales", "Chicago", std::nullopt }, //7782 },
+		Department{40, "Operations", "Boston", std::nullopt }, //7900 }
 	};
 
 	std::vector<EmpBonus> bonuses =
@@ -195,6 +197,18 @@ int main()
 		storage.replace_range(des.begin(), des.end());
 		storage.replace_range(vec.begin(), vec.end());
 		storage.insert_range(bonuses.begin(), bonuses.end());
+
+			    // add FK values to cycle
+		des[0].m_manager = 7369;
+		des[1].m_manager = 7566;
+		des[2].m_manager = 7782;
+		des[3].m_manager = 7900;
+		storage.update(des[0]);
+		storage.update_all(des);
+		storage.replace(des[0]);
+		//storage.replace_range(des.begin(), des.end());
+
+			
 	}
 	catch(std::exception& ex)
 	{
@@ -408,6 +422,14 @@ void Course_8() {
 		auto rows = storage.select(columns(&Artist::m_id, &Album::m_id),
 			left_join<Album>(on(c(&Album::m_artist_id) == &Artist::m_id)),
 			where(is_null(&Album::m_id)));
+    }
+    {
+        // SELECT a.*, alb.* FROM artists a JOIN albums alb ON alb.artist_id = a.id
+
+		auto expression = select(columns(asterisk<Artist>(), asterisk<Album>()), join<Album>(on(c(&Album::m_artist_id) == &Artist::m_id)));
+		//auto sql = storage.dump(expression);
+	//	auto statement = storage.prepare(expression);
+	//	auto rows = storage.execute(statement);
     }
     // 32
     {

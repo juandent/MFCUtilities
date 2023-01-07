@@ -213,6 +213,7 @@ copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utili
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="DateBinding.h" />
+    <ClInclude Include="DateCalculator.h" />
     <ClInclude Include="DoctorDlg.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
@@ -254,6 +255,7 @@ copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utili
     <ClCompile Include="ClaimDlg.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="DateCalculator.cpp" />
     <ClCompile Include="DoctorDlg.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="INSResponseDlg.cpp" />

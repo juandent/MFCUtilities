@@ -63,6 +63,10 @@ BOOL PasswordDlg::OnInitDialog()
 
 
 	// TODO:  Add extra initialization here
+	if (m_location_id > -1)
+	{
+		m_location_namesCB.select(m_location_id);
+	}
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE

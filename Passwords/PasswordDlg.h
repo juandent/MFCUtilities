@@ -43,4 +43,5 @@ public:
 	afx_msg void OnBnClickedBorrar();
 	afx_msg void OnBnClickedNuevo();
 	afx_msg void OnBnClickedCerrar();
+	int m_location_id = -1;
 };

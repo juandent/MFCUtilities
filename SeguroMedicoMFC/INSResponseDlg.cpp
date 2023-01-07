@@ -144,7 +144,7 @@ void INSResponseDlg::InitializeGrid(const T& t)
 		}
 	};
 	auto statement = Storage::getStorage().prepare(select(columns(as<INSResponseLine_id>(&INSResponseLine::id),&INSResponseLine::fkey_factura)));
-	std::string colName{ statement.column_name(0) };
+	//std::string colName{ statement.column_name(0) };
 	////// end  testing column_name
 	
 	auto otherlines = Storage::getStorage().select(columns(

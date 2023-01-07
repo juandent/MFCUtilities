@@ -15,6 +15,8 @@ class LocationPasswordsView : public CFormView
 {
 	DECLARE_DYNCREATE(LocationPasswordsView)
 
+		int get_location_id() const noexcept;
+
 protected:
 	LocationPasswordsView();           // protected constructor used by dynamic creation
 	virtual ~LocationPasswordsView();
@@ -51,6 +53,15 @@ public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnBnClickedBLocationDlg();
 	afx_msg void OnBnClickedBPasswordDlg();
+	afx_msg void OnBnClickedBUnify();
+private:
+	CEdit m_location_search;
+	std::vector<Location> m_found_locations;
+	int m_location_index = -1;
+public:
+	afx_msg void OnBnClickedBSearchLocation();
+	afx_msg void OnKillfocusESearchLocation();
+	afx_msg void OnSetfocusESearchLocation();
 };
 
 

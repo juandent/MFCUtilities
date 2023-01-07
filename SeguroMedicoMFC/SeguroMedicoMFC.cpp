@@ -15,6 +15,7 @@
 #include "MainView.h"
 
 #include "Data.h"
+#include "DateCalculator.h"
 #include "DoctorDlg.h"
 #include "INSResponseDlg.h"
 #include "INSResponseLineDlg.h"
@@ -48,6 +49,7 @@ BEGIN_MESSAGE_MAP(CSeguroMedicoMFCApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_INVOICEDLG, &CSeguroMedicoMFCApp::OnFileInvoicedlg)
 	ON_COMMAND(ID_FILE_INSRESPONSEDLG, &CSeguroMedicoMFCApp::OnFileInsresponsedlg)
 	ON_COMMAND(ID_FILE_INSRESPONSELINEDLG, &CSeguroMedicoMFCApp::OnFileInsresponselinedlg)
+	ON_COMMAND(ID_FILE_DATECALCULATOR, &CSeguroMedicoMFCApp::OnFileDatecalculator)
 END_MESSAGE_MAP()
 
 
@@ -89,7 +91,7 @@ BOOL CSeguroMedicoMFCApp::InitInstance()
 	// return false;
 	//Storage::fill_db_with_test_data();
 
-	auto claim = Storage::getStorage().get<Claim>(1);
+	//auto claim = Storage::getStorage().get<Claim>(1);
 	auto claims = Storage::getStorage().get_all<Claim>(order_by(&Claim::submission_date));
 	
 	std::cout << std::boolalpha;
@@ -354,4 +356,12 @@ void CSeguroMedicoMFCApp::OnFileInsresponselinedlg()
 	INSResponseLineDlg dlg;
 	dlg.DoModal();
 	
+}
+
+
+void CSeguroMedicoMFCApp::OnFileDatecalculator()
+{
+	// TODO: Add your command handler code here
+	DateCalculator dlg;
+	dlg.DoModal();
 }

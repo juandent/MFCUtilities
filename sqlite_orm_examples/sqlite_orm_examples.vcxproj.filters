@@ -21,126 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\blob.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\blob_binding.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\case.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\check.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\collate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\composite_key.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\core_functions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\cross_join.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\custom_aliases.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\date_time.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\distinct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\enum_binding.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\except_intersection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\exists.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\foreign_key.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\generated_column.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\group_by.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\having.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\in_memory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\index.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\insert.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\iteration.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\key_value.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\left_and_inner_join.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\multi_table_select.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\natural_join.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\nullable_enum_binding.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\pointer_passing_interface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\prepared_statement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\private_class_members.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\select.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\self_join.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\subentities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\subquery.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\synchronous.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\triggers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\union.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\unique.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\update.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\user_defined_functions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="JD Sources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -174,11 +54,129 @@
     <ClCompile Include="add_remove_columns.cpp">
       <Filter>For Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\blob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\blob_binding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\case.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\check.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\collate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\composite_key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\core_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\cross_join.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\custom_aliases.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\date_time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\distinct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\enum_binding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\except_intersection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\exists.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\foreign_key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\generated_column.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\group_by.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\having.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\index.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\insert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\in_memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\iteration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\key_value.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\left_and_inner_join.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\multi_table_select.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\natural_join.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\nullable_enum_binding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\pointer_passing_interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\prepared_statement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\private_class_members.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\select.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\self_join.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\subentities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\subquery.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\synchronous.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\triggers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\union.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\unique.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\update.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\user_defined_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\CMakeLists.txt">
-      <Filter>Source Files</Filter>
-    </Text>
+    <Text Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SQLCookbook.h">

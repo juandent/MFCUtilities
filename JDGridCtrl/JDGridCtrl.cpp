@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "JDGridCtrl.h"
 #include <locale>
+#include <cassert>
 
 // CJDGridCtrl
 
@@ -24,6 +25,65 @@ void CJDGridCtrl::OnMouseLeave()
 	m_tracking = FALSE;
 	m_Tip.SendMessage(TTM_TRACKACTIVATE, (WPARAM)FALSE, (LPARAM)&m_ti);
 }
+
+void CJDGridCtrl::ScrollDownNRows(int num_rows)
+{
+	for(int row=0; row < num_rows; ++row)
+	{
+		SendMessage(WM_VSCROLL, SB_LINEDOWN, 0);
+	}
+}
+
+void CJDGridCtrl::ScrollUpNRows(int num_rows)
+{
+	for (int row = 0; row < num_rows; ++row)
+	{
+		SendMessage(WM_VSCROLL, SB_LINEUP, 0);
+	}
+}
+
+int CJDGridCtrl::RowNumberForFirstGridLine()
+{
+	for (int row = 1; row < GetRowCount(); ++row)
+	{
+		POINT point;
+		bool isVisible = GetCellOrigin(row, 0, &point);
+		if (isVisible)
+		{
+			return row;
+		}
+	}
+	assert(false);
+	return -1;
+}
+
+void CJDGridCtrl::Scroll(int row_to_select)
+{
+	const int first_row = RowNumberForFirstGridLine();
+
+	if (row_to_select == first_row)	return;
+
+	if (row_to_select > first_row)
+	{
+		ScrollDownNRows(row_to_select - first_row);
+	}
+	else
+	{
+		ScrollUpNRows(first_row - row_to_select);
+	}
+}
+void CJDGridCtrl::SelectRow(int row_to_select)
+{
+	const auto column_count = GetColumnCount();
+	SetSelectedRange(row_to_select, 0, row_to_select, column_count - 1);
+}
+
+void CJDGridCtrl::SetSelectAndScroll(int row_to_select)
+{
+	SelectRow(row_to_select);
+	Scroll(row_to_select);
+}
+
 
 namespace
 {

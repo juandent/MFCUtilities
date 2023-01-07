@@ -9,6 +9,8 @@
 
 
 import Util;
+import fixed_point;
+
 //#include "..\JDMFCLibrary/Util.h"
 
 // #include "../FixedPoint/Money.h"

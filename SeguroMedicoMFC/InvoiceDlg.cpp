@@ -297,6 +297,15 @@ void InvoiceDlg::OnBnClickedNuevo()
 void InvoiceDlg::OnBnClickedBorrar()
 {
 	// TODO: Add your control notification handler code here
+	using namespace sqlite_orm;
+	auto& storage = Storage::getStorage();
+
+	auto invoice = m_invoiceLB.current();
+	auto ins_response_line = storage.get<INSResponseLine>(where(is_equal(&INSResponseLine::fkey_factura, invoice->id)));
+
+	storage.remove<INSResponseLine>( ins_response_line.id);
+
+
 	if (m_invoiceLB.delete_current_sel())
 	{
 		OnBnClickedNuevo();

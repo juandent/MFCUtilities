@@ -25,6 +25,7 @@ void Storage::upgrade_database()
 /// Password
 /// 
 /// 
+#include <map>
 
 void Storage_Impl::copy_old_to_new()
 {
@@ -33,16 +34,60 @@ void Storage_Impl::copy_old_to_new()
 	// starts empty
 	auto fresh = get_new_storage();
 
-	auto locations = old.get_all<Location>();
-	for (auto& record : locations)
+
+	auto lines = old.select(columns(
+		alias_column<als_l>(&Location::id),
+		upper(alias_column<als_l>(&Location::name)),
+		alias_column<als_l>(&Location::url),
+		alias_column<als_l>(&Location::email),
+		alias_column<als_p>(&Password::id),
+		alias_column<als_p>(&Password::password)),
+
+		inner_join<als_p>(on( alias_column<als_p>(& Password::fkey_location) == c(alias_column<als_l>(& Location::id)))),
+
+		where(true),
+
+		order_by(alias_column<als_l>(&Location::name)).asc().collate_nocase());
+
+	std::map<std::string, Location> name_to_location;
+	std::map<std::string, std::vector<int>> m;	// location name -->> password ids
+
+	for(const auto& line : lines )
 	{
-		fresh.replace(record);
+		static std::string url_concatenate{};
+		static std::string email_concatenate{};
+
+		Location loc{ -1, std::get<1>(line), std::get<2>(line), std::get<3>(line) };
+
+		std::string name = std::get<1>(line);
+
+		const int password_id = std::get<4>(line);
+		auto s = m[name].size();
+		if(s == 0)
+		{
+			url_concatenate = "";
+			email_concatenate = "";
+		}
+		loc.url += url_concatenate;
+		loc.email += email_concatenate;
+
+		// MAP location name => Location
+		name_to_location[name] = loc;
+
+		m[name].push_back(password_id);
 	}
 
-	auto passwords = old.get_all<Password>();
-	for (auto& record : passwords)
+	for (auto& [name, passwords] : m )
 	{
-		fresh.replace(record);
+		auto loc = name_to_location[name];
+		loc.id = fresh.insert(loc);
+		for (auto& pass_id : passwords)
+		{
+			int i = 0;
+			auto pass = old.get<Password>(pass_id);
+			pass.fkey_location = loc.id;
+			fresh.insert(pass);
+		}
 	}
 }
 

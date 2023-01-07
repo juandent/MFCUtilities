@@ -19,130 +19,132 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\blob.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\blob.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\blob_binding.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\blob_binding.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\case.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\case.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\check.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\check.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\collate.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\collate.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\composite_key.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\composite_key.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\core_functions.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\core_functions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\cross_join.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\cross_join.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\custom_aliases.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\custom_aliases.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\date_time.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\date_time.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\distinct.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\distinct.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\enum_binding.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\enum_binding.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\except_intersection.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\except_intersection.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\exists.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\exists.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\foreign_key.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\foreign_key.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\generated_column.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\generated_column.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\group_by.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\group_by.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\having.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\having.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\index.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\index.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\insert.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\insert.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\in_memory.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\in_memory.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\iteration.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\iteration.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\key_value.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\key_value.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\left_and_inner_join.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\left_and_inner_join.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\multi_table_select.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\multi_table_select.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\natural_join.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\natural_join.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\nullable_enum_binding.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\nullable_enum_binding.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\pointer_passing_interface.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\pointer_passing_interface.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\prepared_statement.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\prepared_statement.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\private_class_members.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\private_class_members.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\select.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\select.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\self_join.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\self_join.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\subentities.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\subentities.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\subquery.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\subquery.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\synchronous.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\synchronous.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\triggers.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\triggers.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\union.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\union.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\unique.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\unique.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\update.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\update.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\user_defined_functions.cpp">
+    <ClCompile Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\user_defined_functions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\juan_\OneDrive\Documents\sqlite_orm\include\sqlite_orm\Migration0to1.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="add_remove_columns.cpp" />
+    <ClCompile Include="add_remove_columns.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="DTOs.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -168,11 +170,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="SQLCookbook.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\..\..\..\Components\sqlite_orm_dev_10_feb_2022\examples\CMakeLists.txt">
+    <Text Include="Q:\Components\sqlite_orm_dev_10_feb_2022\examples\CMakeLists.txt">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Text>
   </ItemGroup>
@@ -283,7 +285,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_SILENCE_ALL_CXX20_DEPRECATION_WARNINGS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Users\juan_\OneDrive\Documents\sqlite_orm\not_single_header_include\;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\sqlite_orm_examples;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\ORM_Extensions;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
@@ -304,7 +306,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_10_feb_2022\include;original C:\Components\sqlite_orm_dev_23_jan_2022\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Q:\Components\sqlite_orm_dev_10_feb_2022\include;original C:\Components\sqlite_orm_dev_23_jan_2022\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
