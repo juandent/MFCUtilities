@@ -176,3 +176,65 @@ inline long long GetLongLong(CEdit& ctrl)
 	return std::stoll(str);
 }
 
+// added next functions from ORM_Utilities.h in ORM_Extensions
+inline void operator>>(CEdit& ctrl, std::string& s)
+{
+	s = GetText(ctrl);
+}
+inline void operator>>(CEdit& ctrl, double& d)
+{
+	d = GetAmount(ctrl);
+}
+inline void operator>>(CEdit& ctrl, int& i)
+{
+	i = GetInteger(ctrl);
+}
+inline void operator>>(CEdit& ctrl, long& l)
+{
+	l = GetLong(ctrl);
+}
+
+inline void operator>>(CEdit& ctrl, long long& l)
+{
+	l = GetLongLong(ctrl);
+}
+
+inline void operator<<(CEdit& ctrl, std::string s)
+{
+	SetText(ctrl, s);
+}
+
+template<typename T> requires std::is_arithmetic<T>::value
+inline void operator<<(CEdit& ctrl, T d)
+{
+	SetAmount(ctrl, d);
+}
+
+inline void operator<< (CButton& btn, bool check_status)
+{
+	btn.SetCheck(check_status);
+}
+
+inline void operator>> (CButton& btn, bool& check_status)
+{
+	check_status = btn.GetCheck();
+}
+#if 0	// now in DateBindings.h
+inline std::chrono::sys_days Today()
+{
+	const auto today = std::chrono::sys_days{ floor<std::chrono::days>(std::chrono::system_clock::now()) };
+	return today;
+}
+#endif
+
+template<typename ...Counts>
+static bool allNonZero(Counts ... counts) requires (std::is_same_v<Counts, int> && ...)
+{
+	return (counts && ...);
+}
+
+template<size_t N>
+static bool anyNonZero(int(&vec)[N])
+{
+	return std::any_of(std::begin(vec), std::end(vec), [](int i) { return i != 0; });
+}

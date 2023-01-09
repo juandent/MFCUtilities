@@ -28,6 +28,7 @@ public:
 	void SetSelectAndScroll(int row_to_select);
 	void Scroll(int row_to_select);
 	void SelectRow(int row_to_select);
+	int GetSelectedMinRow() const;
 };
 
 

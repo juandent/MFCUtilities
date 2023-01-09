@@ -7,7 +7,7 @@
 #include "DateCalculator.h"
 #include "Data.h"
 
-#include "ORM_Utilities.h"
+#include "ORM_Utilities-old.h"
 
 
 // DateCalculator dialog
@@ -63,7 +63,9 @@ void DateCalculator::OnClickedApply()
 	using namespace std::chrono_literals;
 
 	// TODO: Add your control notification handler code here
-	auto week_count = GetInteger(m_weeks);
+	int week_count;
+	m_weeks >> week_count;
+	//auto week_count = GetInteger(m_weeks);
 
 	std::chrono::sys_days date = GetDate(m_start_date);
 

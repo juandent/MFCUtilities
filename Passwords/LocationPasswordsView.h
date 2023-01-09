@@ -6,7 +6,7 @@
 #include "..\ORM_Extensions/JoinedGridDisplayer.h"
 
 #include "..\ORM_Extensions/BoxContents.h"
-
+#include "LocationGrid.h"
 
 
 // LocationPasswordsView form view
@@ -39,9 +39,10 @@ protected:
 
 	void OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*);
 public:
-	CJDGridCtrl m_GridLocations;
+	LocationGrid m_location_grid;
+	//CJDGridCtrl m_GridLocations;
 	CJDGridCtrl m_GridPasswords;
-	std::unique_ptr<IDisplayer> m_displayer_locations;
+	//std::unique_ptr<IDisplayer> m_displayer_locations;
 	std::unique_ptr<IDisplayer> m_displayer_passwords;
 
 	template<typename T>
@@ -61,7 +62,9 @@ private:
 public:
 	afx_msg void OnBnClickedBSearchLocation();
 	afx_msg void OnKillfocusESearchLocation();
-	afx_msg void OnSetfocusESearchLocation();
+	afx_msg void OnBnClickedBGetselected();
+private:
+	CEdit m_row_selected;
 };
 
 

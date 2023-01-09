@@ -84,6 +84,17 @@ void CJDGridCtrl::SetSelectAndScroll(int row_to_select)
 	Scroll(row_to_select);
 }
 
+int CJDGridCtrl::GetSelectedMinRow() const
+{
+	if (GetSelectedCount())
+	{
+		auto cell_range = GetSelectedCellRange();
+
+		auto row = cell_range.GetMinRow();
+		return row;
+	}
+	return -1;
+}
 
 namespace
 {

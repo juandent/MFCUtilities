@@ -93,7 +93,7 @@
     <ClInclude Include="SpecialtyDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ORM_Utilities.h">
+    <ClInclude Include="ORM_Utilities-old.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DoctorDlg.h">

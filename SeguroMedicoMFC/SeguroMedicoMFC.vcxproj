@@ -225,7 +225,7 @@ copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utili
     <ClInclude Include="MainView.h" />
     <ClInclude Include="MedicationDlg.h" />
     <ClInclude Include="INSResponseLineDlg.h" />
-    <ClInclude Include="ORM_Utilities.h" />
+    <ClInclude Include="ORM_Utilities-old.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PatientDlg.h" />
     <ClInclude Include="PersistentClasses.h" />

@@ -25,9 +25,10 @@ LocationPasswordsView::~LocationPasswordsView()
 void LocationPasswordsView::DoDataExchange(CDataExchange* pDX)
 {
 	CFormView::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_GRID_LOCATIONS, m_GridLocations);
+	DDX_Control(pDX, IDC_GRID_LOCATIONS, m_location_grid);
 	DDX_Control(pDX, IDC_GRID_PASSWORDS, m_GridPasswords);
 	DDX_Control(pDX, IDC_E_SEARCH_LOCATION, m_location_search);
+	DDX_Control(pDX, IDC_E_ROWSELECTED, m_row_selected);
 }
 
 BEGIN_MESSAGE_MAP(LocationPasswordsView, CFormView)
@@ -38,7 +39,8 @@ BEGIN_MESSAGE_MAP(LocationPasswordsView, CFormView)
 
 	ON_BN_CLICKED(IDC_B_SEARCH_LOCATION, &LocationPasswordsView::OnBnClickedBSearchLocation)
 	ON_EN_KILLFOCUS(IDC_E_SEARCH_LOCATION, &LocationPasswordsView::OnKillfocusESearchLocation)
-	ON_EN_SETFOCUS(IDC_E_SEARCH_LOCATION, &LocationPasswordsView::OnSetfocusESearchLocation)
+	ON_BN_CLICKED(IDC_B_GETSELECTED, &LocationPasswordsView::OnBnClickedBGetselected)
+
 END_MESSAGE_MAP()
 
 
@@ -61,7 +63,9 @@ void LocationPasswordsView::Dump(CDumpContext& dc) const
 template<typename T>
 void LocationPasswordsView::InitializeGridLocations(const T& t)
 {
+	m_location_grid.Initialize(t);
 
+#if 0
 	auto otherlines = Storage::getStorage().select(columns(
 		alias_column<als_l>(&Location::id),
 		alias_column<als_l>(&Location::name),
@@ -82,7 +86,7 @@ void LocationPasswordsView::InitializeGridLocations(const T& t)
 
 	m_displayer_locations.reset(new JoinedGridDisplayer<decltype(otherlines[0]), IntegerList<>, IntegerList<>>(m_GridLocations, std::move(otherlines), std::move(headers)));
 	m_displayer_locations->display();
-
+#endif
 }
 
 
@@ -97,6 +101,7 @@ void LocationPasswordsView::OnInitialUpdate()
 	// TODO: Add your specialized code here and/or call the base class
 }
 
+
 void LocationPasswordsView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 {
 	NM_GRIDVIEW* pItem = (NM_GRIDVIEW*)pNotifyStruct;
@@ -105,9 +110,7 @@ void LocationPasswordsView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*
 
 	if (row < 1) return;
 
-	auto location_id_cs = m_GridLocations.GetItemText(row, 1);
-	auto location_id_s = Util::to_string(location_id_cs.GetBuffer());
-	auto location_id = std::stoi(location_id_s);
+	auto location_id = m_location_grid.get_location_id(row);
 
 	auto passwordWhere = getPasswordWhereClauseAlias(location_id);
 
@@ -158,10 +161,12 @@ void LocationPasswordsView::OnBnClickedBLocationDlg()
 {
 	// TODO: Add your control notification handler code here
 	LocationDlg dlg{};
-	if (dlg.DoModal() == 1)
+	dlg.DoModal();
 	{
 		this->InitializeGridLocations(true);
 		this->InitializeGridPasswords(false);
+		this->m_found_locations.clear();
+		this->m_location_index = -1;
 	}
 }
 
@@ -169,17 +174,9 @@ void LocationPasswordsView::OnBnClickedBLocationDlg()
 
 int LocationPasswordsView::get_location_id() const noexcept
 {
-	int location_id = -1;
-	if (m_GridLocations.GetSelectedCount())
-	{
+	int row = m_location_grid.GetSelectedMinRow();
 
-		auto cell_range = m_GridLocations.GetSelectedCellRange();
-
-		auto row = cell_range.GetMinRow();
-		auto location_id_cs = m_GridLocations.GetItemText(row, 1);
-		auto location_id_s = Util::to_string(location_id_cs.GetBuffer());
-		location_id = std::stoi(location_id_s);
-	}
+	int location_id = m_location_grid.get_location_id(row);
 	return location_id;
 }
 
@@ -237,9 +234,19 @@ void LocationPasswordsView::OnBnClickedBSearchLocation()
 
 		m_location_search << loc.name;
 
-		const int row_to_select = loc.id;
+		const int row_to_select = m_location_grid.row_for_id(loc.id);
 
-		m_GridLocations.SetSelectAndScroll(row_to_select);
+		// const int row_to_select = loc.id;
+
+		m_location_grid.SetSelectAndScroll(row_to_select);
+
+		NM_GRIDVIEW pItem;
+		pItem.iRow = row_to_select;
+		pItem.iColumn = 0;
+
+		NMHDR* pNM = reinterpret_cast<NMHDR*>(&pItem);
+
+		OnGrid1StartSelChange(pNM, 0);
 	}
 }
 
@@ -251,7 +258,7 @@ void LocationPasswordsView::OnKillfocusESearchLocation()
 	if(location.empty())
 	{
 		m_found_locations.clear();
-		m_location_index = 0;
+		m_location_index = -1;
 	}
 	else
 	{
@@ -264,22 +271,17 @@ void LocationPasswordsView::OnKillfocusESearchLocation()
 		auto found = Storage::getStorage().get_all<Location>(where(location_where), order_by(&Location::name));
 
 		m_found_locations.swap(found);
+		m_location_index = -1;
 	}
 }
 
 
-void LocationPasswordsView::OnSetfocusESearchLocation()
+
+
+void LocationPasswordsView::OnBnClickedBGetselected()
 {
-#if 0
-	if( m_found_locations.empty() || m_location_index + 1 >= m_found_locations.size())
-	{
-		return;
-	}
-
-	auto loc = m_found_locations[m_location_index];
-
-	auto column_count = m_GridLocations.GetColumnCount();
-	//m_GridLocations.Scroll
-	m_GridLocations.SetSelectedRange(loc.id, 0, loc.id, column_count - 1);
-#endif
+	int selected_row = m_location_grid.GetSelectedMinRow();
+	m_row_selected << selected_row;
 }
+
+
