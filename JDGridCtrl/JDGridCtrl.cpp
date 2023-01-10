@@ -96,6 +96,7 @@ int CJDGridCtrl::GetSelectedMinRow() const
 	return -1;
 }
 
+
 namespace
 {
 	constexpr static size_t MAX_BUFFER_FOR_TOOLTIP = 120;
@@ -111,8 +112,25 @@ namespace  JD
 
 		return std::wstring(buf.data(), buf.size());
 	}
+
+	// convert CString to string
+	// inline std::string()
+
 }
 
+#if 0
+int CJDGridCtrl::GetID(int row) const
+{
+	auto id_cs = GetItemText(row, m_id_column);
+	auto location_id_s = Util::to_string(location_id_cs.GetBuffer());
+
+	if (location_id_s.empty())	return -1;
+
+	int location_id = std::stoi(location_id_s);
+	return location_id;
+
+}
+#endif
 
 void CJDGridCtrl::OnMouseMove(UINT nFlags, CPoint point)
 {

@@ -7,6 +7,7 @@
 
 #include "..\ORM_Extensions/BoxContents.h"
 #include "LocationGrid.h"
+#include "SearchResults.h"
 
 
 // LocationPasswordsView form view
@@ -59,6 +60,8 @@ private:
 	CEdit m_location_search;
 	std::vector<Location> m_found_locations;
 	int m_location_index = -1;
+
+	SearchResults<Location> m_search_subset;
 public:
 	afx_msg void OnBnClickedBSearchLocation();
 	afx_msg void OnKillfocusESearchLocation();

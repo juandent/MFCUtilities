@@ -13,7 +13,8 @@ import Util;
 IMPLEMENT_DYNCREATE(LocationPasswordsView, CFormView)
 
 LocationPasswordsView::LocationPasswordsView()
-	: CFormView(IDD_LocationPasswordsView)
+	: CFormView(IDD_LocationPasswordsView),
+	m_search_subset{Storage::getStorage(), m_location_search}
 {
 
 }
@@ -110,7 +111,7 @@ void LocationPasswordsView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*
 
 	if (row < 1) return;
 
-	auto location_id = m_location_grid.get_location_id(row);
+	auto location_id = m_location_grid.GetId(row);
 
 	auto passwordWhere = getPasswordWhereClauseAlias(location_id);
 
@@ -165,8 +166,10 @@ void LocationPasswordsView::OnBnClickedBLocationDlg()
 	{
 		this->InitializeGridLocations(true);
 		this->InitializeGridPasswords(false);
-		this->m_found_locations.clear();
-		this->m_location_index = -1;
+		m_search_subset.clear();
+		// this->m_found_locations.clear();
+		// this->m_location_index = -1;
+		// this->m_location_search << "";
 	}
 }
 
@@ -176,7 +179,7 @@ int LocationPasswordsView::get_location_id() const noexcept
 {
 	int row = m_location_grid.GetSelectedMinRow();
 
-	int location_id = m_location_grid.get_location_id(row);
+	int location_id = m_location_grid.GetId(row);
 	return location_id;
 }
 
@@ -219,7 +222,13 @@ void LocationPasswordsView::OnBnClickedBUnify()
 
 void LocationPasswordsView::OnBnClickedBSearchLocation()
 {
-	
+
+#if 0
+	auto res = m_search_subset.get_next_result(&Location::name);
+	if (!res)  return;
+
+
+#else
 	if (!m_found_locations.empty())
 	{
 		if (m_location_index + 1 >= m_found_locations.size() )
@@ -234,7 +243,7 @@ void LocationPasswordsView::OnBnClickedBSearchLocation()
 
 		m_location_search << loc.name;
 
-		const int row_to_select = m_location_grid.row_for_id(loc.id);
+		const int row_to_select = m_location_grid.GetRowForId(loc.id);
 
 		// const int row_to_select = loc.id;
 
@@ -248,6 +257,7 @@ void LocationPasswordsView::OnBnClickedBSearchLocation()
 
 		OnGrid1StartSelChange(pNM, 0);
 	}
+#endif
 }
 
 
@@ -268,9 +278,11 @@ void LocationPasswordsView::OnKillfocusESearchLocation()
 
 		auto location_where = like(&Location::name, search);
 
-		auto found = Storage::getStorage().get_all<Location>(where(location_where), order_by(&Location::name));
+		//auto found = Storage::getStorage().get_all<Location>(where(location_where), order_by(&Location::name));
 
-		m_found_locations.swap(found);
+		m_found_locations = Storage::getStorage().get_all<Location>(where(location_where), order_by(&Location::name));
+
+		//m_found_locations.swap(found);
 		m_location_index = -1;
 	}
 }

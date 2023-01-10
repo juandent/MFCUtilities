@@ -3,7 +3,7 @@
 #include "data.h"
 #include "..\ORM_Extensions/JoinedGridDisplayer.h"
 
-
+#if 0
 int LocationGrid::get_location_id(int row) const
 {
 	auto location_id_cs = GetItemText(row, ID_COLUMN);
@@ -29,4 +29,5 @@ int LocationGrid::row_for_id(int id) const
 	return -1;
 }
 
+#endif
 
