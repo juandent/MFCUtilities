@@ -82,7 +82,7 @@ void LocationDlg::OnBnClickedApply()
 
 	auto location = getCurrent<Location>(m_id);
 
-	auto name = GetText(m_name);
+	auto name = Util::touppercase( GetText(m_name));
 	auto url = GetText(m_url);
 	auto email = GetText(m_email);
 
