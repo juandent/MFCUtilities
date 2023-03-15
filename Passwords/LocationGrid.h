@@ -12,7 +12,7 @@ class GridId
 	CJDGridCtrl& m_grid;
 public:
 	GridId(CJDGridCtrl& grid) : m_grid{ grid } {}
-	int GetId(const int row) const
+	int GetIdFromRow(const int row) const
 	{
 		auto id_cs = m_grid.GetItemText(row, ID_COLUMN);
 		auto id_s = Util::to_string(id_cs.GetBuffer());
@@ -28,11 +28,17 @@ public:
 
 		for (int row = 1; row < count; ++row)
 		{
-			int row_id = this->GetId(row);
+			int row_id = this->GetIdFromRow(row);
 			if (row_id == id) return row;
 		}
 
 		return -1;
+	}
+	int GetSelectedId() const noexcept
+	{
+		int sel_row = m_grid.GetSelectedMinRow();
+		int id = GetIdFromRow(sel_row);
+		return id;
 	}
 };
 
@@ -41,6 +47,8 @@ struct IDisplayer;
 
 class LocationGrid :    public CJDGridCtrl
 {
+	DECLARE_DYNAMIC(LocationGrid)
+
 	const GridId<> m_grid_id;
     std::unique_ptr<IDisplayer> m_displayer;
 public:
@@ -66,10 +74,9 @@ public:
 
     }
 
-	int GetId(int row) const { return m_grid_id.GetId(row); }
+	int GetIdFromRow(int row) const { return m_grid_id.GetIdFromRow(row); }
 	int GetRowForId(int id) const { return m_grid_id.GetRowForId(id); }
-    // int get_location_id(int row) const;
-	// int row_for_id(int id) const;
+	int GetSelectedId() const { return m_grid_id.GetSelectedId(); }
 };
 
 

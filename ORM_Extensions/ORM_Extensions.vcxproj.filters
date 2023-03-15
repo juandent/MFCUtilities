@@ -71,5 +71,8 @@
     <ClCompile Include="BoxContents.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DateBinding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

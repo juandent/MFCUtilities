@@ -111,7 +111,7 @@ void LocationPasswordsView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*
 
 	if (row < 1) return;
 
-	auto location_id = m_location_grid.GetId(row);
+	auto location_id = m_location_grid.GetIdFromRow(row);
 
 	auto passwordWhere = getPasswordWhereClauseAlias(location_id);
 
@@ -167,9 +167,6 @@ void LocationPasswordsView::OnBnClickedBLocationDlg()
 		this->InitializeGridLocations(true);
 		this->InitializeGridPasswords(false);
 		m_search_subset.clear();
-		// this->m_found_locations.clear();
-		// this->m_location_index = -1;
-		// this->m_location_search << "";
 	}
 }
 
@@ -177,10 +174,8 @@ void LocationPasswordsView::OnBnClickedBLocationDlg()
 
 int LocationPasswordsView::get_location_id() const noexcept
 {
-	int row = m_location_grid.GetSelectedMinRow();
-
-	int location_id = m_location_grid.GetId(row);
-	return location_id;
+	int id = m_location_grid.GetSelectedId();
+	return id;
 }
 
 void LocationPasswordsView::OnBnClickedBPasswordDlg()
@@ -223,9 +218,23 @@ void LocationPasswordsView::OnBnClickedBUnify()
 void LocationPasswordsView::OnBnClickedBSearchLocation()
 {
 
-#if 0
+#if 1
 	auto res = m_search_subset.get_next_result(&Location::name);
 	if (!res)  return;
+	auto loc = *res;
+
+	const int row_to_select = m_location_grid.GetRowForId(loc.id);
+
+
+	m_location_grid.SetSelectAndScroll(row_to_select);
+
+	NM_GRIDVIEW pItem;
+	pItem.iRow = row_to_select;
+	pItem.iColumn = 0;
+
+	NMHDR* pNM = reinterpret_cast<NMHDR*>(&pItem);
+
+	OnGrid1StartSelChange(pNM, 0);
 
 
 #else
@@ -263,6 +272,7 @@ void LocationPasswordsView::OnBnClickedBSearchLocation()
 
 void LocationPasswordsView::OnKillfocusESearchLocation()
 {
+	//m_location_search.set_search_string();
 	std::string location;
 	m_location_search >> location;
 	if(location.empty())
@@ -278,12 +288,13 @@ void LocationPasswordsView::OnKillfocusESearchLocation()
 
 		auto location_where = like(&Location::name, search);
 
+		m_search_subset.search(location_where, &Location::name);
 		//auto found = Storage::getStorage().get_all<Location>(where(location_where), order_by(&Location::name));
 
-		m_found_locations = Storage::getStorage().get_all<Location>(where(location_where), order_by(&Location::name));
+		//m_found_locations = Storage::getStorage().get_all<Location>(where(location_where), order_by(&Location::name));
 
 		//m_found_locations.swap(found);
-		m_location_index = -1;
+		//m_location_index = -1;
 	}
 }
 

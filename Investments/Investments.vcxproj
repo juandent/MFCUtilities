@@ -152,7 +152,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>C:\Components\sqlite_orm_dev_3_march_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Q:\Components\sqlite_orm_dev_3_march_2022\include;%(AdditionalIncludeDirectories);C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Investments;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\loki</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
       <UseFullPaths>false</UseFullPaths>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>

@@ -204,9 +204,9 @@ int main()
 		des[2].m_manager = 7782;
 		des[3].m_manager = 7900;
 		storage.update(des[0]);
-		storage.update_all(des);
+//		storage.update_all(des);
 		storage.replace(des[0]);
-		//storage.replace_range(des.begin(), des.end());
+		storage.replace_range(des.begin(), des.end());
 
 			
 	}

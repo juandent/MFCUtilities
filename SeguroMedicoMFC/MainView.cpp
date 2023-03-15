@@ -180,8 +180,8 @@ void MainView::InitializeGridClaims(const T& t)
 		// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 		inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
 		where(t),
-		group_by(alias_column<als_c>(&Claim::id)));
-		// order_by(alias_column<als_c>(&Claim::submission_date)).desc());
+		group_by(alias_column<als_c>(&Claim::id)),
+		order_by(alias_column<als_c>(&Claim::id)).desc());
 
 #else
 	auto otherlines = Storage::getStorage().select(columns(
@@ -352,7 +352,7 @@ void MainView::InitializeGridINSResponses(const T& t)
 			// inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
 			where(t),
 			// order_by(alias_column<als_c>(&Claim::start_date)).desc());
-			order_by(alias_column<als_c>(&Claim::id)));
+			order_by(alias_column<als_c>(&Claim::id)).desc());
 
 	
 #else
@@ -423,7 +423,7 @@ void MainView::InitializeGridPendingInvoices(const T& t)
 		// inner_join<als_i>(on(c(alias_column<als_k>(&INSResponseLine::fkey_INSResponse)) == alias_column<als_j>(&INSResponse::id))),
 		where( where_clause),
 		// order_by(alias_column<als_c>(&Claim::start_date)).desc());
-		multi_order_by(order_by(alias_column<als_c>(&Claim::id)), order_by(alias_column<als_i>(&Invoice::number))));
+		multi_order_by(order_by(alias_column<als_c>(&Claim::id)).desc(), order_by(alias_column<als_i>(&Invoice::number))));
 		// order_by(alias_column<als_c>(&Claim::id)));
 
 	std::vector<std::string> headers{ "REENBOLSO ID", "MONTO REEMBOLSO", "FECHA REEMBOLSO", "FACT ID", "FACT NUM", "FACT MONTO", "FACT TIPO", "FACT DESCR", "INS RESP ID"};

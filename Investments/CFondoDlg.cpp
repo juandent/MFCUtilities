@@ -146,6 +146,7 @@ void CFondoDlg::OnBnClickedErase()
 }
 
 
+
 LRESULT CFondoDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	// TODO: Add your specialized code here and/or call the base class

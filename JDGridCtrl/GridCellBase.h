@@ -107,7 +107,7 @@ public:
     virtual COLORREF   GetTextClr()    const                = 0 ;
     virtual COLORREF   GetBackClr()    const                = 0 ;
     virtual LOGFONT  * GetFont()       const                = 0 ;
-    virtual const CFont    * GetFontObject() const                = 0 ;
+    virtual const CFont * GetFontObject() const                = 0 ;
     virtual CGridCtrl* GetGrid()       const                = 0 ;
     virtual CWnd     * GetEditWnd()    const                = 0 ;
     virtual UINT       GetMargin()     const                = 0 ;

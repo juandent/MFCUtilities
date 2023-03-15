@@ -219,6 +219,7 @@ copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utili
     <ClInclude Include="framework.h" />
     <ClInclude Include="INSResponseDlg.h" />
     <ClInclude Include="INSResponseDoc.h" />
+    <ClInclude Include="INSResponseLB.h" />
     <ClInclude Include="INSResponseView.h" />
     <ClInclude Include="InvoiceDlg.h" />
     <ClInclude Include="MainFrm.h" />
@@ -260,6 +261,7 @@ copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utili
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="INSResponseDlg.cpp" />
     <ClCompile Include="INSResponseDoc.cpp" />
+    <ClCompile Include="INSResponseLB.cpp" />
     <ClCompile Include="INSResponseView.cpp" />
     <ClCompile Include="InvoiceDlg.cpp" />
     <ClCompile Include="MainFrm.cpp" />

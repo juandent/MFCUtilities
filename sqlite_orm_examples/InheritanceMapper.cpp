@@ -33,23 +33,29 @@ struct Player {
     virtual ~Player() = default;
 
     enum TypeId {
-        _Footballer = 1,
-        _Cricketer = 2
+        _Footballer = 10,
+        _Cricketer = 11
     };
 };
 
 
-// type == 1
+// type == 10
 struct Footballer : Player {
     Footballer() = default;
+
+    Footballer(int id, const std::string& name, int team_id, const std::string& club ) : Player{id,name, Player::_Footballer,team_id}, club{club}
+    {}
+
     std::string club;
-
-
 };
 
-// type == 2
+// type == 11
 struct Cricketer : Player {
     Cricketer() = default;
+
+    Cricketer(int id, const std::string& name, int team_id, double average) : Player{ id,name, Player::_Cricketer,team_id }, batting_average{ average}
+    {}
+
     double batting_average;
 };
 
@@ -75,24 +81,31 @@ auto storage = make_storage("Inheritance.sqlite",
         make_column("team_id", &Player::team_id),
         primary_key(&Player::id)),
     make_table<Footballer>("Footballers",
-        make_column("id", &Footballer::id, primary_key(), autoincrement()),
+        make_column("id", &Footballer::id, primary_key().autoincrement()),
         make_column("name", &Footballer::name),
         make_column("type_id", &Footballer::type_id, generated_always_as((int)Player::_Footballer)),
         make_column("team_id", &Footballer::team_id),
         make_column("club", &Footballer::club),
     foreign_key(&Footballer::team_id).references(&Team::id).on_delete.cascade().on_update.cascade()),
     make_table<Cricketer>("Cricketer",
-        make_column("id", &Cricketer::id, primary_key(), autoincrement()),
+        make_column("id", &Cricketer::id, primary_key().autoincrement()),
         make_column("name", &Cricketer::name),
         make_column("type_id", &Cricketer::type_id, generated_always_as((int)Player::_Cricketer)),
         make_column("team_id", &Cricketer::team_id),
         make_column("batting_average", &Cricketer::batting_average),
     foreign_key(&Cricketer::team_id).references(&Team::id).on_delete.cascade().on_update.cascade()),
     make_table("Teams",
-        make_column("id", &Team::id, primary_key(), autoincrement()),
+        make_column("id", &Team::id, primary_key().autoincrement()),
         make_column("name", &Team::name),
         make_column("started", &Team::started),
         make_column("type_id", &Team::type_id)));
+
+
+int next_id() {
+    //storage.select(max()) 
+    return 1;
+}
+
 
 Team Player::team() const
 {
@@ -152,6 +165,14 @@ using namespace std::chrono_literals;
 
 int main(int, char**) {
 
+    constexpr static auto xxxx = NAN;
+    constinit static bool ok = xxxx > 4.5;
+    ok = xxxx == 4.5;
+    ok = xxxx < 4.5;
+    constinit static auto yyyy = 1e+300;
+    yyyy *= yyyy;
+    bool eq = yyyy == INFINITY;
+
     std::cout << "Hi\n";
 
     ::remove(storage.filename().c_str());
@@ -176,18 +197,23 @@ int main(int, char**) {
         Team cteam{ 2, "Los Crickets", yyago, Team::_CricketTeam};
         storage.replace(cteam);
 
+        Footballer f1( 1, "Footballer main player"s, 1, "Football club");
+        storage.replace(f1);
 
-        storage.replace(into<Footballer>(), columns(column<Footballer>(&Player::id), column<Footballer>(&Player::name),column<Footballer>(&Player::team_id),   &Footballer::club), 
-            values(std::make_tuple(1, "Jose Saprissa"s, 1,  "Saprissa"s)));
-        storage.replace(into<Cricketer>(), columns(column<Cricketer>(&Player::id), column<Cricketer>(&Player::name), column<Cricketer>(&Player::team_id), &Cricketer::batting_average), 
-            values(std::make_tuple(1, "Jose Saprissa"s,2, 35.77)));
+        Cricketer c1(2, "Cricketer main player"s, 2, 35.77);
+        storage.replace(c1);
+
+        // storage.replace(into<Footballer>(), columns(column<Footballer>(&Player::id), column<Footballer>(&Player::name),column<Footballer>(&Player::team_id),   &Footballer::club), 
+        //     values(std::make_tuple(1, "Footballer main player"s, 1,  "Football club"s)));
+        // storage.replace(into<Cricketer>(), columns(column<Cricketer>(&Player::id), column<Cricketer>(&Player::name), column<Cricketer>(&Player::team_id), &Cricketer::batting_average), 
+        //     values(std::make_tuple(1, "Cricketer main player"s,2, 35.77)));
 
         auto ff = storage.get_all<Footballer>();
-        auto fff = ff[0];
+        // auto fff = ff[0];
 
-        auto ret = storage.insert(fff);
+        //auto ret = storage.insert(fff);
 
-        storage.replace((Player)ff[0]);
+        //storage.replace((Player)ff[0]);
 
         auto cc = storage.get_all<Cricketer>();
 
@@ -216,13 +242,14 @@ int main(int, char**) {
             } break;
             }
         }
+#if 0
         auto f = storage.get<Footballer>(1);
 
         f.team(cteam);
         storage.replace(f);
         // storage.remove_all<Team>();
         storage.remove<Team>(team.id);   // NO, SHOULD'NT BE OK even if FK is NO_ACTION!
-
+#endif
     }
     catch(const std::exception& ex) {
         auto s = ex.what();

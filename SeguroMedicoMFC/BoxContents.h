@@ -132,8 +132,9 @@ public:
 			// record = storage.get<Table>(pk);
 			record = refIntManager.get(pk);
 			// Posting::PostingWindow = m_box.m_hWnd;
-			Posting::get().AddWindow(m_box.m_hWnd);
-			m_box.GetParent()->PostMessageW(WM_COMMAND, (WPARAM)MAKELONG(m_box.GetDlgCtrlID(), LBN_SELCHANGE), (LPARAM)(HWND)m_box.m_hWnd);
+				Posting::get().AddWindow(m_box.m_hWnd);
+			auto wParam = (WPARAM)MAKELONG(m_box.GetDlgCtrlID(), LBN_SELCHANGE);
+			m_box.GetParent()->PostMessageW(WM_COMMAND, wParam, (LPARAM)(HWND)m_box.m_hWnd);
 		}
 		return record;
 	}
