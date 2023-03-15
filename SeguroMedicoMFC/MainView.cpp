@@ -159,7 +159,7 @@ void MainView::InitializeGridClaims(const T& t)
 // #define NESTED_SELECT
 #ifndef  NESTED_SELECT
 #if 1
-	auto otherlines = Storage::getStorage().select(columns(
+	auto expression = select(columns(
 		// distinct(alias_column<als_c>(&Claim::id)),
 		alias_column<als_c>(&Claim::id),
 		alias_column<als_p>(&Patient::last_name),
@@ -173,15 +173,45 @@ void MainView::InitializeGridClaims(const T& t)
 		// alias_column<als_i>(&Invoice::fkey_INSResponse),
 		select(greater_than(count<als_q>(), 0), from<als_q>(),
 			where(c(alias_column<als_q>(&Invoice::fkey_INSResponse)) == 1 && c(alias_column<als_q>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))),
+		from<als_i>(),
 		// sum(alias_column<als_i>(&Invoice::amount))),
-		inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
-		inner_join<als_d>(on(c(alias_column<als_d>(&Doctor::id)) == alias_column<als_c>(&Claim::fkey_doctor))),
-		inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+		left_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
+		left_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
+		left_join<als_d>(on(c(alias_column<als_d>(&Doctor::id)) == alias_column<als_c>(&Claim::fkey_doctor))),
+		left_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
 		// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
-		inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
+
 		where(t),
 		group_by(alias_column<als_c>(&Claim::id)),
 		order_by(alias_column<als_c>(&Claim::id)).desc());
+
+	auto sql = Storage::getStorage().dump(expression);
+	auto statement = Storage::getStorage().prepare(expression);
+	auto rows = Storage::getStorage().execute(statement);
+	auto otherlines = rows;
+	// auto otherlines = Storage::getStorage().select(columns(
+	// 	// distinct(alias_column<als_c>(&Claim::id)),
+	// 	alias_column<als_c>(&Claim::id),
+	// 	alias_column<als_p>(&Patient::last_name),
+	// 	conc(conc(alias_column<als_d>(&Doctor::last_name), " "), alias_column<als_d>(&Doctor::first_name)),
+	// 	alias_column<als_c>(&Claim::status),
+	// 	alias_column<als_c>(&Claim::start_date),
+	// 	alias_column<als_c>(&Claim::submission_date),
+	// 	alias_column<als_c>(&Claim::amount),
+	// 	alias_column<als_c>(&Claim::asprose_case_number),
+	// 	alias_column<als_m>(&Medication::name),
+	// 	// alias_column<als_i>(&Invoice::fkey_INSResponse),
+	// 	select(greater_than(count<als_q>(), 0), from<als_q>(),
+	// 		where(c(alias_column<als_q>(&Invoice::fkey_INSResponse)) == 1 && c(alias_column<als_q>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id)))),
+	// 	// sum(alias_column<als_i>(&Invoice::amount))),
+	// 	inner_join<als_p>(on(c(alias_column<als_p>(&Patient::id)) == alias_column<als_c>(&Claim::fkey_patient))),
+	// 	inner_join<als_d>(on(c(alias_column<als_d>(&Doctor::id)) == alias_column<als_c>(&Claim::fkey_doctor))),
+	// 	inner_join<als_m>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+	// 	// inner_join<als_c>(on(c(alias_column<als_c>(&Claim::fkey_medication)) == alias_column<als_m>(&Medication::id))),
+	// 	inner_join<als_c>(on(c(alias_column<als_i>(&Invoice::fkey_claim)) == alias_column<als_c>(&Claim::id))),
+	// 	where(t),
+	// 	group_by(alias_column<als_c>(&Claim::id)),
+	// 	order_by(alias_column<als_c>(&Claim::id)).desc());
 
 #else
 	auto otherlines = Storage::getStorage().select(columns(
