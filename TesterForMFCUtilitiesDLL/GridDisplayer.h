@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-//import Util;
-#include "JDMFCLibrary/Util.h"
+//import util;
+#include "JDMFCLibrary/util.h"
 
 template<typename T>
 class GridDisplayer
@@ -30,7 +30,7 @@ public:
 		int col = 1;
 		for( auto& str : headers)
 		{
-			auto head = Util::to_cstring(str);
+			auto head = util::to_cstring(str);
 			grid.SetItemText(0, col, head);
 			++col;
 		}
@@ -82,14 +82,14 @@ private:
 	template<typename T>
 	CString format(const T& t)
 	{
-		return Util::to_cstring(t);
+		return util::to_cstring(t);
 	}
 	template<typename T>
 	static CString format(const std::shared_ptr<T>& t)
 	{
 		if (t)
 		{
-			return Util::to_cstring(*t);
+			return util::to_cstring(*t);
 		}
 		return L"";
 	}

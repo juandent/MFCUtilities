@@ -8,12 +8,17 @@
 // #include <date/date.h>
 
 
-// import Util;
-#include "..\JDMFCLibrary/Util.h"
+import util;
+import date_binding;
+
+
+
+// import util;
+// #include "..\JDMFCLibrary/util.h"
 
 // #include "../FixedPoint/Money.h"
 #if 1
-#include "..\TesterForMFCUtilitiesDLL/Model/Model.DateBinding.h"
+//#include "..\TesterForMFCUtilitiesDLL/Model/Model.DateBinding.h"	//JDH
 #else
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.Colones.Binding.h"
 #include "..\TesterForMFCUtilitiesDLL/Model/Model.CoinBinding.h"
@@ -54,11 +59,12 @@ inline 	auto& Storage_Impl::get_storage()
 
 	// constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
 
+	diag::display("get storage");	// JDH
 
 	static auto storage =
 		make_storage(db_name,
 			make_table("Claims",
-				make_column("id_claim", &Claim::id, autoincrement(), primary_key()),
+				make_column("id_claim", &Claim::id, primary_key().autoincrement()),
 				make_column("fkey_patient", &Claim::fkey_patient),
 				make_column("fkey_doctor", &Claim::fkey_doctor),
 				make_column("fkey_medication", &Claim::fkey_medication),
@@ -77,23 +83,23 @@ inline 	auto& Storage_Impl::get_storage()
 				foreign_key(&Claim::fkey_medication).references(&Medication::id),
 				foreign_key(&Claim::fkey_patient).references(&Patient::id)),
 			make_table("Patients",
-				make_column("id_patient", &Patient::id, autoincrement(), primary_key()),
+				make_column("id_patient", &Patient::id, primary_key().autoincrement()),
 				make_column("first_name", &Patient::first_name, collate_nocase()),
 				make_column("last_name", &Patient::last_name, collate_nocase())),
 			make_table("Doctors",
-				make_column("id_doctor", &Doctor::id, autoincrement(), primary_key()),
+				make_column("id_doctor", &Doctor::id, primary_key().autoincrement()),
 				make_column("first_name", &Doctor::first_name, collate_nocase()),
 				make_column("last_name", &Doctor::last_name),
 				make_column("fkey_specialty", &Doctor::fkey_specialty),
 				foreign_key(&Doctor::fkey_specialty).references(&Specialty::id)),
 			make_table("Specialties",
-				make_column("id_specialty", &Specialty::id, autoincrement(), primary_key()),
+				make_column("id_specialty", &Specialty::id, primary_key().autoincrement()),
 				make_column("name", &Specialty::name, collate_nocase())),
 			make_table("Medications",
-				make_column("id_medication", &Medication::id, autoincrement(), primary_key()),
+				make_column("id_medication", &Medication::id, primary_key().autoincrement()),
 				make_column("name", &Medication::name, collate_nocase())),
 			make_table("Invoices",
-				make_column("id_invoice", &Invoice::id, autoincrement(), primary_key()),
+				make_column("id_invoice", &Invoice::id, primary_key().autoincrement()),
 				make_column("fkey_claim", &Invoice::fkey_claim),
 				make_column("number", &Invoice::number),
 				make_column("amount", &Invoice::amount),
@@ -103,7 +109,7 @@ inline 	auto& Storage_Impl::get_storage()
 				foreign_key(&Invoice::fkey_claim).references(&Claim::id),
 				foreign_key(&Invoice::fkey_INSResponse).references(&INSResponse::id)),
 			make_table("INSResponses",
-				make_column("id_INSResponse", &INSResponse::id, autoincrement(), primary_key()),
+				make_column("id_INSResponse", &INSResponse::id, primary_key().autoincrement()),
 				make_column("liquidacion_num", &INSResponse::liquidacion_num),
 				make_column("numero_caso", &INSResponse::numero_caso),
 				make_column("total_bruto", &INSResponse::total_bruto),
@@ -118,7 +124,7 @@ inline 	auto& Storage_Impl::get_storage()
 				make_column("date_response", &INSResponse::date_response),
 				make_column("tipo_cambio", &INSResponse::tipo_cambio)),
 			make_table("INSResponseLine",
-				make_column("id_INSResponseLine", &INSResponseLine::id, autoincrement(), primary_key()),
+				make_column("id_INSResponseLine", &INSResponseLine::id, primary_key().autoincrement()),
 				make_column("fkey_INSResponse", &INSResponseLine::fkey_INSResponse),
 				make_column("fkey_factura", &INSResponseLine::fkey_factura),
 				make_column("monto_cubierto", &INSResponseLine::monto_cubierto),
@@ -156,10 +162,10 @@ inline auto& Storage_Impl::get_old_storage()
 
 	constexpr int version = 2;
 	
-	static auto storage =
+	static auto storage = 
 		make_storage(db_name,
 			make_table("Claims",
-				make_column("id_claim", &Claim::id, autoincrement(), primary_key()),
+				make_column("id_claim", &Claim::id, primary_key().autoincrement()),
 				make_column("fkey_patient", &Claim::fkey_patient),
 				make_column("fkey_doctor", &Claim::fkey_doctor),
 				make_column("fkey_medication", &Claim::fkey_medication),
@@ -178,23 +184,23 @@ inline auto& Storage_Impl::get_old_storage()
 				foreign_key(&Claim::fkey_medication).references(&Medication::id),
 				foreign_key(&Claim::fkey_patient).references(&Patient::id)),
 			make_table("Patients",
-				make_column("id_patient", &Patient::id, autoincrement(), primary_key()),
+				make_column("id_patient", &Patient::id, primary_key().autoincrement()),
 				make_column("first_name", &Patient::first_name, collate_nocase()),
 				make_column("last_name", &Patient::last_name, collate_nocase())),
 			make_table("Doctors",
-				make_column("id_doctor", &Doctor::id, autoincrement(), primary_key()),
+				make_column("id_doctor", &Doctor::id, primary_key().autoincrement()),
 				make_column("first_name", &Doctor::first_name, collate_nocase()),
 				make_column("last_name", &Doctor::last_name),
 				make_column("fkey_specialty", &Doctor::fkey_specialty),
 				foreign_key(&Doctor::fkey_specialty).references(&Specialty::id)),
 			make_table("Specialties",
-				make_column("id_specialty", &Specialty::id, autoincrement(), primary_key()),
+				make_column("id_specialty", &Specialty::id,primary_key().autoincrement()),
 				make_column("name", &Specialty::name, collate_nocase())),
 			make_table("Medications",
-				make_column("id_medication", &Medication::id, autoincrement(), primary_key()),
+				make_column("id_medication", &Medication::id, primary_key().autoincrement()),
 				make_column("name", &Medication::name, collate_nocase())),
 			make_table("Invoices",
-				make_column("id_invoice", &Invoice::id, autoincrement(), primary_key()),
+				make_column("id_invoice", &Invoice::id, primary_key().autoincrement()),
 				make_column("fkey_claim", &Invoice::fkey_claim),
 				make_column("number", &Invoice::number),
 				make_column("amount", &Invoice::amount),
@@ -204,7 +210,7 @@ inline auto& Storage_Impl::get_old_storage()
 				foreign_key(&Invoice::fkey_claim).references(&Claim::id),
 				foreign_key(&Invoice::fkey_INSResponse).references(&INSResponse::id)),
 			make_table("INSResponses",
-				make_column("id_INSResponse", &INSResponse::id, autoincrement(), primary_key()),
+				make_column("id_INSResponse", &INSResponse::id, primary_key().autoincrement()),
 				make_column("liquidacion_num", &INSResponse::liquidacion_num),
 				make_column("numero_caso", &INSResponse::numero_caso),
 				make_column("total_bruto", &INSResponse::total_bruto),
@@ -219,7 +225,7 @@ inline auto& Storage_Impl::get_old_storage()
 				make_column("date_response", &INSResponse::date_response),
 				make_column("tipo_cambio", &INSResponse::tipo_cambio)),
 			make_table("INSResponseLine",
-				make_column("id_INSResponseLine", &INSResponseLine::id, autoincrement(), primary_key()),
+				make_column("id_INSResponseLine", &INSResponseLine::id, primary_key().autoincrement()),
 				make_column("fkey_INSResponse", &INSResponseLine::fkey_INSResponse),
 				make_column("fkey_factura", &INSResponseLine::fkey_factura),
 				make_column("monto_cubierto", &INSResponseLine::monto_cubierto),
@@ -255,10 +261,10 @@ inline auto& Storage_Impl::get_new_storage()
 	
 	constexpr int version = 3;
 
-	static auto storage =
+	static auto storage = 
 		make_storage(db_name,
 			make_table("Claims",
-				make_column("id_claim", &Claim::id, autoincrement(), primary_key()),
+				make_column("id_claim", &Claim::id, primary_key().autoincrement()),
 				make_column("fkey_patient", &Claim::fkey_patient),
 				make_column("fkey_doctor", &Claim::fkey_doctor),
 				make_column("fkey_medication", &Claim::fkey_medication),
@@ -277,23 +283,23 @@ inline auto& Storage_Impl::get_new_storage()
 				foreign_key(&Claim::fkey_medication).references(&Medication::id),
 				foreign_key(&Claim::fkey_patient).references(&Patient::id)),
 			make_table("Patients",
-				make_column("id_patient", &Patient::id, autoincrement(), primary_key()),
+				make_column("id_patient", &Patient::id, primary_key().autoincrement()),
 				make_column("first_name", &Patient::first_name, collate_nocase()),
 				make_column("last_name", &Patient::last_name, collate_nocase())),
 			make_table("Doctors",
-				make_column("id_doctor", &Doctor::id, autoincrement(), primary_key()),
+				make_column("id_doctor", &Doctor::id, primary_key().autoincrement()),
 				make_column("first_name", &Doctor::first_name, collate_nocase()),
 				make_column("last_name", &Doctor::last_name),
 				make_column("fkey_specialty", &Doctor::fkey_specialty),
 				foreign_key(&Doctor::fkey_specialty).references(&Specialty::id)),
 			make_table("Specialties",
-				make_column("id_specialty", &Specialty::id, autoincrement(), primary_key()),
+				make_column("id_specialty", &Specialty::id, primary_key().autoincrement()),
 				make_column("name", &Specialty::name, collate_nocase())),
 			make_table("Medications",
-				make_column("id_medication", &Medication::id, autoincrement(), primary_key()),
+				make_column("id_medication", &Medication::id, primary_key().autoincrement()),
 				make_column("name", &Medication::name, collate_nocase())),
 			make_table("Invoices",
-				make_column("id_invoice", &Invoice::id, autoincrement(), primary_key()),
+				make_column("id_invoice", &Invoice::id, primary_key().autoincrement()),
 				make_column("fkey_claim", &Invoice::fkey_claim),
 				make_column("number", &Invoice::number),
 				make_column("amount", &Invoice::amount),
@@ -303,7 +309,7 @@ inline auto& Storage_Impl::get_new_storage()
 				foreign_key(&Invoice::fkey_claim).references(&Claim::id),
 				foreign_key(&Invoice::fkey_INSResponse).references(&INSResponse::id)),
 			make_table("INSResponses",
-				make_column("id_INSResponse", &INSResponse::id, autoincrement(), primary_key()),
+				make_column("id_INSResponse", &INSResponse::id, primary_key().autoincrement()),
 				make_column("liquidacion_num", &INSResponse::liquidacion_num),
 				make_column("numero_caso", &INSResponse::numero_caso),
 				make_column("total_bruto", &INSResponse::total_bruto),
@@ -318,7 +324,7 @@ inline auto& Storage_Impl::get_new_storage()
 				make_column("date_response", &INSResponse::date_response),
 				make_column("tipo_cambio", &INSResponse::tipo_cambio)),
 			make_table("INSResponseLine",
-				make_column("id_INSResponseLine", &INSResponseLine::id, autoincrement(), primary_key()),
+				make_column("id_INSResponseLine", &INSResponseLine::id, primary_key().autoincrement()),
 				make_column("fkey_INSResponse", &INSResponseLine::fkey_INSResponse),
 				make_column("fkey_factura", &INSResponseLine::fkey_factura),
 				make_column("monto_cubierto", &INSResponseLine::monto_cubierto),
@@ -377,7 +383,7 @@ std::optional<Table> getCurrent(CEdit& editCtrl)
 	{
 		return std::nullopt;
 	}
-	auto id_str = Util::from_cstring(rId);
+	auto id_str = util::from_cstring(rId);
 	auto id = std::stoi(id_str);
 	auto record = Storage::getStorage().get_optional < Table>(id);
 	///////////	
@@ -394,7 +400,7 @@ Operation whatOperation(CEdit& editCtrl)
 template<typename Table>
 void setIdFromRecord(CEdit& editCtrl, int pk)
 {
-	editCtrl.SetWindowTextW(Util::to_cstring(pk));
+	editCtrl.SetWindowTextW(util::to_cstring(pk));
 }
 
 template<typename Table, int Table::* key>
@@ -407,7 +413,7 @@ struct IdManager
 	{}
 	void SetId()
 	{
-		editCtrl.SetWindowTextW(Util::to_cstring(record->*key));
+		editCtrl.SetWindowTextW(util::to_cstring(record->*key));
 	}
 	std::optional<Table> GetIdToCurrent()
 	{

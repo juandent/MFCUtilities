@@ -8,7 +8,8 @@
 #include "Data.h"
 #include "INSResponseDlg.h"
 
-#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+// #include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+import joinedgrid;
 
 
 // INSResponseView
@@ -19,19 +20,19 @@ INSResponseView::INSResponseView()
 	: CFormView(IDD_INSResponseView),
 m_insresponseCB(m_lista_ins_response, [](INSResponse& resp)
 {
-		return Util::to_cstring(resp.simple_dump());
+		return util::to_cstring(resp.simple_dump());
 }),
 m_doctoresCB(m_lista_doctores, [](Doctor& doctor)
 {
-		return Util::to_cstring(doctor.simple_dump());
+		return util::to_cstring(doctor.simple_dump());
 }),
 m_patientsCB(m_lista_pacientes, [](Patient& patient)
 {
-		return Util::to_cstring(patient.simple_dump());
+		return util::to_cstring(patient.simple_dump());
 }),
 m_medicationsCB(m_lista_medicamentos, [](Medication& med)
 {
-		return Util::to_cstring(med.simple_dump());
+		return util::to_cstring(med.simple_dump());
 })
 {
 	
@@ -156,7 +157,7 @@ void INSResponseView::InitializeGridINSResponse(const T& t)
 
 
 	long count = otherlines.size();
-	auto strCount = Util::to_cstring(count);
+	auto strCount = util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
 	std::vector<std::string> headers{ "ID RESPUESTA", "FECHA RESP", "ID LINEA RESP", "MONTO CUBIERTO", "% MONTO CUBIERTO", "% FACTURA", "NUM FACT", "MONTO FACT" };
@@ -247,33 +248,33 @@ void INSResponseView::InitializeGridINSResponseSummary(const T& t)
 		}
 		
 		// auto& ve = extractValue(std::move(std::get<2>(line)));
-		// CString str = Util::to_cstring(ve);
+		// CString str = util::to_cstring(ve);
 		auto& desc = extractValue(std::get<1>(line));
-		CString str = Util::to_cstring(desc);
+		CString str = util::to_cstring(desc);
 #if 0
 		// if constexpr (std::is_same_v<std::unique_ptr<double>&, ValueType>)
 		static_assert(std::is_same_v<std::unique_ptr<double>&, ValueType>);
-		auto x = Util::to_cstring(std::move(val));
-		// auto x = Util::unique_ptr_to_cstring(std::move(val));
+		auto x = util::to_cstring(std::move(val));
+		// auto x = util::unique_ptr_to_cstring(std::move(val));
 
 		auto&& v0 = std::get<1>(line);
-		auto xx= Util::to_cstring(std::move(v0));
+		auto xx= util::to_cstring(std::move(v0));
 
 		int i = 0;
 #endif
 #elif 0	
-		//CString cs = Util::to_cstring( val);
+		//CString cs = util::to_cstring( val);
 
 		auto line = std::move(otherlines[0]);
 		const auto& val = std::get<1>(line);
 		using ValueType = decltype(val);
 		ValueType* p;
 		static_assert(std::is_same_v<std::unique_ptr<double>, ValueType>);
-		auto x = Util::unique_ptr_to_cstring(std::move(val));
+		auto x = util::unique_ptr_to_cstring(std::move(val));
 		
 #endif	
 	}
-	auto strCount = Util::to_cstring(count);
+	auto strCount = util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
 	std::vector<std::string> headers{ "INS RESP ID", "SUM INV AMT", "SUM INV PAID" };
@@ -386,7 +387,7 @@ void INSResponseView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 	if (row < 1) return;
 
 	auto response_id_cs = m_grid_1.GetItemText(row, 1);
-	auto response_id_s = Util::to_string(response_id_cs.GetBuffer());
+	auto response_id_s = util::to_string(response_id_cs.GetBuffer());
 	auto response_id = std::stoi(response_id_s);
 
 	INSResponseDlg dlg;

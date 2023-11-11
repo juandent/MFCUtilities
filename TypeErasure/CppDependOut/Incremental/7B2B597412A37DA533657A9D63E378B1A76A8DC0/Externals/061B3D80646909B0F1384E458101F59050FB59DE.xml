@@ -1,0 +1,105 @@
+<Externals>
+<cr namespace="std" access="none" depth="1" kind="class" name="vector" id="f4578108546f17d12b5c190adabb6ca7_3d0ab7465d6b9448b8c01dc907d3e25b" file="3" linestart="658" lineend="2053">
+<base access="public">
+<tss>
+<templatebase id="f4578108546f17d12b5c190adabb6ca7_05d3bbcccbfa4b3b58c141a4ec6ed389"/>
+<template_arguments>
+<tss>
+<templatebase id="f4578108546f17d12b5c190adabb6ca7_6a7cfa317aaf33a284de4e9d43f7bf95"/>
+<template_arguments>
+<ttp/>
+<ttp/>
+</template_arguments>
+</tss>
+</template_arguments>
+</tss>
+</base>
+</cr>
+<cr namespace="Model" access="none" depth="0" kind="struct" name="Category" id="f35af7f4b22d5c76993cc57780228fd1_4426892e2a2219913fda1dd8123bf709" file="4" linestart="61" lineend="68" previous="f35af7f4b22d5c76993cc57780228fd1_4426892e2a2219913fda1dd8123bf709"/>
+<cr namespace="ORM" access="none" depth="0" kind="class" name="Storage" id="8b6ac5c4f316e29c15447c3d5d9722e4_7217f35e06a236b573e9ded004958872" file="5" linestart="185" lineend="195" previous="8b6ac5c4f316e29c15447c3d5d9722e4_7217f35e06a236b573e9ded004958872">
+<m name="getStorage" id="8b6ac5c4f316e29c15447c3d5d9722e4_a4dec6634053a470252a35d0b629bdb9" file="5" linestart="192" lineend="192" access="public" storage="static" hasbody="true" isdef="true">
+<fpt cc="cdecl" proto="sqlite_orm::internal::storage_t&lt;sqlite_orm::internal::table_t&lt;Model::Person, sqlite_orm::internal::column_t&lt;Model::Person, int, const int &amp;(Model::Person::*)() __attribute__((thiscall)) const, void (Model::Person::*)(int) __attribute__((thiscall)), sqlite_orm::constraints::autoincrement_t, sqlite_orm::constraints::primary_key_t&lt;&gt; &gt;, sqlite_orm::internal::column_t&lt;Model::Person, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Person::*)() __attribute__((thiscall)) const, void (Model::Person::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Person, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Person::*)() __attribute__((thiscall)) const, void (Model::Person::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Person, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Person::*)() __attribute__((thiscall)) const, void (Model::Person::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt; &gt;, sqlite_orm::internal::table_t&lt;Model::Responsible, sqlite_orm::internal::column_t&lt;Model::Responsible, int, const int &amp;(Model::Responsible::*)() __attribute__((thiscall)) const, void (Model::Responsible::*)(int) __attribute__((thiscall)), sqlite_orm::constraints::primary_key_t&lt;&gt; &gt;, sqlite_orm::internal::column_t&lt;Model::Responsible, int, const int &amp;(Model::Responsible::*)() __attribute__((thiscall)) const, void (Model::Responsible::*)(int) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Responsible, double, const double &amp;(Model::Responsible::*)() __attribute__((thiscall)) const, void (Model::Responsible::*)(double) __attribute__((thiscall))&gt;, sqlite_orm::constraints::foreign_key_t&lt;std::tuple&lt;int Model::Responsible::*&gt;, std::tuple&lt;int Model::Person::*&gt; &gt; &gt;, sqlite_orm::internal::table_t&lt;Model::Category, sqlite_orm::internal::column_t&lt;Model::Category, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Category::*)() __attribute__((thiscall)) const, void (Model::Category::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall)), sqlite_orm::constraints::primary_key_t&lt;&gt; &gt;, sqlite_orm::internal::column_t&lt;Model::Category, bool, const bool &amp;(Model::Category::*)() __attribute__((thiscall)) const, void (Model::Category::*)(bool) __attribute__((thiscall))&gt; &gt;, sqlite_orm::internal::table_t&lt;Model::Concept, sqlite_orm::internal::column_t&lt;Model::Concept, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Concept::*)() __attribute__((thiscall)) const, void (Model::Concept::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall)), sqlite_orm::constraints::primary_key_t&lt;&gt; &gt;, sqlite_orm::internal::column_t&lt;Model::Concept, std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, const std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &amp;(Model::Concept::*)() __attribute__((thiscall)) const, void (Model::Concept::*)(std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Concept, bool, const bool &amp;(Model::Concept::*)() __attribute__((thiscall)) const, void (Model::Concept::*)(bool) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Concept, bool, const bool &amp;(Model::Concept::*)() __attribute__((thiscall)) const, void (Model::Concept::*)(bool) __attribute__((thiscall))&gt;, sqlite_orm::constraints::foreign_key_t&lt;std::tuple&lt;std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; Model::Concept::*&gt;, std::tuple&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; Model::Account::*&gt; &gt; &gt;, sqlite_orm::internal::table_t&lt;Model::Statement, sqlite_orm::internal::column_t&lt;Model::Statement, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Statement::*)() __attribute__((thiscall)) const, void (Model::Statement::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Statement, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Statement::*)() __attribute__((thiscall)) const, void (Model::Statement::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Statement, std::chrono::time_point&lt;std::chrono::system_clock, std::chrono::duration&lt;int, std::ratio&lt;86400, 1&gt; &gt; &gt;, const std::chrono::time_point&lt;std::chrono::system_clock, std::chrono::duration&lt;int, std::ratio&lt;86400, 1&gt; &gt; &gt; &amp;(Model::Statement::*)() __attribute__((thiscall)) const, void (Model::Statement::*)(std::chrono::time_point&lt;std::chrono::system_clock, std::chrono::duration&lt;int, std::ratio&lt;86400, 1&gt; &gt; &gt;) __attribute__((thiscall)), sqlite_orm::constraints::primary_key_t&lt;&gt; &gt; &gt;, sqlite_orm::internal::table_t&lt;Model::StatementLine, sqlite_orm::internal::column_t&lt;Model::StatementLine, unsigned long, const unsigned long &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(unsigned long) __attribute__((thiscall)), sqlite_orm::constraints::autoincrement_t, sqlite_orm::constraints::primary_key_t&lt;&gt; &gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, std::chrono::time_point&lt;std::chrono::system_clock, std::chrono::duration&lt;int, std::ratio&lt;86400, 1&gt; &gt; &gt;, const std::chrono::time_point&lt;std::chrono::system_clock, std::chrono::duration&lt;int, std::ratio&lt;86400, 1&gt; &gt; &gt; &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(std::chrono::time_point&lt;std::chrono::system_clock, std::chrono::duration&lt;int, std::ratio&lt;86400, 1&gt; &gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, std::chrono::time_point&lt;std::chrono::system_clock, std::chrono::duration&lt;int, std::ratio&lt;86400, 1&gt; &gt; &gt;, const std::chrono::time_point&lt;std::chrono::system_clock, std::chrono::duration&lt;int, std::ratio&lt;86400, 1&gt; &gt; &gt; &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(std::chrono::time_point&lt;std::chrono::system_clock, std::chrono::duration&lt;int, std::ratio&lt;86400, 1&gt; &gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, Colones, const Colones &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(Colones) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, Dolares, const Dolares &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(Dolares) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, const std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, bool, const bool &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(bool) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::StatementLine, std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, const std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &amp;(Model::StatementLine::*)() __attribute__((thiscall)) const, void (Model::StatementLine::*)(std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::constraints::foreign_key_t&lt;std::tuple&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; Model::StatementLine::*&gt;, std::tuple&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; Model::Account::*&gt; &gt;, sqlite_orm::constraints::foreign_key_t&lt;std::tuple&lt;std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; Model::StatementLine::*&gt;, std::tuple&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; Model::Category::*&gt; &gt;, sqlite_orm::constraints::foreign_key_t&lt;std::tuple&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; Model::StatementLine::*&gt;, std::tuple&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; Model::Concept::*&gt; &gt;, sqlite_orm::constraints::foreign_key_t&lt;std::tuple&lt;std::shared_ptr&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; Model::StatementLine::*&gt;, std::tuple&lt;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; Model::Account::*&gt; &gt; &gt;, sqlite_orm::internal::table_t&lt;Model::LineResponsibility, sqlite_orm::internal::column_t&lt;Model::LineResponsibility, unsigned long, const unsigned long &amp;(Model::LineResponsibility::*)() __attribute__((thiscall)) const, void (Model::LineResponsibility::*)(unsigned long) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::LineResponsibility, int, const int &amp;(Model::LineResponsibility::*)() __attribute__((thiscall)) const, void (Model::LineResponsibility::*)(int) __attribute__((thiscall))&gt;, sqlite_orm::constraints::foreign_key_t&lt;std::tuple&lt;unsigned long Model::LineResponsibility::*&gt;, std::tuple&lt;unsigned long Model::StatementLine::*&gt; &gt;, sqlite_orm::constraints::foreign_key_t&lt;std::tuple&lt;int Model::LineResponsibility::*&gt;, std::tuple&lt;int Model::Responsible::*&gt; &gt; &gt;, sqlite_orm::internal::table_t&lt;Model::Account, sqlite_orm::internal::column_t&lt;Model::Account, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Account::*)() __attribute__((thiscall)) const, void (Model::Account::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall)), sqlite_orm::constraints::primary_key_t&lt;&gt; &gt;, sqlite_orm::internal::column_t&lt;Model::Account, int, const int &amp;(Model::Account::*)() __attribute__((thiscall)) const, void (Model::Account::*)(int) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Account, Coin, const Coin &amp;(Model::Account::*)() __attribute__((thiscall)) const, void (Model::Account::*)(Coin) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Account, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Account::*)() __attribute__((thiscall)) const, void (Model::Account::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Account, AccountType, const AccountType &amp;(Model::Account::*)() __attribute__((thiscall)) const, void (Model::Account::*)(AccountType) __attribute__((thiscall))&gt;, sqlite_orm::internal::column_t&lt;Model::Account, std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, const std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &amp;(Model::Account::*)() __attribute__((thiscall)) const, void (Model::Account::*)(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;) __attribute__((thiscall))&gt;, sqlite_orm::constraints::foreign_key_t&lt;std::tuple&lt;int Model::Account::*&gt;, std::tuple&lt;int Model::Person::*&gt; &gt; &gt; &gt; &amp;">
+<lrf>
+<auto/>
+</lrf>
+</fpt>
+</m>
+</cr>
+<cr namespace="ORM" access="none" depth="0" kind="class" name="Repository" id="62c3b5585ced8489a53abe6a3d4d6195_80d32d0a52ea6179dd559f4c9386aad5" file="6" linestart="8" lineend="63"/>
+<cr namespace="Controller" access="none" depth="0" kind="struct" name="ICategoryLoader" id="773a8f7d8631fe4758591b8e424468a0_b9d2e29f4c7a182a49474657f81757f6" file="7" linestart="7" lineend="11">
+<m name="load" id="773a8f7d8631fe4758591b8e424468a0_e9adbb75fb39e43c920644b6598e1797" file="7" linestart="9" lineend="9" pure="true" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="file" proto="const std::string &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<ety>
+<Tdef>
+<tss>
+<templatebase id="cbbba42710d1f106dbea48209aadd889_6ecc822215ca97386606c5e8e95c56fb"/>
+<template_arguments>
+<bt name="char"/>
+<tss>
+<templatebase id="04f3f1cbe9cd67bcb1f6c1615c07577f_bf3447e13ccfc57e5fa847f5d78e7639"/>
+<template_arguments>
+<bt name="char"/>
+</template_arguments>
+</tss>
+<tss>
+<templatebase id="ed3c970b2bb54d180a612ffa916a85da_07566aa809aee0bdf1c0fac16e19fa85"/>
+<template_arguments>
+<bt name="char"/>
+</template_arguments>
+</tss>
+</template_arguments>
+</tss>
+</Tdef>
+</ety>
+</QualType>
+</lrf>
+</p>
+</m>
+<m name="store" id="773a8f7d8631fe4758591b8e424468a0_22d0a9f63cf02e79f12227dc69b171ca" file="7" linestart="10" lineend="10" pure="true" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</m>
+</cr>
+<f namespace="std.literals.string_literals" name="operator""s" id="e3f0dca47f18a10284d7e56bce66e5f3_422cab316c9eb574a8332f2da7ee7a36" file="8" linestart="650" lineend="653" access="none" inline="true" hasbody="true" isdef="true">
+<fpt cc="cdecl" proto="string">
+<Tdef>
+<tss>
+<templatebase id="cbbba42710d1f106dbea48209aadd889_6ecc822215ca97386606c5e8e95c56fb"/>
+<template_arguments>
+<bt name="char"/>
+<tss>
+<templatebase id="04f3f1cbe9cd67bcb1f6c1615c07577f_bf3447e13ccfc57e5fa847f5d78e7639"/>
+<template_arguments>
+<bt name="char"/>
+</template_arguments>
+</tss>
+<tss>
+<templatebase id="ed3c970b2bb54d180a612ffa916a85da_07566aa809aee0bdf1c0fac16e19fa85"/>
+<template_arguments>
+<bt name="char"/>
+</template_arguments>
+</tss>
+</template_arguments>
+</tss>
+</Tdef>
+</fpt>
+<p name="_Str" proto="const char *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<QualType const="true">
+<bt name="char"/>
+</QualType>
+</pt>
+</p>
+<p name="_Len" proto="size_t" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</f>
+</Externals>

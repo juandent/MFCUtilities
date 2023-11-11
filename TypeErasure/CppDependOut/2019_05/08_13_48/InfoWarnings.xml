@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<InfoWarnings>
+  <Info>Begin analysis with CppDepend v2019.2.0.23</Info>
+  <Warning>Additional include directory  not found for the project TesterForMFCUtilitiesDLL : This can influence the analysis. You can add the directory path from Project Properties Panel -&gt; View Additional Include Paths. Please contact CppDepend support to check why this path was not correctly resolved.</Warning>
+  <Info>The parser used is Clang</Info>
+  <Info>8 Cores are used, you can change this value from the menu Tools-&gt;Options-&gt;Parser Configuration</Info>
+  <ClangError>Project:JDMFCLibrary=&gt;'stdafx.h' file not found at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\StringDateConverter.cpp:1:10</ClangError>
+  <ClangError>Project:TesterForMFCUtilitiesDLL=&gt;'StdAfx.h' file not found at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TesterForMFCUtilitiesDLL\ORM\ORM.UnitOfWork.cpp:1:10</ClangError>
+  <Info>No dependency cycle detected in Projects referencement graph.</Info>
+  <Info>Analyse dependencies of your application.</Info>
+  <Info>Log trend metrics values.</Info>
+  <Info>Execute queries and rules.</Info>
+  <Warning>1 quality gate fail.
+  - 'Critical Rules Violated' value 3 rules greater than fail threshold 0 rules</Warning>
+  <Info>CppDepend analysis done. Duration: 00:02:15</Info>
+  <Info>Building the report (standard).</Info>
+</InfoWarnings>

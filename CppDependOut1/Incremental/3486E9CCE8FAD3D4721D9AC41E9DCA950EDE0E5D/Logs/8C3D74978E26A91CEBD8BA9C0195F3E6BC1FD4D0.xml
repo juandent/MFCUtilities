@@ -1,0 +1,59 @@
+<log>
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="417" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="7629" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="8087" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="8544" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="9070" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="10251" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="10447" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="10974" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="10985" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="11001" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="11159" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="11176" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="13072" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="13090" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="13707" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="13932" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="14009" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="14019" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="warning" id="pp_nonportable_path" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="6" col="10" msg="non-portable path to file &apos;&quot;resource.h&quot;&apos;; specified path differs in case from file name on disk" />
+ <error level="warning" id="warn_pp_macro_hides_keyword" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="10" col="9" msg="keyword is hidden by macro definition" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="27" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="27" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="28" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="28" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="29" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="29" col="1" msg="zero as null pointer constant" />
+ <error level="error" id="err_no_member" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="64" col="2" msg="no member named &apos;AfxAssertFailedLine&apos; in the global namespace" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="65" col="50" msg="use of old-style cast" />
+ <error level="error" id="err_no_member" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="67" col="2" msg="no member named &apos;AfxAssertFailedLine&apos; in the global namespace" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="68" col="50" msg="use of old-style cast" />
+ <error level="error" id="err_no_member" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="70" col="2" msg="no member named &apos;AfxAssertFailedLine&apos; in the global namespace" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="71" col="49" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="101" col="17" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="101" col="17" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="148" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="148" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="149" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="149" col="2" msg="use of old-style cast" />
+ <error level="error" id="err_member_call_without_object" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="149" col="2" msg="call to non-static member function without an object argument" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="150" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="150" col="2" msg="use of old-style cast" />
+ <error level="error" id="err_member_call_without_object" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="150" col="2" msg="call to non-static member function without an object argument" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="151" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="151" col="2" msg="use of old-style cast" />
+ <error level="error" id="err_member_call_without_object" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="151" col="2" msg="call to non-static member function without an object argument" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="152" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="152" col="2" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="153" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="153" col="1" msg="zero as null pointer constant" />
+ <error level="warning" id="pp_disabled_macro_expansion" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="166" col="31" msg="disabled expansion of recursive macro" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="168" col="51" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="171" col="4" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="190" col="30" msg="use of old-style cast" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="191" col="31" msg="use of old-style cast" />
+ <error level="error" id="err_expected" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="200" col="2" msg="expected &apos;}&apos;" />
+ <error level="error" id="err_expected" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="200" col="2" msg="expected &apos;}&apos;" />
+ <error level="error" id="err_expected" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\OutputWnd.cpp" line="200" col="2" msg="expected &apos;}&apos;" />
+</log>

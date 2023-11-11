@@ -100,7 +100,7 @@ namespace Model
 			m_type = isCreditCard ? AccountType::CreditCard : AccountType::BankAccount;
 
 		}
-		void SetCurrencyType(Util::Dolares dollar_amount)
+		void SetCurrencyType(util::Dolares dollar_amount)
 		{
 			if (m_type == AccountType::BankAccount)
 			{
@@ -192,8 +192,8 @@ namespace Model
 		FK(Account) std::string		m_belongs_to_account_fid;
 		date::sys_days				m_lineDate;
 		FK(Concept) std::string		m_concept_fid;
-		Util::Colones						m_amountInLocal;
-		Util::Dolares						m_amountInDollars;
+		util::Colones						m_amountInLocal;
+		util::Dolares						m_amountInDollars;
 
 		FK(Category)				Nullable::Type<std::string>	m_category_fid;
 		bool						m_enabled;

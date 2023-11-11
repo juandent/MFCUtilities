@@ -1,0 +1,71 @@
+// stdafx.h: This is a precompiled header file.
+// Files listed below are compiled only once, improving build performance for future builds.
+// This also affects IntelliSense performance, including code completion and many code browsing features.
+// However, files listed here are ALL re-compiled if any one of them is updated between builds.
+// Do not add files here that you will be updating frequently as this negates the performance advantage.
+
+#ifndef STDAFX_H
+#define STDAFX_H
+
+#pragma once
+
+
+#if 1
+
+#include <sqlite_orm/sqlite_orm.h>
+#include <vector>
+#include <string>
+#include <regex>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <ios>
+#include <codecvt>
+#include <sstream>
+#include <memory>
+#include <set>
+#include <unordered_set>
+#include <map>
+#include <functional>
+#include <chrono>
+// #include <date/date.h>
+#include <date/tz.h>
+#include <filesystem>
+#include <numeric>
+#include <algorithm>
+// new 5 includes
+#include <tuple>
+#include <future>
+#include <thread>
+#include <exception>
+#include <stdexcept>
+//#include "Utilities.h"
+//#include <JDGridCtrl.h>
+#include <FixedPoint/arithmetic_types.h>
+#include <any>
+#include <variant>
+#endif
+
+
+// add headers that you want to pre-compile here
+#include "framework.h"
+
+#if 1
+#include <DLLs.h>
+#include <JDGridCtrl.h>
+// #include "Utilities.h"
+
+
+
+#else
+#include <afxwin.h>
+#include <afxwin.h>
+#include <afxwin.h>
+#include <afxcontrolbars.h>
+#include <afxext.h>
+#include "Utilities.h"
+#endif
+
+
+
+#endif //PCH_H

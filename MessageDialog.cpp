@@ -3,11 +3,13 @@
 
 #include "stdafx.h"
 
-#include <FixedPoint/arithmetic_types.h>
+// #include <FixedPoint/arithmetic_types.h>
 
 #include "MessageDialog.h"
 
-#include "Util.h"
+import util;
+
+// #include "Util.h"
 #include "JDMFCLibrary/Resource.h"
 
 
@@ -25,9 +27,9 @@ CMessageDialog::CMessageDialog(CWnd* pParent /*=NULL*/)
 }
 
 CMessageDialog::CMessageDialog(const std::string & msg, const std::string& title, CWnd * pParent)
-	: CDialog(IDD_MESSAGE_DIALOG, pParent), m_title{ Util::to_cstring(title)}
+	: CDialog(IDD_MESSAGE_DIALOG, pParent), m_title{ util::to_cstring(title)}
 {
-	m_msgText = Util::to_cstring(msg);
+	m_msgText = util::to_cstring(msg);
 }
 
 CMessageDialog::~CMessageDialog()

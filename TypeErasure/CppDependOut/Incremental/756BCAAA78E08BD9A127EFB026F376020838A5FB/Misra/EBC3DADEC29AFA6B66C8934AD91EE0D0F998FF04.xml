@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\libloaderapi.h"><violation beginline="714" endline="714" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="222" endline="222" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\shellapi.h"><violation beginline="87" endline="87" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\sysinfoapi.h"><violation beginline="281" endline="281" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\winuser.h"><violation beginline="3585" endline="3585" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="9101" endline="9101" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="10256" endline="10256" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="10580" endline="10580" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\gridurlcell.cpp"><violation beginline="12" endline="12" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="43" endline="43" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="71" endline="71" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="71" endline="71" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="71" endline="71" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="97" endline="97" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="128" endline="128" rule="Rule6-3-1" ruleset="Statements">
+</violation><violation beginline="133" endline="133" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="179" endline="179" rule="Rule6-6-5" ruleset="Statements">
+</violation></file></cppdepend-plugin>

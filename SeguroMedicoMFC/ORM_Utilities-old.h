@@ -1,7 +1,9 @@
 #pragma once
 
-// import Util;
-#include "..\JDMFCLibrary/Util.h"
+// import util;
+//#include "..\JDMFCLibrary/util.h"
+import util;
+//using namespace util;
 
 enum class Operation { doUpdate = 1, doInsert = 2 };
 
@@ -17,7 +19,7 @@ std::optional<Table> getCurrent(CEdit& editCtrl)
 	{
 		return std::nullopt;
 	}
-	auto id_str = Util::from_cstring(rId);
+	auto id_str = util::from_cstring(rId);
 	auto id = std::stoi(id_str);
 	auto record = Storage::getStorage().get_optional < Table>(id);
 	///////////	
@@ -34,13 +36,13 @@ Operation whatOperation(CEdit& editCtrl)
 template<typename Table>
 void setIdFromRecord(CEdit& editCtrl, int pk)
 {
-	editCtrl.SetWindowTextW(Util::to_cstring(pk));
+	editCtrl.SetWindowTextW(util::to_cstring(pk));
 }
 
 template<typename Data>
 void SetText(CEdit& edit_box, Data data)
 {
-	edit_box.SetWindowTextW(Util::to_cstring(data));
+	edit_box.SetWindowTextW(util::to_cstring(data));
 }
 
 inline void NullText(CEdit& edit_box)
@@ -50,9 +52,9 @@ inline void NullText(CEdit& edit_box)
 
 inline void SetColones(CEdit& edit_box, double amount)
 {
-	Util::Colones col{ amount };
-	auto col_str = Util::to_string(col);
-	auto str = Util::to_cstring(col_str);
+	util::Colones col{ amount };
+	auto col_str = util::to_string(col);
+	auto str = util::to_cstring(col_str);
 	edit_box.SetWindowTextW(str);
 }
 
@@ -60,17 +62,17 @@ inline void SetDolares(CEdit& edit_box, double amount)
 {
 	// SetAmount(edit_box, amount);
 	
-	Util::Dolares col{ amount };
-	CString str = Util::to_cstring(col);
-	// CString str = Util::dollars_to_cstring(col);
+	util::Dolares col{ amount };
+	CString str = util::to_cstring(col);
+	// CString str = util::dollars_to_cstring(col);
 	edit_box.SetWindowTextW(str);
 }
-inline Util::Dolares GetDolares(CEdit& edit_box)
+inline util::Dolares GetDolares(CEdit& edit_box)
 {
 	CString str;
 	edit_box.GetWindowTextW(str);
 
-	Util::Dolares dollars{ Util::Str::from_dollars_cstring(str) };
+	util::Dolares dollars{ util::Str::from_dollars_cstring(str) };
 	return dollars;
 }
 
@@ -79,27 +81,27 @@ inline Util::Dolares GetDolares(CEdit& edit_box)
 template<typename T> requires std::is_arithmetic<T>::value
 inline void SetAmount(CEdit & edit_box, T amount)
 {
-	auto str = Util::to_cstring(amount);
+	auto str = util::to_cstring(amount);
 	edit_box.SetWindowTextW(str);
 }
 
 #if 0
 inline void SetAmount(CEdit& edit_box, double amount)
 {
-	auto str = Util::to_cstring(amount);
+	auto str = util::to_cstring(amount);
 	edit_box.SetWindowTextW(str);
 }
 
 inline void SetAmount(CEdit& edit_box, long long amount)
 {
-	auto str = Util::to_cstring(amount);
+	auto str = util::to_cstring(amount);
 	edit_box.SetWindowTextW(str);
 }
 #endif
 
 inline void SetLongLong(CEdit& edit_box, long long amount)
 {
-	auto str = Util::to_cstring(amount);
+	auto str = util::to_cstring(amount);
 	edit_box.SetWindowTextW(str);
 }
 
@@ -114,7 +116,7 @@ struct IdManager
 	{}
 	void SetId()
 	{
-		editCtrl.SetWindowTextW(Util::to_cstring(record->*key));
+		editCtrl.SetWindowTextW(util::to_cstring(record->*key));
 	}
 	std::optional<Table> GetIdToCurrent()
 	{
@@ -125,7 +127,7 @@ struct IdManager
 
 inline void SetDate(CDateTimeCtrl& ctrl, std::chrono::sys_days sysdate)
 {
-	auto date = Util::to_ole_date_time(sysdate);
+	auto date = util::to_ole_date_time(sysdate);
 	ctrl.SetTime(date);
 }
 
@@ -133,7 +135,7 @@ inline std::chrono::sys_days GetDate(CDateTimeCtrl& ctrl)
 {
 	COleDateTime rOleDateTime;
 	ctrl.GetTime(rOleDateTime);
-	std::chrono::sys_days date = Util::to_sys_days(rOleDateTime);
+	std::chrono::sys_days date = util::to_sys_days(rOleDateTime);
 	return date;
 }
 
@@ -143,7 +145,7 @@ inline std::string GetText(CEdit& ctrl)
 	ctrl.GetWindowTextW(str);
 	if (str.IsEmpty())
 		return ""s;
-	auto s = Util::from_cstring(str);
+	auto s = util::from_cstring(str);
 	return s;
 }
 

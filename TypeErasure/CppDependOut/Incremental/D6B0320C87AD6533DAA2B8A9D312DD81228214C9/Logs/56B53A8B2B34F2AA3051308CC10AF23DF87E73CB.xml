@@ -1,0 +1,7 @@
+<log>
+ <error level="error" id="err_pp_file_not_found" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\FixedPoint\Money.cpp" line="1" col="10" msg="&apos;stdafx.h&apos; file not found" />
+ <error level="warning" id="warn_impcast_integer_sign" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\FixedPoint\Money.cpp" line="7" col="30" msg="implicit conversion changes signedness: &apos;unsigned int&apos; to &apos;int&apos;" />
+ <error level="warning" id="warn_impcast_integer_sign" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\FixedPoint\Money.cpp" line="12" col="31" msg="implicit conversion changes signedness: &apos;unsigned int&apos; to &apos;int&apos;" />
+ <error level="warning" id="warn_impcast_integer_sign" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\FixedPoint\Money.cpp" line="19" col="30" msg="implicit conversion changes signedness: &apos;unsigned int&apos; to &apos;int&apos;" />
+ <error level="warning" id="warn_impcast_integer_sign" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\FixedPoint\Money.cpp" line="24" col="31" msg="implicit conversion changes signedness: &apos;unsigned int&apos; to &apos;int&apos;" />
+</log>

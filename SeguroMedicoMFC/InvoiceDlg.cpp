@@ -8,7 +8,8 @@
 #include "ClaimDlg.h"
 #include "INSResponseDlg.h"
 #include "INSResponseLineDlg.h"
-#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+// #include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+import joinedgrid;
 
 
 // InvoiceDlg dialog
@@ -20,15 +21,15 @@ InvoiceDlg::InvoiceDlg(CWnd* pParent /*=nullptr*/)
 m_invoice_type({&m_r_consulta,&m_r_examen, &m_r_medicina, &m_r_terapia, &m_r_proc}),
 m_responseCB(m_list_ins_response, [](INSResponse& response)
 {
-		return Util::to_cstring(response.simple_dump());
+		return util::to_cstring(response.simple_dump());
 }),
 m_claimCB(m_list_reclamos, [](Claim& claim)
 {
-		return Util::to_cstring(claim.dump());
+		return util::to_cstring(claim.dump());
 }),
 m_invoiceLB(m_list_facturas, [](Invoice& invoice)
 {
-		return Util::to_cstring(invoice.simple_dump());
+		return util::to_cstring(invoice.simple_dump());
 })
 {
 
@@ -125,10 +126,10 @@ void InvoiceDlg::InitializeGridClaims(const T& t)
 
 	m_displayer_patients.reset(new GridDisplayer<Patient>(m_grid_1, std::move(otherlines), std::move(headers)));
 
-	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Text);
-	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Money);
-	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Text);
-	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Text);
+	m_grid_1.m_sortingFunctions.push_back(util::Comparison::Text);
+	m_grid_1.m_sortingFunctions.push_back(util::Comparison::Money);
+	m_grid_1.m_sortingFunctions.push_back(util::Comparison::Text);
+	m_grid_1.m_sortingFunctions.push_back(util::Comparison::Text);
 
 	m_displayer_patients->display(&Patient::id, &Patient::first_name, &Patient::last_name);
 #else
@@ -158,7 +159,7 @@ void InvoiceDlg::InitializeGridClaims(const T& t)
 
 
 	long count = otherlines.size();
-	auto strCount = Util::to_cstring(count);
+	auto strCount = util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
 	std::vector<std::string> headers{ "ID LINEA RES", "FACT ID", "MONTO CUBIERTO", "% FACT CUBIERTO", "% MONTO CUBIERTO", "TOTAL", "FECHA RES" };
@@ -179,7 +180,7 @@ void InvoiceDlg::OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/
 	if (row < 1) return;
 
 	auto response_line_id_cs = m_grid_response_lines.GetItemText(row, 1);
-	auto response_line_id_s = Util::to_string(response_line_id_cs.GetBuffer());
+	auto response_line_id_s = util::to_string(response_line_id_cs.GetBuffer());
 	auto response_line_id = std::stoi(response_line_id_s);
 
 	INSResponseLineDlg dlg;

@@ -7,7 +7,8 @@
 #include "afxdialogex.h"
 #include "DoctorDlg.h"
 #include "InvoiceDlg.h"
-#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+// #include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+import joinedgrid;
 #include "MedicationDlg.h"
 #include "PatientDlg.h"
 
@@ -20,19 +21,19 @@ ClaimDlg::ClaimDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_ClaimDlg, pParent),
 m_patientCB(m_patient_list, [](Patient& patient)
 {
-	return Util::to_cstring(patient.simple_dump());
+	return util::to_cstring(patient.simple_dump());
 }),
 m_doctorCB(m_doctor_list, [](Doctor& doctor)
 {
-	return Util::to_cstring(doctor.simple_dump());
+	return util::to_cstring(doctor.simple_dump());
 }),
 m_medicationCB(m_medicamento_list, [](Medication& med)
 {
-	return Util::to_cstring(med.simple_dump());
+	return util::to_cstring(med.simple_dump());
 }),
 m_claimLB(m_claim_list, [](Claim& claim)
 {
-		return Util::to_cstring(claim.dump());
+		return util::to_cstring(claim.dump());
 }),
 m_acknowledgement({ &m_acknowledge_none, &m_acknowledge_partial, &m_acknowledge_full  })
 {
@@ -226,7 +227,7 @@ void ClaimDlg::InitializeGrid(const T& t)
 		where(t));
 #endif
 	long count = otherlines.size();
-	auto strCount = Util::to_cstring(count);
+	auto strCount = util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
 	std::vector<std::string> headers{ "ID FAC", "FAC NUMERO", "FAC MONTO", "ID RECLAMO", "FECHA INICIAL", "FECHA ENTREGA", "MONTO RECLAMO", "ID RESPUESTA INS", "DESCRIPCION" };
@@ -445,7 +446,7 @@ void ClaimDlg::OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
 	if (row < 1) return;
 
 	auto invoice_id_cs = m_grid_claims.GetItemText(row, 1);
-	auto invoice_id_s = Util::to_string(invoice_id_cs.GetBuffer());
+	auto invoice_id_s = util::to_string(invoice_id_cs.GetBuffer());
 	auto invoice_id = std::stoi(invoice_id_s);
 
 	InvoiceDlg dlg;

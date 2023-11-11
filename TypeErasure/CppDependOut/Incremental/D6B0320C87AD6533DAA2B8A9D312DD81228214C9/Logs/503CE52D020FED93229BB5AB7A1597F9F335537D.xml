@@ -1,0 +1,7 @@
+<log>
+ <error level="warning" id="warn_pp_macro_hides_keyword" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary\dllmain.cpp" line="9" col="9" msg="keyword is hidden by macro definition" />
+ <error level="warning" id="warn_cxx98_compat_nullptr" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary\dllmain.cpp" line="12" col="56" msg="&apos;nullptr&apos; is incompatible with C++98" />
+ <error level="warning" id="warn_missing_field_initializers" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary\dllmain.cpp" line="12" col="64" msg="missing field &apos;hResource&apos; initializer" />
+ <error level="warning" id="pp_disabled_macro_expansion" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary\dllmain.cpp" line="40" col="3" msg="disabled expansion of recursive macro" />
+ <error level="warning" id="warn_missing_prototype" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary\dllmain.cpp" line="15" col="1" msg="no previous prototype for function &apos;DllMain&apos;" />
+</log>

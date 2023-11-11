@@ -7,7 +7,7 @@ struct IDisplayer
 	virtual void display() = 0;
 };
 
-namespace Util
+namespace util
 {
 	inline CString to_cstring(const std::optional<int>& o)
 	{

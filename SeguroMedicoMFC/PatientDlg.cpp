@@ -15,7 +15,7 @@ PatientDlg::PatientDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_PatientDlg, pParent),
 m_patientLB(m_list_patients, [](Patient& patient)
 {
-		return Util::to_cstring(patient.simple_dump());
+		return util::to_cstring(patient.simple_dump());
 })
 {
 
@@ -62,8 +62,8 @@ void PatientDlg::OnBnClickedAplicarPaciente()
 		return;
 	};
 
-	auto name = Util::from_cstring(rNombre);
-	auto last_name = Util::from_cstring(rApellidos);
+	auto name = util::from_cstring(rNombre);
+	auto last_name = util::from_cstring(rApellidos);
 
 	if (!patient)
 	{

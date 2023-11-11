@@ -10,16 +10,16 @@
 
 #include <sqlite_orm/sqlite_orm.h>
 
-import Util;
+import util;
 
 ////// Dolares
 
-inline std::string DolaresToString(Util::Dolares coin) {
+inline std::string DolaresToString(util::Dolares coin) {
 	std::string temp = coin;
 	return temp;
 }
 
-inline Util::Dolares DolaresFromString(const std::string &s) {
+inline util::Dolares DolaresFromString(const std::string &s) {
 	using namespace std;
 
 	string chars_to_remove = "[$]|[¢]|,|";
@@ -48,7 +48,7 @@ namespace sqlite_orm {
 	 *  or `INTEGER` (int/long/short etc) respectively.
 	 */
 	template<>
-	struct type_printer<Util::Dolares> : public text_printer{};
+	struct type_printer<util::Dolares> : public text_printer{};
 
 	/**
 	 *  This is a binder class. It is used to bind c++ values to sqlite queries.
@@ -58,9 +58,9 @@ namespace sqlite_orm {
 	 *  More here https://www.sqlite.org/c3ref/bind_blob.html
 	 */
 	template<>
-	struct statement_binder<Util::Dolares> {
+	struct statement_binder<util::Dolares> {
 
-		int bind(sqlite3_stmt *stmt, int index, const Util::Dolares &value) {
+		int bind(sqlite3_stmt *stmt, int index, const util::Dolares &value) {
 			return statement_binder<std::string>().bind(stmt, index, DolaresToString(value));
 			//  or return sqlite3_bind_text(stmt, index++, GenderToString(value).c_str(), -1, SQLITE_TRANSIENT);
 		}
@@ -71,8 +71,8 @@ namespace sqlite_orm {
 	 *  a string from mapped object.
 	 */
 	template<>
-	struct field_printer<Util::Dolares> {
-		std::string operator()(const Util::Dolares &t) const {
+	struct field_printer<util::Dolares> {
+		std::string operator()(const util::Dolares &t) const {
 			return DolaresToString(t);
 		}
 	};
@@ -84,12 +84,12 @@ namespace sqlite_orm {
 	 *  functions which return a mapped type value.
 	 */
 	template<>
-	struct row_extractor<Util::Dolares> {
-		Util::Dolares extract(const char *row_value) {
+	struct row_extractor<util::Dolares> {
+		util::Dolares extract(const char *row_value) {
 			return DolaresFromString(row_value);
 		}
 
-		Util::Dolares extract(sqlite3_stmt *stmt, int columnIndex) {
+		util::Dolares extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			return this->extract((const char*)str);
 		}

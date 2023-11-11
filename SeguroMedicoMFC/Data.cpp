@@ -96,7 +96,6 @@ void Storage_Impl::copy_old_to_new()
 	{
 		fresh.replace(record);
 	}
-
 }
 
 void Storage::backup_db()
@@ -269,7 +268,7 @@ void Storage::fill_db_with_test_data()
 	int d = (unsigned)now.day();
 	sys_days now_dp = now;
 
-	string dayName = Util::weekDay(now_dp);
+	string dayName = util::weekDay(now_dp);
 
 
 	//auto x = sun[last]/may/2018;
@@ -303,7 +302,7 @@ void Storage::fill_db_with_test_data()
 	osss << yymd;
 	string str = osss.str();
 	sys_days yymd_dp = yymd;
-	string ss = Util::weekDay(yymd_dp);
+	string ss = util::weekDay(yymd_dp);
 
 
 	year_month_day ymd{ year{2018}, month{8}, day{21} };
@@ -500,7 +499,7 @@ std::string Claim::dump() const
 {
 	Patient patient = Storage::getStorage().get<Patient>(this->fkey_patient);
 	Doctor doctor = Storage::getStorage().get<Doctor>(this->fkey_doctor);
-	std::string str = std::to_string(id) + " - "s + Util::to_string(start_date) + " - "s + Util::to_string(submission_date) + " "s + patient.name() + " Dr(a) "s + doctor.name();
+	std::string str = std::to_string(id) + " - "s + util::to_string(start_date) + " - "s + util::to_string(submission_date) + " "s + patient.name() + " Dr(a) "s + doctor.name();
 	return str;
 
 }

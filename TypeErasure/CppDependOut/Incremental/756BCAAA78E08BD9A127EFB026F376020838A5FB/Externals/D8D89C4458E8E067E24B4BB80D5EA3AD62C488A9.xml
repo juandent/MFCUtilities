@@ -1,0 +1,160 @@
+<Externals>
+<cr access="public" depth="0" kind="class" name="CInPlaceEdit" id="cbb017ebc4991edcdc6675b64565c2db_e0c25f497f093e12a4dbc779d6b028b2" file="3" linestart="32" lineend="76"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagLOGFONTW" id="eea1600428b8c0389267c143023b75b5_d7c341d28b547ded77d6b8f1a6bd0c01" file="4" linestart="1467" lineend="1483"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagNONCLIENTMETRICSW" id="a7d1a534e55e1099364c05856f97493b_06f2d513a1b765e2de9256903e619b14" file="5" linestart="12459" lineend="12479">
+<fl name="cbSize" id="a7d1a534e55e1099364c05856f97493b_0f92de9c9f5859a65ef03d7d68d009a0" file="5" linestart="12461" lineend="12461" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<c name="tagNONCLIENTMETRICSW" id="a7d1a534e55e1099364c05856f97493b_a8e1299eef08d4a1c3eb274a1a8c2be1" file="5" linestart="12459" lineend="12459" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="CRuntimeClass" id="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065" file="6" linestart="455" lineend="485" previous="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065"/>
+<cr access="none" depth="2" kind="class" name="CFont" id="6570f3a0862649ad18d4fd7d746ae1b2_b0075137739bf109ffeb57740cdc654b" file="7" linestart="418" lineend="446" previous="6570f3a0862649ad18d4fd7d746ae1b2_b0075137739bf109ffeb57740cdc654b">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_8083dbf989463f3c442274c501732b23"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="1" kind="class" name="CDC" id="6570f3a0862649ad18d4fd7d746ae1b2_6d2c85bc74d48152ae931ba4af945ebb" file="7" linestart="560" lineend="985" previous="6570f3a0862649ad18d4fd7d746ae1b2_6d2c85bc74d48152ae931ba4af945ebb">
+<base access="public">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</base>
+<m name="GetSafeHdc" id="6570f3a0862649ad18d4fd7d746ae1b2_9d02819cf68175924d6ddf4e176ff398" file="7" linestart="569" lineend="569" access="public">
+<fpt cc="x86_thiscall" const="true" proto="HDC">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_94bef293ec909b1e002d49c3d83c54ec"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</fpt>
+</m>
+<m name="FromHandle" id="6570f3a0862649ad18d4fd7d746ae1b2_3eda55996b56a5b68f6e8d798ef9d5bf" file="7" linestart="572" lineend="572" access="public" storage="static">
+<Attributed/>
+<p name="hDC" proto="HDC" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_94bef293ec909b1e002d49c3d83c54ec"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+</m>
+<m name="SelectObject" id="6570f3a0862649ad18d4fd7d746ae1b2_56fdf69acea89cf118a4fe1310b4323d" file="7" linestart="624" lineend="624" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="CFont *">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_b0075137739bf109ffeb57740cdc654b"/>
+</rt>
+</pt>
+</fpt>
+<p name="pFont" proto="CFont *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_b0075137739bf109ffeb57740cdc654b"/>
+</rt>
+</pt>
+</p>
+</m>
+</cr>
+<f name="__debugbreak" id="a8a852616d3504d5b65f99b78e7835df_09b7f414b2a283fb5618aec2725950a0" file="8" linestart="693" lineend="693" extC="true" implicit="true" access="none" storage="extern">
+<fpt cc="cdecl" proto="void">
+<bt name="void"/>
+</fpt>
+</f>
+<f name="GetDC" id="a7d1a534e55e1099364c05856f97493b_47f7935d8a5a9d64b832536a9ff80d7e" file="5" linestart="8293" lineend="8297" extC="true" imported="true" access="none">
+<Attributed/>
+<p name="hWnd" proto="HWND" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+</f>
+<f name="ReleaseDC" id="a7d1a534e55e1099364c05856f97493b_6cadb7f1b12b4119c4638ac512fb6be6" file="5" linestart="8336" lineend="8341" extC="true" imported="true" access="none">
+<Attributed/>
+<p name="hWnd" proto="HWND" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+<p name="hDC" proto="HDC" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="5dcdfe14c74d4838d7879f540f5cb3fd_94bef293ec909b1e002d49c3d83c54ec"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+</f>
+<f name="SystemParametersInfoW" id="a7d1a534e55e1099364c05856f97493b_e680d18debd1088df179d905be8ce3e2" file="5" linestart="12843" lineend="12851" extC="true" imported="true" access="none">
+<Attributed/>
+<p name="uiAction" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="uiParam" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="pvParam" proto="PVOID" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<bt name="void"/>
+</pt>
+</Tdef>
+</p>
+<p name="fWinIni" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</f>
+<f name="AfxAssertFailedLine" id="b51b67289ce36e487ca03ddebdbacddb_58f26dd8be3e0f31d132fd31ee5a1661" file="6" linestart="311" lineend="321" access="none" inline="true" hasbody="true" isdef="true">
+<Attributed/>
+<p name="lpszFileName" proto="LPCSTR" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<bt name="char"/>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</p>
+<p name="nLine" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</f>
+</Externals>

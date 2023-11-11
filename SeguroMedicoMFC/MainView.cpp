@@ -5,7 +5,8 @@
 #include "SeguroMedicoMFC.h"
 #include "MainView.h"
 #include "Data.h"
-#include "..\TesterForMFCUtilitiesDLL/GridDisplayer.h"
+// #include "..\TesterForMFCUtilitiesDLL/GridDisplayer.h"
+import tablegrid;
 #include <tuple>
 
 
@@ -21,15 +22,15 @@ MainView::MainView()
 	: CFormView(IDD_MainView),
 m_doctoresCB(m_lista_doctores, [](Doctor& doctor)
 {
-		return Util::to_cstring(doctor.simple_dump());
+		return util::to_cstring(doctor.simple_dump());
 }),
 m_pacientesCB(m_lista_pacientes, [](Patient& patient)
 {
-		return Util::to_cstring(patient.simple_dump());
+		return util::to_cstring(patient.simple_dump());
 }),
 m_claimsCB(m_list_claim_ids, [](Claim& claim)
 {
-		return Util::to_cstring(claim.simple_dump());
+		return util::to_cstring(claim.simple_dump());
 })
 {
 
@@ -148,10 +149,10 @@ void MainView::InitializeGridClaims(const T& t)
 
 	m_displayer_patients.reset( new GridDisplayer<Patient> (m_grid_1, std::move(otherlines), std::move(headers)));
 	
-	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Text);
-	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Money);
-	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Text);
-	m_grid_1.m_sortingFunctions.push_back(Util::Comparison::Text);
+	m_grid_1.m_sortingFunctions.push_back(util::Comparison::Text);
+	m_grid_1.m_sortingFunctions.push_back(util::Comparison::Money);
+	m_grid_1.m_sortingFunctions.push_back(util::Comparison::Text);
+	m_grid_1.m_sortingFunctions.push_back(util::Comparison::Text);
 	
 	m_displayer_patients->display(&Patient::id, &Patient::first_name, &Patient::last_name);
 #else
@@ -338,7 +339,7 @@ void MainView::InitializeGridClaims(const T& t)
 #endif
 
 	long count = otherlines.size();
-	auto strCount = Util::to_cstring(count);
+	auto strCount = util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
 #ifndef  NESTED_SELECT	
@@ -595,7 +596,7 @@ void MainView::OnGrid2StartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
 	if (row < 1) return;
 
 	auto invoice_id_cs = m_grid_2.GetItemText(row, 3);
-	auto invoice_id_s = Util::to_string(invoice_id_cs.GetBuffer());
+	auto invoice_id_s = util::to_string(invoice_id_cs.GetBuffer());
 	auto invoice_id = std::stoi(invoice_id_s);
 
 	InvoiceDlg dlg;
@@ -614,7 +615,7 @@ void MainView::OnGrid3StartSelChange(NMHDR* pNotifyStruct, LRESULT* /*pResult*/)
 	if (row < 1) return;
 
 	auto invoice_id_cs = m_pendingInvoicesGrid.GetItemText(row, 4);
-	auto invoice_id_s = Util::to_string(invoice_id_cs.GetBuffer());
+	auto invoice_id_s = util::to_string(invoice_id_cs.GetBuffer());
 	auto invoice_id = std::stoi(invoice_id_s);
 
 	InvoiceDlg dlg;
@@ -634,7 +635,7 @@ void MainView::OnGrid1StartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 	if (row < 1) return;
 	
 	auto claim_id_cs = m_grid_1.GetItemText(row, 1);
-	auto claim_id_s = Util::to_string(claim_id_cs.GetBuffer());
+	auto claim_id_s = util::to_string(claim_id_cs.GetBuffer());
 	auto claim_id = std::stoi(claim_id_s);
 
 
@@ -669,7 +670,7 @@ void MainView::OnBnClickedBSelectReembolso()
 		return;
 	
 	auto text = m_grid_2.GetItemText(minrow, ID_REEMBOLSO_COLUMN);
-	auto str = Util::from_cstring(text);
+	auto str = util::from_cstring(text);
 	auto id_reembolso = std::stoi(str);
 	int i = 0;
 

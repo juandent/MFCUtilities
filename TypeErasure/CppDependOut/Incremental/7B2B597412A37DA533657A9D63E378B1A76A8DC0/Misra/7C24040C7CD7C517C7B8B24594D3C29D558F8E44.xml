@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\vcruntime_exception.h"><violation beginline="87" endline="87" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

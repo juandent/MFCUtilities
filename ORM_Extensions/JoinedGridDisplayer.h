@@ -13,16 +13,6 @@ inline double& extractValue(const std::unique_ptr<double>& val)
 	}
 	return null_value;
 }
-#if 0
-template<typename T> requires (!std::is_same_v<T, std::unique_ptr<double>&>)
-inline static T& extractValue(T& t)
-{
-	static double null_value = 0.0;
-	if (t)
-		return *t;
-	return null_value;
-}
-#endif
 template<typename T>
 inline static T& extractValue(std::optional<T>& opt)
 {

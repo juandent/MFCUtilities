@@ -1,7 +1,8 @@
 #include "stdafx.h"
 
-// import Util;
-#include "Util.h"
+// import util;
+// #include "util.h"
+import util;
 
 
 #include "RecordLinks.h"

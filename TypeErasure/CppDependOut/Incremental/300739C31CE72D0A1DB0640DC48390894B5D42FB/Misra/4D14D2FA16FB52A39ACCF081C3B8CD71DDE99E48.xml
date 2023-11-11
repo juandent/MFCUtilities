@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afx.h"><violation beginline="311" endline="311" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxcmn.h"><violation beginline="829" endline="829" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="829" endline="829" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxwin.h"><violation beginline="2726" endline="2726" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="2347" endline="2347" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testleaksmfc\viewtree.cpp"><violation beginline="18" endline="18" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="22" endline="22" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="23" endline="23" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="28" endline="28" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="33" endline="33" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="33" endline="33" rule="Rule5-14-1" ruleset="Statements">
+</violation><violation beginline="33" endline="33" rule="Rule5-18-1" ruleset="Statements">
+</violation><violation beginline="35" endline="35" rule="Rule5-14-1" ruleset="Statements">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testleaksmfc\viewtree.h"><violation beginline="22" endline="22" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

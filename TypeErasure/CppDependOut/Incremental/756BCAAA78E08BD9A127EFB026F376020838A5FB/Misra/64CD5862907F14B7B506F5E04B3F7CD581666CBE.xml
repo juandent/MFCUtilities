@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxdll_.h"><violation beginline="77" endline="77" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="79" endline="79" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\atltrace.h"><violation beginline="459" endline="459" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="459" endline="459" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\gridctrldll\dllmain.cpp"><violation beginline="12" endline="12" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="50" endline="50" rule="Rule6-6-5" ruleset="Statements">
+</violation></file></cppdepend-plugin>

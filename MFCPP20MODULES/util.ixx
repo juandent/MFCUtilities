@@ -52,7 +52,7 @@ namespace fs = std::filesystem;
 
 
 // Sample diagnostics class:
-namespace diag
+export namespace diag
 {
 	template<typename T>
 	struct TypeName;	// un purpose not defined!

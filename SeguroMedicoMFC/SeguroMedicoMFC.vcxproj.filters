@@ -81,12 +81,6 @@
     <ClInclude Include="..\ExpenseManagerSQLite\JoinedComboDisplayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\JoinedGridDisplayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\TesterForMFCUtilitiesDLL\GridDisplayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MainView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -124,9 +118,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="INSResponseDoc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DateBinding.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DateCalculator.h">

@@ -1,9 +1,13 @@
 #pragma once
 
-#include "..\ExpenseManagerSQLite/IDisplayer.h"
-#include "..\TesterForMFCUtilitiesDLL/GridDisplayer.h"
+// #include "..\ExpenseManagerSQLite/IDisplayer.h"
+import idisplayer;
+// #include "..\TesterForMFCUtilitiesDLL/GridDisplayer.h"
+import tablegrid;
+
 #include "Data.h"
-#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+// #include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+import joinedgrid;
 #include "BoxContents.h"
 
 

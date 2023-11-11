@@ -1,0 +1,29 @@
+<log>
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="417" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="7629" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="8087" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="8544" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="9070" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="10251" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="10447" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="10974" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="10985" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="11001" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="11159" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="11176" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="13072" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="13090" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="13707" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="13932" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="14009" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="error" id="err_pp_file_not_found" file="U:\C++\sqlite_orm\include\sqlite_orm/sqlite_orm.h" line="14019" col="10" msg="&apos;sqlite3.h&apos; file not found" />
+ <error level="warning" id="warn_pp_macro_hides_keyword" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ViewTree.cpp" line="7" col="9" msg="keyword is hidden by macro definition" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ViewTree.cpp" line="24" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ViewTree.cpp" line="24" col="1" msg="zero as null pointer constant" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ViewTree.cpp" line="33" col="18" msg="use of old-style cast" />
+ <error level="error" id="err_no_member" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ViewTree.cpp" line="34" col="2" msg="no member named &apos;AfxAssertFailedLine&apos; in the global namespace" />
+ <error level="warning" id="pp_macro_not_used" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ViewTree.cpp" line="7" col="9" msg="macro is not used" />
+ <error level="error" id="err_expected" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ViewTree.cpp" line="43" col="2" msg="expected &apos;}&apos;" />
+ <error level="error" id="err_expected" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ViewTree.cpp" line="43" col="2" msg="expected &apos;}&apos;" />
+ <error level="error" id="err_expected" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ViewTree.cpp" line="43" col="2" msg="expected &apos;}&apos;" />
+</log>

@@ -17,15 +17,15 @@ INSResponseLineDlg::INSResponseLineDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_m_INSResponseLineDlg, pParent),
 m_INSResponseLinesLB(m_list_INSResponseLines, [](INSResponseLine& line)
 {
-		return Util::to_cstring(line.simple_dump());
+		return util::to_cstring(line.simple_dump());
 }),
 m_ins_responseCB(m_list_ins_response, [](INSResponse& response)
 {
-		return Util::to_cstring(response.simple_dump());
+		return util::to_cstring(response.simple_dump());
 }),
 m_invoicesCB(m_list_facturas, [](Invoice& factura)
 {
-		return Util::to_cstring(factura.simple_dump());
+		return util::to_cstring(factura.simple_dump());
 })
 {
 

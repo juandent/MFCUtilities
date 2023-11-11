@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<InfoWarnings>
+  <Info>Begin analysis with CppDepend v2023.1.0.27</Info>
+  <Warning>Trial license will expire in 259 days.</Warning>
+  <Info>No baseline for comparison defined.</Info>
+  <Info>The parser used is Clang</Info>
+  <Info>8 Cores are used, you can change this value from the menu Tools-&gt;Options-&gt;Parser Configuration</Info>
+  <ClangError>Project:Passwords=&gt;'sqlite3.h' file not found at C:\Users\juan_\OneDrive\Documents\sqlite_orm\not_single_header_include\sqlite_orm/../../dev/error_code.h:3:10</ClangError>
+  <ClangError>Project:Passwords=&gt;expected '}' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ChildFrm.cpp:57:32</ClangError>
+  <ClangError>Project:Passwords=&gt;call to non-static member function without an object argument at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ClassView.cpp:53:2</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'AfxAssertValidObject' in the global namespace at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ClassView.cpp:166:2</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'GetSysColor' in the global namespace at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ClassView.cpp:285:28</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'AfxAssertFailedLine' in the global namespace at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\ClassView.cpp:305:3</ClangError>
+  <ClangError>Project:Passwords=&gt;'Util' is not a class, namespace, or enumeration at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationDlg.cpp:18:11</ClangError>
+  <ClangError>Project:Passwords=&gt;cannot initialize object parameter of type 'sqlite_orm::CWnd' with an expression of type 'sqlite_orm::LocationDlg' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationDlg.cpp:31:11</ClangError>
+  <ClangError>Project:Passwords=&gt;cannot initialize object parameter of type 'sqlite_orm::CDialog' with an expression of type 'sqlite_orm::LocationDlg' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationDlg.cpp:53:11</ClangError>
+  <ClangError>Project:Passwords=&gt;no matching function for call to 'getCurrent' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationDlg.cpp:83:18</ClangError>
+  <ClangError>Project:Passwords=&gt;no matching literal operator for call to 'operator""s' with arguments of types 'const char *' and 'unsigned long long', and no matching literal operator template at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationDlg.cpp:145:18</ClangError>
+  <ClangError>Project:Passwords=&gt;cannot initialize return object of type 'sqlite_orm::CObject *' with an rvalue of type 'sqlite_orm::LocationPasswordsView *' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationPasswordsView.cpp:13:1</ClangError>
+  <ClangError>Project:Passwords=&gt;cannot initialize object parameter of type 'sqlite_orm::CWnd' with an expression of type 'sqlite_orm::LocationPasswordsView' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationPasswordsView.cpp:28:13</ClangError>
+  <ClangError>Project:Passwords=&gt;cannot initialize object parameter of type 'const sqlite_orm::CFormView' with an expression of type 'const sqlite_orm::LocationPasswordsView' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationPasswordsView.cpp:53:13</ClangError>
+  <ClangError>Project:Passwords=&gt;cannot initialize object parameter of type 'sqlite_orm::CFormView' with an expression of type 'sqlite_orm::LocationPasswordsView' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationPasswordsView.cpp:100:13</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'vector' in namespace 'sqlite_orm::std' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationPasswordsView.cpp:154:7</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'string' in namespace 'sqlite_orm::std' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationPasswordsView.cpp:154:19</ClangError>
+  <ClangError>Project:Passwords=&gt;use of undeclared identifier 'headers' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationPasswordsView.cpp:154:27</ClangError>
+  <ClangError>Project:Passwords=&gt;cannot initialize object parameter of type 'sqlite_orm::CDialog' with an expression of type 'sqlite_orm::PasswordDlg' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationPasswordsView.cpp:188:6</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'touppercase' in namespace 'sqlite_orm::Util' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\LocationPasswordsView.cpp:286:20</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'LoadImageW' in the global namespace at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\MainFrm.cpp:256:34</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'AfxGetResourceHandle' in the global namespace at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\MainFrm.cpp:256:46</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'GetSystemMetrics' in the global namespace at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\MainFrm.cpp:256:151</ClangError>
+  <ClangError>Project:Passwords=&gt;cannot initialize object parameter of type 'sqlite_orm::CWnd' with an expression of type 'sqlite_orm::PasswordDlg' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\PasswordDlg.cpp:36:11</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'chrono' in namespace 'sqlite_orm::std' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\PasswordDlg.cpp:104:7</ClangError>
+  <ClangError>Project:Passwords=&gt;reference to overloaded function could not be resolved; did you mean to call it? at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\PasswordDlg.cpp:106:22</ClangError>
+  <ClangError>Project:Passwords=&gt;use of overloaded operator '&gt;&gt;' is ambiguous (with operand types 'sqlite_orm::CEdit' and 'int') at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\PasswordDlg.cpp:110:7</ClangError>
+  <ClangError>Project:Passwords=&gt;expected namespace name at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\Passwords.cpp:242:18</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'Buffer' in namespace 'sqlite_orm::Util' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\Passwords.cpp:249:8</ClangError>
+  <ClangError>Project:Passwords=&gt;expected '(' for function-style cast or type construction at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\Passwords.cpp:249:22</ClangError>
+  <ClangError>Project:Passwords=&gt;use of undeclared identifier 'buffer' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\Passwords.cpp:249:24</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'from_cstring' in namespace 'sqlite_orm::Util' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\Passwords.cpp:265:24</ClangError>
+  <ClangError>Project:Passwords=&gt;no matching constructor for initialization of 'sqlite_orm::CMFCPropertyGridProperty' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\PropertiesWnd.cpp:169:26</ClangError>
+  <ClangError>Project:Passwords=&gt;no member named 'DeleteObject' in the global namespace at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\PropertiesWnd.cpp:255:4</ClangError>
+  <ClangError>Project:Passwords=&gt;'Typelist.h' file not found at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords/..\ORM_Extensions/Connections.h:7:10</ClangError>
+  <ClangError>Project:Passwords=&gt;out-of-line definition of 'has_links' does not match any declaration in 'sqlite_orm::RecordLinks' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\RecordLinks.cpp:11:19</ClangError>
+  <ClangError>Project:Passwords=&gt;'Password' does not refer to a value at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\RecordLinks.cpp:16:29</ClangError>
+  <ClangError>Project:Passwords=&gt;out-of-line definition of 'foreignKeysExist' does not match any declaration in 'sqlite_orm::RecordLinks' at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\RecordLinks.cpp:28:19</ClangError>
+  <ClangError>Project:Passwords=&gt;'Location' does not refer to a value at C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\Passwords\RecordLinks.cpp:33:28</ClangError>
+  <Warning>Some include files are not found for the project Passwords,to see them you can activate the Clang parsing errors tab. You can specify additional include folders from Project Properties-&gt;Code To Analyze.</Warning>
+  <Info>No dependency cycle detected in Projects referencement graph.</Info>
+  <Info>Log trend metrics values.</Info>
+  <Warning>1 quality gate fail.
+  - 'Percentage Debt' value 57.87 % greater than fail threshold 30 %</Warning>
+  <Info>CppDepend analysis done. Duration: 00:00:27</Info>
+</InfoWarnings>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxmdichildwndex.h"><violation beginline="59" endline="59" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="315" endline="315" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\atlmfc\include\afxwin.h"><violation beginline="4469" endline="4469" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="4470" endline="4470" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testleaksmfc\childfrm.cpp"><violation beginline="16" endline="16" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="16" endline="16" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="16" endline="16" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="18" endline="18" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="19" endline="19" rule="Rule4-10-2" ruleset="Expressions">
+</violation><violation beginline="28" endline="28" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="33" endline="33" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="39" endline="39" rule="Rule6-6-5" ruleset="Statements">
+</violation><violation beginline="45" endline="45" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="50" endline="50" rule="Rule10-3-2" ruleset="Classes">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testleaksmfc\childfrm.h"><violation beginline="34" endline="34" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testleaksmfc\testleaksmfc.h"><violation beginline="18" endline="18" rule="Rule10-3-2" ruleset="Classes">
+</violation></file></cppdepend-plugin>

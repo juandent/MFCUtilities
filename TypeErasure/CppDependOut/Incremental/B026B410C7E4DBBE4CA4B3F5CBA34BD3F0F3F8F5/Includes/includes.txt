@@ -1,0 +1,3 @@
+c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\typeerasure\pch.h
+c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\typeerasure\pch.cpp
+c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\typeerasure\typeerasure.cpp

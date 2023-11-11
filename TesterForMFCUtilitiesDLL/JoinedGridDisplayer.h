@@ -83,12 +83,12 @@ public:
 		grid.SetSingleRowSelection(true);
 
 		grid.m_sortingFunctions.resize(NumCols + 1);
-		grid.m_sortingFunctions[0] = Util::Comparison::Text;
+		grid.m_sortingFunctions[0] = util::Comparison::Text;
 
 		int col = 1;
 		for (auto& str : headers)
 		{
-			auto head = Util::to_cstring(str);
+			auto head = util::to_cstring(str);
 			grid.SetItemText(0, col, head);
 			++col;
 		}
@@ -133,16 +133,16 @@ private:
 		CString cs;
 		if constexpr ((std::is_integral_v<FieldType> || std::is_floating_point_v<FieldType>) && ! std::is_same_v<std::remove_const_t<FieldType>, bool>)
 		{
-			grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
+			grid.m_sortingFunctions[Col + 1] = util::Comparison::Money;
 
 			if (ColonesCols::template found<Col + 1>())
 			{
-				Util::Colones c(value);
+				util::Colones c(value);
 				cs = format(c);
 			}
 			else if (DollarsCols::template found<Col + 1>())
 			{
-				Util::Dolares d(value);
+				util::Dolares d(value);
 				cs = format(d);
 			}
 			else
@@ -152,7 +152,7 @@ private:
 		}
 		else
 		{
-			grid.m_sortingFunctions[Col + 1] = Util::Comparison::Text;
+			grid.m_sortingFunctions[Col + 1] = util::Comparison::Text;
 			cs = format(value);
 		}
 		return cs;
@@ -199,7 +199,7 @@ private:
 	static CString format(T&& t)
 	{
 		// static_assert(std::is_same_v<decltype(t), T>);
-		return Util::to_cstring(std::forward<T>(t));
+		return util::to_cstring(std::forward<T>(t));
 	}
 
 	template<typename T>
@@ -207,7 +207,7 @@ private:
 	{
 		if (t)
 		{
-			return Util::to_cstring(*t);
+			return util::to_cstring(*t);
 		}
 		return L"";
 	}

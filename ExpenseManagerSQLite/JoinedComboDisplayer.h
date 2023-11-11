@@ -1,6 +1,7 @@
 #pragma once
 
-#include "IDisplayer.h"
+// #include "IDisplayer.h"
+import idisplayer;
 
 template<typename T>
 class JoinedComboDisplayer : public IDisplayer
@@ -43,7 +44,7 @@ private:
 		T* pT;
 		auto s = typeid(T).name();
 
-		return Util::to_cstring(t);
+		return util::to_cstring(t);
 	}
 
 	template<typename T>
@@ -51,7 +52,7 @@ private:
 	{
 		if (t)
 		{
-			return Util::to_cstring(*t);
+			return util::to_cstring(*t);
 		}
 		return L"";
 	}

@@ -3,9 +3,9 @@
 // #include <FixedPoint/Money.h>
 // #include "Utilities.h"
 
-import Util;
+import util;
 
-using namespace Util;
+using namespace util;
 
 #include <regex>
 #include <array>
@@ -14,12 +14,12 @@ using namespace Util;
 
 ////// Colones
 
-inline std::string ColonesToString(Util::Colones coin) {
+inline std::string ColonesToString(util::Colones coin) {
 	std::string temp = static_cast<std::string>(coin);
 	return temp;
 }
 
-inline Util::Colones ColonesFromString(const std::string &s) {
+inline util::Colones ColonesFromString(const std::string &s) {
 	using namespace std;
 
 	string chars_to_remove = "[$]|[¢]|,|";
@@ -48,7 +48,7 @@ namespace sqlite_orm {
 	 *  or `INTEGER` (int/long/short etc) respectively.
 	 */
 	template<>
-	struct type_printer<Util::Colones> : public text_printer {}; // type_printer<std::wstring> {};  // text_printer{};
+	struct type_printer<util::Colones> : public text_printer {}; // type_printer<std::wstring> {};  // text_printer{};
 
 	/**
 	 *  This is a binder class. It is used to bind c++ values to sqlite queries.
@@ -58,9 +58,9 @@ namespace sqlite_orm {
 	 *  More here https://www.sqlite.org/c3ref/bind_blob.html
 	 */
 	template<>
-	struct statement_binder<Util::Colones> {
+	struct statement_binder<util::Colones> {
 
-		int bind(sqlite3_stmt *stmt, int index, const Util::Colones &value) {
+		int bind(sqlite3_stmt *stmt, int index, const util::Colones &value) {
 			return statement_binder<std::string>().bind(stmt, index, ColonesToString(value));
 			//  or return sqlite3_bind_text(stmt, index++, GenderToString(value).c_str(), -1, SQLITE_TRANSIENT);
 		}
@@ -71,8 +71,8 @@ namespace sqlite_orm {
 	 *  a string from mapped object.
 	 */
 	template<>
-	struct field_printer<Util::Colones> {
-		std::string operator()(const Util::Colones &t) const {
+	struct field_printer<util::Colones> {
+		std::string operator()(const util::Colones &t) const {
 			return ColonesToString(t);
 		}
 	};
@@ -90,19 +90,19 @@ namespace sqlite_orm {
 		Colones extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			auto ws = row_extractor<std::wstring>::extract( (const char*)str);
-			auto s = Util::to_string(ws);
+			auto s = util::to_string(ws);
 			return ColonesFromString(s);
 		}
 	};
 #else
 #if 1	// use std::string
 	template<>
-	struct row_extractor<Util::Colones> {
-		Util::Colones extract(const char *row_value) {
+	struct row_extractor<util::Colones> {
+		util::Colones extract(const char *row_value) {
 			return ColonesFromString(row_value);
 		}
 
-		Util::Colones extract(sqlite3_stmt *stmt, int columnIndex) {
+		util::Colones extract(sqlite3_stmt *stmt, int columnIndex) {
 			auto str = sqlite3_column_text(stmt, columnIndex);
 			return this->extract((const char*)str);
 		}

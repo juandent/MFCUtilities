@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cppdepend-plugin tool="Misra">
+<file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\gridcellcheck.h"><violation beginline="39" endline="39" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="45" endline="45" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\jdgridctrl\gridctrl.h"><violation beginline="332" endline="332" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="334" endline="334" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="370" endline="370" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="370" endline="370" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="370" endline="370" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="399" endline="399" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\basiccategorygridcontroller.cpp"><violation beginline="10" endline="10" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="17" endline="17" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="22" endline="22" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="30" endline="30" rule="Rule6-4-4" ruleset="Statements">
+</violation><violation beginline="40" endline="40" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="46" endline="46" rule="Rule10-3-2" ruleset="Classes">
+</violation><violation beginline="59" endline="59" rule="Rule10-3-2" ruleset="Classes">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\basiccategorygridcontroller.h"><violation beginline="21" endline="21" rule="Rule10-3-2" ruleset="Classes">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\testerformfcutilitiesdll\igridcontroller.h"><violation beginline="14" endline="14" rule="Rule7-5-4" ruleset="Declarations">
+</violation><violation beginline="16" endline="16" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file><file path="c:\users\juan dent\c++ development\source components\utilitiesjd\mfc_utilities\utilities.h"><violation beginline="163" endline="163" rule="Rule7-5-4" ruleset="Declarations">
+</violation></file></cppdepend-plugin>

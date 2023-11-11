@@ -21,6 +21,12 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DLLs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="handle_error.ixx">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -57,6 +63,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="persistent_passwords.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="box_contents.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tablegrid.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="joinedgrid.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="radios.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="idisplayer.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orm_util.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

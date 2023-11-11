@@ -1,0 +1,191 @@
+<Externals>
+<cr access="none" depth="0" pod="true" kind="struct" name="AFX_MSGMAP_ENTRY" id="6570f3a0862649ad18d4fd7d746ae1b2_0105a5320b0c7203d6e955f483769898" file="3" linestart="2129" lineend="2137" previous="6570f3a0862649ad18d4fd7d746ae1b2_0105a5320b0c7203d6e955f483769898"/>
+<cr access="none" depth="2" kind="class" name="CWnd" id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" file="3" linestart="2181" lineend="3292" previous="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f"/>
+</rt>
+</base>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" access="public" name="AdjustType" id="6570f3a0862649ad18d4fd7d746ae1b2_1360de6429278c401b3ac8ff53263c85" file="3" linestart="2274" lineend="2274">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<e parent="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf" access="public" name="RepositionFlags" id="6570f3a0862649ad18d4fd7d746ae1b2_4d42dc68a40ede15a1f7fedd03ae9e2e" file="3" linestart="2579" lineend="2580">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+<m name="DoDataExchange" id="6570f3a0862649ad18d4fd7d746ae1b2_59be0405a42860831d1dcd5618c99ca5" file="3" linestart="2919" lineend="2919" virtual="true" access="protected">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pDX" proto="CDataExchange *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_b69452ee67832fa167ae9138ede11be1"/>
+</rt>
+</pt>
+</p>
+</m>
+</cr>
+<cr access="none" depth="3" kind="class" name="CDialog" id="6570f3a0862649ad18d4fd7d746ae1b2_32c28cd6964146c47f2994f984507464" file="3" linestart="3323" lineend="3423" previous="6570f3a0862649ad18d4fd7d746ae1b2_32c28cd6964146c47f2994f984507464">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</base>
+<m name="GetThisClass" id="6570f3a0862649ad18d4fd7d746ae1b2_b5782515d9b4a5e9d3d43949e92cb5c0" file="3" linestart="3325" lineend="3325" access="public" storage="static">
+<Attributed/>
+</m>
+<c name="CDialog" id="6570f3a0862649ad18d4fd7d746ae1b2_8667f7dc128378dd5548f71bef874033" file="3" linestart="3341" lineend="3341" explicit="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="nIDTemplate" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+<p name="pParentWnd" proto="CWnd *" isPtr="true" isLiteral="true" init="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</pt>
+</p>
+</c>
+<m name="OnInitDialog" id="6570f3a0862649ad18d4fd7d746ae1b2_1fb9ff941f940ae2408464d82ec57162" file="3" linestart="3369" lineend="3369" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+</m>
+<m name="GetThisMessageMap" id="6570f3a0862649ad18d4fd7d746ae1b2_7f864d5a6947bc8f92b75b4343152534" file="3" linestart="3422" lineend="3422" access="protected" storage="static">
+<Attributed/>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="CRuntimeClass" id="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065" file="4" linestart="455" lineend="485" previous="b51b67289ce36e487ca03ddebdbacddb_3f14b02e2ef307fcfd7c4a20988f5065"/>
+<cr access="none" depth="0" kind="class" name="CObject" id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54" file="4" linestart="541" lineend="591" previous="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="AFX_MSGMAP" id="6570f3a0862649ad18d4fd7d746ae1b2_3aefbe810673d879169b4c3b36a63767" file="3" linestart="1229" lineend="1233"/>
+<e access="none" name="AfxSig" id="211cda1356682e02b2c3a6dbf6097792_2e90b9b005cfa7d66beb4ea0a8333e48" file="5" linestart="79" lineend="254">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="AfxSig_end" id="211cda1356682e02b2c3a6dbf6097792_bb6cac538764a896e588133bd3346a48" file="5" linestart="81" lineend="81">
+<et>
+<e id="211cda1356682e02b2c3a6dbf6097792_2e90b9b005cfa7d66beb4ea0a8333e48"/>
+</et>
+</ec>
+</e>
+<cr access="none" depth="0" kind="class" name="CDataExchange" id="6570f3a0862649ad18d4fd7d746ae1b2_b69452ee67832fa167ae9138ede11be1" file="3" linestart="1289" lineend="1308" previous="6570f3a0862649ad18d4fd7d746ae1b2_b69452ee67832fa167ae9138ede11be1"/>
+<cr access="none" depth="1" kind="class" name="CCmdTarget" id="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f" file="3" linestart="1713" lineend="1885" previous="6570f3a0862649ad18d4fd7d746ae1b2_6e953593a2f476eb7fbef4099c87879f">
+<base access="public">
+<rt>
+<cr id="b51b67289ce36e487ca03ddebdbacddb_78c3f3be4aec419b9d038b4245ef4f54"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="3" kind="class" name="CGridCtrl" id="06b85c94ffd3f91b0fe4ec565d41ee6b_3ffb8ede8faa1bdbc8c382431d434d0d" file="6" linestart="186" lineend="822" previous="06b85c94ffd3f91b0fe4ec565d41ee6b_3ffb8ede8faa1bdbc8c382431d434d0d">
+<base access="public">
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</base>
+<m name="SetRowCount" id="06b85c94ffd3f91b0fe4ec565d41ee6b_ad39c61a43895b2ada492bbd9fb2e2fc" file="6" linestart="207" lineend="207" imported="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="nRows" proto="int" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="SetColumnCount" id="06b85c94ffd3f91b0fe4ec565d41ee6b_18d5278bd66819e1b73abb3abb738d77" file="6" linestart="208" lineend="208" imported="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="nCols" proto="int" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="SetFixedRowCount" id="06b85c94ffd3f91b0fe4ec565d41ee6b_01eb70808de112699528b7aaead98354" file="6" linestart="209" lineend="209" imported="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="nFixedRows" proto="int" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="SetFixedColumnCount" id="06b85c94ffd3f91b0fe4ec565d41ee6b_2513755265e3903a77a86a188bdc8e6c" file="6" linestart="210" lineend="210" imported="true" access="public">
+<fpt cc="x86_thiscall" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fpt>
+<p name="nFixedCols" proto="int" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="SetHeaderSort" id="06b85c94ffd3f91b0fe4ec565d41ee6b_5f0e689d7af23d783bc168eb92c552f7" file="6" linestart="323" lineend="323" imported="true" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="bSortOnClick" proto="BOOL" isLiteral="true" isPrimitive="true" init="true" access2="none">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</p>
+</m>
+<e parent="06b85c94ffd3f91b0fe4ec565d41ee6b_3ffb8ede8faa1bdbc8c382431d434d0d" access="protected" name="eMouseModes" id="06b85c94ffd3f91b0fe4ec565d41ee6b_0d82b02ca68e797dbe3ed642c79bad5c" file="6" linestart="785" lineend="793">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+</e>
+</cr>
+<cr access="none" depth="4" kind="class" name="CJDGridCtrl" id="9dff0cd587200d4d80ddfd52e3bd280a_7adc6a3938a283da4713290266dfabe7" file="7" linestart="7" lineend="25">
+<base access="public">
+<rt>
+<cr id="06b85c94ffd3f91b0fe4ec565d41ee6b_3ffb8ede8faa1bdbc8c382431d434d0d"/>
+</rt>
+</base>
+</cr>
+<f name="DDX_Control" id="18df7cb1076dc60028f76c4335826f45_e3474c665927ce757c6f3f04787290c6" file="8" linestart="71" lineend="71" access="none">
+<Attributed/>
+<p name="pDX" proto="CDataExchange *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_b69452ee67832fa167ae9138ede11be1"/>
+</rt>
+</pt>
+</p>
+<p name="nIDC" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="rControl" proto="CWnd &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<rt>
+<cr id="6570f3a0862649ad18d4fd7d746ae1b2_c2fb73585603c166dbd968e2d2075baf"/>
+</rt>
+</lrf>
+</p>
+</f>
+</Externals>

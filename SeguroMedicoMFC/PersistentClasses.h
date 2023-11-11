@@ -1,8 +1,8 @@
 #pragma once
 
-// import Util;
-#include "..\JDMFCLibrary/Util.h"
-
+// import util;
+// #include "..\JDMFCLibrary/util.h"
+import util;
 
 using namespace std::string_literals;
 
@@ -35,7 +35,7 @@ struct Claim
 
 	std::string simple_dump() const
 	{
-		std::string str = std::to_string(id) + " - "s + Util::to_string(start_date) + " - "s + Util::to_string(submission_date) + " " + std::to_string(fkey_patient);
+		std::string str = std::to_string(id) + " - "s + util::to_string(start_date) + " - "s + util::to_string(submission_date) + " " + std::to_string(fkey_patient);
 		return str;
 	}
 
@@ -130,8 +130,8 @@ struct Invoice
 
 	std::string amountInColones() const
 	{
-		Util::Colones col{amount};
-		auto col_str = Util::to_string(col);
+		util::Colones col{amount};
+		auto col_str = util::to_string(col);
 		return col_str;
 	}
 	
@@ -179,8 +179,8 @@ struct INSResponse
 	}
 	std::string amountInColones() const
 	{
-		Util::Colones col{ total_a_pagar};
-		auto col_str = Util::to_string(col);
+		util::Colones col{ total_a_pagar};
+		auto col_str = util::to_string(col);
 		return col_str;
 	}
 };

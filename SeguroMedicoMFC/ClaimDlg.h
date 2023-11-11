@@ -2,7 +2,8 @@
 
 #include "BoxContents.h"
 #include "RadioButtonGroup.h"
-#include "..\ExpenseManagerSQLite/IDisplayer.h"
+// #include "..\ExpenseManagerSQLite/IDisplayer.h"
+import idisplayer;
 
 // ClaimDlg dialog
 

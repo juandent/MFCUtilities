@@ -24,8 +24,13 @@ export {
 
 
     std::chrono::sys_days today() {
-        const auto today = std::chrono::sys_days{ floor<std::chrono::days>(std::chrono::system_clock::now()) };
-        return today;
+        namespace chr = std::chrono;
+
+        auto local_now = chr::current_zone()->to_local(chr::system_clock::now());
+        chr::year_month_day ymd{ chr::floor<chr::days>(local_now) };
+        chr::sys_days today_val = ymd;
+        chr::year_month_day temp = today_val; // conversion sys_days <> year_month_day
+        return temp;
     }
 
     /**

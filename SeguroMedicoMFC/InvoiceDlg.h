@@ -1,7 +1,8 @@
 #pragma once
 
 #include "BoxContents.h"
-#include "..\ExpenseManagerSQLite/IDisplayer.h"
+// #include "..\ExpenseManagerSQLite/IDisplayer.h"
+import idisplayer;
 #include "RadioButtonGroup.h"
 
 

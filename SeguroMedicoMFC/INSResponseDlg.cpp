@@ -6,7 +6,8 @@
 #include "INSResponseDlg.h"
 #include "afxdialogex.h"
 #include "INSResponseLineDlg.h"
-#include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+// #include "..\TesterForMFCUtilitiesDLL/JoinedGridDisplayer.h"
+import joinedgrid;
 
 // INSResponseDlg dialog
 
@@ -16,7 +17,7 @@ INSResponseDlg::INSResponseDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_INSResponseDlg, pParent),
 m_list_insresponsesLB(m_list_INSResponses, [](INSResponse& response)
 {
-		return Util::to_cstring(response.simple_dump());
+		return util::to_cstring(response.simple_dump());
 })
 {
 
@@ -73,7 +74,7 @@ void INSResponseDlg::OnGridStartSelChange(NMHDR* pNotifyStruct, LRESULT*)
 	if (row < 1) return;
 
 	auto ins_response_line_id_cs = m_grid.GetItemText(row, 1);
-	auto ins_response_line_id_s = Util::to_string(ins_response_line_id_cs.GetBuffer());
+	auto ins_response_line_id_s = util::to_string(ins_response_line_id_cs.GetBuffer());
 	auto ins_response_line_id = std::stoi(ins_response_line_id_s);
 
 	INSResponseLineDlg dlg;
@@ -196,7 +197,7 @@ void INSResponseDlg::InitializeGrid(const T& t)
 	}
 	
 	long count = otherlines.size();
-	auto strCount = Util::to_cstring(count);
+	auto strCount = util::to_cstring(count);
 	// m_countMainGrid.SetWindowTextW(strCount);
 
 	std::vector<std::string> headers{ "ID", "FAC ID",  "FAC NUM", "MONTO CUBIERTO", "FAC MONTO", "% FACT CUBIERTA", "INS RESPUESTA ID" };

@@ -15,7 +15,7 @@ MedicationDlg::MedicationDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_MedicationDlg, pParent),
 m_medicationLB(m_list_medications, [](Medication& med)
 {
-		return Util::to_cstring(med.simple_dump());
+		return util::to_cstring(med.simple_dump());
 })
 {
 
@@ -79,7 +79,7 @@ void MedicationDlg::OnBnClickedApply()
 	};
 
 
-	auto name = Util::from_cstring(rNombre);
+	auto name = util::from_cstring(rNombre);
 
 	if (!medication)
 	{

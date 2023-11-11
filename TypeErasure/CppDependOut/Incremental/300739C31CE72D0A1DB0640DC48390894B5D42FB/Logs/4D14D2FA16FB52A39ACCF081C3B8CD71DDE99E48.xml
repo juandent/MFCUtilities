@@ -1,0 +1,10 @@
+<log>
+ <error level="warning" id="warn_pp_macro_hides_keyword" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ViewTree.cpp" line="6" col="9" msg="keyword is hidden by macro definition" />
+ <error level="warning" id="warn_cxx98_compat_noexcept_decl" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ViewTree.cpp" line="14" col="24" msg="noexcept specifications are incompatible with C++98" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ViewTree.cpp" line="23" col="1" msg="use of old-style cast" />
+ <error level="warning" id="warn_zero_as_null_pointer_constant" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ViewTree.cpp" line="23" col="1" msg="zero as null pointer constant" />
+ <error level="warning" id="warn_old_style_cast" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ViewTree.cpp" line="32" col="18" msg="use of old-style cast" />
+ <error level="warning" id="warn_cxx98_compat_nullptr" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ViewTree.cpp" line="33" col="2" msg="&apos;nullptr&apos; is incompatible with C++98" />
+ <error level="warning" id="warn_cxx98_compat_nullptr" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ViewTree.cpp" line="35" col="61" msg="&apos;nullptr&apos; is incompatible with C++98" />
+ <error level="warning" id="pp_macro_not_used" file="C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\TestLeaksMFC\ViewTree.cpp" line="6" col="9" msg="macro is not used" />
+</log>

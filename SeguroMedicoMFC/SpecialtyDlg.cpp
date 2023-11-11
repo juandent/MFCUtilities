@@ -15,7 +15,7 @@ SpecialtyDlg::SpecialtyDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_SpecialtyDlg, pParent),
 	m_specialtyLB{ m_specialty_list, [](Specialty& specialty)
 	{
-		return Util::to_cstring(specialty.simple_dump());
+		return util::to_cstring(specialty.simple_dump());
 	}}
 {
 
@@ -77,7 +77,7 @@ void SpecialtyDlg::OnBnClickedApply()
 	};
 
 
-	auto name = Util::from_cstring(rNombre);
+	auto name = util::from_cstring(rNombre);
 
 	if( ! specialty)
 	{

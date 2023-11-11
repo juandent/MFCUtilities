@@ -16,11 +16,11 @@ DoctorDlg::DoctorDlg(CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_DoctorDlg, pParent),
 m_doctoresLB(m_list_doctores, [](Doctor& doctor)
 {
-		return Util::to_cstring(doctor.simple_dump());
+		return util::to_cstring(doctor.simple_dump());
 }),
 m_specialtiesCB(m_cblist_Specialties, [](Specialty& specialty)
 {
-		return Util::to_cstring(specialty.simple_dump());
+		return util::to_cstring(specialty.simple_dump());
 })
 {
 
@@ -107,8 +107,8 @@ void DoctorDlg::OnBnClickedAplicarDoctor()
 		return;
 	}
 
-	auto name = Util::from_cstring(rNombre);
-	auto last_name = Util::from_cstring(rApellidos);
+	auto name = util::from_cstring(rNombre);
+	auto last_name = util::from_cstring(rApellidos);
 #if 0
 	auto ret = setlocale(LC_ALL, "en-US");
 	auto id = GetThreadLocale();

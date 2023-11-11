@@ -142,7 +142,9 @@ void LocationPasswordsView::InitializeGridPasswords(const T& t)
 
 		where(t),
 
-		order_by(alias_column<als_p>(&Password::begining_date)).desc());
+		//order_by(alias_column<als_p>(&Password::begining_date)).desc());
+		multi_order_by(	order_by(alias_column<als_p>(&Password::begining_date)).desc(), 
+						order_by(alias_column<als_p>(&Password::id)).desc()));
 
 
 
