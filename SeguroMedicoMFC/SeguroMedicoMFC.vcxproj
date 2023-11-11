@@ -125,13 +125,13 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED;_HAS_CXX20=1;_HAS_CXX17=1</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED;_HAS_CXX20=1;_HAS_CXX17=1;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>U:\C++\sqlite_orm\include;Q:\Components\vcpkg\installed\x64-windows\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary</AdditionalIncludeDirectories>
       <EnableModules>true</EnableModules>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
-      <ShowIncludes>true</ShowIncludes>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -158,7 +158,7 @@ copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utili
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED;_HAS_CXX20=1;_HAS_CXX17=1</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED;_HAS_CXX20=1;_HAS_CXX17=1;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>U:\C++\sqlite_orm\include;Q:\Components\vcpkg\installed\x64-windows\include;..\SeguroMedicoMFC;..\;..\JDGridCtrl;..\JDMFCLibrary</AdditionalIncludeDirectories>
@@ -262,7 +262,7 @@ copy "C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utili
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions);_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_AFX;SQLITE_ORM_OPTIONAL_SUPPORTED;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>U:\C++\sqlite_orm\include;Q:\Components\vcpkg\installed\x64-windows\include;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\SeguroMedicoMFC;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDGridCtrl;C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\JDMFCLibrary;ignore ..\ExpenseManagerSQLite;ignore C:\Users\Juan Dent\C++ Development\Source Components\UtilitiesJD\MFC_Utilities\date;ignore C:\Components\Catch2\_binary_\CMakeFiles\Export\include;ignore C:\Components\sqlite_orm\_binary_\tests\third_party\sqlite\sqlite-amalgamation-3210000</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>

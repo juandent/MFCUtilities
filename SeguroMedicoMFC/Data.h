@@ -28,6 +28,8 @@ import date_binding;
 
 #include "PersistentClasses.h"
 
+import one_drive;
+
 class Storage_Impl
 {
 private:
@@ -41,10 +43,9 @@ private:
 
 	// Real DB:
 #ifndef _DEBUG
-	static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite" };
+	inline static std::string db_name = one_drive_path("\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC.sqlite");
 #else
-	// Working DB:
-	static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC - Experiments.sqlite" };
+	inline static std::string db_name = one_drive_path("\\Health\\SeguroMedicoMFC\\SeguroMedicoMFC - Experiments.sqlite");
 #endif
 };
 
@@ -158,7 +159,8 @@ inline auto& Storage_Impl::get_old_storage()
 	static int flag = 0;
 
 	// this file will start full
-	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\old.sqlite" };
+	// constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\old.sqlite" };
+	std::string db_name = one_drive_path("\\Health\\SeguroMedicoMFC\\old.sqlite");
 
 	constexpr int version = 2;
 	
@@ -257,8 +259,9 @@ inline auto& Storage_Impl::get_new_storage()
 
 	static int flag = 0;
 	// this file will start empty
-	constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\New.sqlite" };
-	
+	// constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Health\\SeguroMedicoMFC\\New.sqlite" };
+	std::string db_name = one_drive_path("\\Health\\SeguroMedicoMFC\\New.sqlite");
+
 	constexpr int version = 3;
 
 	static auto storage = 

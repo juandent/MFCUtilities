@@ -83,5 +83,8 @@
     <ClCompile Include="orm_util.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="one_drive.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

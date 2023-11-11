@@ -17,7 +17,7 @@ export namespace string_lib
         transform<decltype(first.begin()), decltype(first.begin()), int(*)(int) >(second.begin(), second.end(), second.begin(), std::tolower);
         //transform(first.begin(), first.end(), first.begin(), std::tolower);
         //transform(second.begin(), second.end(), second.begin(), std::tolower);
-
+        // JDH
         return first == second;
     }
 
