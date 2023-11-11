@@ -1,7 +1,7 @@
 #pragma once
 #include <optional>
 
-#include "IDisplayer.h"
+#include "..\ORM_Extensions/IDisplayer.h"
 
 
 inline double& extractValue(const std::unique_ptr<double>& val)
@@ -13,18 +13,18 @@ inline double& extractValue(const std::unique_ptr<double>& val)
 	}
 	return null_value;
 }
+template<typename T> requires (!std::is_same_v<T, std::unique_ptr<double>&>)
+inline static T& extractValue(T& t)
+{
+	static double null_value = 0.0;
+	if (t)
+		return *t;
+	return null_value;
+}
 template<typename T>
 inline static T& extractValue(std::optional<T>& opt)
 {
-	if(opt)
-		return *opt;
-	return T{};
-}
-
-template<typename T>
-inline static T& extractValue(T& val)
-{
-	return val;
+	return *opt;
 }
 
 
@@ -57,12 +57,12 @@ public:
 		grid.SetSingleRowSelection(true);
 
 		grid.m_sortingFunctions.resize(NumCols + 1);
-		grid.m_sortingFunctions[0] = util::Comparison::Text;
+		grid.m_sortingFunctions[0] = Util::Comparison::Text;
 
 		int col = 1;
 		for (auto& str : headers)
 		{
-			auto head = util::to_cstring(str);
+			auto head = Util::to_cstring(str);
 			grid.SetItemText(0, col, head);
 			++col;
 		}
@@ -97,19 +97,26 @@ private:
 	template<int Col, typename FieldType, typename T>
 	static CString FormatCol(T& value, CJDGridCtrl& grid)
 	{
+#if 0
+		FieldType* pT = nullptr;
+		if constexpr (std::is_same_v<std::remove_const_t<FieldType>, bool>)
+		{
+			int i = 0;
+		}
+#endif
 		CString cs;
 		if constexpr ((std::is_integral_v<FieldType> || std::is_floating_point_v<FieldType>) && !std::is_same_v<std::remove_const_t<FieldType>, bool>)
 		{
-			grid.m_sortingFunctions[Col + 1] = util::Comparison::Money;
+			grid.m_sortingFunctions[Col + 1] = Util::Comparison::Money;
 
 			if (ColonesCols::template found<Col + 1>())
 			{
-				util::Colones c(value);
+				Util::Colones c(value);
 				cs = format(c);
 			}
 			else if (DollarsCols::template found<Col + 1>())
 			{
-				util::Dolares d(value);
+				Util::Dolares d(value);
 				cs = format(d);
 			}
 			else
@@ -119,7 +126,7 @@ private:
 		}
 		else
 		{
-			grid.m_sortingFunctions[Col + 1] = util::Comparison::Text;
+			grid.m_sortingFunctions[Col + 1] = Util::Comparison::Text;
 			cs = format(value);
 		}
 		return cs;
@@ -129,19 +136,22 @@ private:
 	{
 		static void Apply(int row, const Container& z, CJDGridCtrl& grid)
 		{
+			// auto value = std::get<Col>(z[row]);
+			// auto&& value = extractValue(std::get<Col>(z[row]));
 			CString cs;
 
 			using FieldType = std::remove_reference_t<decltype(std::get<Col>(z[row]))>;
 			FieldType* pT = nullptr;
 			if constexpr (std::is_same_v<FieldType, const std::unique_ptr<double>>)
 			{
+				// auto&& value = std::move(std::get<Col>(z[row]));
 				auto&& value = extractValue(std::move(std::get<Col>(z[row])));
+				// cs = format(value);
 				cs = FormatCol<Col, double>(value, grid);
 			}
 			else
 			{
 				auto&& value = std::get<Col>(z[row]);
-				// auto val = extractValue(value);	// JDH
 
 				cs = FormatCol<Col, FieldType>(value, grid);
 			}
@@ -157,13 +167,13 @@ private:
 		{
 		}
 	};
-	
+
 
 	template<typename T>
 	static CString format(T&& t)
 	{
 		// static_assert(std::is_same_v<decltype(t), T>);
-		return util::to_cstring(std::forward<T>(t));
+		return Util::to_cstring(std::forward<T>(t));
 	}
 
 	template<typename T>
@@ -171,17 +181,7 @@ private:
 	{
 		if (t)
 		{
-			return util::to_cstring(*t);
-		}
-		return L"";
-	}
-
-	template<typename T>
-	static CString format(const std::optional<T>& t)
-	{
-		if (t)
-		{
-			return util::to_cstring(*t);
+			return Util::to_cstring(*t);
 		}
 		return L"";
 	}

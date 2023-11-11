@@ -5,10 +5,9 @@
 struct IDisplayer
 {
 	virtual void display() = 0;
-	virtual ~IDisplayer() = default;
 };
 
-namespace util
+namespace Util
 {
 	inline CString to_cstring(const std::optional<int>& o)
 	{
@@ -68,7 +67,7 @@ struct IntegerList
 	{
 		using lista = IntegerList;
 
-		bool found = Find<Value, lista, lista::Count - 1>::Check();
+		static bool found = Find<Value, lista, lista::Count - 1>::Check();
 		return found;
 	}
 };
