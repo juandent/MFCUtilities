@@ -26,6 +26,8 @@ import fixed_point;
 
 #include "PersistentClasses.h"
 
+import one_drive;
+
 class Storage_Impl
 {
 private:
@@ -37,7 +39,8 @@ private:
 
 	friend class Storage;
 
-	static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Tokens\\Tokens.sqlite" };
+	static inline std::string db_name = one_drive_path("\\Tokens\\Tokens.sqlite");
+	// static constexpr const char* db_name{ "C:\\Users\\juan_\\OneDrive\\Tokens\\Tokens.sqlite" };
 };
 
 
